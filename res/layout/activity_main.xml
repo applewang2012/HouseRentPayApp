@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="landlord.guardts.house.MainActivity" >
+
+    <Button
+        android:id="@+id/id_start_baidu_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="百度地图" />
+    
+    <Button
+        android:id="@+id/id_start_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始下载" />
+    <Button
+        android:id="@+id/id_start_download_adv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下载视频" />
+    <Button
+        android:id="@+id/id_start_adv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始广告" />
+    
+    <Button
+        android:id="@+id/id_start_wechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动微信" />
+
+    <ListView android:id="@+id/size_ordered_list"
+                  android:layout_width="fill_parent"
+                  android:layout_height="200dp"/>
+</LinearLayout>
