@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="landlord.guardts.house.MainActivity" >
+    tools:context="tenant.guardts.house.MainActivity" >
 
     <Button
         android:id="@+id/id_start_baidu_map"
@@ -32,6 +32,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="启动微信" />
+    
+    <Button
+        android:id="@+id/btn_scan_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫描二维码" />
+        />
+    <Button
+        android:id="@+id/btn_lancher_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动" />
+        />
 
     <ListView android:id="@+id/size_ordered_list"
                   android:layout_width="fill_parent"

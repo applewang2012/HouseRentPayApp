@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="landlord.guardts.house.MainActivity" >
+    tools:context="tenant.guardts.house.MainActivity" >
 
     <ImageView
         android:layout_width="match_parent"
