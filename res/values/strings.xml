@@ -72,4 +72,10 @@
     <string name="login_success">登录成功</string>
     <string name="login_failed">登录失败，检查用户名和密码</string>
     <string name="modify_pwd_failed">密码修改失败</string>
+    <string name="user_logout_remind">您确定要退出登录吗?</string>
+    <string name="button_ok">确定</string>
+    <string name="button_cancel">取消</string>
+    <string name="home_tab_house">出租屋</string>
+    <string name="home_tab_my">我的</string>
+    <string name="press_again_to_exit">再按一次退出应用</string>
 </resources>

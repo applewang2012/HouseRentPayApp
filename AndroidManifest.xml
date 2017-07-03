@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
         <uses-sdk
-            android:minSdkVersion="7"
-            android:targetSdkVersion="10" />
+            android:minSdkVersion="3"
+            android:targetSdkVersion="21" />
     
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -108,6 +108,11 @@
         <activity  
            android:windowSoftInputMode="adjustUnspecified|stateHidden"
            android:theme="@style/AppTheme"
+           android:name=".HomeActivity" />
+        
+        <activity  
+           android:windowSoftInputMode="adjustUnspecified|stateHidden"
+           android:theme="@style/AppTheme"
            android:name=".GetRentAttributeActivity" />
         
         <activity
@@ -116,6 +121,10 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="sensor" >
         </activity>
+        
+<!--         <activity 
+            android:theme="@style/AppTheme"
+            android:name=".LoadUrlTestActivity"></activity> -->
         
         <provider
             android:name="tenant.guardts.house.download.DownloadProvider"

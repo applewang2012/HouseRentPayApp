@@ -1,4 +1,4 @@
-package tenant.guardts.house;
+package tenant.guardts.house.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,48 +20,62 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
-import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.LoadUrlTestActivity;
+import tenant.guardts.house.LocationDemo;
+import tenant.guardts.house.R;
+import tenant.guardts.house.LocationDemo.MyLocationListenner;
+import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.Constants;
 
-/**
- * 此demo用来展示如何结合定位SDK实现定位，并使用MyLocationOverlay绘制定位位置 同时展示如何使用自定义图标绘制并点击时弹出泡泡
- */
-public class LocationDemo extends BaseActivity {
+//��Ӱ�ʱ���import android.support.v4.app.Fragment; 
+@SuppressLint("NewApi")
+public class HouseFragment extends Fragment implements DataStatusInterface{
+	
 
-    // 定位相关
+	
+	private Context mContext;
+	private View mRootView;
+	// 定位相关
     LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
     private LocationMode mCurrentMode;
-    BitmapDescriptor mCurrentMarker;
-    private static final int accuracyCircleFillColor = 0xAAFFFF88;
-    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
-
-    MapView mMapView;
+	MapView mMapView; //模拟器调试用TextureMapView，真机调试MapView
     BaiduMap mBaiduMap;
     private InfoWindow mInfoWindow;
     // UI相关
@@ -83,81 +97,73 @@ public class LocationDemo extends BaseActivity {
 	//private Marker mMarkerA;
 	private List<Marker> mMarkList;
 	private String mLocationAction = "http://tempuri.org/GetRentsByCoodinates";
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-        setContentView(R.layout.activity_location);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-        TextView titleBar = (TextView)findViewById(R.id.id_titlebar);
-        titleBar.setText("位置");
-        mPresenter = new HoursePresenter(getApplicationContext(), this);
-        requestLocButton = (Button) findViewById(R.id.button1);
-        mCurrentMode = LocationMode.NORMAL;
-        requestLocButton.setText("普通");
+	private String mUserName;
+	
+	public HouseFragment(String name){
+		mUserName = name;
+	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		mContext = getActivity().getApplicationContext();
+		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		mRootView = inflater.inflate(R.layout.activity_location, container, false);
+		initView();
+		//initData();
+		return mRootView;
+	}
+	
+	
+	
+	@Override
+	public void onResume() {
+		mMapView.onResume();
+		super.onResume();
+//		showLoadingView();
+//		mContentLayout.setVisibility(View.INVISIBLE);
+//		initData();
+//		mAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+	
+	@Override
+	public void onDestroy() {
+        // 退出时销毁定位
+        mLocClient.stop();
+        // 关闭定位图层
+        mBaiduMap.setMyLocationEnabled(false);
+        mMapView.onDestroy();
+        mMapView = null;
+        super.onDestroy();
+     // 回收 bitmap 资源
+        icon_blue.recycle();
+        icon_red.recycle();
+        icon_yellow.recycle();
         
-        OnClickListener btnClickListener = new OnClickListener() {
-            public void onClick(View v) {
-                switch (mCurrentMode) {
-                    case NORMAL:
-                        requestLocButton.setText("跟随");
-                        mCurrentMode = LocationMode.FOLLOWING;
-                        mBaiduMap
-                                .setMyLocationConfigeration(new MyLocationConfiguration(
-                                        mCurrentMode, true, mCurrentMarker));
-                        break;
-                    case COMPASS:
-                        requestLocButton.setText("普通");
-                        mCurrentMode = LocationMode.NORMAL;
-                        mBaiduMap
-                                .setMyLocationConfigeration(new MyLocationConfiguration(
-                                        mCurrentMode, true, mCurrentMarker));
-                        break;
-                    case FOLLOWING:
-                        requestLocButton.setText("罗盘");
-                        mCurrentMode = LocationMode.COMPASS;
-                        mBaiduMap
-                                .setMyLocationConfigeration(new MyLocationConfiguration(
-                                        mCurrentMode, true, mCurrentMarker));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        requestLocButton.setOnClickListener(btnClickListener);
+    }
 
-        RadioGroup group = (RadioGroup) this.findViewById(R.id.radioGroup);
-        radioButtonListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.defaulticon) {
-                    // 传入null则，恢复默认图标
-                    mCurrentMarker = null;
-                    mBaiduMap
-                            .setMyLocationConfigeration(new MyLocationConfiguration(
-                                    mCurrentMode, true, null));
-                }
-                if (checkedId == R.id.customicon) {
-                    // 修改为自定义marker
-                    mCurrentMarker = BitmapDescriptorFactory
-                            .fromResource(R.drawable.icon_geo);
-                    mBaiduMap
-                            .setMyLocationConfigeration(new MyLocationConfiguration(
-                                    mCurrentMode, true, mCurrentMarker,
-                                                    accuracyCircleFillColor, accuracyCircleStrokeColor));
-                }
-            }
-        };
-        group.setOnCheckedChangeListener(radioButtonListener);
+	private void initView(){
 
-        // 地图初始化
-        mMapView = (MapView)findViewById(R.id.bmapView);
+		 // 地图初始化
+        mMapView = (MapView)mRootView.findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
-        mLocClient = new LocationClient(this);
+        mLocClient = new LocationClient(mContext);
         mLocClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
@@ -168,7 +174,7 @@ public class LocationDemo extends BaseActivity {
         mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
 			public boolean onMarkerClick(final Marker marker) {
-            	Button button = new Button(getApplicationContext());
+            	Button button = new Button(mContext);
                 button.setBackgroundResource(R.drawable.popup);
                 button.setTextColor(Color.parseColor("#000000"));
                 OnInfoWindowClickListener listener = null;
@@ -179,36 +185,30 @@ public class LocationDemo extends BaseActivity {
                 LatLng ll = marker.getPosition();
                 mInfoWindow = new InfoWindow(button, ll, -47);
                 mBaiduMap.showInfoWindow(mInfoWindow);
+                button.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						startActivity(new Intent(mContext, LoadUrlTestActivity.class));
+					}
+				});
 				return true;
             	
             }
         });
-        
-        Button scanButton = (Button)findViewById(R.id.id_scan_rent_house);
-		scanButton.setVisibility(View.VISIBLE);
-		scanButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent openCameraIntent = new Intent(LocationDemo.this,CaptureActivity.class);
-				startActivityForResult(openCameraIntent, 0);
-//				Intent openCameraIntent = new Intent(LocationDemo.this, GetRentAttributeActivity.class);
-//				startActivityForResult(openCameraIntent, 0);
-				
-			}
-		});
-    }
-    
-    private int getCurrentMarkerIndex(Marker marker){
-    	for (int index = 0; index < mMarkList.size(); index++){
-    		if (marker == mMarkList.get(index)){
-    			return index;
-    		}
-    	}
-    	return -1;
-    }
-    
-    public void initOverlay() {
+
+	}
+	
+	 private int getCurrentMarkerIndex(Marker marker){
+	    	for (int index = 0; index < mMarkList.size(); index++){
+	    		if (marker == mMarkList.get(index)){
+	    			return index;
+	    		}
+	    	}
+	    	return -1;
+	    }
+	
+	 public void initOverlay() {
     	
     	//mOverlay = new MyOverlay(getResources().getDrawable(R.drawable.icon_marka),mMapView);	
         for (int index = 0; index < mHouserList.size(); index++){
@@ -240,34 +240,20 @@ public class LocationDemo extends BaseActivity {
         
 
 
-        mBaiduMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            public void onMarkerDragEnd(Marker marker) {
-                Toast.makeText(
-                        LocationDemo.this,
-                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
-                                + marker.getPosition().longitude,
-                        Toast.LENGTH_LONG).show();
-            }
-
-            public void onMarkerDragStart(Marker marker) {
-            }
-        });
+        
         }
 
         
     }
-    
-    private void getLocationByCoordinates(){
+	
+	private void getLocationByCoordinates(){
     	Log.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetRentsByCoodinates";
 		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mLati+""); 
 		rpc.addProperty("lon", mLongi+""); 
 		rpc.addProperty("distance", "15000"); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mLocationAction, rpc);
+		mPresenter.readyPresentServiceParams(mContext, url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
     
@@ -365,59 +351,12 @@ public class LocationDemo extends BaseActivity {
         	
         }
     }
-    
-    
 
-    @Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		//处理扫描结果（在界面上显示）
-				if (resultCode == RESULT_OK) {
-					Bundle bundle = data.getExtras();
-					String scanResult = bundle.getString("result");
-					Log.e("mingguo", "scan  result  "+scanResult);
-					if (!TextUtils.isEmpty(scanResult)){
-						Intent attributeIntent = new Intent(LocationDemo.this, GetRentAttributeActivity.class);
-						attributeIntent.putExtra("order_id", scanResult);
-						startActivity(attributeIntent);
-					}
-				}
-	}
-
-	@Override
-    protected void onPause() {
-        mMapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        mMapView.onResume();
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        // 退出时销毁定位
-        mLocClient.stop();
-        // 关闭定位图层
-        mBaiduMap.setMyLocationEnabled(false);
-        mMapView.onDestroy();
-        mMapView = null;
-        super.onDestroy();
-     // 回收 bitmap 资源
-        icon_blue.recycle();
-        icon_red.recycle();
-        icon_yellow.recycle();
-        
-    }
-
+	
+	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
-		super.onStatusSuccess(action, templateInfo);
-		
+		Log.e("housefragment", "on status success  action  "+action+"  info  "+templateInfo);
 		if (action != null){
 			if (action.equalsIgnoreCase(mLocationAction)){
 				Message message = mHandler.obtainMessage();
@@ -426,20 +365,19 @@ public class LocationDemo extends BaseActivity {
 				mHandler.sendMessage(message);
 			}
 		}
+		
 	}
 
 	@Override
 	public void onStatusStart() {
 		// TODO Auto-generated method stub
-		super.onStatusStart();
+		Log.e("housefragment", "on start  ");
 	}
 
 	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
-		super.onStatusError(action, error);
+		Log.e("housefragment", "error   "+error);
 	}
-    
-    
-
+	
 }

@@ -127,11 +127,11 @@ public class LoginUserActivity extends BaseActivity{
 			    editor.putString("user_password", mPassword);
 			    editor.commit();
 				Toast.makeText(LoginUserActivity.this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-//				Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);
-//				intent.putExtra("user_name", mUserName);
-//				intent.putExtra("user_password", mPassword);
-//				startActivity(intent);
-				startActivity(new Intent(LoginUserActivity.this, LocationDemo.class));
+				Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);
+				intent.putExtra("user_name", mUserName);
+				intent.putExtra("user_password", mPassword);
+				startActivity(intent);
+//				startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
 				finish();
 			}else if (msg.what == 101){
 				mLoadingView.setVisibility(View.INVISIBLE);
