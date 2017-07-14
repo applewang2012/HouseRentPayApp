@@ -1,13 +1,34 @@
 package tenant.guardts.house;
 
+import java.io.File;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.zxing.common.StringUtils;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.PictureCallback;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -20,7 +41,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.ScreenShotUtil;
 
 public class RegisterUserActivity extends BaseActivity{
 
@@ -28,10 +51,27 @@ public class RegisterUserActivity extends BaseActivity{
 	private View mLoadingView;
 	private HoursePresenter mPresenter;
 	private String mValidAction = "http://tempuri.org/ValidateLoginName";
+	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mRentAttributeAction = "http://tempuri.org/GetRentAttribute";
 	private String mRegisterAction = "http://tempuri.org/AddUserInfo";
 	private String mUserName, mPassword, mRealName, mIdCard, mPhone, mNickName,mAddress, mPosition, mEmail;
 	private boolean mUsernameValid = false;
+	private DetectionAuthentic authentic;
+//	private Bitmap mPressBitmap;
+	private HandlerThread myHandlerThread ;
+	private Handler mSubHandler, mMainHanlder;
+	private String mFaceCaptureString, mCaptureString;
+	private String file;
+	
+	private ScreenshotCameraManager frontCameraManager;
+	/**
+	 * 定义前置有关的参数
+	 */
+	private SurfaceView frontSurfaceView;
+	private SurfaceHolder frontHolder;
+	private boolean isFrontOpened = false;
+	private Camera mFrontCamera;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,12 +81,32 @@ public class RegisterUserActivity extends BaseActivity{
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText(getString(R.string.register_user));
-		
+		//bmp = BitmapFactory.decodeResource(getResources(), R.drawable.blue);
+		initHandler();
 		initView();
+		
+//		BitmapFactory.Options options = new BitmapFactory.Options();
+//		options.inSampleSize = 2;
+//		Bitmap bmp = BitmapFactory.decodeFile("mnt/sdcard/CAMERA_DEMO/Camera/abc.png",options);
+//		
+//		ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
+//		if (bmp != null){
+//			Log.i("mingguo", " bmp  width  "+bmp.getWidth()+"  height  "+bmp.getHeight());
+//			shot.setImageBitmap(bmp);
+//		}
 		
 	}
 	
 	private void initView(){
+		/**
+		 * 初始化前置相机参数
+		 */
+		// 初始化surface view
+		frontSurfaceView = (SurfaceView) findViewById(R.id.front_surfaceview);
+		// 初始化surface holder
+		frontHolder = frontSurfaceView.getHolder();
+		frontCameraManager = new ScreenshotCameraManager(mFrontCamera, frontHolder);
+		
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
@@ -55,7 +115,7 @@ public class RegisterUserActivity extends BaseActivity{
 			
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO Auto-generated method stub
+				
 				if (!hasFocus){
 					mUserName = userName.getEditableText().toString();
 					if (mUserName != null && mUserName.length() > 0){
@@ -78,8 +138,11 @@ public class RegisterUserActivity extends BaseActivity{
 		Button registerButton = (Button)findViewById(R.id.id_register_button);
 		registerButton.setOnClickListener(new OnClickListener() {
 			
+			
+
 			@Override
 			public void onClick(View v) {
+				
 				mUserName = userName.getEditableText().toString();
 				mPassword = password.getEditableText().toString();
 				
@@ -120,13 +183,172 @@ public class RegisterUserActivity extends BaseActivity{
 					Toast.makeText(RegisterUserActivity.this, getString(R.string.username_register_again), Toast.LENGTH_SHORT).show();
 					return;
 				}
-				showLoadingView();
-				registerUserName();
+//				showLoadingView();
+//				registerUserName();
+				
+				Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				file = ScreenShotUtil.createScreenshotDirectory(RegisterUserActivity.this);
+				
+				File out = new File(file);
+				
+				Uri uri = Uri.fromFile(out);
+				getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);//鏍规嵁uri淇濆瓨鐓х墖
+				getPhoto.putExtra("return-data", true);
+				getPhoto.putExtra("camerasensortype", 2); // 调用前置摄像头
+				startActivityForResult(getPhoto, 1);//鍚姩鐩告満鎷嶇収
+			
 			}
 		});
 	}
 	
+	private void startLiveIdentifyActivity(){
+		authentic = DetectionAuthentic.getInstance(RegisterUserActivity.this, new ResultListener() {
+
+		@Override
+		public void onSDKUsingFail(String errorMessage, String errorCode) {
+			// TODO Auto-generated method stub
+			Toast toast = Toast.makeText(RegisterUserActivity.this, errorMessage, Toast.LENGTH_SHORT);
+			toast.show();
+		}
+		
+		@Override
+		public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
+			if(faceImages == null){
+				Toast toast = Toast.makeText(RegisterUserActivity.this, "image capture  无人脸", Toast.LENGTH_SHORT);
+				toast.show();
+			}
+			
+			//TextView textView = (TextView)findViewById(R.id.show_text);
+			//textView.setText("onFaceImageCaptured-->"+imgStr);
+//			identifyUserInfo(imgStr, mCaptureString);
+//			ImageView img = (ImageView) this.findViewById(R.id.imageView1);
+//			Bitmap bm = BitmapFactory.decodeByteArray(faceImages, 0, faceImages.length);
+//			img.setImageBitmap(bm);
+			
+		}
+		
+		@Override
+		public void onFaceImageCaptured(byte[] faceImages) {
+			if(faceImages == null){
+				Toast toast = Toast.makeText(RegisterUserActivity.this, "image capture  无人脸", Toast.LENGTH_SHORT);
+				toast.show();
+			}
+			showLoadingView();
+			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
+			identifyUserInfo(mFaceCaptureString, mCaptureString);
+		}
+		});
 	
+		authentic.autenticateToCaptureAction(RegisterUserActivity.this, mRealName, mIdCard);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		if (resultCode == RESULT_OK && requestCode == 1) {
+			 Log.w("mingguo", "activity result  width data   "+data);
+			 mSubHandler.sendEmptyMessage(1000);
+			 startLiveIdentifyActivity();
+			 
+			 //			   if(data != null){
+//			    if(data.hasExtra("data")){
+//			     Bitmap thunbnail = data.getParcelableExtra("data");
+//			     Log.w("mingguo", "activity result  width  "+thunbnail.getWidth()+"  height  "+thunbnail.getHeight());
+//			     ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
+//					shot.setImageBitmap(thunbnail);
+//			    }
+//			   }
+			
+			
+//			ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
+//			shot.setImageBitmap(newBitmap);
+//			int scale = 0;
+//				scale = getZoomScale(imageFile);//寰楀埌缂╂斁鍊嶆暟
+//				Log.i(TAG, "scale = "+scale);
+//				BitmapFactory.Options options = new BitmapFactory.Options();
+//				options.inSampleSize = scale;
+//				photoImageView.setImageBitmap(BitmapFactory.decodeFile(strImgPath,options));//鎸夋寚瀹歰ptions鏄剧ず鍥剧墖闃叉OOM
+//			}else {
+//				Toast.makeText(MainActivity.this, R.string.failed, Toast.LENGTH_LONG).show();
+//			}
+		}else{
+			Toast.makeText(RegisterUserActivity.this, "头像采集失败", Toast.LENGTH_LONG).show();
+		}
+	}
+
+
+	private void initHandler(){
+    	//创建一个线程,线程名字：handler-thread
+        myHandlerThread = new HandlerThread( "handler-thread") ;
+        myHandlerThread.start();
+        
+        mMainHanlder = new Handler(){
+
+			@Override
+			public void handleMessage(Message msg) {
+				Log.w("mingguo", "handler message  ");
+				//takeFrontPhoto();
+			}
+        	
+        };
+        
+        mSubHandler = new Handler(myHandlerThread.getLooper()){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                //这个方法是运行在 handler-thread 线程中的 ，可以执行耗时操作
+                Log.d("mingguo " , "sub handler  ： " + msg.what + "  线程： " + Thread.currentThread().getName()) ;
+                Bitmap bmp = BitmapFactory.decodeFile(file, null);
+   			 	Log.w("mingguo", "onActivityResult  compress image  "+bmp.getWidth()+" height  "+bmp.getHeight()+"  byte  "+bmp.getByteCount());
+   			 	Bitmap newBitmap = BMapUtil.compressScale(bmp);
+   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
+                
+                
+//                mPressBitmap = ScreenShotUtil.getScreenshotBitmap(DemoApplication.getActivity());
+                
+                
+//                if (mScreenShotNum == 1){
+//                	clearScreenShotImage(ScreenShotUtil.getScreenshotDirectory(SurfaceViewTestActivity.this));
+//                }
+//                if (mScreenShotNum <= 2){
+//                	String status = ScreenShotUtil.generateScreenshot(SurfaceViewTestActivity.this, mediaPlayer.getCurrentPosition(),
+//                			"http://p.vod05.icntvcdn.com/media/new/2013/icntv2/media/2016/03/21/gongyiguoshijia.ts");
+//                    mSubHandler.sendEmptyMessageDelayed(100, 3000+(long)Math.random()*4000);
+//                    Message message = mUIHandler.obtainMessage();
+//                    message.obj = status;
+//                    mUIHandler.sendMessage(message);
+//                }
+//                if (mScreenShotNum == 2){
+//                	getScreenShotImage(ScreenShotUtil.getScreenshotDirectory(SurfaceViewTestActivity.this));
+//                	imgView.setImageBitmap(ScreenShotUtil.startCompareImg(mImage1, mImage2);
+//                }
+            }
+        };
+        
+    }
+	
+	private void cameraFunction(){
+		Camera camera = Camera.open();
+	}
+	
+	private void identifyUserInfo(String faceStr, String screenshotStr){
+		if (faceStr == null || screenshotStr == null){
+			return;
+		}
+		Log.i("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
+		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mIdentifyAction));
+		rpc.addProperty("idcard", mIdCard);
+		rpc.addProperty("name", mRealName);
+		rpc.addProperty("base64Str", faceStr);
+		rpc.addProperty("picBase64Str", screenshotStr);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.startPresentServiceTask();
+		
+	}
 	
 	private void checkUserNameValid(String username){
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=ValidateLoginName";
@@ -144,14 +366,14 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("userType", "1");
 		rpc.addProperty("realName", mRealName);
 		rpc.addProperty("title", mPosition);
-		rpc.addProperty("sex", "��");
+		rpc.addProperty("sex", "male");
 		rpc.addProperty("phone", mPhone);
-		rpc.addProperty("fax", "��");
+		rpc.addProperty("fax", "fax");
 		rpc.addProperty("email", mEmail);
 		rpc.addProperty("idcard", mIdCard);
 		rpc.addProperty("nickName", mNickName);
 		rpc.addProperty("address", mAddress);
-		rpc.addProperty("status", "0"); //0������1������
+		rpc.addProperty("status", "0"); //
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRegisterAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
@@ -171,12 +393,41 @@ public class RegisterUserActivity extends BaseActivity{
 			    editor.putString("user_name", mUserName);
 			    editor.putString("user_password", mPassword);
 			    editor.commit();
+			    mHandler.sendEmptyMessageDelayed(105, 3000);
+			}else if (msg.what == 105){
 				Toast.makeText(RegisterUserActivity.this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
-//				Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
-//				intent.putExtra("user_name", mUserName);
-//				intent.putExtra("user_password", mPassword);
-//				startActivity(intent);
-//				finish();
+				Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
+				intent.putExtra("user_name", mUserName);
+				intent.putExtra("user_password", mPassword);
+				startActivity(intent);
+				finish();
+			}else if (msg.what == 102){
+				dismissLoadingView();
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String compareResult = object.optString("compareresult");
+						if (compareResult == null || compareResult.equals("")){
+							Toast.makeText(RegisterUserActivity.this, mRealName + " 身份认证失败 ", Toast.LENGTH_SHORT).show();
+						}else{
+							if (compareResult.equals("0")){
+								String similar = object.optString("similar");
+								if (similar != null && similar.length() > 3){
+									Double rate = 100 *	Double.parseDouble(similar);
+									Toast.makeText(RegisterUserActivity.this,  mRealName + " 身份认证成功,相似度 "+rate, Toast.LENGTH_SHORT).show();
+									registerUserName();
+									return;
+								}
+							}else{
+								Toast.makeText(RegisterUserActivity.this,  mRealName + " 身份认证失败  "+compareResult, Toast.LENGTH_SHORT).show();
+							}
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 		}
@@ -198,6 +449,55 @@ public class RegisterUserActivity extends BaseActivity{
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(View.INVISIBLE);
 		}
+	}
+	
+	
+	/**
+	 * 自动对焦的回调方法，用来处理对焦成功/不成功后的事件
+	 */
+	private AutoFocusCallback mAutoFocus =  new AutoFocusCallback() {
+		
+		@Override
+		public void onAutoFocus(boolean success, Camera camera) {
+			//TODO:空实现
+		}
+	}; 
+	
+	/**
+	 * @return 开启前置摄像头照相
+	 */
+	@SuppressWarnings("deprecation")
+	private void takeFrontPhoto() {
+		if (isFrontOpened == false && frontCameraManager.openCamera(Camera.CameraInfo.CAMERA_FACING_FRONT)) {
+			mFrontCamera = frontCameraManager.getCamera();
+			//自动对焦  
+			mFrontCamera.autoFocus(mAutoFocus);
+			isFrontOpened = true;
+			// 拍照
+			//mFrontCamera.takePicture(null, null, frontCameraManager.new PicCallback(mFrontCamera));
+			mFrontCamera.takePicture(null, null, new PictureCallback() {
+				
+				@Override
+				public void onPictureTaken(byte[] data, Camera camera) {
+					try {
+						Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+						Matrix matrix = new Matrix();
+						matrix.preRotate(270);
+						bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+						
+						mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(bitmap), android.util.Base64.NO_WRAP);
+						identifyUserInfo(mFaceCaptureString, mCaptureString);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally {
+						mFrontCamera.stopPreview();
+						mFrontCamera.release();
+						mFrontCamera = null;
+					}
+					
+				}
+			});
+		} 
 	}
 
 	 @Override
@@ -234,11 +534,13 @@ public class RegisterUserActivity extends BaseActivity{
 				if (templateInfo.equals("true")){
 					mHandler.sendEmptyMessage(101);
 				}
+			}else if (action.equals(mIdentifyAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 102;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
 		}
-		
 	}
-
-	
 
 }

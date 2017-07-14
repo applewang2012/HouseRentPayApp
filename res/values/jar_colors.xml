@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="jar_white">#ffffff</color>  
+   <color name="jar_newbg">#F1F1F1</color>
+   <color name="jar_textViewColor">#333333</color>
+   <color name="jar_edit">#949494</color>
+    <color name="jar_text_person">#28ACEC</color>
+    <color name="do_action_green">#009933</color>
+    <color name="jar_promptColor2">#515151</color>
+</resources>

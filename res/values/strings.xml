@@ -7,6 +7,7 @@
     
     <string name="demo_name_overlay">覆盖物功能</string>
 	<string name="edit_input">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+	<string name="edit_idcard_input">0123456789xX</string>
     <string name="download_unknown_title">"&amp;lt;未命名&amp;gt;"</string>
     <string msgid="5973127997598540499" name="notification_need_wifi_for_size">"此大小的文件需要通过 Wi-Fi 下载"</string>
     <string name="notification_filename_separator">", "</string>
@@ -26,7 +27,7 @@
     <string msgid="7006048006543495236" name="download_success">"已完成"</string>
     <string msgid="104973307780629904" name="download_queued">"已加入队列"</string>
     <string name="download_paused">暂停</string>
-    <string name="register_success">注册成功</string>
+    <string name="register_success">注册成功，自动登录</string>
     <string name="modify_password">修改密码</string>
     <string name="register_user">注册用户</string>
     <string name="user_logout">退出登录</string>

@@ -30,6 +30,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;

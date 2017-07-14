@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="JarCustomDialog" parent="@android:style/Theme.Dialog">  
+    <item name="android:windowFrame">@null</item>  
+        <item name="android:windowIsFloating">true</item>  
+        <item name="android:windowContentOverlay">@null</item>  
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>  
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>  
+    </style>
+    <style name="JarCustomProgressDialog" parent="@style/JarCustomDialog">  
+        <item name="android:windowBackground">@android:color/transparent</item>  
+        <item name="android:windowNoTitle">true</item>  
+    </style>
+    <!-- 设置dialog和alertDialog样式 -->
+        <style name="Jar_DialogWindowTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/jar_promptColor2</item>
+    </style>
+        <style name="Jar_DialogWindowTitle.DeviceDefault">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@style/Jar_DialogWindowTitle</item>
+    </style>  
+        <!--AlderDialog主题-->
+    <style name="Jar_Theme.DeviceDefault.Dialog.Alert"  parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowTitleStyle">@style/Jar_DialogWindowTitle.DeviceDefault</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
+        <!--Dialog主题-->
+    <style name="Jar_Theme.DeviceDefault.Dialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog" >
+        <item name="android:windowTitleStyle">@style/Jar_DialogWindowTitle.DeviceDefault</item>
+    </style>
+    <style name="Jar_ParkingTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="android:dialogTheme">@style/Jar_Theme.DeviceDefault.Dialog</item>
+        <item name="android:alertDialogTheme">@style/Jar_Theme.DeviceDefault.Dialog.Alert</item>
+    </style>
+</resources>

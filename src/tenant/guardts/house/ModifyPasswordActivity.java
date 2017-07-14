@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;

@@ -32,4 +32,7 @@
 	<dimen name="font_size_s">12sp</dimen>
 	<!--download -->
     <dimen name="checkmark_area">40dip</dimen>
+    
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.baidu.mapapi.SDKInitializer;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;

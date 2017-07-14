@@ -184,6 +184,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
 					userInfo.put("Address", itemJsonObject.optString("Address"));
 					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
+					Constants.mRegisterName = itemJsonObject.optString("RealName");
+					Constants.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 			return userInfo;
 		} catch (Exception e) {

@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -62,7 +66,7 @@ public class LoginUserActivity extends BaseActivity{
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		dismissLoadingView();
 		userNameEditText = (EditText)findViewById(R.id.id_login_username);
 		passwordEditText = (EditText)findViewById(R.id.id_login_password);
 		
@@ -81,7 +85,7 @@ public class LoginUserActivity extends BaseActivity{
 					Toast.makeText(getApplicationContext(), getString(R.string.please_input_username), Toast.LENGTH_SHORT).show();
 					return;
 				}
-				mLoadingView.setVisibility(View.VISIBLE);
+				showLoadingView();
 				loginUser();
 			}
 		});
@@ -113,6 +117,22 @@ public class LoginUserActivity extends BaseActivity{
 		mPresenter.startPresentServiceTask();
 	}
 	
+	private void showLoadingView(){
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.VISIBLE);
+        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
+        	if (imageView != null) {
+        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+        		imageView.startAnimation(rotate);
+        	}
+		}
+	}
+	private void dismissLoadingView(){
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.INVISIBLE);
+		}
+	}
+	
 	private Handler mHandler = new Handler(){
 
 		@Override
@@ -120,7 +140,7 @@ public class LoginUserActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				mLoadingView.setVisibility(View.INVISIBLE);
+				dismissLoadingView();
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_name", mUserName);
@@ -134,7 +154,7 @@ public class LoginUserActivity extends BaseActivity{
 //				startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
 				finish();
 			}else if (msg.what == 101){
-				mLoadingView.setVisibility(View.INVISIBLE);
+				dismissLoadingView();
 				Toast.makeText(LoginUserActivity.this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
 			}
 			
@@ -149,7 +169,7 @@ public class LoginUserActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
+					dismissLoadingView();
 					return false;
 				}
 			}

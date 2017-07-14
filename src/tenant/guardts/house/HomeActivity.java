@@ -1,10 +1,7 @@
 package tenant.guardts.house;
 
-import java.util.HashMap;
 
-import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -62,9 +59,10 @@ public class HomeActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent openCameraIntent = new Intent(HomeActivity.this,CaptureActivity.class);
-				startActivityForResult(openCameraIntent, 0);
-//				Intent openCameraIntent = new Intent(LocationDemo.this, GetRentAttributeActivity.class);
-//				startActivityForResult(openCameraIntent, 0);
+				startActivityForResult(openCameraIntent, 1);
+//				Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
+//				attributeIntent.putExtra("order_id", "170");
+//				startActivity(attributeIntent);
 				
 			}
 		});
@@ -232,7 +230,7 @@ public class HomeActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.onActivityResult(requestCode, resultCode, data);
 			//处理扫描结果（在界面上显示）
-					if (resultCode == RESULT_OK) {
+					if (resultCode == RESULT_OK  && requestCode == 1) {
 						Bundle bundle = data.getExtras();
 						String scanResult = bundle.getString("result");
 						Log.e("mingguo", "scan  result  "+scanResult);

@@ -2,11 +2,14 @@ package tenant.guardts.house.util;
 
 import java.io.File;
 
+import org.apache.http.impl.cookie.PublicSuffixFilter;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract.StreamItemPhotos;
 
 /**
  * @author shenxiaolei
@@ -24,6 +27,9 @@ public class Constants {
     public static final String DOWLOAD_URL = "http://weiyuzhu.cn/HRPApp.apk";
     
     public static final String NAMESPACE = "http://tempuri.org/";
+    
+    public static String mRegisterName = null;
+    public static String mRegisterIdcard = null;
 
     public static Canvas getCanvas() {
         return canvas;
