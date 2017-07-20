@@ -68,6 +68,7 @@
             android:value="fmntWH7DXloP8Tt7jU2kPPAp6ni9OuCi" />
         <activity
             android:name="tenant.guardts.house.WelcomeActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/app_name" >
             <intent-filter>
                 
@@ -98,6 +99,21 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         
+        <activity  
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:theme="@style/AppTheme"
+            android:name=".HouseDetailInfoActivity" />
+        
+        <activity  
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:theme="@style/AppTheme"
+            android:name=".HouseSearchActivity" />
+        
+        <activity  
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:theme="@style/AppTheme"
+            android:name=".HouseHistoryActivity" />
+            
         <activity  
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"

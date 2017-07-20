@@ -2,14 +2,11 @@ package tenant.guardts.house.util;
 
 import java.io.File;
 
-import org.apache.http.impl.cookie.PublicSuffixFilter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.ContactsContract.StreamItemPhotos;
 
 /**
  * @author shenxiaolei
@@ -30,7 +27,7 @@ public class Constants {
     
     public static String mRegisterName = null;
     public static String mRegisterIdcard = null;
-
+    public static String mUserIdNo = null;
     public static Canvas getCanvas() {
         return canvas;
     }

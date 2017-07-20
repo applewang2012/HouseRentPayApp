@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;

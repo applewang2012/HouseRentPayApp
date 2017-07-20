@@ -43,6 +43,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
+import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -157,25 +159,46 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
         //option.setScanSpan(1000);
         mLocClient.setLocOption(option);
         mLocClient.start();
+        
         mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
 			public boolean onMarkerClick(final Marker marker) {
+				View detailView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_layout, null);
+				TextView contact = (TextView) detailView.findViewById(R.id.id_house_contacts);
+				TextView location = (TextView) detailView.findViewById(R.id.id_house_location);
+				TextView desp = (TextView)detailView.findViewById(R.id.id_house_desp);
             	Button button = new Button(mContext);
                 button.setBackgroundResource(R.drawable.popup);
                 button.setTextColor(Color.parseColor("#000000"));
                 OnInfoWindowClickListener listener = null;
-                int index = getCurrentMarkerIndex(marker);
+                final int index = getCurrentMarkerIndex(marker);
+                desp.setText(mHouserList.get(index).get("rroomtypedesc")+"  |  "+mHouserList.get(index).get("rrentarea")+"平米  |  "+
+                mHouserList.get(index).get("RPropertyDesc")	+"  |  "+mHouserList.get(index).get("rdirectiondesc"));
+                location.setText("地址:"+mHouserList.get(index).get("RAddress"));
                 Log.i("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
-                button.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
+                contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
                 "电话："+mHouserList.get(index).get("ROwnerTel"));
                 LatLng ll = marker.getPosition();
-                mInfoWindow = new InfoWindow(button, ll, -47);
+                mInfoWindow = new InfoWindow(detailView, ll, -47);
+                
                 mBaiduMap.showInfoWindow(mInfoWindow);
-                button.setOnClickListener(new OnClickListener() {
+                Button showView = (Button)detailView.findViewById(R.id.id_house_detail_show);
+                showView.setOnClickListener(new OnClickListener() {
 					
 					@Override
 					public void onClick(View v) {
+						// TODO Auto-generated method stub
 						startActivity(new Intent(mContext, LoadUrlTestActivity.class));
+					}
+				});
+                Button houseSearch = (Button)detailView.findViewById(R.id.id_house_detail_search);
+                houseSearch.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
+						startActivity(detailIntent);
 					}
 				});
 				return true;
@@ -224,12 +247,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
 //        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
 //        giflist.add(bdA);
         
-
-
-        
         }
 
-        
     }
 	
 	private void getLocationByCoordinates(){
@@ -290,6 +309,10 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
 					itemHouse.put("RAddress",itemJsonObject.optString("RAddress"));
 					itemHouse.put("rentno",itemJsonObject.optString("rentno"));
 					itemHouse.put("Status",itemJsonObject.optString("Status"));
+					itemHouse.put("rroomtypedesc",itemJsonObject.optString("rroomtypedesc"));
+					itemHouse.put("rdirectiondesc",itemJsonObject.optString("rdirectiondesc"));
+					itemHouse.put("rrentarea",itemJsonObject.optString("rrentarea"));
+					itemHouse.put("RPropertyDesc",itemJsonObject.optString("RPropertyDesc"));
 					mHouserList.add(itemHouse);
 				}
 			}
@@ -342,7 +365,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.e("housefragment", "on status success  action  "+action+"  info  "+templateInfo);
+		Log.i("mingguo", "on map view status success  action  "+action+"  info  "+templateInfo);
 		if (action != null){
 			if (action.equalsIgnoreCase(mLocationAction)){
 				Message message = mHandler.obtainMessage();
@@ -351,7 +374,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
 				mHandler.sendMessage(message);
 			}
 		}
-		
 	}
 
 	@Override

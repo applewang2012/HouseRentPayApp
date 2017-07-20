@@ -2,7 +2,6 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,9 +11,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +39,7 @@ public class LoginUserActivity extends BaseActivity{
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("登录");
+		
 		initView();
 	}
 	
@@ -49,16 +49,6 @@ public class LoginUserActivity extends BaseActivity{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
-		mUserName = getIntent().getStringExtra("user_name");
-		mPassword = getIntent().getStringExtra("user_password");
-		if (mUserName != null && !mUserName.equals("")){
-			userNameEditText.setText(mUserName);
-		}
-		if (mPassword != null && !mPassword.equals("")){
-			passwordEditText.setText(mPassword);
-		}
-		
 	}
 
 
@@ -69,7 +59,14 @@ public class LoginUserActivity extends BaseActivity{
 		dismissLoadingView();
 		userNameEditText = (EditText)findViewById(R.id.id_login_username);
 		passwordEditText = (EditText)findViewById(R.id.id_login_password);
-		
+		mUserName = getIntent().getStringExtra("user_name");
+		mPassword = getIntent().getStringExtra("user_password");
+		if (mUserName != null && !mUserName.equals("")){
+			userNameEditText.setText(mUserName);
+		}
+		if (mPassword != null && !mPassword.equals("")){
+			passwordEditText.setText(mPassword);
+		}
 		Button login = (Button)findViewById(R.id.id_login_user_button);
 		login.setOnClickListener(new OnClickListener() {
 			
@@ -103,7 +100,8 @@ public class LoginUserActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class));
+				//startActivity(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class));
+				startActivityForResult(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class), 1);
 			}
 		});
 	}
@@ -113,6 +111,7 @@ public class LoginUserActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mLoginAction));
 		rpc.addProperty("username", mUserName);
 		rpc.addProperty("password", mPassword);
+		rpc.addProperty("userType", "0");
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mLoginAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
@@ -133,6 +132,23 @@ public class LoginUserActivity extends BaseActivity{
 		}
 	}
 	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK && requestCode == 1){
+			if (data != null){
+				mPassword = data.getStringExtra("new_password");
+				passwordEditText.setText(mPassword);
+				Log.i("mingguo", "login activity  onActivityResult password  "+mPassword);
+			}
+		}
+	}
+
+
+
 	private Handler mHandler = new Handler(){
 
 		@Override

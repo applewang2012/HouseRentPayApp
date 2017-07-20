@@ -1,14 +1,10 @@
 package tenant.guardts.house;
 
 import com.baidu.mapapi.SDKInitializer;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.app.Application.ActivityLifecycleCallbacks;
-import android.content.Context;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.Log;
 
 public class DemoApplication extends Application {
 	private static DemoApplication mApp;  

@@ -26,6 +26,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.HouseHistoryActivity;
+import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.R;
@@ -46,8 +48,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	private View mLoadingView;
 	private TextView mUserAddress;
 	private HoursePresenter mPresent;
-	private FrameLayout mPublishHouse;
-	private FrameLayout mDeleteHouse;
+	private FrameLayout mHistoryHouse;
+	private FrameLayout mSearchHouse;
 	private FrameLayout mPassword;
 	private FrameLayout mLogout;
 	private String mUsername;
@@ -85,8 +87,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 		showLoadingView();
 		mUserContainer.setVisibility(View.INVISIBLE);
 		
-		mPublishHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_publish);
-		mDeleteHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_delete);
+		mHistoryHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_history);
+		mSearchHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_search);
 		mPassword = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_password_modify);
 		mLogout = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_logout);
 		mPassword.setOnClickListener(new OnClickListener() {
@@ -103,20 +105,21 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				logoutUserDialog(0);
 			}
 		});
-		mPublishHouse.setOnClickListener(new OnClickListener() {
+		mHistoryHouse.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
-//				intent.putExtra("user_name", mUsername);
-//				startActivity(intent);
+				Intent intent = new Intent(mContext, HouseHistoryActivity.class);
+				intent.putExtra("idcard", Constants.mRegisterIdcard);
+				startActivity(intent);
 			}
 		});
-		mDeleteHouse.setOnClickListener(new OnClickListener() {
+		mSearchHouse.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				//Toast.makeText(mContext, getString(R.string.long_press_to_delete), Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(mContext, HouseSearchActivity.class);
+				startActivity(intent);
 				
 			}
 		});
@@ -163,8 +166,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			dismissLoadingView();
 			if (infoModel != null){
 				mUserContainer.setVisibility(View.VISIBLE);
-				mUserNickname.setText(infoModel.get("NickName"));
-				mUserAddress.setText(infoModel.get("Address"));
+				mUserNickname.setText(Constants.mRegisterName);
+				mUserAddress.setText(infoModel.get("Phone"));
 				mUserId.setText(infoModel.get("LoginName"));
 			}
 		}
@@ -184,6 +187,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
 					userInfo.put("Address", itemJsonObject.optString("Address"));
 					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
+					userInfo.put("Phone", itemJsonObject.optString("Phone"));
 					Constants.mRegisterName = itemJsonObject.optString("RealName");
 					Constants.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}

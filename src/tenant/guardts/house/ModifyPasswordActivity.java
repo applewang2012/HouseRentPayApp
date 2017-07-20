@@ -2,7 +2,7 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -93,6 +93,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 		rpc.addProperty("username", mUserName);
 		rpc.addProperty("oldPassword", mOldPassword);
 		rpc.addProperty("newPassword", mNewPassword);
+		rpc.addProperty("userType", "0");
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mModifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
@@ -109,7 +110,10 @@ public class ModifyPasswordActivity extends BaseActivity{
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_password", mNewPassword);
 			    editor.commit();
-				Toast.makeText(ModifyPasswordActivity.this, getString(R.string.modify_pwd_success), Toast.LENGTH_SHORT).show();
+			    Toast.makeText(ModifyPasswordActivity.this, getString(R.string.modify_pwd_success), Toast.LENGTH_SHORT).show();
+			    Intent passwordIntent = new Intent();
+			    passwordIntent.putExtra("new_password", mNewPassword);
+			    setResult(RESULT_OK, passwordIntent);
 				finish();
 			}else if (msg.what == 101){
 				dismissLoadingView();

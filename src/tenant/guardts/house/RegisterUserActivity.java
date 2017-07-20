@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.zxing.common.StringUtils;
 import com.gzt.faceid5sdk.DetectionAuthentic;
 import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
@@ -363,7 +362,7 @@ public class RegisterUserActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mRegisterAction));
 		rpc.addProperty("loginName", mUserName);
 		rpc.addProperty("password", mPassword);
-		rpc.addProperty("userType", "1");
+		rpc.addProperty("userType", "0");
 		rpc.addProperty("realName", mRealName);
 		rpc.addProperty("title", mPosition);
 		rpc.addProperty("sex", "male");

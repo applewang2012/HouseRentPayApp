@@ -76,7 +76,7 @@
 		        android:orientation="vertical"
 	        	>
 	        	<FrameLayout 
-	        	    android:id="@+id/id_user_house_publish"
+	        	    android:id="@+id/id_user_house_history"
 	        	    android:layout_width="match_parent"
 		        	android:layout_height="60dp"
 		        	android:orientation="horizontal"
@@ -104,7 +104,7 @@
 		        	 android:background="#0c000000"
 	        	     />
 	        	<FrameLayout 
-	        	    android:id="@+id/id_user_house_delete"
+	        	    android:id="@+id/id_user_house_search"
 	        	    android:layout_width="match_parent"
 		        	android:layout_height="60dp"
 		        	android:gravity="center_vertical"

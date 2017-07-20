@@ -1,6 +1,12 @@
 package tenant.guardts.house;
 
 
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.ksoap2.serialization.SoapObject;
+
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +27,7 @@ import android.widget.Toast;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.Constants;
 
 public class HomeActivity extends BaseActivity {
 
@@ -28,10 +35,11 @@ public class HomeActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	//private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mUpdateAction="http://tempuri.org/CheckUpdate";
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";;
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
-	//private String mIdCard;
+	private String mUserInfoString = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class HomeActivity extends BaseActivity {
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");
 		initView();
+		getUserInfo();
 	}
 	
 	
@@ -178,6 +187,15 @@ public class HomeActivity extends BaseActivity {
 //		mPresenter.startPresentServiceTask();
 //	}
 	
+	private void getUserInfo(){
+		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mUserInfoAction));
+		rpc.addProperty("username", mUserName);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUserInfoAction, rpc);
+		mPresenter.startPresentServiceTask();
+		
+	}
+	
 	private void hideAllFragments(FragmentTransaction transaction) {
 		if (mHouseFrament != null && !mHouseFrament.isHidden()) {
 			transaction.hide(mHouseFrament);
@@ -194,16 +212,52 @@ public class HomeActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				
-				
+				if (msg.obj != null){
+					parseUserInfo((String)msg.obj);
+				}
 			}else if (msg.what == 101){
 				
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
 			}
-			
 		}
-		
 	};
+	
+	private static void parseUserInfo(String value) {
+		try{
+			JSONArray array = new JSONArray(value);
+			if (array != null){
+				Log.i("house", "parse house info "+array.length());
+				//for (int item = 0; item < array.length(); item++){
+					
+					JSONObject itemJsonObject = array.optJSONObject(0);
+//					userInfo = new HashMap<>();
+//					userInfo.put("NickName", itemJsonObject.optString("NickName"));
+//					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
+//					userInfo.put("Address", itemJsonObject.optString("Address"));
+//					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
+					Constants.mRegisterName = itemJsonObject.optString("RealName");
+					Constants.mRegisterIdcard = itemJsonObject.optString("IDCard");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private  String getUserIdNo(String value) {
+		HashMap<String,String> userInfo = null;
+		try{
+			JSONArray array = new JSONArray(value);
+			if (array != null){
+				Log.i("house", "parse house info "+array.length());
+					JSONObject itemJsonObject = array.optJSONObject(0);
+					return itemJsonObject.optString("IDCard");
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 	
@@ -252,7 +306,12 @@ public class HomeActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		if (action != null && templateInfo != null){}
-		
+			if (action.equals(mUserInfoAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 100;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}
 	}
 	
 	

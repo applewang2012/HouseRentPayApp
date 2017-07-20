@@ -3,7 +3,6 @@ package tenant.guardts.house;
 
 import java.io.File;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;

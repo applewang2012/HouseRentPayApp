@@ -13,9 +13,7 @@ import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -98,43 +96,13 @@ public class GetRentAttributeActivity extends BaseActivity{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		mHouseNo = getIntent().getStringExtra("house_id");
-		mUsername = getIntent().getStringExtra("user_name");
-		mOwnerName = getIntent().getStringExtra("owner_name");
-		mOwnerIdcard = getIntent().getStringExtra("owner_id");
-		mHouseId.setText(mHouseNo);
+//		mHouseNo = getIntent().getStringExtra("house_id");
+//		mUsername = getIntent().getStringExtra("user_name");
+//		mOwnerName = getIntent().getStringExtra("owner_name");
+//		mOwnerIdcard = getIntent().getStringExtra("owner_id");
+//		mHouseId.setText(mHouseNo);
 	}
 
-	
-	private void showAlertDialog(final TextView text,final String[] items) {  
-		  AlertDialog.Builder builder =new AlertDialog.Builder(GetRentAttributeActivity.this);
-		  builder.setItems(items, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mTypeIndex = which+"";
-				text.setText(mOriginTypeText +"   "+items[which]);
-			}
-		});
-		builder.show();
-}
-
-	private void getStartTime(){
-		new DatePickerDialog(GetRentAttributeActivity.this , 
-				startlistener , 
-				cal.get(Calendar.YEAR ), 
-				cal .get(Calendar.MONTH ), 
-				cal .get(Calendar.DAY_OF_MONTH ) 
-				).show(); 
-	}
-	
-	private void getEndTime(){
-		new DatePickerDialog(GetRentAttributeActivity.this , 
-				endlistener , 
-				cal.get(Calendar.YEAR ), 
-				cal .get(Calendar.MONTH ), 
-				cal .get(Calendar.DAY_OF_MONTH ) 
-				).show(); 
-	}
 	
 	private DatePickerDialog.OnDateSetListener startlistener = new DatePickerDialog.OnDateSetListener(){  //
 		@Override 
@@ -195,13 +163,6 @@ public class GetRentAttributeActivity extends BaseActivity{
 		FrameLayout endTime = (FrameLayout)findViewById(R.id.id_rent_house_end_date);
 		mEndTime = (TextView)findViewById(R.id.id_rent_house_end_date_text);
 		mOriginEndContent = (String) mEndTime.getText()+"  ";
-		endTime.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getEndTime();
-			}
-		});
 		
 		mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
 		mRentIDcard = (TextView)findViewById(R.id.id_rent_house_idcard);
@@ -218,16 +179,27 @@ public class GetRentAttributeActivity extends BaseActivity{
 //				showLoadingView();
 //				confirmRentAttributeInfo(mOrderId);
 				
-				Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
+				if (Constants.mRegisterIdcard != null && !Constants.mRegisterIdcard.equals("")){
+					Log.w("mingguo", "register id card  "+Constants.mRegisterIdcard);
+					if (Constants.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
+						Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+						mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
+						
+						File out = new File(mfilePath);
+						
+						Uri uri = Uri.fromFile(out);
+						getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+						getPhoto.putExtra("return-data", true);
+						getPhoto.putExtra("camerasensortype", 2); 
+						startActivityForResult(getPhoto, 1);
+					}else{
+						Toast.makeText(getApplicationContext(), "抱歉，登录用户身份信息和租房者身份信息不符 ", Toast.LENGTH_SHORT).show();
+					}
+				}else{
+					Toast.makeText(getApplicationContext(), "register user idcard  get failed ! ", Toast.LENGTH_SHORT).show();
+				}
 				
-				File out = new File(mfilePath);
 				
-				Uri uri = Uri.fromFile(out);
-				getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-				getPhoto.putExtra("return-data", true);
-				getPhoto.putExtra("camerasensortype", 2); 
-				startActivityForResult(getPhoto, 1);
 			}
 		});
 	}
@@ -383,13 +355,13 @@ public class GetRentAttributeActivity extends BaseActivity{
 						}else{
 							if (compareResult.equals("0")){
 								String similar = object.optString("similar");
-								if (similar != null && similar.length() > 3){
+								//if (similar != null && similar.length() > 3){
 									Double rate = 100 *	Double.parseDouble(similar);
-									Toast.makeText(GetRentAttributeActivity.this,  mRentName.getText().toString() + " 身份认证成功,相似度 "+rate, Toast.LENGTH_SHORT).show();
+									Toast.makeText(GetRentAttributeActivity.this,  mRentName.getText().toString() + " 身份认证成功 ", Toast.LENGTH_SHORT).show();
 									showLoadingView();
 									confirmRentAttributeInfo(mOrderId);
 									return;
-								}
+								//}
 							}else{
 								Toast.makeText(GetRentAttributeActivity.this,  mRentName.getText().toString() + " 身份认证失败  "+compareResult, Toast.LENGTH_SHORT).show();
 							}
@@ -413,7 +385,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 				object = new JSONObject(value);
 				if (object != null){
 					mHouseId.setText(object.getString("RentNo"));
-					mRentIDcard.setText(object.getString("RentNo"));
+					mRentIDcard.setText(object.getString("RRAIDCard"));
 					mRentName.setText(object.getString("RRAContactName"));
 					mRentPhone.setText(object.getString("RRAContactTel"));
 					mRentPrice.setText(object.getString("RRentPrice"));

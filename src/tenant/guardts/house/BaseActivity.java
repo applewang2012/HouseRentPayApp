@@ -1,10 +1,23 @@
 package tenant.guardts.house;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
 
 public class BaseActivity extends Activity implements DataStatusInterface{
 
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Toast.makeText(getApplicationContext(), "网络异常，请检查网络！", Toast.LENGTH_SHORT).show();
+		}
+		
+	};
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
@@ -19,7 +32,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 
 	@Override
 	public void onStatusError(String action, String error) {
-		//Toast.makeText(getApplicationContext(), "�����쳣���������磡", Toast.LENGTH_SHORT).show();
+		mHandler.sendEmptyMessage(100);
 	}
 	
 	
