@@ -352,20 +352,17 @@
 		        	 android:background="#0c000000"
 	        	     />
 	        	
-             <!-- <Button 
-                 android:id="@+id/id_add_rent_confirm"
-                 android:layout_width="match_parent"
-		         android:layout_height="45dp"
-		         android:layout_marginLeft="30dp"
-		         android:layout_marginRight="30dp"
-		         android:layout_marginTop="30dp"
-		         android:layout_marginBottom="20dp"
-		         android:text="确 认 订 单"
-		         android:textColor="#ffffff"
-		         android:textSize="18dp"
-		         android:gravity="center"
-		         android:background="@drawable/button_background"
-                 /> -->
+             <GridView 
+		        android:id="@+id/id_house_detail_info_image"
+		        android:layout_width="match_parent"
+		        android:layout_height="500dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:horizontalSpacing="5dp"    
+		        android:verticalSpacing="10dp"    
+		        android:numColumns="3"
+		        android:scrollbars="none"
+		        />
 	       </LinearLayout>
 	      </LinearLayout>
      </ScrollView>

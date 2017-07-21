@@ -1,5 +1,8 @@
 package tenant.guardts.house;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +12,8 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -19,9 +24,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.model.HouseImageInfo;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.search.HouseInfo;
 import tenant.guardts.house.util.Constants;
 
 public class HouseDetailInfoActivity extends BaseActivity{
@@ -44,6 +54,7 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	private String mOwnerName;
 	private String mOwnerIdcard;
 	private String mHouseDetailAction = "http://tempuri.org/GetHouseDetailInfo";
+	private String mHouseImageListAction = "http://tempuri.org/GetRentImageList";
 	private String mRentNo = "";
 	private String mfilePath;
 	private HandlerThread myHandlerThread ;
@@ -62,6 +73,8 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		mRentNo = getIntent().getStringExtra("rentNo");
 		Log.e("mingguo", "rent no  "+mRentNo);
 		getHouseDetailInfoByHouseId(mRentNo);
+		//getHouseDetailImageListByHouseId(mRentNo);
+		mHandler.sendEmptyMessageDelayed(200, 300);
 	}
 	
 	
@@ -103,14 +116,13 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	private TextView mRentFloor;
 	private TextView mRentAddress;
 	private TextView mRentStatus;
-	
+	private GridView mHouseInfoGridview;
+	private List<HouseImageInfo> mDataList = new ArrayList<>();
 	
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
-		
-		
 		mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
 		mRentArea = (TextView)findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView)findViewById(R.id.id_rent_house_name);
@@ -121,6 +133,20 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		mRentFloor = (TextView)findViewById(R.id.id_rent_house_floor);
 		mRentAddress = (TextView)findViewById(R.id.id_rent_house_address);
 		mRentStatus = (TextView)findViewById(R.id.id_rent_house_status);
+		
+		mHouseInfoGridview = (GridView) findViewById(R.id.id_house_detail_info_image);	
+		mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+		UniversalAdapter adapter = new UniversalAdapter<HouseImageInfo>(getApplicationContext(), R.layout.house_detail_gridview_item_layout, mDataList) {
+
+			@Override
+			public void convert(UniversalViewHolder holder, HouseImageInfo info) {
+				
+				
+			}
+			
+		};
+		
+		mHouseInfoGridview.setAdapter(adapter);
 	}
 	
 	
@@ -138,6 +164,15 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		mPresenter.startPresentServiceTask();
 	}
 	
+	private void getHouseDetailImageListByHouseId(String rentNo){
+		
+		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetRentImageList";
+		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mHouseImageListAction));
+		rpc.addProperty("rentNo", rentNo); 
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mHouseImageListAction, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+	
 
 	
 	
@@ -146,13 +181,14 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-			Log.i("mingguo", "on success  action handle  message  ");
 			if (msg.what == 100){
 				dismissLoadingView();
 				jsonHouseInfoToView((String)msg.obj);
 			}else if (msg.what == 101){
 			
 				
+			}else if (msg.what == 200){
+				getHouseDetailImageListByHouseId(mRentNo);
 			}
 		}
 		
@@ -164,11 +200,8 @@ public class HouseDetailInfoActivity extends BaseActivity{
 			try {
 				array = new JSONArray(value);
 				JSONObject object = array.optJSONObject(0);
-				Log.i("mingguo", "json house info  "+object);
 				if (object != null){
-					Log.i("mingguo", "json house info  "+object);
 					mHouseId.setText(object.getString("RentNO"));
-					Log.i("mingguo", "json house info  "+object.getString("RentNO"));
 					mRentName.setText(object.getString("ROwner"));
 					mRentPhone.setText(object.getString("ROwnerTel"));
 					mRentArea.setText(object.getString("RRentArea")+" 平米");
@@ -224,6 +257,7 @@ public class HouseDetailInfoActivity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
+		
 		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mHouseDetailAction)){
@@ -247,9 +281,8 @@ public class HouseDetailInfoActivity extends BaseActivity{
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
-		mHandler.removeMessages(100);
+		mHandler.removeCallbacksAndMessages(null);
 	}
 	
 	
