@@ -1,6 +1,7 @@
 package tenant.guardts.house;
 
 
+import tenant.guardts.house.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;

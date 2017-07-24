@@ -3,6 +3,7 @@ package tenant.guardts.house;
 
 import java.io.File;
 
+import tenant.guardts.house.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -24,7 +25,7 @@ import tenant.guardts.house.download.DownloadManager;
 import tenant.guardts.house.download.DownloadManager.Request;
 import tenant.guardts.house.downloadui.DownloadAdapter;
 import tenant.guardts.house.downloadui.DownloadSelectListener;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 public class DownloadAppActivity extends Activity{
 
@@ -156,7 +157,7 @@ public class DownloadAppActivity extends Activity{
 			String databasepath = mSizeSortedCursor.getString(mLocalUriColumnId);
 			String downloadUrl = mSizeSortedCursor.getString(mDownloadUrlColumnId);
 			Log.i("mingguo", "database  download path  "+databasepath+"  download url  "+downloadUrl);
-			if (downloadUrl != null && downloadUrl.equalsIgnoreCase(Constants.DOWLOAD_URL)){
+			if (downloadUrl != null && downloadUrl.equalsIgnoreCase(CommonUtil.DOWLOAD_URL)){
 				int downloadId =  mSizeSortedCursor.getInt(mIdColumnId);
 				if (downloadpath == null){
 					Log.e("mingguo", "download path null  remove download id "+downloadId);
@@ -189,8 +190,8 @@ public class DownloadAppActivity extends Activity{
 			break;
 		case DownloadManager.STATUS_SUCCESSFUL:
 			mDownloadButton.setText("下载完成，点击安装");
-			String downloadfile = Constants.getDefaultDownloadPath(Constants.DOWLOAD_URL);
-			Constants.installApk(DownloadAppActivity.this, downloadfile);
+			String downloadfile = CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL);
+			CommonUtil.installApk(DownloadAppActivity.this, downloadfile);
 			break;
 		default:
 			mDownloadButton.setText("未下载，点击下载");
@@ -199,7 +200,7 @@ public class DownloadAppActivity extends Activity{
 	}
 	
 	private void changeDownloadStatus(){
-		String downloadfile = Constants.getDefaultDownloadPath(Constants.DOWLOAD_URL);
+		String downloadfile = CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL);
 		switch (queryDownloadStatus(downloadfile)) {
 		case DownloadManager.STATUS_PENDING:
 		case DownloadManager.STATUS_RUNNING:
@@ -212,12 +213,12 @@ public class DownloadAppActivity extends Activity{
 			break;
 		case DownloadManager.STATUS_SUCCESSFUL:
 			mDownloadButton.setText("下载完成，点击安装");
-			Constants.installApk(DownloadAppActivity.this, downloadfile);
+			CommonUtil.installApk(DownloadAppActivity.this, downloadfile);
 			break;
 		case -1:
 			mDownloadButton.setText("未下载，点击下载");
 			Toast.makeText(getApplicationContext(), "文件未找到,开始下载！", Toast.LENGTH_SHORT).show();
-			Request request = new Request(Uri.parse(Constants.DOWLOAD_URL));
+			Request request = new Request(Uri.parse(CommonUtil.DOWLOAD_URL));
 			request.setPackageName("com.pay.renthouse");
 			request.setShowRunningNotification(false);
 			request.setMimeType("application/vnd.android.package-archive");
@@ -239,7 +240,7 @@ public class DownloadAppActivity extends Activity{
         		Log.e("mingguo", "package name "+packageName);
         		if (packageName != null && packageName.equals("com.pay.renthouse")){
         			mDownloadManager.remove(mCurrentDownloadId);
-        			new File(Constants.getDefaultDownloadPath(Constants.DOWLOAD_URL)).delete();
+        			new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL)).delete();
         			finish();
         		}
         	}

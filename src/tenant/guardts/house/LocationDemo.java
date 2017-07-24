@@ -30,6 +30,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+import tenant.guardts.house.R;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 /**
  * 此demo用来展示如何结合定位SDK实现定位，并使用MyLocationOverlay绘制定位位置 同时展示如何使用自定义图标绘制并点击时弹出泡泡
@@ -262,8 +263,8 @@ public class LocationDemo extends BaseActivity {
     
     private void getLocationByCoordinates(){
     	Log.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetRentsByCoodinates";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mLocationAction));
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentsByCoodinates";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mLati+""); 
 		rpc.addProperty("lon", mLongi+""); 
 		rpc.addProperty("distance", "15000"); 

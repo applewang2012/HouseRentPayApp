@@ -24,15 +24,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
 import tenant.guardts.house.model.HouseImageInfo;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.search.HouseInfo;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 public class HouseDetailInfoActivity extends BaseActivity{
 
@@ -59,6 +62,8 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	private String mfilePath;
 	private HandlerThread myHandlerThread ;
 	private Handler mSubHandler;
+	private ArrayList<String> imageUrlList = new ArrayList<String>();
+	private String mImageUrlPrefix = CommonUtil.mUserHost+"";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +76,9 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		mTitleBar.setText("房屋详情");
 		initView();
 		mRentNo = getIntent().getStringExtra("rentNo");
+		//mRentNo = "888888888";
 		Log.e("mingguo", "rent no  "+mRentNo);
 		getHouseDetailInfoByHouseId(mRentNo);
-		//getHouseDetailImageListByHouseId(mRentNo);
-		mHandler.sendEmptyMessageDelayed(200, 300);
 	}
 	
 	
@@ -116,8 +120,10 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	private TextView mRentFloor;
 	private TextView mRentAddress;
 	private TextView mRentStatus;
-	private GridView mHouseInfoGridview;
+	//private GridView mHouseInfoGridview;
 	private List<HouseImageInfo> mDataList = new ArrayList<>();
+	private ViewFlow mViewFlow;
+	private CircleFlowIndicator mFlowIndicator;
 	
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
@@ -134,31 +140,63 @@ public class HouseDetailInfoActivity extends BaseActivity{
 		mRentAddress = (TextView)findViewById(R.id.id_rent_house_address);
 		mRentStatus = (TextView)findViewById(R.id.id_rent_house_status);
 		
-		mHouseInfoGridview = (GridView) findViewById(R.id.id_house_detail_info_image);	
-		mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-		UniversalAdapter adapter = new UniversalAdapter<HouseImageInfo>(getApplicationContext(), R.layout.house_detail_gridview_item_layout, mDataList) {
-
-			@Override
-			public void convert(UniversalViewHolder holder, HouseImageInfo info) {
-				
-				
-			}
-			
-		};
+//		mHouseInfoGridview = (GridView) findViewById(R.id.id_house_detail_info_image);	
+//		mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		
-		mHouseInfoGridview.setAdapter(adapter);
+		mViewFlow = (ViewFlow) findViewById(R.id.viewflow);
+		mFlowIndicator = (CircleFlowIndicator) findViewById(R.id.viewflowindic);
+//		UniversalAdapter adapter = new UniversalAdapter<HouseImageInfo>(getApplicationContext(), R.layout.house_detail_gridview_item_layout, mDataList) {
+//
+//			@Override
+//			public void convert(UniversalViewHolder holder, HouseImageInfo info) {
+//				
+//				
+//			}
+//			
+//		};
+//		
+//		mHouseInfoGridview.setAdapter(adapter);
+		
+//		imageUrlList
+//		.add("http://b.hiphotos.baidu.com/image/pic/item/d01373f082025aaf95bdf7e4f8edab64034f1a15.jpg");
+//		imageUrlList
+//				.add("http://g.hiphotos.baidu.com/image/pic/item/6159252dd42a2834da6660c459b5c9ea14cebf39.jpg");
+//		imageUrlList
+//				.add("http://d.hiphotos.baidu.com/image/pic/item/adaf2edda3cc7cd976427f6c3901213fb80e911c.jpg");
+//		imageUrlList
+//				.add("http://g.hiphotos.baidu.com/image/pic/item/b3119313b07eca80131de3e6932397dda1448393.jpg");
+		
+		
 	}
 	
 	
-	
+	private void initBanner(ArrayList<String> imageUrlList) {
+		if (imageUrlList.size() == 0){
+			FrameLayout viewflowContent = (FrameLayout) findViewById(R.id.id_viewflow_framelayout);
+			viewflowContent.setVisibility(View.GONE);
+			return;
+		}
+		mViewFlow.setAdapter(new ImagePagerAdapter(HouseDetailInfoActivity.this, imageUrlList,
+				null, null).setInfiniteLoop(true));
+		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
+														// 我的ImageAdapter实际图片张数为3
+		mFlowIndicator.setIndicatorCount(imageUrlList.size());
+		
+		mViewFlow.setFlowIndicator(mFlowIndicator);
+		mViewFlow.setTimeSpan(3000);
+		mViewFlow.setSelection(imageUrlList.size() * 1000); // 设置初始位置
+		mViewFlow.startAutoFlowTimer(); // 启动自动播放
+		mFlowIndicator.requestLayout();
+		mFlowIndicator.invalidate();
+	}
 	
 	
 
 	private void getHouseDetailInfoByHouseId(String rentNo){
 		showLoadingView();
 		mLoadingView.setVisibility(View.VISIBLE);
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetHouseDetailInfo";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mHouseDetailAction));
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetHouseDetailInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
 		rpc.addProperty("rentNo", rentNo); 
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mHouseDetailAction, rpc);
 		mPresenter.startPresentServiceTask();
@@ -166,8 +204,8 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	
 	private void getHouseDetailImageListByHouseId(String rentNo){
 		
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetRentImageList";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mHouseImageListAction));
+		String url = CommonUtil.mUserHost+"services.asmx?op=GetRentImageList";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseImageListAction));
 		rpc.addProperty("rentNo", rentNo); 
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mHouseImageListAction, rpc);
 		mPresenter.startPresentServiceTask();
@@ -184,11 +222,16 @@ public class HouseDetailInfoActivity extends BaseActivity{
 			if (msg.what == 100){
 				dismissLoadingView();
 				jsonHouseInfoToView((String)msg.obj);
+				showLoadingView();
+				getHouseDetailImageListByHouseId(mRentNo);
 			}else if (msg.what == 101){
 			
 				
 			}else if (msg.what == 200){
-				getHouseDetailImageListByHouseId(mRentNo);
+				dismissLoadingView();
+				jsonHouseImageListData((String)msg.obj);
+				Log.i("mingguo", "handle message   image url list size  "+imageUrlList.size());
+				initBanner(imageUrlList);
 			}
 		}
 		
@@ -211,6 +254,75 @@ public class HouseDetailInfoActivity extends BaseActivity{
 					mRentFloor.setText(object.getString("RFloor")+"/"+object.getString("RTotalFloor")+"层");
 					mRentAddress.setText(object.getString("RAddress"));
 					mRentStatus.setText(object.getString("IsAvailable"));
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	private void jsonHouseImageListData(String value){
+		if (value != null){
+			try {
+				JSONObject object = new JSONObject(value);
+				if (object != null){
+					String imageCount = object.optString("count");
+					int count = Integer.parseInt(imageCount);
+					Log.w("mingguo", "countt  "+count);
+					if (count > 0){
+						if (count == 1){
+							String imageUrl1 = object.optString("Image0");
+							imageUrlList.add(mImageUrlPrefix+mImageUrlPrefix+imageUrl1);
+						}else if (count == 2){
+							String imageUrl1 = object.optString("Image0");
+							String imageUrl2 = object.optString("Image1");
+							imageUrlList.add(mImageUrlPrefix+imageUrl1);
+							imageUrlList.add(mImageUrlPrefix+imageUrl2);
+						}else if (count == 3){
+							String imageUrl1 = object.optString("Image0");
+							String imageUrl2 = object.optString("Image1");
+							String imageUrl3 = object.optString("Image2");
+							imageUrlList.add(mImageUrlPrefix+imageUrl1);
+							imageUrlList.add(mImageUrlPrefix+imageUrl2);
+							imageUrlList.add(mImageUrlPrefix+imageUrl3);
+						}else if (count == 4){
+							String imageUrl1 = object.optString("Image0");
+							String imageUrl2 = object.optString("Image1");
+							String imageUrl3 = object.optString("Image2");
+							String imageUrl4 = object.optString("Image3");
+							imageUrlList.add(mImageUrlPrefix+imageUrl1);
+							imageUrlList.add(mImageUrlPrefix+imageUrl2);
+							imageUrlList.add(mImageUrlPrefix+imageUrl3);
+							imageUrlList.add(mImageUrlPrefix+imageUrl4);
+						}else if (count == 5){
+							String imageUrl1 = object.optString("Image0");
+							String imageUrl2 = object.optString("Image1");
+							String imageUrl3 = object.optString("Image2");
+							String imageUrl4 = object.optString("Image3");
+							String imageUrl5 = object.optString("Image4");
+							imageUrlList.add(mImageUrlPrefix+imageUrl1);
+							imageUrlList.add(mImageUrlPrefix+imageUrl2);
+							imageUrlList.add(mImageUrlPrefix+imageUrl3);
+							imageUrlList.add(mImageUrlPrefix+imageUrl4);
+							imageUrlList.add(mImageUrlPrefix+imageUrl5);
+						}else if (count == 6){
+							String imageUrl1 = object.optString("Image0");
+							String imageUrl2 = object.optString("Image1");
+							String imageUrl3 = object.optString("Image2");
+							String imageUrl4 = object.optString("Image3");
+							String imageUrl5 = object.optString("Image4");
+							String imageUrl6 = object.optString("Image5");
+							imageUrlList.add(mImageUrlPrefix+imageUrl1);
+							imageUrlList.add(mImageUrlPrefix+imageUrl2);
+							imageUrlList.add(mImageUrlPrefix+imageUrl3);
+							imageUrlList.add(mImageUrlPrefix+imageUrl4);
+							imageUrlList.add(mImageUrlPrefix+imageUrl5);
+							imageUrlList.add(mImageUrlPrefix+imageUrl6);
+						}
+					}
+					
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -269,11 +381,11 @@ public class HouseDetailInfoActivity extends BaseActivity{
 //				mHandler.sendEmptyMessageDelayed(101, 10);
 //			}else if (action.equals(mCompleteRentAttribute)){
 //				mHandler.sendEmptyMessageDelayed(102, 1000);
-//			}else if (action.equals(mIdentifyAction)){
-//				Message message = mHandler.obtainMessage();
-//				message.what = 103;
-//				message.obj = templateInfo;
-//				mHandler.sendMessage(message);
+			}else if (action.equals(mHouseImageListAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 200;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
 		}
 		

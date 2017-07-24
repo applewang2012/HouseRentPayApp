@@ -10,6 +10,7 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
+import tenant.guardts.house.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,7 +42,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.ScreenShotUtil;
 
 public class RegisterUserActivity extends BaseActivity{
@@ -155,31 +157,31 @@ public class RegisterUserActivity extends BaseActivity{
 				mEmail = email.getEditableText().toString();
 				Log.i("mingguo", "user name  "+mUserName);
 				if (mUserName == null || mUserName.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.user_name_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mPassword == null || mPassword.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.pwd_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mRealName == null || mRealName.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.surface_name_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.surface_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mIdCard == null || mIdCard.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.id_card_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(),getString(R.string.id_card_not_null) , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mPhone == null || mPhone.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.phone_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mNickName == null || mNickName.equals("")){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.nickname_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.nickname_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (!mUsernameValid){
-					Toast.makeText(RegisterUserActivity.this, getString(R.string.username_register_again), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 //				showLoadingView();
@@ -206,15 +208,14 @@ public class RegisterUserActivity extends BaseActivity{
 		@Override
 		public void onSDKUsingFail(String errorMessage, String errorCode) {
 			// TODO Auto-generated method stub
-			Toast toast = Toast.makeText(RegisterUserActivity.this, errorMessage, Toast.LENGTH_SHORT);
-			toast.show();
+			GlobalUtil.shortToast(getApplication(), errorMessage, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			
 		}
 		
 		@Override
 		public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
 			if(faceImages == null){
-				Toast toast = Toast.makeText(RegisterUserActivity.this, "image capture  无人脸", Toast.LENGTH_SHORT);
-				toast.show();
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 			
 			//TextView textView = (TextView)findViewById(R.id.show_text);
@@ -229,8 +230,7 @@ public class RegisterUserActivity extends BaseActivity{
 		@Override
 		public void onFaceImageCaptured(byte[] faceImages) {
 			if(faceImages == null){
-				Toast toast = Toast.makeText(RegisterUserActivity.this, "image capture  无人脸", Toast.LENGTH_SHORT);
-				toast.show();
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 			showLoadingView();
 			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
@@ -273,7 +273,7 @@ public class RegisterUserActivity extends BaseActivity{
 //				Toast.makeText(MainActivity.this, R.string.failed, Toast.LENGTH_LONG).show();
 //			}
 		}else{
-			Toast.makeText(RegisterUserActivity.this, "头像采集失败", Toast.LENGTH_LONG).show();
+			GlobalUtil.shortToast(getApplication(), "头像采集失败", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 		}
 	}
 
@@ -339,7 +339,7 @@ public class RegisterUserActivity extends BaseActivity{
 		}
 		Log.i("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mIdentifyAction));
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
 		rpc.addProperty("name", mRealName);
 		rpc.addProperty("base64Str", faceStr);
@@ -350,16 +350,16 @@ public class RegisterUserActivity extends BaseActivity{
 	}
 	
 	private void checkUserNameValid(String username){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=ValidateLoginName";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mValidAction));
+		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
 	private void registerUserName(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddUserInfo";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mRegisterAction));
+		String url = CommonUtil.mUserHost+"services.asmx?op=AddUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRegisterAction));
 		rpc.addProperty("loginName", mUserName);
 		rpc.addProperty("password", mPassword);
 		rpc.addProperty("userType", "0");
@@ -384,7 +384,7 @@ public class RegisterUserActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				Toast.makeText(RegisterUserActivity.this, getString(R.string.username_register_again), Toast.LENGTH_SHORT).show();
+				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 101){
 				dismissLoadingView();
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
@@ -394,7 +394,7 @@ public class RegisterUserActivity extends BaseActivity{
 			    editor.commit();
 			    mHandler.sendEmptyMessageDelayed(105, 3000);
 			}else if (msg.what == 105){
-				Toast.makeText(RegisterUserActivity.this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+				GlobalUtil.shortToast(getApplication(), getString(R.string.register_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				Intent intent = new Intent(RegisterUserActivity.this, HomeActivity.class);
 				intent.putExtra("user_name", mUserName);
 				intent.putExtra("user_password", mPassword);
@@ -407,18 +407,18 @@ public class RegisterUserActivity extends BaseActivity{
 					if (object != null){
 						String compareResult = object.optString("compareresult");
 						if (compareResult == null || compareResult.equals("")){
-							Toast.makeText(RegisterUserActivity.this, mRealName + " 身份认证失败 ", Toast.LENGTH_SHORT).show();
+							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}else{
 							if (compareResult.equals("0")){
 								String similar = object.optString("similar");
 								if (similar != null && similar.length() > 3){
 									Double rate = 100 *	Double.parseDouble(similar);
-									Toast.makeText(RegisterUserActivity.this,  mRealName + " 身份认证成功,相似度 "+rate, Toast.LENGTH_SHORT).show();
+									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功,相似度 "+rate, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 									registerUserName();
 									return;
 								}
 							}else{
-								Toast.makeText(RegisterUserActivity.this,  mRealName + " 身份认证失败  "+compareResult, Toast.LENGTH_SHORT).show();
+								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}
 						}
 					}

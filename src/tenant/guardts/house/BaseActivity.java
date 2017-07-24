@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class BaseActivity extends Activity implements DataStatusInterface{
 
@@ -14,7 +15,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			Toast.makeText(getApplicationContext(), "网络异常，请检查网络！", Toast.LENGTH_SHORT).show();
+			GlobalUtil.shortToast(getApplication(), "网络异常，请检查网络！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 		}
 		
 	};

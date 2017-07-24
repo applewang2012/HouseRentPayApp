@@ -3,13 +3,13 @@ package tenant.guardts.house.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import tenant.guardts.house.R;
 import android.content.Context;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import tenant.guardts.house.R;
 import tenant.guardts.house.search.ExpandMenuView.ViewBaseAction;
 
 /**

@@ -43,7 +43,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 public class DataModel {
 
@@ -98,13 +98,13 @@ public class DataModel {
 		protected Void doInBackground(Void... params) {
 			try {
 				 Element[] header = new Element[1]; 
-	                header[0] = new Element().createElement(Constants.NAMESPACE, "MySoapHeader"); 
+	                header[0] = new Element().createElement(CommonUtil.NAMESPACE, "MySoapHeader"); 
 	                
-	                Element userName = new Element().createElement(Constants.NAMESPACE, "UserID"); 
+	                Element userName = new Element().createElement(CommonUtil.NAMESPACE, "UserID"); 
 	                userName.addChild(Node.TEXT, "admin"); 
 	                header[0].addChild(Node.ELEMENT, userName); 
 	                
-	                Element pass = new Element().createElement(Constants.NAMESPACE, "PassWord"); 
+	                Element pass = new Element().createElement(CommonUtil.NAMESPACE, "PassWord"); 
 	                pass.addChild(Node.TEXT, "Pa$$w0rd780419"); 
 	                header[0].addChild(Node.ELEMENT, pass); 
 	                
@@ -276,7 +276,7 @@ public class DataModel {
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-				String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseInfo";
+				String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseInfo";
 				String action = "http://tempuri.org/GetHouseInfo";
 				SoapObject object = new SoapObject("http://tempuri.org/", getSoapName(mSoapAction));
 				

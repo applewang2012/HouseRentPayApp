@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import tenant.guardts.house.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -26,7 +27,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, OnBufferingUpdateListener,
@@ -218,9 +219,9 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
         // 当视频加载完毕以后，隐藏加载进度�?
         progressBar.setVisibility(View.GONE);
         // 判断是否有保存的播放位置,防止屏幕旋转时，界面被重新构建，播放位置丢失�?
-        if (Constants.playPosition >= 0) {
-            mediaPlayer.seekTo(Constants.playPosition);
-            Constants.playPosition = -1;
+        if (CommonUtil.playPosition >= 0) {
+            mediaPlayer.seekTo(CommonUtil.playPosition);
+            CommonUtil.playPosition = -1;
             // surfaceHolder.unlockCanvasAndPost(Constants.getCanvas());
         }
         seekBarAutoFlag = true;
@@ -342,17 +343,17 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
             if (null != mediaPlayer) {
                 // 正在播放
                 if (mediaPlayer.isPlaying()) {
-                    Constants.playPosition = mediaPlayer.getCurrentPosition();
+                    CommonUtil.playPosition = mediaPlayer.getCurrentPosition();
                     // seekBarAutoFlag = false;
                     mediaPlayer.pause();
                     playButton.setText("播放");
                 } else {
-                    if (Constants.playPosition >= 0) {
+                    if (CommonUtil.playPosition >= 0) {
                         // seekBarAutoFlag = true;
-                        mediaPlayer.seekTo(Constants.playPosition);
+                        mediaPlayer.seekTo(CommonUtil.playPosition);
                         mediaPlayer.start();
                         playButton.setText("暂停");
-                        Constants.playPosition = -1;
+                        CommonUtil.playPosition = -1;
                     }
                 }
 
@@ -364,14 +365,14 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
                 // 视频正在播放�?
                 if (mediaPlayer.isPlaying()) {
                     // 获取播放位置
-                    Constants.playPosition = mediaPlayer.getCurrentPosition();
+                    CommonUtil.playPosition = mediaPlayer.getCurrentPosition();
                     // 暂停播放
                     mediaPlayer.pause();
                     //
                     playButton.setText("播放");
                 }
                 // 视频截图
-                savaScreenShot(Constants.playPosition);
+                savaScreenShot(CommonUtil.playPosition);
             } else {
                 Toast.makeText(SurfaceViewTestActivity.this, "视频暂未播放�?", Toast.LENGTH_SHORT).show();
             }
@@ -455,11 +456,11 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
         // TODO Auto-generated method stub
         super.onResume();
         // 判断播放位置
-        if (Constants.playPosition >= 0) {
+        if (CommonUtil.playPosition >= 0) {
 
             if (null != mediaPlayer) {
                 seekBarAutoFlag = true;
-                mediaPlayer.seekTo(Constants.playPosition);
+                mediaPlayer.seekTo(CommonUtil.playPosition);
                 mediaPlayer.start();
             } else {
                 playVideo();
@@ -476,7 +477,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
         super.onPause();
         try {
             if (null != mediaPlayer && mediaPlayer.isPlaying()) {
-                Constants.playPosition = mediaPlayer.getCurrentPosition();
+                CommonUtil.playPosition = mediaPlayer.getCurrentPosition();
                 mediaPlayer.pause();
                 seekBarAutoFlag = false;
             }
@@ -494,7 +495,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
         super.onSaveInstanceState(outState);
         if (null != mediaPlayer) {
             // 保存播放位置
-            Constants.playPosition = mediaPlayer.getCurrentPosition();
+            CommonUtil.playPosition = mediaPlayer.getCurrentPosition();
         }
     }
 
@@ -526,7 +527,7 @@ public void onConfigurationChanged(Configuration newConfig) {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.stop();
                 }
-                Constants.playPosition = -1;
+                CommonUtil.playPosition = -1;
                 // 释放mediaPlayer
                 SurfaceViewTestActivity.this.mediaPlayer.release();
                 SurfaceViewTestActivity.this.mediaPlayer = null;

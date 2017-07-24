@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import tenant.guardts.house.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
+import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 /**
  * Initial the camera
@@ -123,7 +125,7 @@ public class CaptureActivity extends Activity implements Callback {
 		String resultString = result.getText();
 		//FIXME
 		if (resultString.equals("")) {
-			Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
+			GlobalUtil.shortToast(getApplication(), "Scan failed  !", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 		}else {
 //			System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent();

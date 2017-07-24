@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import com.google.zxing.ResultPoint;
 
+import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -29,7 +30,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-import tenant.guardts.house.R;
 import tenant.guardts.house.camera.CameraManager;
 
 /**

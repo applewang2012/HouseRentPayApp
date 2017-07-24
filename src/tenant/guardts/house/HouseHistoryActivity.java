@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 public class HouseHistoryActivity extends BaseActivity implements OnItemClickListener{
 
@@ -99,8 +100,8 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	}
 	
 	private void getHouseHistoryData(){
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetRentHistory";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mRentHistoryAction));
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentHistory";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", mIdCard);
 		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
 		mPresent.startPresentServiceTask();

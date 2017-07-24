@@ -35,4 +35,8 @@
     
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <dimen name="ui_10_dip">10dip</dimen> 
+    <dimen name="text_size_medium">16dip</dimen> 
+    
 </resources>

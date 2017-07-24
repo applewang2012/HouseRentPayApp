@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class ModifyPasswordActivity extends BaseActivity{
 
@@ -61,23 +63,23 @@ public class ModifyPasswordActivity extends BaseActivity{
 				mNewPassword = newpassword.getEditableText().toString();
 				mNewPasswordConfirm = newpasswordConfirm.getEditableText().toString();
 				if (mUserName == null || mUserName.equals("")){
-					Toast.makeText(getApplicationContext(), getString(R.string.user_name_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mOldPassword == null || mOldPassword.equals("")){
-					Toast.makeText(getApplicationContext(), getString(R.string.old_pwd_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.old_pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mNewPassword == null || mNewPassword.equals("")){
-					Toast.makeText(getApplicationContext(), getString(R.string.new_pwd_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.new_pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mNewPasswordConfirm == null || mNewPasswordConfirm.equals("")){
-					Toast.makeText(getApplicationContext(), getString(R.string.new_again_pwd_not_null), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.new_again_pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (!mNewPassword.equals(mNewPasswordConfirm)){
-					Toast.makeText(getApplicationContext(), getString(R.string.twice_pwd_not_same), Toast.LENGTH_SHORT).show();
+					GlobalUtil.shortToast(getApplication(), getString(R.string.twice_pwd_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				showLoadingView();
@@ -88,8 +90,8 @@ public class ModifyPasswordActivity extends BaseActivity{
 	}
 	
 	private void modifyUserPassword(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=ChangePassword";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mModifyAction));
+		String url = CommonUtil.mUserHost+"services.asmx?op=ChangePassword";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mModifyAction));
 		rpc.addProperty("username", mUserName);
 		rpc.addProperty("oldPassword", mOldPassword);
 		rpc.addProperty("newPassword", mNewPassword);
@@ -110,14 +112,14 @@ public class ModifyPasswordActivity extends BaseActivity{
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_password", mNewPassword);
 			    editor.commit();
-			    Toast.makeText(ModifyPasswordActivity.this, getString(R.string.modify_pwd_success), Toast.LENGTH_SHORT).show();
+			    GlobalUtil.shortToast(getApplication(), getString(R.string.modify_pwd_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 			    Intent passwordIntent = new Intent();
 			    passwordIntent.putExtra("new_password", mNewPassword);
 			    setResult(RESULT_OK, passwordIntent);
 				finish();
 			}else if (msg.what == 101){
 				dismissLoadingView();
-				Toast.makeText(ModifyPasswordActivity.this, getString(R.string.modify_pwd_failed), Toast.LENGTH_SHORT).show();
+				GlobalUtil.shortToast(getApplication(), getString(R.string.modify_pwd_failed), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 			
 		}

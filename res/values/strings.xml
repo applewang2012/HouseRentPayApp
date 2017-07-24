@@ -74,6 +74,7 @@
     <string name="login_failed">登录失败，检查用户名和密码</string>
     <string name="modify_pwd_failed">密码修改失败</string>
     <string name="user_logout_remind">您确定要退出登录吗?</string>
+    <string name="user_change_area_title">您确定要切换当前城市吗?</string>
     <string name="button_ok">确定</string>
     <string name="button_cancel">取消</string>
     <string name="home_tab_house">出租屋</string>

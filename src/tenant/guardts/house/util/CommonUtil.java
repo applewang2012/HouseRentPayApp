@@ -12,7 +12,7 @@ import android.os.Environment;
  * @author shenxiaolei
  *
  */
-public class Constants {
+public class CommonUtil {
 
     /**
      * 记录播放位置
@@ -28,12 +28,14 @@ public class Constants {
     public static String mRegisterName = null;
     public static String mRegisterIdcard = null;
     public static String mUserIdNo = null;
+    public static String mUserHost, mUserArea;
+    
     public static Canvas getCanvas() {
         return canvas;
     }
 
     public static void setCanvas(Canvas canvas) {
-        Constants.canvas = canvas;
+        CommonUtil.canvas = canvas;
     }
     
     public static String getDefaultDownloadPath(String downloadUrl){

@@ -2,6 +2,7 @@ package tenant.guardts.house.search;
 
 import java.util.ArrayList;
 
+import tenant.guardts.house.R;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +15,6 @@ import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import tenant.guardts.house.R;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse

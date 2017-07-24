@@ -2,12 +2,12 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.MemoryHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,22 +24,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import tenant.guardts.house.R;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.search.ExpandMenuView;
+import tenant.guardts.house.search.ExpandMenuView.OnButtonClickListener;
 import tenant.guardts.house.search.HouseInfo;
 import tenant.guardts.house.search.Item;
 import tenant.guardts.house.search.Province;
 import tenant.guardts.house.search.SingleListFilterView;
-import tenant.guardts.house.search.ExpandMenuView.OnButtonClickListener;
-import tenant.guardts.house.search.SingleListFilterView.OnSelectListener;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse
@@ -211,8 +208,8 @@ public class HouseSearchActivity extends BaseActivity {
 	
 	private void searchHouseByFilterCondition(){
 		showLoadingView();
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetHousesByCondition";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mSearchAction));
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetHousesByCondition";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSearchAction));
 		rpc.addProperty("pageSize", mPageCount);
 		rpc.addProperty("pageIndex", 1);
 		rpc.addProperty("housetype", mHouseType);

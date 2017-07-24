@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
         <uses-sdk
-            android:minSdkVersion="13"
+            android:minSdkVersion="14"
             android:targetSdkVersion="21" />
     
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -17,8 +17,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     
-    <uses-permission android:name = "android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.READ_FRAME_BUFFER"/>
     
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -89,6 +87,12 @@
            
         </activity>
         
+        <activity
+            android:name=".GalleryActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        
         <activity android:name="tenant.guardts.house.DownloadAppActivity"></activity>
         
         <activity
@@ -99,42 +103,50 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         
-        <activity  
+    <activity  
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".HouseDetailInfoActivity" />
         
         <activity  
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".HouseSearchActivity" />
         
         <activity  
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".HouseHistoryActivity" />
             
         <activity  
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".RegisterUserActivity" />
         <activity 
             android:windowSoftInputMode="adjustUnspecified|stateHidden" 
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".ModifyPasswordActivity" />
         <activity 
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".LoginUserActivity" />
         
         <activity  
            android:windowSoftInputMode="adjustUnspecified|stateHidden"
            android:theme="@style/AppTheme"
+           android:screenOrientation="portrait"
            android:name=".HomeActivity" />
         
         <activity  
            android:windowSoftInputMode="adjustUnspecified|stateHidden"
            android:theme="@style/AppTheme"
+           android:screenOrientation="portrait"
            android:name=".GetRentAttributeActivity" />
         
         <activity
@@ -146,6 +158,7 @@
         
 		<activity 
             android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
             android:name=".LoadUrlTestActivity"></activity> 
         
         <provider

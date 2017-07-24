@@ -2,6 +2,7 @@ package tenant.guardts.house.search;
 
 import java.util.List;
 
+import tenant.guardts.house.R;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import tenant.guardts.house.R;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse

@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.R;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,7 +28,8 @@ import android.widget.Toast;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class HomeActivity extends BaseActivity {
 
@@ -179,7 +181,7 @@ public class HomeActivity extends BaseActivity {
 	
 	
 //	private void loginUser(){
-//		String url = "http://qxw2332340157.my3w.com/services.asmx?op=ValidateLogin";
+//		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLogin";
 //		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLoginAction));
 //		rpc.addProperty("username", mUserName);
 //		rpc.addProperty("password", mPassword);
@@ -188,8 +190,8 @@ public class HomeActivity extends BaseActivity {
 //	}
 	
 	private void getUserInfo(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetUserInfo";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mUserInfoAction));
+		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUserInfoAction, rpc);
 		mPresenter.startPresentServiceTask();
@@ -235,8 +237,8 @@ public class HomeActivity extends BaseActivity {
 //					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
 //					userInfo.put("Address", itemJsonObject.optString("Address"));
 //					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
-					Constants.mRegisterName = itemJsonObject.optString("RealName");
-					Constants.mRegisterIdcard = itemJsonObject.optString("IDCard");
+					CommonUtil.mRegisterName = itemJsonObject.optString("RealName");
+					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,7 +269,7 @@ public class HomeActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
 					if ((System.currentTimeMillis() - exitTime) > 2000) {
-						Toast.makeText(getApplicationContext(), getString(R.string.press_again_to_exit), Toast.LENGTH_SHORT).show();
+						GlobalUtil.shortToast(getApplication(), getString(R.string.press_again_to_exit), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			            exitTime = System.currentTimeMillis();
 			        } else {
 			            finish();

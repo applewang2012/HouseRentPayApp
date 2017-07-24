@@ -2,12 +2,15 @@ package tenant.guardts.house.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 
 public class BMapUtil {
+	
     	
 	/**
 	 * 从view 得到图片

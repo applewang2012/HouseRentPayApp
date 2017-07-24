@@ -28,6 +28,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 
+import tenant.guardts.house.R;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
@@ -46,10 +47,9 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
-import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 @SuppressLint("NewApi")
@@ -253,8 +253,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface{
 	
 	private void getLocationByCoordinates(){
     	Log.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetRentsByCoodinates";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(mLocationAction));
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentsByCoodinates";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mLati+""); 
 		rpc.addProperty("lon", mLongi+""); 
 		rpc.addProperty("distance", "15000"); 

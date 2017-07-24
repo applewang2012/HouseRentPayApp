@@ -33,7 +33,7 @@ import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.Constants;
+import tenant.guardts.house.util.CommonUtil;
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 @SuppressLint("NewApi")
 public class MyFragment extends Fragment implements DataStatusInterface{
@@ -53,6 +53,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	private FrameLayout mPassword;
 	private FrameLayout mLogout;
 	private String mUsername;
+	private FrameLayout mChangeArea;
 
 	public MyFragment(String user){
 		mUsername = user;
@@ -91,6 +92,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 		mSearchHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_search);
 		mPassword = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_password_modify);
 		mLogout = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_logout);
+		mChangeArea = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_change_area);
 		mPassword.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -98,6 +100,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				startActivity(new Intent(mContext, ModifyPasswordActivity.class));
 			}
 		});
+		
 		mLogout.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -110,8 +113,16 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mContext, HouseHistoryActivity.class);
-				intent.putExtra("idcard", Constants.mRegisterIdcard);
+				intent.putExtra("idcard", CommonUtil.mRegisterIdcard);
 				startActivity(intent);
+			}
+		});
+		mChangeArea.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				changeUserAreaDialog();
 			}
 		});
 		mSearchHouse.setOnClickListener(new OnClickListener() {
@@ -131,9 +142,9 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void getUserInfo(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetUserInfo";
+		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
 		String soapaction = "http://tempuri.org/GetUserInfo";
-		SoapObject rpc = new SoapObject(Constants.NAMESPACE, Constants.getSoapName(soapaction));
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(soapaction));
 		rpc.addProperty("username", mUsername);
 		mPresent.readyPresentServiceParams(mContext, url, soapaction, rpc);
 		mPresent.startPresentServiceTask();
@@ -166,7 +177,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			dismissLoadingView();
 			if (infoModel != null){
 				mUserContainer.setVisibility(View.VISIBLE);
-				mUserNickname.setText(Constants.mRegisterName);
+				mUserNickname.setText(CommonUtil.mRegisterName);
 				mUserAddress.setText(infoModel.get("Phone"));
 				mUserId.setText(infoModel.get("LoginName"));
 			}
@@ -188,8 +199,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 					userInfo.put("Address", itemJsonObject.optString("Address"));
 					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
 					userInfo.put("Phone", itemJsonObject.optString("Phone"));
-					Constants.mRegisterName = itemJsonObject.optString("RealName");
-					Constants.mRegisterIdcard = itemJsonObject.optString("IDCard");
+					CommonUtil.mRegisterName = itemJsonObject.optString("RealName");
+					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 			return userInfo;
 		} catch (Exception e) {
@@ -225,7 +236,39 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	             Log.i("alertdialog"," �뱣�����ݣ�");  
 	         }  
 	  
-	     }).show();//�ڰ�����Ӧ�¼�����ʾ�˶Ի���  
+	     }).show();
+	}
+	
+	private void changeUserAreaDialog(){
+		new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.user_logout)) 
+		  
+	     .setMessage(getString(R.string.user_change_area_title))//������ʾ������  
+	  
+	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {
+	        	 SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+					SharedPreferences.Editor editor = sharedata.edit();
+				    editor.putString("user_name", "");
+				    editor.putString("user_password", "");
+				    editor.putString("area", "");
+				    editor.putString("host", "");
+				    editor.commit();
+				    Intent intent = new Intent(mContext, LoginUserActivity.class);
+		            startActivity(intent);    
+		            
+	         }  
+	  
+	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
+	  
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
+	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	         }  
+	  
+	     }).show();
 	}
 
 	@Override

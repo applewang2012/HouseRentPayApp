@@ -69,7 +69,7 @@
     
 	 <LinearLayout 
 		        android:layout_width="match_parent"
-		        android:layout_height="244dp"
+		        android:layout_height="306dp"
 		        android:layout_marginLeft="32dp"
 		        android:layout_marginRight="32dp"
 		        android:layout_marginTop="150dp"
@@ -155,6 +155,34 @@
 	        	        />
 	        	</FrameLayout>
 	        	 <ImageView 
+	        	     android:layout_width="match_parent"
+		        	 android:layout_height="1dp"
+		        	 android:background="#0c000000"
+	        	     />
+	        	 <FrameLayout 
+	        	    android:id="@+id/id_userinfo_change_area"
+	        	    android:layout_width="match_parent"
+		        	android:layout_height="60dp"
+		        	android:gravity="center_vertical"
+		        	>
+	        	    <TextView 
+	        	        android:layout_width="wrap_content"
+		        		android:layout_height="match_parent"
+		        		android:text="切换城市"
+		        		android:textSize="15dp"
+		        		android:gravity="center_vertical"
+		        		android:textColor="#666666"
+	        	        />
+	        	    <ImageView 
+	        	        android:layout_width="8dp"
+		        		android:layout_height="12dp"
+		        		android:gravity="center_vertical"
+		        		android:layout_marginRight="10dp"
+		        		android:background="@drawable/into_icon"
+		        		android:layout_gravity="right|center_vertical"
+	        	        />
+	        	</FrameLayout>
+	        	<ImageView 
 	        	     android:layout_width="match_parent"
 		        	 android:layout_height="1dp"
 		        	 android:background="#0c000000"

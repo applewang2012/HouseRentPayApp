@@ -31,5 +31,12 @@
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>  
         <item name="android:windowExitAnimation">@anim/pophidden_anim</item>  
     </style>
+    
+    <style name="Dialog_Message">
+	    <!--item name="android:textColor">@color/dialog_message_text</item-->
+	    <item name="android:textColor">@android:color/white</item>
+	    <item name="android:textSize">@dimen/text_size_medium</item>
+	    <item name="android:gravity">center</item>
+	</style>
 
 </resources>
