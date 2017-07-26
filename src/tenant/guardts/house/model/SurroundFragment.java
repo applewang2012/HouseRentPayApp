@@ -50,6 +50,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.SurroundResultActivity;
 import tenant.guardts.house.headergridview.StickyGridHeadersBaseAdapter;
 import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -137,7 +138,10 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 						
 						@Override
 						public void onClick(View arg0) {
-							searchNearbyProcess(searchText);
+							//searchNearbyProcess(searchText);
+							Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+							surroundIntent.putExtra("search_text", searchText);
+							startActivity(surroundIntent);
 						}
 					});
 	            return b;

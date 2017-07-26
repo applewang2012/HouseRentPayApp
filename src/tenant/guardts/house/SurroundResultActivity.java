@@ -123,20 +123,22 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	}
 	
 	private void initAdapter(){
-		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.house_search_list_item, mDataList) {
+		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_list_item, mDataList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, SurroundInfo info) {
-//				View holderView = holder.getConvertView();
-//				TextView addressTextView = (TextView)holderView.findViewById(R.id.id_house_address);
+				View holderView = holder.getConvertView();
+				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_name);
+				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_address);
+				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_phone);
 //				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
 //				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
 //				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
 //				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
-//				addressTextView.setText(info.getHouseAddress());
-//				typeTextView.setText(info.getHouseType());
-//				directionTextView.setText(info.getHouseDirection());
-//				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
+				surroundname.setText(info.getNearName());
+				surroundaddress.setText(info.getNearAddress());
+				surroundphone.setText(info.getNearUid());
+//				floorTextView.setText(info.geor()+"/"+info.getHouseTotalFloor()+"层");
 //				statusTextView.setText(info.getHouseStatus());
 			}
 		};
@@ -166,7 +168,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult arg0) {
 		// TODO Auto-generated method stub
-		
+		Log.i("mingguo", " detail result  "+arg0.detailUrl);
 	}
 
 	@Override
@@ -187,6 +189,8 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
     	   PoiInfo info = result.getAllPoi().get(index);
     	   SurroundInfo surroundInfo = new SurroundInfo();
     	   surroundInfo.setNearUid(info.uid);
+    	   surroundInfo.setNearAddress(info.address);
+    	   surroundInfo.setNearName(info.name);
     	   searchPoiDetailProcess(info.uid);
     	   mDataList.add(surroundInfo);
        }

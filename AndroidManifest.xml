@@ -149,6 +149,12 @@
            android:screenOrientation="portrait"
            android:name=".GetRentAttributeActivity" />
         
+        <activity  
+           android:windowSoftInputMode="adjustUnspecified|stateHidden"
+           android:theme="@style/AppTheme"
+           android:screenOrientation="portrait"
+           android:name=".SurroundResultActivity" />
+        
         <activity
             android:name="tenant.guardts.house.LocationDemo"
             android:configChanges="orientation|keyboardHidden"
