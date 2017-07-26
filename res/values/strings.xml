@@ -77,7 +77,104 @@
     <string name="user_change_area_title">您确定要切换当前城市吗?</string>
     <string name="button_ok">确定</string>
     <string name="button_cancel">取消</string>
-    <string name="home_tab_house">出租屋</string>
+    <string name="home_tab_house">首页</string>
     <string name="home_tab_my">我的</string>
+    <string name="home_tab_surround">周边</string>
+    <string name="home_tab_history">历史</string>
     <string name="press_again_to_exit">再按一次退出应用</string>
+    
+    <string-array name="surround_title">  
+        <item>热点</item>
+        <item>吃喝</item>  
+        <item>住宿</item>  
+        <item>出行</item>  
+        <item>娱乐</item>  
+        <item>生活</item>  
+        <item>景点</item> 
+        <item>购物</item> 
+  </string-array>  
+  <string-array name="surround_content_hot">  
+        <item>美食</item>
+        <item>酒店</item>  
+        <item>景点</item>  
+        <item>停车场</item>  
+        <item>加油站</item>  
+        <item>银行</item>  
+        <item>超市</item> 
+        <item>洗浴</item> 
+  </string-array>  
+  <string-array name="surround_content_eat">  
+        <item>美食</item>
+        <item>小吃快餐</item>  
+        <item>火锅</item>  
+        <item>中餐</item>  
+        <item>酒吧</item>  
+        <item>咖啡厅</item>  
+        <item>肯德基</item> 
+        <item>麦当劳</item> 
+  </string-array>  
+  
+  <string-array name="surround_content_hotel">  
+        <item>酒店</item>
+        <item>快捷酒店</item>  
+        <item>星级酒店</item>  
+        <item>特价酒店</item>  
+        <item>宾馆</item>  
+        <item>公寓酒店</item>  
+        <item>招待所</item> 
+        <item>青年旅社</item> 
+  </string-array> 
+  
+  <string-array name="surround_content_travel">  
+        <item>公交站</item>
+        <item>地铁站</item>  
+        <item>加油站</item>  
+        <item>停车场</item>  
+        <item>火车票代售</item>  
+        <item>汽车站</item>  
+  </string-array> 
+  
+  <string-array name="surround_content_leasure">  
+        <item>网吧</item>
+        <item>洗浴</item>  
+        <item>足疗</item>  
+        <item>KTV</item>  
+        <item>电影院</item>  
+        <item>按摩</item>  
+  </string-array> 
+  
+  <string-array name="surround_content_live">  
+        <item>银行</item>
+        <item>超市</item>  
+        <item>医院</item>  
+        <item>药店</item>  
+        <item>厕所</item>  
+        <item>ATM</item>  
+        <item>快递</item>
+        <item>花店</item>  
+        <item>照相馆</item>  
+        <item>幼儿园</item>  
+        <item>菜市场</item>  
+        <item>小学</item>
+        <item>书店</item>
+        <item>车管所</item>  
+        <item>眼镜店</item>  
+        <item>蛋糕店</item>  
+        <item>美容美发</item>  
+  </string-array> 
+  
+  <string-array name="surround_content_jingdian">  
+        <item>景点</item>
+        <item>公园</item>  
+        <item>名胜古迹</item>  
+        <item>度假村</item>  
+        <item>步行街</item>  
+  </string-array> 
+  
+  <string-array name="surround_content_buy">  
+        <item>商场</item>
+        <item>万达广场</item>  
+        <item>丽人</item>  
+        <item>宜家</item>  
+  </string-array> 
 </resources>

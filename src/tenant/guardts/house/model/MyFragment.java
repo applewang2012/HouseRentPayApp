@@ -52,12 +52,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	private FrameLayout mSearchHouse;
 	private FrameLayout mPassword;
 	private FrameLayout mLogout;
-	private String mUsername;
+	//private String mUsername;
 	private FrameLayout mChangeArea;
-
-	public MyFragment(String user){
-		mUsername = user;
-	}
 	
 	
 	@Override
@@ -106,6 +102,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			@Override
 			public void onClick(View v) {
 				logoutUserDialog(0);
+				
 			}
 		});
 		mHistoryHouse.setOnClickListener(new OnClickListener() {
@@ -123,6 +120,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			public void onClick(View v) {
 				
 				changeUserAreaDialog();
+				
 			}
 		});
 		mSearchHouse.setOnClickListener(new OnClickListener() {
@@ -145,7 +143,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
 		String soapaction = "http://tempuri.org/GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(soapaction));
-		rpc.addProperty("username", mUsername);
+		rpc.addProperty("username", CommonUtil.mUserLoginName);
 		mPresent.readyPresentServiceParams(mContext, url, soapaction, rpc);
 		mPresent.startPresentServiceTask();
 		
@@ -177,9 +175,9 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			dismissLoadingView();
 			if (infoModel != null){
 				mUserContainer.setVisibility(View.VISIBLE);
-				mUserNickname.setText(CommonUtil.mRegisterName);
+				mUserNickname.setText(CommonUtil.mRegisterRealName);
 				mUserAddress.setText(infoModel.get("Phone"));
-				mUserId.setText(infoModel.get("LoginName"));
+				mUserId.setText(infoModel.get("NickName"));
 			}
 		}
 	};
@@ -199,8 +197,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 					userInfo.put("Address", itemJsonObject.optString("Address"));
 					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
 					userInfo.put("Phone", itemJsonObject.optString("Phone"));
-					CommonUtil.mRegisterName = itemJsonObject.optString("RealName");
-					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+					//CommonUtil.mRegisterName = itemJsonObject.optString("RealName");
+					//CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 			return userInfo;
 		} catch (Exception e) {
@@ -225,7 +223,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				    editor.commit();
 				    Intent intent = new Intent(mContext, LoginUserActivity.class);
 		            startActivity(intent);    
-	        	 
+		            MyFragment.this.getActivity().finish();
 	         }  
 	  
 	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
@@ -233,7 +231,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	         @Override  
 	  
 	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	             Log.i("alertdialog"," dialog interface ");  
 	         }  
 	  
 	     }).show();
@@ -257,7 +255,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				    editor.commit();
 				    Intent intent = new Intent(mContext, LoginUserActivity.class);
 		            startActivity(intent);    
-		            
+		            MyFragment.this.getActivity().finish();
 	         }  
 	  
 	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  

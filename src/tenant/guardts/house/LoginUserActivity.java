@@ -3,7 +3,6 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections.iterators.ObjectGraphIterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
@@ -26,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -92,6 +90,10 @@ public class LoginUserActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.please_input_username), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")){
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
 				showLoadingView();
 				loginUser();
 			}
@@ -103,6 +105,10 @@ public class LoginUserActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
+				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")){
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
 				startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
 			}
 		});
@@ -110,7 +116,10 @@ public class LoginUserActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				//startActivity(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class));
+				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")){
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
 				startActivityForResult(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class), 1);
 			}
 		});
@@ -131,6 +140,7 @@ public class LoginUserActivity extends BaseActivity{
 	    String host = sharedata.getString("host", "");
 	    Log.i("mingguo", "common service preference host  "+host);
 	    if (host == null || host.equals("")){
+	    	showLoadingView();
 	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
 			rpc.addProperty("status", "1");
@@ -238,7 +248,7 @@ public class LoginUserActivity extends BaseActivity{
 			    editor.putString("user_name", mUserName);
 			    editor.putString("user_password", mPassword);
 			    editor.commit();
-				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);
 				intent.putExtra("user_name", mUserName);
 				intent.putExtra("user_password", mPassword);
@@ -249,11 +259,10 @@ public class LoginUserActivity extends BaseActivity{
 				dismissLoadingView();
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_failed), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 110){
+				dismissLoadingView();
 				showSelectAlertDialog("请选择所在区域", parseCommonService((String)msg.obj));
 			}
-			
 		}
-		
 	};
 	
 

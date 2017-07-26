@@ -25,8 +25,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.model.HistoryFragment;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
+import tenant.guardts.house.model.SurroundFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -41,6 +43,8 @@ public class HomeActivity extends BaseActivity {
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
+	private SurroundFragment mSurroundFragment;
+	private HistoryFragment mHistoryFragment;
 	private String mUserInfoString = null;
 	
 	@Override
@@ -71,10 +75,6 @@ public class HomeActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent openCameraIntent = new Intent(HomeActivity.this,CaptureActivity.class);
 				startActivityForResult(openCameraIntent, 1);
-//				Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
-//				attributeIntent.putExtra("order_id", "170");
-//				startActivity(attributeIntent);
-				
 			}
 		});
 		
@@ -88,22 +88,31 @@ public class HomeActivity extends BaseActivity {
 			fragmentTransaction.commitAllowingStateLoss();
 		}
 		
-		final LinearLayout houseLayout = (LinearLayout)findViewById(R.id.id_home_button_house);
-		final LinearLayout myLayout = (LinearLayout)findViewById(R.id.id_home_button_my);
-		final ImageView houseIcon = (ImageView)findViewById(R.id.id_home_button_house_icon);
-		final ImageView myIcon = (ImageView)findViewById(R.id.id_home_button_my_icon);
-		final TextView houseText = (TextView)findViewById(R.id.id_home_button_house_text);
-		final TextView myText = (TextView)findViewById(R.id.id_home_button_my_text);
+		final LinearLayout houseLayout = (LinearLayout)findViewById(R.id.id_home_tab_home);
+		final LinearLayout myLayout = (LinearLayout)findViewById(R.id.id_home_tab_my);
+		final ImageView houseIcon = (ImageView)findViewById(R.id.id_home_tab_home_icon);
+		final ImageView myIcon = (ImageView)findViewById(R.id.id_home_tab_my_icon);
+		final TextView houseText = (TextView)findViewById(R.id.id_home_tab_home_text);
+		final TextView myText = (TextView)findViewById(R.id.id_home_tab_my_text);
+		final LinearLayout surroundlayout = (LinearLayout)findViewById(R.id.id_home_tab_surround);
+		final LinearLayout historylayout = (LinearLayout)findViewById(R.id.id_home_tab_history);
+		final ImageView surroundicon = (ImageView)findViewById(R.id.id_home_tab_surround_icon);
+		final ImageView historyicon = (ImageView)findViewById(R.id.id_home_tab_history_icon);
+		final TextView surroundtext = (TextView)findViewById(R.id.id_home_tab_surround_text);
+		final TextView historytext = (TextView)findViewById(R.id.id_home_tab_history_text);
 		houseLayout.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				mTitleBar.setText(getString(R.string.home_tab_house));
-				
-				houseIcon.setBackgroundResource(R.drawable.chuzu_icon);
+				houseIcon.setBackgroundResource(R.drawable.home_icon);
 				houseText.setTextColor(Color.parseColor("#0b6cfe"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
 				myText.setTextColor(Color.parseColor("#afaeae"));
+				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
+				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				historyicon.setBackgroundResource(R.drawable.history_icon_default);
+				historytext.setTextColor(Color.parseColor("#afaeae"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mHouseFrament == null){
@@ -121,14 +130,18 @@ public class HomeActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				mTitleBar.setText(getString(R.string.home_tab_my));
-				houseIcon.setBackgroundResource(R.drawable.chuzu_icon_default);
+				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
 				houseText.setTextColor(Color.parseColor("#afaeae"));
 				myIcon.setBackgroundResource(R.drawable.my_icon);
 				myText.setTextColor(Color.parseColor("#0b6cfe"));
+				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
+				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				historyicon.setBackgroundResource(R.drawable.history_icon_default);
+				historytext.setTextColor(Color.parseColor("#afaeae"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mMyFragment == null){
-					mMyFragment = new MyFragment(mUserName);
+					mMyFragment = new MyFragment();
 					fragmentTransaction.add(R.id.id_home_content, mMyFragment);
 					fragmentTransaction.commitAllowingStateLoss();
 				}else{
@@ -138,56 +151,61 @@ public class HomeActivity extends BaseActivity {
 			}
 		});
 		
-//		final EditText userName = (EditText)findViewById(R.id.id_login_username);
-//		final EditText password = (EditText)findViewById(R.id.id_login_password);
-//		Button login = (Button)findViewById(R.id.id_login_user_button);
-//		login.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				mUserName = userName.getEditableText().toString();
-//				mPassword = password.getEditableText().toString();
-//				if (mUserName == null || mUserName.equals("")){
-//					Toast.makeText(getApplicationContext(), "�û�������Ϊ��", Toast.LENGTH_SHORT).show();
-//					return;
-//				}
-//				if (mPassword == null || mPassword.equals("")){
-//					Toast.makeText(getApplicationContext(), "���벻��Ϊ��", Toast.LENGTH_SHORT).show();
-//					return;
-//				}
-//				showLoadingView();
-//				loginUser();
-//			}
-//		});
-//		
-//		Button registerButton = (Button)findViewById(R.id.id_login_user_register);
-//		Button modifyButton = (Button)findViewById(R.id.id_login_user_modify_password);
-//		registerButton.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(HomeActivity.this, RegisterUserActivity.class));
-//			}
-//		});
-//		modifyButton.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(HomeActivity.this, ModifyPasswordActivity.class));
-//			}
-//		});
+		surroundlayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTitleBar.setText(getString(R.string.home_tab_surround));
+				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
+				houseText.setTextColor(Color.parseColor("#afaeae"));
+				myIcon.setBackgroundResource(R.drawable.my_icon_default);
+				myText.setTextColor(Color.parseColor("#afaeae"));
+				surroundicon.setBackgroundResource(R.drawable.surround_icon);
+				surroundtext.setTextColor(Color.parseColor("#0b6cfe"));
+				historyicon.setBackgroundResource(R.drawable.history_icon_default);
+				historytext.setTextColor(Color.parseColor("#afaeae"));
+				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+				hideAllFragments(fragmentTransaction);
+				if (mSurroundFragment == null){
+					mSurroundFragment = new SurroundFragment();
+					fragmentTransaction.add(R.id.id_home_content, mSurroundFragment);
+					fragmentTransaction.commitAllowingStateLoss();
+				}else{
+					fragmentTransaction.show(mSurroundFragment);
+					fragmentTransaction.commitAllowingStateLoss();
+				}
+			}
+		});
+		historylayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mTitleBar.setText(getString(R.string.home_tab_house));
+				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
+				houseText.setTextColor(Color.parseColor("#afaeae"));
+				myIcon.setBackgroundResource(R.drawable.my_icon_default);
+				myText.setTextColor(Color.parseColor("#afaeae"));
+				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
+				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				historyicon.setBackgroundResource(R.drawable.history_icon);
+				historytext.setTextColor(Color.parseColor("#0b6cfe"));
+				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+				hideAllFragments(fragmentTransaction);
+				if (mHistoryFragment == null){
+					mHistoryFragment = new HistoryFragment();
+					fragmentTransaction.add(R.id.id_home_content, mHistoryFragment);
+					fragmentTransaction.commitAllowingStateLoss();
+				}else{
+					fragmentTransaction.show(mHistoryFragment);
+					fragmentTransaction.commitAllowingStateLoss();
+				}
+			}
+		});
+
 	}
 	
 	
-	
-//	private void loginUser(){
-//		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLogin";
-//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLoginAction));
-//		rpc.addProperty("username", mUserName);
-//		rpc.addProperty("password", mPassword);
-//		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mLoginAction, rpc);
-//		mPresenter.startPresentServiceTask();
-//	}
+	private void showTabView(){
+		
+	}
 	
 	private void getUserInfo(){
 		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
@@ -204,6 +222,12 @@ public class HomeActivity extends BaseActivity {
 		}
 		if (mMyFragment != null && !mMyFragment.isHidden()) {
 			transaction.hide(mMyFragment);
+		}
+		if (mSurroundFragment != null && !mSurroundFragment.isHidden()) {
+			transaction.hide(mSurroundFragment);
+		}
+		if (mHistoryFragment != null && !mHistoryFragment.isHidden()) {
+			transaction.hide(mHistoryFragment);
 		}
 	}
 	
@@ -237,7 +261,8 @@ public class HomeActivity extends BaseActivity {
 //					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
 //					userInfo.put("Address", itemJsonObject.optString("Address"));
 //					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
-					CommonUtil.mRegisterName = itemJsonObject.optString("RealName");
+					CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+					CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 		} catch (Exception e) {
@@ -294,6 +319,8 @@ public class HomeActivity extends BaseActivity {
 							Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
 							attributeIntent.putExtra("order_id", scanResult);
 							startActivity(attributeIntent);
+						}else{
+							GlobalUtil.shortToast(getApplication(), "二维码扫描异常，请重新扫码！！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}
 					}
 		}

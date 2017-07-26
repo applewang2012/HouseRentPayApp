@@ -365,6 +365,12 @@ public class LocationDemo extends BaseActivity {
         public void onReceivePoi(BDLocation poiLocation) {
         	
         }
+
+		@Override
+		public void onConnectHotSpotMessage(String arg0, int arg1) {
+			// TODO Auto-generated method stub
+			
+		}
     }
     
     

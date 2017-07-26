@@ -219,7 +219,7 @@ public class DownloadAppActivity extends Activity{
 			mDownloadButton.setText("未下载，点击下载");
 			Toast.makeText(getApplicationContext(), "文件未找到,开始下载！", Toast.LENGTH_SHORT).show();
 			Request request = new Request(Uri.parse(CommonUtil.DOWLOAD_URL));
-			request.setPackageName("com.pay.renthouse");
+			//request.setPackageName("tenant.guardts.house");
 			request.setShowRunningNotification(false);
 			request.setMimeType("application/vnd.android.package-archive");
 			long id = mDownloadManager.enqueue(request);

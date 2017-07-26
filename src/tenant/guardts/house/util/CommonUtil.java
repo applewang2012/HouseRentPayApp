@@ -21,14 +21,15 @@ public class CommonUtil {
     
     private static  Canvas canvas;
     
-    public static final String DOWLOAD_URL = "http://weiyuzhu.cn/HRPApp.apk";
+    public static final String DOWLOAD_URL = "http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
     
     public static final String NAMESPACE = "http://tempuri.org/";
     
-    public static String mRegisterName = null;
+    public static String mRegisterRealName = null;
     public static String mRegisterIdcard = null;
-    public static String mUserIdNo = null;
+    public static String mUserLoginName = null;
     public static String mUserHost, mUserArea;
+    public static double mCurrentLati, mCurrentLongi;
     
     public static Canvas getCanvas() {
         return canvas;
@@ -45,6 +46,7 @@ public class CommonUtil {
             // 存在获取外部文件路径
             File root = Environment.getExternalStorageDirectory();
             File base = new File(root.getPath() + "/download");
+            //base.mkdir();
         	if (!base.isDirectory() && !base.mkdir()) {
         		return null;
         	}else{

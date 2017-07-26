@@ -301,6 +301,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 	}
 
 	private void getRentAttributeByOrderId(String id){
+		
 		mLoadingView.setVisibility(View.VISIBLE);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentAttributeAction));
@@ -356,7 +357,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 								String similar = object.optString("similar");
 								//if (similar != null && similar.length() > 3){
 									Double rate = 100 *	Double.parseDouble(similar);
-									GlobalUtil.shortToast(getApplication(), mRentName.getText().toString() + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+									GlobalUtil.shortToast(getApplication(), mRentName.getText().toString() + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 									showLoadingView();
 									confirmRentAttributeInfo(mOrderId);
 									return;
@@ -372,6 +373,8 @@ public class GetRentAttributeActivity extends BaseActivity{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}else if (msg.what == 200){
+				dismissLoadingView();
 			}
 		}
 		
@@ -439,6 +442,16 @@ public class GetRentAttributeActivity extends BaseActivity{
 		
 		
 	}
+	
+	
+
+	@Override
+	public void onStatusError(String action, String error) {
+		// TODO Auto-generated method stub
+		super.onStatusError(action, error);
+		mHandler.sendEmptyMessage(200);
+	}
+
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
