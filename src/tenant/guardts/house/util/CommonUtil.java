@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
 /**
  * @author shenxiaolei
@@ -92,6 +93,32 @@ public class CommonUtil {
 		}
 		int index = action.lastIndexOf("/");
 		return action.substring(index+1);
+	}
+    
+    private static double dEARTH_RADIUS = 6378.137;  // 地球半径
+    private static double Rad(double d)
+    {
+        return (d * Math.PI / 180.0);
+    }
+    /// <summary>
+    /// 计算两个坐标的距离
+    /// </summary>
+    /// <param >第一个坐标纬度</param>
+    /// <param >第一个坐标经度</param>
+    /// <param >第二个坐标纬度</param>
+    /// <param >第二个坐标经度</param>
+    /// <returns>两个坐标间的距离</returns>
+    public static double GetDistance(double dLngPre, double dLatPre, double dLngNext, double dLatNext){
+    	Log.e("mingguo", "lng "+dLngPre+"  "+ dLatPre+"  "+dLngNext+"  "+dLatNext);
+        double dRadLatPre = Rad(dLatPre);
+        double dRadLatNext = Rad(dLatNext);
+        double a = dRadLatPre - dRadLatNext;
+        double b = Rad(dLngPre) - Rad(dLngNext);
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(dRadLatPre) * Math.cos(dRadLatNext) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * dEARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000;
+        Log.w("mingguo", "ss "+s);
+        return s;
 	}
     
     

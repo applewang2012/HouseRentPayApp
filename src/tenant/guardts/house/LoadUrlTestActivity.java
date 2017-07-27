@@ -4,6 +4,7 @@ package tenant.guardts.house;
 import tenant.guardts.house.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,15 +19,16 @@ public class LoadUrlTestActivity extends Activity {
     /** Called when the activity is first created. */
 	WebView webView;
     ProgressBar progressBar;
-    String DEFINE_URL = "http://www.guardts.com/output/html5.html";
+    //String DEFINE_URL = "http://www.guardts.com/output/html5.html";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.load_url);
+        String tabName = getIntent().getStringExtra("tab_name"); 
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("全景看房");
+		mTitleBar.setText(tabName);
         webView = (WebView) findViewById(R.id.webView1);
         progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         
@@ -35,18 +37,23 @@ public class LoadUrlTestActivity extends Activity {
         //webView.getSettings().setPluginState(PluginState.ON);
         webView.setWebChromeClient(new WebChromeClient());
         
-        Intent i = getIntent(); 
-        String url = i.getStringExtra("url");  
+        String url = getIntent().getStringExtra("url");  
         
 //        webView.loadUrl(url);
         
 //        webView.loadUrl("file:///android_asset/source/index.html");
-        webView.loadUrl(DEFINE_URL);
+        webView.loadUrl(url);
         
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+            	if( url.startsWith("http:") || url.startsWith("https:") ) {  
+                    return false;  
+                }  
+          Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  
+                startActivity(intent);
+    //  下面这一行保留的时候，原网页仍报错，新网页正常.所以注释掉后，也就没问题了
+//              view.loadUrl(url); 
+                return true; 
             }
         });
         webView.setWebChromeClient(new WebChromeClient() {

@@ -279,8 +279,10 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 					
 					@Override
 					public void onClick(View v) {
-						
-						startActivity(new Intent(mContext, LoadUrlTestActivity.class));
+						Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+						loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+						loadIntent.putExtra("tab_name", "全景图");
+						startActivity(loadIntent);
 					}
 				});
                 Button houseSearch = (Button)detailView.findViewById(R.id.id_house_detail_search);

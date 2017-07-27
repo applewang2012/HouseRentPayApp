@@ -178,7 +178,7 @@ public class HomeActivity extends BaseActivity {
 		historylayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTitleBar.setText(getString(R.string.home_tab_house));
+				mTitleBar.setText(getString(R.string.home_tab_history));
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
 				houseText.setTextColor(Color.parseColor("#afaeae"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);

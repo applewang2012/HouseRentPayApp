@@ -7,7 +7,8 @@ public class SurroundInfo {
 	private String distance;
 	private String star;
 	private String uid;
-	
+	private String phone;
+	private String detailUrl;
 	
 	public String getPosterUrl() {
 		return imageUrl;
@@ -55,6 +56,22 @@ public class SurroundInfo {
 
 	public void setNearUid(String uid) {
 		this.uid = uid;
+	}
+	
+	public String getNearPhone() {
+		return phone;
+	}
+
+	public void setNearPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	public String getNearDetailUrl() {
+		return detailUrl;
+	}
+
+	public void setNearDetailUrl(String url) {
+		this.detailUrl = url;
 	}
 
 }

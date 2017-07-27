@@ -3,6 +3,8 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kobjects.util.Util;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -16,6 +18,7 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.SurroundInfo;
 import tenant.guardts.house.model.UniversalAdapter;
@@ -37,6 +42,7 @@ import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.search.ExpandMenuView;
 import tenant.guardts.house.search.Item;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse
@@ -54,7 +60,7 @@ import tenant.guardts.house.util.CommonUtil;
  * 	@tags An overview of this file: 可扩展的条件筛选菜单Demo主页
  * 
  */
-public class SurroundResultActivity extends BaseActivity implements OnGetPoiSearchResultListener{
+public class SurroundResultActivity extends BaseActivity implements OnGetPoiSearchResultListener, OnItemClickListener{
 
 	
 	private Context mContext;
@@ -113,7 +119,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		Log.i("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
         		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
-                .radius(2000).pageCapacity(50);
+                .radius(2000).pageCapacity(20);
         mPoiSearch.searchNearby(nearbySearchOption);
     }
 	
@@ -131,13 +137,15 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_name);
 				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_address);
 				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_phone);
+				//TextView surroundDistance = (TextView)holderView.findViewById(R.id.id_surround_distance);
 //				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
 //				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
 //				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
 //				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
 				surroundname.setText(info.getNearName());
 				surroundaddress.setText(info.getNearAddress());
-				surroundphone.setText(info.getNearUid());
+				surroundphone.setText(info.getNearPhone());
+//				surroundDistance.setText(info.getNearDistance());
 //				floorTextView.setText(info.geor()+"/"+info.getHouseTotalFloor()+"层");
 //				statusTextView.setText(info.getHouseStatus());
 			}
@@ -148,13 +156,11 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		//mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
-		mLoadingView.setVisibility(View.INVISIBLE);
-		mNoContent.setVisibility(View.VISIBLE);
-		
+		mNoContent.setVisibility(View.INVISIBLE);
 		mSurroundListview = (ListView)findViewById(R.id.id_surround_listview);
 		initAdapter();
 		mSurroundListview.setAdapter(mAdapter);
-		
+		mSurroundListview.setOnItemClickListener(this);
 	}
 	
 	
@@ -168,17 +174,23 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult arg0) {
 		// TODO Auto-generated method stub
-		Log.i("mingguo", " detail result  "+arg0.detailUrl);
+		Log.i("mingguo", " detail result  "+arg0.name);
+		for (int i = 0; i < mDataList.size(); i++){
+			if (arg0.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
+				mDataList.get(i).setNearDetailUrl(arg0.getDetailUrl());
+			}
+		}
 	}
 
 	@Override
 	public void onGetPoiIndoorResult(PoiIndoorResult arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void onGetPoiResult(PoiResult result) {
+		dismissLoadingView();
 		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
             Toast.makeText(mContext, "未找到结果", Toast.LENGTH_LONG)
                     .show();
@@ -191,13 +203,32 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
     	   surroundInfo.setNearUid(info.uid);
     	   surroundInfo.setNearAddress(info.address);
     	   surroundInfo.setNearName(info.name);
+    	   surroundInfo.setNearPhone(info.phoneNum);
+//    	   surroundInfo.setNearDistance(CommonUtil.GetDistance(CommonUtil.mCurrentLongi, 
+//    			   CommonUtil.mCurrentLati, info.location.longitude, info.location.latitude)+"");
     	   searchPoiDetailProcess(info.uid);
     	   mDataList.add(surroundInfo);
        }
        if (mDataList.size() > 0){
     	   mAdapter.notifyDataSetChanged();
+       }else{
+    	   mNoContent.setVisibility(View.VISIBLE);
        }
        
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
+		if (mDataList.get(position).getNearDetailUrl()== null || mDataList.get(position).getNearDetailUrl().equals("")){
+			GlobalUtil.shortToast(getApplication(), "抱歉，未获取到详细信息！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			return;
+		}else{
+			Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+			loadIntent.putExtra("url", mDataList.get(position).getNearDetailUrl());
+			loadIntent.putExtra("tab_name", mDataList.get(position).getNearName());
+			startActivity(loadIntent);
+		}
 	}
 	
 	

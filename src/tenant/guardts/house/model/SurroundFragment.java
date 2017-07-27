@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 @SuppressLint("NewApi")
 public class SurroundFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener{
@@ -210,6 +212,22 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 			public int getCountForHeader(int header) {
 				mCurrentHeader = header;
 				return mContentMap.get(header).length;
+				
+			}
+		});
+		final EditText inputSurround = (EditText)mRootView.findViewById(R.id.id_surround_search_input);
+		Button searchButton = (Button)mRootView.findViewById(R.id.id_surround_search_button);
+		searchButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (inputSurround.getText().toString() == null || inputSurround.getText().toString().equals("")){
+					GlobalUtil.shortToast(mContext, "请输入您感兴趣周边信息！", mContext.getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", inputSurround.getText().toString());
+				startActivity(surroundIntent);
 				
 			}
 		});
