@@ -235,10 +235,10 @@ public class GetRentAttributeActivity extends BaseActivity{
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 //这个方法是运行在 handler-thread 线程中的 ，可以执行耗时操作
-                Log.d("mingguo " , "sub handler  ： " + msg.what + "  线程： " + Thread.currentThread().getName()) ;
-                Bitmap bmp = BitmapFactory.decodeFile(mfilePath, null);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+bmp.getWidth()+" height  "+bmp.getHeight()+"  byte  "+bmp.getByteCount());
-   			 	Bitmap newBitmap = BMapUtil.compressScale(bmp);
+                int degree = BMapUtil.readPictureDegree(mfilePath);
+                Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(mfilePath, null));
+   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
    			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
 

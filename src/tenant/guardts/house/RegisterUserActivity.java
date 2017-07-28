@@ -297,33 +297,13 @@ public class RegisterUserActivity extends BaseActivity{
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                //这个方法是运行在 handler-thread 线程中的 ，可以执行耗时操作
-                Log.d("mingguo " , "sub handler  ： " + msg.what + "  线程： " + Thread.currentThread().getName()) ;
-                Bitmap bmp = BitmapFactory.decodeFile(file, null);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+bmp.getWidth()+" height  "+bmp.getHeight()+"  byte  "+bmp.getByteCount());
-   			 	Bitmap newBitmap = BMapUtil.compressScale(bmp);
+                int degree = BMapUtil.readPictureDegree(file);
+                Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
+   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
    			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
                 
-                
-//                mPressBitmap = ScreenShotUtil.getScreenshotBitmap(DemoApplication.getActivity());
-                
-                
-//                if (mScreenShotNum == 1){
-//                	clearScreenShotImage(ScreenShotUtil.getScreenshotDirectory(SurfaceViewTestActivity.this));
-//                }
-//                if (mScreenShotNum <= 2){
-//                	String status = ScreenShotUtil.generateScreenshot(SurfaceViewTestActivity.this, mediaPlayer.getCurrentPosition(),
-//                			"http://p.vod05.icntvcdn.com/media/new/2013/icntv2/media/2016/03/21/gongyiguoshijia.ts");
-//                    mSubHandler.sendEmptyMessageDelayed(100, 3000+(long)Math.random()*4000);
-//                    Message message = mUIHandler.obtainMessage();
-//                    message.obj = status;
-//                    mUIHandler.sendMessage(message);
-//                }
-//                if (mScreenShotNum == 2){
-//                	getScreenShotImage(ScreenShotUtil.getScreenshotDirectory(SurfaceViewTestActivity.this));
-//                	imgView.setImageBitmap(ScreenShotUtil.startCompareImg(mImage1, mImage2);
-//                }
             }
         };
         
