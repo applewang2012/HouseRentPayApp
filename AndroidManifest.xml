@@ -73,12 +73,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.view"/>
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="wxpay" android:scheme="weixin"/>
-            </intent-filter>
         </activity>
         <activity
             android:name="tenant.guardts.house.SurfaceViewTestActivity"
