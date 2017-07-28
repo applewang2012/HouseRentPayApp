@@ -71,12 +71,12 @@ import android.widget.Toast;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.map.PoiOverlay;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-@SuppressLint({ "NewApi", "ValidFragment" })
 public class HouseFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 	
 
@@ -110,7 +110,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	private LatLng mCurrentLatLng;
 	private List<Marker> mMarkList;
 	private String mLocationAction = "http://tempuri.org/GetRentsByCoodinates";
-	private String mUserName;
 	private String mCurrentLocationCity;
 	
 	private PoiSearch mPoiSearch = null;
@@ -119,8 +118,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
 	
-	public HouseFragment(String name){
-		mUserName = name;
+	public HouseFragment(){
+		
 	}
 	
 	@Override
@@ -178,7 +177,16 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     }
 
 	private void initView(){
-
+		Button button = (Button)mRootView.findViewById(R.id.button1);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
+				intent.putExtra("current_city", mCurrentLocationCity);
+				startActivity(intent);
+			}
+		});
 		 mPoiSearch = PoiSearch.newInstance();
 		 mPoiSearch.setOnGetPoiSearchResultListener(this);
 		 mSearchListener = (AutoCompleteTextView)mRootView.findViewById(R.id.button_search);  

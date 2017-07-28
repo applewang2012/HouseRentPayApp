@@ -69,7 +69,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="25dp"
         android:layout_marginTop="10dip" 
-        android:visibility="invisible"
         />
 
 </RelativeLayout>

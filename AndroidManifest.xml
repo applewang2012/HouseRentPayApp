@@ -87,6 +87,12 @@
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         
+        <activity
+            android:name=".SelectShowCityActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        
         <activity android:name="tenant.guardts.house.DownloadAppActivity"></activity>
         
         <activity

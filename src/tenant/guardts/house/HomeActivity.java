@@ -80,7 +80,7 @@ public class HomeActivity extends BaseActivity {
 		
 		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 		if (mHouseFrament == null){
-			mHouseFrament = new HouseFragment(mUserName);
+			mHouseFrament = new HouseFragment();
 			fragmentTransaction.add(R.id.id_home_content, mHouseFrament);
 			fragmentTransaction.commitAllowingStateLoss();
 		}else{
@@ -116,7 +116,7 @@ public class HomeActivity extends BaseActivity {
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mHouseFrament == null){
-					mHouseFrament = new HouseFragment(mUserName);
+					mHouseFrament = new HouseFragment();
 					fragmentTransaction.add(R.id.id_home_content, mHouseFrament);
 					fragmentTransaction.commitAllowingStateLoss();
 				}else{

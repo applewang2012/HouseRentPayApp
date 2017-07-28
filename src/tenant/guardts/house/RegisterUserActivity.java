@@ -55,6 +55,8 @@ public class RegisterUserActivity extends BaseActivity{
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mRentAttributeAction = "http://tempuri.org/GetRentAttribute";
 	private String mRegisterAction = "http://tempuri.org/AddUserInfo";
+	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
+	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mUserName, mPassword, mRealName, mIdCard, mPhone, mNickName,mAddress, mPosition, mEmail;
 	private boolean mUsernameValid = false;
 	private DetectionAuthentic authentic;
@@ -135,6 +137,27 @@ public class RegisterUserActivity extends BaseActivity{
 		final EditText position = (EditText)findViewById(R.id.id_register_position);
 		final EditText address = (EditText)findViewById(R.id.id_register_address);
 		final EditText nickName = (EditText)findViewById(R.id.id_register_nickname);
+		final EditText verifyCode = (EditText)findViewById(R.id.id_input_verify_code);
+		verifyCode.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus){
+					checkPhoneVerifyCode(phone.getEditableText().toString(), verifyCode.getText().toString());
+				}
+				
+			}
+		});
+		
+		Button sendVerifyCode =(Button)findViewById(R.id.id_send_verifycode);
+		sendVerifyCode.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				sendPhoneVerifyCode(phone.getEditableText().toString());
+			}
+		});
 		
 		Button registerButton = (Button)findViewById(R.id.id_register_button);
 		registerButton.setOnClickListener(new OnClickListener() {
@@ -329,6 +352,23 @@ public class RegisterUserActivity extends BaseActivity{
 		
 	}
 	
+	private void sendPhoneVerifyCode(String phone){
+		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
+		rpc.addProperty("phone", phone); 
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendVerifyCodeAction, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+	
+	private void checkPhoneVerifyCode(String phone, String code){
+		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=ValidateIdentifyCode";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
+		rpc.addProperty("phone", phone); 
+		rpc.addProperty("number", code); 
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCheckVerifyCodeAction, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+	
 	private void checkUserNameValid(String username){
 		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
@@ -407,6 +447,8 @@ public class RegisterUserActivity extends BaseActivity{
 					e.printStackTrace();
 				}
 				
+			}else if (msg.what == 200){
+				dismissLoadingView();
 			}
 			
 		}
@@ -495,6 +537,15 @@ public class RegisterUserActivity extends BaseActivity{
 	public void onStatusStart() {
 		
 		
+	}
+	
+	
+
+	@Override
+	public void onStatusError(String action, String error) {
+		// TODO Auto-generated method stub
+		super.onStatusError(action, error);
+		mHandler.sendEmptyMessage(200);
 	}
 
 	@Override
