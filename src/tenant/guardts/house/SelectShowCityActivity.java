@@ -6,18 +6,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.model.inner.GeoPoint;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PixelFormat;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -142,6 +146,14 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 					Toast.makeText(getApplicationContext(),
 							allCity_lists.get(position).getName(),
 							Toast.LENGTH_SHORT).show();
+					Intent resultIntent = new Intent();
+					Bundle bundle = new Bundle();
+					bundle.putString("city", allCity_lists.get(position).getName());
+					resultIntent.putExtras(bundle);
+					setResult(RESULT_OK, resultIntent);
+					WindowManager windowManager = (WindowManager) SelectShowCityActivity.this.getSystemService(Context.WINDOW_SERVICE);
+					windowManager.removeView(overlay);
+					finish();
 				}
 			}
 		});
@@ -158,6 +170,14 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 				Toast.makeText(getApplicationContext(),
 						city_result.get(position).getName(), Toast.LENGTH_SHORT)
 						.show();
+				Intent resultIntent = new Intent();
+				Bundle bundle = new Bundle();
+				bundle.putString("city", city_result.get(position).getName());
+				resultIntent.putExtras(bundle);
+				setResult(RESULT_OK, resultIntent);
+				WindowManager windowManager = (WindowManager) SelectShowCityActivity.this.getSystemService(Context.WINDOW_SERVICE);
+				windowManager.removeView(overlay);
+				finish();
 			}
 		});
 		initOverlay();
@@ -172,6 +192,23 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 //		InitLocation();
 //		mLocationClient.start();
 	}
+	
+	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	
+
+	@Override
+	protected void onDestroy() {
+		
+		super.onDestroy();
+	}
+
+
 
 	public void InsertCity(String name) {
 		SQLiteDatabase db = helper.getReadableDatabase();
@@ -542,7 +579,14 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 						Toast.makeText(getApplicationContext(),
 								city_hot.get(position).getName(),
 								Toast.LENGTH_SHORT).show();
-
+						Intent resultIntent = new Intent();
+						Bundle bundle = new Bundle();
+						bundle.putString("city", city_hot.get(position).getName());
+						resultIntent.putExtras(bundle);
+						setResult(RESULT_OK, resultIntent);
+						WindowManager windowManager = (WindowManager) SelectShowCityActivity.this.getSystemService(Context.WINDOW_SERVICE);
+						windowManager.removeView(overlay);
+						finish();
 					}
 				});
 				hotCity.setAdapter(new HotCityAdapter(context, this.hotList));
@@ -591,6 +635,8 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 //		mLocationClient.stop();
 		super.onStop();
 	}
+	
+	
 
 	class HotCityAdapter extends BaseAdapter {
 		private Context context;

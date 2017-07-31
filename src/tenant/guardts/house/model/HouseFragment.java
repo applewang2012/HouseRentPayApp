@@ -32,6 +32,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
@@ -53,6 +54,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore.Video;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -68,8 +70,11 @@ import android.widget.Button;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
+import tenant.guardts.house.LocationDemo;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -146,12 +151,51 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	public void onResume() {
 		mMapView.onResume();
 		super.onResume();
-//		showLoadingView();
-//		mContentLayout.setVisibility(View.INVISIBLE);
-//		initData();
-//		mAdapter.notifyDataSetChanged();
+		HomeActivity activity = (HomeActivity)getActivity();
+		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
+			mCurrentLocationCity = activity.getSelectedCity();
+			Log.i("mingguo", "home fragment  visible currentCity  "+mCurrentLocationCity);
+			startThreadfindLocation(mCurrentLocationCity);
+//			showSelectLocationMap();
+		}
 	}
 	
+	private void startThreadfindLocation(final String locationName) {  
+		  
+        Thread thrd = new Thread() {  
+            @Override  
+            public void run() {  
+                try {  
+                	mCurrentLatLng = CommonUtil.getLatLngBystr(mContext, mCurrentLocationCity);
+                    Message message = mHandler.obtainMessage();
+                    message.what = 300;
+                    message.obj = mCurrentLatLng;  
+                    message.sendToTarget();  
+                } catch (Exception e) {
+                    e.printStackTrace();  
+                }  
+            }  
+        };  
+        thrd.start();  
+    }  
+	
+	
+	@SuppressLint("NewApi")
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if (isVisibleToUser){
+//			HomeActivity activity = (HomeActivity)getActivity();
+//			if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
+//				mCurrentLocationCity = activity.getSelectedCity();
+//				Log.i("mingguo", "home fragment  visible currentCity  "+mCurrentLocationCity);
+//				showSelectLocationMap();
+//			}
+		}
+	}
+	
+	
+
 	@Override
 	public void onPause() {
         mMapView.onPause();
@@ -184,7 +228,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			public void onClick(View v) {
 				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
 				intent.putExtra("current_city", mCurrentLocationCity);
-				startActivity(intent);
+				getActivity().startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
+				
 			}
 		});
 		 mPoiSearch = PoiSearch.newInstance();
@@ -240,6 +285,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
                 /**
                  * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
                  */
+                Log.i("mingguo", "house fragment  onTextChanged   "+mCurrentLocationCity);
                 mSuggestionSearch
                         .requestSuggestion((new SuggestionSearchOption())
                                 .keyword(cs.toString()).city(mCurrentLocationCity));
@@ -399,6 +445,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			if (msg.what == 100){
 				parseLocationInfo((String)msg.obj);
 				updateLocationFromHouse();
+			}else if (msg.what == 300){
+				showSelectLocationMap();
 			}
 		}
     };
@@ -521,6 +569,18 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			// TODO Auto-generated method stub
 			
 		}
+    }
+    
+    private void showSelectLocationMap(){
+    	MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(0)
+                        // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(100).latitude(mCurrentLatLng.latitude)
+                .longitude(mCurrentLatLng.longitude).build();
+        mBaiduMap.setMyLocationData(locData);
+    	MapStatus.Builder builder = new MapStatus.Builder();
+        builder.target(mCurrentLatLng).zoom(18.0f);
+        mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
     }
 
 	

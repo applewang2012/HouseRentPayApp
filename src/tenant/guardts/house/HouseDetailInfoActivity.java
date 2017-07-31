@@ -12,8 +12,6 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -25,15 +23,12 @@ import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import tenant.guardts.house.bannerview.CircleFlowIndicator;
 import tenant.guardts.house.bannerview.ImagePagerAdapter;
 import tenant.guardts.house.bannerview.ViewFlow;
 import tenant.guardts.house.model.HouseImageInfo;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 

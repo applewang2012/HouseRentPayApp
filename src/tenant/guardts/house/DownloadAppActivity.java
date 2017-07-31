@@ -26,6 +26,7 @@ import tenant.guardts.house.download.DownloadManager.Request;
 import tenant.guardts.house.downloadui.DownloadAdapter;
 import tenant.guardts.house.downloadui.DownloadSelectListener;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class DownloadAppActivity extends Activity{
 
@@ -219,7 +220,7 @@ public class DownloadAppActivity extends Activity{
 			mDownloadButton.setText("未下载，点击下载");
 			Toast.makeText(getApplicationContext(), "文件未找到,开始下载！", Toast.LENGTH_SHORT).show();
 			Request request = new Request(Uri.parse(CommonUtil.DOWLOAD_URL));
-			//request.setPackageName("tenant.guardts.house");
+			request.setPackageName(GlobalUtil.getPackageName(getApplicationContext()));
 			request.setShowRunningNotification(false);
 			request.setMimeType("application/vnd.android.package-archive");
 			long id = mDownloadManager.enqueue(request);

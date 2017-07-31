@@ -119,6 +119,10 @@ public final class GlobalUtil {
 
 		return versionName;
 	}
+	
+	public static String getPackageName(Context context){
+		return context.getPackageName();
+	}
 
 	public static void startActivity(Context context, Class<?> class1) {
 		Intent intent = new Intent();

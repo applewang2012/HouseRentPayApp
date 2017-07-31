@@ -2,19 +2,28 @@ package tenant.guardts.house;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.zxing.common.StringUtils;
+
 import tenant.guardts.house.R;
+import android.R.integer;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.style.TtsSpan.ElectronicBuilder;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,7 +47,7 @@ public class HomeActivity extends BaseActivity {
 	private TextView mTitleBar;
 	private HoursePresenter mPresenter;
 	//private String mLoginAction = "http://tempuri.org/ValidateLogin";
-	private String mUpdateAction="http://tempuri.org/CheckUpdate";
+	private String mUpdateAction="http://tempuri.org/CheckUpgrade";
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";;
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
@@ -46,6 +55,9 @@ public class HomeActivity extends BaseActivity {
 	private SurroundFragment mSurroundFragment;
 	private HistoryFragment mHistoryFragment;
 	private String mUserInfoString = null;
+	private String mCity = null;
+	private int mVersionCode = -1;
+	private String mDownloadUpdateUrl = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,7 @@ public class HomeActivity extends BaseActivity {
 		mPassword = getIntent().getStringExtra("user_password");
 		initView();
 		getUserInfo();
+		checkVersionUpdate();
 	}
 	
 	
@@ -74,7 +87,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent openCameraIntent = new Intent(HomeActivity.this,CaptureActivity.class);
-				startActivityForResult(openCameraIntent, 1);
+				startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
 			}
 		});
 		
@@ -203,8 +216,17 @@ public class HomeActivity extends BaseActivity {
 	}
 	
 	
-	private void showTabView(){
-		
+	private void checkVersionUpdate(){
+		mVersionCode = GlobalUtil.getVersionCode(getApplicationContext());
+		String url = "http://www.guardts.com/UpgradeService/SystemUpgradeService.asmx?op=CheckUpgrade";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateAction));
+		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
+		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateAction, rpc);
+		mPresenter.startPresentServiceTask();
+		//msg  {"Result":"0","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success"}
+		//{"Result":"1","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success","IsEnforced":"True",
+		//"APKUrl":"UpgradeFolder\\APK20170731135631.apk","IOSUrl":"","CreatedDate":"2017-07-31 13:56:32"}
 	}
 	
 	private void getUserInfo(){
@@ -242,13 +264,40 @@ public class HomeActivity extends BaseActivity {
 					parseUserInfo((String)msg.obj);
 				}
 			}else if (msg.what == 101){
-				
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
+			}else if (msg.what == 200){
+				if (msg.obj != null){
+					parseUpdateVersion((String)msg.obj);
+					showUpdateVersionAlertDialog();
+				}
 			}
 		}
 	};
 	
-	private static void parseUserInfo(String value) {
+	private void showUpdateVersionAlertDialog() {  
+		if (mDownloadUpdateUrl == null){
+			return;
+		}
+			
+		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this);
+		  builder.setTitle("升级云上之家");
+		  builder.setIcon(android.R.drawable.ic_dialog_info);
+		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+		         @Override  
+		  
+		         public void onClick(DialogInterface dialog, int which) {
+		        	 CommonUtil.DOWLOAD_URL = mDownloadUpdateUrl;
+		        	 startActivity(new Intent(HomeActivity.this, DownloadAppActivity.class));
+		        	 finish();
+		         }  
+			
+		});
+		builder.setCancelable(false);
+		builder.show();
+		
+	}
+	
+	private  void parseUserInfo(String value) {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
@@ -264,6 +313,28 @@ public class HomeActivity extends BaseActivity {
 					CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 					CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private  void parseUpdateVersion(String value) {
+		try{
+			if (value != null){
+				//{"Result":"1","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success","IsEnforced":"True",
+					//"APKUrl":"UpgradeFolder\\APK20170731135631.apk","IOSUrl":"","CreatedDate":"2017-07-31 13:56:32"}
+					JSONObject itemJsonObject = new JSONObject(value);
+					String versionId = itemJsonObject.optString("VersionID");
+					if (versionId != null){
+						int versionCode = Integer.parseInt(versionId);
+						if (versionCode > mVersionCode){
+							String downloadUrl = itemJsonObject.optString("APKUrl");
+							if (downloadUrl != null && downloadUrl.length() > 5){
+								mDownloadUpdateUrl = CommonUtil.DOWLOAD_URL+downloadUrl;
+							}
+						}
+					}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -310,8 +381,9 @@ public class HomeActivity extends BaseActivity {
 		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 			// TODO Auto-generated method stub
 			super.onActivityResult(requestCode, resultCode, data);
+			Log.w("mingguo", "HomeActivity  onActivityResult result code  "+resultCode+"   requestcode  "+requestCode+" data  "+data);
 			//处理扫描结果（在界面上显示）
-					if (resultCode == RESULT_OK  && requestCode == 1) {
+					if (resultCode == RESULT_OK  && requestCode == CommonUtil.mScanCodeRequestCode) {
 						Bundle bundle = data.getExtras();
 						String scanResult = bundle.getString("result");
 						Log.e("mingguo", "scan  result  "+scanResult);
@@ -322,8 +394,26 @@ public class HomeActivity extends BaseActivity {
 						}else{
 							GlobalUtil.shortToast(getApplication(), "二维码扫描异常，请重新扫码！！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}
+					}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode){
+						Bundle bundle = data.getExtras();
+						if (bundle != null){
+							String selectedCity = bundle.getString("city");
+							Log.e("mingguo", "selected city  "+selectedCity);
+							if (!TextUtils.isEmpty(selectedCity)){
+								setSelectedCity(selectedCity);
+							}
+						}
+						
 					}
 		}
+	 
+	 public void setSelectedCity(String city){
+		 mCity = city;
+	 }
+	 
+	 public String getSelectedCity(){
+		 return mCity;
+	 }
 
 	@Override
 	public void onStatusStart() {
@@ -338,6 +428,11 @@ public class HomeActivity extends BaseActivity {
 			if (action.equals(mUserInfoAction)){
 				Message message = mHandler.obtainMessage();
 				message.what = 100;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}else if (action.equals(mUpdateAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 200;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}

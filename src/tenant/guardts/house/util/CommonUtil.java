@@ -1,10 +1,17 @@
 package tenant.guardts.house.util;
 
 import java.io.File;
+import java.util.List;
+import java.util.Locale;
+
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.inner.GeoPoint;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -22,15 +29,19 @@ public class CommonUtil {
     
     private static  Canvas canvas;
     
-    public static final String DOWLOAD_URL = "http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
+    public static String DOWLOAD_URL = "http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
     
     public static final String NAMESPACE = "http://tempuri.org/";
+    
+    public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
     
     public static String mRegisterRealName = null;
     public static String mRegisterIdcard = null;
     public static String mUserLoginName = null;
     public static String mUserHost, mUserArea;
     public static double mCurrentLati, mCurrentLongi;
+    public static int mScanCodeRequestCode = 1;
+    public static int mSelectCityRequestCode = 2;
     
     public static Canvas getCanvas() {
         return canvas;
@@ -46,7 +57,7 @@ public class CommonUtil {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             // 存在获取外部文件路径
             File root = Environment.getExternalStorageDirectory();
-            File base = new File(root.getPath() + "/download");
+            File base = new File(root.getPath() + "/guardtshouse");
             //base.mkdir();
         	if (!base.isDirectory() && !base.mkdir()) {
         		return null;
@@ -119,6 +130,60 @@ public class CommonUtil {
         s = Math.round(s * 10000) / 10000;
         Log.w("mingguo", "ss "+s);
         return s;
+	}
+    
+    public static GeoPoint getGeoPointBystr(Context context, String str) {
+		  GeoPoint gpGeoPoint = null;
+		  if (str!=null) {
+		    Geocoder gc = new Geocoder(context,Locale.CHINA);
+		      List<Address> addressList = null;
+		    try {
+		    	addressList = gc.getFromLocationName(str, 1);
+		        if (!addressList.isEmpty()) {
+		      Address address_temp = addressList.get(0);
+		      //计算经纬度
+		      double Latitude=address_temp.getLatitude();
+		      double Longitude=address_temp.getLongitude();
+		      Log.i("mingguo", "经度："+Latitude);
+		      Log.i("mingguo", "纬度："+Longitude);
+		      //生产GeoPoint
+		      gpGeoPoint = new GeoPoint((int)Latitude, (int)Longitude);
+		    }
+		    } catch (Exception e) {
+		    	Log.e("mingguo", "get getPoint By str  "+e);
+		      e.printStackTrace();
+		    }
+		  }
+		  return gpGeoPoint;
+		  
+	}
+    
+    public static LatLng getLatLngBystr(Context context, String str) {
+		  GeoPoint gpGeoPoint = null;
+		  double Latitude = 0, Longitude = 0;
+		  if (str!=null) {
+		    Geocoder gc = new Geocoder(context,Locale.CHINA);
+		      List<Address> addressList = null;
+		    try {
+		    	addressList = gc.getFromLocationName(str, 1);
+		        if (!addressList.isEmpty()) {
+		        	if (addressList.size() > 0){
+		        		Address address_temp = addressList.get(0);
+					      //计算经纬度
+					       Latitude =address_temp.getLatitude();
+					       Longitude = address_temp.getLongitude();
+					      Log.i("mingguo", "经度："+Latitude);
+					      Log.i("mingguo", "纬度："+Longitude);
+					      //生产GeoPoint
+					    }
+		        	}
+		    } catch (Exception e) {
+		    	Log.e("mingguo", "get getPoint By str  "+e);
+		      e.printStackTrace();
+		    }
+		  }
+		  return new LatLng(Latitude, Longitude);
+		  
 	}
     
     
