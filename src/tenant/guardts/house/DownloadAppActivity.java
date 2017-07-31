@@ -69,28 +69,6 @@ public class DownloadAppActivity extends Activity{
 				changeDownloadStatus();
 			}
 		});
-		
-//		String downloadfile = Constants.getDefaultDownloadPath(Constants.DOWLOAD_URL);
-//		if (downloadfile == null){
-//			Toast.makeText(getApplicationContext(), "文件未找到,开始下载！", Toast.LENGTH_SHORT).show();
-//			Request request = new Request(Uri.parse(Constants.DOWLOAD_URL));
-//			request.setPackageName("com.pay.renthouse");
-//			request.setShowRunningNotification(false);
-//			request.setMimeType("application/vnd.android.package-archive");
-////			request.setIconUrl(mIconCache.get(info.packageName));
-////			request.setSourceType(Constants.DOWNLOAD_FROM_MARKET);
-////			request.setMD5("82acb1ab0c7949ef2c272ce1db98bc57");
-//			long id = mDownloadManager.enqueue(request);
-//		}else{
-//			Log.i("mingguo", "download path  download file  "+downloadfile);
-//			if (queryIsDownloadCompleteDatabase(downloadfile)){
-//				Constants.installApk(DownloadAppActivity.this, downloadfile);
-//				
-//			}else{
-//				Toast.makeText(getApplicationContext(), "下载未完成，请稍后！", Toast.LENGTH_SHORT).show();
-//			}
-//			
-//		}
 	}
 	
 	private void initDownloadAdapter(){
@@ -164,12 +142,12 @@ public class DownloadAppActivity extends Activity{
 					Log.e("mingguo", "download path null  remove download id "+downloadId);
 					mDownloadManager.remove(downloadId);
 				}
-				if (databasepath.equalsIgnoreCase("file://"+downloadpath)){
+				//if (databasepath.equalsIgnoreCase("file://"+downloadpath)){
 					mCurrentDownloadId =  mSizeSortedCursor.getInt(mIdColumnId);
 					if (downloadpath != null && new File(downloadpath).exists()){
 						return mSizeSortedCursor.getInt(mStatusColumnId);
 					}
-				}
+				//}
 			}
 			
 		}
@@ -222,6 +200,8 @@ public class DownloadAppActivity extends Activity{
 			Request request = new Request(Uri.parse(CommonUtil.DOWLOAD_URL));
 			request.setPackageName(GlobalUtil.getPackageName(getApplicationContext()));
 			request.setShowRunningNotification(false);
+			request.setTitle(GlobalUtil.getApplicationName(getApplicationContext()));
+			
 			request.setMimeType("application/vnd.android.package-archive");
 			long id = mDownloadManager.enqueue(request);
 			break;
@@ -236,15 +216,15 @@ public class DownloadAppActivity extends Activity{
         public void onReceive(Context context, Intent intent) {
         	//PackageManager manager = context.getPackageManager();
         	Log.e("mingguo", "onReceiver  ");
-        	if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) || intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)){
-        		String packageName = intent.getData().getSchemeSpecificPart();
-        		Log.e("mingguo", "package name "+packageName);
-        		if (packageName != null && packageName.equals("com.pay.renthouse")){
-        			mDownloadManager.remove(mCurrentDownloadId);
-        			new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL)).delete();
-        			finish();
-        		}
-        	}
+//        	if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) || intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)){
+//        		String packageName = intent.getData().getSchemeSpecificPart();
+//        		Log.e("mingguo", "package name "+packageName);
+//        		if (packageName != null && packageName.equals(GlobalUtil.getPackageName(getApplicationContext()))){
+//        			mDownloadManager.remove(mCurrentDownloadId);
+//        			new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL)).delete();
+//        			finish();
+//        		}
+//        	}
         }
 	}
 	

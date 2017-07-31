@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.util.Config;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import tenant.guardts.house.util.CommonUtil;
 
 /**
  * Some helper functions for the download manager
@@ -262,7 +263,10 @@ public class Helpers {
     	return cacheFile;
      }
     private static File getCacheDestination(Context context) throws GenerateSaveFileError {
-    	File cacheDirFile = new File(context.getCacheDir(), "/");
+    	//add for appstore
+    	//File cacheDirFile = new File(context.getCacheDir(), "/");
+    	File cacheDirFile = new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL), "/");
+    	Log.i("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
     	if (!cacheDirFile.isDirectory() && !cacheDirFile.mkdir()) {
     	    // Can't create download directory, e.g. because a file called
     	    // "download"
@@ -291,7 +295,9 @@ public class Helpers {
 		    "insufficient space on external media");
 	}
 	
-	File base = new File(root.getPath() + DownloadConstants.DEFAULT_DL_SUBDIR);
+	//File base = new File(root.getPath() + DownloadConstants.DEFAULT_DL_SUBDIR);
+	//add guardts download path
+	File base = new File(root.getPath() + "/"+CommonUtil.GURADTS_DOWNLOAD_DIR);
 	if (!base.isDirectory() && !base.mkdir()) {
 	    // Can't create download directory, e.g. because a file called
 	    // "download"

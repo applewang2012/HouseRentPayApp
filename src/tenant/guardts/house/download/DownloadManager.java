@@ -337,7 +337,7 @@ public class DownloadManager {
 		private String mRequestMD5;
 		private int mSourceType;
 		private String mRequestMimeType = DownloadConstants.MIMETYPE_APK;
-		private int mRequestDestination = 0;
+		private int mRequestDestination = 0; //0自己指定目录
 		private String mRequestIconUrl;
 
 		/**
@@ -849,9 +849,9 @@ public class DownloadManager {
 	public long enqueue(Request request) {
 		ContentValues values = request.toContentValues(mPackageName);
 		// add for appstore
-		Log.i("downloadp", "DownloadManager   enqueue   packagename    "+mPackageName);
-		Log.i("downloadp", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
-		values.put(Downloads.COLUMN_FILE_NAME_HINT, (String) request.mTitle);
+		Log.i("mingguo", "DownloadManager   enqueue   packagename    "+mPackageName);
+		Log.i("mingguo", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
+		//values.put(Downloads.COLUMN_FILE_NAME_HINT, (String) request.mTitle);
 		values.put(Downloads.COLUMN_PACKAGE_NAME, request.mRequestPackageName);
 		//values.put(Downloads.COLUMN_NOTIFICATION_CLASS, HomeTabActivity.class.getName());
 		values.put(Downloads.COLUMN_NOTIFICATION_CLASS, mPackageName);
@@ -862,6 +862,7 @@ public class DownloadManager {
 //		} else {
 			values.put(Downloads.COLUMN_DESTINATION,
 					request.mRequestDestination);
+			
 //		}
 		Uri downloadUri = mResolver.insert(Downloads.CONTENT_URI, values);
 		long id = Long.parseLong(downloadUri.getLastPathSegment());

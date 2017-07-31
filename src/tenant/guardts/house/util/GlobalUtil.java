@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -119,6 +120,20 @@ public final class GlobalUtil {
 
 		return versionName;
 	}
+	
+	public static String getApplicationName(Context ctx) { 
+		PackageManager packageManager = null; 
+		ApplicationInfo applicationInfo = null; 
+		try { 
+		packageManager = ctx.getPackageManager(); 
+			applicationInfo = packageManager.getApplicationInfo(getPackageName(ctx), 0); 
+		} catch (PackageManager.NameNotFoundException e) { 
+			applicationInfo = null; 
+		} 
+		String applicationName = 
+		(String) packageManager.getApplicationLabel(applicationInfo); 
+		return applicationName; 
+		} 
 	
 	public static String getPackageName(Context context){
 		return context.getPackageName();

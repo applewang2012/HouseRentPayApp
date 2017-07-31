@@ -57,7 +57,6 @@ public class HomeActivity extends BaseActivity {
 	private String mUserInfoString = null;
 	private String mCity = null;
 	private int mVersionCode = -1;
-	private String mDownloadUpdateUrl = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -275,10 +274,11 @@ public class HomeActivity extends BaseActivity {
 	};
 	
 	private void showUpdateVersionAlertDialog() {  
-		if (mDownloadUpdateUrl == null){
+		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")){
+			Log.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile());
 			return;
 		}
-			
+		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this);
 		  builder.setTitle("升级云上之家");
 		  builder.setIcon(android.R.drawable.ic_dialog_info);
@@ -286,7 +286,6 @@ public class HomeActivity extends BaseActivity {
 		         @Override  
 		  
 		         public void onClick(DialogInterface dialog, int which) {
-		        	 CommonUtil.DOWLOAD_URL = mDownloadUpdateUrl;
 		        	 startActivity(new Intent(HomeActivity.this, DownloadAppActivity.class));
 		        	 finish();
 		         }  
@@ -331,7 +330,7 @@ public class HomeActivity extends BaseActivity {
 						if (versionCode > mVersionCode){
 							String downloadUrl = itemJsonObject.optString("APKUrl");
 							if (downloadUrl != null && downloadUrl.length() > 5){
-								mDownloadUpdateUrl = CommonUtil.DOWLOAD_URL+downloadUrl;
+								CommonUtil.DOWLOAD_URL = CommonUtil.UPDATE_VERSION_HOST+downloadUrl;
 							}
 						}
 					}
@@ -434,7 +433,7 @@ public class HomeActivity extends BaseActivity {
 				Message message = mHandler.obtainMessage();
 				message.what = 200;
 				message.obj = templateInfo;
-				mHandler.sendMessage(message);
+				mHandler.sendMessageDelayed(message, 500);
 			}
 	}
 	

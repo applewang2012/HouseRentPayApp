@@ -29,8 +29,8 @@ public class CommonUtil {
     
     private static  Canvas canvas;
     
-    public static String DOWLOAD_URL = "http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
-    
+    public static String DOWLOAD_URL = null; //"http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
+    public static String GURADTS_DOWNLOAD_DIR = "guardtsdownload";
     public static final String NAMESPACE = "http://tempuri.org/";
     
     public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
@@ -57,13 +57,13 @@ public class CommonUtil {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             // 存在获取外部文件路径
             File root = Environment.getExternalStorageDirectory();
-            File base = new File(root.getPath() + "/guardtshouse");
-            //base.mkdir();
-        	if (!base.isDirectory() && !base.mkdir()) {
-        		return null;
-        	}else{
-        		File[] files = base.listFiles();
-        		for (int i = 0; i < files.length; i++) {
+            File base = new File(root.getPath() + "/"+GURADTS_DOWNLOAD_DIR);
+            if (!base.exists()){
+            	base.mkdir();
+            }
+        	
+        	File[] files = base.listFiles();
+        	for (int i = 0; i < files.length; i++) {
         			String filename = files[i].getName();
         			if (filename != null && downloadUrl != null){
         				if (downloadUrl.endsWith(filename)){
@@ -71,13 +71,33 @@ public class CommonUtil {
         					break;
         				}
         			}
-        		}
+        	}
+        	if (path == null){
+        		path = base.getPath();
         	}
         } else {
             // 不存在获取内部存
             return null;
         }
+        Log.i("mingguo", "common util get default download path  "+path);
        return path;
+    }
+    
+    public static boolean deleteInstalledApkFile(){
+    	 File root = Environment.getExternalStorageDirectory();
+         File base = new File(root.getPath() + "/"+GURADTS_DOWNLOAD_DIR);
+         if (!base.exists()){
+         	base.mkdir();
+         }
+     	
+     	File[] files = base.listFiles();
+     	for (int i = 0; i < files.length; i++) {
+			String filename = files[i].getName();
+			if (filename.endsWith(".apk")){
+				return new File(base.getPath()+File.separator+filename).delete();
+			}
+     	}
+     	return false;
     }
     
     
