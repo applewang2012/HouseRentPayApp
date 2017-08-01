@@ -111,7 +111,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
             .fromResource(R.drawable.yellow);
     
 
-    private double mLati, mLongi;
+    //private double mLati, mLongi;
 	private LatLng mCurrentLatLng;
 	private List<Marker> mMarkList;
 	private String mLocationAction = "http://tempuri.org/GetRentsByCoodinates";
@@ -154,9 +154,13 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		HomeActivity activity = (HomeActivity)getActivity();
 		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
 			mCurrentLocationCity = activity.getSelectedCity();
-			Log.i("mingguo", "home fragment  visible currentCity  "+mCurrentLocationCity);
+			Log.i("mingguo", "home fragment  on resume  change  currentCity  "+mCurrentLocationCity);
+//			mCurrentLatLng = CommonUtil.getLatLngBystr(mContext, mCurrentLocationCity);
+//            Message message = mHandler.obtainMessage();
+//            message.what = 300;
+//            message.obj = mCurrentLatLng;  
+//            message.sendToTarget();  
 			startThreadfindLocation(mCurrentLocationCity);
-//			showSelectLocationMap();
 		}
 	}
 	
@@ -422,11 +426,11 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     }
 	
 	private void getLocationByCoordinates(){
-    	Log.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
+    	Log.w("mingguo", "house  fragment  location by coordates lati  "+ mCurrentLatLng.latitude+"  longti  "+mCurrentLatLng.longitude);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentsByCoodinates";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
-		rpc.addProperty("lat", mLati+""); 
-		rpc.addProperty("lon", mLongi+""); 
+		rpc.addProperty("lat", mCurrentLatLng.latitude+""); 
+		rpc.addProperty("lon", mCurrentLatLng.longitude+""); 
 		rpc.addProperty("distance", "15000"); 
 		mPresenter.readyPresentServiceParams(mContext, url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask();
@@ -546,12 +550,9 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
             mBaiduMap.setMyLocationData(locData);
             if (isFirstLoc) {
                 isFirstLoc = false;
-                mLati = location.getLatitude();
-                mLongi = location.getLongitude();
-                CommonUtil.mCurrentLati = mLati;
-                CommonUtil.mCurrentLongi = mLongi;
-                mCurrentLatLng = new LatLng(mLati,
-                        mLongi);
+                CommonUtil.mCurrentLati = location.getLatitude();
+                CommonUtil.mCurrentLongi = location.getLongitude();
+                mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(mCurrentLatLng).zoom(18.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
@@ -572,6 +573,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     }
     
     private void showSelectLocationMap(){
+    	Log.i("mingguo", "select location site  lati  "+mCurrentLatLng.latitude+"  longi  "+mCurrentLatLng.longitude);
     	MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(0)
                         // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -581,9 +583,9 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     	MapStatus.Builder builder = new MapStatus.Builder();
         builder.target(mCurrentLatLng).zoom(18.0f);
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        
     }
 
-	
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
@@ -635,7 +637,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-			//mBaiduMap.clear();
+			mBaiduMap.clear();
+			startGetLocationFromHouse();
 			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
 			// 设置overlay可以处理标注点击事件
 			//mBaiduMap.setOnMarkerClickListener(overlay);

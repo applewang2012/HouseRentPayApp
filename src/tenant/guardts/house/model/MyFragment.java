@@ -118,9 +118,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			
 			@Override
 			public void onClick(View v) {
-				
 				changeUserAreaDialog();
-				
 			}
 		});
 		mSearchHouse.setOnClickListener(new OnClickListener() {

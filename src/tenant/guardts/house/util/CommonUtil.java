@@ -190,7 +190,7 @@ public class CommonUtil {
 		        	if (addressList.size() > 0){
 		        		Address address_temp = addressList.get(0);
 					      //计算经纬度
-					       Latitude =address_temp.getLatitude();
+					       Latitude = address_temp.getLatitude();
 					       Longitude = address_temp.getLongitude();
 					      Log.i("mingguo", "经度："+Latitude);
 					      Log.i("mingguo", "纬度："+Longitude);

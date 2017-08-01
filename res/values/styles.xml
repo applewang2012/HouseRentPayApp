@@ -5,12 +5,12 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="CustomWindowTitleBackground">
-       <item name="android:background">#0b6cff</item>
+       <item name="android:background">#337ffd</item>
 	</style>
 	
     <!-- Application theme. -->
     <style name="AppTheme" parent="android:Theme">
-     <item name="android:windowTitleSize">50dp</item>
+     <item name="android:windowTitleSize">@dimen/base_dimen_90</item>
      <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
 	</style>
 	

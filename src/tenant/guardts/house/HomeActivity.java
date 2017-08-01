@@ -2,28 +2,20 @@ package tenant.guardts.house;
 
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.zxing.common.StringUtils;
-
-import tenant.guardts.house.R;
-import android.R.integer;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.InputFilter;
 import android.text.TextUtils;
-import android.text.style.TtsSpan.ElectronicBuilder;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -72,7 +64,7 @@ public class HomeActivity extends BaseActivity {
 		mPassword = getIntent().getStringExtra("user_password");
 		initView();
 		getUserInfo();
-		checkVersionUpdate();
+		
 	}
 	
 	
@@ -262,6 +254,7 @@ public class HomeActivity extends BaseActivity {
 				if (msg.obj != null){
 					parseUserInfo((String)msg.obj);
 				}
+				checkVersionUpdate();
 			}else if (msg.what == 101){
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
 			}else if (msg.what == 200){
