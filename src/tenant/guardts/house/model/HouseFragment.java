@@ -67,6 +67,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -122,6 +123,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	private AutoCompleteTextView mSearchListener = null;
     private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
+	private TextView mSelectCityText;
 	
 	public HouseFragment(){
 		
@@ -155,12 +157,14 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
 			mCurrentLocationCity = activity.getSelectedCity();
 			Log.i("mingguo", "home fragment  on resume  change  currentCity  "+mCurrentLocationCity);
+			mSelectCityText.setText(mCurrentLocationCity);
 //			mCurrentLatLng = CommonUtil.getLatLngBystr(mContext, mCurrentLocationCity);
 //            Message message = mHandler.obtainMessage();
 //            message.what = 300;
 //            message.obj = mCurrentLatLng;  
 //            message.sendToTarget();  
 			startThreadfindLocation(mCurrentLocationCity);
+			
 		}
 	}
 	
@@ -225,7 +229,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
     }
 
 	private void initView(){
-		Button button = (Button)mRootView.findViewById(R.id.button1);
+		LinearLayout button = (LinearLayout)mRootView.findViewById(R.id.id_home_select_city_content);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -236,6 +240,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 				
 			}
 		});
+		mSelectCityText = (TextView)mRootView.findViewById(R.id.id_home_show_city_view);
 		 mPoiSearch = PoiSearch.newInstance();
 		 mPoiSearch.setOnGetPoiSearchResultListener(this);
 		 mSearchListener = (AutoCompleteTextView)mRootView.findViewById(R.id.button_search);  
@@ -542,6 +547,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
                 return;
             }
             mCurrentLocationCity = location.getCity();
+            mSelectCityText.setText(mCurrentLocationCity);
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                             // 此处设置开发者获取到的方向信息，顺时针0-360

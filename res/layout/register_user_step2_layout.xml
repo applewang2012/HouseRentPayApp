@@ -23,16 +23,11 @@
          	android:orientation="vertical"
          	android:layout_weight="1"
             >
-            <ImageView
-                android:layout_width="@dimen/base_dimen_47"  
-         		android:layout_height="@dimen/base_dimen_68"
-         		android:background="@drawable/register_step_marker"
-         		android:layout_gravity="center_horizontal"
-                />
+            
             <LinearLayout 
                 android:layout_width="match_parent"  
 	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_12"
+	         	android:layout_marginTop="@dimen/base_dimen_80"
 	         	android:orientation="horizontal"
                 >
                 <ImageView 
@@ -72,10 +67,16 @@
          	android:orientation="vertical"
          	android:layout_weight="1"
             >
+            <ImageView
+                android:layout_width="@dimen/base_dimen_47"  
+         		android:layout_height="@dimen/base_dimen_68"
+         		android:background="@drawable/register_step_marker"
+         		android:layout_gravity="center_horizontal"
+                />
             <LinearLayout 
                 android:layout_width="match_parent"  
 	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_80"
+	         	android:layout_marginTop="@dimen/base_dimen_12"
 	         	android:orientation="horizontal"
                 >
                 <ImageView 
@@ -88,7 +89,7 @@
 	            <ImageView
 	                android:layout_width="@dimen/base_dimen_38"  
 	         		android:layout_height="@dimen/base_dimen_38"
-	         		android:background="@drawable/register_step2_normal"
+	         		android:background="@drawable/register_step2_select"
 	         		
 	         		android:layout_gravity="center_horizontal"
 	                />
@@ -103,7 +104,7 @@
                 android:layout_width="wrap_content"  
          		android:layout_height="wrap_content"
          		android:text="手机绑定"
-         		android:textColor="#cccccc"
+         		android:textColor="#337ffd"
          		android:textSize="@dimen/base_dimen_26"
          		android:layout_marginTop="@dimen/base_dimen_14"
          		android:layout_gravity="center_horizontal"
@@ -170,7 +171,7 @@
                 <ImageView 
                     android:layout_width="@dimen/base_dimen_60"  
 	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#cccccc"
+	         		android:background="#337ffd"
 		         	android:layout_gravity="center_vertical"
                     />
 	            <ImageView
@@ -201,20 +202,21 @@
 		        android:layout_gravity="center_horizontal"
 	        	>
 	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_34"
-		        	android:layout_height="@dimen/base_dimen_34"
-		        	android:background="@drawable/register_user_icno"
+	        	    android:layout_width="@dimen/base_dimen_22"
+		        	android:layout_height="@dimen/base_dimen_36"
+		        	android:background="@drawable/register_step2_phone"
 		        	android:layout_marginLeft="@dimen/base_dimen_15"
 		        	android:layout_gravity="center_vertical"
 	        	    />
 	        	<EditText 
-	        	        android:id="@+id/id_register_step1_input_username"
+	        	        android:id="@+id/id_register_step2_input_phone"
 	        	         android:layout_width="match_parent"
 		        		 android:layout_height="@dimen/base_dimen_34"
 		        		 android:layout_gravity="center_vertical"
-		        		 android:hint="请输入用户名"
-		        		 android:digits="@string/edit_input"
+		        		 android:hint="请输入11位手机号码"
+		        		 android:inputType="number"
 		        		 android:gravity="center_vertical"
+		        		 android:maxLength="11"
 		        		 android:layout_marginTop="@dimen/base_dimen_6"
 		        		 android:layout_marginLeft="@dimen/base_dimen_64"
 		        		 android:background="#00000000"
@@ -232,67 +234,54 @@
 		        android:layout_gravity="center_horizontal"
 	        	>
 	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_30"
-		        	android:layout_height="@dimen/base_dimen_38"
+	        	    android:layout_width="@dimen/base_dimen_19"
+		        	android:layout_height="@dimen/base_dimen_34"
 		        	android:layout_gravity="center_vertical"
 		        	android:layout_marginLeft="@dimen/base_dimen_18"
-		        	android:background="@drawable/register_user_password"
+		        	android:background="@drawable/register_step2_verifycode"
 	        	    />
 	        	<EditText 
-	        	        android:id="@+id/id_register_step1_input_password"
+	        	        android:id="@+id/id_register_step2_input_verifycode"
 	        	         android:layout_width="match_parent"
 		        		 android:layout_height="@dimen/base_dimen_38"
 		        		 android:layout_marginTop="@dimen/base_dimen_6"
 		        		 android:layout_marginLeft="@dimen/base_dimen_64"
 		        		 android:layout_gravity="center_vertical"
-		        		 android:hint="请输入密码"
+		        		 android:hint="请输入验证码"
 		        		 android:digits="@string/edit_input"
-		        		 android:inputType="textPassword"
+		        		 android:inputType="number"
 		        		 android:gravity="center_vertical"
 		        		 android:textSize="@dimen/base_dimen_28"
 		        		 android:background="#00000000"
 		        		 android:textColorHint="#cccccc"
 		        		 android:textColor="#000000"
 	        	        />
-	        	
+	        	<ImageView 
+	        	    android:layout_width="@dimen/base_dimen_1"
+		        	android:layout_height="@dimen/base_dimen_40"
+		        	android:layout_gravity="center_vertical"
+		        	android:layout_marginLeft="@dimen/base_dimen_348"
+		        	android:background="#b2b2b2"
+	        	    />
+	        	<TextView 
+	        	   		 android:id="@+id/id_register_step2_get_verifycode"
+	        	         android:layout_width="wrap_content"
+		        		 android:layout_height="match_parent"
+		        		 android:layout_marginLeft="@dimen/base_dimen_364"
+		        		 android:gravity="center_vertical"
+		        		 android:text="获取验证码"
+		        		 android:textColor="#337ffd"
+		        		 android:clickable="true"
+		        		 android:textSize="@dimen/base_dimen_28"
+	        	    />
 	       	</FrameLayout>
 	       	
-	       	<FrameLayout 
-		        android:layout_width="@dimen/base_dimen_520"
-		        android:layout_height="@dimen/base_dimen_80"
-		        android:layout_marginTop="@dimen/base_dimen_30"
-		        android:background="@drawable/item_shape_no_solid_corner"
-		        android:layout_gravity="center_horizontal"
-	        	>
-	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_28"
-		        	android:layout_height="@dimen/base_dimen_36"
-		        	android:layout_marginLeft="@dimen/base_dimen_18"
-		        	android:layout_gravity="center_vertical"
-		        	android:background="@drawable/register_user_password_identify"
-	        	    />
-	        	<EditText 
-	        	        android:id="@+id/id_register_step1_input_password_identify"
-	        	         android:layout_width="match_parent"
-		        		 android:layout_height="@dimen/base_dimen_38"
-		        		 android:layout_gravity="center_vertical"
-		        		 android:layout_marginLeft="@dimen/base_dimen_64"
-		        		 android:hint="请再次输入密码"
-		        		 android:digits="@string/edit_input"
-		        		 android:inputType="textPassword"
-		        		 android:gravity="center_vertical"
-		        		 android:textSize="@dimen/base_dimen_28"
-		        		 android:background="#00000000"
-		        		 android:textColorHint="#cccccc"
-		        		 android:textColor="#000000"
-	        	        />
-	       	</FrameLayout>
 	       	
 	       	<Button 
-                 android:id="@+id/id_register_user_step1_next"
+                 android:id="@+id/id_register_user_step2_next"
                  android:layout_width="@dimen/base_dimen_520"
 		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_60"
+		         android:layout_marginTop="@dimen/base_dimen_170"
 		         android:text="下一步"
 		         android:textColor="@drawable/button_text_selector"
 		         android:textSize="@dimen/base_dimen_30"

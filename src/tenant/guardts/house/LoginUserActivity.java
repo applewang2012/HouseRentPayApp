@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -110,7 +111,8 @@ public class LoginUserActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				startActivity(new Intent(LoginUserActivity.this, RegisterUserActivity.class));
+				
+				startActivity(new Intent(LoginUserActivity.this, RegisterUserStep1Activity.class));
 			}
 		});
 		modifyButton.setOnClickListener(new OnClickListener() {

@@ -34,8 +34,7 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
-//��Ӱ�ʱ���import android.support.v4.app.Fragment; 
-@SuppressLint("NewApi")
+
 public class MyFragment extends Fragment implements DataStatusInterface{
 	
 

@@ -5,14 +5,15 @@
        android:layout_height="@dimen/base_dimen_90"
        android:background="#337ffd"  
        >    
-      <ImageView 
+      <Button 
           android:id="@+id/id_titlebar_back"
-           android:layout_width="@dimen/base_dimen_22"
-           android:layout_height="@dimen/base_dimen_40"
+           android:layout_width="@dimen/base_dimen_42"
+           android:layout_height="@dimen/base_dimen_60"
            android:background="@drawable/custom_title_back"
            android:layout_gravity="center_vertical"
            android:clickable="true"
-           android:layout_marginLeft="@dimen/base_dimen_30"
+           android:onClick="backFinish"
+           android:layout_marginLeft="@dimen/base_dimen_20"
           />
       <TextView
            android:id="@+id/id_titlebar"
@@ -25,7 +26,7 @@
            android:textSize="@dimen/base_dimen_38"
            android:textStyle="bold"
        /> 
-       <Button
+       <!-- <Button
            android:id="@+id/id_scan_rent_house"
            android:layout_width="wrap_content"
            android:layout_height="50dp"
@@ -37,6 +38,6 @@
 		   android:gravity="center"
 		   android:visibility="gone"
 		   android:background="#00000000"
-       />         
+       />          -->
        
 </FrameLayout>

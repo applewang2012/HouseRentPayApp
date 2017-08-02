@@ -36,7 +36,6 @@ import tenant.guardts.house.util.GlobalUtil;
 
 public class HomeActivity extends BaseActivity {
 
-	private TextView mTitleBar;
 	private HoursePresenter mPresenter;
 	//private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mUpdateAction="http://tempuri.org/CheckUpgrade";
@@ -53,12 +52,7 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.home_layout); 
-		
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText(getResources().getString(R.string.home_tab_house));
 		
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");
@@ -92,6 +86,15 @@ public class HomeActivity extends BaseActivity {
 			fragmentTransaction.commitAllowingStateLoss();
 		}
 		
+//		if (mSurroundFragment == null){
+//			mSurroundFragment = new SurroundFragment();
+//			fragmentTransaction.add(R.id.id_home_content, mSurroundFragment);
+//			fragmentTransaction.commitAllowingStateLoss();
+//		}else{
+//			fragmentTransaction.show(mSurroundFragment);
+//			fragmentTransaction.commitAllowingStateLoss();
+//		}
+		
 		final LinearLayout houseLayout = (LinearLayout)findViewById(R.id.id_home_tab_home);
 		final LinearLayout myLayout = (LinearLayout)findViewById(R.id.id_home_tab_my);
 		final ImageView houseIcon = (ImageView)findViewById(R.id.id_home_tab_home_icon);
@@ -108,15 +111,15 @@ public class HomeActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				mTitleBar.setText(getString(R.string.home_tab_house));
+				//mTitleBar.setText(getString(R.string.home_tab_house));
 				houseIcon.setBackgroundResource(R.drawable.home_icon);
-				houseText.setTextColor(Color.parseColor("#0b6cfe"));
+				houseText.setTextColor(Color.parseColor("#337ffd"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
-				myText.setTextColor(Color.parseColor("#afaeae"));
+				myText.setTextColor(Color.parseColor("#b2b2b2"));
 				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
-				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				surroundtext.setTextColor(Color.parseColor("#b2b2b2"));
 				historyicon.setBackgroundResource(R.drawable.history_icon_default);
-				historytext.setTextColor(Color.parseColor("#afaeae"));
+				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mHouseFrament == null){
@@ -133,15 +136,15 @@ public class HomeActivity extends BaseActivity {
 		myLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTitleBar.setText(getString(R.string.home_tab_my));
+				//mTitleBar.setText(getString(R.string.home_tab_my));
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
-				houseText.setTextColor(Color.parseColor("#afaeae"));
+				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon);
-				myText.setTextColor(Color.parseColor("#0b6cfe"));
+				myText.setTextColor(Color.parseColor("#337ffd"));
 				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
-				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				surroundtext.setTextColor(Color.parseColor("#b2b2b2"));
 				historyicon.setBackgroundResource(R.drawable.history_icon_default);
-				historytext.setTextColor(Color.parseColor("#afaeae"));
+				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mMyFragment == null){
@@ -158,15 +161,15 @@ public class HomeActivity extends BaseActivity {
 		surroundlayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTitleBar.setText(getString(R.string.home_tab_surround));
+				Log.e("mingguo", "surround   onclick  ");
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
-				houseText.setTextColor(Color.parseColor("#afaeae"));
+				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
-				myText.setTextColor(Color.parseColor("#afaeae"));
+				myText.setTextColor(Color.parseColor("#b2b2b2"));
 				surroundicon.setBackgroundResource(R.drawable.surround_icon);
-				surroundtext.setTextColor(Color.parseColor("#0b6cfe"));
+				surroundtext.setTextColor(Color.parseColor("#337ffd"));
 				historyicon.setBackgroundResource(R.drawable.history_icon_default);
-				historytext.setTextColor(Color.parseColor("#afaeae"));
+				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mSurroundFragment == null){
@@ -182,15 +185,15 @@ public class HomeActivity extends BaseActivity {
 		historylayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mTitleBar.setText(getString(R.string.home_tab_history));
+				//mTitleBar.setText(getString(R.string.home_tab_history));
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
-				houseText.setTextColor(Color.parseColor("#afaeae"));
+				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
-				myText.setTextColor(Color.parseColor("#afaeae"));
+				myText.setTextColor(Color.parseColor("#b2b2b2"));
 				surroundicon.setBackgroundResource(R.drawable.surround_icon_default);
-				surroundtext.setTextColor(Color.parseColor("#afaeae"));
+				surroundtext.setTextColor(Color.parseColor("#b2b2b2"));
 				historyicon.setBackgroundResource(R.drawable.history_icon);
-				historytext.setTextColor(Color.parseColor("#0b6cfe"));
+				historytext.setTextColor(Color.parseColor("#337ffd"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mHistoryFragment == null){

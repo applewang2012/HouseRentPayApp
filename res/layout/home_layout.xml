@@ -3,24 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical"
-    android:paddingLeft="1dp"
-    android:paddingRight="1dp"
      >
      
     <FrameLayout
 		android:id="@+id/id_home_content"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" 
-		android:paddingBottom="55dp"
+		android:paddingBottom="@dimen/base_dimen_104"
 		android:persistentDrawingCache="animation"
 		/>
     <LinearLayout
            android:id="@+id/id_home_button_container"
            android:layout_width="fill_parent"
-           android:layout_height="55dp"
+           android:layout_height="@dimen/base_dimen_104"
            android:layout_gravity="bottom"
-           android:background="#f1f5fc"
            android:orientation="horizontal"
            >
            <LinearLayout 
@@ -34,20 +30,21 @@
                >
                <ImageView
                    android:id="@+id/id_home_tab_home_icon"
-                   android:layout_width="32dp"
-	           	   android:layout_height="32dp"
-	           	   android:layout_marginTop="3dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_50"
+	           	   android:layout_marginTop="@dimen/base_dimen_12"
 	           	   android:background="@drawable/home_icon"
 	           	   
                    />
                <TextView 
                    android:id="@+id/id_home_tab_home_text"
-                   android:layout_width="match_parent"
-	           	   android:layout_height="15dp"
-	           	   android:textColor="#0b6cfe"
-	           	   android:textSize="12dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_30"
+	           	   android:textColor="#337ffd"
+	           	   android:layout_marginTop="@dimen/base_dimen_5"
+	           	   android:textSize="@dimen/base_dimen_20"
 	           	   android:text="首页"
-	           	   android:textStyle="bold"
+	           	   
 	           	   android:gravity="center_horizontal"
                    />
            </LinearLayout>
@@ -62,20 +59,36 @@
                >
                <ImageView
                    android:id="@+id/id_home_tab_surround_icon"
-                   android:layout_width="32dp"
-	           	   android:layout_height="32dp"
-	           	   android:layout_marginTop="3dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_50"
+	           	   android:layout_marginTop="@dimen/base_dimen_12"
 	           	   android:background="@drawable/surround_icon_default"
                    />
                <TextView 
                    android:id="@+id/id_home_tab_surround_text"
-                   android:layout_width="match_parent"
-	           	   android:layout_height="15dp"
-	           	   android:textColor="#afaeae"
-	           	   android:textSize="12dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_30"
+	           	   android:textColor="#b2b2b2"
+	           	   android:textSize="@dimen/base_dimen_20"
 	           	   android:text="周边"
-	           	   android:textStyle="bold"
+	           	   android:layout_marginTop="@dimen/base_dimen_5"
 	           	   android:gravity="center_horizontal"
+                   />
+           </LinearLayout>
+           <LinearLayout 
+	           android:layout_width="0dp"
+	           android:layout_height="match_parent"
+	           android:layout_weight="1"
+	           android:orientation="vertical"
+	           android:clickable="true"
+	           android:gravity="center_horizontal"
+               >
+               <Button
+                   android:id="@+id/id_scan_rent_house"
+                   android:layout_width="@dimen/base_dimen_88"
+	           	   android:layout_height="@dimen/base_dimen_88"
+	           	   android:background="@drawable/scan_house_qrcode_icon"
+	           	   android:layout_gravity="center"
                    />
            </LinearLayout>
            <LinearLayout 
@@ -89,19 +102,19 @@
                >
                <ImageView
                    android:id="@+id/id_home_tab_history_icon"
-                   android:layout_width="32dp"
-	           	   android:layout_height="32dp"
-	           	   android:layout_marginTop="3dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_50"
+	           	   android:layout_marginTop="@dimen/base_dimen_12"
 	           	   android:background="@drawable/history_icon_default"
                    />
                <TextView 
                    android:id="@+id/id_home_tab_history_text"
-                   android:layout_width="match_parent"
-	           	   android:layout_height="15dp"
-	           	   android:textColor="#afaeae"
-	           	   android:textSize="12dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_30"
+	           	   android:textColor="#b2b2b2"
+	           	   android:textSize="@dimen/base_dimen_20"
 	           	   android:text="历史"
-	           	   android:textStyle="bold"
+	           	   android:layout_marginTop="@dimen/base_dimen_5"
 	           	   android:gravity="center_horizontal"
                    />
            </LinearLayout>
@@ -116,19 +129,19 @@
                >
                <ImageView
                    android:id="@+id/id_home_tab_my_icon"
-                   android:layout_width="32dp"
-	           	   android:layout_height="32dp"
-	           	   android:layout_marginTop="2dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_50"
+	           	   android:layout_marginTop="@dimen/base_dimen_12"
 	           	   android:background="@drawable/my_icon_default"
                    />
                <TextView 
                    android:id="@+id/id_home_tab_my_text"
-                   android:layout_width="match_parent"
-	           	   android:layout_height="15dp"
-	           	   android:textColor="#afaeae"
-	           	   android:textSize="12dp"
+                   android:layout_width="@dimen/base_dimen_50"
+	           	   android:layout_height="@dimen/base_dimen_30"
+	           	   android:textColor="#b2b2b2"
+	           	   android:textSize="@dimen/base_dimen_20"
 	           	   android:text="我的"
-	           	   android:textStyle="bold"
+	           	   android:layout_marginTop="@dimen/base_dimen_5"
 	           	   android:gravity="center_horizontal"
                    />
            </LinearLayout>

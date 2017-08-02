@@ -1,74 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+	
+    <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/base_dimen_90"
+       android:orientation="horizontal"
+       android:background="#337ffd"
+       >
+       <LinearLayout 
+           android:id="@+id/id_home_select_city_content"
+           android:layout_width="wrap_content"
+       	   android:layout_height="match_parent"
+       	   android:orientation="horizontal"
+       	   android:clickable="true"
+           >
+           <TextView 
+               android:id="@+id/id_home_show_city_view"
+               android:layout_width="wrap_content"
+	       	   android:layout_height="match_parent"
+	       	   android:layout_marginLeft="@dimen/base_dimen_20"
+	       	   android:orientation="horizontal"
+	       	   android:text="天津天津"
+	       	   android:textColor="#ffffff"
+	       	   android:textSize="@dimen/base_dimen_30"
+	       	   android:textStyle="bold"
+	       	   android:gravity="center"
+	       	   android:layout_gravity="center_vertical"
+               />
+           <ImageView 
+               android:layout_width="@dimen/base_dimen_20"
+	       	   android:layout_height="@dimen/base_dimen_11"
+	       	   android:background="@drawable/home_select_city_more"
+	       	   android:layout_marginLeft="@dimen/base_dimen_10"
+	       	   android:layout_gravity="center_vertical"
+               />
+       </LinearLayout>
+       <LinearLayout 
+           android:layout_width="@dimen/base_dimen_500"
+       	   android:layout_height="@dimen/base_dimen_70"
+       	   android:layout_marginLeft="@dimen/base_dimen_20"
+       	   android:layout_gravity="center_vertical"
+       	   android:orientation="horizontal"
+       	   android:background="@drawable/home_search_bg_shape_solid_corner">
+	      <ImageView 
+	           android:layout_width="@dimen/base_dimen_34"
+	       	   android:layout_height="@dimen/base_dimen_34"
+	       	   android:background="@drawable/home_tab_search_icon"
+	       	   android:layout_marginLeft="@dimen/base_dimen_30"
+	       	   android:layout_gravity="center_vertical"
+	          />
+	      <AutoCompleteTextView
+		        android:id="@+id/button_search"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:background="#00000000"
+		        android:ems="10"
+		        android:hint="想租房？来云上之家！"
+		        android:textSize="@dimen/base_dimen_28"
+		        android:textColorHint="#cccccc"
+		        android:textColor="#ffffff"
+		        android:imeOptions="actionSearch"
+		        android:inputType="text"
+		        android:paddingLeft="@dimen/base_dimen_20"
+		        android:gravity="center_vertical"
+		        />
+       </LinearLayout>
+	</LinearLayout>
+    
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/base_dimen_90"
         android:clickable="true" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="80dip"
-        android:background="#D000"
-        android:minWidth="100dip"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        android:padding="2dp" >
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="定位icon" >
-
-            <RadioButton
-                android:id="@+id/defaulticon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="默认图标" >
-            </RadioButton>
-
-            <RadioButton
-                android:id="@+id/customicon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="自定义图标" >
-            </RadioButton>
-        </RadioGroup>
-    </LinearLayout>
     
-    <AutoCompleteTextView
-        android:id="@+id/button_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="4dp"
-        android:background="@drawable/item_shape_focus_no_corner"
-        android:drawableRight="@drawable/icon_search"
-        android:ems="10"
-        android:hint="搜索"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:minHeight="40dp"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp" />
+    <FrameLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/base_dimen_83"
+        android:layout_marginTop="@dimen/base_dimen_100"
+        android:layout_marginLeft="@dimen/base_dimen_20"
+        android:layout_marginRight="@dimen/base_dimen_20"
+        android:orientation="horizontal"
+        >
+        <Button 
+            android:id="@+id/id_home_button_rent_house"
+            android:layout_width="@dimen/base_dimen_337"
+        	android:layout_height="@dimen/base_dimen_83"
+        	android:layout_gravity="left"
+        	android:text="我要租房"
+        	android:textColor="@drawable/button_text_selector"
+        	android:gravity="center"
+		    android:background="@drawable/home_button_rent_house_selector"
+            />
+        <Button 
+            android:id="@+id/id_home_button_chuzu_house"
+            android:layout_width="@dimen/base_dimen_337"
+        	android:layout_height="@dimen/base_dimen_83"
+        	android:layout_gravity="right"
+        	android:text="我要出租"
+        	android:textColor="@drawable/button_text_selector"
+        	android:gravity="center"
+		    android:background="@drawable/home_button_rent_house_selector"
+            />
+    </FrameLayout>
+    
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dip" 
-        />
-
-</RelativeLayout>
+</FrameLayout>
