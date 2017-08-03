@@ -43,6 +43,7 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.google.zxing.oned.rss.FinderPattern;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -57,6 +58,7 @@ import android.os.Message;
 import android.provider.MediaStore.Video;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,11 +79,13 @@ import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LocationDemo;
 import tenant.guardts.house.R;
+import tenant.guardts.house.RentToHouseActivity;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.map.PoiOverlay;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class HouseFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener{
 	
@@ -163,8 +167,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 //            message.what = 300;
 //            message.obj = mCurrentLatLng;  
 //            message.sendToTarget();  
-			startThreadfindLocation(mCurrentLocationCity);
-			
+//			startThreadfindLocation(mCurrentLocationCity);
+			searchButtonProcess();
 		}
 	}
 	
@@ -187,20 +191,12 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
         thrd.start();  
     }  
 	
-	
-	@SuppressLint("NewApi")
-	@Override
-	public void setUserVisibleHint(boolean isVisibleToUser) {
-		super.setUserVisibleHint(isVisibleToUser);
-		if (isVisibleToUser){
-//			HomeActivity activity = (HomeActivity)getActivity();
-//			if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
-//				mCurrentLocationCity = activity.getSelectedCity();
-//				Log.i("mingguo", "home fragment  visible currentCity  "+mCurrentLocationCity);
-//				showSelectLocationMap();
-//			}
-		}
-	}
+	public void searchButtonProcess() {
+        String citystr = mCurrentLocationCity;
+        String keystr = "市政府";
+        mPoiSearch.searchInCity((new PoiCitySearchOption())
+                .city(citystr).keyword(keystr).pageCapacity(1));
+    }
 	
 	
 
@@ -374,8 +370,17 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
             public void onMapClick(LatLng arg0)  {  
                 mBaiduMap.hideInfoWindow();  
             }
-			
         });  
+        
+        Button rentToButton = (Button)mRootView.findViewById(R.id.id_home_button_chuzu_house);
+        rentToButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getActivity(), RentToHouseActivity.class));
+				
+			}
+		});
 
 	}
 	// 查询周围2000米的某类建筑
@@ -397,35 +402,31 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	    }
 	
 	 public void initOverlay() {
-    	
-    	//mOverlay = new MyOverlay(getResources().getDrawable(R.drawable.icon_marka),mMapView);	
+    	if (mHouserList.size() == 0){
+    		GlobalUtil.shortToast(mContext, "抱歉，改位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
+    		return;
+    	}
         for (int index = 0; index < mHouserList.size(); index++){
-       	 Map<String, String> child = (Map<String, String>) mHouserList.get(index);
-        LatLng llA = new LatLng(Double.parseDouble(child.get("Latitude")), Double.parseDouble(child.get("Longitude")));
-        //LatLng llA = new LatLng(mLati, mLongi+0.0008);
-        MarkerOptions options = null;
-        String status = child.get("Status");
-        if (status != null && status.equals("0")){
-        	options = new MarkerOptions().position(llA).icon(icon_blue)
-                    .zIndex(9).draggable(false);
-        }else if (status != null && status.equals("1")){
-        	options = new MarkerOptions().position(llA).icon(icon_red)
-                    .zIndex(9).draggable(false);
-        }else if (status != null && status.equals("2")){
-        	options = new MarkerOptions().position(llA).icon(icon_yellow)
-                    .zIndex(9).draggable(false);
-        
-        }else{
-        	options = new MarkerOptions().position(llA).icon(icon_blue)
-                    .zIndex(9).draggable(false);
-        }
-        mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
-        
-        //ooA.animateType(MarkerAnimateType.drop);
-        
-//        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-//        giflist.add(bdA);
-        
+	       	 Map<String, String> child = (Map<String, String>) mHouserList.get(index);
+	        LatLng llA = new LatLng(Double.parseDouble(child.get("Latitude")), Double.parseDouble(child.get("Longitude")));
+	        //LatLng llA = new LatLng(mLati, mLongi+0.0008);
+	        MarkerOptions options = null;
+	        String status = child.get("Status");
+	        if (status != null && status.equals("0")){
+	        	options = new MarkerOptions().position(llA).icon(icon_blue)
+	                    .zIndex(9).draggable(false);
+	        }else if (status != null && status.equals("1")){
+	        	options = new MarkerOptions().position(llA).icon(icon_red)
+	                    .zIndex(9).draggable(false);
+	        }else if (status != null && status.equals("2")){
+	        	options = new MarkerOptions().position(llA).icon(icon_yellow)
+	                    .zIndex(9).draggable(false);
+	        
+	        }else{
+	        	options = new MarkerOptions().position(llA).icon(icon_blue)
+	                    .zIndex(9).draggable(false);
+	        }
+	        mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
         }
 
     }
@@ -456,6 +457,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 				updateLocationFromHouse();
 			}else if (msg.what == 300){
 				showSelectLocationMap();
+			}else if (msg.what == 500){
+				updateLocationCity();
 			}
 		}
     };
@@ -547,7 +550,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
                 return;
             }
             mCurrentLocationCity = location.getCity();
-            mSelectCityText.setText(mCurrentLocationCity);
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                             // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -565,6 +567,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
                
             }
             startGetLocationFromHouse();
+            mHandler.sendEmptyMessageDelayed(500, 200);
         }
 
         public void onReceivePoi(BDLocation poiLocation) {
@@ -590,6 +593,10 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
         builder.target(mCurrentLatLng).zoom(18.0f);
         mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
         
+    }
+    
+    private void updateLocationCity(){
+    	mSelectCityText.setText(mCurrentLocationCity);
     }
 
 	
@@ -638,11 +645,15 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	@Override
 	public void onGetPoiResult(PoiResult result) {
+		Log.e("mingguo", "House fragment  onGetPoiResult  "+result.error);
 		if (result == null
 				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			if (result.getAllPoi().size() > 0){
+				mCurrentLatLng = result.getAllPoi().get(0).location;
+			}
 			mBaiduMap.clear();
 			startGetLocationFromHouse();
 			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
@@ -653,6 +664,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			overlay.addToMap();
 			overlay.zoomToSpan();
 			return;
+		}else{
+			GlobalUtil.shortToast(mContext, "抱歉，定位该城市失败！", getResources().getDrawable(R.drawable.ic_dialog_no));
 		}
 		
 	}

@@ -299,13 +299,13 @@ public class RegisterUserStep3Activity extends BaseActivity{
 							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}else{
 							if (compareResult.equals("0")){
-								String similar = object.optString("similar");
-								if (similar != null && similar.length() > 3){
-									Double rate = 100 *	Double.parseDouble(similar);
-									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功,相似度 "+rate, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//								String similar = object.optString("similar");
+//								if (similar != null && similar.length() > 3){
+//									Double rate = 100 *	Double.parseDouble(similar);
+									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 									registerUserName();
 									return;
-								}
+//								}
 							}else{
 								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}

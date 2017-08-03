@@ -90,6 +90,10 @@
     <string name="home_tab_history">历史</string>
     <string name="press_again_to_exit">再按一次退出应用</string>
     
+    <string name="house_floor"> 层</string>
+    <string name="arribute_house">租赁房屋</string>
+    <string name="arribute_house_whether">您确定要将该房屋进行租赁吗？</string>
+    
     <string-array name="surround_title">  
         <item>热点</item>
         <item>吃喝</item>  

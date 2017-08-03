@@ -536,7 +536,7 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 					city.setVisibility(View.GONE);
 					pbLocate.setVisibility(View.VISIBLE);
 				} else if (locateProcess == 2) { // 定位成功
-					locateHint.setText("当前定位城市");
+					locateHint.setText("当前选择城市");
 					city.setVisibility(View.VISIBLE);
 					city.setText(currentCity);
 //					mLocationClient.stop();

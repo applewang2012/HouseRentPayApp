@@ -165,7 +165,7 @@ public class HouseDetailInfoActivity extends BaseActivity{
 	}
 	
 	
-	private void initBanner(ArrayList<String> imageUrlList) {
+	private void initBanner(List<String> imageUrlList) {
 		if (imageUrlList.size() == 0){
 			FrameLayout viewflowContent = (FrameLayout) findViewById(R.id.id_viewflow_framelayout);
 			viewflowContent.setVisibility(View.GONE);

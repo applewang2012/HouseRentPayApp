@@ -39,11 +39,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.RentToHouseActivity;
 import tenant.guardts.house.SurroundResultActivity;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
 import tenant.guardts.house.headergridview.StickyGridHeadersBaseAdapter;
 import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -64,6 +69,9 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	private Map<Integer, String[]> mContentMap = new HashMap<>();
 	private List<String> mContentList = new ArrayList<>();
 	private PoiSearch mPoiSearch;
+	private ViewFlow mViewFlow;
+	private CircleFlowIndicator mFlowIndicator;
+	private List<SurroundInfo> mDataList = new ArrayList<>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,9 +87,43 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		// TODO Auto-generated method stub
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_surround_fragment, container, false);
+		initTitleBar();
 		initView();
+		initAdapter();
 		initData();
+		initBanner();
+		initSearchData();
 		return mRootView;
+	}
+	
+	private void initTitleBar(){
+		
+		View titlebarView = (View)mRootView.findViewById(R.id.id_common_title_bar);
+		TextView titleText = (TextView) titlebarView.findViewById(R.id.id_titlebar);
+		titleText.setText("周边生活");
+		Button backButton = (Button)titlebarView.findViewById(R.id.id_titlebar_back);
+		backButton.setVisibility(View.INVISIBLE);
+	}
+	
+	private void initBanner() {
+		List<Integer> localImage = new ArrayList<>();
+		localImage.add(R.drawable.house_surround_life_viewflow1);
+		localImage.add(R.drawable.house_surround_life_viewflow2);
+		localImage.add(R.drawable.house_surround_life_viewflow3);
+		mViewFlow = (ViewFlow) mRootView.findViewById(R.id.id_surround_life_viewflow);
+		mFlowIndicator = (CircleFlowIndicator) mRootView.findViewById(R.id.id_surround_life_viewflow_indicator);
+		mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), localImage,
+				null, null).setInfiniteLoop(true));
+		mViewFlow.setmSideBuffer(localImage.size()); // 实际图片张数，
+														// 我的ImageAdapter实际图片张数为3
+		mFlowIndicator.setIndicatorCount(localImage.size());
+		
+		mViewFlow.setFlowIndicator(mFlowIndicator);
+		mViewFlow.setTimeSpan(2000);
+		mViewFlow.setSelection(localImage.size() * 1000); // 设置初始位置
+		mViewFlow.startAutoFlowTimer(); // 启动自动播放
+		mFlowIndicator.requestLayout();
+		mFlowIndicator.invalidate();
 	}
 	
 	private void initView(){
@@ -222,7 +264,18 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 				
 			}
 		});
+		
 	}
+	
+	public void  searchNearbyProcess(String text ) {
+		Log.i("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
+        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
+        		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
+                .radius(2000).pageCapacity(20);
+        mPoiSearch.searchNearby(nearbySearchOption);
+    }
+	
+	
 	public  class TitleViewHolder {
         public TextView textView;
     }
@@ -276,6 +329,12 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		}
 	}
 	
+	private void initSearchData() {
+		mPoiSearch = PoiSearch.newInstance();
+        mPoiSearch.setOnGetPoiSearchResultListener(this);
+		searchNearbyProcess("美食");
+	}
+	
 	private int getContentCount(){
 		int num = 0;
 		for (int i =0; i < mContentMap.size(); i++){
@@ -320,15 +379,6 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		super.onDestroy();
 	}
 
-	public void  searchNearbyProcess(String text ) {
-		Log.i("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
-        int radius = 500;
-        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
-        		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
-                .radius(2000).pageCapacity(50);
-        mPoiSearch.searchNearby(nearbySearchOption);
-        //mPoiSearch.searchPoiDetail(arg0)
-    }
 	
 	private void searchPoiDetailProcess(String uid){
 		mPoiSearch.searchPoiDetail(new PoiDetailSearchOption()  
@@ -352,6 +402,8 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 //			}
 		}
 	};
+	private UniversalAdapter<SurroundInfo> mAdapter;
+	private ListView mSurroundListview;
 	
 	public static HashMap<String,String> parseUserInfo(String value) {
 		HashMap<String,String> userInfo = null;
@@ -489,13 +541,55 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
             return;
         }
         Log.i("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
-       for (int index = 0; index < result.getAllPoi().size(); index++){
-    	   PoiInfo info = result.getAllPoi().get(index);
-    	   SurroundInfo surroundInfo = new SurroundInfo();
-    	   surroundInfo.setNearUid(info.uid);
-    	   searchPoiDetailProcess(info.uid);
-    	   //mDataList 
-       }
+//       for (int index = 0; index < result.getAllPoi().size(); index++){
+//    	   PoiInfo info = result.getAllPoi().get(index);
+//    	   SurroundInfo surroundInfo = new SurroundInfo();
+//    	   surroundInfo.setNearUid(info.uid);
+//    	   searchPoiDetailProcess(info.uid);
+//    	   //mDataList 
+//       }
+        for (int index = 0; index < result.getAllPoi().size(); index++){
+     	   PoiInfo info = result.getAllPoi().get(index);
+     	   SurroundInfo surroundInfo = new SurroundInfo();
+     	   surroundInfo.setNearUid(info.uid);
+     	   surroundInfo.setNearAddress(info.address);
+     	   surroundInfo.setNearName(info.name);
+     	   surroundInfo.setNearPhone(info.phoneNum);
+     	   //searchPoiDetailProcess(info.uid);
+     	   mDataList.add(surroundInfo);
+        }
+        if (mDataList.size() > 0){
+     	   mAdapter.notifyDataSetChanged();
+        }else{
+     	  // mNoContent.setVisibility(View.VISIBLE);
+        }
+	}
+	
+	private void initAdapter(){
+		mSurroundListview = (ListView)mRootView.findViewById(R.id.id_surround_life_listview);
+		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_fragment_list_item, mDataList) {
+
+			@Override
+			public void convert(UniversalViewHolder holder, SurroundInfo info) {
+				View holderView = holder.getConvertView();
+				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_name);
+				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_address);
+				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_phone);
+				//TextView surroundDistance = (TextView)holderView.findViewById(R.id.id_surround_distance);
+//				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
+//				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
+//				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
+//				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
+				surroundname.setText(info.getNearName());
+				surroundaddress.setText(info.getNearAddress());
+				surroundphone.setText(info.getNearPhone());
+//				surroundDistance.setText(info.getNearDistance());
+//				floorTextView.setText(info.geor()+"/"+info.getHouseTotalFloor()+"层");
+//				statusTextView.setText(info.getHouseStatus());
+			}
+		};
+		mSurroundListview.setAdapter(mAdapter);
+		//mSurroundListview.setOnItemClickListener(this);
 	}
 	
 }

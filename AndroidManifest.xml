@@ -147,6 +147,12 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:name=".RegisterUserFinishActivity" />
+        
+        <activity  
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"
+            android:name=".RentToHouseActivity" />
         <activity 
             android:windowSoftInputMode="adjustUnspecified|stateHidden" 
             android:theme="@style/AppTheme"

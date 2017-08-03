@@ -78,6 +78,7 @@ public class GalleryActivity extends Activity {
 		//position = intent.getIntExtra("position", 0);
 		//mTotalNum = intent.getIntExtra("listSize", 0);
 		mImageStringList =  getIntent().getStringArrayListExtra("imagelist");
+		//bundle.get("imagelist");
 		mTotalNum = mImageStringList.size();
 		mSelectedViewNum = (TextView) findViewById(R.id.id_show_seleted_num);
 		mSelectedViewNum.setText((location+1) + "/"+mTotalNum);

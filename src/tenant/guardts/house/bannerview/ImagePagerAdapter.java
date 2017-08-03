@@ -5,28 +5,22 @@
  */
 package tenant.guardts.house.bannerview;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baidu.mapapi.BMapManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.Toast;
 import tenant.guardts.house.GalleryActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.util.BMapUtil;
 
 /**
  * @Description: 图片适配器
@@ -35,23 +29,29 @@ import tenant.guardts.house.util.BMapUtil;
 public class ImagePagerAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<String> imageIdList;
-	private List<String> linkUrlArray;
-	private List<String> urlTitlesList;
+	private List<?> mImageIdList;
+	private List<String> imageUrlList;
+	private boolean mIsLocalImage = false;
 	private int size;
 	private boolean isInfiniteLoop;
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 
-	public ImagePagerAdapter(Context context, List<String> imageIdList,
-			List<String> urllist, List<String> urlTitlesList) {
+	public ImagePagerAdapter(Context context, List<?> imageIdList,
+			List<Integer> resourceList, List<String> urlTitlesList) {
 		this.context = context;
-		this.imageIdList = imageIdList;
-		if (imageIdList != null) {
-			this.size = imageIdList.size();
+		this.mImageIdList = imageIdList;
+		
+		if (imageIdList.size() > 0){
+			if (imageIdList.get(0) instanceof Integer){
+				mIsLocalImage = true;
+			}else{
+				imageUrlList = (List<String>)mImageIdList;
+			}
 		}
-		this.linkUrlArray = urllist;
-		this.urlTitlesList = urlTitlesList;
+		size = mImageIdList.size();	
+//		this.linkUrlArray = urllist;
+//		this.urlTitlesList = urlTitlesList;
 		isInfiniteLoop = false;
 		// 初始化imageLoader 否则会报错
 		imageLoader = ImageLoader.getInstance();
@@ -69,7 +69,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// Infinite loop
-		return isInfiniteLoop ? Integer.MAX_VALUE : imageIdList.size();
+		return isInfiniteLoop ? Integer.MAX_VALUE : mImageIdList.size();
 	}
 
 	/**
@@ -95,32 +95,35 @@ public class ImagePagerAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
+		if (mIsLocalImage){
+			holder.imageView.setImageResource((Integer)mImageIdList.get(getPosition(position)));
+		}else{
+			imageLoader.displayImage(
+					(String) mImageIdList.get(getPosition(position)),
+					holder.imageView, options);
+			holder.imageView.setOnClickListener(new OnClickListener() {
 
-		imageLoader.displayImage(
-				(String) this.imageIdList.get(getPosition(position)),
-				holder.imageView, options);
-		holder.imageView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+//					String url = linkUrlArray.get(ImagePagerAdapter.this
+//							.getPosition(position));
+//					String title = urlTitlesList.get(ImagePagerAdapter.this
+//							.getPosition(position));
+					/*
+					 * if (TextUtils.isEmpty(url)) {
+					 * holder.imageView.setEnabled(false); return; }
+					 */
+					Intent intent = new Intent(context, GalleryActivity.class);
+					intent.putExtra("listSize", getCount());
+					intent.putStringArrayListExtra("imagelist", (ArrayList<String>) mImageIdList); 
+					intent.putExtra("position", position);
+					context.startActivity(intent);
+//					Toast.makeText(context, "点击了第" + getPosition(position) + "美女",
+//							0).show();
 
-			@Override
-			public void onClick(View arg0) {
-//				String url = linkUrlArray.get(ImagePagerAdapter.this
-//						.getPosition(position));
-//				String title = urlTitlesList.get(ImagePagerAdapter.this
-//						.getPosition(position));
-				/*
-				 * if (TextUtils.isEmpty(url)) {
-				 * holder.imageView.setEnabled(false); return; }
-				 */
-				Intent intent = new Intent(context, GalleryActivity.class);
-				intent.putExtra("listSize", getCount());
-				intent.putStringArrayListExtra("imagelist", (ArrayList<String>) imageIdList); 
-				intent.putExtra("position", position);
-				context.startActivity(intent);
-//				Toast.makeText(context, "点击了第" + getPosition(position) + "美女",
-//						0).show();
-
-			}
-		});
+				}
+			});
+		}
 
 		return view;
 	}

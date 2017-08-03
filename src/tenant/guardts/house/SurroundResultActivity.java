@@ -204,8 +204,6 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
     	   surroundInfo.setNearAddress(info.address);
     	   surroundInfo.setNearName(info.name);
     	   surroundInfo.setNearPhone(info.phoneNum);
-//    	   surroundInfo.setNearDistance(CommonUtil.GetDistance(CommonUtil.mCurrentLongi, 
-//    			   CommonUtil.mCurrentLati, info.location.longitude, info.location.latitude)+"");
     	   searchPoiDetailProcess(info.uid);
     	   mDataList.add(surroundInfo);
        }
