@@ -29,7 +29,7 @@
   <color name="header">#58567D</color>
   <color name="grgray">#686868</color>
   <color name="province_line_border">#C7C7C7</color>
-  
+  <color name="none_color">#00000000</color>
   <color name="them_brown">#362e2b</color>
     <color name="selection_gray">#f4f4fa</color>
     <color name="bg_gray">#dddddd</color>

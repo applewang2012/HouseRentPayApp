@@ -11,21 +11,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -59,7 +57,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	private int mDeleteIndex = 0;
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
-	
+	private Button mAddHouseButton;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -69,6 +67,8 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("我要出租");
+		mAddHouseButton = (Button)findViewById(R.id.id_add_rent_house);
+		mAddHouseButton.setVisibility(View.VISIBLE);
 		mContext = getApplicationContext();
 		mUserName = CommonUtil.mUserLoginName;
 		initView();
@@ -88,8 +88,18 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		mlistView.setAdapter(mAdapter);
 		mlistView.setOnItemClickListener(this);
 		mlistView.setOnItemLongClickListener(this);
-		
 		initBanner();
+		
+		mAddHouseButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
+				intent.putExtra("user_name", mUserName);
+				startActivity(intent);
+			}
+		});
 	}
 	
 	private void initBanner() {
@@ -115,6 +125,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	
 	private void initData(){
 		mPresent = new HoursePresenter(mContext, RentToHouseActivity.this);
+		showLoadingView();
 		getHouseInfo();
 		
 	}
@@ -122,7 +133,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onResume() {
 		super.onResume();
-		showLoadingView();
+//		showLoadingView();
 //		mContentLayout.setVisibility(View.INVISIBLE);
 //		mAdapter.notifyDataSetChanged();
 	}
@@ -209,7 +220,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	private void getHouseInfo(){
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseInfoByLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetHouseInfoAction));
-		rpc.addProperty("loginName", "apple");
+		rpc.addProperty("loginName", mUserName);
 		mPresent.readyPresentServiceParams(mContext, url, mGetHouseInfoAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
@@ -229,8 +240,8 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				getAdapterListData(parseUserHouseInfo((String)msg.obj));
 				dismissLoadingView();
+				getAdapterListData(parseUserHouseInfo((String)msg.obj));
 				if (mHouseInfoList.size() == 0){
 					mContentLayout.setVisibility(View.GONE);
 					mNoContent.setVisibility(View.VISIBLE);

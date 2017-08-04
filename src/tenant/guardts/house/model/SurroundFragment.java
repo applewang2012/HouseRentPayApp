@@ -26,37 +26,36 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.RentToHouseActivity;
+import tenant.guardts.house.SurroundMoreActivity;
 import tenant.guardts.house.SurroundResultActivity;
 import tenant.guardts.house.bannerview.CircleFlowIndicator;
 import tenant.guardts.house.bannerview.ImagePagerAdapter;
 import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.headergridview.StickyGridHeadersBaseAdapter;
 import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 
-public class SurroundFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener{
+public class SurroundFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnItemClickListener{
 	
 
 	
@@ -72,7 +71,6 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
 	private List<SurroundInfo> mDataList = new ArrayList<>();
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -88,11 +86,12 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_surround_fragment, container, false);
 		initTitleBar();
-		initView();
 		initAdapter();
+		initSurroundHot();
 		initData();
 		initBanner();
 		initSearchData();
+		
 		return mRootView;
 	}
 	
@@ -110,8 +109,8 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		localImage.add(R.drawable.house_surround_life_viewflow1);
 		localImage.add(R.drawable.house_surround_life_viewflow2);
 		localImage.add(R.drawable.house_surround_life_viewflow3);
-		mViewFlow = (ViewFlow) mRootView.findViewById(R.id.id_surround_life_viewflow);
-		mFlowIndicator = (CircleFlowIndicator) mRootView.findViewById(R.id.id_surround_life_viewflow_indicator);
+		mViewFlow = (ViewFlow) mRootView.findViewById(R.id.id_fragment_surround_life_viewflow);
+		mFlowIndicator = (CircleFlowIndicator) mRootView.findViewById(R.id.id_fragment_surround_life_viewflow_indicator);
 		mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), localImage,
 				null, null).setInfiniteLoop(true));
 		mViewFlow.setmSideBuffer(localImage.size()); // 实际图片张数，
@@ -126,140 +125,90 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		mFlowIndicator.invalidate();
 	}
 	
-	private void initView(){
-		mHeadersGridView = (StickyGridHeadersGridView) mRootView.findViewById(R.id.sgv);
-		mHeadersGridView.setAdapter(new StickyGridHeadersBaseAdapter() {
-
-			private int mCurrentHeader;
-
-			@Override
-			public void unregisterDataSetObserver(DataSetObserver arg0) {
-
-			}
-
-			@Override
-			public void registerDataSetObserver(DataSetObserver arg0) {
-
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-
-			@Override
-			public boolean hasStableIds() {
-				return false;
-			}
-
-			@Override
-			public int getViewTypeCount() {
-				return 1;
-			}
-
-			@Override
-			public View getView(int arg0, View arg1, ViewGroup arg2) {
-	                final Button b = new Button(mContext);
-	                arg1 = b;
-					b.setWidth(10);
-					b.setHeight(50);
-					b.setText(mContentList.get(arg0));
-					b.setTextSize(15);
-					b.setTextColor(Color.parseColor("#000000"));
-					//b.setBackgroundColor(Color.parseColor("#0b6cfe"));
-					b.setBackgroundColor(Color.parseColor("#00000000"));
-					final String searchText = mContentList.get(arg0);
-					b.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View arg0) {
-							//searchNearbyProcess(searchText);
-							Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
-							surroundIntent.putExtra("search_text", searchText);
-							startActivity(surroundIntent);
-						}
-					});
-	            return b;
-			}
-
-			@Override
-			public int getItemViewType(int arg0) {
-				return 0;
-			}
-
-			@Override
-			public long getItemId(int arg0) {
-				return 0;
-			}
-
-			@Override
-			public Object getItem(int arg0) {
-				return null;
-			}
-
-			@Override
-			public int getCount() {
-				return getContentCount();
-			}
-
-			@Override
-			public boolean isEnabled(int position) {
-				return false;
-			}
-
-			@Override
-			public boolean areAllItemsEnabled() {
-				return false;
-			}
-
-			@Override
-			public int getNumHeaders() {
-				return mTitleList.size();
-			}
-
-			@Override
-			public View getHeaderView(int position, View convertView,
-					ViewGroup parent) {
-//				TitleViewHolder holder = null;
-//	            if (convertView == null) {
-//	                holder = new TitleViewHolder();
-	                TextView b = new TextView(mContext);
-	                convertView = b;
-					b.setWidth(200);
-					b.setHeight(150);
-					b.setTextSize(20);
-					b.setPadding(20, 0, 0, 0);
-					b.setGravity(Gravity.BOTTOM);
-					b.setTextColor(Color.parseColor("#0b6cfe"));
-					b.setBackgroundColor(Color.parseColor("#00000000"));
-					b.setText(mTitleList.get(position));
-//					holder.textView = b;
-//	                convertView.setTag(holder);
-//	            } else {
-//	                holder = (TitleViewHolder)convertView.getTag();
-//	            }
-				return b;
-			}
-
-			@Override
-			public int getCountForHeader(int header) {
-				mCurrentHeader = header;
-				return mContentMap.get(header).length;
-				
-			}
-		});
-		final EditText inputSurround = (EditText)mRootView.findViewById(R.id.id_surround_search_input);
-		Button searchButton = (Button)mRootView.findViewById(R.id.id_surround_search_button);
-		searchButton.setOnClickListener(new OnClickListener() {
+	private void initSurroundHot(){
+		LinearLayout eatbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_eat);
+		eatbutton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if (inputSurround.getText().toString() == null || inputSurround.getText().toString().equals("")){
-					GlobalUtil.shortToast(mContext, "请输入您感兴趣周边信息！", mContext.getResources().getDrawable(R.drawable.ic_dialog_no));
-					return;
-				}
 				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
-				surroundIntent.putExtra("search_text", inputSurround.getText().toString());
+				surroundIntent.putExtra("search_text", "美食");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout hotelbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_hotle);
+		hotelbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "酒店");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout bankbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_bank);
+		bankbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "银行");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout jingdianbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_jingdian);
+		jingdianbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "景点");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout trafficbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_traffic);
+		trafficbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "交通");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout parkbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_park);
+		parkbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "停车场");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout oilbutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_oil);
+		oilbutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundResultActivity.class);
+				surroundIntent.putExtra("search_text", "加油站");
+				startActivity(surroundIntent);
+				
+			}
+		});
+		LinearLayout morebutton = (LinearLayout)mRootView.findViewById(R.id.id_fragment_surround_more);
+		morebutton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent surroundIntent = new Intent(mContext, SurroundMoreActivity.class);
 				startActivity(surroundIntent);
 				
 			}
@@ -327,6 +276,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 				mContentList.add(childContent[childIndex]);
 			}
 		}
+		
 	}
 	
 	private void initSearchData() {
@@ -514,15 +464,17 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
-		Log.i("mingguo", "onGetPoiDetailResult    ");
+		Log.i("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
 		
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(mContext, "抱歉，未找到结果", Toast.LENGTH_SHORT)
                     .show();
         } else {
-        	
-            Toast.makeText(mContext, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT)
-                    .show();
+        	for (int i = 0; i < mDataList.size(); i++){
+    			if (result.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
+    				mDataList.get(i).setNearDetailUrl(result.getDetailUrl());
+    			}
+    		}
         }
 	}
 
@@ -555,7 +507,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
      	   surroundInfo.setNearAddress(info.address);
      	   surroundInfo.setNearName(info.name);
      	   surroundInfo.setNearPhone(info.phoneNum);
-     	   //searchPoiDetailProcess(info.uid);
+     	   searchPoiDetailProcess(info.uid);
      	   mDataList.add(surroundInfo);
         }
         if (mDataList.size() > 0){
@@ -566,7 +518,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	}
 	
 	private void initAdapter(){
-		mSurroundListview = (ListView)mRootView.findViewById(R.id.id_surround_life_listview);
+		mSurroundListview = (ListView)mRootView.findViewById(R.id.id_fragment_surround_life_listview);
 		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_fragment_list_item, mDataList) {
 
 			@Override
@@ -583,13 +535,28 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 				surroundname.setText(info.getNearName());
 				surroundaddress.setText(info.getNearAddress());
 				surroundphone.setText(info.getNearPhone());
-//				surroundDistance.setText(info.getNearDistance());
-//				floorTextView.setText(info.geor()+"/"+info.getHouseTotalFloor()+"层");
-//				statusTextView.setText(info.getHouseStatus());
+//				if (info.getNearPhone() == null || info.getNearPhone().equals("")){
+//					ImageView phoneIcon = (ImageView)holderView.findViewById(R.id.id_surround_fragment_item_hot_phone_icon);
+//					phoneIcon.setVisibility(View.INVISIBLE);
+//				}
 			}
 		};
 		mSurroundListview.setAdapter(mAdapter);
-		//mSurroundListview.setOnItemClickListener(this);
+		mSurroundListview.setOnItemClickListener(this);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		if (mDataList.get(position).getNearDetailUrl()== null || mDataList.get(position).getNearDetailUrl().equals("")){
+			GlobalUtil.shortToast(mContext, "抱歉，未获取到详细信息！", mContext.getResources().getDrawable(R.drawable.ic_dialog_no));
+			return;
+		}else{
+			Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+			loadIntent.putExtra("url", mDataList.get(position).getNearDetailUrl());
+			loadIntent.putExtra("tab_name", mDataList.get(position).getNearName());
+			startActivity(loadIntent);
+		}
 	}
 	
 }

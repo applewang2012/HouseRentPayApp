@@ -41,9 +41,8 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	
 	private Context mContext;
 	private View mRootView;
-	private FrameLayout mUserContainer;
 	private TextView mUserNickname;
-	private TextView mUserId;
+	//private TextView mUserId;
 	private View mLoadingView;
 	private TextView mUserAddress;
 	private HoursePresenter mPresent;
@@ -75,15 +74,12 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void initView(){
-		mUserContainer = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_container);
 		mUserNickname = (TextView)mRootView.findViewById(R.id.id_user_nickname);
-		mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
+		//mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
 		mUserAddress = (TextView)mRootView.findViewById(R.id.id_user_address);
 		mLoadingView = (View)mRootView.findViewById(R.id.id_data_loading);
 		showLoadingView();
-		mUserContainer.setVisibility(View.INVISIBLE);
-		
-		mHistoryHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_history);
+		//mHistoryHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house);
 		mSearchHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_search);
 		mPassword = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_password_modify);
 		mLogout = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_logout);
@@ -104,15 +100,15 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				
 			}
 		});
-		mHistoryHouse.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(mContext, HouseHistoryActivity.class);
-				intent.putExtra("idcard", CommonUtil.mRegisterIdcard);
-				startActivity(intent);
-			}
-		});
+//		mHistoryHouse.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(mContext, HouseHistoryActivity.class);
+//				intent.putExtra("idcard", CommonUtil.mRegisterIdcard);
+//				startActivity(intent);
+//			}
+//		});
 		mChangeArea.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -171,10 +167,9 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			HashMap<String,String> infoModel = parseUserInfo((String)msg.obj);
 			dismissLoadingView();
 			if (infoModel != null){
-				mUserContainer.setVisibility(View.VISIBLE);
 				mUserNickname.setText(CommonUtil.mRegisterRealName);
 				mUserAddress.setText(infoModel.get("Phone"));
-				mUserId.setText(infoModel.get("NickName"));
+				//mUserId.setText(infoModel.get("NickName"));
 			}
 		}
 	};

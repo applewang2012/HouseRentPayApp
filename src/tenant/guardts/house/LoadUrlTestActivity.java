@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class LoadUrlTestActivity extends Activity {
+public class LoadUrlTestActivity extends BaseActivity {
     /** Called when the activity is first created. */
 	WebView webView;
     ProgressBar progressBar;

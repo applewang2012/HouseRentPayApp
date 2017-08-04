@@ -19,7 +19,7 @@
 	         >
 	
 	        <tenant.guardts.house.bannerview.ViewFlow
-	            android:id="@+id/id_surround_life_viewflow"
+	            android:id="@+id/id_fragment_surround_life_viewflow"
 	            android:layout_width="fill_parent"
 	            android:layout_height="fill_parent"
 	            android:paddingLeft="@dimen/base_dimen_20"
@@ -35,7 +35,7 @@
 		            android:gravity="center"
 		            >
 			       <tenant.guardts.house.bannerview.CircleFlowIndicator 
-			            android:id="@+id/id_surround_life_viewflow_indicator"
+			            android:id="@+id/id_fragment_surround_life_viewflow_indicator"
 			            android:layout_width="wrap_content"
 			            android:layout_height="wrap_content"
 			            android:layout_gravity="center_horizontal|bottom"
@@ -70,6 +70,8 @@
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
 	   	   	   android:gravity="center"
+	   	   	   android:id="@+id/id_fragment_surround_eat"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -93,6 +95,8 @@
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
 	   	   	   android:gravity="center"
+	   	   	   android:id="@+id/id_fragment_surround_hotle"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -116,6 +120,8 @@
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
 	   	   	   android:gravity="center"
+	   	   	   android:id="@+id/id_fragment_surround_bank"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -139,6 +145,8 @@
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
 	   	   	   android:gravity="center"
+	   	   	   android:id="@+id/id_fragment_surround_jingdian"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -169,6 +177,8 @@
 	   	   	   android:layout_height="match_parent"
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
+	   	   	   android:id="@+id/id_fragment_surround_traffic"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -191,6 +201,8 @@
 	   	   	   android:layout_height="match_parent"
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
+	   	   	   android:id="@+id/id_fragment_surround_park"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -213,6 +225,8 @@
 	   	   	   android:layout_height="match_parent"
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
+	   	   	   android:id="@+id/id_fragment_surround_oil"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -235,6 +249,8 @@
 	   	   	   android:layout_height="match_parent"
 	   	   	   android:layout_weight="1"
 	   	   	   android:orientation="vertical"
+	   	   	   android:id="@+id/id_fragment_surround_more"
+	   	   	   android:clickable="true"
                >
                <ImageView 
                    android:layout_width="@dimen/base_dimen_60"
@@ -256,7 +272,7 @@
    </LinearLayout>
    
    <ListView
-            android:id="@+id/id_surround_life_listview"
+            android:id="@+id/id_fragment_surround_life_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/base_dimen_674"
@@ -277,7 +293,7 @@
 	        android:visibility="invisible"
 	        >
 	        <EditText 
-		        android:id="@+id/id_surround_search_input"
+		        android:id="@+id/id_fragment_surround_search_input"
 		        android:layout_width="@dimen/base_dimen_76"
 			    android:layout_height="match_parent"
 			    android:layout_weight="4"
@@ -289,7 +305,7 @@
 			    android:textColor="#afaeae"
 		        />
 	        <Button 
-	            android:id="@+id/id_surround_search_button"
+	            android:id="@+id/id_fragment_surround_search_button"
 				android:layout_width="@dimen/base_dimen_76"
 			    android:layout_height="35dp"
 			    android:layout_weight="1"

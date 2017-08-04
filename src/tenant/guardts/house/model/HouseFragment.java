@@ -76,6 +76,8 @@ import android.widget.Toast;
 import tenant.guardts.house.CaptureActivity;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.HouseHistoryActivity;
+import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LocationDemo;
 import tenant.guardts.house.R;
@@ -159,8 +161,11 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		super.onResume();
 		HomeActivity activity = (HomeActivity)getActivity();
 		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")){
+			if (mCurrentLocationCity != null && mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())){
+				return;
+			}
 			mCurrentLocationCity = activity.getSelectedCity();
-			Log.i("mingguo", "home fragment  on resume  change  currentCity  "+mCurrentLocationCity);
+			Log.i("mingguo", "house fragment  on resume  change  currentCity  "+mCurrentLocationCity);
 			mSelectCityText.setText(mCurrentLocationCity);
 //			mCurrentLatLng = CommonUtil.getLatLngBystr(mContext, mCurrentLocationCity);
 //            Message message = mHandler.obtainMessage();
@@ -381,6 +386,17 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 				
 			}
 		});
+        Button rentButton = (Button)mRootView.findViewById(R.id.id_home_button_rent_house);
+        rentButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(mContext, HouseSearchActivity.class);
+				startActivity(intent);
+			}
+		});
+        
 
 	}
 	// 查询周围2000米的某类建筑

@@ -4,13 +4,23 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 public class BMapUtil {
 	
@@ -147,11 +157,84 @@ public class BMapUtil {
 	       //旋转图片 动作   
 	       Matrix matrix = new Matrix();;  
 	       matrix.postRotate(angle);  
-	       System.out.println("angle2=" + angle);  
+	       Log.i("mingguo", "image  rotation  angle = " + angle);  
 	       // 创建新的图片   
 	       Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,  
 	               bitmap.getWidth(), bitmap.getHeight(), matrix, true);  
 	       return resizedBitmap;  
 	   }
+	   
+	   private static int QR_WIDTH = 480; // pixel
+		private static int QR_HEIGHT = 480; // pixel
+
+		public static Bitmap createQRImage(String url, ImageView imgQrd, int nWidth, int nHeight) {
+			QR_WIDTH = nWidth;
+			QR_HEIGHT = nHeight;
+
+			return createQRImage(url, imgQrd);
+		}
+
+		public static Bitmap createQRImage(String url, ImageView imgQrd) {
+			Bitmap bitmap = null;
+			try {
+				if (url == null || "".equals(url) || url.length() < 1) {
+					return null;
+				}
+				
+				Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
+				hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+				BitMatrix bitMatrix = new QRCodeWriter().encode(url, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
+				int[] pixels = new int[QR_WIDTH * QR_HEIGHT];
+				
+				for (int y = 0; y < QR_HEIGHT; y++) {
+					for (int x = 0; x < QR_WIDTH; x++) {
+						if (bitMatrix.get(x, y)) {
+							pixels[y * QR_WIDTH + x] = 0xff000000;
+						} else {
+							pixels[y * QR_WIDTH + x] = 0xffffffff;
+						}
+					}
+				}
+				
+				bitmap = Bitmap.createBitmap(QR_WIDTH, QR_HEIGHT, Bitmap.Config.ARGB_8888);
+				bitmap.setPixels(pixels, 0, QR_WIDTH, 0, 0, QR_WIDTH, QR_HEIGHT);
+				imgQrd.setImageBitmap(bitmap);
+			} catch (WriterException e) {
+				e.printStackTrace();
+				return null;
+			}
+			return bitmap;
+		}
+		
+		
+		public static String bitmapToBase64(Bitmap bitmap) {  
+	    	  
+	        String result = null;  
+	        ByteArrayOutputStream baos = null;  
+	        try {  
+	            if (bitmap != null) {  
+	                baos = new ByteArrayOutputStream();  
+	                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);  
+	      
+	                baos.flush();  
+	                baos.close();  
+	      
+	                byte[] bitmapBytes = baos.toByteArray();  
+	                result = Base64.encodeToString(bitmapBytes, Base64.DEFAULT);  
+	            }  
+	        } catch (IOException e) {  
+	            e.printStackTrace();  
+	        } finally {  
+	            try {  
+	                if (baos != null) {  
+	                    baos.flush();  
+	                    baos.close();  
+	                }  
+	            } catch (IOException e) {  
+	                e.printStackTrace();  
+	            }  
+	        }  
+	        return result;  
+	    }  
 	
 }

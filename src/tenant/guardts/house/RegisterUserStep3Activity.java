@@ -80,9 +80,9 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		mUserName = getIntent().getStringExtra("username");
 		mPassword = getIntent().getStringExtra("password");
 		mPhone = getIntent().getStringExtra("phone");
-		mUserName = "wmg123";
-		mPassword = "1234567890";
-		mPhone = "13333333333";
+//		mUserName = "wmg123";
+//		mPassword = "1234567890";
+//		mPhone = "13333333333";
 		initView();
 		initHandler();
 	}
@@ -232,7 +232,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.i("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		Log.i("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		Log.i("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -289,6 +290,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 				intent.putExtra("user_password", mPassword);
 				startActivity(intent);
 				finish();
+			}else if (msg.what == 110){
+				GlobalUtil.shortToast(getApplication(), "登录失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 102){
 				dismissLoadingView();
 				try {
@@ -388,6 +391,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			if (action.equals(mRegisterAction)){
 				if (templateInfo.equals("true")){
 					mHandler.sendEmptyMessage(101);
+				}else{
+					mHandler.sendEmptyMessage(110);
 				}
 			}else if (action.equals(mIdentifyAction)){
 				Message message = mHandler.obtainMessage();

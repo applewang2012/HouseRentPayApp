@@ -287,6 +287,8 @@ public class LoginUserActivity extends BaseActivity{
 		
 		
 	}
+	
+
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {

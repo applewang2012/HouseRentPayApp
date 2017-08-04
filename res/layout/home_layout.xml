@@ -15,9 +15,11 @@
     <LinearLayout
            android:id="@+id/id_home_button_container"
            android:layout_width="fill_parent"
-           android:layout_height="@dimen/base_dimen_104"
+           android:layout_height="@dimen/base_dimen_124"
            android:layout_gravity="bottom"
            android:orientation="horizontal"
+           android:background="@drawable/home_activity_tab_bg"
+           android:paddingTop="@dimen/base_dimen_20"
            >
            <LinearLayout 
                android:id="@+id/id_home_tab_home"
@@ -44,7 +46,6 @@
 	           	   android:layout_marginTop="@dimen/base_dimen_5"
 	           	   android:textSize="@dimen/base_dimen_20"
 	           	   android:text="首页"
-	           	   
 	           	   android:gravity="center_horizontal"
                    />
            </LinearLayout>

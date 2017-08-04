@@ -393,7 +393,7 @@ public class HomeActivity extends BaseActivity {
 						Bundle bundle = data.getExtras();
 						if (bundle != null){
 							String selectedCity = bundle.getString("city");
-							Log.e("mingguo", "selected city  "+selectedCity);
+							Log.e("mingguo", "homeActivity  onActivity  selected city  "+selectedCity);
 							if (!TextUtils.isEmpty(selectedCity)){
 								setSelectedCity(selectedCity);
 							}

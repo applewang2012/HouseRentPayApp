@@ -26,18 +26,14 @@
            android:textSize="@dimen/base_dimen_38"
            android:textStyle="bold"
        /> 
-       <!-- <Button
-           android:id="@+id/id_scan_rent_house"
-           android:layout_width="wrap_content"
-           android:layout_height="50dp"
-           android:layout_gravity="right"
-           android:paddingRight="20dp"
-		   android:text="扫描租房" 
-		   android:textColor="#ffffff"
-		   android:textSize="18sp"
-		   android:gravity="center"
-		   android:visibility="gone"
-		   android:background="#00000000"
-       />          -->
+       <Button
+           android:id="@+id/id_add_rent_house"
+           android:layout_width="@dimen/base_dimen_54"
+           android:layout_height="@dimen/base_dimen_54"
+           android:layout_gravity="right|center_vertical"
+           android:layout_marginRight="@dimen/base_dimen_20"
+		   android:background="@drawable/tab_add_rent_house"
+		   android:visibility="invisible"
+       />
        
 </FrameLayout>

@@ -17,8 +17,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
-			super.handleMessage(msg);
-			GlobalUtil.shortToast(getApplication(), "网络异常，请检查网络！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			GlobalUtil.shortToast(getApplication(), "网络异常，请检查网络！"+msg.obj, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 		}
 		
 	};
@@ -36,7 +35,10 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 
 	@Override
 	public void onStatusError(String action, String error) {
-		mHandler.sendEmptyMessage(100);
+		Message msg = mHandler.obtainMessage();
+		msg.what = 100;
+		msg.obj = error;
+		mHandler.sendMessage(msg);
 	}
 	
 	public void backFinish(View view){
