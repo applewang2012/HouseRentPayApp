@@ -38,6 +38,7 @@ import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 public class RentToHouseActivity extends BaseActivity implements DataStatusInterface, OnItemClickListener, OnItemLongClickListener{
 	
@@ -94,7 +95,6 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 			
 			@Override
 			public void onClick(View v) {
-				
 				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
 				intent.putExtra("user_name", mUserName);
 				startActivity(intent);
@@ -165,20 +165,20 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	}
 	
 	private void showPublicAttributeDialog(final int position){
-		new AlertDialog.Builder(mContext).setTitle(getString(R.string.arribute_house))//���öԻ������  
+		new AlertDialog.Builder(RentToHouseActivity.this).setTitle(getString(R.string.arribute_house)) 
 		  
-	     .setMessage(getString(R.string.arribute_house_whether))//������ʾ������  
+	     .setMessage(getString(R.string.arribute_house_whether))  
 	  
-	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {//���ȷ����ť  
+	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() { 
 	         @Override  
 	  
-	         public void onClick(DialogInterface dialog, int which) {//ȷ����ť����Ӧ�¼�  
-//	        	 Intent intent = new Intent(mContext, AddRentAttributeActivity.class);
-//	        	 intent.putExtra("house_id", mHouseInfoList.get(position).getHouseId());
-//	        	 intent.putExtra("user_name", mUserName);
-//	        	 intent.putExtra("owner_name", mHouseInfoList.get(position).getHouseOwnerName());
-//	        	 intent.putExtra("owner_id", mHouseInfoList.get(position).getHouseOwnerIdcard());
-//	        	 startActivityForResult(intent, 100);
+	         public void onClick(DialogInterface dialog, int which) {
+	        	 Intent intent = new Intent(mContext, AddRentAttributeActivity.class);
+	        	 intent.putExtra("house_id", mHouseInfoList.get(position).getHouseId());
+	        	 intent.putExtra("user_name", mUserName);
+	        	 intent.putExtra("owner_name", mHouseInfoList.get(position).getHouseOwnerName());
+	        	 intent.putExtra("owner_id", mHouseInfoList.get(position).getHouseOwnerIdcard());
+	        	 startActivityForResult(intent, 100);
 	         }  
 	  
 	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
@@ -365,11 +365,11 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Log.e("housefragment", "item click position    "+position+"  list  "+mHouseInfoList.get(position).getHouseAvailable());
-//		if (mHouseInfoList.get(position).getHouseAvailable()){
-//			Toast.makeText(mContext, "已出租", Toast.LENGTH_SHORT).show();
-//		}else{
-//			showPublicAttributeDialog(position);
-//		}
+		if (mHouseInfoList.get(position).getHouseAvailable()){
+			GlobalUtil.shortToast(getApplicationContext(), "该房屋已出租", getResources().getDrawable(R.drawable.ic_dialog_no));
+		}else{
+			showPublicAttributeDialog(position);
+		}
 		
 	}
 

@@ -69,8 +69,6 @@ public class AddRentAttributeActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.add_house_rent_attribute_info); 
-		
-		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋租赁信息");

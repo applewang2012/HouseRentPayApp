@@ -124,6 +124,7 @@ public class SelectPhotoActivity extends BaseActivity {
 				overridePendingTransition(R.anim.activity_translate_in, R.anim.activity_translate_out);
 				pop.dismiss();
 				ll_popup.clearAnimation();
+				finish();
 			}
 		});
 		bt3.setOnClickListener(new OnClickListener() {
@@ -147,10 +148,9 @@ public class SelectPhotoActivity extends BaseActivity {
 					ll_popup.startAnimation(AnimationUtils.loadAnimation(SelectPhotoActivity.this,R.anim.activity_translate_in));
 					pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
 				} else {
-//					Intent intent = new Intent(SelectPhotoActivity.this, GalleryActivity.class);
-//					intent.putExtra("position", "1");
-//					intent.putExtra("ID", arg2);
-//					startActivity(intent);
+					Intent intent = new Intent(SelectPhotoActivity.this, GalleryActivity.class);
+					startActivity(intent);
+					finish();
 				}
 			}
 		});
@@ -384,11 +384,13 @@ public class SelectPhotoActivity extends BaseActivity {
 						String ret = object.optString("ret");
 						if (ret != null && ret.equals("0")){
 							mUploadNum++;
+							Log.e("mingguo", "  upload num  "+mUploadNum);
 							if (mUploadNum <= Bimp.tempSelectBitmap.size()){
 								startAddRentHouseImage(mUploadNum);
 							}else if (mUploadNum > Bimp.tempSelectBitmap.size()){
+								Log.e("mingguo", "  upload Bimp.tempSelectBitmap.size()  "+Bimp.tempSelectBitmap.size());
 								Toast.makeText(getApplicationContext(), "上传图片完成！", Toast.LENGTH_SHORT).show();
-								finish();
+								SelectPhotoActivity.this.finish();
 							}
 						}else{
 							Toast.makeText(getApplicationContext(), "上传图片失败！", Toast.LENGTH_SHORT).show();
@@ -405,8 +407,7 @@ public class SelectPhotoActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		super.onStatusSuccess(action, templateInfo);
-		
+		Log.i("mingguo", "select photeo upload  status  success  "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddImageAction)){
 				Message message = mHandler.obtainMessage();

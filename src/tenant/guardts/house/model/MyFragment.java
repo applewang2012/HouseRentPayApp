@@ -26,6 +26,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
@@ -46,7 +47,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	private View mLoadingView;
 	private TextView mUserAddress;
 	private HoursePresenter mPresent;
-	private FrameLayout mHistoryHouse;
+	private FrameLayout mPublishHouse;
 	private FrameLayout mSearchHouse;
 	private FrameLayout mPassword;
 	private FrameLayout mLogout;
@@ -79,7 +80,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 		mUserAddress = (TextView)mRootView.findViewById(R.id.id_user_address);
 		mLoadingView = (View)mRootView.findViewById(R.id.id_data_loading);
 		showLoadingView();
-		//mHistoryHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house);
+		mPublishHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_publish_house);
 		mSearchHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_search);
 		mPassword = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_password_modify);
 		mLogout = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_logout);
@@ -100,15 +101,15 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				
 			}
 		});
-//		mHistoryHouse.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(mContext, HouseHistoryActivity.class);
-//				intent.putExtra("idcard", CommonUtil.mRegisterIdcard);
-//				startActivity(intent);
-//			}
-//		});
+		mPublishHouse.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
+				intent.putExtra("user_name", CommonUtil.mUserLoginName);
+				startActivity(intent);
+			}
+		});
 		mChangeArea.setOnClickListener(new OnClickListener() {
 			
 			@Override

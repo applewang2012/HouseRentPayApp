@@ -92,8 +92,8 @@
     <string name="only_choose_num">超出可选图片张数</string>
     <string name="finish">完成</string>
     <string name="house_floor"> 层</string>
-    <string name="arribute_house">租赁房屋</string>
-    <string name="arribute_house_whether">您确定要将该房屋进行租赁吗？</string>
+    <string name="arribute_house">出租该房屋</string>
+    <string name="arribute_house_whether">您确定要将该房屋进行出租吗？</string>
     
     <string name="add_house_property_text">房产性质</string>
     <string name="add_house_type_text">房	型</string>

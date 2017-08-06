@@ -226,4 +226,13 @@ public class AlbumActivity extends Activity {
 		isShowOkBt();
 		super.onRestart();
 	}
+
+	@Override
+	protected void onDestroy() {
+		unregisterReceiver(broadcastReceiver);
+		super.onDestroy();
+		
+	}
+	
+	
 }

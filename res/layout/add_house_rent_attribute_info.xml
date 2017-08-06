@@ -327,17 +327,16 @@
 	         </LinearLayout>
              <Button 
                  android:id="@+id/id_add_rent_confirm"
-                 android:layout_width="match_parent"
-		         android:layout_height="45dp"
-		         android:layout_marginLeft="30dp"
-		         android:layout_marginRight="30dp"
-		         android:layout_marginTop="30dp"
-		         android:layout_marginBottom="20dp"
-		         android:text="确		定"
-		         android:textColor="#ffffff"
-		         android:textSize="18dp"
+                 android:layout_width="@dimen/base_dimen_520"
+		         android:layout_height="@dimen/base_dimen_80"
+		         android:layout_marginTop="@dimen/base_dimen_60"
+		         android:layout_marginBottom="@dimen/base_dimen_100"
+		         android:text="确   定"
+		         android:textColor="@drawable/button_text_selector"
+		         android:textSize="@dimen/base_dimen_30"
+		         android:layout_gravity="center_horizontal"
 		         android:gravity="center"
-		         android:background="@drawable/button_background"
+		         android:background="@drawable/button_background_selector"
                  />
 	       </LinearLayout>
      </ScrollView>

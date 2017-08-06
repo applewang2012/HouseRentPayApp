@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import tenant.guardts.house.bannerview.ViewPagerFixed;
 import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.Bimp;
 
 /**
  * 这个是用于进行图片浏览时的界面
@@ -79,7 +80,16 @@ public class GalleryActivity extends Activity {
 		//mTotalNum = intent.getIntExtra("listSize", 0);
 		mImageStringList =  getIntent().getStringArrayListExtra("imagelist");
 		//bundle.get("imagelist");
-		mTotalNum = mImageStringList.size();
+		if (mImageStringList != null){
+			mTotalNum = mImageStringList.size();
+			for (int i = 0; i < mImageStringList.size(); i++){
+				Log.i("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
+				initListViewsByMemoryBitmap(i);
+			}
+		}
+		if (mTotalNum == 0){
+			mTotalNum = Bimp.tempSelectBitmap.size();
+		}
 		mSelectedViewNum = (TextView) findViewById(R.id.id_show_seleted_num);
 		mSelectedViewNum.setText((location+1) + "/"+mTotalNum);
 		//isShowOkBt();
@@ -98,11 +108,18 @@ public class GalleryActivity extends Activity {
 //		for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
 //			initListViews( Bimp.tempSelectBitmap.get(i).getBitmap() );
 //		}
-		for (int i = 0; i < mImageStringList.size(); i++){
-			Log.i("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
-			initListViewsByMemoryBitmap(i);
-		}
 		
+		if (listViews.size() == 0){
+			for (int index = 0; index < Bimp.tempSelectBitmap.size(); index++){
+				Bitmap bitmap = Bimp.tempSelectBitmap.get(index).getBitmap();
+				ImageView image = new ImageView(mContext);
+				image.setBackgroundColor(0xff000000);
+				image.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+						LayoutParams.MATCH_PARENT));
+				image.setImageBitmap(bitmap);
+				listViews.add(image);
+			}
+		}
 		adapter = new MyPageAdapter(listViews);
 		pager.setAdapter(adapter);
 		pager.setPageMargin((int)getResources().getDimensionPixelOffset(R.dimen.ui_10_dip));

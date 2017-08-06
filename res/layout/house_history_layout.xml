@@ -2,32 +2,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#f1f2f3"
      >
+     
+    <include
+        android:id="@+id/id_common_title_bar"
+        android:visibility="visible"
+        layout="@layout/titlebar"
+       />
+    
 	<LinearLayout 
-	    android:id="@+id/id_frament_house_cotent"
+	    
 	    android:layout_width="match_parent"
    		android:layout_height="match_parent"
    		android:orientation="vertical"
 	    >
-	    <ImageView 
-        	android:layout_width="320dp"
-	        android:layout_height="130dp"
-	        android:layout_marginTop="10dp"
-	        android:layout_gravity="center_horizontal"
-	        android:background="@drawable/view_banner"
-	        />
-	    <ListView 
-	        android:id="@+id/id_fragment_house_listview" 
-		    android:layout_width="fill_parent"
-		    android:layout_height="match_parent"
-		    android:cacheColorHint="#00000000"
-		    android:fadingEdge="none"
-		    android:divider="#0c000000"
-		    android:paddingLeft="5dp"
-		    android:paddingRight="5dp"
-		    android:dividerHeight="1dp"
-	    />
+	    <FrameLayout 
+	        android:layout_width="match_parent"
+   			android:layout_height="@dimen/base_dimen_83"
+   			android:layout_marginTop="@dimen/base_dimen_100"
+	        >
+	        <Button 
+	            android:id="@+id/id_frament_history_zufang_button"
+	            android:layout_width="@dimen/base_dimen_337"
+   				android:layout_height="@dimen/base_dimen_83"
+   				android:background="@drawable/house_history_button_press"
+   				android:layout_marginLeft="@dimen/base_dimen_20"
+   				android:layout_gravity="left"
+   				android:text="租房历史"
+   				android:textSize="@dimen/base_dimen_30"
+   			/>
+	        <Button 
+	            android:id="@+id/id_frament_history_chuzu_button"
+	            android:layout_width="@dimen/base_dimen_337"
+   				android:layout_height="@dimen/base_dimen_83"
+   				android:background="@drawable/house_history_button_normal"
+   				android:layout_marginRight="@dimen/base_dimen_20"
+   				android:layout_gravity="right"
+   				android:text="出租历史"
+   				android:textSize="@dimen/base_dimen_30"
+   			/>
+	    </FrameLayout>
+	    <FrameLayout
+	        android:id="@+id/id_house_child_fragment_content" 
+			android:layout_width="fill_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="@dimen/base_dimen_12"
+	        >
+	    </FrameLayout>
+		    
 	</LinearLayout>
     <TextView 
         android:id="@+id/id_frament_house_no_cotent"
@@ -38,9 +61,5 @@
     	android:textSize="28sp"
     	android:textColor="#000000"
     	android:visibility="invisible"
-        />
-	<include
-        android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog"
-       />   
+        />  
 </FrameLayout>

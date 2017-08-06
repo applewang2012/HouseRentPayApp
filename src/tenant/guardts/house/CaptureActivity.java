@@ -35,7 +35,7 @@ import tenant.guardts.house.zxingview.ViewfinderView;
  * Initial the camera
  * @author Ryan.Tang
  */
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends BaseActivity implements Callback {
 
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
@@ -57,7 +57,7 @@ public class CaptureActivity extends Activity implements Callback {
 		setContentView(R.layout.camera);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
-		titlebar.setText("扫码租房");
+		titlebar.setText("扫一扫租房");
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);

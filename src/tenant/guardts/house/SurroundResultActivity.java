@@ -191,7 +191,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	@Override
 	public void onGetPoiResult(PoiResult result) {
 		dismissLoadingView();
-		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
             Toast.makeText(mContext, "未找到结果", Toast.LENGTH_LONG)
                     .show();
             return;

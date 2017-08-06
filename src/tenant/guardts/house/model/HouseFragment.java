@@ -419,9 +419,10 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	
 	 public void initOverlay() {
     	if (mHouserList.size() == 0){
-    		GlobalUtil.shortToast(mContext, "抱歉，改位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
+    		GlobalUtil.shortToast(mContext, "抱歉，该位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
     		return;
     	}
+    	GlobalUtil.shortToast(mContext, "共搜索到 "+mHouserList.size()+" 套房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
         for (int index = 0; index < mHouserList.size(); index++){
 	       	 Map<String, String> child = (Map<String, String>) mHouserList.get(index);
 	        LatLng llA = new LatLng(Double.parseDouble(child.get("Latitude")), Double.parseDouble(child.get("Longitude")));
@@ -661,11 +662,12 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	@Override
 	public void onGetPoiResult(PoiResult result) {
-		Log.e("mingguo", "House fragment  onGetPoiResult  "+result.error);
+		
 		if (result == null
-				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
 			return;
 		}
+		Log.e("mingguo", "House fragment  onGetPoiResult  "+result.error);
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
 			if (result.getAllPoi().size() > 0){
 				mCurrentLatLng = result.getAllPoi().get(0).location;
@@ -681,7 +683,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			overlay.zoomToSpan();
 			return;
 		}else{
-			GlobalUtil.shortToast(mContext, "抱歉，定位该城市失败！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			GlobalUtil.shortToast(mContext, "抱歉，定位城市失败！", getResources().getDrawable(R.drawable.ic_dialog_no));
 		}
 		
 	}

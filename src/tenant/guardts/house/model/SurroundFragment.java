@@ -487,7 +487,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	@Override
 	public void onGetPoiResult(PoiResult result) {
 		// TODO Auto-generated method stub
-		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
             Toast.makeText(mContext, "未找到结果", Toast.LENGTH_LONG)
                     .show();
             return;
