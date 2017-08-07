@@ -46,12 +46,8 @@ public class LoginUserActivity extends BaseActivity{
 //		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
 		setContentView(R.layout.login_user); 
-//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-//		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-//		mTitleBar.setText("登录");
-		
+		ActivityController.addActivity(LoginUserActivity.this);
 		initView();
-		
 		commonServiceInterface();
 	}
 	

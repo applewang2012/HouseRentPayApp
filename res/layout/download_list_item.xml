@@ -52,6 +52,7 @@
         android:layout_toRightOf="@id/download_icon"
         android:maxLines="1"
         android:paddingLeft="8dip"
+        android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
 
@@ -71,6 +72,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/download_progress"
         android:maxLines="1"
+        android:textColor="#333333"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -80,6 +82,7 @@
         android:layout_below="@id/download_progress"
         android:layout_toRightOf="@id/download_icon"
         android:paddingLeft="8dip"
+        android:textColor="#333333"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -90,6 +93,7 @@
         android:layout_toRightOf="@id/status_text"
         android:maxLines="1"
         android:paddingLeft="15dp"
+        android:textColor="#333333"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </tenant.guardts.house.downloadui.DownloadStartItem>

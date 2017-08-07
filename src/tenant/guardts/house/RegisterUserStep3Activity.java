@@ -77,8 +77,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("实名认证");
-		mUserName = getIntent().getStringExtra("username");
-		mPassword = getIntent().getStringExtra("password");
+		mUserName = getIntent().getStringExtra("user_name");
+		mPassword = getIntent().getStringExtra("user_password");
 		mPhone = getIntent().getStringExtra("phone");
 //		mUserName = "wmg123";
 //		mPassword = "1234567890";

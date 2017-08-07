@@ -34,7 +34,6 @@ public class RegisterUserFinishActivity extends BaseActivity{
 		initView();
 	}
 	
-	
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);

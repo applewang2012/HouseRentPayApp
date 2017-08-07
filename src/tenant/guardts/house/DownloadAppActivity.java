@@ -15,11 +15,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.download.DownloadManager;
 import tenant.guardts.house.download.DownloadManager.Request;
@@ -28,7 +30,7 @@ import tenant.guardts.house.downloadui.DownloadSelectListener;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 
-public class DownloadAppActivity extends Activity{
+public class DownloadAppActivity extends BaseActivity{
 
 	private DownloadManager mDownloadManager;
 	private DownloadAdapter mSizeSortedAdapter;
@@ -51,7 +53,11 @@ public class DownloadAppActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.download_app_layout);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("下载更新");
 		registerReceiverData();
 		initDownloadAdapter();
 		

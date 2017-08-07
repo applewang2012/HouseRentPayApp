@@ -220,8 +220,9 @@ public class DownloadAdapter extends CursorAdapter {
 	    // no icon found for this mediatype. use "unknown" icon
 	    iconView.setImageResource(R.drawable.ic_download_misc_file_type);
 	} else {
-	    Drawable icon = list.get(0).activityInfo.loadIcon(pm);
-	    iconView.setImageDrawable(icon);
+//	    Drawable icon = list.get(0).activityInfo.loadIcon(pm);
+//	    iconView.setImageDrawable(icon);
+		iconView.setImageResource(R.drawable.icon_house);
 	}
 	iconView.setVisibility(View.VISIBLE);
     }

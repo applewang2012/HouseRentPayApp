@@ -38,7 +38,8 @@ public class CommonUtil {
     public static String mRegisterRealName = null;
     public static String mRegisterIdcard = null;
     public static String mUserLoginName = null;
-    public static String mUserHost = "http://qxw2332340157.my3w.com/", mUserArea;
+    public static String mUserHost = "http://qxw2332340157.my3w.com/";
+    public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
     public static int mSelectCityRequestCode = 2;

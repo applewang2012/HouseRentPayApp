@@ -3,24 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="tenant.guardts.house.MainActivity" >
-
-    <ImageView
-        android:layout_width="match_parent"
-    	android:layout_height="80dp"
-    	android:background="#fcfcfc"
-        />
+    android:background="#f1f2f3"
+    
+     >
 
     <ListView android:id="@+id/size_ordered_list"
                   android:layout_width="fill_parent"
+                  android:layout_marginTop="@dimen/base_dimen_80"
                   android:layout_height="200dp"/>
     
     <Button
         android:id="@+id/id_download_button"
-        android:layout_width="match_parent"
-    	android:layout_height="80dp"
-    	android:layout_marginLeft="10dp"
-    	android:layout_marginRight="10dp"
     	android:text="下载"
+    	android:layout_width="@dimen/base_dimen_520"
+		android:layout_height="@dimen/base_dimen_80"
+		android:layout_marginTop="@dimen/base_dimen_60"
+		android:textColor="@drawable/button_text_selector"
+		android:textSize="@dimen/base_dimen_30"
+		android:layout_gravity="center_horizontal"
+		android:gravity="center"
+		android:background="@drawable/button_background_selector"
         />
+    
 </LinearLayout>

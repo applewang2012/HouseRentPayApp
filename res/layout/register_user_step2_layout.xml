@@ -171,7 +171,7 @@
                 <ImageView 
                     android:layout_width="@dimen/base_dimen_60"  
 	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#337ffd"
+	         		android:background="#cccccc"
 		         	android:layout_gravity="center_vertical"
                     />
 	            <ImageView

@@ -76,6 +76,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				Log.w("mingguo", "register step 2  phone  "+mPhone);
 				if (mTimeCount < 0){
 					mTimeCount = 60;
 					sendPhoneVerifyCode(mPhone);
@@ -103,7 +104,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 				if (mVerifyCode == null || mVerifyCode.equals("") ){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.verify_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
-				}else if (mVerifyCode.length() < 6){
+				}else if (mVerifyCode.length() != 6){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
@@ -161,25 +162,25 @@ public class RegisterUserStep2Activity extends BaseActivity{
 			}else if (msg.what == 102){
 				dismissLoadingView();
 				if (msg.obj != null){
-					JSONObject json;
-					try {
-						json = new JSONObject((String)msg.obj);
-						String ret = json.optString("ret");
-						if (ret != null){
-							if (ret.equals("0")){
+//					JSONObject json;
+//					try {
+//						json = new JSONObject((String)msg.obj);
+//						String ret = json.optString("ret");
+//						if (ret != null){
+//							if (ret.equals("0")){
 								Intent nextIntent = new Intent(RegisterUserStep2Activity.this, RegisterUserStep3Activity.class);
 								nextIntent.putExtra("phone", mPhone);
 								nextIntent.putExtra("user_name", mUserName);
 								nextIntent.putExtra("user_password", mPassword);
 								startActivity(nextIntent);
-							}else{
-								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-							}
-						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+//							}else{
+//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+//							}
+//						}
+//					} catch (JSONException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 					
 				}
 			}else if (msg.what == 105){
