@@ -201,7 +201,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void logoutUserDialog(final int position){
-		new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.user_logout)) 
+		new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.user_logout)) 
 		  
 	     .setMessage(getString(R.string.user_logout_remind))//������ʾ������  
 	  
@@ -231,7 +231,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void changeUserAreaDialog(){
-		new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.user_logout)) 
+		new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.user_logout)) 
 		  
 	     .setMessage(getString(R.string.user_change_area_title))//������ʾ������  
 	  

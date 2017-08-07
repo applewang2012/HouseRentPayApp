@@ -165,7 +165,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	}
 	
 	private void showPublicAttributeDialog(final int position){
-		new AlertDialog.Builder(RentToHouseActivity.this).setTitle(getString(R.string.arribute_house)) 
+		new AlertDialog.Builder(RentToHouseActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.arribute_house)) 
 		  
 	     .setMessage(getString(R.string.arribute_house_whether))  
 	  

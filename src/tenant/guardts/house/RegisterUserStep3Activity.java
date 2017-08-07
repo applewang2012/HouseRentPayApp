@@ -118,6 +118,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(),getString(R.string.id_card_input_error) , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				GlobalUtil.longToast(getApplication(),"拍照认证！");
 				Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				file = ScreenShotUtil.createScreenshotDirectory(RegisterUserStep3Activity.this);
 				File out = new File(file);

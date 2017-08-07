@@ -91,7 +91,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 
 	
 	private void showAlertDialog(final TextView text,final String[] items) {  
-		  AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this);
+		  AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setItems(items, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

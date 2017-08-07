@@ -275,7 +275,7 @@ public class HomeActivity extends BaseActivity {
 			return;
 		}
 		
-		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this);
+		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle("升级云上之家");
 		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
@@ -289,7 +289,6 @@ public class HomeActivity extends BaseActivity {
 		});
 		builder.setCancelable(false);
 		builder.show();
-		
 	}
 	
 	private  void parseUserInfo(String value) {

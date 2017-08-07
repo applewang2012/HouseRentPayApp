@@ -185,7 +185,7 @@ public class LoginUserActivity extends BaseActivity{
 	}
 	
 	private void showSelectAlertDialog(final String title, final List<String[]> data) {  
-		  AlertDialog.Builder builder =new AlertDialog.Builder(LoginUserActivity.this);
+		  AlertDialog.Builder builder =new AlertDialog.Builder(LoginUserActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle(title);
 		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setItems(data.get(0), new DialogInterface.OnClickListener() {

@@ -129,25 +129,17 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	}
 	
 	private void initAdapter(){
-		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_list_item, mDataList) {
+		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_fragment_list_item, mDataList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, SurroundInfo info) {
 				View holderView = holder.getConvertView();
-				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_name);
-				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_address);
-				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_phone);
-				//TextView surroundDistance = (TextView)holderView.findViewById(R.id.id_surround_distance);
-//				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
-//				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
-//				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
-//				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
+				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_name);
+				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_address);
+				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_phone);
 				surroundname.setText(info.getNearName());
 				surroundaddress.setText(info.getNearAddress());
 				surroundphone.setText(info.getNearPhone());
-//				surroundDistance.setText(info.getNearDistance());
-//				floorTextView.setText(info.geor()+"/"+info.getHouseTotalFloor()+"层");
-//				statusTextView.setText(info.getHouseStatus());
 			}
 		};
 	}

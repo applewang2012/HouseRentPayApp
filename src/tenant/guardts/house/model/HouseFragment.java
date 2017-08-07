@@ -495,7 +495,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		@Override
 		public boolean onPoiClick(int index) {
 			poi = getPoiResult().getAllPoi().get(index);
-			AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+			AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
             // 设置Title的内�?
 			alertDialog.setTitle("位置信息");
             // 设置Content来显示一个信�?

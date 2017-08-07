@@ -379,67 +379,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		}
 	}
 	
-	private void logoutUserDialog(final int position){
-		new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.user_logout)) 
-		  
-	     .setMessage(getString(R.string.user_logout_remind))//������ʾ������  
-	  
-	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	        	 SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
-					SharedPreferences.Editor editor = sharedata.edit();
-				    editor.putString("user_name", "");
-				    editor.putString("user_password", "");
-				    editor.commit();
-				    Intent intent = new Intent(mContext, LoginUserActivity.class);
-		            startActivity(intent);    
-	        	 
-	         }  
-	  
-	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
-	  
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
-	         }  
-	  
-	     }).show();
-	}
 	
-	private void changeUserAreaDialog(){
-		new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.user_logout)) 
-		  
-	     .setMessage(getString(R.string.user_change_area_title))//������ʾ������  
-	  
-	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	        	 SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
-					SharedPreferences.Editor editor = sharedata.edit();
-				    editor.putString("user_name", "");
-				    editor.putString("user_password", "");
-				    editor.putString("area", "");
-				    editor.putString("host", "");
-				    editor.commit();
-				    Intent intent = new Intent(mContext, LoginUserActivity.class);
-		            startActivity(intent);    
-		            
-	         }  
-	  
-	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
-	  
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
-	         }  
-	  
-	     }).show();
-	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
@@ -493,13 +433,6 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
             return;
         }
         Log.i("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
-//       for (int index = 0; index < result.getAllPoi().size(); index++){
-//    	   PoiInfo info = result.getAllPoi().get(index);
-//    	   SurroundInfo surroundInfo = new SurroundInfo();
-//    	   surroundInfo.setNearUid(info.uid);
-//    	   searchPoiDetailProcess(info.uid);
-//    	   //mDataList 
-//       }
         for (int index = 0; index < result.getAllPoi().size(); index++){
      	   PoiInfo info = result.getAllPoi().get(index);
      	   SurroundInfo surroundInfo = new SurroundInfo();
@@ -527,18 +460,9 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 				TextView surroundname = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_name);
 				TextView surroundaddress = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_address);
 				TextView surroundphone = (TextView)holderView.findViewById(R.id.id_surround_fragment_item_hot_phone);
-				//TextView surroundDistance = (TextView)holderView.findViewById(R.id.id_surround_distance);
-//				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
-//				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
-//				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
-//				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
 				surroundname.setText(info.getNearName());
 				surroundaddress.setText(info.getNearAddress());
 				surroundphone.setText(info.getNearPhone());
-//				if (info.getNearPhone() == null || info.getNearPhone().equals("")){
-//					ImageView phoneIcon = (ImageView)holderView.findViewById(R.id.id_surround_fragment_item_hot_phone_icon);
-//					phoneIcon.setVisibility(View.INVISIBLE);
-//				}
 			}
 		};
 		mSurroundListview.setAdapter(mAdapter);

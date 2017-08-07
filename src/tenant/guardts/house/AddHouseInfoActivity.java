@@ -713,7 +713,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void showAlertDialog(final TextView text, final String tag, final String[] items) {  
-			  AlertDialog.Builder builder =new AlertDialog.Builder(AddHouseInfoActivity.this);
+			  AlertDialog.Builder builder =new AlertDialog.Builder(AddHouseInfoActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 			  
 			  builder.setItems(items, new DialogInterface.OnClickListener() {
 				
