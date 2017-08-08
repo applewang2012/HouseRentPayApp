@@ -148,8 +148,6 @@ public class LoginUserActivity extends BaseActivity{
 	    }else{
 	    	CommonUtil.mUserHost = host;
 	    }
-	    
-	    
 		
 	}
 	
