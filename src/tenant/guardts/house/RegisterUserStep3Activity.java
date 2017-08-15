@@ -147,14 +147,6 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			if(faceImages == null){
 				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
-			
-			//TextView textView = (TextView)findViewById(R.id.show_text);
-			//textView.setText("onFaceImageCaptured-->"+imgStr);
-//			identifyUserInfo(imgStr, mCaptureString);
-//			ImageView img = (ImageView) this.findViewById(R.id.imageView1);
-//			Bitmap bm = BitmapFactory.decodeByteArray(faceImages, 0, faceImages.length);
-//			img.setImageBitmap(bm);
-			
 		}
 		
 		@Override
@@ -180,28 +172,6 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			 Log.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
 			 startLiveIdentifyActivity();
-			 
-			 //			   if(data != null){
-//			    if(data.hasExtra("data")){
-//			     Bitmap thunbnail = data.getParcelableExtra("data");
-//			     Log.w("mingguo", "activity result  width  "+thunbnail.getWidth()+"  height  "+thunbnail.getHeight());
-//			     ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
-//					shot.setImageBitmap(thunbnail);
-//			    }
-//			   }
-			
-			
-//			ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
-//			shot.setImageBitmap(newBitmap);
-//			int scale = 0;
-//				scale = getZoomScale(imageFile);//寰楀埌缂╂斁鍊嶆暟
-//				Log.i(TAG, "scale = "+scale);
-//				BitmapFactory.Options options = new BitmapFactory.Options();
-//				options.inSampleSize = scale;
-//				photoImageView.setImageBitmap(BitmapFactory.decodeFile(strImgPath,options));//鎸夋寚瀹歰ptions鏄剧ず鍥剧墖闃叉OOM
-//			}else {
-//				Toast.makeText(MainActivity.this, R.string.failed, Toast.LENGTH_LONG).show();
-//			}
 		}else{
 			GlobalUtil.shortToast(getApplication(), "头像采集失败", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 		}

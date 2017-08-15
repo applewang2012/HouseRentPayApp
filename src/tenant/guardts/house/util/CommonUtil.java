@@ -44,10 +44,6 @@ public class CommonUtil {
     public static int mScanCodeRequestCode = 1;
     public static int mSelectCityRequestCode = 2;
     
-    public static Canvas getCanvas() {
-        return canvas;
-    }
-
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;
     }

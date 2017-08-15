@@ -218,9 +218,6 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateAction, rpc);
 		mPresenter.startPresentServiceTask();
-		//msg  {"Result":"0","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success"}
-		//{"Result":"1","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success","IsEnforced":"True",
-		//"APKUrl":"UpgradeFolder\\APK20170731135631.apk","IOSUrl":"","CreatedDate":"2017-07-31 13:56:32"}
 	}
 	
 	private void getUserInfo(){
