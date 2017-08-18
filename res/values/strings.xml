@@ -4,59 +4,56 @@
     <string name="app_name">云上之家</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    
     <string name="demo_name_overlay">覆盖物功能</string>
-	<string name="edit_input">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-	<string name="edit_idcard_input">0123456789xX</string>
+    <string name="edit_input">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="edit_idcard_input">0123456789xX</string>
     <string name="download_unknown_title">"&amp;lt;未命名&amp;gt;"</string>
-    <string msgid="5973127997598540499" name="notification_need_wifi_for_size">"此大小的文件需要通过 Wi-Fi 下载"</string>
+    <string name="notification_need_wifi_for_size" msgid="5973127997598540499">"此大小的文件需要通过 Wi-Fi 下载"</string>
     <string name="notification_filename_separator">", "</string>
     <string name="notification_filename_extras">" 还有%1$d项"</string>
-    <string msgid="5343637375905111462" name="notification_download_failed">"下载失败"</string>
+    <string name="notification_download_failed" msgid="5343637375905111462">"下载失败"</string>
     <string name="notification_download_complete">"下载完成"</string>
-    <string msgid="422576726189179221" name="button_queue_for_wifi">"排队"</string>
-    <string msgid="1995971416871498179" name="wifi_required_title">"文件太大，不适于通过运营商网络下载"</string>
-    <string msgid="1675692697446715831" name="wifi_required_body">"您必须使用 Wi-Fi 才能完成此可在下次连接到 Wi-Fi 网络时开始此下载。"</string>
-    <string msgid="2430166148737975604" name="button_cancel_download">"取消"</string>
-    <string msgid="792123674007840864" name="button_start_now">"立即开始"</string>
-    <string msgid="7441589306734687400" name="wifi_recommended_title">"稍后再加入下载队列吗？"</string>
-    <string msgid="7574517147645381271" name="wifi_recommended_body">"立即开始此 %s 文件的下载可能会缩短电池的使用时间并/或导致超额使用移动数据连接（这会导致移动运营商依照流量套餐中的超额规定向您收费）。"\n\n"点击下面的可在下次连接到 Wi-Fi 网络时开始此下载。"</string>
-	<string msgid="830115697868833773" name="missing_title">"&amp;lt;未知&amp;gt;"</string>
-	<string name="download_error">下载失败，请重新下载</string>
-	<string msgid="4656462962155580641" name="download_running">"正在下载"</string>
-    <string msgid="7006048006543495236" name="download_success">"已完成"</string>
-    <string msgid="104973307780629904" name="download_queued">"已加入队列"</string>
+    <string name="button_queue_for_wifi" msgid="422576726189179221">"排队"</string>
+    <string name="wifi_required_title" msgid="1995971416871498179">"文件太大，不适于通过运营商网络下载"</string>
+    <string name="wifi_required_body" msgid="1675692697446715831">"您必须使用 Wi-Fi 才能完成此可在下次连接到 Wi-Fi 网络时开始此下载。"</string>
+    <string name="button_cancel_download" msgid="2430166148737975604">"取消"</string>
+    <string name="button_start_now" msgid="792123674007840864">"立即开始"</string>
+    <string name="wifi_recommended_title" msgid="7441589306734687400">"稍后再加入下载队列吗？"</string>
+    <string name="wifi_recommended_body" msgid="7574517147645381271">"立即开始此 %s 文件的下载可能会缩短电池的使用时间并/或导致超额使用移动数据连接（这会导致移动运营商依照流量套餐中的超额规定向您收费）。"\n\n"点击下面的可在下次连接到 Wi-Fi 网络时开始此下载。"</string>
+    <string name="missing_title" msgid="830115697868833773">"&amp;lt;未知&amp;gt;"</string>
+    <string name="download_error">下载失败，请重新下载</string>
+    <string name="download_running" msgid="4656462962155580641">"正在下载"</string>
+    <string name="download_success" msgid="7006048006543495236">"已完成"</string>
+    <string name="download_queued" msgid="104973307780629904">"已加入队列"</string>
     <string name="download_paused">暂停</string>
     <string name="register_success">注册成功，自动登录</string>
     <string name="verify_error">验证码输入有误，请重新输入！</string>
     <string name="modify_password">修改密码</string>
     <string name="register_user">注册用户</string>
     <string name="user_logout">退出登录</string>
-    <string msgid="2470985874255839247" name="download_title">"下载内容"</string>
-    <string msgid="1029667411186146836" name="no_downloads">"无下载内容。"</string>
-    <string msgid="3062862079904954824" name="dialog_title_queued_body">"文件尚不可用"</string>
-    <string msgid="2783781332668129395" name="dialog_file_missing_body">"未找到已下载的文件。"</string>
-    <string msgid="6372920256257247857" name="remove_download">"清除"</string>
-    <string msgid="2663737850617642888" name="dialog_file_already_exists">"无法下载，目标文件已存在。"</string>
-    <string msgid="7534108515812329821" name="dialog_insufficient_space_on_external">"无法完成下载，外部存储器的空间不足。"</string>
-    <string msgid="8387210487235302129" name="dialog_insufficient_space_on_cache">"无法完成下载，内部下载存储器的空间不足。"</string>
-    <string msgid="5308602145105720991" name="dialog_media_not_found">"无法下载，未安装外部媒体。"</string>
-    <string msgid="3501359021635168387" name="download_no_application_title">"无法打开文件"</string>
+    <string name="download_title" msgid="2470985874255839247">"下载内容"</string>
+    <string name="no_downloads" msgid="1029667411186146836">"无下载内容。"</string>
+    <string name="dialog_title_queued_body" msgid="3062862079904954824">"文件尚不可用"</string>
+    <string name="dialog_file_missing_body" msgid="2783781332668129395">"未找到已下载的文件。"</string>
+    <string name="remove_download" msgid="6372920256257247857">"清除"</string>
+    <string name="dialog_file_already_exists" msgid="2663737850617642888">"无法下载，目标文件已存在。"</string>
+    <string name="dialog_insufficient_space_on_external" msgid="7534108515812329821">"无法完成下载，外部存储器的空间不足。"</string>
+    <string name="dialog_insufficient_space_on_cache" msgid="8387210487235302129">"无法完成下载，内部下载存储器的空间不足。"</string>
+    <string name="dialog_media_not_found" msgid="5308602145105720991">"无法下载，未安装外部媒体。"</string>
+    <string name="download_no_application_title" msgid="3501359021635168387">"无法打开文件"</string>
     <string name="dialog_running_body">您想要暂停下载文件，还是取消下载？</string>
     <string name="dialog_paused_body">您想要继续下载该文件，还是将其从队列中删除？</string>
-    <string msgid="76629022653866471" name="delete_download">"删除"</string>
-    <string msgid="587545111677064427" name="dialog_failed_body">"您想要稍后重新尝试下载该文件，还是将其从队列中删除？"</string>
-    <string msgid="2506935748423351902" name="dialog_queued_body">"该文件已加入队列，供以后下载。"</string>
-    
-    <string msgid="5144882786014818569" name="keep_queued_download">"保留"</string>
-    <string msgid="5232704030969221112" name="cancel_running_download">"取消"</string>
+    <string name="delete_download" msgid="76629022653866471">"删除"</string>
+    <string name="dialog_failed_body" msgid="587545111677064427">"您想要稍后重新尝试下载该文件，还是将其从队列中删除？"</string>
+    <string name="dialog_queued_body" msgid="2506935748423351902">"该文件已加入队列，供以后下载。"</string>
+    <string name="keep_queued_download" msgid="5144882786014818569">"保留"</string>
+    <string name="cancel_running_download" msgid="5232704030969221112">"取消"</string>
     <string name="pause_download">暂停</string>
     <string name="resume_download">继续</string>
-    <string msgid="7617100787922717912" name="retry_download">"重试"</string>
-    <string msgid="5638030443515705047" name="deselect_all">"清除所选项"</string>
-    <string msgid="4479021195995400471" name="dialog_title_not_available">"下载失败"</string>
-    <string msgid="7704082031608361756" name="dialog_cannot_resume">"下载中断，无法继续进行。"</string>
-    
+    <string name="retry_download" msgid="7617100787922717912">"重试"</string>
+    <string name="deselect_all" msgid="5638030443515705047">"清除所选项"</string>
+    <string name="dialog_title_not_available" msgid="4479021195995400471">"下载失败"</string>
+    <string name="dialog_cannot_resume" msgid="7704082031608361756">"下载中断，无法继续进行。"</string>
     <string name="user_name_not_null">用户名不能为空</string>
     <string name="old_pwd_not_null">原密码不能为空</string>
     <string name="pwd_not_null">密码不能为空</string>
@@ -94,103 +91,100 @@
     <string name="house_floor"> 层</string>
     <string name="arribute_house">出租该房屋</string>
     <string name="arribute_house_whether">您确定要将该房屋进行出租吗？</string>
-    
-    <string name="add_house_property_text">房产性质</string>
+    <string name="add_house_rental_mode_text">出租方式</string>
     <string name="add_house_type_text">房	型</string>
     <string name="add_house_direction_text">朝	向</string>
-    
-    <string-array name="surround_title">  
+    <string name="add_house_lease_type_text">租赁类型</string>
+
+    <string-array name="surround_title">
         <item>热点</item>
-        <item>吃喝</item>  
-        <item>住宿</item>  
-        <item>出行</item>  
-        <item>娱乐</item>  
-        <item>生活</item>  
-        <item>景点</item> 
-        <item>购物</item> 
-  </string-array>  
-  <string-array name="surround_content_hot">  
+        <item>吃喝</item>
+        <item>住宿</item>
+        <item>出行</item>
+        <item>娱乐</item>
+        <item>生活</item>
+        <item>景点</item>
+        <item>购物</item>
+    </string-array>
+    <string-array name="surround_content_hot">
         <item>美食</item>
-        <item>酒店</item>  
-        <item>景点</item>  
-        <item>停车场</item>  
-        <item>加油站</item>  
-        <item>银行</item>  
-        <item>超市</item> 
-        <item>洗浴</item> 
-  </string-array>  
-  <string-array name="surround_content_eat">  
-        <item>美食</item>
-        <item>小吃快餐</item>  
-        <item>火锅</item>  
-        <item>中餐</item>  
-        <item>酒吧</item>  
-        <item>咖啡厅</item>  
-        <item>肯德基</item> 
-        <item>麦当劳</item> 
-  </string-array>  
-  
-  <string-array name="surround_content_hotel">  
         <item>酒店</item>
-        <item>快捷酒店</item>  
-        <item>星级酒店</item>  
-        <item>特价酒店</item>  
-        <item>宾馆</item>  
-        <item>公寓酒店</item>  
-        <item>招待所</item> 
-        <item>青年旅社</item> 
-  </string-array> 
-  
-  <string-array name="surround_content_travel">  
-        <item>公交站</item>
-        <item>地铁站</item>  
-        <item>加油站</item>  
-        <item>停车场</item>  
-        <item>火车票代售</item>  
-        <item>汽车站</item>  
-  </string-array> 
-  
-  <string-array name="surround_content_leasure">  
-        <item>网吧</item>
-        <item>洗浴</item>  
-        <item>足疗</item>  
-        <item>KTV</item>  
-        <item>电影院</item>  
-        <item>按摩</item>  
-  </string-array> 
-  
-  <string-array name="surround_content_live">  
+        <item>景点</item>
+        <item>停车场</item>
+        <item>加油站</item>
         <item>银行</item>
-        <item>超市</item>  
-        <item>医院</item>  
-        <item>药店</item>  
-        <item>厕所</item>  
-        <item>ATM</item>  
+        <item>超市</item>
+        <item>洗浴</item>
+    </string-array>
+    <string-array name="surround_content_eat">
+        <item>美食</item>
+        <item>小吃快餐</item>
+        <item>火锅</item>
+        <item>中餐</item>
+        <item>酒吧</item>
+        <item>咖啡厅</item>
+        <item>肯德基</item>
+        <item>麦当劳</item>
+    </string-array>
+    <string-array name="surround_content_hotel">
+        <item>酒店</item>
+        <item>快捷酒店</item>
+        <item>星级酒店</item>
+        <item>特价酒店</item>
+        <item>宾馆</item>
+        <item>公寓酒店</item>
+        <item>招待所</item>
+        <item>青年旅社</item>
+    </string-array>
+    <string-array name="surround_content_travel">
+        <item>公交站</item>
+        <item>地铁站</item>
+        <item>加油站</item>
+        <item>停车场</item>
+        <item>火车票代售</item>
+        <item>汽车站</item>
+    </string-array>
+    <string-array name="surround_content_leasure">
+        <item>网吧</item>
+        <item>洗浴</item>
+        <item>足疗</item>
+        <item>KTV</item>
+        <item>电影院</item>
+        <item>按摩</item>
+    </string-array>
+    <string-array name="surround_content_live">
+        <item>银行</item>
+        <item>超市</item>
+        <item>医院</item>
+        <item>药店</item>
+        <item>厕所</item>
+        <item>ATM</item>
         <item>快递</item>
-        <item>花店</item>  
-        <item>照相馆</item>  
-        <item>幼儿园</item>  
-        <item>菜市场</item>  
+        <item>花店</item>
+        <item>照相馆</item>
+        <item>幼儿园</item>
+        <item>菜市场</item>
         <item>小学</item>
         <item>书店</item>
-        <item>车管所</item>  
-        <item>眼镜店</item>  
-        <item>蛋糕店</item>  
-        <item>美容美发</item>  
-  </string-array> 
-  
-  <string-array name="surround_content_jingdian">  
+        <item>车管所</item>
+        <item>眼镜店</item>
+        <item>蛋糕店</item>
+        <item>美容美发</item>
+    </string-array>
+    <string-array name="surround_content_jingdian">
         <item>景点</item>
-        <item>公园</item>  
-        <item>名胜古迹</item>  
-        <item>度假村</item>  
-        <item>步行街</item>  
-  </string-array> 
-  
-  <string-array name="surround_content_buy">  
+        <item>公园</item>
+        <item>名胜古迹</item>
+        <item>度假村</item>
+        <item>步行街</item>
+    </string-array>
+    <string-array name="surround_content_buy">
         <item>商场</item>
-        <item>万达广场</item>  
-        <item>丽人</item>  
-        <item>宜家</item>  
-  </string-array> 
+        <item>万达广场</item>
+        <item>丽人</item>
+        <item>宜家</item>
+    </string-array>
+
+    <string name="title_activity_search">SearchActivity</string>
+
 </resources>

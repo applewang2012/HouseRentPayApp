@@ -108,7 +108,6 @@ public class HouseSearchActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋搜索");
-		
 		initView();
 		initData();
 	}

@@ -4,21 +4,20 @@
     android:versionCode="5"
     android:versionName="1.0.5" >
 
-        <uses-sdk
-            android:minSdkVersion="14"
-            android:targetSdkVersion="22" />
-    
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="22" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  
-    
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,8 +30,8 @@
     <uses-permission android:name="tenant.guardts.house.download.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="tenant.guardts.house.download.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED" />
     <uses-permission android:name="tenant.guardts.house.download.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
-    
-      <!-- 百度地图使用 -->
+
+    <!-- 百度地图使用 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -50,233 +49,223 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <supports-screens
-            android:anyDensity="true"
-            android:largeScreens="true"
-            android:normalScreens="false"
-            android:resizeable="true"
-            android:smallScreens="true" />
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" />
 
     <application
-        android:name="tenant.guardts.house.DemoApplication"
+        android:name=".DemoApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon_house"
-        android:label="@string/app_name"
-         >
-   <meta-data
+        android:label="@string/app_name" >
+        <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fmntWH7DXloP8Tt7jU2kPPAp6ni9OuCi" />
-<!--            <meta-data
+        <!--
+                <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" /> -->
+            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" />
+        -->
         <activity
-            android:name="tenant.guardts.house.WelcomeActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/app_name" >
-            <intent-filter>
-                
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".WelcomeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name="tenant.guardts.house.SurfaceViewTestActivity"
-			android:screenOrientation="sensorLandscape"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
-           
+            android:name=".SurfaceViewTestActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensorLandscape" >
         </activity>
-        
         <activity
             android:name=".GalleryActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".SelectShowCityActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        
-        <activity android:name="tenant.guardts.house.DownloadAppActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppTheme"></activity>
-        
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
+            android:name=".DownloadAppActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:name="tenant.guardts.house.CaptureActivity"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
-    <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+        <activity
+            android:name=".HouseDetailInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".AddHouseInfoActivity"
             android:screenOrientation="portrait"
-            android:name=".HouseDetailInfoActivity" />
-        
-    	<activity 
-           android:windowSoftInputMode="adjustUnspecified|stateHidden" 
-           android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-           android:name=".AddHouseInfoActivity" />
-       <activity  
-           android:windowSoftInputMode="adjustUnspecified|stateHidden"
-           android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-           android:name=".AddRentAttributeActivity" />
-       
-       <activity
-            android:name=".ImageGridActivity" android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.NoTitleBar"
-            >
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+             
         </activity>
-
+        <activity
+            android:name=".AddRentAttributeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ImageGridActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
         <activity
             android:name=".SelectPhotoActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".PhotoActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" />
-        
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".AlbumActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ImageFile"
-            android:theme="@android:style/Theme.NoTitleBar"
-            >
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".ShowAllPhoto" 
-            android:theme="@android:style/Theme.NoTitleBar"
-            >
+            android:name=".ShowAllPhoto"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
-        
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".HouseSearchActivity" />
-        
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".HouseHistoryActivity" />
-            
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RegisterUserActivity" />
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RegisterUserStep1Activity" />
-		 <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RegisterUserStep2Activity" />
-		 
-		 <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RegisterUserStep3Activity" />
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RegisterUserFinishActivity" />
-        
-        <activity  
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".RentToHouseActivity" />
-        <activity 
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" 
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"
-            android:name=".ModifyPasswordActivity" />
-        <activity 
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait"
-            android:name=".LoginUserActivity" />
-        
-        <activity  
-           android:windowSoftInputMode="adjustUnspecified|stateHidden"
-           android:theme="@android:style/Theme.NoTitleBar"
-           android:screenOrientation="portrait"
-           android:name=".HomeActivity" />
-        
-        <activity  
-           android:windowSoftInputMode="adjustUnspecified|stateHidden"
-           android:theme="@style/AppTheme"
-           android:screenOrientation="portrait"
-           android:name=".GetRentAttributeActivity" />
-        
-        <activity  
-           android:windowSoftInputMode="adjustUnspecified|stateHidden"
-           android:theme="@style/AppTheme"
-           android:screenOrientation="portrait"
-           android:name=".SurroundResultActivity" />
-        
-        <activity  
-           android:windowSoftInputMode="adjustUnspecified|stateHidden"
-           android:theme="@style/AppTheme"
-           android:screenOrientation="portrait"
-           android:name=".SurroundMoreActivity" />
-        
         <activity
-            android:name="tenant.guardts.house.LocationDemo"
+            android:name=".HouseSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".HouseHistoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RegisterUserStep1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RegisterUserStep2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RegisterUserStep3Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RegisterUserFinishActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".RentToHouseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ModifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".LoginUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".GetRentAttributeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".SurroundResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".SurroundMoreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".LocationDemo"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="sensor" >
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme" >
         </activity>
-        
-		<activity 
-            android:theme="@style/AppTheme"
+        <activity
+            android:name=".LoadUrlTestActivity"
             android:screenOrientation="portrait"
-            android:name=".LoadUrlTestActivity"></activity> 
-        
+            android:theme="@style/AppTheme" >
+        </activity>
+
         <provider
-            android:name="tenant.guardts.house.download.DownloadProvider"
+            android:name=".download.DownloadProvider"
             android:authorities="tenant.guardts.house.download" />
 
-        <service android:name="tenant.guardts.house.download.DownloadService" />
+        <service android:name=".download.DownloadService" />
 
         <receiver
-            android:name="tenant.guardts.house.download.DownloadReceiver"
+            android:name=".download.DownloadReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        
-        	<!-- 百度地图部分 -->
+
+        <!-- 百度地图部分 -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" >
         </service>
-        
+
         <!-- 识别部分 -->
-         <service android:name="com.oliveapp.camerasdk.MediaSaveService" />
-        <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity"></activity>
-        <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity"></activity>
-        
+        <service android:name="com.oliveapp.camerasdk.MediaSaveService" />
+
+        <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
+        </activity>
+        <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
+        </activity>
+        <activity
+           
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" >
+         <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+              
+        </activity>
     </application>
 
 </manifest>
