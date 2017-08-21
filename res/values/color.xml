@@ -3,6 +3,10 @@
     <color name="green_11B57C">#2894ff</color>
     <color name="black_333333">#333333</color>
     <color name="line_DDDDDD">#DDDDDD</color>
+    <color  name="radiobutton_checked_text_color">#337ffd</color>
+    <color  name="radiobutton_normal_text_color">#555555</color>
     
+    <color  name="radiobutton2_pressed_text_color">#337ffd</color>
+    <color  name="radiobutton2_normal_text_color">#ffffff</color>
 
 </resources>

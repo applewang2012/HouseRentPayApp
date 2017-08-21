@@ -66,7 +66,7 @@
         <!--
                 <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" />
+            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" />
         -->
         <activity
             android:name=".WelcomeActivity"
@@ -110,7 +110,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-             
         </activity>
         <activity
             android:name=".AddRentAttributeActivity"
@@ -198,7 +197,13 @@
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GetRentAttributeActivity"
             android:screenOrientation="portrait"
@@ -256,15 +261,8 @@
         <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
         </activity>
         <activity
-           
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
-         <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-              
         </activity>
     </application>
 
