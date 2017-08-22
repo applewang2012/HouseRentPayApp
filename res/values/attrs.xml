@@ -20,4 +20,11 @@
      <declare-styleable name="ViewFlow">
         <attr name="sidebuffer" format="integer" />
     </declare-styleable>
+    
+     
+     <declare-styleable name="HomeCustomView">
+         <attr name="background" format="reference|color"></attr>
+         <attr name="textColor" format="reference|color"></attr>
+       
+     </declare-styleable>
 </resources>

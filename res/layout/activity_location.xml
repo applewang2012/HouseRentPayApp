@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guardts="http://schemas.android.com/apk/res/tenant.guardts.house"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -108,11 +109,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/home_radiobutton_bg"
                 android:button="@null"
+                android:checked="true"
                 android:gravity="center"
                 android:text="共享房屋"
-                android:checked="true"
-                android:background="@drawable/home_radiobutton_bg"
                 android:textColor="@drawable/home_frag_radiobutton_text_bg"
                 android:textSize="@dimen/base_dimen_32" />
 
@@ -127,10 +128,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/home_radiobutton_bg"
                 android:button="@null"
                 android:gravity="center"
                 android:text="我是房主"
-                android:background="@drawable/home_radiobutton_bg"
                 android:textColor="@drawable/home_frag_radiobutton_text_bg"
                 android:textSize="@dimen/base_dimen_32" />
         </RadioGroup>
@@ -144,31 +145,22 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_80" >
 
-            <Button
+            <tenant.guardts.house.view.HomeCustomView
                 android:id="@+id/id_home_button_left"
                 android:layout_width="144px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/home_button_rent_house_selector"
-                android:gravity="center"
-                android:text="短租共享"
-                android:drawablePadding="10px"
-                android:textColor="@drawable/button_text_selector"
-                android:textSize="@dimen/base_dimen_32" />
-
+                android:gravity="center" />
             
+            <!-- guardts:textColor="@drawable/button_text_selector"
+            guardts:background="@drawable/home_button_rent_house_selector" -->
 
-            <Button
+            <tenant.guardts.house.view.HomeCustomView
                 android:id="@+id/id_home_button_right"
                 android:layout_width="144px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/home_button_rent_house_selector"
-                android:gravity="center"
-                android:text="地图租房"
-                android:drawablePadding="10px"
-                android:textColor="@drawable/button_text_selector"
-                android:textSize="@dimen/base_dimen_32" />
+                android:gravity="center" />
         </LinearLayout>
 
         <View
@@ -270,13 +262,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_1"
             android:background="#cccccc" />
-        
+
         <tenant.guardts.house.view.HomeFragmentListView
             android:id="@+id/home_listview"
-             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </ScrollView>

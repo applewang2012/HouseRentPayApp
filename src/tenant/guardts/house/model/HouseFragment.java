@@ -91,6 +91,8 @@ import tenant.guardts.house.map.PoiOverlay;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.view.HomeCustomView;
+import tenant.guardts.house.view.HomeFragmentListView;
 
 public class HouseFragment extends Fragment
 		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
@@ -128,7 +130,7 @@ public class HouseFragment extends Fragment
 	private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
 	private TextView mSelectCityText;
-	private Button mBtnRight;
+	private HomeCustomView mBtnRight;
 
 	public HouseFragment() {
 
@@ -158,12 +160,12 @@ public class HouseFragment extends Fragment
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				switch (checkedId) {
 				case R.id.home_radio_share:
-					setDrawableLeft(R.drawable.clock,mBtnLeft,"短租共享");
-					setDrawableLeft(R.drawable.pin_sharp_circle,mBtnRight,"地图租房");
+					mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
+					mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
 					break;
 				case R.id.home_radio_owner:
-					setDrawableLeft(R.drawable.edit,mBtnLeft,"登记房屋");
-					setDrawableLeft(R.drawable.tap_click_force_touch,mBtnRight,"我要出租");
+					mBtnLeft.setImageAndContent(R.drawable.edit,"登记房屋");
+					mBtnRight.setImageAndContent(R.drawable.tap_click_force_touch,"我要出租");
 					break;
 
 				}
@@ -175,13 +177,7 @@ public class HouseFragment extends Fragment
 
 	}
 	
-	public void setDrawableLeft(int resid,TextView btn,String content) {
-		Drawable drawable= getResources().getDrawable(resid);  
-		drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-		btn.setCompoundDrawables(drawable, null, null, null);
-		btn.setText(content);
-		btn.setCompoundDrawablePadding(10);
-	}
+
 
 	@Override
 	public void onResume() {
@@ -257,10 +253,13 @@ public class HouseFragment extends Fragment
 		mRbShare = (RadioButton) mRootView.findViewById(R.id.home_radio_share);
 		mRbOwner = (RadioButton) mRootView.findViewById(R.id.home_radio_owner);
 		mRadioGroup = (RadioGroup) mRootView.findViewById(R.id.home_radiogrouop);
-		mBtnLeft = (Button) mRootView.findViewById(R.id.id_home_button_left);
-		mBtnRight = (Button) mRootView.findViewById(R.id.id_home_button_right);
-		
-		
+		mBtnLeft = (HomeCustomView) mRootView.findViewById(R.id.id_home_button_left);
+		mBtnRight = (HomeCustomView) mRootView.findViewById(R.id.id_home_button_right);
+		mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
+		mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
+		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.home_listview);
+//		mListView.setAdapter(new );
+//		///////////////////////////////////////////////////////////////////////////////
 		
 		
 		
@@ -471,7 +470,8 @@ public class HouseFragment extends Fragment
 	private RadioButton mRbShare;
 	private RadioButton mRbOwner;
 	private RadioGroup mRadioGroup;
-	private Button mBtnLeft;
+	private HomeCustomView mBtnLeft;
+	private HomeFragmentListView mListView;
 
 	private void updateLocationFromHouse() {
 		initOverlay();

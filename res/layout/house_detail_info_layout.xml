@@ -6,396 +6,415 @@
     android:background="#ffffff"
     android:orientation="vertical"
     android:paddingLeft="2dp"
-    android:paddingRight="2dp"
-     >
-     <ScrollView 
-         android:layout_width="fill_parent"  
-         android:layout_height="fill_parent">  
-         <LinearLayout 
-             android:layout_width="fill_parent"  
-        	 android:layout_height="fill_parent"
-        	 android:orientation="vertical">
-        	 <FrameLayout
-	        android:id="@+id/id_viewflow_framelayout"
-	        android:layout_width="fill_parent"
-	        android:layout_height="230dip"
-	        android:orientation="vertical" >
-	
-	        <tenant.guardts.house.bannerview.ViewFlow
-	            android:id="@+id/viewflow"
-	            android:layout_width="fill_parent"
-	            android:layout_height="fill_parent" />
-	
-	        <FrameLayout
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="bottom"
-	            android:background="@color/transparent"
-	            android:gravity="center"
-	            android:padding="3dip" >
-	        
-		        <tenant.guardts.house.bannerview.CircleFlowIndicator 
-		            android:id="@+id/viewflowindic"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_gravity="center_horizontal|bottom"
-		            android:padding="2dip"
-		            app:activeColor="#ff0000"
-		            app:activeType="fill"
-		            app:circleSeparation="20dip"
-		            app:inactiveColor="#ffffff"
-		            app:inactiveType="fill"
-		            app:radius="4dip"
-		            />
-          
-        </FrameLayout>
-    </FrameLayout>
-        	<!--  <ImageView 
+    android:paddingRight="2dp" >
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/id_viewflow_framelayout"
+                android:layout_width="fill_parent"
+                android:layout_height="230dip"
+                android:orientation="vertical" >
+
+                <tenant.guardts.house.bannerview.ViewFlow
+                    android:id="@+id/viewflow"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:padding="3dip" >
+
+                    <tenant.guardts.house.bannerview.CircleFlowIndicator
+                        android:id="@+id/viewflowindic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:padding="2dip"
+                        app:activeColor="#ff0000"
+                        app:activeType="fill"
+                        app:circleSeparation="20dip"
+                        app:inactiveColor="#ffffff"
+                        app:inactiveType="fill"
+                        app:radius="4dip" />
+                </FrameLayout>
+            </FrameLayout>
+            <!--
+                  <ImageView 
         	     android:layout_width="320dp"
 	        	 android:layout_height="130dp"
 	        	 android:layout_marginTop="10dp"
 	        	 android:layout_gravity="center_horizontal"
 	        	 android:background="@drawable/view_banner"
-        	     /> -->
-             <LinearLayout 
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginLeft="20dp"
-		        android:layout_marginRight="20dp"
-		        android:layout_marginTop="30dp"
-		        android:orientation="vertical"
-	        	>
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="产权编号"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_number"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="match_parent"
-		        		 android:layout_weight="3"
-		        		 android:maxLength="20"
-		        		 android:textColor="#afaeae"
-			    		 android:textSize="15dp"
-			    		 android:gravity="left|center_vertical"
-	        	        />
-	        	   </LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="房主"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_name"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:textColor="#afaeae"
-		        		 android:gravity="left|center_vertical"
-	        	        />
-	        	    </LinearLayout>
-	        	    <ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="手	机"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_phone"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:maxLength="11"
-		        		 android:inputType="number"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	    </LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="面积"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_area"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:maxLength="18"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:digits="@string/edit_input"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	    </LinearLayout>
-	        	
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="性质"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_property"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:maxLength="50"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="房型"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_type"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:maxLength="50"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="朝向"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_direction"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="楼层"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_floor"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="地址"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_address"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="状态"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <TextView 
-	        	        android:id="@+id/id_rent_house_status"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:inputType="number"
-		        		 android:maxLength="8"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:gravity="left|center_vertical"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-	        	
-	        	<ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        
-	       </LinearLayout>
-	      </LinearLayout>
-     </ScrollView>
+        	     />
+            -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="出租方式"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_rantal_mode"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:maxLength="20"
+                        android:textColor="#afaeae"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="租赁类型"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_lease_type"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:maxLength="20"
+                        android:textColor="#afaeae"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="房型"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_type"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:maxLength="50"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="朝向"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_direction"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="面积"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_area"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:digits="@string/edit_input"
+                        android:gravity="left|center_vertical"
+                        android:maxLength="18"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="所在区域"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_district"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="详细地址"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_address"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="门牌号"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_num"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:maxLength="50"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="房主姓名"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_name"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="房主电话"
+                        android:textColor="#666666"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_rent_house_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:paddingLeft="5dp"
+                        android:textColor="#afaeae"
+                        android:textSize="14dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:layout_marginBottom="20dp"
+                >
+
+                <Button
+                    android:id="@+id/detail_button_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    
+                    android:layout_marginLeft="@dimen/base_dimen_40"
+                    android:textColor="@drawable/button_text_selector"
+                    android:background="@drawable/detail_button_background_selector"
+                    android:textSize="@dimen/base_dimen_32"
+                    android:text="联系房主" >
+                </Button>
+
+                <Button
+                   android:id="@+id/detail_button_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/base_dimen_32"
+                    android:textColor="@drawable/button_text_selector"
+                    android:layout_marginLeft="@dimen/base_dimen_40"
+                    android:background="@drawable/detail_button_background_selector"
+                    android:text="申请租房" >
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <include
         android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog"
-       />
-    
-	       
+        layout="@layout/layout_loading_dialog" />
+
 </FrameLayout>
