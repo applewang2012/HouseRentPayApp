@@ -1,0 +1,320 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#337ffd" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/short_lease_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="评价"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_26"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_20"
+            android:layout_height="@dimen/base_dimen_28"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:src="@drawable/evaluation_location" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:text="河西区陈塘庄珠江道69号"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="@dimen/base_dimen_122"
+            android:layout_height="@dimen/base_dimen_34"
+            android:layout_marginLeft="@dimen/base_dimen_26"
+            android:layout_marginTop="@dimen/base_dimen_24"
+            android:text="综合评分"
+            android:textColor="#777777"
+            android:textSize="@dimen/base_dimen_28" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_22"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:layout_marginTop="@dimen/base_dimen_24"
+        android:background="#f1f2f3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="@dimen/base_dimen_122"
+            android:layout_height="@dimen/base_dimen_34"
+            android:layout_marginLeft="@dimen/base_dimen_26"
+            android:layout_marginTop="@dimen/base_dimen_22"
+            android:text="服务评分"
+            android:textColor="#777777"
+            android:textSize="@dimen/base_dimen_28" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_22"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="@dimen/base_dimen_122"
+            android:layout_height="@dimen/base_dimen_34"
+            android:layout_marginLeft="@dimen/base_dimen_26"
+            android:layout_marginTop="@dimen/base_dimen_22"
+            android:text="环境评分"
+            android:textColor="#777777"
+            android:textSize="@dimen/base_dimen_28" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_22"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="@dimen/base_dimen_122"
+            android:layout_height="@dimen/base_dimen_34"
+            android:layout_marginLeft="@dimen/base_dimen_26"
+            android:layout_marginTop="@dimen/base_dimen_22"
+            android:text="价格评分"
+            android:textColor="#777777"
+            android:textSize="@dimen/base_dimen_28" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_22"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:background="@drawable/evaluation_star_bg"
+            android:button="@null" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:layout_marginTop="@dimen/base_dimen_24"
+        android:background="#f1f2f3" />
+
+    <EditText
+        android:background="@null"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_170"
+        android:layout_marginLeft="@dimen/base_dimen_26"
+        android:layout_marginRight="@dimen/base_dimen_26"
+        android:layout_marginTop="@dimen/base_dimen_8"
+        android:layout_marginBottom="@dimen/base_dimen_8"
+        android:hint="其他补充说明"
+        android:gravity="top"
+        android:maxLength="200"
+        android:textColorHint="#b2b2b2"
+        android:textColor="#000000"
+        android:textSize="@dimen/base_dimen_26"
+        android:lines="5" />
+  <LinearLayout 
+      android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      android:background="#f1f2f3"
+      >
+    <Button 
+        android:textSize="@dimen/base_dimen_32"
+        android:layout_width="@dimen/base_dimen_220"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginLeft="@dimen/base_dimen_470"
+        android:layout_marginTop="@dimen/base_dimen_20"
+        android:text="提交评价"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:background="@drawable/evaluation_btn_bg"
+        />
+</LinearLayout>  
+</LinearLayout>

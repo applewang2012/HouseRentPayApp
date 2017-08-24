@@ -7,9 +7,9 @@
        >    
       <Button 
           android:id="@+id/id_titlebar_back"
-           android:layout_width="@dimen/base_dimen_42"
-           android:layout_height="@dimen/base_dimen_60"
-           android:background="@drawable/custom_title_back"
+           android:layout_width="@dimen/base_dimen_44"
+           android:layout_height="@dimen/base_dimen_44"
+           android:background="@drawable/short_lease_back"
            android:layout_gravity="center_vertical"
            android:clickable="true"
            android:onClick="backFinish"
@@ -36,4 +36,11 @@
 		   android:visibility="invisible"
        />
        
+       <ImageView 
+          android:layout_width="@dimen/base_dimen_44"
+           android:layout_height="@dimen/base_dimen_44" 
+           android:src="@drawable/short_lease_search"
+           android:layout_gravity="center_vertical"
+           android:layout_marginLeft="@dimen/base_dimen_650"
+           />
 </FrameLayout>

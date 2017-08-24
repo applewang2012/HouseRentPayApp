@@ -66,7 +66,7 @@
         <!--
                 <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" />
+            android:value="jUaEdfyiueCf9OdbKkbxoAgCGDhrGDYU" />
         -->
         <activity
             android:name=".WelcomeActivity"
@@ -105,12 +105,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
         </activity>
         <activity
             android:name=".AddHouseInfoActivity"
@@ -154,7 +148,8 @@
             android:name=".HouseSearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
         <activity
             android:name=".HouseHistoryActivity"
             android:screenOrientation="portrait"
@@ -205,7 +200,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-           
+            
+               
         </activity>
         <activity
             android:name=".GetRentAttributeActivity"
@@ -230,6 +226,11 @@
         </activity>
         <activity
             android:name=".LoadUrlTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".PersonalInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
         </activity>
@@ -266,6 +267,19 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name=".EvaluationActivity"
+            android:label="@string/title_activity_evaluation" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

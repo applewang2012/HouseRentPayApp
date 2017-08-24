@@ -407,7 +407,7 @@
                     android:textColor="@drawable/button_text_selector"
                     android:layout_marginLeft="@dimen/base_dimen_40"
                     android:background="@drawable/detail_button_background_selector"
-                    android:text="申请租房" >
+                    android:text="立即预约" >
                 </Button>
             </LinearLayout>
         </LinearLayout>

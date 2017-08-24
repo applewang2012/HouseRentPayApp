@@ -1,65 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
-    android:paddingBottom="10dp"
     android:background="@drawable/house_info_pop_bg"
     android:orientation="vertical" >
 
-	<TextView
-            android:id="@+id/id_house_desp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#666666"
-            android:layout_marginTop="10dp"
-			android:textSize="12dp"
-            />
     <TextView
-            android:id="@+id/id_house_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#666666"
-            android:layout_marginTop="2dp"
-			android:textSize="12dp"
-            />
-    <TextView
-            android:id="@+id/id_house_contacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#666666"
-            android:layout_marginTop="2dp"
-			android:textSize="12dp"
-            />
+        android:id="@+id/id_house_desp"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/base_dimen_44"
+        android:layout_marginLeft="@dimen/base_dimen_32"
+        android:layout_marginTop="@dimen/base_dimen_30"
+        android:text="此房已租"
+        android:textColor="#fe6305"
+        android:textSize="@dimen/base_dimen_38"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="@dimen/base_dimen_510"
+        android:layout_height="@dimen/base_dimen_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_dimen_12"
+        android:background="#cccccc" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_28"
         android:orientation="horizontal" >
-        <Button 
-            android:id="@+id/id_house_detail_show"
-              android:layout_width="0dp"
-		         android:layout_height="wrap_content"
-		         android:layout_weight="1"
-		         android:text="全景图"
-		         android:textColor="#ffffff"
-		         android:textSize="12dp"
-		         android:gravity="center"
-		         android:background="@drawable/button_small__background"
-                 />
-        <Button 
-            android:id="@+id/id_house_detail_search"
-                 android:layout_width="0dp"
-		         android:layout_height="wrap_content"
-		         android:layout_weight="1"
-		         android:layout_marginLeft="20dp"
-		         android:text="详 情"
-		         android:textColor="#ffffff"
-		         android:textSize="12dp"
-		         android:gravity="center"
-		         android:background="@drawable/button_small__background"
-                 />
+
+        <TextView
+            android:id="@+id/id_house_area"
+            android:layout_width="@dimen/base_dimen_138"
+            android:layout_height="@dimen/base_dimen_36"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:gravity="center"
+            android:text="80.0平米"
+            android:textColor="#666666"
+            android:textSize="@dimen/base_dimen_32" >
+        </TextView>
+
+        <View
+            android:layout_width="@dimen/base_dimen_1"
+            android:layout_height="@dimen/base_dimen_32"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_46"
+            android:background="#cccccc" />
+
+        <TextView
+            android:id="@+id/id_house_direction"
+            android:layout_width="@dimen/base_dimen_138"
+            android:layout_height="@dimen/base_dimen_36"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_6"
+            android:gravity="center"
+            android:text="南北向"
+            android:textColor="#666666"
+            android:textSize="@dimen/base_dimen_32" >
+        </TextView>
+
+        <View
+            android:layout_width="@dimen/base_dimen_1"
+            android:layout_height="@dimen/base_dimen_32"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_28"
+            android:background="#cccccc" />
+
+        <TextView
+            android:id="@+id/id_house_floor"
+            android:layout_width="@dimen/base_dimen_138"
+            android:layout_height="@dimen/base_dimen_36"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_6"
+            android:gravity="center"
+            android:text="3/9层"
+            android:textColor="#666666"
+            android:textSize="@dimen/base_dimen_32" >
+        </TextView>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/id_house_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:layout_marginTop="@dimen/base_dimen_22"
+        android:text="地址：河西区怒江道美年广场"
+        android:textColor="#666666"
+        android:textSize="@dimen/base_dimen_32" />
+
+    <TextView
+        android:id="@+id/id_house_check_out_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:layout_marginTop="@dimen/base_dimen_22"
+        android:text="退房时间：2017-09-08"
+        android:textColor="#666666"
+        android:textSize="@dimen/base_dimen_32" />
+
+    <View
+        android:layout_width="@dimen/base_dimen_510"
+        android:layout_height="@dimen/base_dimen_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_dimen_30"
+        android:background="#cccccc" />
+
+    <TextView 
+        android:id="@+id/id_house_owner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:layout_marginTop="@dimen/base_dimen_30"
+        android:text="房主：王安石"
+        android:textColor="#666666"
+        android:textSize="@dimen/base_dimen_32" 
+
+        />
+    <TextView
+        android:id="@+id/id_house_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:layout_marginTop="@dimen/base_dimen_30"
+        android:text="电话：18722331877"
+        android:textColor="#666666"
+        android:textSize="@dimen/base_dimen_32"  />
+
+   
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_40"
+        android:layout_marginBottom="@dimen/base_dimen_20"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/id_house_detail_show"
+            android:layout_width="@dimen/base_dimen_235"
+            android:layout_height="@dimen/base_dimen_72"
+            android:layout_marginLeft="@dimen/base_dimen_38"
+            android:background="@drawable/button_small__background"
+            android:gravity="center"
+            android:text="全景图"
+            android:textColor="@drawable/map_marker_btn_text_bg"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <Button
+            android:id="@+id/id_house_detail_search"
+            android:layout_width="@dimen/base_dimen_235"
+            android:layout_height="@dimen/base_dimen_72"
+            android:layout_marginLeft="@dimen/base_dimen_42"
+            android:background="@drawable/button_small__background"
+            android:gravity="center"
+            android:text="房屋详情"
+            android:textColor="@drawable/map_marker_btn_text_bg"
+            android:textSize="@dimen/base_dimen_32" />
+ </LinearLayout>  
 </LinearLayout>

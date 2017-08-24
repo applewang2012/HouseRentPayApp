@@ -31,6 +31,7 @@ import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.ModifyPasswordActivity;
+import tenant.guardts.house.PersonalInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -75,16 +76,31 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void initView(){
+		mImageAvator = (ImageView) mRootView.findViewById(R.id.img_avator);//头像
+		
 		mUserNickname = (TextView)mRootView.findViewById(R.id.id_user_nickname);
 		//mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
 		mUserAddress = (TextView)mRootView.findViewById(R.id.id_user_address);
 		mLoadingView = (View)mRootView.findViewById(R.id.id_data_loading);
-		showLoadingView();
+//		showLoadingView();
 		mPublishHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_publish_house);
 		mSearchHouse = (FrameLayout)mRootView.findViewById(R.id.id_user_house_search);
 		mPassword = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_password_modify);
 		mLogout = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_logout);
 		mChangeArea = (FrameLayout)mRootView.findViewById(R.id.id_userinfo_change_area);
+		//点击头像跳转
+		mImageAvator.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				startActivity(new Intent(mContext, PersonalInfoActivity.class));
+				
+			}
+		});
+		
+		
+		
 		mPassword.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -126,7 +142,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 				
 			}
 		});
-		showLoadingView();
+//		showLoadingView();
 	}
 	
 	private void initData(){
@@ -174,6 +190,7 @@ public class MyFragment extends Fragment implements DataStatusInterface{
 			}
 		}
 	};
+	private ImageView mImageAvator;
 	
 	public static HashMap<String,String> parseUserInfo(String value) {
 		HashMap<String,String> userInfo = null;

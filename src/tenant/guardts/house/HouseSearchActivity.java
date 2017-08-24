@@ -98,7 +98,7 @@ public class HouseSearchActivity extends BaseActivity {
 	private String mHouseType = "", mRentType = "";
 	private int mPageCount = 1000;
 	private View mLoadingView;
-	private EditText mAddressEdit;
+//	private EditText mAddressEdit;
 	private TextView mNoContent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class HouseSearchActivity extends BaseActivity {
 		setContentView(R.layout.house_search_layout);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("房屋搜索");
+		mTitleBar.setText("短租共享");
 		initView();
 		initData();
 	}
@@ -165,16 +165,29 @@ public class HouseSearchActivity extends BaseActivity {
 			}
 		});
 		
+		final SingleListFilterView moreFilter = new SingleListFilterView(this, showList, "更多");
+		moreFilter.setOnSelectListener(new SingleListFilterView.OnSelectListener() {
+
+			@Override
+			public void getValue(String showText, int position) {
+				refreshScreen(moreFilter, showText, -1, position);
+			}
+		});
+		
+		
 		//添加条件筛选控件到数据集合中
 		mViewArray = new ArrayList<View>();
 		mViewArray.add(typeFilter);
 		mViewArray.add(rentTypeFilter);
 		mViewArray.add(showListFilter);
-		
+		mViewArray.add(moreFilter);
+
 		ArrayList<String> orignList = new ArrayList<String>();
-		orignList.add("全部");
-		orignList.add("全部");
-		orignList.add("全部");
+		orignList.add("智能排序");
+		orignList.add("区域");
+		orignList.add("价格");
+		orignList.add("更多");
+	
 		
 		//给组合控件设置数据
 		expandTabView.setValue(orignList, mViewArray);
@@ -213,7 +226,7 @@ public class HouseSearchActivity extends BaseActivity {
 		rpc.addProperty("pageIndex", 1);
 		rpc.addProperty("housetype", mHouseType);
 		rpc.addProperty("rentType", mRentType);
-		rpc.addProperty("address", mAddressEdit.getText().toString());
+//		rpc.addProperty("address", mAddressEdit.getText().toString());
 		rpc.addProperty("isAvalible", "0");
 		rpc.addProperty("userID", "1");
 		mPresent.readyPresentServiceParams(mContext, url, mSearchAction, rpc);
@@ -232,12 +245,12 @@ public class HouseSearchActivity extends BaseActivity {
 				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
 				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
 				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
-				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
+//				TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
 				addressTextView.setText(info.getHouseAddress());
 				typeTextView.setText(info.getHouseType());
 				directionTextView.setText(info.getHouseDirection());
 				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
-				statusTextView.setText(info.getHouseStatus());
+//				statusTextView.setText(info.getHouseStatus());
 			}
 		};
 	}
@@ -254,16 +267,16 @@ public class HouseSearchActivity extends BaseActivity {
 		items = new ArrayList<Item>();
 		initAdapter();
 		mSearchViewList.setAdapter(mAdapter);
-		mAddressEdit = (EditText)findViewById(R.id.id_input_address);
-		Button searchButton = (Button)findViewById(R.id.id_modify_password_confirm);
-		searchButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				searchHouseByFilterCondition();
-				
-			}
-		});
+//		mAddressEdit = (EditText)findViewById(R.id.id_input_address);
+//		Button searchButton = (Button)findViewById(R.id.id_modify_password_confirm);
+//		searchButton.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				searchHouseByFilterCondition();
+//				
+//			}
+//		});
 		
 		mSearchViewList.setOnItemClickListener(new OnItemClickListener() {
 
