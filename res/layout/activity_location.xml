@@ -44,7 +44,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="@dimen/base_dimen_500"
+                android:layout_width="@dimen/base_dimen_460"
                 android:layout_height="@dimen/base_dimen_70"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/base_dimen_20"
@@ -76,10 +76,9 @@
 
             <TextView
                 android:id="@+id/textview_login"
-                android:layout_width="@dimen/base_dimen_76"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_40"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/base_dimen_18"
                 android:gravity="center"
                 android:text="登录"
                 android:textColor="#ffffff"
@@ -113,6 +112,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:text="共享房屋"
                 android:textColor="@drawable/home_frag_radiobutton_text_bg"
                 android:textSize="@dimen/base_dimen_32" />
@@ -132,6 +132,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="我是房主"
+                android:textStyle="bold"
                 android:textColor="@drawable/home_frag_radiobutton_text_bg"
                 android:textSize="@dimen/base_dimen_32" />
         </RadioGroup>
@@ -149,16 +150,17 @@
                 android:id="@+id/id_home_button_left"
                 android:layout_width="144px"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_weight="1"
                 android:gravity="center" />
             
-            <!-- guardts:textColor="@drawable/button_text_selector"
-            guardts:background="@drawable/home_button_rent_house_selector" -->
-
             <tenant.guardts.house.view.HomeCustomView
                 android:id="@+id/id_home_button_right"
                 android:layout_width="144px"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_weight="1"
                 android:gravity="center" />
         </LinearLayout>

@@ -8,28 +8,20 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
+import org.w3c.dom.Text;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
-import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
+import com.baidu.location.a.r;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
-import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
-import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
 import com.baidu.mapapi.search.poi.PoiCitySearchOption;
@@ -43,51 +35,38 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
-import com.google.zxing.oned.rss.FinderPattern;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore.Video;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.CaptureActivity;
 import tenant.guardts.house.HomeActivity;
-import tenant.guardts.house.HouseDetailInfoActivity;
-import tenant.guardts.house.HouseHistoryActivity;
-import tenant.guardts.house.HouseSearchActivity;
-import tenant.guardts.house.LoadUrlTestActivity;
-import tenant.guardts.house.LocationDemo;
 import tenant.guardts.house.R;
-import tenant.guardts.house.RentToHouseActivity;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.map.PoiOverlay;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -104,8 +83,6 @@ public class HouseFragment extends Fragment
 	public MyLocationListenner myListener = new MyLocationListenner();
 	private LocationMode mCurrentMode;
 
-	BaiduMap mBaiduMap;
-	private InfoWindow mInfoWindow;
 	private boolean mShowInfoWindow;
 	// UI相关
 	OnCheckedChangeListener radioButtonListener;
@@ -123,7 +100,7 @@ public class HouseFragment extends Fragment
 	private List<Marker> mMarkList;
 	private String mLocationAction = "http://tempuri.org/GetRentsByCoodinates";
 	private String mCurrentLocationCity;
-
+	private int mRadioSelectedPostion = 0;
 	private PoiSearch mPoiSearch = null;
 	// private EditText mSearchListener;
 	private AutoCompleteTextView mSearchListener = null;
@@ -155,6 +132,7 @@ public class HouseFragment extends Fragment
 
 	private void initEvent() {
 		mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -162,17 +140,15 @@ public class HouseFragment extends Fragment
 				case R.id.home_radio_share:
 					mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
 					mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
+					mRadioSelectedPostion = 0;
 					break;
 				case R.id.home_radio_owner:
 					mBtnLeft.setImageAndContent(R.drawable.edit,"登记房屋");
 					mBtnRight.setImageAndContent(R.drawable.tap_click_force_touch,"我要出租");
+					mRadioSelectedPostion = 1;
 					break;
-
 				}
-
 			}
-
-			
 		});
 		
 		
@@ -240,8 +216,6 @@ public class HouseFragment extends Fragment
 		// 退出时销毁定位
 		mLocClient.stop();
 		// 关闭定位图层
-		mBaiduMap.setMyLocationEnabled(false);
-
 		mPoiSearch.destroy();
 		mSuggestionSearch.destroy();
 		super.onDestroy();
@@ -260,16 +234,86 @@ public class HouseFragment extends Fragment
 		mBtnRight = (HomeCustomView) mRootView.findViewById(R.id.id_home_button_right);
 		mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
 		mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
+		mBtnLeft.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				TextView name = (TextView)v.findViewById(R.id.textView1);
+				ImageView image = (ImageView)v.findViewById(R.id.imageView1);
+				if (event.getAction() == MotionEvent.ACTION_DOWN){
+					name.setTextColor(Color.parseColor("#ffffff"));
+					v.setBackgroundColor(Color.parseColor("#337ffd"));
+					Log.w("mingguo", "left  selected position  "+mRadioSelectedPostion);
+					if (mRadioSelectedPostion == 0){
+						image.setBackgroundResource(R.drawable.clock_press);
+					}else if (mRadioSelectedPostion == 1){
+						image.setBackgroundResource(R.drawable.edit_press);
+					}
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP){
+					name.setTextColor(Color.parseColor("#999999"));
+					v.setBackgroundColor(Color.parseColor("#ffffff"));
+					Log.w("mingguo", "left up  selected position  "+mRadioSelectedPostion);
+					if (mRadioSelectedPostion == 0){
+						image.setBackgroundResource(R.drawable.clock);
+					}else if (mRadioSelectedPostion == 1){
+						image.setBackgroundResource(R.drawable.edit);
+					}
+				}
+				
+				return false;
+			}
+		});
+		mBtnRight.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				TextView name = (TextView)v.findViewById(R.id.textView1);
+				ImageView image = (ImageView)v.findViewById(R.id.imageView1);
+				
+				if (event.getAction() == MotionEvent.ACTION_DOWN){
+					name.setTextColor(Color.parseColor("#ffffff"));
+					v.setBackgroundColor(Color.parseColor("#337ffd"));
+					Log.w("mingguo", "right   selected position down "+mRadioSelectedPostion);
+					if (mRadioSelectedPostion == 0){
+						image.setBackgroundResource(R.drawable.pin_sharp_circle_press);
+					}else if (mRadioSelectedPostion == 1){
+						image.setBackgroundResource(R.drawable.tap_click_force_touch_press);
+					}
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP){
+					name.setTextColor(Color.parseColor("#999999"));
+					v.setBackgroundColor(Color.parseColor("#ffffff"));
+					Log.w("mingguo", "right   selected position up  "+mRadioSelectedPostion);
+					if (mRadioSelectedPostion == 0){
+						image.setBackgroundResource(R.drawable.pin_sharp_circle);
+					}else if (mRadioSelectedPostion == 1){
+						image.setBackgroundResource(R.drawable.tap_click_force_touch);
+					}
+				}
+				return false;
+			}
+		});
+		mBtnLeft.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.i("mingguo", "share  onclick left ");
+				
+			}
+		});
+		mBtnRight.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.i("mingguo", "share  onclick  right ");
+				
+			}
+		});
 		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.home_listview);
 //		mListView.setAdapter(new );
 //		///////////////////////////////////////////////////////////////////////////////
 		
-		
-		
-		
-		
-		
-
 		LinearLayout button = (LinearLayout) mRootView.findViewById(R.id.id_home_select_city_content);
 		button.setOnClickListener(new OnClickListener() {
 
@@ -408,34 +452,6 @@ public class HouseFragment extends Fragment
 		return -1;
 	}
 
-	public void initOverlay() {
-		if (mHouserList.size() == 0) {
-			GlobalUtil.shortToast(mContext, "抱歉，该位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
-			return;
-		}
-		GlobalUtil.shortToast(mContext, "共搜索到 " + mHouserList.size() + " 套房源！",
-				getResources().getDrawable(R.drawable.ic_dialog_no));
-		for (int index = 0; index < mHouserList.size(); index++) {
-			Map<String, String> child = (Map<String, String>) mHouserList.get(index);
-			LatLng llA = new LatLng(Double.parseDouble(child.get("Latitude")),
-					Double.parseDouble(child.get("Longitude")));
-			// LatLng llA = new LatLng(mLati, mLongi+0.0008);
-			MarkerOptions options = null;
-			String status = child.get("Status");
-			if (status != null && status.equals("0")) {
-				options = new MarkerOptions().position(llA).icon(icon_blue).zIndex(9).draggable(false);
-			} else if (status != null && status.equals("1")) {
-				options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
-			} else if (status != null && status.equals("2")) {
-				options = new MarkerOptions().position(llA).icon(icon_yellow).zIndex(9).draggable(false);
-
-			} else {
-				options = new MarkerOptions().position(llA).icon(icon_blue).zIndex(9).draggable(false);
-			}
-			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
-		}
-
-	}
 
 	private void getLocationByCoordinates() {
 		Log.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
@@ -461,7 +477,6 @@ public class HouseFragment extends Fragment
 			super.handleMessage(msg);
 			if (msg.what == 100) {
 				parseLocationInfo((String) msg.obj);
-				updateLocationFromHouse();
 			} else if (msg.what == 300) {
 				showSelectLocationMap();
 			} else if (msg.what == 500) {
@@ -476,35 +491,7 @@ public class HouseFragment extends Fragment
 	private HomeCustomView mBtnLeft;
 	private HomeFragmentListView mListView;
 
-	private void updateLocationFromHouse() {
-		initOverlay();
-	}
 
-	private class MyPoiOverlay extends PoiOverlay {
-		PoiInfo poi;
-
-		public MyPoiOverlay(BaiduMap baiduMap) {
-			super(baiduMap);
-		}
-
-		@Override
-		public boolean onPoiClick(int index) {
-			poi = getPoiResult().getAllPoi().get(index);
-			AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
-			// 设置Title的内�?
-			alertDialog.setTitle("位置信息");
-			// 设置Content来显示一个信�?
-			alertDialog.setMessage(poi.name + "\n" + poi.address);
-			// 设置�?��PositiveButton
-			alertDialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-				}
-			});
-			alertDialog.show();
-			return true;
-		}
-	}
 
 	private void parseLocationInfo(String value) {
 		mHouserList = new ArrayList<>();
@@ -557,10 +544,10 @@ public class HouseFragment extends Fragment
 				return;
 			}
 			mCurrentLocationCity = location.getCity();
+			
 			MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
 					// 此处设置开发者获取到的方向信息，顺时针0-360
 					.direction(100).latitude(location.getLatitude()).longitude(location.getLongitude()).build();
-			mBaiduMap.setMyLocationData(locData);
 			if (isFirstLoc) {
 				isFirstLoc = false;
 				CommonUtil.mCurrentLati = location.getLatitude();
@@ -568,11 +555,10 @@ public class HouseFragment extends Fragment
 				mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 				MapStatus.Builder builder = new MapStatus.Builder();
 				builder.target(mCurrentLatLng).zoom(18.0f);
-				mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
+				Log.i("mingguo", "loaction current city  "+mCurrentLocationCity+"  CommonUtil.mCurrentLati  "+CommonUtil.mCurrentLati+"  CommonUtil.mCurrentLongi  "+CommonUtil.mCurrentLongi);
 			}
-			startGetLocationFromHouse();
-			mHandler.sendEmptyMessageDelayed(500, 200);
+			//startGetLocationFromHouse();
+			mHandler.sendEmptyMessageDelayed(500, 100);
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -592,10 +578,8 @@ public class HouseFragment extends Fragment
 		MyLocationData locData = new MyLocationData.Builder().accuracy(0)
 				// 此处设置开发者获取到的方向信息，顺时针0-360
 				.direction(100).latitude(mCurrentLatLng.latitude).longitude(mCurrentLatLng.longitude).build();
-		mBaiduMap.setMyLocationData(locData);
 		MapStatus.Builder builder = new MapStatus.Builder();
 		builder.target(mCurrentLatLng).zoom(18.0f);
-		mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
 
 	}
 
@@ -655,15 +639,7 @@ public class HouseFragment extends Fragment
 			if (result.getAllPoi().size() > 0) {
 				mCurrentLatLng = result.getAllPoi().get(0).location;
 			}
-			mBaiduMap.clear();
 			startGetLocationFromHouse();
-			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
-			// 设置overlay可以处理标注点击事件
-			// mBaiduMap.setOnMarkerClickListener(overlay);
-			// 设置PoiOverlay数据
-			overlay.setData(result);
-			overlay.addToMap();
-			overlay.zoomToSpan();
 			return;
 		} else {
 			GlobalUtil.shortToast(mContext, "抱歉，定位城市失败！", getResources().getDrawable(R.drawable.ic_dialog_no));
