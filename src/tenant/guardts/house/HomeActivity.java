@@ -57,7 +57,7 @@ public class HomeActivity extends BaseActivity {
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");
 		initView();
-		getUserInfo();
+//		getUserInfo();
 		
 	}
 	
@@ -428,8 +428,6 @@ public class HomeActivity extends BaseActivity {
 				mHandler.sendMessageDelayed(message, 500);
 			}
 	}
-	
-	
 
 
 }

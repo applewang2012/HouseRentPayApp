@@ -62,6 +62,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private Handler mSubHandler;
 	private ArrayList<String> imageUrlList = new ArrayList<String>();
 	private String mImageUrlPrefix = CommonUtil.mUserHost + "";
+	private TextView mLocationPolice;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +130,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		builder.show();
 	}
 
-	private TextView mHouseId;
 	private TextView mRentName;
 
 	private TextView mRentReadMe;
@@ -145,19 +145,22 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private List<HouseImageInfo> mDataList = new ArrayList<>();
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
+	private TextView mZhulinType;
+	private TextView mRoomNum;
 
 	private void initView() {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
-		mHouseId = (TextView) findViewById(R.id.id_rent_house_number);
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView) findViewById(R.id.id_rent_house_phone);
 		mRentType = (TextView) findViewById(R.id.id_rent_house_type);
 		mRentDirection = (TextView) findViewById(R.id.id_rent_house_direction);
 		mRentAddress = (TextView) findViewById(R.id.id_rent_house_address);
-
+		mZhulinType = (TextView) findViewById(R.id.id_rent_house_lease_type);
+		mRoomNum = (TextView) findViewById(R.id.id_rent_house_num);
+		mLocationPolice = (TextView)findViewById(R.id.id_rent_house_district);
 		// mHouseInfoGridview = (GridView)
 		// findViewById(R.id.id_house_detail_info_image);
 		// mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -245,6 +248,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 	};
 	
+	
 
 	private void jsonHouseInfoToView(String value) {
 		if (value != null) {
@@ -253,13 +257,15 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				array = new JSONArray(value);
 				JSONObject object = array.optJSONObject(0);
 				if (object != null) {
-					mHouseId.setText(object.getString("RentNO"));
 					mRentName.setText(object.getString("ROwner"));
 					mRentPhone.setText(object.getString("ROwnerTel"));
 					mRentArea.setText(object.getString("RRentArea") + " 平米");
 					mRentType.setText(object.getString("RRoomTypeDesc"));
 					mRentDirection.setText(object.getString("RDirectionDesc"));
 					mRentAddress.setText(object.getString("RAddress"));
+					mZhulinType.setText(object.getString("RRentTypeDesc"));
+					mRoomNum.setText(object.getString("RDoor"));
+					mLocationPolice.setText(object.getString("RPSName"));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -382,10 +388,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				msg.what = 100;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
-				// }else if (action.equals(mConfirmRentAttribute)){
-				// mHandler.sendEmptyMessageDelayed(101, 10);
-				// }else if (action.equals(mCompleteRentAttribute)){
-				// mHandler.sendEmptyMessageDelayed(102, 1000);
 			} else if (action.equals(mHouseImageListAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 200;

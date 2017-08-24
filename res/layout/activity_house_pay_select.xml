@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guardts="http://schemas.android.com/apk/res/tenant.guardts.house"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f1f1f1" >
+
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/base_dimen_120"
+            android:layout_marginTop="@dimen/base_dimen_10"
+            android:background="#ffffff"
+             >
+            
+            <TextView 
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="支付金额"
+            	android:textColor="#555555"
+            	android:textSize="@dimen/base_dimen_32"
+            	android:layout_gravity="center_vertical"
+            	android:layout_marginLeft="@dimen/base_dimen_26"
+                />
+            
+            <TextView 
+                android:id="@+id/id_pay_price_show"
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="￥ 300"
+            	android:textColor="#337ffd"
+            	android:textSize="@dimen/base_dimen_34"
+            	android:layout_gravity="center_vertical|right"
+            	android:layout_marginRight="@dimen/base_dimen_26"
+                />
+         </FrameLayout>
+         
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/base_dimen_120"
+            android:layout_marginTop="@dimen/base_dimen_10"
+            android:background="#ffffff"
+             >
+            
+            <ImageView 
+                android:layout_width="@dimen/base_dimen_50"
+            	android:layout_height="@dimen/base_dimen_50"
+            	android:layout_gravity="center_vertical"
+            	android:layout_marginLeft="@dimen/base_dimen_30"
+            	android:background="@drawable/pay_icon_weixin"
+                />
+            
+            <TextView 
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:text="微信支付"
+            	android:textColor="#555555"
+            	android:textSize="@dimen/base_dimen_24"
+            	android:layout_gravity="center_vertical"
+            	android:layout_marginLeft="@dimen/base_dimen_92"
+                />
+            
+            <ImageView 
+                android:layout_width="@dimen/base_dimen_42"
+            	android:layout_height="@dimen/base_dimen_42"
+            	android:layout_gravity="center_vertical|right"
+            	android:layout_marginRight="@dimen/base_dimen_80"
+            	android:background="@drawable/pay_icon_select"
+                />
+         </FrameLayout>
+          
+       <Button 
+                 android:id="@+id/id_button_pay_money_button"
+                 android:layout_width="@dimen/base_dimen_520"
+		         android:layout_height="@dimen/base_dimen_80"
+		         android:layout_marginTop="@dimen/base_dimen_714"
+		         android:text="立即付款"
+		         android:textColor="#ffffff"
+		         android:textSize="@dimen/base_dimen_30"
+		         android:layout_gravity="center_horizontal"
+		         android:gravity="center"
+		         android:background="@drawable/house_button_press"
+                 />
+
+</LinearLayout>

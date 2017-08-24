@@ -38,11 +38,16 @@ public class CommonUtil {
     public static String mRegisterRealName = null;
     public static String mRegisterIdcard = null;
     public static String mUserLoginName = null;
-    public static String mUserHost = null; //"http://qxw2332340157.my3w.com/";
+    public static String mUserHost = "http://qxw2332340157.my3w.com/";
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
     public static int mSelectCityRequestCode = 2;
+    
+    //weixin
+    public static final String APP_ID = "wxae25cb3fefdc75ae";
+    public static final String WX_PARTNER_ID = "1481965242";
+    public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
     
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;

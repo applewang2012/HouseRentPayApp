@@ -37,7 +37,8 @@
        />
        
        <ImageView 
-          android:layout_width="@dimen/base_dimen_44"
+           android:id="@+id/id_titlebar_right_search"
+           android:layout_width="@dimen/base_dimen_44"
            android:layout_height="@dimen/base_dimen_44" 
            android:src="@drawable/short_lease_search"
            android:layout_gravity="center_vertical"

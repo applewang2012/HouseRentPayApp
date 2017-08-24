@@ -58,12 +58,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import tenant.guardts.house.HomeActivity;
+import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -74,7 +78,7 @@ import tenant.guardts.house.view.HomeCustomView;
 import tenant.guardts.house.view.HomeFragmentListView;
 
 public class HouseFragment extends Fragment
-		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
+		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener, OnItemClickListener {
 
 	private Context mContext;
 	private View mRootView;
@@ -89,7 +93,7 @@ public class HouseFragment extends Fragment
 	Button requestLocButton;
 	boolean isFirstLoc = true; // 是否首次定位
 	private HoursePresenter mPresenter;
-	private ArrayList<Map<String, String>> mHouserList;
+	private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	// 初始化全局 bitmap 信息，不用时及时 recycle
 	BitmapDescriptor icon_blue = BitmapDescriptorFactory.fromResource(R.drawable.blue);
 	BitmapDescriptor icon_red = BitmapDescriptorFactory.fromResource(R.drawable.red);
@@ -107,7 +111,9 @@ public class HouseFragment extends Fragment
 	private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
 	private TextView mSelectCityText;
-	private HomeCustomView mBtnRight;
+	//private HomeCustomView mBtnShareRight;
+	private LinearLayout mShareHouseLayout;
+	private LinearLayout mHouseOwnerLayout;
 
 	public HouseFragment() {
 
@@ -133,27 +139,21 @@ public class HouseFragment extends Fragment
 	private void initEvent() {
 		mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
-
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				switch (checkedId) {
 				case R.id.home_radio_share:
-					mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
-					mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
-					mRadioSelectedPostion = 0;
+					mShareHouseLayout.setVisibility(View.VISIBLE);
+					mHouseOwnerLayout.setVisibility(View.GONE);
 					break;
 				case R.id.home_radio_owner:
-					mBtnLeft.setImageAndContent(R.drawable.edit,"登记房屋");
-					mBtnRight.setImageAndContent(R.drawable.tap_click_force_touch,"我要出租");
-					mRadioSelectedPostion = 1;
+					mShareHouseLayout.setVisibility(View.GONE);
+					mHouseOwnerLayout.setVisibility(View.VISIBLE);
 					break;
 				}
 			}
 		});
 		
-		
-		
-
 	}
 	
 
@@ -161,23 +161,16 @@ public class HouseFragment extends Fragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		HomeActivity activity = (HomeActivity) getActivity();
-		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")) {
-			if (mCurrentLocationCity != null && mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())) {
-				return;
-			}
-			mCurrentLocationCity = activity.getSelectedCity();
-			Log.i("mingguo", "house fragment  on resume  change  currentCity  " + mCurrentLocationCity);
-			mSelectCityText.setText(mCurrentLocationCity);
-			// mCurrentLatLng = CommonUtil.getLatLngBystr(mContext,
-			// mCurrentLocationCity);
-			// Message message = mHandler.obtainMessage();
-			// message.what = 300;
-			// message.obj = mCurrentLatLng;
-			// message.sendToTarget();
-			// startThreadfindLocation(mCurrentLocationCity);
-			searchButtonProcess();
-		}
+//		HomeActivity activity = (HomeActivity) getActivity();
+//		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")) {
+//			if (mCurrentLocationCity != null && mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())) {
+//				return;
+//			}
+//			mCurrentLocationCity = activity.getSelectedCity();
+//			Log.i("mingguo", "house fragment  on resume  change  currentCity  " + mCurrentLocationCity);
+//			mSelectCityText.setText(mCurrentLocationCity);
+//			searchButtonProcess();
+//		}
 	}
 
 	private void startThreadfindLocation(final String locationName) {
@@ -230,87 +223,12 @@ public class HouseFragment extends Fragment
 		mRbShare = (RadioButton) mRootView.findViewById(R.id.home_radio_share);
 		mRbOwner = (RadioButton) mRootView.findViewById(R.id.home_radio_owner);
 		mRadioGroup = (RadioGroup) mRootView.findViewById(R.id.home_radiogrouop);
-		mBtnLeft = (HomeCustomView) mRootView.findViewById(R.id.id_home_button_left);
-		mBtnRight = (HomeCustomView) mRootView.findViewById(R.id.id_home_button_right);
-		mBtnLeft.setImageAndContent(R.drawable.clock,"短租共享");
-		mBtnRight.setImageAndContent(R.drawable.pin_sharp_circle,"地图租房");
-		mBtnLeft.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				TextView name = (TextView)v.findViewById(R.id.textView1);
-				ImageView image = (ImageView)v.findViewById(R.id.imageView1);
-				if (event.getAction() == MotionEvent.ACTION_DOWN){
-					name.setTextColor(Color.parseColor("#ffffff"));
-					v.setBackgroundColor(Color.parseColor("#337ffd"));
-					Log.w("mingguo", "left  selected position  "+mRadioSelectedPostion);
-					if (mRadioSelectedPostion == 0){
-						image.setBackgroundResource(R.drawable.clock_press);
-					}else if (mRadioSelectedPostion == 1){
-						image.setBackgroundResource(R.drawable.edit_press);
-					}
-				}
-				if (event.getAction() == MotionEvent.ACTION_UP){
-					name.setTextColor(Color.parseColor("#999999"));
-					v.setBackgroundColor(Color.parseColor("#ffffff"));
-					Log.w("mingguo", "left up  selected position  "+mRadioSelectedPostion);
-					if (mRadioSelectedPostion == 0){
-						image.setBackgroundResource(R.drawable.clock);
-					}else if (mRadioSelectedPostion == 1){
-						image.setBackgroundResource(R.drawable.edit);
-					}
-				}
-				
-				return false;
-			}
-		});
-		mBtnRight.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				TextView name = (TextView)v.findViewById(R.id.textView1);
-				ImageView image = (ImageView)v.findViewById(R.id.imageView1);
-				
-				if (event.getAction() == MotionEvent.ACTION_DOWN){
-					name.setTextColor(Color.parseColor("#ffffff"));
-					v.setBackgroundColor(Color.parseColor("#337ffd"));
-					Log.w("mingguo", "right   selected position down "+mRadioSelectedPostion);
-					if (mRadioSelectedPostion == 0){
-						image.setBackgroundResource(R.drawable.pin_sharp_circle_press);
-					}else if (mRadioSelectedPostion == 1){
-						image.setBackgroundResource(R.drawable.tap_click_force_touch_press);
-					}
-				}
-				if (event.getAction() == MotionEvent.ACTION_UP){
-					name.setTextColor(Color.parseColor("#999999"));
-					v.setBackgroundColor(Color.parseColor("#ffffff"));
-					Log.w("mingguo", "right   selected position up  "+mRadioSelectedPostion);
-					if (mRadioSelectedPostion == 0){
-						image.setBackgroundResource(R.drawable.pin_sharp_circle);
-					}else if (mRadioSelectedPostion == 1){
-						image.setBackgroundResource(R.drawable.tap_click_force_touch);
-					}
-				}
-				return false;
-			}
-		});
-		mBtnLeft.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Log.i("mingguo", "share  onclick left ");
-				
-			}
-		});
-		mBtnRight.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Log.i("mingguo", "share  onclick  right ");
-				
-			}
-		});
-		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.home_listview);
+		mShareHouseLayout = (LinearLayout)mRootView.findViewById(R.id.id_share_house_content);
+		mHouseOwnerLayout = (LinearLayout)mRootView.findViewById(R.id.id_house_owner_content);
+		mShareHouseLayout.setVisibility(View.VISIBLE);
+		mHouseOwnerLayout.setVisibility(View.GONE);
+
+		mListView = (ListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 //		mListView.setAdapter(new );
 //		///////////////////////////////////////////////////////////////////////////////
 		
@@ -380,58 +298,14 @@ public class HouseFragment extends Fragment
 						(new SuggestionSearchOption()).keyword(cs.toString()).city(mCurrentLocationCity));
 			}
 		});
-
-		// mSearchListener.setOnItemClickListener(new OnItemClickListener() {
-		//
-		// @Override
-		// public void onItemClick(AdapterView<?> parent, View view, int
-		// position, long id) {
-		//
-		// searchNearbyProcess(mSearchListener.getText().toString());
-		// }
-		//
-		// });
-		//
-		//
-		// Button houseSearch =
-		// (Button)detailView.findViewById(R.id.id_house_detail_search);
-		// houseSearch.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// Intent detailIntent = new Intent(mContext,
-		// HouseDetailInfoActivity.class);
-		// detailIntent.putExtra("rentNo",
-		// mHouserList.get(index).get("rentno"));
-		// startActivity(detailIntent);
-		// }
-		// });
-		// return true;
-		//
-		// }
-		// });
-
-		// Button rentToButton =
-		// (Button)mRootView.findViewById(R.id.id_home_button_chuzu_house);
-		// rentToButton.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// startActivity(new Intent(getActivity(), RentToHouseActivity.class));
-		//
-		// }
-		// });
-		// Button rentButton =
-		// (Button)mRootView.findViewById(R.id.id_home_button_rent_house);
-		// rentButton.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		//
-		// Intent intent = new Intent(mContext, HouseSearchActivity.class);
-		// startActivity(intent);
-		// }
-		// });
+		
+		initAdapter();
+		
+		mListView.setAdapter(mAdapter);
+		TextView empty = new TextView(mContext);
+		empty.setText("未搜索到任何信息！");
+		mListView.setEmptyView(empty);
+		mListView.setOnItemClickListener(this);
 
 	}
 
@@ -477,6 +351,7 @@ public class HouseFragment extends Fragment
 			super.handleMessage(msg);
 			if (msg.what == 100) {
 				parseLocationInfo((String) msg.obj);
+				mAdapter.notifyDataSetChanged();
 			} else if (msg.what == 300) {
 				showSelectLocationMap();
 			} else if (msg.what == 500) {
@@ -488,49 +363,43 @@ public class HouseFragment extends Fragment
 	private RadioButton mRbShare;
 	private RadioButton mRbOwner;
 	private RadioGroup mRadioGroup;
-	private HomeCustomView mBtnLeft;
-	private HomeFragmentListView mListView;
+	private ListView mListView;
+	private UniversalAdapter<HouseInfoModel> mAdapter;
 
 
 
-	private void parseLocationInfo(String value) {
-		mHouserList = new ArrayList<>();
-		mMarkList = new ArrayList<>();
-		try {
-			if (mHouserList != null) {
-				mHouserList.clear();
-			}
-			if (mMarkList != null) {
-				mMarkList.clear();
-			}
-			JSONArray array = new JSONArray(value);
-			if (array != null) {
-				Log.i("mingguo", "house  location  num   " + array.length());
-				for (int item = 0; item < array.length(); item++) {
-					Map<String, String> itemHouse = new HashMap<>();
+	
+	
+	private void parseLocationInfo(String obj){
+		try{
+			JSONArray array = new JSONArray(obj);
+			if (array != null){
+				mHouseInfoList.clear();
+				for (int item = 0; item < array.length(); item++){
+					if (item > 15){
+						break;
+					}
 					JSONObject itemJsonObject = array.optJSONObject(item);
-					itemHouse.put("ROwnerTel", itemJsonObject.optString("ROwnerTel"));
-					itemHouse.put("Latitude", itemJsonObject.optString("Latitude"));
-					itemHouse.put("Longitude", itemJsonObject.optString("Longitude"));
-					itemHouse.put("rid", itemJsonObject.optString("rid"));
-					itemHouse.put("ROwner", itemJsonObject.optString("ROwner"));
-					itemHouse.put("RIDCard", itemJsonObject.optString("RIDCard"));
-					itemHouse.put("RAddress", itemJsonObject.optString("RAddress"));
-					itemHouse.put("rentno", itemJsonObject.optString("rentno"));
-					itemHouse.put("Status", itemJsonObject.optString("Status"));
-					itemHouse.put("rroomtypedesc", itemJsonObject.optString("rroomtypedesc"));
-					itemHouse.put("rdirectiondesc", itemJsonObject.optString("rdirectiondesc"));
-					itemHouse.put("rrentarea", itemJsonObject.optString("rrentarea"));
-					itemHouse.put("RPropertyDesc", itemJsonObject.optString("RPropertyDesc"));
-					mHouserList.add(itemHouse);
+					HouseInfoModel houseModel = new HouseInfoModel();
+					houseModel.setHouseAddress(itemJsonObject.optString("RAddress"));
+					houseModel.setHouseDirection(itemJsonObject.optString("rdirectiondesc"));
+					houseModel.setHouseTotalFloor(itemJsonObject.optString("rtotalfloor"));
+					houseModel.setHouseCurrentFloor(itemJsonObject.optString("rFloor"));
+					houseModel.setHouseType(itemJsonObject.optString("rroomtypedesc"));
+					houseModel.setHouseStatus(itemJsonObject.optString("IsAvailable"));
+					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
+					houseModel.setHouseId(itemJsonObject.optString("rentno"));
+					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
+					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
+					houseModel.setHouseArea(itemJsonObject.optString("rrentarea"));
+					mHouseInfoList.add(houseModel);
 				}
 			}
-
+			Log.i("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
-	}
+}
 
 	/**
 	 * 定位SDK监听函数
@@ -557,7 +426,7 @@ public class HouseFragment extends Fragment
 				builder.target(mCurrentLatLng).zoom(18.0f);
 				Log.i("mingguo", "loaction current city  "+mCurrentLocationCity+"  CommonUtil.mCurrentLati  "+CommonUtil.mCurrentLati+"  CommonUtil.mCurrentLongi  "+CommonUtil.mCurrentLongi);
 			}
-			//startGetLocationFromHouse();
+			startGetLocationFromHouse();
 			mHandler.sendEmptyMessageDelayed(500, 100);
 		}
 
@@ -570,6 +439,26 @@ public class HouseFragment extends Fragment
 			// TODO Auto-generated method stub
 
 		}
+	}
+	
+	private void initAdapter(){
+		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_search_list_item, mHouseInfoList) {
+
+			@Override
+			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
+				View holderView = holder.getConvertView();
+				TextView addressTextView = (TextView)holderView.findViewById(R.id.id_house_address);
+				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
+				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
+				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
+				TextView areaTextView = (TextView)holderView.findViewById(R.id.id_house_area);
+				addressTextView.setText(info.getHouseAddress());
+				typeTextView.setText(info.getHouseType());
+				directionTextView.setText(info.getHouseDirection());
+				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
+				areaTextView.setText(info.getHouseArea()+"平米");
+			}
+		};
 	}
 
 	private void showSelectLocationMap() {
@@ -610,6 +499,14 @@ public class HouseFragment extends Fragment
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		Log.e("housefragment", "error   " + error);
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+		Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+		detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+		startActivity(detailIntent);
 	}
 
 	@Override
@@ -672,5 +569,7 @@ public class HouseFragment extends Fragment
 		mSearchListener.setAdapter(sugAdapter);
 		sugAdapter.notifyDataSetChanged();
 	}
+
+	
 
 }

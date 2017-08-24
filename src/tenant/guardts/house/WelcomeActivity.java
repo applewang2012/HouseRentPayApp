@@ -51,12 +51,12 @@ public class WelcomeActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
-				
+				startActivity(new Intent(WelcomeActivity.this, HomeActivity.class));
 				//if (username != null && !username.equals("") && password != null && !password.equals("")){
-					Intent intent = new Intent(WelcomeActivity.this, LoginUserActivity.class);
-					intent.putExtra("user_name", mUsername);
-					intent.putExtra("user_password", mPassword);
-					startActivity(intent);
+//					Intent intent = new Intent(WelcomeActivity.this, LoginUserActivity.class);
+//					intent.putExtra("user_name", mUsername);
+//					intent.putExtra("user_password", mPassword);
+//					startActivity(intent);
 //				}else{
 //					Intent intent = new Intent(WelcomeActivity.this, RegisterUserActivity.class);
 //					startActivity(intent);

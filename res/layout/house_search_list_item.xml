@@ -55,6 +55,18 @@
 	    	android:gravity="left|center_vertical"
 	        />
 	    <TextView 
+	        android:id="@+id/id_house_area"
+	        android:layout_width="0dp" 
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:singleLine="true"
+	    	android:textColor="#666666"
+	    	android:textSize="15dp"
+	    	android:text="18/30层"
+	    	android:gravity="left|center_vertical"
+	        />
+	    
+	    <TextView 
 	        android:id="@+id/id_house_floor"
 	        android:layout_width="0dp" 
 	    	android:layout_height="wrap_content"

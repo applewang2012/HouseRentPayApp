@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:guardts="http://schemas.android.com/apk/res/tenant.guardts.house"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -141,29 +141,206 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_1"
             android:background="#f1f1f1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base_dimen_80" >
-
-            <tenant.guardts.house.view.HomeCustomView
-                android:id="@+id/id_home_button_left"
-                android:layout_width="144px"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_weight="1"
-                android:gravity="center" />
-            
-            <tenant.guardts.house.view.HomeCustomView
-                android:id="@+id/id_home_button_right"
-                android:layout_width="144px"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_weight="1"
-                android:gravity="center" />
-        </LinearLayout>
+		<FrameLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="@dimen/base_dimen_140" 
+		    >
+			 <LinearLayout
+			     android:id="@+id/id_share_house_content"
+		            android:layout_width="match_parent"
+		            android:layout_height="@dimen/base_dimen_140" 
+		            android:orientation="horizontal"
+		            >
+	            <LinearLayout 
+	                android:id="@+id/id_share_house_duanzu"
+				    android:layout_width="0dp"				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				    android:orientation="vertical"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_70"
+				        android:layout_height="@dimen/base_dimen_54"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_20"
+				        android:background="@drawable/fgt_share_house_duanzu_share"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_vertical"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="短租共享"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+	            
+	             <LinearLayout 
+	                android:id="@+id/id_share_house_ditu"
+				    android:layout_width="0dp"
+				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				    android:orientation="vertical"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_70"
+				        android:layout_height="@dimen/base_dimen_54"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_20"
+				        android:background="@drawable/fgt_share_house_map_zhufang"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="地图租房"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+	            
+	        </LinearLayout>
+	        
+			 <LinearLayout
+			     android:id="@+id/id_house_owner_content"
+		            android:layout_width="match_parent"
+		            android:layout_height="@dimen/base_dimen_140" 
+		            android:orientation="horizontal"
+		            >
+	            <LinearLayout 
+	                android:id="@+id/id_house_owner_dengji"
+				    android:layout_width="0dp"
+				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				    android:orientation="vertical"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_64"
+				        android:layout_height="@dimen/base_dimen_52"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_20"
+				        android:background="@drawable/fgt_house_owner_dengji_house"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="登记房屋"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+	            
+	             <LinearLayout 
+	                android:id="@+id/id_share_house_ditu"
+				    android:layout_width="0dp"
+				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				     android:orientation="vertical"
+				     android:layout_marginTop="@dimen/base_dimen_20"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_64"
+				        android:layout_height="@dimen/base_dimen_52"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/fgt_house_owner_remand_house"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="维修服务"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+				
+	            <LinearLayout 
+	                android:id="@+id/id_share_house_ditu"
+				    android:layout_width="0dp"
+				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				     android:orientation="vertical"
+				     android:layout_marginTop="@dimen/base_dimen_20"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_64"
+				        android:layout_height="@dimen/base_dimen_52"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/fgt_house_owner_update_house"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="改造房屋"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+				
+	            <LinearLayout 
+	                android:id="@+id/id_share_house_ditu"
+				    android:layout_width="0dp"
+				    android:layout_height="match_parent" 
+				    android:layout_weight="1"
+				     android:orientation="vertical"
+				     android:layout_marginTop="@dimen/base_dimen_20"
+				    >
+				
+				    <ImageView
+				        android:id="@+id/imageView1"
+				        android:layout_width="@dimen/base_dimen_64"
+				        android:layout_height="@dimen/base_dimen_52"
+				        android:layout_gravity="center_horizontal"
+				        android:background="@drawable/fgt_house_owner_publish_house"
+				         />
+				
+				    <TextView
+				        android:id="@+id/textView1"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:layout_gravity="center_horizontal"
+				        android:layout_marginTop="@dimen/base_dimen_15"
+				        android:textColor="#999999"
+				        android:text="发布房屋"
+				        android:gravity="center"
+				        android:textSize="@dimen/base_dimen_26" />
+				
+				</LinearLayout>
+	        </LinearLayout>
+	        
+		</FrameLayout>
+        
 
         <View
             android:layout_width="match_parent"
@@ -265,10 +442,15 @@
             android:layout_height="@dimen/base_dimen_1"
             android:background="#cccccc" />
 
-        <tenant.guardts.house.view.HomeFragmentListView
-            android:id="@+id/home_listview"
+        <ListView
+            android:id="@+id/id_home_house_fragment_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" 
+            android:cacheColorHint="#00000000"
+		    android:fadingEdge="none"
+		    android:divider="#afaeae"
+		    android:dividerHeight="@dimen/base_dimen_1"
+            />
     </LinearLayout>
 
-</ScrollView>
+</FrameLayout>

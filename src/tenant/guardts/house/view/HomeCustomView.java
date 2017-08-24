@@ -25,21 +25,6 @@ public class HomeCustomView extends LinearLayout {
 		View view = LayoutInflater.from(context).inflate(R.layout.custom_view_layout,this, true);
 		tv=(TextView) view.findViewById(R.id.textView1);
 		img=(ImageView) view.findViewById(R.id.imageView1);
-//		view.setOnTouchListener(new OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				if(event.getAction() == MotionEvent.ACTION_DOWN){
-//					Log.i("mingguo", "action down");
-//					v.setBackgroundColor(Color.parseColor("#337ffd"));
-//				}
-//				if (event.getAction() == MotionEvent.ACTION_UP){
-//					Log.i("mingguo", "action up");
-//					v.setBackgroundColor(Color.parseColor("#ffffff"));
-//				}
-//				return false;
-//			}
-//		});
 	}
 
 	public HomeCustomView(Context context, AttributeSet attrs) {
