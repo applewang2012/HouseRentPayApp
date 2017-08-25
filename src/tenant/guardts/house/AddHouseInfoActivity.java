@@ -288,7 +288,9 @@ public class AddHouseInfoActivity extends BaseActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(AddHouseInfoActivity.this, list.toString(), Toast.LENGTH_SHORT).show();
+				//////////////////////////////////////////////////////////////////////
+				mConfigTextView.setText(mConfigTextView.getText()+ "   " +list.toString().substring(1, list.size()));
+				Toast.makeText(getApplicationContext(), list.toString().substring(1, list.size()), Toast.LENGTH_SHORT).show();
 				mAlertDialog.dismiss();
 			}
 		});
@@ -476,14 +478,14 @@ public class AddHouseInfoActivity extends BaseActivity {
 		if (!mSelectorInfo.containsKey("property")) {
 			showLoadingView();
 			HouseSelectorModel property = new HouseSelectorModel();
-			property.setHouseOrginText((String) 	mRentalModeTextView.getText());
+			property.setHouseOrginText((String) mRentalModeTextView.getText());
 			mSelectorInfo.put("property", property);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseProperty";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPropertyAction));
 			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPropertyAction, rpc);
 			mPresenter.startPresentServiceTask();
 		} else {
-			showAlertDialog(	mRentalModeTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
+			showAlertDialog(mRentalModeTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
 		}
 
 		// [{"RSOUrl":"0","IsVisible":null,"RSOName":"私产","RSOParentNo":8,"RSOID":15,"RSONo":0,"RSOOrder":1},{"RSOUrl":"0","IsVisible":null,"RSOName":"公产","RSOParentNo":8,"RSOID":16,"RSONo":0,"RSOOrder":2}]
@@ -748,7 +750,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 				dismissLoadingView();
 				mSelectorInfo.get("property").setHouseAllContent(parseHouseProperty((String) msg.obj).get(1));
 				mSelectorInfo.get("property").setHouseAllId(parseHouseProperty((String) msg.obj).get(0));
-				showAlertDialog(mPropertryTextView, "property", parseHouseProperty((String) msg.obj).get(1));
+				showAlertDialog(mRentalModeTextView, "property", parseHouseProperty((String) msg.obj).get(1));
 			} else if (msg.what == 101) {
 				dismissLoadingView();
 				mSelectorInfo.get("type").setHouseAllContent(parseHouseProperty((String) msg.obj).get(1));

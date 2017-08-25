@@ -122,7 +122,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-            
         </activity>
         <activity
             android:name=".AddRentAttributeActivity"
@@ -238,6 +237,11 @@
             android:name=".PersonalInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
+              <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <provider
@@ -299,7 +303,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>
         -->
         <activity
             android:name=".EvaluationActivity"
@@ -315,9 +319,10 @@
             android:theme="@style/AppTheme2" >
         </activity>
         <activity
-            android:theme="@style/AppTheme2" 
             android:name=".AboutUsActivity"
-            android:label="@string/title_activity_about_us" >
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme2" >
+          
         </activity>
     </application>
 

@@ -157,11 +157,13 @@
         android:background="#cccccc" />
 
     <LinearLayout
-        android:id="@+id/linear_layout_about"
+        android:id="@+id/about_us_linearlayout"
+        
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 
         <TextView
+            
             android:layout_width="@dimen/base_dimen_128"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
