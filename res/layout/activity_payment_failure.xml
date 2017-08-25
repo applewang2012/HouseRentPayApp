@@ -71,6 +71,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/id_button_retry_pay"
         android:layout_marginTop="@dimen/base_dimen_150"
         android:textColor="#ffffff"
         android:background="@drawable/payment_success_btn_bg"

@@ -75,7 +75,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 	private TextView mRoadTextView;
 	private TextView mFenjuTextView;
 	private TextView mPoliceTextView;
-	private TextView mRentTypeTextView;
+	//private TextView mRentTypeTextView;
 	private TextView mHouseTypeTextView;
 	private TextView mOwnerTypeTextView;
 	private String mRentNo;
@@ -120,6 +120,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 	private TextView mLeaseTypeTextView;// 租赁类型
 	private TextView mConfigTextView;// 房源配置
 	private AlertDialog mAlertDialog;
+	private EditText mHousePrice;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -179,21 +180,22 @@ public class AddHouseInfoActivity extends BaseActivity {
 			}
 		});
 
+		mHousePrice = (EditText)findViewById(R.id.id_add_house_price);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
 
 		// 出租方式
-		FrameLayout rentalModeFrameLayout = (FrameLayout) findViewById(R.id.id_add_house_rental_mode);
-		mRentalModeTextView = (TextView) findViewById(R.id.id_add_house_rental_mode_text);
-		rentalModeFrameLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(AddHouseInfoActivity.this, "出租方式", Toast.LENGTH_SHORT).show();
-				getHouseProperty();
-			}
-		});
+//		FrameLayout rentalModeFrameLayout = (FrameLayout) findViewById(R.id.id_add_house_rental_mode);
+//		mRentalModeTextView = (TextView) findViewById(R.id.id_add_house_rental_mode_text);
+//		rentalModeFrameLayout.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Toast.makeText(AddHouseInfoActivity.this, "出租方式", Toast.LENGTH_SHORT).show();
+//				getHouseProperty();
+//			}
+//		});
 
 		// 租赁类型
 		FrameLayout leaseTypeFrameLayout = (FrameLayout) findViewById(R.id.id_add_house_lease_type);
@@ -325,7 +327,6 @@ public class AddHouseInfoActivity extends BaseActivity {
 			@Override
 			public void itemClick(AddressSelector addressSelector, CityInterface city, int tabPosition) {
 				String name = city.getCityName();
-
 				switch (tabPosition) {
 				case 0:
 					addressSelector.setCities(cities2);
@@ -654,7 +655,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 		rpc.addProperty("ROwner", mROwner);
 		rpc.addProperty("ROwnerTel", mROwnerTel);
 		rpc.addProperty("RIDCard", "111");
-		rpc.addProperty("RLocationDescription", " desp ");
+		rpc.addProperty("RLocationDescription", mHousePrice.getText().toString());
 		rpc.addProperty("RPSParentName", "111");
 		rpc.addProperty("createdBy", mUserName);
 		rpc.addProperty("rentType", "111");
@@ -792,7 +793,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 				dismissLoadingView();
 				mSelectorInfo.get("renttype").setHouseAllContent(parseHouseProperty((String) msg.obj).get(1));
 				mSelectorInfo.get("renttype").setHouseAllId(parseHouseProperty((String) msg.obj).get(0));
-				showAlertDialog(mRentTypeTextView, "renttype", parseHouseProperty((String) msg.obj).get(1));
+				showAlertDialog(mLeaseTypeTextView, "renttype", parseHouseProperty((String) msg.obj).get(1));
 			} else if (msg.what == 110) {
 				dismissLoadingView();
 				mSelectorInfo.get("ownertype").setHouseAllContent(parseHouseProperty((String) msg.obj).get(1));

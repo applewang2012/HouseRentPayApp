@@ -15,7 +15,7 @@
         	android:layout_height="@dimen/base_dimen_550"
         	android:layout_gravity="center"
         	android:orientation="vertical"
-        	android:background="@drawable/item_shape_solid_corner"
+        	android:background="@drawable/item_shape_solid_corner_normal"
             >
             <ImageView 
                 android:layout_width="@dimen/base_dimen_286"  

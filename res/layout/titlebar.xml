@@ -4,17 +4,21 @@
        android:layout_width="fill_parent"
        android:layout_height="@dimen/base_dimen_90"
        android:background="#337ffd"  
-       >    
-      <Button 
+       >
+      <FrameLayout
           android:id="@+id/id_titlebar_back"
-           android:layout_width="@dimen/base_dimen_44"
-           android:layout_height="@dimen/base_dimen_44"
-           android:background="@drawable/short_lease_back"
-           android:layout_gravity="center_vertical"
-           android:clickable="true"
-           android:onClick="backFinish"
-           android:layout_marginLeft="@dimen/base_dimen_20"
-          />
+	       android:layout_width="@dimen/base_dimen_100"
+	       android:layout_height="@dimen/base_dimen_90"
+	       android:clickable="true"
+	       android:onClick="backFinish" >
+	      <Button 
+	           android:layout_width="@dimen/base_dimen_44"
+	           android:layout_height="@dimen/base_dimen_44"
+	           android:background="@drawable/short_lease_back"
+	           android:layout_gravity="center_vertical"
+	           android:layout_marginLeft="@dimen/base_dimen_20"
+	          />
+      </FrameLayout>
       <TextView
            android:id="@+id/id_titlebar"
            android:layout_width="wrap_content"
@@ -36,12 +40,12 @@
 		   android:visibility="invisible"
        />
        
-       <ImageView 
+       <!-- <ImageView 
            android:id="@+id/id_titlebar_right_search"
            android:layout_width="@dimen/base_dimen_44"
            android:layout_height="@dimen/base_dimen_44" 
            android:src="@drawable/short_lease_search"
            android:layout_gravity="center_vertical"
            android:layout_marginLeft="@dimen/base_dimen_650"
-           />
+           /> -->
 </FrameLayout>

@@ -81,8 +81,8 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				View holderView = holder.getConvertView();
 				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
 				//TextView areaText = (TextView)holderView.findViewById(R.id.id_history_area);
-				TextView contactText = (TextView)holderView.findViewById(R.id.id_history_contacts);
-				TextView timeText = (TextView)holderView.findViewById(R.id.id_history_time);
+				TextView contactText = (TextView)holderView.findViewById(R.id.id_order_end_time);
+				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				addressText.setText(info.getHouseAddress());
 				//areaText.setText(info.getHouseArea()+" 平米");
 				contactText.setText(info.getHouseOwnerName()+" "+info.getHousePhone());

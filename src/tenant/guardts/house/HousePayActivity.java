@@ -53,9 +53,6 @@ public class HousePayActivity extends BaseActivity{
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("支付房款");
-		ImageView searchImage = (ImageView)findViewById(R.id.id_titlebar_right_search);
-		searchImage.setVisibility(View.INVISIBLE);
-        
         
         Button payButton = (Button)findViewById(R.id.id_button_pay_money_button);
         payButton.setOnClickListener(new OnClickListener() {
@@ -80,7 +77,6 @@ private void startPay(final String price, final String orderNo, final String ip 
 				return null;
 			}
 			
-
 			@Override
 			protected void onPostExecute(Void result) {
 				try {

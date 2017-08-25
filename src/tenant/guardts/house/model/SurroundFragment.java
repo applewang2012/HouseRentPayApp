@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -100,7 +101,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		View titlebarView = (View)mRootView.findViewById(R.id.id_common_title_bar);
 		TextView titleText = (TextView) titlebarView.findViewById(R.id.id_titlebar);
 		titleText.setText("周边生活");
-		Button backButton = (Button)titlebarView.findViewById(R.id.id_titlebar_back);
+		FrameLayout backButton = (FrameLayout)titlebarView.findViewById(R.id.id_titlebar_back);
 		backButton.setVisibility(View.INVISIBLE);
 	}
 	

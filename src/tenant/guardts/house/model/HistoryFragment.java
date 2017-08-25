@@ -13,8 +13,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -37,6 +40,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 	private String mRentHistoryAction = "http://tempuri.org/GetRentHistory";
 	private HistoryZufangFragment mZuFangFrament;
 	private HistoryChuZuFragment mChuzuFragment;
+	private RadioGroup mRadioGroup;
 
 	
 	@Override
@@ -71,6 +75,42 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 //		initAdapter();
 //		mlistView.setAdapter(mAdapter);
 //		mlistView.setOnItemClickListener(this);
+		
+		mRadioGroup = (RadioGroup) mRootView.findViewById(R.id.id_fragment_history_radiogrouop);
+		mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.id_frament_history_zufang_button:
+					
+					FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+					hideAllFragments(fragmentTransaction);
+					if (mZuFangFrament == null){
+						mZuFangFrament = new HistoryZufangFragment();
+						fragmentTransaction.add(R.id.id_house_child_fragment_content, mZuFangFrament);
+						fragmentTransaction.commitAllowingStateLoss();
+					}else{
+						fragmentTransaction.show(mZuFangFrament);
+						fragmentTransaction.commitAllowingStateLoss();
+					}
+					break;
+				case R.id.id_frament_history_chuzu_button:
+					
+					FragmentTransaction chuzufragmentTransaction = getChildFragmentManager().beginTransaction();
+					hideAllFragments(chuzufragmentTransaction);
+					if (mChuzuFragment == null){
+						mChuzuFragment = new HistoryChuZuFragment();
+						chuzufragmentTransaction.add(R.id.id_house_child_fragment_content, mChuzuFragment);
+						chuzufragmentTransaction.commitAllowingStateLoss();
+					}else{
+						chuzufragmentTransaction.show(mChuzuFragment);
+						chuzufragmentTransaction.commitAllowingStateLoss();
+					}
+					break;
+				}
+			}
+		});
 		FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 		if (mZuFangFrament == null){
 			mZuFangFrament = new HistoryZufangFragment();
@@ -80,52 +120,6 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 			fragmentTransaction.show(mZuFangFrament);
 			fragmentTransaction.commitAllowingStateLoss();
 		}
-		final Button zufangButton = (Button)mRootView.findViewById(R.id.id_frament_history_zufang_button);
-		final Button chuzuButton = (Button)mRootView.findViewById(R.id.id_frament_history_chuzu_button);
-		zufangButton.setOnClickListener(new OnClickListener() {
-			
-			@SuppressLint("NewApi")
-			@Override
-			public void onClick(View v) {
-				zufangButton.setTextColor(Color.parseColor("#ffffff"));
-				chuzuButton.setTextColor(Color.parseColor("#888888"));
-				zufangButton.setBackgroundResource(R.drawable.house_history_button_press);
-				chuzuButton.setBackgroundResource(R.drawable.house_history_button_normal);
-				
-				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-				hideAllFragments(fragmentTransaction);
-				if (mZuFangFrament == null){
-					mZuFangFrament = new HistoryZufangFragment();
-					fragmentTransaction.add(R.id.id_house_child_fragment_content, mZuFangFrament);
-					fragmentTransaction.commitAllowingStateLoss();
-				}else{
-					fragmentTransaction.show(mZuFangFrament);
-					fragmentTransaction.commitAllowingStateLoss();
-				}
-			}
-		});
-		chuzuButton.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				zufangButton.setTextColor(Color.parseColor("#888888"));
-				chuzuButton.setTextColor(Color.parseColor("#ffffff"));
-				zufangButton.setBackgroundResource(R.drawable.house_history_button_normal);
-				chuzuButton.setBackgroundResource(R.drawable.house_history_button_press);
-				
-				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-				hideAllFragments(fragmentTransaction);
-				if (mChuzuFragment == null){
-					mChuzuFragment = new HistoryChuZuFragment();
-					fragmentTransaction.add(R.id.id_house_child_fragment_content, mChuzuFragment);
-					fragmentTransaction.commitAllowingStateLoss();
-				}else{
-					fragmentTransaction.show(mChuzuFragment);
-					fragmentTransaction.commitAllowingStateLoss();
-				}
-			}
-			
-		});
 	}
 	
 	private void hideAllFragments(FragmentTransaction transaction) {
@@ -143,7 +137,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 		View titlebarView = (View)mRootView.findViewById(R.id.id_common_title_bar);
 		TextView titleText = (TextView) titlebarView.findViewById(R.id.id_titlebar);
 		titleText.setText("历史记录");
-		Button backButton = (Button)titlebarView.findViewById(R.id.id_titlebar_back);
+		FrameLayout backButton = (FrameLayout)titlebarView.findViewById(R.id.id_titlebar_back);
 		backButton.setVisibility(View.INVISIBLE);
 	}
 	

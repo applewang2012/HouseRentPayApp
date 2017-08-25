@@ -49,8 +49,6 @@ public class HousePayActivity extends BaseActivity implements IWXAPIEventHandler
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("支付房款");
-		ImageView searchImage = (ImageView)findViewById(R.id.id_titlebar_right_search);
-		searchImage.setVisibility(View.INVISIBLE);
         
         
         Button payButton = (Button)findViewById(R.id.id_button_pay_money_button);
@@ -59,6 +57,9 @@ public class HousePayActivity extends BaseActivity implements IWXAPIEventHandler
 			@Override
 			public void onClick(View v) {
 				api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
+				CommonUtil.ORDER_MONKEY = "1";
+				CommonUtil.ORDER_NO = UtilTool.generateOrderNo();
+				CommonUtil.ORDER_TIME = UtilTool.stampToNormalDate(System.currentTimeMillis()+"");
 				startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 			}
 		});

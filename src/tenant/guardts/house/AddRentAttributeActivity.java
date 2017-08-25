@@ -1,5 +1,6 @@
 package tenant.guardts.house;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -8,6 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,9 +20,13 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,11 +41,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 
-public class AddRentAttributeActivity extends BaseActivity{
+public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
 
 	private TextView mTitleBar;
 	private View mLoadingView;
@@ -57,6 +69,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 	private TextView mStartTime, mEndTime; 
 	private String mSetStartData, mSetEndData;
 	private String mOriginStartContent, mOriginEndContent, mOriginNationalContent, mOriginProvinceContent;
+	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mHouseNo;
 	private String mUsername;
 	private String [] mOwnerType = new String[2];
@@ -64,6 +77,13 @@ public class AddRentAttributeActivity extends BaseActivity{
 	private String mOwnerName;
 	private String mOwnerIdcard;
 	private String mOrderId;
+	private String file;
+	private DetectionAuthentic authentic;
+	private String mFaceCaptureString, mCaptureString;
+	private String mRealName, mIdCard;
+	private HandlerThread myHandlerThread ;
+	private Handler mSubHandler;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,10 +91,10 @@ public class AddRentAttributeActivity extends BaseActivity{
 		setContentView(R.layout.add_house_rent_attribute_info); 
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("房屋租赁信息");
+		mTitleBar.setText("房客信息");
 		
 		initView();
-		
+		initHandler();
 	}
 	
 	
@@ -86,7 +106,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 		mUsername = getIntent().getStringExtra("user_name");
 		mOwnerName = getIntent().getStringExtra("owner_name");
 		mOwnerIdcard = getIntent().getStringExtra("owner_id");
-		mHouseId.setText(mHouseNo);
+		//mHouseId.setText(mHouseNo);
 	}
 
 	
@@ -100,7 +120,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 			}
 		});
 		builder.show();
-}
+	}
 
 	private void getStartTime(){
 		new DatePickerDialog(AddRentAttributeActivity.this , 
@@ -118,6 +138,22 @@ public class AddRentAttributeActivity extends BaseActivity{
 				cal .get(Calendar.MONTH ), 
 				cal .get(Calendar.DAY_OF_MONTH ) 
 				).show(); 
+	}
+	
+	private void showIndentifySuccessDialog(){
+		new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.identify_success_title)) 
+		  
+	     .setMessage(getString(R.string.identify_success_content))  
+	  
+	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() { 
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {
+	        	 finish();
+	         }  
+	  
+	     }).setCancelable(false)
+	     .show(); 
 	}
 	
 	private DatePickerDialog.OnDateSetListener startlistener = new DatePickerDialog.OnDateSetListener(){  //
@@ -139,7 +175,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 		updateEndDate();
 		} 
 	};
-	private TextView mHouseId;
+	//private TextView mHouseId;
 	private EditText mRentIDcard;
 	private EditText mRentName;
 	private EditText mRentPrice;
@@ -203,7 +239,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 			}
 		});
 		
-		mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
+		//mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
 		mRentIDcard = (EditText)findViewById(R.id.id_rent_house_idcard);
 		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
@@ -215,20 +251,52 @@ public class AddRentAttributeActivity extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				if (checkInputContent()){
-					showLoadingView();
-					startAddRentInfo();
-					//startHttpService();
+					//showLoadingView();
+					//startAddRentInfo();
+					mRealName = mRentName.getEditableText().toString();
+					mIdCard = mRentIDcard.getEditableText().toString();
+					
+					GlobalUtil.longToast(getApplication(),"拍照认证！");
+					Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					file = ScreenShotUtil.createScreenshotDirectory(AddRentAttributeActivity.this);
+					File out = new File(file);
+					Uri uri = Uri.fromFile(out);
+					getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+					getPhoto.putExtra("return-data", true);
+					getPhoto.putExtra("camerasensortype", 2); 
+					startActivityForResult(getPhoto, 1);
 				}
 			}
 		});
 	}
 	
+	private void initHandler(){
+    	//创建一个线程,线程名字：handler-thread
+        myHandlerThread = new HandlerThread( "handler-thread") ;
+        myHandlerThread.start();
+        
+        mSubHandler = new Handler(myHandlerThread.getLooper()){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                int degree = BMapUtil.readPictureDegree(file);
+                Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
+   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
+   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
+                
+            }
+        };
+        
+    }
+	
 	private boolean checkInputContent(){
 		
-		if (mHouseId.getText().toString() == null || mHouseId.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请输入产权编号", Toast.LENGTH_SHORT).show();
-			return false;
-		}
+//		if (mHouseId.getText().toString() == null || mHouseId.getText().toString().equals("")){
+//			Toast.makeText(getApplicationContext(), "请输入产权编号", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}
 		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
 			return false;
@@ -242,7 +310,7 @@ public class AddRentAttributeActivity extends BaseActivity{
 			return false;
 		}
 		if (mRentPhone.getText().toString() == null || mRentPhone.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请输入手机号码", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "请输入手机号码,保证手机号真实有效", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if (mRentPhone.getText().toString().length()<11){
@@ -274,12 +342,12 @@ public class AddRentAttributeActivity extends BaseActivity{
 	}
 	
 	private void startAddRentInfo(){
-			Log.w("mingguo", " mHouseId "+mHouseId.getText()+" mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
+			Log.w("mingguo", " mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
 					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+mRentReadMe.getText());
 			showLoadingView();
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
-			rpc.addProperty("RentNo", mHouseId.getText().toString());   
+			//rpc.addProperty("RentNo", mHouseId.getText().toString());   
 			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
 			rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());  
 			rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());  
@@ -301,15 +369,76 @@ public class AddRentAttributeActivity extends BaseActivity{
 	}
 	
 	private void sendMessageToFinish(){
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=SendMessageToPlice";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendMessageAction));
-		rpc.addProperty("rentNo", mHouseId.getText().toString());
-		rpc.addProperty("sign", "0");
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendMessageAction, rpc);
-		mPresenter.startPresentServiceTask();
+//		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=SendMessageToPlice";
+//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendMessageAction));
+//		rpc.addProperty("rentNo", mHouseId.getText().toString());
+//		rpc.addProperty("sign", "0");
+//		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendMessageAction, rpc);
+//		mPresenter.startPresentServiceTask();
 	}
 	
+	private void startLiveIdentifyActivity(){
+		authentic = DetectionAuthentic.getInstance(AddRentAttributeActivity.this, new ResultListener() {
+
+		@Override
+		public void onSDKUsingFail(String errorMessage, String errorCode) {
+			// TODO Auto-generated method stub
+			GlobalUtil.shortToast(getApplication(), errorMessage, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			
+		}
+		
+		@Override
+		public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
+			if(faceImages == null){
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		}
+		
+		@Override
+		public void onFaceImageCaptured(byte[] faceImages) {
+			if(faceImages == null){
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+			showLoadingView();
+			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
+			identifyUserInfo(mFaceCaptureString, mCaptureString);
+		}
+		});
 	
+		authentic.autenticateToCaptureAction(AddRentAttributeActivity.this, mRealName, mIdCard);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		if (resultCode == RESULT_OK && requestCode == 1) {
+			 Log.w("mingguo", "activity result  width data   "+data);
+			 mSubHandler.sendEmptyMessage(1000);
+			 startLiveIdentifyActivity();
+		}else{
+			GlobalUtil.shortToast(getApplication(), "头像采集失败", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+		}
+	}
+
+
+	private void identifyUserInfo(String faceStr, String screenshotStr){
+		if (faceStr == null || screenshotStr == null){
+			return;
+		}
+		Log.i("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		Log.i("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
+		rpc.addProperty("idcard", mIdCard);
+		rpc.addProperty("name", mRealName);
+		rpc.addProperty("base64Str", faceStr);
+		rpc.addProperty("picBase64Str", screenshotStr);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.startPresentServiceTask();
+		
+	}
 	
 	private void startHttpService(){
 		try {
@@ -372,11 +501,49 @@ public class AddRentAttributeActivity extends BaseActivity{
 				}
 			}else if (msg.what == 101){
 				dismissLoadingView();
-				getIndentifyInfo((String)msg.obj);
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								showIndentifySuccessDialog();
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				//getIndentifyInfo((String)msg.obj);
 			}else if (msg.what == 102){
 				parseQueryStatus((String)msg.obj);
 			}else if (msg.what == 103){
 				finish();
+			}else if (msg.what == 110){
+				//dismissLoadingView();
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String compareResult = object.optString("compareresult");
+						if (compareResult == null || compareResult.equals("")){
+							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						}else{
+							if (compareResult.equals("0")){
+									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ,请等待房主确认！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+									startAddRentInfo();
+									return;
+							}else{
+								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -566,9 +733,13 @@ public class AddRentAttributeActivity extends BaseActivity{
 				msg.what = 103;
 				msg.obj = templateInfo;
 				mHandler.sendMessage(msg);
+			}else if (action.equals(mIdentifyAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 110;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
 		}
-		
 	}
 
 	@Override
@@ -577,6 +748,8 @@ public class AddRentAttributeActivity extends BaseActivity{
 		super.onDestroy();
 		mHandler.removeCallbacksAndMessages(null);
 	}
+	
+	
 	
 	
 

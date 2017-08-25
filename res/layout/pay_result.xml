@@ -5,12 +5,13 @@
 	android:layout_height="fill_parent"
     >
     
-	<TextView
-	    android:layout_width="fill_parent"
-	 	android:layout_height="fill_parent"
-		android:gravity="center"
-	 	android:textColor="#ff000000"
-	 	android:textSize="20dp"
-	 	android:text="@string/pay_result_tip"/>
+	<include
+        android:id="@+id/id_weixin_paysuccess"
+        layout="@layout/activity_successful_payment" />
+	
+	<include
+        android:id="@+id/id_weixin_payfailed"
+        android:visibility="invisible"
+        layout="@layout/activity_payment_failure" />
 	
 </FrameLayout>

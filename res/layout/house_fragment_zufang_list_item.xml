@@ -2,51 +2,136 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent" 
-    android:layout_height="70dp"
+    android:layout_height="@dimen/base_dimen_236"
     android:orientation="vertical"
-    android:paddingRight="25dp"
     android:paddingBottom="5dp"
     android:background="#ffffff"
-    android:paddingLeft="25dp">
-    <TextView 
-        android:id="@+id/id_history_address"
+    >
+    <FrameLayout 
         android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:layout_marginTop="10dp"
-    	android:singleLine="true"
-    	android:textColor="#afaeae"
-    	android:textSize="13dp"
-    	android:text="天津市和平区瞰和平16号楼1-202"
-    	android:gravity="left|center_vertical"
-        />
-	<LinearLayout 
-	    android:layout_width="fill_parent" 
-    	android:layout_height="wrap_content"
-    	android:layout_marginTop="8dp"
-    	android:orientation="horizontal"
-	    >
-	    <TextView 
-	        android:id="@+id/id_history_contacts"
-	        android:layout_width="0dp" 
+    	android:layout_height="@dimen/base_dimen_90"
+    	android:layout_marginTop="@dimen/base_dimen_10"
+    	android:layout_marginLeft="@dimen/base_dimen_30"
+    	android:layout_marginRight="@dimen/base_dimen_30"
+        >
+    	<ImageView 
+    	    android:layout_width="@dimen/base_dimen_20" 
+    		android:layout_height="@dimen/base_dimen_28"
+    		android:background="@drawable/fgt_zufang_location_icon"
+    		android:layout_gravity="center_vertical"
+    	    />
+    	 <TextView 
+	        android:id="@+id/id_history_address"
+	        android:layout_width="@dimen/base_dimen_500" 
 	    	android:layout_height="wrap_content"
-	    	android:layout_weight="3"
+	    	android:layout_marginLeft="@dimen/base_dimen_30"
 	    	android:singleLine="true"
-	    	android:textColor="#666666"
-	    	android:textSize="13dp"
-	    	android:text="姓名"
+	    	android:textColor="#333333"
+	    	android:textSize="@dimen/base_dimen_30"
+	    	android:text="天津市和平区瞰和平16号楼1-202"
+	    	android:layout_gravity="center_vertical"
+	        />   
+	       <TextView 
+	        android:id="@+id/id_zufang_item_status"
+	        android:layout_width="wrap_content" 
+	    	android:layout_height="wrap_content"
+	    	android:layout_marginRight="@dimen/base_dimen_20"
+	    	android:textColor="#de6262"
+	    	android:textSize="@dimen/base_dimen_28"
+	    	android:text="待确认"
+	    	android:layout_gravity="center_vertical|right"
+	        />  
+    </FrameLayout>
+    
+    <ImageView 
+        android:layout_width="fill_parent" 
+    	android:layout_height="@dimen/base_dimen_1"
+    	android:background="#cccccc"
+    	android:layout_marginTop="@dimen/base_dimen_1"
+        />
+    
+	<FrameLayout 
+	    android:layout_width="fill_parent" 
+    	android:layout_height="@dimen/base_dimen_50"
+    	android:layout_marginTop="@dimen/base_dimen_20"
+    	android:orientation="horizontal"
+    	android:layout_marginLeft="@dimen/base_dimen_30"
+    	android:layout_marginRight="@dimen/base_dimen_30"
+	    >
+	    
+	    <TextView 
+	        android:id="@+id/id_order_end_time"
+	        android:layout_width="wrap_content" 
+	    	android:layout_height="fill_parent"
+	    	android:textColor="#555555"
+	    	android:textSize="@dimen/base_dimen_28"
+	    	android:text="退房时间  2017-08-26"
 	    	android:gravity="left|center_vertical"
 	        />
 	    
 	    <TextView 
-	        android:id="@+id/id_history_time"
-	        android:layout_width="0dp" 
-	    	android:layout_height="wrap_content"
-	    	android:layout_weight="4"
-	    	android:singleLine="true"
-	    	android:textColor="#666666"
-	    	android:textSize="13dp"
-	    	android:text="时间"
-	    	android:gravity="right|center_vertical"
+	        android:id="@+id/id_order_monkey"
+	        android:layout_width="wrap_content" 
+	    	android:layout_height="fill_parent"
+	    	android:textColor="#555555"
+	    	android:textSize="@dimen/base_dimen_28"
+	    	android:layout_marginLeft="@dimen/base_dimen_500"
+	    	android:text="金额"
+	    	android:gravity="left|center_vertical"
 	        />
-	</LinearLayout>
+	    
+	    <TextView 
+	        android:id="@+id/id_order_monkey_input"
+	        android:layout_width="wrap_content" 
+	    	android:layout_height="fill_parent"
+	    	android:textColor="#337ffd"
+	    	android:textSize="@dimen/base_dimen_28"
+	    	android:layout_marginRight="@dimen/base_dimen_20"
+	    	android:layout_gravity="center_vertical|right"
+	    	android:text="500"
+	    	android:gravity="left|center_vertical"
+	        />
+	</FrameLayout>
+	
+	<FrameLayout 
+	    android:layout_width="fill_parent" 
+    	android:layout_height="@dimen/base_dimen_58"
+    	android:layout_marginTop="@dimen/base_dimen_22"
+    	android:layout_marginLeft="@dimen/base_dimen_30"
+    	android:layout_marginRight="@dimen/base_dimen_30"
+	    >
+	    <Button 
+	        android:id="@+id/id_order_button_status1"
+	        android:layout_width="@dimen/base_dimen_150" 
+    		android:layout_height="@dimen/base_dimen_56"
+    		android:layout_marginLeft="@dimen/base_dimen_170"
+    		android:textColor="#999999"
+    		android:background="@drawable/item_shape_no_solid_corner"
+    		android:gravity="center"
+    		android:text="查看详情 "
+    		android:layout_gravity="center_vertical"
+	        />
+	    <Button 
+	        android:id="@+id/id_order_button_status2"
+	        android:layout_width="@dimen/base_dimen_150" 
+    		android:layout_height="@dimen/base_dimen_56"
+    		android:layout_marginLeft="@dimen/base_dimen_330"
+    		android:textColor="#999999"
+    		android:background="@drawable/item_shape_no_solid_corner"
+    		android:gravity="center"
+    		android:text="立即付款"
+    		android:layout_gravity="center_vertical"
+	        />
+	    <Button 
+	        android:id="@+id/id_order_button_status3"
+	        android:layout_width="@dimen/base_dimen_150" 
+    		android:layout_height="@dimen/base_dimen_56"
+    		android:layout_marginLeft="@dimen/base_dimen_500"
+    		android:textColor="#999999"
+    		android:background="@drawable/item_shape_no_solid_corner"
+    		android:gravity="center"
+    		android:text="取消 订单"
+    		android:layout_gravity="center_vertical"
+	        />
+	 </FrameLayout>
 </LinearLayout>

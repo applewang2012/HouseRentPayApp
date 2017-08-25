@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -28,8 +27,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
-import tenant.guardts.house.HouseHistoryActivity;
-import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.PersonalInfoActivity;

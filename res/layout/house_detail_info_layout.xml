@@ -414,31 +414,38 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
+                android:layout_height="@dimen/base_dimen_80" 
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/base_dimen_20"
+                android:paddingRight="@dimen/base_dimen_20"
                 >
 
                 <Button
                     android:id="@+id/detail_button_call"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    
-                    android:layout_marginLeft="@dimen/base_dimen_40"
+                    android:layout_weight="1"
                     android:textColor="@drawable/button_text_selector"
                     android:background="@drawable/detail_button_background_selector"
                     android:textSize="@dimen/base_dimen_32"
+                    android:gravity="center"
                     android:text="联系房主" >
                 </Button>
+                
 
                 <Button
                    android:id="@+id/detail_button_apply"
-                    android:layout_width="wrap_content"
+                   android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:textSize="@dimen/base_dimen_32"
                     android:textColor="@drawable/button_text_selector"
-                    android:layout_marginLeft="@dimen/base_dimen_40"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/base_dimen_20"
                     android:background="@drawable/detail_button_background_selector"
-                    android:text="立即预约" >
+                    android:text="申请租房" >
                 </Button>
             </LinearLayout>
         </LinearLayout>

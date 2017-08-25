@@ -33,6 +33,9 @@
 
     <!-- 微信支付 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    	<!-- 微信支付 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
     <!-- 百度地图使用 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
@@ -204,11 +207,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".GetRentAttributeActivity"

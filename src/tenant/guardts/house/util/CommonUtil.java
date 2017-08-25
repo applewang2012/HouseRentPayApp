@@ -36,7 +36,7 @@ public class CommonUtil {
     public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
     
     public static String mRegisterRealName = null;
-    public static String mRegisterIdcard = null;
+    public static String mRegisterIdcard = "370881198411094833";
     public static String mUserLoginName = "wmg";
     public static String mUserHost = "http://qxw2332340157.my3w.com/";
     public static String mUserArea;
@@ -48,6 +48,10 @@ public class CommonUtil {
     public static final String APP_ID = "wxae25cb3fefdc75ae";
     public static final String WX_PARTNER_ID = "1481965242";
     public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
+    
+    public static  String ORDER_TIME = null;
+    public static  String ORDER_NO = null;
+    public static  String ORDER_MONKEY = null;
     
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;

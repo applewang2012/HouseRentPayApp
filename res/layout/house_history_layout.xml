@@ -12,37 +12,52 @@
        />
     
 	<LinearLayout 
-	    
 	    android:layout_width="match_parent"
    		android:layout_height="match_parent"
+   		android:layout_marginTop="@dimen/base_dimen_90"
    		android:orientation="vertical"
 	    >
-	    <FrameLayout 
-	        android:layout_width="match_parent"
-   			android:layout_height="@dimen/base_dimen_83"
-   			android:layout_marginTop="@dimen/base_dimen_100"
-	        >
-	        <Button 
-	            android:id="@+id/id_frament_history_zufang_button"
-	            android:layout_width="@dimen/base_dimen_337"
-   				android:layout_height="@dimen/base_dimen_83"
-   				android:background="@drawable/house_history_button_press"
-   				android:layout_marginLeft="@dimen/base_dimen_20"
-   				android:layout_gravity="left"
-   				android:text="租房历史"
-   				android:textSize="@dimen/base_dimen_30"
-   			/>
-	        <Button 
-	            android:id="@+id/id_frament_history_chuzu_button"
-	            android:layout_width="@dimen/base_dimen_337"
-   				android:layout_height="@dimen/base_dimen_83"
-   				android:background="@drawable/house_history_button_normal"
-   				android:layout_marginRight="@dimen/base_dimen_20"
-   				android:layout_gravity="right"
-   				android:text="出租历史"
-   				android:textSize="@dimen/base_dimen_30"
-   			/>
-	    </FrameLayout>
+	    <RadioGroup
+            android:id="@+id/id_fragment_history_radiogrouop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_80"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/id_frament_history_zufang_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/home_radiobutton_bg"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="我是房客"
+                android:textColor="@drawable/home_frag_radiobutton_text_bg"
+                android:textSize="@dimen/base_dimen_32" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="@dimen/base_dimen_60"
+                android:layout_gravity="center_vertical"
+                android:background="#cccccc" />
+
+            <RadioButton
+                android:id="@+id/id_frament_history_chuzu_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/home_radiobutton_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:text="我是房主"
+                android:textStyle="bold"
+                android:textColor="@drawable/home_frag_radiobutton_text_bg"
+                android:textSize="@dimen/base_dimen_32" />
+        </RadioGroup>
+        
+	    
 	    <FrameLayout
 	        android:id="@+id/id_house_child_fragment_content" 
 			android:layout_width="fill_parent"

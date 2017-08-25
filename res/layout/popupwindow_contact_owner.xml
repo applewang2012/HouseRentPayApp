@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    
+    android:id="@+id/id_contact_owner_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
@@ -29,6 +29,7 @@
             android:background="#cccccc" />
 
         <TextView
+            android:id="@+id/id_button_contact_owner_show_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/base_dimen_30"
@@ -43,32 +44,41 @@
         android:layout_width="@dimen/base_dimen_680"
         android:layout_height="@dimen/base_dimen_100"
         android:background="@drawable/contact_owner_bg_down"
+        android:paddingLeft="@dimen/base_dimen_30"
+        android:paddingRight="@dimen/base_dimen_30"
+        android:layout_marginBottom="@dimen/base_dimen_15"
         android:orientation="horizontal" >
 
-        <TextView
+        <Button
+            android:id="@+id/id_button_contact_owner_dial"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/base_dimen_36"
-            android:layout_marginTop="@dimen/base_dimen_30"
+            android:layout_height="@dimen/base_dimen_70"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="拨号"
             android:textColor="#337ffd"
+            android:background="#00000000"
             android:textSize="@dimen/base_dimen_32" />
 
-        <View
+         <View
             android:layout_width="@dimen/base_dimen_1"
             android:layout_height="@dimen/base_dimen_40"
             android:layout_gravity="center_vertical"
             android:background="#cccccc" />
+        
 
-        <TextView
+        <Button
+            android:id="@+id/id_button_contact_owner_cancel"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base_dimen_30"
+            android:layout_height="@dimen/base_dimen_70"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_50"
             android:gravity="center"
             android:text="取消"
             android:textColor="#999999"
+            android:background="#00000000"
             android:textSize="@dimen/base_dimen_32" />
     </LinearLayout>
 

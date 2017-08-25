@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapObject;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -79,26 +81,55 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 
 
 	private void initAdapter(){
-		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.rent_to_house_list_item_layout, mHouseInfoList) {
+		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
 				View holderView = holder.getConvertView();
-				TextView addressTextView = (TextView)holderView.findViewById(R.id.id_rent_to_house_item_address);
-				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_rent_to_house_item_type);
-				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_rent_to_house_item_direction);
-				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_rent_to_house_item_floor);
-				//TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
-				addressTextView.setText(info.getHouseAddress());
-				typeTextView.setText(info.getHouseType());
-				directionTextView.setText(info.getHouseDirection());
-				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+getString(R.string.house_floor));
-//				statusTextView.setText(info.getHouseStatus());
-//				if (info.getHouseAvailable()){
-//					statusTextView.setTextColor(Color.parseColor("#0b6cfe"));
-//				}else{
-//					
-//				}
+				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
+				TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
+				TextView contactText = (TextView)holderView.findViewById(R.id.id_order_end_time);
+				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
+				Button button1 = (Button)holderView.findViewById(R.id.id_order_button_status1);
+				Button button2 = (Button)holderView.findViewById(R.id.id_order_button_status2);
+				Button button3 = (Button)holderView.findViewById(R.id.id_order_button_status3);
+				addressText.setText(info.getHouseAddress());
+				//areaText.setText(info.getHouseArea()+" 平米");
+				//contactText.setText(info.getHouseOwnerName()+" "+info.getHousePhone());
+				//timeText.setText(info.getHouseStartTime()+"至"+info.getHouseEndTime());
+				if (holder.getPosition() == 0){
+					status.setText("待确认");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setTextColor(Color.parseColor("#337ffd"));
+					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button2.setText("查看详情");
+					button3.setText("取消订单");
+				}else if (holder.getPosition() == 1){
+					status.setText("待支付");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setText("查看详情");
+				}else if (holder.getPosition() == 2){
+					status.setText("已支付");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setText("查看详情");
+				}else if (holder.getPosition() == 3){
+					status.setText("待评价");
+					status.setTextColor(Color.parseColor("#8be487"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setText("查看详情");
+					button3.setText("立即评价");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+				}
 			}
 		};
 	}
@@ -191,20 +222,23 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 			return;
 		}
 		mHouseInfoList.clear();
-		for (int index = 0; index < list.size(); index++){
-			HouseInfoModel infoModel = new HouseInfoModel();
-			infoModel.setHouseAddress(list.get(index).getHouseAddress());
-			infoModel.setHouseDirection(list.get(index).getHouseDirection());
-			infoModel.setHouseTotalFloor(list.get(index).getHouseTotalFloor());
-			infoModel.setHouseCurrentFloor(list.get(index).getHouseCurrentFloor());
-			infoModel.setHouseType(list.get(index).getHouseType());
-			infoModel.setHouseStatus(list.get(index).getHouseStatus());
-			infoModel.setHouseId(list.get(index).getHouseId());
-			infoModel.setHouseAvailable(list.get(index).getHouseAvailable());
-			infoModel.setHouseOwnerName(list.get(index).getHouseOwnerName());
-			infoModel.setHouseOwnerIdcard(list.get(index).getHouseOwnerIdcard());
-			mHouseInfoList.add(infoModel);
+		for (int i = 0; i  < 4; i++){
+			for (int index = 0; index < list.size(); index++){
+				HouseInfoModel infoModel = new HouseInfoModel();
+				infoModel.setHouseAddress(list.get(index).getHouseAddress());
+				infoModel.setHouseDirection(list.get(index).getHouseDirection());
+				infoModel.setHouseTotalFloor(list.get(index).getHouseTotalFloor());
+				infoModel.setHouseCurrentFloor(list.get(index).getHouseCurrentFloor());
+				infoModel.setHouseType(list.get(index).getHouseType());
+				infoModel.setHouseStatus(list.get(index).getHouseStatus());
+				infoModel.setHouseId(list.get(index).getHouseId());
+				infoModel.setHouseAvailable(list.get(index).getHouseAvailable());
+				infoModel.setHouseOwnerName(list.get(index).getHouseOwnerName());
+				infoModel.setHouseOwnerIdcard(list.get(index).getHouseOwnerIdcard());
+				mHouseInfoList.add(infoModel);
+			}
 		}
+		
 	}
 	
 	
