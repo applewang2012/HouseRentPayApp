@@ -38,8 +38,8 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 	private TextView mNoContent;
 	private String mUserName = null;
 	private String mRentHistoryAction = "http://tempuri.org/GetRentHistory";
-	private HistoryZufangFragment mZuFangFrament;
-	private HistoryChuZuFragment mChuzuFragment;
+	private OrderZhuHuFragment mZuFangFrament;
+	private OrderFangzhuFragment mChuzuFragment;
 	private RadioGroup mRadioGroup;
 
 	
@@ -87,7 +87,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 					FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 					hideAllFragments(fragmentTransaction);
 					if (mZuFangFrament == null){
-						mZuFangFrament = new HistoryZufangFragment();
+						mZuFangFrament = new OrderZhuHuFragment();
 						fragmentTransaction.add(R.id.id_house_child_fragment_content, mZuFangFrament);
 						fragmentTransaction.commitAllowingStateLoss();
 					}else{
@@ -100,7 +100,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 					FragmentTransaction chuzufragmentTransaction = getChildFragmentManager().beginTransaction();
 					hideAllFragments(chuzufragmentTransaction);
 					if (mChuzuFragment == null){
-						mChuzuFragment = new HistoryChuZuFragment();
+						mChuzuFragment = new OrderFangzhuFragment();
 						chuzufragmentTransaction.add(R.id.id_house_child_fragment_content, mChuzuFragment);
 						chuzufragmentTransaction.commitAllowingStateLoss();
 					}else{
@@ -113,7 +113,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 		});
 		FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 		if (mZuFangFrament == null){
-			mZuFangFrament = new HistoryZufangFragment();
+			mZuFangFrament = new OrderZhuHuFragment();
 			fragmentTransaction.add(R.id.id_house_child_fragment_content, mZuFangFrament);
 			fragmentTransaction.commitAllowingStateLoss();
 		}else{

@@ -242,6 +242,7 @@
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/id_rent_house_price"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:layout_weight="3"

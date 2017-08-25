@@ -129,7 +129,6 @@ public class GetRentAttributeActivity extends BaseActivity{
 	private TextView mRentIDcard;
 	private TextView mRentName;
 	private TextView mRentPrice;
-	private TextView mRentReadMe;
 	private TextView mRentPhone;
 	private View mQrcodeView;
 	private TextView mRentOrderId;
@@ -171,7 +170,6 @@ public class GetRentAttributeActivity extends BaseActivity{
 		mRentName = (TextView)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView)findViewById(R.id.id_rent_house_phone);
 		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
-		mRentReadMe = (TextView)findViewById(R.id.id_rent_house_read_me);
 		mRentOrderId = (TextView)findViewById(R.id.id_rent_house_order_id);
 		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
@@ -391,7 +389,6 @@ public class GetRentAttributeActivity extends BaseActivity{
 					mRentName.setText(object.getString("RRAContactName"));
 					mRentPhone.setText(object.getString("RRAContactTel"));
 					mRentPrice.setText(object.getString("RRentPrice"));
-					mRentReadMe.setText(object.getString("RRADescription"));
 					mRentOrderId.setText(object.getString("RRAID"));
 					mStartTime.setText(mOriginStartContent + object.getString("RRAStartDate"));
 					mEndTime.setText(mOriginEndContent + object.getString("RRAEndDate")); 

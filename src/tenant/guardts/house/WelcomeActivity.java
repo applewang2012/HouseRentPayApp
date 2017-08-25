@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 
 import tenant.guardts.house.R;
+import tenant.guardts.house.util.CommonUtil;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +32,11 @@ public class WelcomeActivity extends BaseActivity {
 		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 		mUsername = sharedata.getString("user_name", "");
 		mPassword = sharedata.getString("user_password", "");
-		
+	    if (mUsername != null && !mUsername.equals("")){
+//	    	CommonUtil.mUserLoginName = sharedata.getString("user_name", "");
+//	    	CommonUtil.mRegisterRealName = sharedata.getString("user_realname", "");
+//	    	CommonUtil.mRegisterIdcard = sharedata.getString("user_idcard", "");
+	    }
 		mHandler.sendEmptyMessageDelayed(200, 100);
 		
 	}
@@ -51,12 +56,12 @@ public class WelcomeActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
-				startActivity(new Intent(WelcomeActivity.this, HomeActivity.class));
-				//if (username != null && !username.equals("") && password != null && !password.equals("")){
-//					Intent intent = new Intent(WelcomeActivity.this, LoginUserActivity.class);
-//					intent.putExtra("user_name", mUsername);
-//					intent.putExtra("user_password", mPassword);
-//					startActivity(intent);
+				
+//				if (mUsername != null && !mUsername.equals("") && mPassword != null && !mPassword.equals("")){
+					Intent intent = new Intent(WelcomeActivity.this, LoginUserActivity.class);
+					intent.putExtra("user_name", mUsername);
+					intent.putExtra("user_password", mPassword);
+					startActivity(intent);
 //				}else{
 //					Intent intent = new Intent(WelcomeActivity.this, RegisterUserActivity.class);
 //					startActivity(intent);

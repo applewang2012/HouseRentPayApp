@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
@@ -14,9 +15,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings.Global;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
@@ -26,15 +29,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
-public class HistoryChuZuFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
-	
-
+public class OrderFangzhuFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
 	
 	private Context mContext;
 	private View mRootView;
@@ -46,16 +49,16 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 	//private LinearLayout mContentLayout;
 	private TextView mNoContent;
 	private String mUserName = null;
-	private String mGetHouseInfoAction = "http://tempuri.org/GetHouseInfoByLoginName";
-	//private String mIdCard;
-
+	private String mRentHistoryAction = "http://tempuri.org/GetRentOwnerHistory";
+	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
+	private int mCurrentPosition = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
-		mPresent = new HoursePresenter(mContext, HistoryChuZuFragment.this);
+		mPresent = new HoursePresenter(mContext, OrderFangzhuFragment.this);
 	}
 
 	@Override
@@ -84,43 +87,51 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
 
 			@Override
-			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
+			public void convert(final UniversalViewHolder holder, final HouseInfoModel info) {
 				View holderView = holder.getConvertView();
 				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
 				TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
-				TextView contactText = (TextView)holderView.findViewById(R.id.id_order_end_time);
-				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
+				TextView endTime = (TextView)holderView.findViewById(R.id.id_order_end_time);
+				TextView money = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				Button button1 = (Button)holderView.findViewById(R.id.id_order_button_status1);
 				Button button2 = (Button)holderView.findViewById(R.id.id_order_button_status2);
 				Button button3 = (Button)holderView.findViewById(R.id.id_order_button_status3);
 				addressText.setText(info.getHouseAddress());
-				//areaText.setText(info.getHouseArea()+" 平米");
-				//contactText.setText(info.getHouseOwnerName()+" "+info.getHousePhone());
-				//timeText.setText(info.getHouseStartTime()+"至"+info.getHouseEndTime());
-				if (holder.getPosition() == 0){
+				endTime.setText(info.getHouseEndTime());
+				money.setText(info.getHousePrice());
+				if (info.getHouseStatus().equals("0")){
 					status.setText("待确认");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
 					button1.setVisibility(View.INVISIBLE);
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button2.setText("查看详情");
+					button2.setText("确认订单");
 					button3.setText("取消订单");
-				}else if (holder.getPosition() == 1){
+					button2.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							mCurrentPosition = holder.getPosition();
+							showLoadingView();
+							confirmRentAttributeInfo(info.getHouseOrderId());
+						}
+					});
+				}else if (info.getHouseStatus().equals("1")){
 					status.setText("待支付");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setVisibility(View.INVISIBLE);
 					button2.setVisibility(View.INVISIBLE);
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button3.setText("查看详情");
-				}else if (holder.getPosition() == 2){
+				}else if (info.getHouseStatus().equals("2")){
 					status.setText("已支付");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setVisibility(View.INVISIBLE);
 					button2.setVisibility(View.INVISIBLE);
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button3.setText("查看详情");
-				}else if (holder.getPosition() == 3){
+				}else if (info.getHouseStatus().equals("3")){
 					status.setText("待评价");
 					status.setTextColor(Color.parseColor("#8be487"));
 					button1.setText("查看详情");
@@ -140,10 +151,19 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 	}
 	
 	private void getHouseHistoryData(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseInfoByLoginName";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetHouseInfoAction));
-		rpc.addProperty("loginName", CommonUtil.mUserLoginName);
-		mPresent.readyPresentServiceParams(mContext, url, mGetHouseInfoAction, rpc);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentOwnerHistory";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
+		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
+		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
+		mPresent.startPresentServiceTask();
+	}
+	
+	private void confirmRentAttributeInfo(String id){
+		mLoadingView.setVisibility(View.VISIBLE);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
+		rpc.addProperty("id", id);
+		mPresent.readyPresentServiceParams(mContext, url, mConfirmRentAttribute, rpc);
 		mPresent.startPresentServiceTask();
 	}
 
@@ -167,88 +187,81 @@ public class HistoryChuZuFragment extends Fragment implements DataStatusInterfac
 
 		@Override
 		public void handleMessage(Message msg) {
-			
 			dismissLoadingView();
 			if (msg.what == 100){
-				getAdapterListData(parseUserHouseInfo((String)msg.obj));
+				parseUserHouseInfo((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无出租历史");
 					mNoContent.setVisibility(View.VISIBLE);
 				}else{
 					//mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("housefragment", "house list  "+mHouseInfoList.size());
+					Log.w("mingguo", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
+				}
+			}else if (msg.what == 101){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					String ret = object.optString("ret");
+					if (ret != null){
+						if (ret.equals("0")){
+							mHouseInfoList.get(mCurrentPosition).setHouseStatus("1");
+							mAdapter.notifyDataSetChanged();
+						}else{
+							GlobalUtil.shortToast(mContext, "订单确认失败，请重试！", getResources().getDrawable(R.drawable.ic_dialog_no));
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}
 	};
 	
-	public static List<HouseInfoModel> parseUserHouseInfo(String value) {
-		List<HouseInfoModel> list = new ArrayList<>();
+	private  void parseUserHouseInfo(String value) {
+		mHouseInfoList.clear();
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.i("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel houseModel = new HouseInfoModel();
+					houseModel.setHouseStatus(itemJsonObject.optString("RRAStatus"));
 					houseModel.setHouseAddress(itemJsonObject.optString("RAddress"));
-					houseModel.setHouseDirection(itemJsonObject.optString("RDirectionDesc"));
+					houseModel.setHousePrice(itemJsonObject.optString("RRentPrice"));
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
-					houseModel.setHouseCurrentFloor(itemJsonObject.optString("RFloor"));
+					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
 					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
-					houseModel.setHouseStatus(itemJsonObject.optString("IsAvailable"));
 					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
 					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
-					if (itemJsonObject.optBoolean("Available")){
-						list.add(houseModel);
-					}
+					houseModel.setHouseOrderId(itemJsonObject.optString("RRAID"));
+					mHouseInfoList.add(houseModel);
 				}
 			}
-			Log.i("house", "for item  "+list.size());
-			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return list;
 		}
 	}
 	
-	private void getAdapterListData(List<HouseInfoModel> list){
-		if (list == null){
-			return;
-		}
-		mHouseInfoList.clear();
-		for (int i = 0; i  < 4; i++){
-			for (int index = 0; index < list.size(); index++){
-				HouseInfoModel infoModel = new HouseInfoModel();
-				infoModel.setHouseAddress(list.get(index).getHouseAddress());
-				infoModel.setHouseDirection(list.get(index).getHouseDirection());
-				infoModel.setHouseTotalFloor(list.get(index).getHouseTotalFloor());
-				infoModel.setHouseCurrentFloor(list.get(index).getHouseCurrentFloor());
-				infoModel.setHouseType(list.get(index).getHouseType());
-				infoModel.setHouseStatus(list.get(index).getHouseStatus());
-				infoModel.setHouseId(list.get(index).getHouseId());
-				infoModel.setHouseAvailable(list.get(index).getHouseAvailable());
-				infoModel.setHouseOwnerName(list.get(index).getHouseOwnerName());
-				infoModel.setHouseOwnerIdcard(list.get(index).getHouseOwnerIdcard());
-				mHouseInfoList.add(infoModel);
-			}
-		}
-		
-	}
 	
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "success "+templateInfo);
-		if (action.equals(mGetHouseInfoAction)){
+		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		if (action.equals(mRentHistoryAction)){
 			Message msg = mHandler.obtainMessage();
 			msg.what = 100;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}else if (action.equals(mConfirmRentAttribute)){
+			Message msg = mHandler.obtainMessage();
+			msg.what = 101;
 			msg.obj = templateInfo;
 			msg.sendToTarget();
 		}

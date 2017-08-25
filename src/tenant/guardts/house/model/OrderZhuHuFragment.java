@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
-
-import com.baidu.location.Poi;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -20,12 +17,13 @@ import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +33,7 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-public class HistoryZufangFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
+public class OrderZhuHuFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
 	
 
 	
@@ -58,7 +56,7 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
-		mPresent = new HoursePresenter(mContext, HistoryZufangFragment.this);
+		mPresent = new HoursePresenter(mContext, OrderZhuHuFragment.this);
 	}
 
 	@Override
@@ -87,20 +85,20 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
 
 			@Override
-			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
+			public void convert(UniversalViewHolder holder, final HouseInfoModel info) {
 				View holderView = holder.getConvertView();
 				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
 				TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
-				TextView contactText = (TextView)holderView.findViewById(R.id.id_order_end_time);
-				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
+				TextView endTime = (TextView)holderView.findViewById(R.id.id_order_end_time);
+				TextView money = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				Button button1 = (Button)holderView.findViewById(R.id.id_order_button_status1);
 				Button button2 = (Button)holderView.findViewById(R.id.id_order_button_status2);
 				Button button3 = (Button)holderView.findViewById(R.id.id_order_button_status3);
 				addressText.setText(info.getHouseAddress());
-				//areaText.setText(info.getHouseArea()+" 平米");
-				//contactText.setText(info.getHouseOwnerName()+" "+info.getHousePhone());
-				//timeText.setText(info.getHouseStartTime()+"至"+info.getHouseEndTime());
-				if (holder.getPosition() == 0){
+				endTime.setText(info.getHouseEndTime());
+				money.setText(info.getHousePrice());
+				
+				if (info.getHouseStatus().equals("0")){
 					status.setText("待确认");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
@@ -109,14 +107,24 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("查看详情");
 					button3.setText("取消订单");
-				}else if (holder.getPosition() == 1){
+				}else if (info.getHouseStatus().equals("1")){
 					status.setText("待支付");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button2.setText("立即付款");
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button3.setText("取消订单");
-				}else if (holder.getPosition() == 2){
+					button2.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							CommonUtil.mPayHouseOrderId = info.getHouseOrderId();
+							Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
+							payIntent.putExtra("pay_price", info.getHousePrice());
+							startActivity(payIntent);
+						}
+					});
+				}else if (info.getHouseStatus().equals("2")){
 					status.setText("已支付");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
@@ -125,7 +133,7 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 					button3.setText("取消订单");
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-				}else if (holder.getPosition() == 3){
+				}else if (info.getHouseStatus().equals("3")){
 					status.setText("待评价");
 					status.setTextColor(Color.parseColor("#8be487"));
 					button1.setText("查看详情");
@@ -175,7 +183,7 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 			
 			dismissLoadingView();
 			if (msg.what == 100){
-				getAdapterListData((String)msg.obj);
+				parseUserHouseInfo((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无租房历史");
 					mNoContent.setVisibility(View.VISIBLE);
@@ -189,53 +197,40 @@ public class HistoryZufangFragment extends Fragment implements DataStatusInterfa
 		}
 	};
 	
-	private void getAdapterListData(String value){
-		if (value == null){
-			return;
-		}
+	private  void parseUserHouseInfo(String value) {
 		mHouseInfoList.clear();
-		JSONArray array;
-		try {
-			array = new JSONArray(value);
+		try{
+			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.i("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
+					
 					JSONObject itemJsonObject = array.optJSONObject(item);
-					HouseInfoModel infoModel = new HouseInfoModel();
-					infoModel.setHouseAddress(itemJsonObject.optString("RAddress"));
-					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
-					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
-					infoModel.setHousePhone(itemJsonObject.optString("ROwnerTel"));
-					infoModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
-					infoModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
-					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
-					mHouseInfoList.add(infoModel);
-				}
-				for (int item = 0; item < array.length(); item++){
-					JSONObject itemJsonObject = array.optJSONObject(item);
-					HouseInfoModel infoModel = new HouseInfoModel();
-					infoModel.setHouseAddress(itemJsonObject.optString("RAddress"));
-					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
-					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
-					infoModel.setHousePhone(itemJsonObject.optString("ROwnerTel"));
-					infoModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
-					infoModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
-					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
-					mHouseInfoList.add(infoModel);
+					HouseInfoModel houseModel = new HouseInfoModel();
+					houseModel.setHouseStatus(itemJsonObject.optString("RRAStatus"));
+					houseModel.setHouseAddress(itemJsonObject.optString("RAddress"));
+					houseModel.setHousePrice(itemJsonObject.optString("RRentPrice"));
+					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
+					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
+					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
+					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
+					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
+					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
+					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
+					houseModel.setHouseOrderId(itemJsonObject.optString("RRAID"));
+					mHouseInfoList.add(houseModel);
 				}
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "success "+templateInfo);
+		Log.e("mingguo", "action "+action+" success "+templateInfo);
 		if (action.equals(mRentHistoryAction)){
 			Message msg = mHandler.obtainMessage();
 			msg.what = 100;

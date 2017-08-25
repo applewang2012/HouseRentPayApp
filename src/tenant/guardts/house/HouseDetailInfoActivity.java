@@ -276,7 +276,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
 	private TextView mZhulinType;
-	private TextView mRoomNum;
+	private TextView mRoomNum, mHousePrice;
 
 	private void initView() {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
@@ -291,6 +291,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		mZhulinType = (TextView) findViewById(R.id.id_rent_house_lease_type);
 		mRoomNum = (TextView) findViewById(R.id.id_rent_house_num);
 		mLocationPolice = (TextView)findViewById(R.id.id_rent_house_district);
+		mHousePrice = (TextView)findViewById(R.id.id_rent_house_price);
 		// mHouseInfoGridview = (GridView)
 		// findViewById(R.id.id_house_detail_info_image);
 		// mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -397,6 +398,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mZhulinType.setText(object.getString("RRentTypeDesc"));
 					mRoomNum.setText(object.getString("RDoor"));
 					mLocationPolice.setText(object.getString("RPSName"));
+					mHousePrice.setText(object.getString("RLocationDescription")+" 元");
 					
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));

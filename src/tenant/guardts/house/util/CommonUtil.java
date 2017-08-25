@@ -36,14 +36,14 @@ public class CommonUtil {
     public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
     
     public static String mRegisterRealName = null;
-    public static String mRegisterIdcard = "370881198411094833";
-    public static String mUserLoginName = "wmg";
+    public static String mRegisterIdcard = null;
+    public static String mUserLoginName = null;
     public static String mUserHost = "http://qxw2332340157.my3w.com/";
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
     public static int mSelectCityRequestCode = 2;
-    
+    public static String mPayHouseOrderId = null;
     //weixin
     public static final String APP_ID = "wxae25cb3fefdc75ae";
     public static final String WX_PARTNER_ID = "1481965242";

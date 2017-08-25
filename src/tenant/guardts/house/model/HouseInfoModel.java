@@ -15,6 +15,8 @@ public class HouseInfoModel {
 	private String houseTotalFloor;
 	private String houseStatus;
 	private String houseCurrentFloor;
+	private String price;
+	private String houseOrderId;
 	
 	public String getHouseId() {
 		return houseId;
@@ -23,6 +25,14 @@ public class HouseInfoModel {
 	public void setHouseId(String id) {
 		this.houseId = id;
 	}
+	
+	public String getHouseOrderId() {
+		return houseOrderId;
+	}
+
+	public void setHouseOrderId(String id) {
+		this.houseOrderId = id;
+	}
 
 	public String getHouseAddress() {
 		return houseAddress;
@@ -30,6 +40,14 @@ public class HouseInfoModel {
 
 	public void setHouseAddress(String address) {
 		this.houseAddress = address;
+	}
+	
+	public String getHouseDirection() {
+		return direction;
+	}
+
+	public void setHouseDirection(String address) {
+		this.direction = address;
 	}
 
 	public String getHouseType() {
@@ -96,12 +114,12 @@ public class HouseInfoModel {
 		this.startTime = time;
 	}
 	
-	public void setHouseDirection(String direction) {
-		this.direction = direction;
+	public void setHousePrice(String direction) {
+		this.price = direction;
 	}
 
-	public String getHouseDirection() {
-		return direction;
+	public String getHousePrice() {
+		return price;
 	}
 	
 	public void setHouseTotalFloor(String floor) {

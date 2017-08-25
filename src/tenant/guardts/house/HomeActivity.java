@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,7 +40,8 @@ public class HomeActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	//private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mUpdateAction="http://tempuri.org/CheckUpgrade";
-	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";;
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
+	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";;
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
@@ -57,7 +59,7 @@ public class HomeActivity extends BaseActivity {
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");
 		initView();
-//		getUserInfo();
+		getUserInfo();
 		
 	}
 	
@@ -210,6 +212,14 @@ public class HomeActivity extends BaseActivity {
 	}
 	
 	
+	private void getOpenDoorRequest(String lockId) {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=OpenDoor";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOpenDoorAction));
+		rpc.addProperty("lockId", lockId);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOpenDoorAction, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+	
 	private void checkVersionUpdate(){
 		mVersionCode = GlobalUtil.getVersionCode(getApplicationContext());
 		String url = "http://www.guardts.com/UpgradeService/SystemUpgradeService.asmx?op=CheckUpgrade";
@@ -304,6 +314,11 @@ public class HomeActivity extends BaseActivity {
 					CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 					CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+					SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
+					SharedPreferences.Editor editor = sharedata.edit();
+				    editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				    editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				    editor.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -375,16 +390,19 @@ public class HomeActivity extends BaseActivity {
 			Log.w("mingguo", "HomeActivity  onActivityResult result code  "+resultCode+"   requestcode  "+requestCode+" data  "+data);
 			//处理扫描结果（在界面上显示）
 					if (resultCode == RESULT_OK  && requestCode == CommonUtil.mScanCodeRequestCode) {
+						getOpenDoorRequest("0201002200100002");
 						Bundle bundle = data.getExtras();
 						String scanResult = bundle.getString("result");
 						Log.e("mingguo", "scan  result  "+scanResult);
-						if (!TextUtils.isEmpty(scanResult)){
-							Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
-							attributeIntent.putExtra("order_id", scanResult);
-							startActivity(attributeIntent);
-						}else{
-							GlobalUtil.shortToast(getApplication(), "二维码扫描异常，请重新扫码！！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-						}
+						//http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
+						//int scanResult.lastIndexOf("=");
+//						if (!TextUtils.isEmpty(scanResult)){
+//							Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
+//							attributeIntent.putExtra("order_id", scanResult);
+//							startActivity(attributeIntent);
+//						}else{
+//							GlobalUtil.shortToast(getApplication(), "二维码扫描异常，请重新扫码！！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//						}
 					}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode){
 						Bundle bundle = data.getExtras();
 						if (bundle != null){

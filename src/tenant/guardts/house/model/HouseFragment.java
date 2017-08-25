@@ -68,6 +68,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -227,6 +228,15 @@ public class HouseFragment extends Fragment
 		mHouseOwnerLayout = (LinearLayout)mRootView.findViewById(R.id.id_house_owner_content);
 		mShareHouseLayout.setVisibility(View.VISIBLE);
 		mHouseOwnerLayout.setVisibility(View.GONE);
+		LinearLayout duanzuShareHouse = (LinearLayout)mShareHouseLayout.findViewById(R.id.id_share_house_duanzu);
+		duanzuShareHouse.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(mContext, HouseSearchActivity.class));
+			}
+		});
 
 		mListView = (ListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 //		mListView.setAdapter(new );

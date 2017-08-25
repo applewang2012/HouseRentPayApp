@@ -1,17 +1,12 @@
-package tenant.guardts.house;
+package tenant.guardts.house.wxapi;
 
-import java.io.StringReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.xmlpull.v1.XmlPullParser;
 
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -26,19 +21,19 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.BaseActivity;
+import tenant.guardts.house.R;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.wxpay.WeiXinPay;
 
-@SuppressWarnings("deprecation")
-public class HousePayActivity extends BaseActivity{
+public class HousePayActivity2 extends BaseActivity implements IWXAPIEventHandler{
 	
 	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
 	
@@ -54,12 +49,16 @@ public class HousePayActivity extends BaseActivity{
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("支付房款");
         
+        
         Button payButton = (Button)findViewById(R.id.id_button_pay_money_button);
         payButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
+				api = WXAPIFactory.createWXAPI(HousePayActivity2.this, CommonUtil.APP_ID);
+				CommonUtil.ORDER_MONKEY = "1";
+				CommonUtil.ORDER_NO = UtilTool.generateOrderNo();
+				CommonUtil.ORDER_TIME = UtilTool.stampToNormalDate(System.currentTimeMillis()+"");
 				startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 			}
 		});
@@ -77,6 +76,7 @@ private void startPay(final String price, final String orderNo, final String ip 
 				return null;
 			}
 			
+
 			@Override
 			protected void onPostExecute(Void result) {
 				try {
@@ -114,7 +114,6 @@ private void startPay(final String price, final String orderNo, final String ip 
 					nvps.add(new BasicNameValuePair("sign", sign));
 					req.sign = sign;
 					api.sendReq(req);
-					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -127,4 +126,105 @@ private void startPay(final String price, final String orderNo, final String ip 
 	
 	
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		
+		setIntent(intent);
+        api.handleIntent(intent, this);
+	}
+
+	@Override
+	public void onReq(BaseReq arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onResp(BaseResp resp) {
+		Log.i("mingguo", "onResp error  code    "+resp.errCode);
+		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("提示");
+			builder.setMessage("微信支付结果："+String.valueOf(resp.errCode));
+			builder.show();
+		}
+	}
+
+//	@Override
+//	public void onReq(BaseReq req) {
+//		Toast.makeText(this, "openid = " + req.openId, Toast.LENGTH_SHORT).show();
+//		
+//		switch (req.getType()) {
+//		case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+//			goToGetMsg();		
+//			break;
+//		case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+//			goToShowMsg((ShowMessageFromWX.Req) req);
+//			break;
+//		case ConstantsAPI.COMMAND_LAUNCH_BY_WX:
+//			Toast.makeText(this, R.string.launch_from_wx, Toast.LENGTH_SHORT).show();
+//			break;
+//		default:
+//			break;
+//		}
+//	}
+//
+//	// ����Ӧ�÷��͵�΢�ŵ�����������Ӧ����ص����÷���
+//	@Override
+//	public void onResp(BaseResp resp) {
+//		Toast.makeText(this, "openid = " + resp.openId, Toast.LENGTH_SHORT).show();
+//		
+//		if (resp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
+//			Toast.makeText(this, "code = " + ((SendAuth.Resp) resp).code, Toast.LENGTH_SHORT).show();
+//		}
+//		
+//		int result = 0;
+//		
+//		switch (resp.errCode) {
+//		case BaseResp.ErrCode.ERR_OK:
+//			result = R.string.errcode_success;
+//			break;
+//		case BaseResp.ErrCode.ERR_USER_CANCEL:
+//			result = R.string.errcode_cancel;
+//			break;
+//		case BaseResp.ErrCode.ERR_AUTH_DENIED:
+//			result = R.string.errcode_deny;
+//			break;
+//		default:
+//			result = R.string.errcode_unknown;
+//			break;
+//		}
+//		
+//		Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+//	}
+//	
+//	private void goToGetMsg() {
+//		Intent intent = new Intent(this, GetFromWXActivity.class);
+//		intent.putExtras(getIntent());
+//		startActivity(intent);
+//		finish();
+//	}
+//	
+//	private void goToShowMsg(ShowMessageFromWX.Req showReq) {
+//		WXMediaMessage wxMsg = showReq.message;		
+//		WXAppExtendObject obj = (WXAppExtendObject) wxMsg.mediaObject;
+//		
+//		StringBuffer msg = new StringBuffer(); // ��֯һ������ʾ����Ϣ����
+//		msg.append("description: ");
+//		msg.append(wxMsg.description);
+//		msg.append("\n");
+//		msg.append("extInfo: ");
+//		msg.append(obj.extInfo);
+//		msg.append("\n");
+//		msg.append("filePath: ");
+//		msg.append(obj.filePath);
+//		
+//		Intent intent = new Intent(this, ShowFromWXActivity.class);
+//		intent.putExtra(Constants.ShowMsgActivity.STitle, wxMsg.title);
+//		intent.putExtra(Constants.ShowMsgActivity.SMessage, msg.toString());
+//		intent.putExtra(Constants.ShowMsgActivity.BAThumbData, wxMsg.thumbData);
+//		startActivity(intent);
+//		finish();
+//	}
 }

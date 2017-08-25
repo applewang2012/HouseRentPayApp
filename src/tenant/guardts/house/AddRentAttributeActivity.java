@@ -92,7 +92,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房客信息");
-		
+		mHouseNo = getIntent().getStringExtra("house_id");
+		mUsername = getIntent().getStringExtra("user_name");
+		mOwnerName = getIntent().getStringExtra("owner_name");
+		mOwnerIdcard = getIntent().getStringExtra("owner_id");
 		initView();
 		initHandler();
 	}
@@ -102,10 +105,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		mHouseNo = getIntent().getStringExtra("house_id");
-		mUsername = getIntent().getStringExtra("user_name");
-		mOwnerName = getIntent().getStringExtra("owner_name");
-		mOwnerIdcard = getIntent().getStringExtra("owner_id");
+		
 		//mHouseId.setText(mHouseNo);
 	}
 
@@ -179,7 +179,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private EditText mRentIDcard;
 	private EditText mRentName;
 	private EditText mRentPrice;
-	private EditText mRentReadMe;
+	
 	private EditText mRentPhone;
 	private View mQrcodeView;
 	private TextView mTypeTextView;
@@ -244,7 +244,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
 		mRentPrice = (EditText)findViewById(R.id.id_rent_house_price);
-		mRentReadMe = (EditText)findViewById(R.id.id_rent_house_read_me);
 		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
 			
@@ -317,10 +316,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentReadMe.getText().toString() == null || mRentReadMe.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请输入备注信息", Toast.LENGTH_SHORT).show();
-			return false;
-		}
+		
 		if (mRentPrice.getText().toString() == null || mRentPrice.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入租金", Toast.LENGTH_SHORT).show();
 			return false;
@@ -343,18 +339,18 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	
 	private void startAddRentInfo(){
 			Log.w("mingguo", " mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
-					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+mRentReadMe.getText());
+					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe ");
 			showLoadingView();
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
-			//rpc.addProperty("RentNo", mHouseId.getText().toString());   
+			rpc.addProperty("RentNo", mHouseNo);   
 			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
 			rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());  
 			rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());  
 			rpc.addProperty("RRentPrice", mRentPrice.getText().toString());     
 			rpc.addProperty("RRAStartDate", mSetStartData);  
 			rpc.addProperty("RRAEndDate", mSetEndData); 
-			rpc.addProperty("RRADescription", mRentReadMe.getText().toString()); 
+			rpc.addProperty("RRADescription", "meiyou"); 
 			rpc.addProperty("createdBy", mUsername);
 			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddRentAction, rpc);
 			mPresenter.startPresentServiceTask();

@@ -14,4 +14,9 @@
         android:visibility="invisible"
         layout="@layout/activity_payment_failure" />
 	
+	<include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog"
+       />
+	
 </FrameLayout>

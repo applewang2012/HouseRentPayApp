@@ -237,11 +237,6 @@
             android:name=".PersonalInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
-              <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
@@ -294,17 +289,15 @@
             android:label="@string/title_activity_map" >
         </activity>
 
-        <!--
+
         <activity
             android:name=".wxapi.HousePayActivity"
-            android:theme="@style/AppTheme" >
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
+            android:theme="@style/AppTheme" 
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="sensor"
+            >
+             
+        </activity>
         <activity
             android:name=".EvaluationActivity"
             android:label="@string/title_activity_evaluation" >
