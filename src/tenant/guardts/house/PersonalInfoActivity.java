@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**个人信息
- * @author Zhou
+ * 
  *
  */
 public class PersonalInfoActivity extends BaseActivity {
@@ -17,6 +17,7 @@ public class PersonalInfoActivity extends BaseActivity {
 	private TextView mRealName;
 	private TextView mPhone;
 	private TextView mIdCard;
+	private LinearLayout mAboutUs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,14 @@ public class PersonalInfoActivity extends BaseActivity {
 	}
 
 	private void initEvent() {
+		mAboutUs.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(PersonalInfoActivity.this, AboutUsActivity.class));
+				
+			}
+		});
 		
 	}
 
@@ -50,6 +59,7 @@ public class PersonalInfoActivity extends BaseActivity {
 		mRealName = (TextView) findViewById(R.id.personal_info_name);
 		mPhone = (TextView) findViewById(R.id.personal_info_phone);
 		mIdCard = (TextView) findViewById(R.id.personal_info_idcard);
+		mAboutUs = (LinearLayout) findViewById(R.id.about_us_linearlayout);
 		
 		
 	}

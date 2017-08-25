@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class WalletActivity extends Activity {
+public class WalletActivity extends BaseActivity {
 
 	private TextView mBalance;
 
