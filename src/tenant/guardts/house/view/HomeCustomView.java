@@ -3,7 +3,6 @@ package tenant.guardts.house.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.net.Network;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;

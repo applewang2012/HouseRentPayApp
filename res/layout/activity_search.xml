@@ -4,13 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context="${relativePackage}.${activityClass}" >
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#337ffd"
         android:gravity="center_vertical"
+        
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -58,30 +59,42 @@
             android:textColor="#fff"
             android:textSize="17sp" />
     </LinearLayout>
-  <ScrollView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <tenant.guardts.house.view.HistoryRecordsView
                 android:id="@+id/history_listview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+               
+                android:divider="#f1f1f1"
+                android:dividerHeight="@dimen/base_dimen_1" >
             </tenant.guardts.house.view.HistoryRecordsView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_1"
+                android:background="#f1f1f1" />
 
             <TextView
                 android:id="@+id/tv_clear"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-				android:textColor="#999999"
+                android:layout_height="30dp" 
                 android:gravity="center"
-                android:visibility="invisible"
-                android:text="清除搜索历史" />
+                android:text="清空历史记录"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

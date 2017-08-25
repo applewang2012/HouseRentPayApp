@@ -38,5 +38,10 @@
 	    <item name="android:textSize">@dimen/text_size_medium</item>
 	    <item name="android:gravity">center</item>
 	</style>
+	
+    <style name="AppTheme2" parent="AppBaseTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
 
 </resources>

@@ -192,5 +192,8 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_evaluation">EvaluationActivity</string>
+    <string name="title_activity_successful_payment">SuccessfulPaymentActivity</string>
+    <string name="title_activity_payment_failure">PaymentFailureActivity</string>
+    <string name="title_activity_contact_owner">ContactOwnerActivity</string>
 
 </resources>

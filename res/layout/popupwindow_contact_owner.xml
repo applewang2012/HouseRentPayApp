@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_180"
+        android:background="@drawable/contact_owner_bg_up"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_36"
+            android:layout_marginTop="@dimen/base_dimen_22"
+            android:gravity="center"
+            android:text="联系房主"
+            android:textColor="#666666"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_1"
+            android:layout_marginTop="@dimen/base_dimen_22"
+            android:background="#cccccc" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:gravity="center"
+            android:text="18722331844"
+            android:textColor="#337ffd"
+            android:textSize="@dimen/base_dimen_32" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_100"
+        android:background="@drawable/contact_owner_bg_down"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/base_dimen_36"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:gravity="center"
+            android:text="拨号"
+            android:textColor="#337ffd"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <View
+            android:layout_width="@dimen/base_dimen_1"
+            android:layout_height="@dimen/base_dimen_40"
+            android:layout_gravity="center_vertical"
+            android:background="#cccccc" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#999999"
+            android:textSize="@dimen/base_dimen_32" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -12,6 +12,8 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -19,13 +21,17 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import tenant.guardts.house.bannerview.CircleFlowIndicator;
 import tenant.guardts.house.bannerview.ImagePagerAdapter;
@@ -33,6 +39,7 @@ import tenant.guardts.house.bannerview.ViewFlow;
 import tenant.guardts.house.model.HouseImageInfo;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.view.AddressSelector;
 
 public class HouseDetailInfoActivity extends BaseActivity {
 	private Button mButtonCall;//联系房主
@@ -63,6 +70,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private ArrayList<String> imageUrlList = new ArrayList<String>();
 	private String mImageUrlPrefix = CommonUtil.mUserHost + "";
 	private TextView mLocationPolice;
+	private PopupWindow popupWindow;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +97,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				initPopupWindow();
 				
 			}
 		});
@@ -104,6 +112,23 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			}
 		});
 		
+	}
+	/**
+	 * 初始化PopupWindow
+	 */
+	protected void initPopupWindow() {
+		// 产生背景变暗效果
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.alpha = 0.3f;
+		getWindow().setAttributes(lp);
+		View view = View.inflate(this, R.layout.popupwindow_contact_owner, null);
+		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+		popupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		int popHeight = popupWindow.getContentView().getMeasuredHeight();
+		popupWindow.showAsDropDown(mButtonCall, 0, -popHeight);
+		initEvent();
+
 	}
 
 	@Override
