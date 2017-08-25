@@ -95,11 +95,10 @@
     <string name="add_house_type_text">房	型</string>
     <string name="add_house_direction_text">朝	向</string>
     <string name="add_house_lease_type_text">租赁类型</string>
-
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
     <string name="app_tip">提示</string>
     <string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
-    
+
     <string-array name="surround_title">
         <item>热点</item>
         <item>吃喝</item>
@@ -195,5 +194,7 @@
     <string name="title_activity_successful_payment">SuccessfulPaymentActivity</string>
     <string name="title_activity_payment_failure">PaymentFailureActivity</string>
     <string name="title_activity_contact_owner">ContactOwnerActivity</string>
+    <string name="title_activity_wallet">WalletActivity</string>
+    <string name="title_activity_about_us">AboutUsActivity</string>
 
 </resources>

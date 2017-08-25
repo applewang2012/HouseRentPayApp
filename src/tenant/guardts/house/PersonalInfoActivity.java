@@ -1,21 +1,22 @@
 package tenant.guardts.house;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**个人信息
  * @author Zhou
  *
  */
 public class PersonalInfoActivity extends BaseActivity {
-	private LinearLayout mAvator;//头像
-	private LinearLayout mNickName;//昵称
-	private LinearLayout mIDCard;//身份证
-	private LinearLayout mPhone;//手机号
-	private LinearLayout mAbout;//关于
+
+	private TextView mRealName;
+	private TextView mPhone;
+	private TextView mIdCard;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,60 +24,33 @@ public class PersonalInfoActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_personal_info);
 		initView();
+		initData();
 		initEvent();
 		
 	}
 
+	private void initData() {
+		Intent intent = getIntent();
+		String realName = intent.getStringExtra("RealName");
+		String phone = intent.getStringExtra("Phone");
+		String idCard = intent.getStringExtra("IDCard");
+		idCard=idCard.substring(0, 3)+"*****"+idCard.substring(14);
+		mRealName.setText(realName);
+		mPhone.setText(phone);
+		mIdCard.setText(idCard);
+		
+		
+	}
+
 	private void initEvent() {
-		mAvator.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
-		mNickName.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
-		mPhone.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
-		mIDCard.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
-		mAbout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				
-			}
-		});
 		
 	}
 
 	private void initView() {
-		mAvator = (LinearLayout) findViewById(R.id.linear_layout_avator);
-		mNickName = (LinearLayout) findViewById(R.id.linear_layout_nickname);
-		mIDCard = (LinearLayout) findViewById(R.id.linear_layout_idcard);
-		mPhone = (LinearLayout) findViewById(R.id.linear_layout_phone);
-		mAbout = (LinearLayout) findViewById(R.id.linear_layout_about);
+		mRealName = (TextView) findViewById(R.id.personal_info_name);
+		mPhone = (TextView) findViewById(R.id.personal_info_phone);
+		mIdCard = (TextView) findViewById(R.id.personal_info_idcard);
+		
 		
 	}
 

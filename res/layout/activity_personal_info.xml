@@ -66,7 +66,7 @@
         android:background="#cccccc" />
 
     <LinearLayout
-         android:id="@+id/linear_layout_nickname"
+        android:id="@+id/linear_layout_nickname"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 
@@ -75,16 +75,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_34"
-            android:text="昵称"
+            android:text="姓名"
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_32" />
 
-        <ImageView
-            android:layout_width="@dimen/base_dimen_44"
-            android:layout_height="@dimen/base_dimen_44"
+        <TextView
+            android:id="@+id/personal_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_558"
-            android:src="@drawable/more" />
+            android:layout_marginLeft="@dimen/base_dimen_510"
+            android:text="吴承恩"
+            android:textColor="#b2b2b2"
+            android:textSize="@dimen/base_dimen_26" />
     </LinearLayout>
 
     <View
@@ -93,7 +96,7 @@
         android:background="#cccccc" />
 
     <LinearLayout
-         android:id="@+id/linear_layout_phone"
+        android:id="@+id/linear_layout_phone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 
@@ -106,12 +109,15 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_32" />
 
-        <ImageView
-            android:layout_width="@dimen/base_dimen_44"
-            android:layout_height="@dimen/base_dimen_44"
+         <TextView
+             android:id="@+id/personal_info_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_528"
-            android:src="@drawable/more" />
+            android:layout_marginLeft="@dimen/base_dimen_400"
+            
+            android:textColor="#b2b2b2"
+            android:textSize="@dimen/base_dimen_26" />
     </LinearLayout>
 
     <View
@@ -120,7 +126,7 @@
         android:background="#cccccc" />
 
     <LinearLayout
-         android:id="@+id/linear_layout_idcard"
+        android:id="@+id/linear_layout_idcard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 
@@ -134,14 +140,15 @@
             android:textSize="@dimen/base_dimen_32" />
 
         <TextView
-            android:text="120281***26"
-            android:textColor="#b2b2b2"
-            android:textSize="@dimen/base_dimen_26"
+            android:id="@+id/personal_info_idcard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_396"
-            android:src="@drawable/more" />
+            android:layout_marginLeft="@dimen/base_dimen_373"
+            android:src="@drawable/more"
+            android:text="120281***26"
+            android:textColor="#b2b2b2"
+            android:textSize="@dimen/base_dimen_26" />
     </LinearLayout>
 
     <View
@@ -150,7 +157,7 @@
         android:background="#cccccc" />
 
     <LinearLayout
-         android:id="@+id/linear_layout_about"
+        android:id="@+id/linear_layout_about"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 

@@ -10,7 +10,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-	
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -30,9 +30,9 @@
     <uses-permission android:name="tenant.guardts.house.download.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="tenant.guardts.house.download.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED" />
     <uses-permission android:name="tenant.guardts.house.download.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
-    
-    	<!-- 微信支付 -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+    <!-- 微信支付 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <!-- 百度地图使用 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
@@ -66,21 +66,21 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="fmntWH7DXloP8Tt7jU2kPPAp6ni9OuCi" />
-			<activity
-	            android:name=".WelcomeActivity"
-	            android:theme="@style/AppTheme" >
-	             <intent-filter>
-	                <action android:name="android.intent.action.MAIN" />
-	
-	                <category android:name="android.intent.category.LAUNCHER" />
-	            </intent-filter>
-	        </activity>
-		<activity
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".LoginUserActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-       
         <activity
             android:name=".SurfaceViewTestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -108,23 +108,18 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-
         <activity
             android:name=".HouseDetailInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-              <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AddHouseInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            
         </activity>
         <activity
             android:name=".AddRentAttributeActivity"
@@ -204,14 +199,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        
-        
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".GetRentAttributeActivity"
             android:screenOrientation="portrait"
@@ -268,20 +266,18 @@
 
         <!-- 识别部分 -->
         <service android:name="com.oliveapp.camerasdk.MediaSaveService" />
-        
-       	 <!-- 微信部分 -->
-         <receiver
-            android:name=".wxpay.AppRegister">
+
+        <!-- 微信部分 -->
+        <receiver android:name=".wxpay.AppRegister" >
             <intent-filter>
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
         </receiver>
-        
-         <activity
+
+        <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
-
+            android:launchMode="singleTop" />
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
         </activity>
         <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
@@ -296,7 +292,8 @@
             android:label="@string/title_activity_map" >
         </activity>
 
-        <!-- <activity
+        <!--
+        <activity
             android:name=".wxapi.HousePayActivity"
             android:theme="@style/AppTheme" >
              <intent-filter>
@@ -304,7 +301,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity>
         -->
         <activity
             android:name=".EvaluationActivity"
@@ -313,9 +310,17 @@
         <activity
             android:name=".PaymentStatusActivity"
             android:theme="@style/AppTheme2" >
-          
         </activity>
-
+        <activity
+            android:name=".WalletActivity"
+            android:label="@string/title_activity_wallet"
+            android:theme="@style/AppTheme2" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme2" 
+            android:name=".AboutUsActivity"
+            android:label="@string/title_activity_about_us" >
+        </activity>
     </application>
 
 </manifest>

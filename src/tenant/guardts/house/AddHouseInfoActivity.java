@@ -191,6 +191,7 @@ public class AddHouseInfoActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(AddHouseInfoActivity.this, "出租方式", Toast.LENGTH_SHORT).show();
+				getHouseProperty();
 			}
 		});
 
@@ -474,14 +475,14 @@ public class AddHouseInfoActivity extends BaseActivity {
 		if (!mSelectorInfo.containsKey("property")) {
 			showLoadingView();
 			HouseSelectorModel property = new HouseSelectorModel();
-			property.setHouseOrginText((String) mPropertryTextView.getText());
+			property.setHouseOrginText((String) 	mRentalModeTextView.getText());
 			mSelectorInfo.put("property", property);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseProperty";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPropertyAction));
 			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPropertyAction, rpc);
 			mPresenter.startPresentServiceTask();
 		} else {
-			showAlertDialog(mPropertryTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
+			showAlertDialog(	mRentalModeTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
 		}
 
 		// [{"RSOUrl":"0","IsVisible":null,"RSOName":"私产","RSOParentNo":8,"RSOID":15,"RSONo":0,"RSOOrder":1},{"RSOUrl":"0","IsVisible":null,"RSOName":"公产","RSOParentNo":8,"RSOID":16,"RSONo":0,"RSOOrder":2}]

@@ -29,7 +29,7 @@
 			        android:id="@+id/id_user_nickname"
 			        android:layout_width="wrap_content"
 			    	android:layout_height="wrap_content"
-			    	android:text="昵称"
+			    	
 			    	android:textColor="#ffffff"
 			    	android:textSize="@dimen/base_dimen_30"
 			    	android:textStyle="bold"
@@ -41,7 +41,7 @@
 			        android:id="@+id/id_user_address"
 			        android:layout_width="wrap_content"
 			    	android:layout_height="wrap_content"
-			    	android:text="昵称"
+			    	
 			    	android:textColor="#e8e6e6"
 			    	android:textSize="@dimen/base_dimen_26"
 			    	android:textStyle="bold"
@@ -60,7 +60,7 @@
 		        	>
 			    
 		 	    <FrameLayout 
-	        	    android:id="@+id/id_user_house_search"
+	        	    android:id="@+id/id_user_house_wallet"
 	        	    android:layout_width="match_parent"
 		        	android:layout_height="@dimen/base_dimen_100"
 		        	android:layout_marginTop="@dimen/base_dimen_80"
@@ -83,10 +83,11 @@
 	        	        />
 	        	    
 	        	    <TextView 
+	        	        android:id="@+id/id_user_wallet"
 	        	        android:layout_marginLeft="@dimen/base_dimen_520"
 	        	         android:layout_width="@dimen/base_dimen_64"
 		        		 android:layout_height="@dimen/base_dimen_28"
-	        	         android:text="¥500"
+	        	        
 	        	        
 	        	         android:layout_gravity="center_vertical"
 	        	         android:textSize="@dimen/base_dimen_24"

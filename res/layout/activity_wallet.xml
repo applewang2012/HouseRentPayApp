@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/wallet_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="我的钱包"
+            android:textColor="#555555"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_400"
+        android:background="@drawable/wallet_bg"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_144"
+            android:gravity="center_horizontal"
+            android:text="500.0"
+            android:textColor="#020202"
+            android:textSize="@dimen/base_dimen_90"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_38"
+            android:layout_marginTop="@dimen/base_dimen_10"
+            android:gravity="center_horizontal"
+            android:text="余额  (元)"
+            android:textColor="#252424"
+            android:textSize="@dimen/base_dimen_32" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginTop="@dimen/base_dimen_40"
+        android:background="@drawable/wallet_btn_bg1"
+        android:text="充值"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/base_dimen_34" />
+
+    <Button
+         android:layout_width="@dimen/base_dimen_680"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginTop="@dimen/base_dimen_16"
+        android:background="@drawable/wallet_btn_bg2"
+        android:text="提现"
+        android:textColor="#999999"
+        android:textSize="@dimen/base_dimen_34" />
+
+</LinearLayout>
