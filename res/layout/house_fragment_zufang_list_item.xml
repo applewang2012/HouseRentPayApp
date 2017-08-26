@@ -76,7 +76,7 @@
 	    	android:textColor="#555555"
 	    	android:textSize="@dimen/base_dimen_28"
 	    	android:layout_marginLeft="@dimen/base_dimen_500"
-	    	android:text="金额"
+	    	android:text="金额:￥"
 	    	android:gravity="left|center_vertical"
 	        />
 	    
@@ -88,7 +88,7 @@
 	    	android:textSize="@dimen/base_dimen_28"
 	    	android:layout_marginRight="@dimen/base_dimen_20"
 	    	android:layout_gravity="center_vertical|right"
-	    	android:text="500"
+	    	android:text="0"
 	    	android:gravity="left|center_vertical"
 	        />
 	</FrameLayout>

@@ -154,8 +154,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	  
 	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
 	  
-	             // TODO Auto-generated method stub  
-	  
 	             Log.i("alertdialog"," �뱣�����ݣ�");  
 	  
 	         }  

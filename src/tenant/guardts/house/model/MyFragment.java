@@ -203,7 +203,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 				mUserNickname.setText(realName);
 				idCard = infoModel.get("IDCard");
 				wallet = infoModel.get("Wallet");
-				Toast.makeText(mContext, wallet, Toast.LENGTH_LONG).show();
+				//Toast.makeText(mContext, wallet, Toast.LENGTH_LONG).show();
 				if (wallet == null || wallet.equals("null")) {
 					mWallet.setText("¥0.0");
 

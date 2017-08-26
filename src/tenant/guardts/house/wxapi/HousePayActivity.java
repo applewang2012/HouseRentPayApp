@@ -35,7 +35,7 @@ public class HousePayActivity extends BaseActivity{
 	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
     private IWXAPI api;
 	private View mLoadingView;
-	
+	private String realPrice = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +46,16 @@ public class HousePayActivity extends BaseActivity{
 		titlebar.setText("支付房款");
         final String price = getIntent().getStringExtra("pay_price");
         TextView priceText = (TextView)findViewById(R.id.id_pay_price_show);
-        priceText.setText(price);
+        priceText.setText(price+"元");
         mLoadingView = (View)findViewById(R.id.id_data_loading);
+        mLoadingView.setVisibility(View.INVISIBLE);
+        try {
+        	String priceInt = price.substring(0, price.indexOf("."));
+        	realPrice = priceInt+"00";
+        	Log.i("mingguo", "pay activity  price int   "+realPrice);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         
         Button payButton = (Button)findViewById(R.id.id_button_pay_money_button);
         payButton.setOnClickListener(new OnClickListener() {
@@ -56,7 +64,7 @@ public class HousePayActivity extends BaseActivity{
 			public void onClick(View v) {
 				showLoadingView();
 				api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-				startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+				startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
 			}
 		});
         

@@ -22,6 +22,7 @@
                 android:id="@+id/id_viewflow_framelayout"
                 android:layout_width="fill_parent"
                 android:layout_height="230dip"
+                android:visibility="gone"
                 android:orientation="vertical" >
 
                 <tenant.guardts.house.bannerview.ViewFlow

@@ -85,12 +85,11 @@
 		         android:gravity="center"
 		         android:background="@drawable/house_button_press"
                  />
-
-       <include
+     
+       </LinearLayout>
+         <include
 	        android:id="@+id/id_data_loading"
 	        layout="@layout/layout_loading_dialog"
        		/> 
        		
-       </LinearLayout>
-       
 </FrameLayout>

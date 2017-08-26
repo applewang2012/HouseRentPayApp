@@ -71,6 +71,7 @@ import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseSearchActivity;
+import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -232,6 +233,8 @@ public class HouseFragment extends Fragment
 		mShareHouseLayout.setVisibility(View.VISIBLE);
 		mHouseOwnerLayout.setVisibility(View.GONE);
 		
+		
+		
 		LinearLayout fabuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_fabu);
 		LinearLayout dengjiLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_dengji);
 		LinearLayout weixiuLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_weixiu);
@@ -282,6 +285,15 @@ public class HouseFragment extends Fragment
 				startActivity(new Intent(mContext, HouseSearchActivity.class));
 			}
 		});
+		LinearLayout mapRentHouse = (LinearLayout) mRootView.findViewById(R.id.id_share_house_ditu);
+		mapRentHouse.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(mContext, MapRentHouseActivity.class));
+				
+			}
+		});
 
 		mListView = (ListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 //		mListView.setAdapter(new );
@@ -292,9 +304,9 @@ public class HouseFragment extends Fragment
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
-				intent.putExtra("current_city", mCurrentLocationCity);
-				getActivity().startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
+//				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
+//				intent.putExtra("current_city", mCurrentLocationCity);
+//				getActivity().startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
 
 			}
 		});
@@ -447,6 +459,7 @@ public class HouseFragment extends Fragment
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
 					houseModel.setHouseArea(itemJsonObject.optString("rrentarea"));
+					
 					mHouseInfoList.add(houseModel);
 				}
 			}

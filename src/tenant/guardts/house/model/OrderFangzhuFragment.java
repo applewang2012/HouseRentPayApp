@@ -108,7 +108,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					status.setText("待确认");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
-					button1.setVisibility(View.INVISIBLE);
+					button1.setVisibility(View.VISIBLE);
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("确认订单");
@@ -138,6 +138,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					button1.setVisibility(View.INVISIBLE);
 					button2.setVisibility(View.INVISIBLE);
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setText("查看详情");
 				}else if (info.getHouseStatus().equals("2")){
 					status.setText("已支付");
@@ -145,6 +146,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					button1.setVisibility(View.INVISIBLE);
 					button2.setVisibility(View.INVISIBLE);
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setText("查看详情");
 				}else if (info.getHouseStatus().equals("3")){
 					status.setText("待评价");

@@ -150,10 +150,10 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button1.setText("查看详情");
 					button1.setVisibility(View.INVISIBLE);
 					button2.setText("查看详情");
-					button3.setText("取消订单");
-					button3.setVisibility(View.INVISIBLE);
-					button2.setTextColor(Color.parseColor("#337ffd"));
-					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 				}else if (info.getHouseStatus().equals("3")){
 					status.setText("待评价");
 					status.setTextColor(Color.parseColor("#8be487"));

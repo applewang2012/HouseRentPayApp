@@ -13,7 +13,7 @@
 	    android:orientation="vertical"
 	    >
 	    
-	   <!--  <LinearLayout 
+	    <LinearLayout 
 	        android:layout_width="match_parent"
 	        android:layout_height="40dp"
 	        android:layout_marginTop="5dp"
@@ -47,19 +47,16 @@
 			    android:background="@drawable/button_background"
 	            />
 	        
-	    </LinearLayout> -->
+	    </LinearLayout>
 	    
 	    <tenant.guardts.house.search.ExpandMenuView
 	        android:id="@+id/expandTabView"
+	        android:layout_marginTop="3dp"
 	        android:layout_width="match_parent"
-	        android:layout_height="@dimen/base_dimen_90"
-	       	
+	        android:layout_height="wrap_content"
+	        android:divider="#362e2b"
 	        />
-	    <View 
-	        android:layout_width="match_parent"
-	        android:layout_height="@dimen/base_dimen_10"
-	        android:background="#f1f2f3"
-	        />
+	    
 	    <ListView 
 	        android:id="@+id/listView"
 	        android:layout_width="fill_parent"
