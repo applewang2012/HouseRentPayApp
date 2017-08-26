@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:guardts="http://schemas.android.com/apk/res/tenant.guardts.house"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f1f1f1" >
-
-
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"
+	    >
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="@dimen/base_dimen_120"
@@ -74,7 +77,7 @@
                  android:id="@+id/id_button_pay_money_button"
                  android:layout_width="@dimen/base_dimen_520"
 		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_714"
+		         android:layout_marginTop="@dimen/base_dimen_554"
 		         android:text="立即付款"
 		         android:textColor="#ffffff"
 		         android:textSize="@dimen/base_dimen_30"
@@ -83,4 +86,11 @@
 		         android:background="@drawable/house_button_press"
                  />
 
-</LinearLayout>
+       <include
+	        android:id="@+id/id_data_loading"
+	        layout="@layout/layout_loading_dialog"
+       		/> 
+       		
+       </LinearLayout>
+       
+</FrameLayout>

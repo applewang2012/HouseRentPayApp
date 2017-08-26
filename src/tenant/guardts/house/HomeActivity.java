@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.hp.hpl.sparta.xpath.PositionEqualsExpr;
+
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -27,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.HistoryFragment;
+import tenant.guardts.house.model.OrderFragment;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
 import tenant.guardts.house.model.SurroundFragment;
@@ -46,7 +48,7 @@ public class HomeActivity extends BaseActivity {
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
 	private SurroundFragment mSurroundFragment;
-	private HistoryFragment mHistoryFragment;
+	private OrderFragment mHistoryFragment;
 	private String mUserInfoString = null;
 	private String mCity = null;
 	private int mVersionCode = -1;
@@ -199,7 +201,7 @@ public class HomeActivity extends BaseActivity {
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
 				if (mHistoryFragment == null){
-					mHistoryFragment = new HistoryFragment();
+					mHistoryFragment = new OrderFragment();
 					fragmentTransaction.add(R.id.id_home_content, mHistoryFragment);
 					fragmentTransaction.commitAllowingStateLoss();
 				}else{
@@ -298,6 +300,34 @@ public class HomeActivity extends BaseActivity {
 		builder.show();
 	}
 	
+	private void showOpenDoorAlertDialog(final String lockId) {  
+		
+		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setTitle("智能锁编号："+lockId);
+		  builder.setMessage("您确认要开锁吗？");
+		  builder.setIcon(android.R.drawable.ic_dialog_info);
+		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+		         @Override  
+		  
+		         public void onClick(DialogInterface dialog, int which) {
+		        	 getOpenDoorRequest(lockId);
+		         }  
+			
+		});
+		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
+			  
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {
+	  
+	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	  
+	         }
+		});
+		builder.setCancelable(false);
+		builder.show();
+	}
+	
 	private  void parseUserInfo(String value) {
 		try{
 			JSONArray array = new JSONArray(value);
@@ -390,19 +420,17 @@ public class HomeActivity extends BaseActivity {
 			Log.w("mingguo", "HomeActivity  onActivityResult result code  "+resultCode+"   requestcode  "+requestCode+" data  "+data);
 			//处理扫描结果（在界面上显示）
 					if (resultCode == RESULT_OK  && requestCode == CommonUtil.mScanCodeRequestCode) {
-						getOpenDoorRequest("0201002200100002");
+						//getOpenDoorRequest("0201002200100002");
 						Bundle bundle = data.getExtras();
 						String scanResult = bundle.getString("result");
 						Log.e("mingguo", "scan  result  "+scanResult);
 						//http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
-						//int scanResult.lastIndexOf("=");
-//						if (!TextUtils.isEmpty(scanResult)){
-//							Intent attributeIntent = new Intent(HomeActivity.this, GetRentAttributeActivity.class);
-//							attributeIntent.putExtra("order_id", scanResult);
-//							startActivity(attributeIntent);
-//						}else{
-//							GlobalUtil.shortToast(getApplication(), "二维码扫描异常，请重新扫码！！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-//						}
+						int pos =   scanResult.lastIndexOf("=");
+						String lockNo = scanResult.substring(pos+1);
+						Log.e("mingguo", "scan  result pos "+pos+" lockNo  "+lockNo);
+						if (lockNo != null && lockNo.length() > 2){
+							showOpenDoorAlertDialog(lockNo+"");
+						}
 					}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode){
 						Bundle bundle = data.getExtras();
 						if (bundle != null){

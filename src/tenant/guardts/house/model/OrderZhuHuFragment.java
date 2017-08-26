@@ -48,7 +48,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 	private TextView mNoContent;
 	private String mUserName = null;
 	private String mRentHistoryAction = "http://tempuri.org/GetRentHistory";
-	//private String mIdCard;
+	private String mCancelAttrbuteAction = "http://tempuri.org/CancelRentAttribute";
 
 	
 	@Override
@@ -68,6 +68,10 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		initView();
 		initData();
 		return mRootView;
+	}
+	
+	public void refreshData(){
+		initData();
 	}
 	
 	private void initView(){
@@ -107,6 +111,14 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("查看详情");
 					button3.setText("取消订单");
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							showLoadingView();
+							cancelRentAttributeInfo(info.getHouseOrderId());
+						}
+					});
 				}else if (info.getHouseStatus().equals("1")){
 					status.setText("待支付");
 					status.setTextColor(Color.parseColor("#de6262"));
@@ -124,6 +136,14 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 							startActivity(payIntent);
 						}
 					});
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							showLoadingView();
+							cancelRentAttributeInfo(info.getHouseOrderId());
+						}
+					});
 				}else if (info.getHouseStatus().equals("2")){
 					status.setText("已支付");
 					status.setTextColor(Color.parseColor("#de6262"));
@@ -131,6 +151,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button1.setVisibility(View.INVISIBLE);
 					button2.setText("查看详情");
 					button3.setText("取消订单");
+					button3.setVisibility(View.INVISIBLE);
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 				}else if (info.getHouseStatus().equals("3")){
@@ -140,6 +161,25 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button1.setVisibility(View.INVISIBLE);
 					button2.setText("查看详情");
 					button3.setText("立即评价");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+				}else if (info.getHouseStatus().equals("8")){
+					status.setText("已取消");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setText("查看详情");
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+				}else if (info.getHouseStatus().equals("9")){
+					status.setText("已拒绝");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 				}
@@ -157,6 +197,15 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
+		mPresent.startPresentServiceTask();
+	}
+	
+	private void cancelRentAttributeInfo(String id){
+		mLoadingView.setVisibility(View.VISIBLE);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=CancelRentAttribute";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCancelAttrbuteAction));
+		rpc.addProperty("id", id);
+		mPresent.readyPresentServiceParams(mContext, url, mCancelAttrbuteAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 
@@ -193,6 +242,8 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					Log.w("housefragment", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
+			}else if (msg.what == 101){
+				
 			}
 		}
 	};
@@ -234,6 +285,11 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		if (action.equals(mRentHistoryAction)){
 			Message msg = mHandler.obtainMessage();
 			msg.what = 100;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}else if (action.equals(mCancelAttrbuteAction)){
+			Message msg = mHandler.obtainMessage();
+			msg.what = 101;
 			msg.obj = templateInfo;
 			msg.sendToTarget();
 		}

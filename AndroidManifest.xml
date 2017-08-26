@@ -274,7 +274,14 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" />
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:launchMode="singleTop" >
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+           </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
         </activity>
         <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
@@ -294,10 +301,14 @@
             android:name=".wxapi.HousePayActivity"
             android:theme="@style/AppTheme" 
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="sensor"
-            >
+            android:screenOrientation="sensor">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
              
-        </activity>
         <activity
             android:name=".EvaluationActivity"
             android:label="@string/title_activity_evaluation" >
@@ -309,7 +320,7 @@
         <activity
             android:name=".WalletActivity"
             android:label="@string/title_activity_wallet"
-            android:theme="@style/AppTheme2" >
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".AboutUsActivity"

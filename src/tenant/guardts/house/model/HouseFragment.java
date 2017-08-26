@@ -56,6 +56,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -66,6 +67,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseSearchActivity;
@@ -155,6 +157,7 @@ public class HouseFragment extends Fragment
 			}
 		});
 		
+		
 	}
 	
 
@@ -228,6 +231,48 @@ public class HouseFragment extends Fragment
 		mHouseOwnerLayout = (LinearLayout)mRootView.findViewById(R.id.id_house_owner_content);
 		mShareHouseLayout.setVisibility(View.VISIBLE);
 		mHouseOwnerLayout.setVisibility(View.GONE);
+		
+		LinearLayout fabuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_fabu);
+		LinearLayout dengjiLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_dengji);
+		LinearLayout weixiuLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_weixiu);
+		LinearLayout gaizhaoLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_gaizhao);
+		fabuLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
+				intent.putExtra("user_name", CommonUtil.mUserLoginName);
+				startActivity(intent);
+			}
+		});
+		dengjiLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		
+		weixiuLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		
+		gaizhaoLayout.setOnClickListener(new OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		
 		LinearLayout duanzuShareHouse = (LinearLayout)mShareHouseLayout.findViewById(R.id.id_share_house_duanzu);
 		duanzuShareHouse.setOnClickListener(new OnClickListener() {
 			

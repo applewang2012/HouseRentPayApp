@@ -51,6 +51,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 	private String mUserName = null;
 	private String mRentHistoryAction = "http://tempuri.org/GetRentOwnerHistory";
 	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
+	private String mRejectRentAction = "http://tempuri.org/RejectRentAttribute";
 	private int mCurrentPosition = 0;
 	
 	@Override
@@ -81,6 +82,10 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		mlistView.setAdapter(mAdapter);
 		mlistView.setOnItemClickListener(this);
 	}
+	
+	public void refreshData(){
+		initData();
+	}
 
 
 	private void initAdapter(){
@@ -107,7 +112,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("确认订单");
-					button3.setText("取消订单");
+					button3.setText("拒绝订单");
 					button2.setOnClickListener(new OnClickListener() {
 						
 						@Override
@@ -115,6 +120,16 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 							mCurrentPosition = holder.getPosition();
 							showLoadingView();
 							confirmRentAttributeInfo(info.getHouseOrderId());
+						}
+					});
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							mCurrentPosition = holder.getPosition();
+							showLoadingView();
+							rejectRentAttributeInfo(info.getHouseOrderId());
+							
 						}
 					});
 				}else if (info.getHouseStatus().equals("1")){
@@ -138,6 +153,25 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					button1.setVisibility(View.INVISIBLE);
 					button2.setText("查看详情");
 					button3.setText("立即评价");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+				}else if (info.getHouseStatus().equals("8")){
+					status.setText("已取消");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setText("查看详情");
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+				}else if (info.getHouseStatus().equals("9")){
+					status.setText("已拒绝");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 				}
@@ -167,6 +201,15 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		mPresent.startPresentServiceTask();
 	}
 
+	private void rejectRentAttributeInfo(String id){
+		mLoadingView.setVisibility(View.VISIBLE);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
+		rpc.addProperty("id", id);
+		mPresent.readyPresentServiceParams(mContext, url, mRejectRentAction, rpc);
+		mPresent.startPresentServiceTask();
+	}
+	
 	private void showLoadingView(){
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(View.VISIBLE);
@@ -262,6 +305,11 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		}else if (action.equals(mConfirmRentAttribute)){
 			Message msg = mHandler.obtainMessage();
 			msg.what = 101;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}else if (action.equals(mRejectRentAction)){
+			Message msg = mHandler.obtainMessage();
+			msg.what = 102;
 			msg.obj = templateInfo;
 			msg.sendToTarget();
 		}

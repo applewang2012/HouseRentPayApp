@@ -109,6 +109,7 @@
     		android:background="@drawable/item_shape_no_solid_corner"
     		android:gravity="center"
     		android:text="查看详情 "
+    		android:textSize="@dimen/base_dimen_28"
     		android:layout_gravity="center_vertical"
 	        />
 	    <Button 
@@ -120,6 +121,7 @@
     		android:background="@drawable/item_shape_no_solid_corner"
     		android:gravity="center"
     		android:text="立即付款"
+    		android:textSize="@dimen/base_dimen_28"
     		android:layout_gravity="center_vertical"
 	        />
 	    <Button 
@@ -131,6 +133,7 @@
     		android:background="@drawable/item_shape_no_solid_corner"
     		android:gravity="center"
     		android:text="取消 订单"
+    		android:textSize="@dimen/base_dimen_28"
     		android:layout_gravity="center_vertical"
 	        />
 	 </FrameLayout>

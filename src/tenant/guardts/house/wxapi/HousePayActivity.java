@@ -18,8 +18,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
@@ -30,9 +33,8 @@ import tenant.guardts.house.wxpay.WeiXinPay;
 public class HousePayActivity extends BaseActivity{
 	
 	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
-	
-	
     private IWXAPI api;
+	private View mLoadingView;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,20 +47,39 @@ public class HousePayActivity extends BaseActivity{
         final String price = getIntent().getStringExtra("pay_price");
         TextView priceText = (TextView)findViewById(R.id.id_pay_price_show);
         priceText.setText(price);
+        mLoadingView = (View)findViewById(R.id.id_data_loading);
         
         Button payButton = (Button)findViewById(R.id.id_button_pay_money_button);
         payButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				showLoadingView();
 				api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-				startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
+				startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 			}
 		});
         
     }
     
-private void startPay(final String price, final String orderNo, final String ip ){
+    private void showLoadingView(){
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.VISIBLE);
+        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
+        	if (imageView != null) {
+        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(HousePayActivity.this, R.anim.anim_rotate);
+        		imageView.startAnimation(rotate);
+        	}
+		}
+	}
+    
+	private void dismissLoadingView(){
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.INVISIBLE);
+		}
+	}
+    
+    private void startPay(final String price, final String orderNo, final String ip ){
 		
 		new AsyncTask<Void, Void, Void>() {
 			private String weiXinReturn = null;
@@ -83,6 +104,7 @@ private void startPay(final String price, final String orderNo, final String ip 
 					req.packageValue	= "Sign=WXPay";
 					if (req.prepayId == null)
 						return;
+					CommonUtil.ORDER_PREPAY_ID = req.prepayId;
 					List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 					// 调用统一下单接口必需传的参数,可以查看微信支付统一下单接口api查看每个参数的意思
 					nvps.add(new BasicNameValuePair("appid", CommonUtil.APP_ID));

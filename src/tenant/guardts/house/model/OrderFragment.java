@@ -23,7 +23,7 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 
-public class HistoryFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
+public class OrderFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
 	
 
 	
@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
-		mPresent = new HoursePresenter(mContext, HistoryFragment.this);
+		mPresent = new HoursePresenter(mContext, OrderFragment.this);
 	}
 
 	@Override
@@ -93,6 +93,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 					}else{
 						fragmentTransaction.show(mZuFangFrament);
 						fragmentTransaction.commitAllowingStateLoss();
+						mZuFangFrament.refreshData();
 					}
 					break;
 				case R.id.id_frament_history_chuzu_button:
@@ -106,6 +107,7 @@ public class HistoryFragment extends Fragment implements DataStatusInterface, On
 					}else{
 						chuzufragmentTransaction.show(mChuzuFragment);
 						chuzufragmentTransaction.commitAllowingStateLoss();
+						mChuzuFragment.refreshData();
 					}
 					break;
 				}

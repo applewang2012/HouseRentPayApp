@@ -3,20 +3,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:background="#ffffff"
     >
     
-	<include
+<!-- 	<include
         android:id="@+id/id_weixin_paysuccess"
         layout="@layout/activity_successful_payment" />
 	
 	<include
         android:id="@+id/id_weixin_payfailed"
         android:visibility="invisible"
-        layout="@layout/activity_payment_failure" />
+        layout="@layout/activity_payment_failure" /> -->
 	
-	<include
-        android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog"
-       />
+	
 	
 </FrameLayout>

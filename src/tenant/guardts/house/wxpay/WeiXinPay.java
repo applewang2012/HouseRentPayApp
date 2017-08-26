@@ -43,6 +43,10 @@ public class WeiXinPay {
 		nvps.add(new BasicNameValuePair("spbill_create_ip", ip));//ip地址需要根据实际项目做修改
 		nvps.add(new BasicNameValuePair("total_fee", realPayPrice));
 		nvps.add(new BasicNameValuePair("trade_type", "APP"));
+		CommonUtil.ORDER_NO = order_no;
+		CommonUtil.ORDER_MONKEY = realPayPrice;
+		
+		CommonUtil.ORDER_TIME = UtilTool.stampToNormalDate(System.currentTimeMillis()+"");
 		StringBuffer sb = new StringBuffer();
 
 		for (NameValuePair nvp : nvps) {
