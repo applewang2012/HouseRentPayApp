@@ -34,8 +34,8 @@
     <!-- 微信支付 -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    	<!-- 微信支付 -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!-- 微信支付 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <!-- 百度地图使用 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
@@ -89,7 +89,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        
         <activity
             android:name=".SurfaceViewTestActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -280,14 +279,17 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:launchMode="singleTop" >
-            <!-- <intent-filter>
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
-           </activity>
+            </intent-filter>
+            -->
+        </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
         </activity>
         <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
@@ -301,20 +303,20 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
-
-
         <activity
             android:name=".wxapi.HousePayActivity"
-            android:theme="@style/AppTheme" 
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="sensor">
-           <!-- <intent-filter>
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme" >
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+            </intent-filter>
+            -->
         </activity>
-             
         <activity
             android:name=".EvaluationActivity"
             android:label="@string/title_activity_evaluation" >
@@ -332,7 +334,10 @@
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme2" >
-          
+        </activity>
+        <activity
+            android:name=".HousingDetailsActivity"
+            android:label="@string/title_activity_housing_details" >
         </activity>
     </application>
 

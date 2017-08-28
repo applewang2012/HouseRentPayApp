@@ -1,0 +1,302 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#337ffd" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/short_lease_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="房屋详情"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_20"
+            android:layout_height="@dimen/base_dimen_28"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:src="@drawable/details_location" >
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:text="河西区陈塘庄美年广场2-206"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_100"
+            android:text="待确认"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:background="#f1f1f1" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_30" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="房客姓名:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="王安石"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="联系电话:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="16789009809"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="入住时间:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="2017-08-26"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_dimen_20"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="退房时间:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="2017-08-30"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:background="#f1f1f1" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_30" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="房主姓名:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="王安石"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_dimen_20"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="联系电话:"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_20"
+                android:text="16789009809"
+                android:textColor="#777777"
+                android:textSize="@dimen/base_dimen_26" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:background="#f1f1f1" >
+    </View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/base_dimen_28"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:text="支付金额"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/base_dimen_28"
+            android:layout_marginLeft="@dimen/base_dimen_400"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:text="¥500"
+            android:textColor="#7aa5ef"
+            android:textSize="@dimen/base_dimen_32"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_20" >
+
+        <Button
+            android:layout_width="@dimen/base_dimen_150"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_370"
+            android:background="@drawable/housing_details_btn_bg"
+            android:gravity="center"
+            android:text="确认订单"
+            android:textColor="@drawable/details_btn_text_bg"
+            android:textSize="@dimen/base_dimen_24" />
+
+        <Button
+            android:layout_width="@dimen/base_dimen_150"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/housing_details_btn_bg"
+            android:gravity="center"
+            android:text="取消订单 "
+            android:textColor="@drawable/details_btn_text_bg"
+            android:textSize="@dimen/base_dimen_24" />
+    </LinearLayout>
+
+</LinearLayout>
