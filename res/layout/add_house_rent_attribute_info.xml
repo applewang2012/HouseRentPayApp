@@ -145,7 +145,7 @@
 	        	         android:layout_width="0dp"
 		        		 android:layout_height="35dp"
 		        		 android:layout_weight="3"
-		        		 android:hint="请输入房屋出租价格"
+		        		 android:hint="请输入和房主约定房屋价格"
 		        		 android:gravity="center_vertical"
 		        		 android:inputType="number"
 		        		 android:maxLength="8"

@@ -425,7 +425,7 @@ public class RegisterUserActivity extends BaseActivity{
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
-						String compareResult = object.optString("compareresult");
+						String compareResult = object.optString("verify_result");
 						if (compareResult == null || compareResult.equals("")){
 							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}else{

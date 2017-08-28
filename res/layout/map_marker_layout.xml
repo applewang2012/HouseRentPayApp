@@ -6,12 +6,12 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/id_house_desp"
+        android:id="@+id/id_house_status"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/base_dimen_44"
         android:layout_marginLeft="@dimen/base_dimen_32"
         android:layout_marginTop="@dimen/base_dimen_30"
-        android:text="此房已租"
+        android:text="房屋信息"
         android:textColor="#fe6305"
         android:textSize="@dimen/base_dimen_38"
         android:textStyle="bold" />
@@ -27,16 +27,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_dimen_28"
+        android:layout_marginLeft="@dimen/base_dimen_38"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/id_house_area"
-            android:layout_width="@dimen/base_dimen_138"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/base_dimen_36"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_30"
             android:gravity="center"
-            android:text="80.0平米"
+            android:text="0.0平米"
             android:textColor="#666666"
             android:textSize="@dimen/base_dimen_32" >
         </TextView>
@@ -50,10 +50,10 @@
 
         <TextView
             android:id="@+id/id_house_direction"
-            android:layout_width="@dimen/base_dimen_138"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/base_dimen_36"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_6"
+            android:layout_marginLeft="@dimen/base_dimen_28"
             android:gravity="center"
             android:text="南北向"
             android:textColor="#666666"
@@ -69,10 +69,10 @@
 
         <TextView
             android:id="@+id/id_house_floor"
-            android:layout_width="@dimen/base_dimen_138"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/base_dimen_36"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_6"
+            android:layout_marginLeft="@dimen/base_dimen_28"
             android:gravity="center"
             android:text="3/9层"
             android:textColor="#666666"
@@ -90,7 +90,7 @@
         android:textColor="#666666"
         android:textSize="@dimen/base_dimen_32" />
 
-    <TextView
+    <!-- <TextView
         android:id="@+id/id_house_check_out_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
         android:layout_marginTop="@dimen/base_dimen_22"
         android:text="退房时间：2017-09-08"
         android:textColor="#666666"
-        android:textSize="@dimen/base_dimen_32" />
+        android:textSize="@dimen/base_dimen_32" /> -->
 
     <View
         android:layout_width="@dimen/base_dimen_510"

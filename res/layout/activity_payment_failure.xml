@@ -11,14 +11,14 @@
         android:layout_height="@dimen/base_dimen_90"
         android:background="#337ffd" >
 
-        <ImageView
+       <!--  <ImageView
             android:layout_width="@dimen/base_dimen_44"
             android:layout_height="@dimen/base_dimen_44"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_20"
             android:background="@drawable/short_lease_back"
             android:clickable="true"
-            android:onClick="backFinish" />
+            android:onClick="backFinish" /> -->
 
         <TextView
             android:id="@+id/id_titlebar"

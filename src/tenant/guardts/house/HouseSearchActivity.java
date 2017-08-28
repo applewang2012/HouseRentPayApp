@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import tenant.guardts.house.R;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -98,7 +99,7 @@ public class HouseSearchActivity extends BaseActivity {
 	private String mHouseType = "", mRentType = "";
 	private int mPageCount = 1000;
 	private View mLoadingView;
-	private EditText mAddressEdit;
+	//private EditText mAddressEdit;
 	private TextView mNoContent;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +108,23 @@ public class HouseSearchActivity extends BaseActivity {
 		setContentView(R.layout.house_search_layout);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("房屋搜索");
+		mTitleBar.setText("短租共享");
+//		TextView showSearch = (TextView)findViewById(R.id.id_show_search_content);
+//		showSearch.setVisibility(View.VISIBLE);
+		
+		Button searchButton = (Button)findViewById(R.id.id_add_rent_house);
+		searchButton.setVisibility(View.VISIBLE);
+		searchButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivityForResult(new Intent(HouseSearchActivity.this, SearchActivity.class), 1);
+				
+			}
+		});
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, HouseSearchActivity.this);
+		
 		initView();
 		initData();
 	}
@@ -189,6 +204,28 @@ public class HouseSearchActivity extends BaseActivity {
 		});
 	}
 	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+			Bundle bundle = data.getExtras();
+			String search_tag = bundle.getString("search_tag");
+			Log.e("mingguo", "scan  result  "+search_tag);
+			TextView showSearch = (TextView)findViewById(R.id.id_show_search_content);
+			
+			if (search_tag == null || search_tag.equals("")){
+				showSearch.setVisibility(View.GONE);
+			}else{
+				showSearch.setText("在地址关键词“"+search_tag+"”筛选");
+				showSearch.setVisibility(View.VISIBLE);
+				searchHouseByFilterCondition(search_tag);
+			}
+		}
+	}
+
 	private void showLoadingView(){
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(View.VISIBLE);
@@ -205,7 +242,7 @@ public class HouseSearchActivity extends BaseActivity {
 		}
 	}
 	
-	private void searchHouseByFilterCondition(){
+	private void searchHouseByFilterCondition(String inputCotent){
 		showLoadingView();
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetHousesByCondition";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSearchAction));
@@ -213,7 +250,7 @@ public class HouseSearchActivity extends BaseActivity {
 		rpc.addProperty("pageIndex", 1);
 		rpc.addProperty("housetype", mHouseType);
 		rpc.addProperty("rentType", mRentType);
-		rpc.addProperty("address", mAddressEdit.getText().toString());
+		rpc.addProperty("address", inputCotent);
 		rpc.addProperty("isAvalible", "0");
 		rpc.addProperty("userID", "1");
 		mPresent.readyPresentServiceParams(mContext, url, mSearchAction, rpc);
@@ -232,10 +269,11 @@ public class HouseSearchActivity extends BaseActivity {
 				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
 				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
 				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
-				//TextView statusTextView = (TextView)holderView.findViewById(R.id.id_house_status);
+				TextView areaView = (TextView)holderView.findViewById(R.id.id_house_area);
 				addressTextView.setText(info.getHouseAddress());
 				typeTextView.setText(info.getHouseType());
 				directionTextView.setText(info.getHouseDirection());
+				areaView.setText(info.getHouseArea()+"平米");
 				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
 				//statusTextView.setText(info.getHouseStatus());
 			}
@@ -254,17 +292,17 @@ public class HouseSearchActivity extends BaseActivity {
 		items = new ArrayList<Item>();
 		initAdapter();
 		mSearchViewList.setAdapter(mAdapter);
-		mAddressEdit = (EditText)findViewById(R.id.id_input_address);
-		Button searchButton = (Button)findViewById(R.id.id_modify_password_confirm);
-		searchButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				searchHouseByFilterCondition();
-				
-			}
-		});
-		
+		//mAddressEdit = (EditText)findViewById(R.id.id_input_address);
+//		Button searchButton = (Button)findViewById(R.id.id_modify_password_confirm);
+//		searchButton.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				searchHouseByFilterCondition("");
+//				
+//			}
+//		});
+//		
 		mSearchViewList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -275,7 +313,7 @@ public class HouseSearchActivity extends BaseActivity {
 			}
 		});
 		
-		searchHouseByFilterCondition();
+		searchHouseByFilterCondition("");
 		
 	}
 	
@@ -354,7 +392,7 @@ public class HouseSearchActivity extends BaseActivity {
 			}
 			break;
 		}
-		searchHouseByFilterCondition();
+		searchHouseByFilterCondition("");
 	}
 	
 	/**
@@ -417,6 +455,7 @@ public class HouseSearchActivity extends BaseActivity {
 						houseModel.setHouseId(itemJsonObject.optString("RentNO"));
 						houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 						houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
+						houseModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 						mHouseInfoList.add(houseModel);
 					}
 				}

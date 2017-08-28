@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <FrameLayout
+<!--     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_90"
         android:background="#337ffd" >
@@ -30,7 +30,7 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_38"
             android:textStyle="bold" />
-    </FrameLayout>
+    </FrameLayout> -->
 
     <ImageView
         android:layout_width="@dimen/base_dimen_144"

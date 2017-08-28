@@ -1,9 +1,12 @@
 package tenant.guardts.house.model;
 
-public class HouseInfoModel {
+import java.io.Serializable;
+
+public class HouseInfoModel implements Serializable{
+	private static final long serialVersionUID = -7060210544600464481L;
 	private String houseAddress;
 	private String houseType;
-	private String phone;
+	private String ownerPhone;
 	private String area;
 	private String startTime;
 	private String direction;
@@ -17,6 +20,8 @@ public class HouseInfoModel {
 	private String houseCurrentFloor;
 	private String price;
 	private String houseOrderId;
+	private String contactPhone;
+	private String contactName;
 	
 	public String getHouseId() {
 		return houseId;
@@ -66,12 +71,28 @@ public class HouseInfoModel {
 		this.endTime = time;
 	}
 	
-	public String getHousePhone() {
-		return phone;
+	public String getHouseOwnerPhone() {
+		return ownerPhone;
 	}
 
-	public void setHousePhone(String phone) {
-		this.phone = phone;
+	public void setHouseOwnerPhone(String phone) {
+		this.ownerPhone = phone;
+	}
+	
+	public String getHouseContactPhone() {
+		return contactPhone;
+	}
+
+	public void setHouseContactPhone(String phone) {
+		this.contactPhone = phone;
+	}
+	
+	public String getHouseContactName() {
+		return contactName;
+	}
+
+	public void setHouseContactName(String name) {
+		this.contactName = name;
 	}
 	
 	public String getHouseArea() {

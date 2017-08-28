@@ -35,6 +35,7 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.google.zxing.oned.rss.FinderPattern;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -111,8 +112,8 @@ public class HouseFragment extends Fragment
 	private int mRadioSelectedPostion = 0;
 	private PoiSearch mPoiSearch = null;
 	// private EditText mSearchListener;
-	private AutoCompleteTextView mSearchListener = null;
-	private ArrayAdapter<String> sugAdapter = null;
+	//private AutoCompleteTextView mSearchListener = null;
+	//private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
 	private TextView mSelectCityText;
 	//private HomeCustomView mBtnShareRight;
@@ -313,10 +314,20 @@ public class HouseFragment extends Fragment
 		mSelectCityText = (TextView) mRootView.findViewById(R.id.id_home_show_city_view);
 		mPoiSearch = PoiSearch.newInstance();
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
-		mSearchListener = (AutoCompleteTextView) mRootView.findViewById(R.id.button_search);
-		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line);
-		mSearchListener.setAdapter(sugAdapter);
-		mSearchListener.setThreshold(1);
+		TextView searchText = (TextView) mRootView.findViewById(R.id.button_search);
+//		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line);
+//		mSearchListener.setAdapter(sugAdapter);
+//		mSearchListener.setThreshold(1);
+		LinearLayout searchLayout = (LinearLayout)mRootView.findViewById(R.id.home_search_container);
+		searchLayout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				startActivity(new Intent(mContext, HouseSearchActivity.class));
+			}
+		});
+		
 
 		// 初始化建议搜索模块，注册建议搜索事件监听
 		mSuggestionSearch = SuggestionSearch.newInstance();
@@ -339,32 +350,32 @@ public class HouseFragment extends Fragment
 		/**
 		 * 当输入关键字变化时，动态更新建议列表
 		 */
-		mSearchListener.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-				if (cs.length() <= 0) {
-					return;
-				}
-
-				/**
-				 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-				 */
-				Log.i("mingguo", "house fragment  onTextChanged   " + mCurrentLocationCity);
-				mSuggestionSearch.requestSuggestion(
-						(new SuggestionSearchOption()).keyword(cs.toString()).city(mCurrentLocationCity));
-			}
-		});
+//		mSearchListener.addTextChangedListener(new TextWatcher() {
+//
+//			@Override
+//			public void afterTextChanged(Editable arg0) {
+//
+//			}
+//
+//			@Override
+//			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//
+//			}
+//
+//			@Override
+//			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+//				if (cs.length() <= 0) {
+//					return;
+//				}
+//
+//				/**
+//				 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+//				 */
+//				Log.i("mingguo", "house fragment  onTextChanged   " + mCurrentLocationCity);
+//				mSuggestionSearch.requestSuggestion(
+//						(new SuggestionSearchOption()).keyword(cs.toString()).city(mCurrentLocationCity));
+//			}
+//		});
 		
 		initAdapter();
 		
@@ -633,9 +644,9 @@ public class HouseFragment extends Fragment
 				suggest.add(info.key);
 			}
 		}
-		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, suggest);
-		mSearchListener.setAdapter(sugAdapter);
-		sugAdapter.notifyDataSetChanged();
+//		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, suggest);
+//		mSearchListener.setAdapter(sugAdapter);
+//		sugAdapter.notifyDataSetChanged();
 	}
 
 	

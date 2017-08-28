@@ -85,7 +85,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				addressText.setText(info.getHouseAddress());
 				//areaText.setText(info.getHouseArea()+" 平米");
-				contactText.setText(info.getHouseOwnerName()+" "+info.getHousePhone());
+				contactText.setText(info.getHouseOwnerName()+" "+info.getHouseOwnerPhone());
 				timeText.setText(info.getHouseStartTime()+"至"+info.getHouseEndTime());
 			}
 		};
@@ -122,7 +122,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 					infoModel.setHouseAddress(itemJsonObject.optString("RAddress"));
 					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
-					infoModel.setHousePhone(itemJsonObject.optString("ROwnerTel"));
+					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwnerTel"));
 					infoModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
 					infoModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
 					infoModel.setHouseId(itemJsonObject.optString("RentNO"));

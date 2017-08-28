@@ -18,12 +18,17 @@ public class PersonalInfoActivity extends BaseActivity {
 	private TextView mPhone;
 	private TextView mIdCard;
 	private LinearLayout mAboutUs;
+	private TextView mTitleBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE); 
 		setContentView(R.layout.activity_personal_info);
+		
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar.setText("个人信息");
 		initView();
 		initData();
 		initEvent();

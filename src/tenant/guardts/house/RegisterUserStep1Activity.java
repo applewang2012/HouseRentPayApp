@@ -54,7 +54,8 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	private String mUserName;
 	private String mPassword, mPasswordIndentify;
 	private String mValidAction = "http://tempuri.org/ValidateLoginName";
-	private boolean mUsernameValid;
+	//private boolean mUsernameValid;
+	private View mLoadingView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +78,27 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		initView();
 	}
 	
+	private void showLoadingView() {
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.VISIBLE);
+			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
+			if (imageView != null) {
+				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+				imageView.startAnimation(rotate);
+			}
+		}
+	}
+
+	private void dismissLoadingView() {
+		if (mLoadingView != null) {
+			mLoadingView.setVisibility(View.INVISIBLE);
+		}
+	}
 	
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		
+		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		final EditText password = (EditText)findViewById(R.id.id_register_step1_input_password);
 		final EditText passowrdInditfy = (EditText)findViewById(R.id.id_register_step1_input_password_identify);
 		
@@ -93,12 +110,12 @@ public class RegisterUserStep1Activity extends BaseActivity{
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				
-				if (!hasFocus){
+				/*if (!hasFocus){
 					mUserName = userName.getEditableText().toString();
 					if (mUserName != null && mUserName.length() > 0){
 						checkUserNameValid(mUserName);
 					}
-				}
+				}*/
 			}
 		});
 		
@@ -116,6 +133,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				
 				if (mPassword == null || mPassword.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -127,15 +145,18 @@ public class RegisterUserStep1Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_again_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				if (!mUsernameValid){
-					GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-					return;
+//				if (!mUsernameValid){
+//					GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//					return;
+//				}
+				
+				mUserName = userName.getEditableText().toString();
+				if (mUserName != null && mUserName.length() > 0){
+					showLoadingView();
+					checkUserNameValid(mUserName);
 				}
 				
-				Intent nextIntent = new Intent(RegisterUserStep1Activity.this, RegisterUserStep2Activity.class);
-				nextIntent.putExtra("username", mUserName);
-				nextIntent.putExtra("password", mPassword);
-				startActivity(nextIntent);
+				
 			}
 		});
 	}
@@ -167,10 +188,14 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
+			dismissLoadingView();
 			if (msg.what == 100){
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 200){
-				
+				Intent nextIntent = new Intent(RegisterUserStep1Activity.this, RegisterUserStep2Activity.class);
+				nextIntent.putExtra("username", mUserName);
+				nextIntent.putExtra("password", mPassword);
+				startActivity(nextIntent);
 			}
 			
 		}
@@ -191,7 +216,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
-		mHandler.sendEmptyMessage(200);
+		//mHandler.sendEmptyMessage(200);
 	}
 
 	@Override
@@ -202,9 +227,9 @@ public class RegisterUserStep1Activity extends BaseActivity{
 				Log.i("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
-					mUsernameValid = false;
+					
 				}else{
-					mUsernameValid = true;
+					mHandler.sendEmptyMessage(200);
 				}
 			}
 		}

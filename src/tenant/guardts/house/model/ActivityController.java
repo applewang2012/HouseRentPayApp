@@ -8,7 +8,7 @@ import android.app.Activity;
 public class ActivityController {
 
 
-	public static List<Activity> activities = new ArrayList<Activity>();  
+	public static List<Activity> activities = new ArrayList<Activity>(); 
 	  
     public static void addActivity(Activity activity) {  
         activities.add(activity);  
@@ -20,7 +20,7 @@ public class ActivityController {
   
     public static void finishAll() {  
         for (Activity activity : activities) {  
-            if (!activity.isFinishing()) {  
+            if (!activity.isFinishing()) {
                 activity.finish();  
             }  
         }  

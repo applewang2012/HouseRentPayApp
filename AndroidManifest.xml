@@ -87,7 +87,7 @@
         <activity
             android:name=".MapRentHouseActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".SurfaceViewTestActivity"
@@ -108,6 +108,18 @@
             android:name=".DownloadAppActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".HouseOrderDetailsActivity"
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation|keyboardHidden"
+            
+             >
+             <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
         </activity>
         <activity
             android:name=".CaptureActivity"
@@ -297,7 +309,8 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme2" >
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".MapActivity"
@@ -319,6 +332,7 @@
         </activity>
         <activity
             android:name=".EvaluationActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_evaluation" >
         </activity>
         <activity
@@ -333,12 +347,9 @@
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
-            android:theme="@style/AppTheme2" >
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity
-            android:name=".HousingDetailsActivity"
-            android:label="@string/title_activity_housing_details" >
-        </activity>
+
     </application>
 
 </manifest>

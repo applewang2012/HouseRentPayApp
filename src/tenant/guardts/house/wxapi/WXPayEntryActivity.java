@@ -32,6 +32,7 @@ import android.widget.TextView;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
@@ -152,12 +153,13 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 
 	@Override
 	public void onReq(BaseReq req) {
+		
 	}
 
 	@Override
 	public void onResp(BaseResp resp) {
 		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr+" open  id  "+resp.openId);
-
+		ActivityController.finishAll();
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){
 				View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
@@ -172,10 +174,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 				setContentView(v);
 				initFailedView(v);
 			}
-//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//			builder.setTitle(R.string.app_tip);
-//			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-//			builder.show();
 		}
 	}
 	

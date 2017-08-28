@@ -7,8 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -66,7 +69,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_zufang_fragment, container, false);
 		initView();
-		initData();
+		//initData();
 		return mRootView;
 	}
 	
@@ -74,6 +77,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		initData();
 	}
 	
+	
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		refreshData();
+		
+	}
+
 	private void initView(){
 		mlistView = (ListView)mRootView.findViewById(R.id.id_fragment_house_listview);
 		mNoContent = (TextView)mRootView.findViewById(R.id.id_frament_house_no_cotent);
@@ -89,7 +102,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
 
 			@Override
-			public void convert(UniversalViewHolder holder, final HouseInfoModel info) {
+			public void convert(final UniversalViewHolder holder, final HouseInfoModel info) {
 				View holderView = holder.getConvertView();
 				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
 				TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
@@ -111,21 +124,41 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("查看详情");
 					button3.setText("取消订单");
+					button2.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 					button3.setOnClickListener(new OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
-							showLoadingView();
-							cancelRentAttributeInfo(info.getHouseOrderId());
+							showCancelOrderDialog(holder.getPosition(), info.getHouseOrderId());
 						}
 					});
 				}else if (info.getHouseStatus().equals("1")){
 					status.setText("待支付");
 					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setText("查看详情");
 					button2.setText("立即付款");
 					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button3.setText("取消订单");
+					button1.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 					button2.setOnClickListener(new OnClickListener() {
 						
 						@Override
@@ -140,8 +173,8 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 						
 						@Override
 						public void onClick(View v) {
-							showLoadingView();
-							cancelRentAttributeInfo(info.getHouseOrderId());
+							showCancelOrderDialog(holder.getPosition(), info.getHouseOrderId());
+							
 						}
 					});
 				}else if (info.getHouseStatus().equals("2")){
@@ -154,6 +187,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 				}else if (info.getHouseStatus().equals("3")){
 					status.setText("待评价");
 					status.setTextColor(Color.parseColor("#8be487"));
@@ -163,6 +206,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button3.setText("立即评价");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button2.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 				}else if (info.getHouseStatus().equals("8")){
 					status.setText("已取消");
 					status.setTextColor(Color.parseColor("#de6262"));
@@ -173,6 +226,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 				}else if (info.getHouseStatus().equals("9")){
 					status.setText("已拒绝");
 					status.setTextColor(Color.parseColor("#de6262"));
@@ -182,6 +245,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 				}
 			}
 		};
@@ -190,6 +263,36 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 	private void initData(){
 		showLoadingView();
 		getHouseHistoryData();
+	}
+	
+	private void showCancelOrderDialog(final int id, final String houseId) {  
+		
+		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setTitle("取消订单");
+		  builder.setMessage("您确认要取消该订单吗？");
+		  builder.setIcon(android.R.drawable.ic_dialog_info);
+		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+		         @Override  
+		  
+		         public void onClick(DialogInterface dialog, int which) {
+		        	 showLoadingView();
+					 cancelRentAttributeInfo(houseId);
+		        	 
+		         }  
+			
+		});
+		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
+			  
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {
+	  
+	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	  
+	         }
+		});
+		builder.setCancelable(false);
+		builder.show();
 	}
 	
 	private void getHouseHistoryData(){
@@ -243,7 +346,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 101){
-				
+				parseUserHouseInfo((String)msg.obj);
+				if (mHouseInfoList.size() == 0){
+					mNoContent.setText("暂无租房历史");
+					mNoContent.setVisibility(View.VISIBLE);
+				}else{
+					//mContentLayout.setVisibility(View.VISIBLE);
+					mNoContent.setVisibility(View.INVISIBLE);
+					Log.w("housefragment", "house list  "+mHouseInfoList.size());
+					mAdapter.notifyDataSetChanged();
+				}
 			}
 		}
 	};
@@ -263,12 +375,16 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 					houseModel.setHousePrice(itemJsonObject.optString("RRentPrice"));
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
+					houseModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
 					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
 					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
 					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
 					houseModel.setHouseOrderId(itemJsonObject.optString("RRAID"));
+					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
+					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
+					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
 					mHouseInfoList.add(houseModel);
 				}
 			}

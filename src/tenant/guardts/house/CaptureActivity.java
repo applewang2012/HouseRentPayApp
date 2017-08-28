@@ -57,7 +57,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		setContentView(R.layout.camera);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
-		titlebar.setText("扫一扫租房");
+		titlebar.setText("扫一扫开锁");
 		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);

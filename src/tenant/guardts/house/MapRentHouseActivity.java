@@ -107,22 +107,22 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	private String mLocationAction = "http://tempuri.org/GetRentsByCoodinates";
 	private String mCurrentLocationCity;
 	
-	private PoiSearch mPoiSearch = null;
+//	private PoiSearch mPoiSearch = null;
 	//private EditText mSearchListener;
-	private AutoCompleteTextView mSearchListener = null;
-    private ArrayAdapter<String> sugAdapter = null;
-	private SuggestionSearch mSuggestionSearch;
-	private TextView mSelectCityText;
+//	private AutoCompleteTextView mSearchListener = null;
+//    private ArrayAdapter<String> sugAdapter = null;
+//	private SuggestionSearch mSuggestionSearch;
+//	private TextView mSelectCityText;
 	private TextView mTitleBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE); 
 		setContentView(R.layout.activity_map_rent_house_layout); 
-//		
-//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-//		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-//		mTitleBar.setText("地图租房");
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar.setText("地图租房");
 		
 		mContext = getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, this);
@@ -135,7 +135,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+		mMapView.onResume();
 		super.onResume();
 		
 	}
@@ -154,8 +154,8 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
         mMapView = null;
-        mPoiSearch.destroy();
-        mSuggestionSearch.destroy();
+//        mPoiSearch.destroy();
+//        mSuggestionSearch.destroy();
         super.onDestroy();
      // 回收 bitmap 资源
         icon_blue.recycle();
@@ -166,29 +166,29 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 
 	private void initView(){
 
-		LinearLayout button = (LinearLayout)findViewById(R.id.id_home_select_city_content);
-		button.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+//		LinearLayout button = (LinearLayout)findViewById(R.id.id_home_select_city_content);
+//		button.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
 //				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
 //				intent.putExtra("current_city", mCurrentLocationCity);
 //				startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
-				
-			}
-		});
-		mSelectCityText = (TextView)findViewById(R.id.id_home_show_city_view);
-		 mPoiSearch = PoiSearch.newInstance();
-		 mPoiSearch.setOnGetPoiSearchResultListener(this);
-		 mSearchListener = (AutoCompleteTextView)findViewById(R.id.button_search);  
-		 sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this,
-	                android.R.layout.simple_dropdown_item_1line);
-	     mSearchListener.setAdapter(sugAdapter);
-	     mSearchListener.setThreshold(1);
+//				
+//			}
+//		});
+//		mSelectCityText = (TextView)findViewById(R.id.id_home_show_city_view);
+//		 mPoiSearch = PoiSearch.newInstance();
+//		 mPoiSearch.setOnGetPoiSearchResultListener(this);
+//		 mSearchListener = (AutoCompleteTextView)findViewById(R.id.button_search);  
+//		 sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this,
+//	                android.R.layout.simple_dropdown_item_1line);
+//	     mSearchListener.setAdapter(sugAdapter);
+//	     mSearchListener.setThreshold(1);
 	        
 	  // 初始化建议搜索模块，注册建议搜索事件监听
-	     mSuggestionSearch = SuggestionSearch.newInstance();
-	     mSuggestionSearch.setOnGetSuggestionResultListener(this);   
+//	     mSuggestionSearch = SuggestionSearch.newInstance();
+//	     mSuggestionSearch.setOnGetSuggestionResultListener(this);   
 		 // 地图初始化
         mMapView = (MapView)findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
@@ -208,45 +208,45 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
         /**
          * 当输入关键字变化时，动态更新建议列表
          */
-        mSearchListener.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1,
-                                          int arg2, int arg3) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2,
-                                      int arg3) {
-                if (cs.length() <= 0) {
-                    return;
-                }
-
-                /**
-                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-                 */
-                Log.i("mingguo", "house fragment  onTextChanged   "+mCurrentLocationCity);
-                mSuggestionSearch
-                        .requestSuggestion((new SuggestionSearchOption())
-                                .keyword(cs.toString()).city(mCurrentLocationCity));
-            }
-        });
-        
-        mSearchListener.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				
-				searchNearbyProcess(mSearchListener.getText().toString());
-			}
-        	
-		});
+//        mSearchListener.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence arg0, int arg1,
+//                                          int arg2, int arg3) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence cs, int arg1, int arg2,
+//                                      int arg3) {
+//                if (cs.length() <= 0) {
+//                    return;
+//                }
+//
+//                /**
+//                 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+//                 */
+//                Log.i("mingguo", "house fragment  onTextChanged   "+mCurrentLocationCity);
+//                mSuggestionSearch
+//                        .requestSuggestion((new SuggestionSearchOption())
+//                                .keyword(cs.toString()).city(mCurrentLocationCity));
+//            }
+//        });
+//        
+//        mSearchListener.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				
+//				searchNearbyProcess(mSearchListener.getText().toString());
+//			}
+//        	
+//		});
         
         mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -259,18 +259,32 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
                 View detailView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_layout, null);
 				TextView contact = (TextView) detailView.findViewById(R.id.id_house_contacts);
 				TextView location = (TextView) detailView.findViewById(R.id.id_house_location);
-				TextView desp = (TextView)detailView.findViewById(R.id.id_house_desp);
-            	Button button = new Button(mContext);
-                button.setBackgroundResource(R.drawable.popup);
-                button.setTextColor(Color.parseColor("#000000"));
-                OnInfoWindowClickListener listener = null;
-                desp.setText(mHouserList.get(index).get("rroomtypedesc")+"  |  "+mHouserList.get(index).get("rrentarea")+"平米  |  "+
-                mHouserList.get(index).get("RPropertyDesc")	+"  |  "+mHouserList.get(index).get("rdirectiondesc"));
-                location.setText("地址:"+mHouserList.get(index).get("RAddress"));
-                Log.i("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
-                contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
-                "电话："+mHouserList.get(index).get("ROwnerTel"));
+				TextView status = (TextView)detailView.findViewById(R.id.id_house_status);
+				TextView direction = (TextView)detailView.findViewById(R.id.id_house_direction);
+				TextView floor = (TextView)detailView.findViewById(R.id.id_house_floor);
+				//TextView checkoutTime = (TextView)detailView.findViewById(R.id.id_house_check_out_time);
+				TextView area = (TextView)detailView.findViewById(R.id.id_house_area);
+				TextView owner = (TextView)detailView.findViewById(R.id.id_house_owner);
+				
+//            	Button button = new Button(mContext);
+//                button.setBackgroundResource(R.drawable.popup);
+//                button.setTextColor(Color.parseColor("#000000"));
+//                OnInfoWindowClickListener listener = null;
+//                desp.setText(mHouserList.get(index).get("rroomtypedesc")+"  |  "+mHouserList.get(index).get("rrentarea")+"平米  |  "+
+//                mHouserList.get(index).get("RPropertyDesc")	+"  |  "+mHouserList.get(index).get("rdirectiondesc"));
+//                location.setText("地址:"+mHouserList.get(index).get("RAddress"));
+//                Log.i("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
+//                contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
+//                "电话："+mHouserList.get(index).get("ROwnerTel"));
                 LatLng ll = marker.getPosition();
+                contact.setText("电话："+mHouserList.get(index).get("ROwnerTel"));
+                location.setText(mHouserList.get(index).get("RAddress"));
+                //status.setText(mHouserList.get(index).get("Status"));
+                direction.setText(mHouserList.get(index).get("rroomtypedesc"));
+                floor.setText(mHouserList.get(index).get("rFloor")+"/"+mHouserList.get(index).get("rtotalfloor")+"层");
+                //checkoutTime.setText(mHouserList.get(index).get("rroomtypedesc"));
+                area.setText(mHouserList.get(index).get("rrentarea")+"平米");
+                owner.setText("房主："+mHouserList.get(index).get("ROwner"));
                 mInfoWindow = new InfoWindow(detailView, ll, -47);
                 mBaiduMap.showInfoWindow(mInfoWindow);
                 
@@ -341,7 +355,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(searchText
 	                .toString()).sortType(PoiSortType.distance_from_near_to_far).location(mCurrentLatLng)
 	                .radius(2000);
-	        mPoiSearch.searchNearby(nearbySearchOption);
+//	        mPoiSearch.searchNearby(nearbySearchOption);
 	    }
 		
 		 private int getCurrentMarkerIndex(Marker marker){
@@ -411,7 +425,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 				}else if (msg.what == 300){
 					showSelectLocationMap();
 				}else if (msg.what == 500){
-					updateLocationCity();
+					//updateLocationCity();
 				}
 			}
 	    };
@@ -479,6 +493,8 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 						itemHouse.put("rdirectiondesc",itemJsonObject.optString("rdirectiondesc"));
 						itemHouse.put("rrentarea",itemJsonObject.optString("rrentarea"));
 						itemHouse.put("RPropertyDesc",itemJsonObject.optString("RPropertyDesc"));
+						itemHouse.put("rFloor",itemJsonObject.optString("rFloor"));
+						itemHouse.put("rtotalfloor",itemJsonObject.optString("rtotalfloor"));
 						mHouserList.add(itemHouse);
 					}
 				}
@@ -548,9 +564,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	        
 	    }
 	    
-	    private void updateLocationCity(){
-	    	mSelectCityText.setText(mCurrentLocationCity);
-	    }
+//	    private void updateLocationCity(){
+//	    	mSelectCityText.setText(mCurrentLocationCity);
+//	    }
 
 		
 		@Override
@@ -644,9 +660,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	                suggest.add(info.key);
 	            }
 	        }
-	        sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this, android.R.layout.simple_dropdown_item_1line, suggest);
-	        mSearchListener.setAdapter(sugAdapter);
-	        sugAdapter.notifyDataSetChanged();
+//	        sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this, android.R.layout.simple_dropdown_item_1line, suggest);
+//	        mSearchListener.setAdapter(sugAdapter);
+//	        sugAdapter.notifyDataSetChanged();
 		}
 
 }

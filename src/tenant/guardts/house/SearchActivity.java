@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -15,14 +16,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
+import tenant.guardts.house.view.AddressSelector;
+import tenant.guardts.house.view.CityInterface;
 import tenant.guardts.house.view.HistoryRecordsView;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity{
 
 	private AutoCompleteTextView mSearchText;
 	private RecordSQLiteOpenHelper helper;
@@ -93,7 +98,17 @@ public class SearchActivity extends Activity {
 					insertData(mSearchText.getText().toString().trim());
 					queryData("");
 				}
+				
+//				Intent resultIntent = new Intent();
+//				Bundle bundle = new Bundle();
+//				bundle.putString("search_tag", mSearchText.getText().toString().trim());
+//				resultIntent.putExtras(bundle);
+//				setResult(RESULT_OK, resultIntent);
+				
 				}
+			
+			
+			
 		});
 
 	}
@@ -184,6 +199,19 @@ public class SearchActivity extends Activity {
 		listView = (HistoryRecordsView) findViewById(R.id.history_listview);
 		tvClear=(TextView) findViewById(R.id.tv_clear);
 		tvSearch=(TextView) findViewById(R.id.tv_search);
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent resultIntent = new Intent();
+				Bundle bundle = new Bundle();
+				bundle.putString("search_tag", list.get(position));
+				resultIntent.putExtras(bundle);
+				setResult(RESULT_OK, resultIntent);
+				finish();
+			}
+		});
 
 	}
 

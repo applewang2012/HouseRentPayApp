@@ -5,7 +5,7 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-    <FrameLayout
+    <!-- <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_90"
         android:background="#337ffd" >
@@ -29,7 +29,7 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_38"
             android:textStyle="bold" />
-    </FrameLayout>
+    </FrameLayout> -->
 
     <LinearLayout
         android:id="@+id/linear_layout_avator"

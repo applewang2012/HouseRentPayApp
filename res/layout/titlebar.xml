@@ -10,8 +10,9 @@
 	       android:layout_width="@dimen/base_dimen_100"
 	       android:layout_height="@dimen/base_dimen_90"
 	       android:clickable="true"
+	       android:focusable="true"
 	       android:onClick="backFinish" >
-	      <Button 
+	      <ImageView 
 	           android:layout_width="@dimen/base_dimen_44"
 	           android:layout_height="@dimen/base_dimen_44"
 	           android:background="@drawable/short_lease_back"
@@ -32,11 +33,11 @@
        /> 
        <Button
            android:id="@+id/id_add_rent_house"
-           android:layout_width="@dimen/base_dimen_54"
-           android:layout_height="@dimen/base_dimen_54"
+           android:layout_width="@dimen/base_dimen_60"
+           android:layout_height="@dimen/base_dimen_60"
            android:layout_gravity="right|center_vertical"
            android:layout_marginRight="@dimen/base_dimen_20"
-		   android:background="@drawable/tab_add_rent_house"
+		   android:background="@drawable/search"
 		   android:visibility="invisible"
        />
        

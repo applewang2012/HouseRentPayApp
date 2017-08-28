@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.RegisterUserStep1Activity;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.wxpay.WeiXinPay;
@@ -42,6 +44,7 @@ public class HousePayActivity extends BaseActivity{
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_house_pay_select);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+        ActivityController.addActivity(HousePayActivity.this);
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("支付房款");
         final String price = getIntent().getStringExtra("pay_price");
@@ -70,7 +73,16 @@ public class HousePayActivity extends BaseActivity{
         
     }
     
-    private void showLoadingView(){
+    
+    
+    @Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+
+
+	private void showLoadingView(){
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(View.VISIBLE);
         	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);

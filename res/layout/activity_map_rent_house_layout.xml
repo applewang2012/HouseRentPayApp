@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 	
-    <LinearLayout
+    <!-- <LinearLayout
        android:layout_width="fill_parent"
        android:layout_height="@dimen/base_dimen_90"
        android:orientation="horizontal"
@@ -67,13 +67,12 @@
 		        android:gravity="center_vertical"
 		        />
        </LinearLayout>
-	</LinearLayout>
+	</LinearLayout> -->
     
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="@dimen/base_dimen_90"
         android:clickable="true" />
     
     <FrameLayout 

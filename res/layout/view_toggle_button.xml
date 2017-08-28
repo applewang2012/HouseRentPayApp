@@ -4,6 +4,7 @@
     android:layout_height="50dp"
     android:layout_weight="1"
     android:drawableRight="@drawable/selector_tab_indicate"
+    android:paddingRight="@dimen/base_dimen_5"
     android:background="@color/transparency"
     android:gravity="center"
     android:singleLine="true"

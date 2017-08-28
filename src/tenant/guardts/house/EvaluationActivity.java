@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import tenant.guardts.house.view.CustomRatingBar;
 
-public class EvaluationActivity extends Activity {
+public class EvaluationActivity extends BaseActivity {
 
 	private TextView mHouseLocation;//房屋所在地
 	private CustomRatingBar mOverallRating;//综合评价
@@ -19,12 +19,16 @@ public class EvaluationActivity extends Activity {
 	private CustomRatingBar mPriceRating;//价格评价
 	private EditText mExplanation;//补充说明
 	private Button mBtnSubmit;//提交
+	private TextView mTitleBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_evaluation);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar.setText("评价");
 		initView();
 		initEvent();
 	}
