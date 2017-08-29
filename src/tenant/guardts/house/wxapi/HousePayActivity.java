@@ -24,6 +24,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.RegisterUserStep1Activity;
@@ -48,13 +49,23 @@ public class HousePayActivity extends BaseActivity{
 		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("支付房款");
         final String price = getIntent().getStringExtra("pay_price");
+        final String ownerId = getIntent().getStringExtra("owner_idcard");
         TextView priceText = (TextView)findViewById(R.id.id_pay_price_show);
         priceText.setText(price+"元");
         mLoadingView = (View)findViewById(R.id.id_data_loading);
         mLoadingView.setVisibility(View.INVISIBLE);
+        CommonUtil.ORDER_MONKEY = price;
+        CommonUtil.OWNER_IDCARD = ownerId;
         try {
-        	String priceInt = price.substring(0, price.indexOf("."));
-        	realPrice = priceInt+"00";
+        	int dotInex = price.indexOf(".");
+        	if (dotInex >= 0){
+        		String priceInt = price.substring(0, dotInex);
+            	realPrice = priceInt+"00";
+        	}else{
+        		Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
+        		return;
+        	}
+        	
         	Log.i("mingguo", "pay activity  price int   "+realPrice);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,7 +78,7 @@ public class HousePayActivity extends BaseActivity{
 			public void onClick(View v) {
 				showLoadingView();
 				api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-				startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
+				startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
 			}
 		});
         

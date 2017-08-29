@@ -519,22 +519,25 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}else if (msg.what == 103){
 				finish();
 			}else if (msg.what == 110){
-				//dismissLoadingView();
+				dismissLoadingView();
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
 						String compareResult = object.optString("verify_result");
-						if (compareResult == null || compareResult.equals("")){
-							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-						}else{
-							if (compareResult.equals("0")){
-									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ,请等待房主确认！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-									startAddRentInfo();
-									return;
+						String result = object.optString("result");
+						if (result != null && result.equals("0")){
+							if (compareResult != null && compareResult.equals("0")){
+								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ,请等待房主确认！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+								startAddRentInfo();
+								//GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}else{
+								
 								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}
+						}else{
+							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败，请重试 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						}
+						
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

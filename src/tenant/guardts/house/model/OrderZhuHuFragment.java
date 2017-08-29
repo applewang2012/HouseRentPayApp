@@ -166,6 +166,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 							CommonUtil.mPayHouseOrderId = info.getHouseOrderId();
 							Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
 							payIntent.putExtra("pay_price", info.getHousePrice());
+							payIntent.putExtra("owner_idcard", info.getHouseOwnerIdcard());
 							startActivity(payIntent);
 						}
 					});

@@ -181,7 +181,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 				
 				if (CommonUtil.mRegisterIdcard != null && !CommonUtil.mRegisterIdcard.equals("")){
 					Log.w("mingguo", "register id card  "+CommonUtil.mRegisterIdcard);
-					if (CommonUtil.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
+					//if (CommonUtil.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
 						Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 						mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
 						
@@ -192,9 +192,9 @@ public class GetRentAttributeActivity extends BaseActivity{
 						getPhoto.putExtra("return-data", true);
 						getPhoto.putExtra("camerasensortype", 2); 
 						startActivityForResult(getPhoto, 1);
-					}else{
-						GlobalUtil.shortToast(getApplication(), "抱歉，登录用户身份信息和租房者身份信息不符 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-					}
+//					}else{
+//						GlobalUtil.shortToast(getApplication(), "抱歉，登录用户身份信息和租房者身份信息不符 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//					}
 				}else{
 					GlobalUtil.shortToast(getApplication(), "register user idcard  get failed !", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 				}

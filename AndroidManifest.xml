@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tenant.guardts.house"
-    android:versionCode="5"
-    android:versionName="1.0.5" >
+    android:versionCode="2"
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -310,7 +310,7 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@style/AppTheme" >
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".MapActivity"

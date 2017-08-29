@@ -29,6 +29,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private View mLoadingView;
 	private String mCancelAttrbuteAction = "http://tempuri.org/CancelRentAttribute";
 	private String mRejectRentAction = "http://tempuri.org/RejectRentAttribute";
+	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +71,34 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		if (mOrderDetail.getHouseStatus().equals("0")){
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
-			button1.setText("查看详情");
+			button1.setText("确认订单");
 			button1.setVisibility(View.INVISIBLE);
-			button2.setTextColor(Color.parseColor("#337ffd"));
+			
 			button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 			if (mDetailType != null){
 				if (mDetailType.equals("owner")){
+					button1.setVisibility(View.VISIBLE);
+					button1.setTextColor(Color.parseColor("#337ffd"));
+					button1.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							showLoadingView();
+							confirmRentAttributeInfo(mOrderDetail.getHouseOrderId());
+						}
+					});
 					button2.setText("拒绝订单");
 					button2.setOnClickListener(new OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
-							showCancelOrderDialog(0, mOrderDetail.getHouseOrderId());
+							showRejectOrderDialog(mOrderDetail.getHouseOrderId());
 						}
 					});
 				}else if (mDetailType.equals("renter")){
 					button2.setText("取消订单");
+					button2.setTextColor(Color.parseColor("#337ffd"));
 					button2.setOnClickListener(new OnClickListener() {
 						
 						@Override
@@ -116,6 +129,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 							CommonUtil.mPayHouseOrderId = mOrderDetail.getHouseOrderId();
 							Intent payIntent = new Intent(HouseOrderDetailsActivity.this, tenant.guardts.house.wxapi.HousePayActivity.class);
 							payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
+							payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
 							startActivity(payIntent);
 						}
 					});
@@ -227,7 +241,16 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		builder.show();
 	}
 	
-	private void showRejectOrderDialog(final int id, final String houseId) {  
+	private void confirmRentAttributeInfo(String id){
+		mLoadingView.setVisibility(View.VISIBLE);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
+		rpc.addProperty("id", id);
+		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mConfirmRentAttribute, rpc);
+		mPresent.startPresentServiceTask();
+	}
+	
+	private void showRejectOrderDialog(final String houseId) {  
 		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(HouseOrderDetailsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle("拒绝订单");
@@ -286,6 +309,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				finish();
 			}else if (msg.what == 101){
 				finish();
+			}else if (msg.what == 102){
+				finish();
 			}
 		}
 	};
@@ -304,6 +329,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		}else if (action.equals(mCancelAttrbuteAction)){
 			Message msg = mHandler.obtainMessage();
 			msg.what = 101;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}else if (action.equals(mConfirmRentAttribute)){
+			Message msg = mHandler.obtainMessage();
+			msg.what = 102;
 			msg.obj = templateInfo;
 			msg.sendToTarget();
 		}

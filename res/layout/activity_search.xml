@@ -1,17 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-   >
+   	>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#337ffd"
         android:gravity="center_vertical"
-        
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -60,14 +59,11 @@
             android:textSize="17sp" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
-
+    
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
             android:orientation="vertical" >
 
             <tenant.guardts.house.view.HistoryRecordsView
@@ -92,9 +88,7 @@
                 android:text="清空历史记录"
                 android:textColor="#999999"
                 android:textSize="12sp"
-                
                 android:visibility="invisible" />
         </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

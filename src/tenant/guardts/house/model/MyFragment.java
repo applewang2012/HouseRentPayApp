@@ -71,8 +71,17 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.home_my_fragment, container, false);
 		initView();
-		initData();
+		
 		return mRootView;
+	}
+	
+	
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		initData();
 	}
 
 	private void initView() {
@@ -155,6 +164,8 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		});
 		// showLoadingView();
 	}
+	
+	
 
 	private void initData() {
 		getUserInfo();

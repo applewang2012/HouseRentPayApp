@@ -634,7 +634,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RRName", mRRName);      
 		rpc.addProperty("RPSName", mRPSName);  
 		rpc.addProperty("RAddress", mSelectorInfo.get("district").getHouseSelectValue()+mSelectorInfo.get("street").getHouseSelectValue()
-				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress);   
+				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress+mRDoor);   
 		rpc.addProperty("RDoor", mRDoor);    
 		rpc.addProperty("RTotalDoor", mRTotalDoor); 
 		

@@ -3,8 +3,6 @@ package tenant.guardts.house;
 
 import java.io.File;
 
-import tenant.guardts.house.R;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,11 +13,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +58,8 @@ public class DownloadAppActivity extends BaseActivity{
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
 		titlebar.setText("下载更新");
+		FrameLayout backButton = (FrameLayout) findViewById(R.id.id_titlebar_back);
+		backButton.setVisibility(View.INVISIBLE);
 		registerReceiverData();
 		initDownloadAdapter();
 		

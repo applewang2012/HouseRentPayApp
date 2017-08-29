@@ -70,16 +70,14 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
         mOrderNo.setText(CommonUtil.mPayHouseOrderId);
         mOrderTime.setText(CommonUtil.ORDER_TIME);
         mOrderNo.setText(CommonUtil.ORDER_NO);
-        mOrderMonkey.setText(CommonUtil.ORDER_MONKEY);
+        mOrderMonkey.setText(CommonUtil.ORDER_MONKEY+"　元");
         mFinishPay = (Button)v.findViewById(R.id.id_button_finish_pay);
         Log.i("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
         		" CommonUtil.ORDER_NO "+CommonUtil.ORDER_NO+" CommonUtil.ORDER_MONKEY "+CommonUtil.ORDER_MONKEY);
         mFinishPay.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				finish();
-				
 			}
 		});
     }
@@ -122,6 +120,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		rpc.addProperty("tradeNo", CommonUtil.ORDER_NO);
 		rpc.addProperty("fee", CommonUtil.ORDER_MONKEY);
 		rpc.addProperty("prepayId", CommonUtil.ORDER_PREPAY_ID );
+		rpc.addProperty("ownerIdCard", CommonUtil.OWNER_IDCARD );
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateOrderAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}

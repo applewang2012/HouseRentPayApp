@@ -53,6 +53,7 @@ public class CommonUtil {
     public static  String ORDER_NO = null;
     public static  String ORDER_MONKEY = null;
     public static String ORDER_PREPAY_ID = null;
+    public static String OWNER_IDCARD = null;
     
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;
