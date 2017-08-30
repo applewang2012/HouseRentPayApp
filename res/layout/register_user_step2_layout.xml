@@ -2,302 +2,316 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-     >
-    <LinearLayout 
-        android:layout_width="fill_parent"  
+    android:background="#ffffff" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical" >
+
         <LinearLayout
-         android:layout_width="fill_parent"  
-         android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/base_dimen_42"
-         android:layout_marginLeft="@dimen/base_dimen_70"
-         android:layout_marginRight="@dimen/base_dimen_70"
-         android:orientation="horizontal"
-         >
-        <LinearLayout 
-            android:layout_width="wrap_content"  
-         	android:layout_height="wrap_content"
-         	android:orientation="vertical"
-         	android:layout_weight="1"
-            >
-            
-            <LinearLayout 
-                android:layout_width="match_parent"  
-	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_80"
-	         	android:orientation="horizontal"
-                >
-                <ImageView 
-                    android:layout_width="@dimen/base_dimen_60"  
-	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#00000000"
-                    />
+            android:layout_width="@dimen/base_dimen_522"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_42"
+            android:gravity="center"
+           
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
                 <ImageView
-	                android:layout_width="@dimen/base_dimen_38"  
-	         		android:layout_height="@dimen/base_dimen_38"
-	         		android:background="@drawable/register_step1_select"
-	         		android:layout_gravity="center_horizontal"
-	                />
-                <ImageView 
-                    android:layout_width="@dimen/base_dimen_60"  
-	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#337ffd"
-	         		android:layout_gravity="center_vertical"
-                    />
+                    android:layout_width="@dimen/base_dimen_47"
+                    android:layout_height="@dimen/base_dimen_68"
+                    android:layout_gravity="center"
+                    android:background="@drawable/register_step_marker" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_38"
+                    android:layout_marginTop="@dimen/base_dimen_12"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#ffffff" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_38"
+                        android:layout_height="@dimen/base_dimen_38"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/register_step1_select" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#337ffd" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/base_dimen_14"
+                    android:gravity="left"
+                    android:text="手机认证"
+                    android:textColor="#337ffd"
+                    android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
-            
-            <TextView
-                android:layout_width="wrap_content"  
-         		android:layout_height="wrap_content"
-         		android:text="用户设置"
-         		android:textColor="#337ffd"
-         		android:textSize="@dimen/base_dimen_26"
-         		android:layout_marginTop="@dimen/base_dimen_14"
-         		android:layout_gravity="center_horizontal"
-         		android:gravity="center"
-                />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_38"
+                    android:layout_marginTop="@dimen/base_dimen_80"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#337ffd" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_38"
+                        android:layout_height="@dimen/base_dimen_38"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/register_step2_normal" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#cccccc" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/base_dimen_14"
+                    android:gravity="center"
+                    android:text="实名认证"
+                    android:textColor="#cccccc"
+                    android:textSize="@dimen/base_dimen_26" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_38"
+                    android:layout_marginTop="@dimen/base_dimen_80"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#cccccc" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_38"
+                        android:layout_height="@dimen/base_dimen_38"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/base_dimen_80"
+                        android:background="@drawable/register_step3_normal" />
+
+                    <ImageView
+                        android:layout_width="@dimen/base_dimen_68"
+                        android:layout_height="@dimen/base_dimen_2"
+                        android:layout_gravity="center_vertical"
+                        android:background="#ffffff" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/base_dimen_14"
+                    android:gravity="center"
+                    android:text="注册完成"
+                    android:textColor="#cccccc"
+                    android:textSize="@dimen/base_dimen_26" />
+            </LinearLayout>
         </LinearLayout>
-        
-        <LinearLayout 
-            android:layout_width="wrap_content"  
-         	android:layout_height="wrap_content"
-         	android:orientation="vertical"
-         	android:layout_weight="1"
-            >
+
+        <FrameLayout
+            android:layout_width="@dimen/base_dimen_520"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_97"
+            android:background="@drawable/item_shape_no_solid_corner" >
+
             <ImageView
-                android:layout_width="@dimen/base_dimen_47"  
-         		android:layout_height="@dimen/base_dimen_68"
-         		android:background="@drawable/register_step_marker"
-         		android:layout_gravity="center_horizontal"
-                />
-            <LinearLayout 
-                android:layout_width="match_parent"  
-	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_12"
-	         	android:orientation="horizontal"
-                >
-                <ImageView 
-                    android:layout_width="@dimen/base_dimen_60"  
-	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#337ffd"
-		         	android:layout_gravity="center_vertical"
-                    />
-                
-	            <ImageView
-	                android:layout_width="@dimen/base_dimen_38"  
-	         		android:layout_height="@dimen/base_dimen_38"
-	         		android:background="@drawable/register_step2_select"
-	         		
-	         		android:layout_gravity="center_horizontal"
-	                />
-	            <ImageView 
-	                    android:layout_width="@dimen/base_dimen_60"  
-		         		android:layout_height="@dimen/base_dimen_2"
-		         		android:background="#cccccc"
-		         		android:layout_gravity="center_vertical"
-	                    />
-            </LinearLayout>
+                android:layout_width="@dimen/base_dimen_22"
+                android:layout_height="@dimen/base_dimen_36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_15"
+                android:background="@drawable/register_step2_phone" />
+
+            <EditText
+                android:id="@+id/id_register_step2_input_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_34"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_64"
+                android:layout_marginTop="@dimen/base_dimen_6"
+                android:background="#00000000"
+                android:gravity="center_vertical"
+                android:hint="请输入11位手机号码"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="#000000"
+                android:textColorHint="#cccccc"
+                android:textSize="@dimen/base_dimen_28" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/base_dimen_520"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:background="@drawable/item_shape_no_solid_corner" >
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_19"
+                android:layout_height="@dimen/base_dimen_34"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_18"
+                android:background="@drawable/register_step2_verifycode" />
+
+            <EditText
+                android:id="@+id/id_register_step2_input_verifycode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_38"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_64"
+                android:layout_marginTop="@dimen/base_dimen_6"
+                android:background="#00000000"
+                android:digits="@string/edit_input"
+                android:gravity="center_vertical"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:textColor="#000000"
+                android:textColorHint="#cccccc"
+                android:textSize="@dimen/base_dimen_28" />
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_1"
+                android:layout_height="@dimen/base_dimen_40"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_348"
+                android:background="#b2b2b2" />
+
             <TextView
-                android:layout_width="wrap_content"  
-         		android:layout_height="wrap_content"
-         		android:text="手机绑定"
-         		android:textColor="#337ffd"
-         		android:textSize="@dimen/base_dimen_26"
-         		android:layout_marginTop="@dimen/base_dimen_14"
-         		android:layout_gravity="center_horizontal"
-         		android:gravity="center"
-                />
-        </LinearLayout>
-        
-        <LinearLayout 
-            android:layout_width="wrap_content"  
-         	android:layout_height="wrap_content"
-         	android:orientation="vertical"
-         	android:layout_weight="1"
-            >
-             <LinearLayout 
-                android:layout_width="match_parent"  
-	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_80"
-	         	android:orientation="horizontal"
-                >
-                <ImageView 
-                    android:layout_width="@dimen/base_dimen_60"  
-	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#cccccc"
-		         	android:layout_gravity="center_vertical"
-                    />
-	            <ImageView
-	                android:layout_width="@dimen/base_dimen_38"  
-	         		android:layout_height="@dimen/base_dimen_38"
-	         		android:background="@drawable/register_step3_normal"
-	         		android:layout_marginTop="@dimen/base_dimen_80"
-	         		android:layout_gravity="center_horizontal"
-	                />
-	            <ImageView 
-	                    android:layout_width="@dimen/base_dimen_60"  
-		         		android:layout_height="@dimen/base_dimen_2"
-		         		android:background="#cccccc"
-		         		android:layout_gravity="center_vertical"
-	                    />
-            </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"  
-         		android:layout_height="wrap_content"
-         		android:text="实名认证"
-         		android:textColor="#cccccc"
-         		android:textSize="@dimen/base_dimen_26"
-         		android:layout_marginTop="@dimen/base_dimen_14"
-         		android:layout_gravity="center_horizontal"
-         		android:gravity="center"
-                />
-        </LinearLayout>
-        
-        <LinearLayout 
-            android:layout_width="wrap_content"  
-         	android:layout_height="wrap_content"
-         	android:orientation="vertical"
-         	android:layout_weight="1"
-            >
-            <LinearLayout 
-                android:layout_width="match_parent"  
-	         	android:layout_height="@dimen/base_dimen_38"
-	         	android:layout_marginTop="@dimen/base_dimen_80"
-	         	android:orientation="horizontal"
-                >
-                <ImageView 
-                    android:layout_width="@dimen/base_dimen_60"  
-	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#cccccc"
-		         	android:layout_gravity="center_vertical"
-                    />
-	            <ImageView
-	                android:layout_width="@dimen/base_dimen_38"  
-	         		android:layout_height="@dimen/base_dimen_38"
-	         		android:background="@drawable/register_step4_normal"
-	         		android:layout_gravity="center_horizontal"
-	                />
-	          </LinearLayout>
-            <TextView
-                android:layout_width="wrap_content"  
-         		android:layout_height="wrap_content"
-         		android:text="注册完成"
-         		android:textColor="#cccccc"
-         		android:textSize="@dimen/base_dimen_26"
-         		android:layout_marginTop="@dimen/base_dimen_14"
-         		android:layout_gravity="center_horizontal"
-         		android:gravity="center"
-                />
-        </LinearLayout>
-	       	
-    	</LinearLayout>
-    	<FrameLayout 
-		        android:layout_width="@dimen/base_dimen_520"
-		        android:layout_height="@dimen/base_dimen_80"
-		        android:layout_marginTop="@dimen/base_dimen_97"
-		        android:background="@drawable/item_shape_no_solid_corner"
-		        android:layout_gravity="center_horizontal"
-	        	>
-	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_22"
-		        	android:layout_height="@dimen/base_dimen_36"
-		        	android:background="@drawable/register_step2_phone"
-		        	android:layout_marginLeft="@dimen/base_dimen_15"
-		        	android:layout_gravity="center_vertical"
-	        	    />
-	        	<EditText 
-	        	        android:id="@+id/id_register_step2_input_phone"
-	        	         android:layout_width="match_parent"
-		        		 android:layout_height="@dimen/base_dimen_34"
-		        		 android:layout_gravity="center_vertical"
-		        		 android:hint="请输入11位手机号码"
-		        		 android:inputType="number"
-		        		 android:gravity="center_vertical"
-		        		 android:maxLength="11"
-		        		 android:layout_marginTop="@dimen/base_dimen_6"
-		        		 android:layout_marginLeft="@dimen/base_dimen_64"
-		        		 android:background="#00000000"
-		        		 android:textSize="@dimen/base_dimen_28"
-		        		 android:textColorHint="#cccccc"
-		        		 android:textColor="#000000"
-	        	        />
-	        	
-	       	</FrameLayout>
-	       	<FrameLayout 
-		        android:layout_width="@dimen/base_dimen_520"
-		        android:layout_height="@dimen/base_dimen_80"
-		        android:layout_marginTop="@dimen/base_dimen_30"
-		        android:background="@drawable/item_shape_no_solid_corner"
-		        android:layout_gravity="center_horizontal"
-	        	>
-	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_19"
-		        	android:layout_height="@dimen/base_dimen_34"
-		        	android:layout_gravity="center_vertical"
-		        	android:layout_marginLeft="@dimen/base_dimen_18"
-		        	android:background="@drawable/register_step2_verifycode"
-	        	    />
-	        	<EditText 
-	        	        android:id="@+id/id_register_step2_input_verifycode"
-	        	         android:layout_width="match_parent"
-		        		 android:layout_height="@dimen/base_dimen_38"
-		        		 android:layout_marginTop="@dimen/base_dimen_6"
-		        		 android:layout_marginLeft="@dimen/base_dimen_64"
-		        		 android:layout_gravity="center_vertical"
-		        		 android:hint="请输入验证码"
-		        		 android:digits="@string/edit_input"
-		        		 android:inputType="number"
-		        		 android:gravity="center_vertical"
-		        		 android:textSize="@dimen/base_dimen_28"
-		        		 android:background="#00000000"
-		        		 android:textColorHint="#cccccc"
-		        		 android:textColor="#000000"
-	        	        />
-	        	<ImageView 
-	        	    android:layout_width="@dimen/base_dimen_1"
-		        	android:layout_height="@dimen/base_dimen_40"
-		        	android:layout_gravity="center_vertical"
-		        	android:layout_marginLeft="@dimen/base_dimen_348"
-		        	android:background="#b2b2b2"
-	        	    />
-	        	<TextView 
-	        	   		 android:id="@+id/id_register_step2_get_verifycode"
-	        	         android:layout_width="wrap_content"
-		        		 android:layout_height="match_parent"
-		        		 android:layout_marginLeft="@dimen/base_dimen_364"
-		        		 android:gravity="center_vertical"
-		        		 android:text="获取验证码"
-		        		 android:textColor="#337ffd"
-		        		 android:clickable="true"
-		        		 android:textSize="@dimen/base_dimen_28"
-	        	    />
-	       	</FrameLayout>
-	       	
-	       	
-	       	<Button 
-                 android:id="@+id/id_register_user_step2_next"
-                 android:layout_width="@dimen/base_dimen_520"
-		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_170"
-		         android:text="下一步"
-		         android:textColor="@drawable/button_text_selector"
-		         android:textSize="@dimen/base_dimen_30"
-		         android:layout_gravity="center_horizontal"
-		         android:gravity="center"
-		         android:background="@drawable/button_background_selector"
-                 />
+                android:id="@+id/id_register_step2_get_verifycode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/base_dimen_364"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:text="获取验证码"
+                android:textColor="#337ffd"
+                android:textSize="@dimen/base_dimen_28" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/base_dimen_520"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:background="@drawable/item_shape_no_solid_corner" >
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_28"
+                android:layout_height="@dimen/base_dimen_36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_18"
+                android:background="@drawable/register_user_password" />
+
+            <EditText
+                android:id="@+id/id_register_step1_input_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_38"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_64"
+                android:layout_marginTop="@dimen/base_dimen_6"
+                android:background="#00000000"
+                android:digits="@string/edit_input"
+                android:gravity="center_vertical"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="#cccccc"
+                android:textSize="@dimen/base_dimen_28" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="@dimen/base_dimen_520"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_30"
+            android:background="@drawable/item_shape_no_solid_corner" >
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_28"
+                android:layout_height="@dimen/base_dimen_36"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_18"
+                android:background="@drawable/register_user_password_identify" />
+
+            <EditText
+                android:id="@+id/id_register_step1_input_password_identify"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_38"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_dimen_64"
+                android:background="#00000000"
+                android:digits="@string/edit_input"
+                android:gravity="center_vertical"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="#cccccc"
+                android:textSize="@dimen/base_dimen_28" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/id_register_user_step2_next"
+            android:layout_width="@dimen/base_dimen_520"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_70"
+            android:background="@drawable/button_background_selector"
+            android:gravity="center"
+            android:text="下一步"
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
-    
-    
-     
 
     <include
         android:id="@+id/id_data_loading"
-        android:visibility="invisible"
         layout="@layout/layout_loading_dialog"
-       />
-	       
+        android:visibility="invisible" />
+
 </FrameLayout>

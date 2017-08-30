@@ -62,9 +62,9 @@ public class RegisterUserStep3Activity extends BaseActivity{
 	private String mFaceCaptureString, mCaptureString;
 	private String file;
 	
-	private String mUserName;
+	private String mUserName;//手机号
 	private String mPassword;
-	private String mPhone;
+	private String mPhone;//手机号
 	
 	
 	

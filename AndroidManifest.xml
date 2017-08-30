@@ -111,15 +111,16 @@
         </activity>
         <activity
             android:name=".HouseOrderDetailsActivity"
-            android:theme="@style/AppTheme"
             android:configChanges="orientation|keyboardHidden"
-            
-             >
-             <!-- <intent-filter>
+            android:theme="@style/AppTheme" >
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".CaptureActivity"
@@ -197,7 +198,8 @@
             android:name=".RegisterUserStep2Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
         <activity
             android:name=".RegisterUserStep3Activity"
             android:screenOrientation="portrait"
@@ -223,6 +225,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            
         </activity>
         <activity
             android:name=".GetRentAttributeActivity"
@@ -299,7 +302,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
@@ -309,8 +312,8 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
             android:name=".MapActivity"
@@ -327,13 +330,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
             android:name=".EvaluationActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_evaluation" >
+            android:label="@string/title_activity_evaluation"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".PaymentStatusActivity"
@@ -342,14 +345,18 @@
         <activity
             android:name=".WalletActivity"
             android:label="@string/title_activity_wallet"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@style/AppTheme2" >
         </activity>
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme" >
         </activity>
-
+        <activity
+            android:name=".HousingDetailsActivity"
+            android:label="@string/title_activity_housing_details"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

@@ -72,6 +72,7 @@ import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseSearchActivity;
+import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SelectShowCityActivity;
@@ -82,8 +83,8 @@ import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.view.HomeCustomView;
 import tenant.guardts.house.view.HomeFragmentListView;
 
-public class HouseFragment extends Fragment
-		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener, OnItemClickListener {
+public class HouseFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener,
+		OnGetSuggestionResultListener, OnItemClickListener {
 
 	private Context mContext;
 	private View mRootView;
@@ -112,11 +113,11 @@ public class HouseFragment extends Fragment
 	private int mRadioSelectedPostion = 0;
 	private PoiSearch mPoiSearch = null;
 	// private EditText mSearchListener;
-	//private AutoCompleteTextView mSearchListener = null;
-	//private ArrayAdapter<String> sugAdapter = null;
+	// private AutoCompleteTextView mSearchListener = null;
+	// private ArrayAdapter<String> sugAdapter = null;
 	private SuggestionSearch mSuggestionSearch;
 	private TextView mSelectCityText;
-	//private HomeCustomView mBtnShareRight;
+	// private HomeCustomView mBtnShareRight;
 	private LinearLayout mShareHouseLayout;
 	private LinearLayout mHouseOwnerLayout;
 
@@ -127,6 +128,9 @@ public class HouseFragment extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Bundle bundle = getArguments();
+		userName = bundle.getString("user_name");
+		Log.e("", userName+"=============");
 		mContext = getActivity().getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
 
@@ -142,8 +146,21 @@ public class HouseFragment extends Fragment
 	}
 
 	private void initEvent() {
+
+		// 登录
+		mLogin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (userName.equals("") || userName == null) {
+
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				}
+
+			}
+		});
 		mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				switch (checkedId) {
@@ -158,25 +175,25 @@ public class HouseFragment extends Fragment
 				}
 			}
 		});
-		
-		
-	}
-	
 
+	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-//		HomeActivity activity = (HomeActivity) getActivity();
-//		if (activity.getSelectedCity() != null && !activity.getSelectedCity().equals("")) {
-//			if (mCurrentLocationCity != null && mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())) {
-//				return;
-//			}
-//			mCurrentLocationCity = activity.getSelectedCity();
-//			Log.i("mingguo", "house fragment  on resume  change  currentCity  " + mCurrentLocationCity);
-//			mSelectCityText.setText(mCurrentLocationCity);
-//			searchButtonProcess();
-//		}
+		// HomeActivity activity = (HomeActivity) getActivity();
+		// if (activity.getSelectedCity() != null &&
+		// !activity.getSelectedCity().equals("")) {
+		// if (mCurrentLocationCity != null &&
+		// mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())) {
+		// return;
+		// }
+		// mCurrentLocationCity = activity.getSelectedCity();
+		// Log.i("mingguo", "house fragment on resume change currentCity " +
+		// mCurrentLocationCity);
+		// mSelectCityText.setText(mCurrentLocationCity);
+		// searchButtonProcess();
+		// }
 	}
 
 	private void startThreadfindLocation(final String locationName) {
@@ -226,88 +243,151 @@ public class HouseFragment extends Fragment
 	}
 
 	private void initView() {
+		mLogin = (TextView) mRootView.findViewById(R.id.textview_login);
+		if (userName.equals("") || userName == null) {
+
+		} else {
+			mLogin.setVisibility(View.GONE);
+		}
+
+		TextView mGovernmentService = (TextView) mRootView.findViewById(R.id.tv_government_service);// 政府服务
+		TextView mHeXiPower = (TextView) mRootView.findViewById(R.id.tv_hexi_power);// 河西力量
+		TextView mSafeguardRights = (TextView) mRootView.findViewById(R.id.tv_safeguard_rights);// 维权常识
+		TextView mMedicalInsurance = (TextView) mRootView.findViewById(R.id.tv_medical_insurance);// 医疗保险
+		TextView mUseFulNumber = (TextView) mRootView.findViewById(R.id.tv_useful_numbers);// 常用电话
+
+		mGovernmentService.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		mHeXiPower.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		mSafeguardRights.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		mMedicalInsurance.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		mUseFulNumber.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+
 		mRbShare = (RadioButton) mRootView.findViewById(R.id.home_radio_share);
 		mRbOwner = (RadioButton) mRootView.findViewById(R.id.home_radio_owner);
 		mRadioGroup = (RadioGroup) mRootView.findViewById(R.id.home_radiogrouop);
-		mShareHouseLayout = (LinearLayout)mRootView.findViewById(R.id.id_share_house_content);
-		mHouseOwnerLayout = (LinearLayout)mRootView.findViewById(R.id.id_house_owner_content);
+		mShareHouseLayout = (LinearLayout) mRootView.findViewById(R.id.id_share_house_content);
+		mHouseOwnerLayout = (LinearLayout) mRootView.findViewById(R.id.id_house_owner_content);
 		mShareHouseLayout.setVisibility(View.VISIBLE);
 		mHouseOwnerLayout.setVisibility(View.GONE);
-		
-		
-		
+
 		LinearLayout fabuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_fabu);
-		LinearLayout dengjiLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_dengji);
-		LinearLayout weixiuLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_weixiu);
-		LinearLayout gaizhaoLayout = (LinearLayout)mRootView.findViewById(R.id.id_home_house_owner_gaizhao);
+		LinearLayout dengjiLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_dengji);
+		LinearLayout weixiuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_weixiu);
+		LinearLayout gaizhaoLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_gaizhao);
 		fabuLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
-				intent.putExtra("user_name", CommonUtil.mUserLoginName);
-				startActivity(intent);
+				// 先判断是否登录
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+                 //发布房屋
+					Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
+					intent.putExtra("user_name", CommonUtil.mUserLoginName);
+					startActivity(intent);
+				}
 			}
 		});
 		dengjiLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
-		
+
 		weixiuLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
-		
+
 		gaizhaoLayout.setOnClickListener(new OnClickListener() {
-		
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
-		
-		LinearLayout duanzuShareHouse = (LinearLayout)mShareHouseLayout.findViewById(R.id.id_share_house_duanzu);
+
+		LinearLayout duanzuShareHouse = (LinearLayout) mShareHouseLayout.findViewById(R.id.id_share_house_duanzu);
 		duanzuShareHouse.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(mContext, HouseSearchActivity.class));
+				
+                 //房屋检索
+				Intent intent = new Intent(mContext, HouseSearchActivity.class);
+				intent.putExtra("user_name", userName);
+				startActivity(intent);
 			}
 		});
 		LinearLayout mapRentHouse = (LinearLayout) mRootView.findViewById(R.id.id_share_house_ditu);
 		mapRentHouse.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(mContext, MapRentHouseActivity.class));
-				
+
 			}
 		});
 
 		mListView = (ListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
-//		mListView.setAdapter(new );
-//		///////////////////////////////////////////////////////////////////////////////
-		
+		// mListView.setAdapter(new );
+		// ///////////////////////////////////////////////////////////////////////////////
+
 		LinearLayout button = (LinearLayout) mRootView.findViewById(R.id.id_home_select_city_content);
 		button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
-//				intent.putExtra("current_city", mCurrentLocationCity);
-//				getActivity().startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
+				// Intent intent = new Intent(mContext,
+				// SelectShowCityActivity.class);
+				// intent.putExtra("current_city", mCurrentLocationCity);
+				// getActivity().startActivityForResult(intent,
+				// CommonUtil.mSelectCityRequestCode);
 
 			}
 		});
@@ -315,19 +395,19 @@ public class HouseFragment extends Fragment
 		mPoiSearch = PoiSearch.newInstance();
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		TextView searchText = (TextView) mRootView.findViewById(R.id.button_search);
-//		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line);
-//		mSearchListener.setAdapter(sugAdapter);
-//		mSearchListener.setThreshold(1);
-		LinearLayout searchLayout = (LinearLayout)mRootView.findViewById(R.id.home_search_container);
+		// sugAdapter = new ArrayAdapter<String>(getActivity(),
+		// android.R.layout.simple_dropdown_item_1line);
+		// mSearchListener.setAdapter(sugAdapter);
+		// mSearchListener.setThreshold(1);
+		LinearLayout searchLayout = (LinearLayout) mRootView.findViewById(R.id.home_search_container);
 		searchLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				startActivity(new Intent(mContext, HouseSearchActivity.class));
 			}
 		});
-		
 
 		// 初始化建议搜索模块，注册建议搜索事件监听
 		mSuggestionSearch = SuggestionSearch.newInstance();
@@ -350,35 +430,39 @@ public class HouseFragment extends Fragment
 		/**
 		 * 当输入关键字变化时，动态更新建议列表
 		 */
-//		mSearchListener.addTextChangedListener(new TextWatcher() {
-//
-//			@Override
-//			public void afterTextChanged(Editable arg0) {
-//
-//			}
-//
-//			@Override
-//			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-//
-//			}
-//
-//			@Override
-//			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-//				if (cs.length() <= 0) {
-//					return;
-//				}
-//
-//				/**
-//				 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-//				 */
-//				Log.i("mingguo", "house fragment  onTextChanged   " + mCurrentLocationCity);
-//				mSuggestionSearch.requestSuggestion(
-//						(new SuggestionSearchOption()).keyword(cs.toString()).city(mCurrentLocationCity));
-//			}
-//		});
-		
+		// mSearchListener.addTextChangedListener(new TextWatcher() {
+		//
+		// @Override
+		// public void afterTextChanged(Editable arg0) {
+		//
+		// }
+		//
+		// @Override
+		// public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+		// int arg3) {
+		//
+		// }
+		//
+		// @Override
+		// public void onTextChanged(CharSequence cs, int arg1, int arg2, int
+		// arg3) {
+		// if (cs.length() <= 0) {
+		// return;
+		// }
+		//
+		// /**
+		// * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+		// */
+		// Log.i("mingguo", "house fragment onTextChanged " +
+		// mCurrentLocationCity);
+		// mSuggestionSearch.requestSuggestion(
+		// (new
+		// SuggestionSearchOption()).keyword(cs.toString()).city(mCurrentLocationCity));
+		// }
+		// });
+
 		initAdapter();
-		
+
 		mListView.setAdapter(mAdapter);
 		TextView empty = new TextView(mContext);
 		empty.setText("未搜索到任何信息！");
@@ -403,7 +487,6 @@ public class HouseFragment extends Fragment
 		}
 		return -1;
 	}
-
 
 	private void getLocationByCoordinates() {
 		Log.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
@@ -443,18 +526,16 @@ public class HouseFragment extends Fragment
 	private RadioGroup mRadioGroup;
 	private ListView mListView;
 	private UniversalAdapter<HouseInfoModel> mAdapter;
+	private TextView mLogin;
+	private String userName;
 
-
-
-	
-	
-	private void parseLocationInfo(String obj){
-		try{
+	private void parseLocationInfo(String obj) {
+		try {
 			JSONArray array = new JSONArray(obj);
-			if (array != null){
+			if (array != null) {
 				mHouseInfoList.clear();
-				for (int item = 0; item < array.length(); item++){
-					if (item > 15){
+				for (int item = 0; item < array.length(); item++) {
+					if (item > 15) {
 						break;
 					}
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -470,15 +551,15 @@ public class HouseFragment extends Fragment
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
 					houseModel.setHouseArea(itemJsonObject.optString("rrentarea"));
-					
+
 					mHouseInfoList.add(houseModel);
 				}
 			}
-			Log.i("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
+			Log.i("mingguo", "search  result  mHouseInfoList  " + mHouseInfoList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-}
+	}
 
 	/**
 	 * 定位SDK监听函数
@@ -492,7 +573,7 @@ public class HouseFragment extends Fragment
 				return;
 			}
 			mCurrentLocationCity = location.getCity();
-			
+
 			MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
 					// 此处设置开发者获取到的方向信息，顺时针0-360
 					.direction(100).latitude(location.getLatitude()).longitude(location.getLongitude()).build();
@@ -503,7 +584,8 @@ public class HouseFragment extends Fragment
 				mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 				MapStatus.Builder builder = new MapStatus.Builder();
 				builder.target(mCurrentLatLng).zoom(18.0f);
-				Log.i("mingguo", "loaction current city  "+mCurrentLocationCity+"  CommonUtil.mCurrentLati  "+CommonUtil.mCurrentLati+"  CommonUtil.mCurrentLongi  "+CommonUtil.mCurrentLongi);
+				Log.i("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
+						+ CommonUtil.mCurrentLati + "  CommonUtil.mCurrentLongi  " + CommonUtil.mCurrentLongi);
 			}
 			startGetLocationFromHouse();
 			mHandler.sendEmptyMessageDelayed(500, 100);
@@ -519,23 +601,23 @@ public class HouseFragment extends Fragment
 
 		}
 	}
-	
-	private void initAdapter(){
+
+	private void initAdapter() {
 		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_search_list_item, mHouseInfoList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
 				View holderView = holder.getConvertView();
-				TextView addressTextView = (TextView)holderView.findViewById(R.id.id_house_address);
-				TextView typeTextView = (TextView)holderView.findViewById(R.id.id_house_type);
-				TextView directionTextView = (TextView)holderView.findViewById(R.id.id_house_direction);
-				TextView floorTextView = (TextView)holderView.findViewById(R.id.id_house_floor);
-				TextView areaTextView = (TextView)holderView.findViewById(R.id.id_house_area);
+				TextView addressTextView = (TextView) holderView.findViewById(R.id.id_house_address);
+				TextView typeTextView = (TextView) holderView.findViewById(R.id.id_house_type);
+				TextView directionTextView = (TextView) holderView.findViewById(R.id.id_house_direction);
+				TextView floorTextView = (TextView) holderView.findViewById(R.id.id_house_floor);
+				TextView areaTextView = (TextView) holderView.findViewById(R.id.id_house_area);
 				addressTextView.setText(info.getHouseAddress());
 				typeTextView.setText(info.getHouseType());
 				directionTextView.setText(info.getHouseDirection());
-				floorTextView.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
-				areaTextView.setText(info.getHouseArea()+"平米");
+				floorTextView.setText(info.getHouseCurrentFloor() + "/" + info.getHouseTotalFloor() + "层");
+				areaTextView.setText(info.getHouseArea() + "平米");
 			}
 		};
 	}
@@ -579,7 +661,7 @@ public class HouseFragment extends Fragment
 		// TODO Auto-generated method stub
 		Log.e("housefragment", "error   " + error);
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -644,11 +726,10 @@ public class HouseFragment extends Fragment
 				suggest.add(info.key);
 			}
 		}
-//		sugAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, suggest);
-//		mSearchListener.setAdapter(sugAdapter);
-//		sugAdapter.notifyDataSetChanged();
+		// sugAdapter = new ArrayAdapter<String>(getActivity(),
+		// android.R.layout.simple_dropdown_item_1line, suggest);
+		// mSearchListener.setAdapter(sugAdapter);
+		// sugAdapter.notifyDataSetChanged();
 	}
-
-	
 
 }

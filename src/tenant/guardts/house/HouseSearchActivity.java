@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
@@ -101,6 +102,8 @@ public class HouseSearchActivity extends BaseActivity {
 	private View mLoadingView;
 	//private EditText mAddressEdit;
 	private TextView mNoContent;
+	
+	private String userName=new String();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,6 +114,10 @@ public class HouseSearchActivity extends BaseActivity {
 		mTitleBar.setText("短租共享");
 //		TextView showSearch = (TextView)findViewById(R.id.id_show_search_content);
 //		showSearch.setVisibility(View.VISIBLE);
+		
+		Intent intent = getIntent();
+		userName=intent.getStringExtra("user_name");
+		
 		
 		Button searchButton = (Button)findViewById(R.id.id_add_rent_house);
 		searchButton.setVisibility(View.VISIBLE);
@@ -307,9 +314,14 @@ public class HouseSearchActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-				detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-				startActivity(detailIntent);
+				if(userName==null||userName.equals("")){
+					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
+					startActivity(new Intent(HouseSearchActivity.this, LoginUserActivity.class));
+				}else{
+					Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+					detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+					startActivity(detailIntent);
+				}
 			}
 		});
 		

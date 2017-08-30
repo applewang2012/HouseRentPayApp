@@ -1,11 +1,8 @@
 package tenant.guardts.house;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class HousingDetailsActivity extends Activity {
+public class HousingDetailsActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

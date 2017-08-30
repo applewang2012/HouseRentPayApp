@@ -35,6 +35,7 @@ import android.widget.Toast;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -63,6 +64,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
+		
 		mPresent = new HoursePresenter(mContext, OrderFangzhuFragment.this);
 	}
 

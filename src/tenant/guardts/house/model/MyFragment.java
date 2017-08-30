@@ -56,35 +56,36 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	private String phone;
 	private String idCard;
 	private FrameLayout mWalletFrameLayout;
+	private String userName=new String();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		Bundle bundle = getArguments();
+		userName = bundle.getString("user_name");
 		mContext = getActivity().getApplicationContext();
 		mPresent = new HoursePresenter(mContext, MyFragment.this);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.home_my_fragment, container, false);
 		initView();
-		
+
 		return mRootView;
 	}
-	
-	
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		initData();
 	}
 
 	private void initView() {
+		mRegistAndLogin = (TextView) mRootView.findViewById(R.id.id_user_log_in);// 登录注册
+
 		mImageAvator = (ImageView) mRootView.findViewById(R.id.img_avator);// 头像
 		mWallet = (TextView) mRootView.findViewById(R.id.id_user_wallet);
 		mUserNickname = (TextView) mRootView.findViewById(R.id.id_user_nickname);
@@ -92,22 +93,42 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		mUserAddress = (TextView) mRootView.findViewById(R.id.id_user_address);
 		mLoadingView = (View) mRootView.findViewById(R.id.id_data_loading);
 		// showLoadingView();
-		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);
-		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);
-		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);
-		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_logout);
-		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);
+		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
+		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
+		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);// 修改密码
+		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_logout);// 退出登录
+		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);// 切换城市
+		if (userName.equals("") || userName == null) {
+		} else {
+			mRegistAndLogin.setVisibility(View.GONE);
+			mUserNickname.setVisibility(View.VISIBLE);
+			mUserAddress.setVisibility(View.VISIBLE);
+		}
+
+		mRegistAndLogin.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(mContext, LoginUserActivity.class));
+			}
+		});
+
 		// 点击头像跳转
 		mImageAvator.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (realName != null && phone != null && idCard != null) {
-					Intent intent = new Intent(mContext, PersonalInfoActivity.class);
-					intent.putExtra("RealName", realName);
-					intent.putExtra("Phone", phone);
-					intent.putExtra("IDCard", idCard);
-					startActivity(intent);
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+					if (realName != null && phone != null && idCard != null) {
+						Intent intent = new Intent(mContext, PersonalInfoActivity.class);
+						intent.putExtra("RealName", realName);
+						intent.putExtra("Phone", phone);
+						intent.putExtra("IDCard", idCard);
+						startActivity(intent);
+					}
 				}
 
 			}
@@ -117,7 +138,14 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mContext, ModifyPasswordActivity.class));
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+
+					startActivity(new Intent(mContext, ModifyPasswordActivity.class));
+				}
+
 			}
 		});
 
@@ -125,7 +153,13 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				logoutUserDialog(0);
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+
+					logoutUserDialog(0);
+				}
 
 			}
 		});
@@ -133,9 +167,16 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
-				intent.putExtra("user_name", CommonUtil.mUserLoginName);
-				startActivity(intent);
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+
+					Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
+					intent.putExtra("user_name", CommonUtil.mUserLoginName);
+					startActivity(intent);
+				}
+
 			}
 		});
 		mChangeArea.setOnClickListener(new OnClickListener() {
@@ -149,23 +190,27 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-
-				Intent intent = new Intent(mContext, WalletActivity.class);
-				if (wallet == null || wallet.equals("null")) {
-					intent.putExtra("balance", "0.0");
-
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-					intent.putExtra("balance", wallet);
-				}
 
-				startActivity(intent);
+					Intent intent = new Intent(mContext, WalletActivity.class);
+					if (wallet == null || wallet.equals("null")) {
+						intent.putExtra("balance", "0.0");
+
+					} else {
+						intent.putExtra("balance", wallet);
+					}
+
+					startActivity(intent);
+
+				}
 
 			}
 		});
 		// showLoadingView();
 	}
-	
-	
 
 	private void initData() {
 		getUserInfo();
@@ -209,12 +254,12 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 			dismissLoadingView();
 			if (infoModel != null) {
 				phone = infoModel.get("Phone");
-				mUserAddress.setText(phone);
+				mUserAddress.setText(phone);// 显示手机号
 				realName = infoModel.get("RealName");
-				mUserNickname.setText(realName);
+				mUserNickname.setText(realName);// 显示姓名
 				idCard = infoModel.get("IDCard");
 				wallet = infoModel.get("Wallet");
-				//Toast.makeText(mContext, wallet, Toast.LENGTH_LONG).show();
+				// Toast.makeText(mContext, wallet, Toast.LENGTH_LONG).show();
 				if (wallet == null || wallet.equals("null")) {
 					mWallet.setText("¥0.0");
 
@@ -227,6 +272,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	};
 	private ImageView mImageAvator;
 	private TextView mWallet;
+	private TextView mRegistAndLogin;
 
 	public static HashMap<String, String> parseUserInfo(String value) {
 		HashMap<String, String> userInfo = null;
@@ -266,11 +312,14 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
+						mWallet.setText("¥0.0");
 						SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 						SharedPreferences.Editor editor = sharedata.edit();
 						editor.putString("user_name", "");
 						editor.putString("user_password", "");
 						editor.commit();
+						mUserAddress.setVisibility(View.GONE);
+						mUserNickname.setVisibility(View.GONE);
 						Intent intent = new Intent(mContext, LoginUserActivity.class);
 						startActivity(intent);
 						MyFragment.this.getActivity().finish();

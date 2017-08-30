@@ -108,7 +108,7 @@ public class LoginUserActivity extends BaseActivity{
 					return;
 				}
 				
-				startActivity(new Intent(LoginUserActivity.this, RegisterUserStep1Activity.class));
+				startActivity(new Intent(LoginUserActivity.this, RegisterUserStep2Activity.class));
 			}
 		});
 		modifyButton.setOnClickListener(new OnClickListener() {

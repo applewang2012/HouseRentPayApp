@@ -1,6 +1,5 @@
 package tenant.guardts.house;
 
-
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -40,8 +39,8 @@ import tenant.guardts.house.util.GlobalUtil;
 public class HomeActivity extends BaseActivity {
 
 	private HoursePresenter mPresenter;
-	//private String mLoginAction = "http://tempuri.org/ValidateLogin";
-	private String mUpdateAction="http://tempuri.org/CheckUpgrade";
+	// private String mLoginAction = "http://tempuri.org/ValidateLogin";
+	private String mUpdateAction = "http://tempuri.org/CheckUpgrade";
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";;
 	private String mUserName, mPassword;
@@ -52,70 +51,71 @@ public class HomeActivity extends BaseActivity {
 	private String mUserInfoString = null;
 	private String mCity = null;
 	private int mVersionCode = -1;
-	
+	private Bundle bundle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.home_layout); 
-		
+		setContentView(R.layout.home_layout);
+		bundle = new Bundle();
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");
+		bundle.putString("user_name", mUserName);
 		initView();
 		getUserInfo();
-		
+
 	}
-	
-	
-	
-	private void initView(){
+
+	private void initView() {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		Button scanButton = (Button)findViewById(R.id.id_scan_rent_house);
+		Button scanButton = (Button) findViewById(R.id.id_scan_rent_house);
 		scanButton.setVisibility(View.VISIBLE);
 		scanButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent openCameraIntent = new Intent(HomeActivity.this,CaptureActivity.class);
+				Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
 				startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
 			}
 		});
-		
+
 		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-		if (mHouseFrament == null){
+		if (mHouseFrament == null) {
 			mHouseFrament = new HouseFragment();
+			mHouseFrament.setArguments(bundle);// 向fragment传值
 			fragmentTransaction.add(R.id.id_home_content, mHouseFrament);
 			fragmentTransaction.commitAllowingStateLoss();
-		}else{
+		} else {
 			fragmentTransaction.show(mHouseFrament);
 			fragmentTransaction.commitAllowingStateLoss();
 		}
-		
-//		if (mSurroundFragment == null){
-//			mSurroundFragment = new SurroundFragment();
-//			fragmentTransaction.add(R.id.id_home_content, mSurroundFragment);
-//			fragmentTransaction.commitAllowingStateLoss();
-//		}else{
-//			fragmentTransaction.show(mSurroundFragment);
-//			fragmentTransaction.commitAllowingStateLoss();
-//		}
-		
-		final LinearLayout houseLayout = (LinearLayout)findViewById(R.id.id_home_tab_home);
-		final LinearLayout myLayout = (LinearLayout)findViewById(R.id.id_home_tab_my);
-		final ImageView houseIcon = (ImageView)findViewById(R.id.id_home_tab_home_icon);
-		final ImageView myIcon = (ImageView)findViewById(R.id.id_home_tab_my_icon);
-		final TextView houseText = (TextView)findViewById(R.id.id_home_tab_home_text);
-		final TextView myText = (TextView)findViewById(R.id.id_home_tab_my_text);
-		final LinearLayout surroundlayout = (LinearLayout)findViewById(R.id.id_home_tab_surround);
-		final LinearLayout historylayout = (LinearLayout)findViewById(R.id.id_home_tab_history);
-		final ImageView surroundicon = (ImageView)findViewById(R.id.id_home_tab_surround_icon);
-		final ImageView historyicon = (ImageView)findViewById(R.id.id_home_tab_history_icon);
-		final TextView surroundtext = (TextView)findViewById(R.id.id_home_tab_surround_text);
-		final TextView historytext = (TextView)findViewById(R.id.id_home_tab_history_text);
+
+		// if (mSurroundFragment == null){
+		// mSurroundFragment = new SurroundFragment();
+		// fragmentTransaction.add(R.id.id_home_content, mSurroundFragment);
+		// fragmentTransaction.commitAllowingStateLoss();
+		// }else{
+		// fragmentTransaction.show(mSurroundFragment);
+		// fragmentTransaction.commitAllowingStateLoss();
+		// }
+
+		final LinearLayout houseLayout = (LinearLayout) findViewById(R.id.id_home_tab_home);
+		final LinearLayout myLayout = (LinearLayout) findViewById(R.id.id_home_tab_my);
+		final ImageView houseIcon = (ImageView) findViewById(R.id.id_home_tab_home_icon);
+		final ImageView myIcon = (ImageView) findViewById(R.id.id_home_tab_my_icon);
+		final TextView houseText = (TextView) findViewById(R.id.id_home_tab_home_text);
+		final TextView myText = (TextView) findViewById(R.id.id_home_tab_my_text);
+		final LinearLayout surroundlayout = (LinearLayout) findViewById(R.id.id_home_tab_surround);
+		final LinearLayout historylayout = (LinearLayout) findViewById(R.id.id_home_tab_history);
+		final ImageView surroundicon = (ImageView) findViewById(R.id.id_home_tab_surround_icon);
+		final ImageView historyicon = (ImageView) findViewById(R.id.id_home_tab_history_icon);
+		final TextView surroundtext = (TextView) findViewById(R.id.id_home_tab_surround_text);
+		final TextView historytext = (TextView) findViewById(R.id.id_home_tab_history_text);
 		houseLayout.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				//mTitleBar.setText(getString(R.string.home_tab_house));
+				// mTitleBar.setText(getString(R.string.home_tab_house));
 				houseIcon.setBackgroundResource(R.drawable.home_icon);
 				houseText.setTextColor(Color.parseColor("#337ffd"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
@@ -126,21 +126,21 @@ public class HomeActivity extends BaseActivity {
 				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
-				if (mHouseFrament == null){
+				if (mHouseFrament == null) {
 					mHouseFrament = new HouseFragment();
 					fragmentTransaction.add(R.id.id_home_content, mHouseFrament);
 					fragmentTransaction.commitAllowingStateLoss();
-				}else{
+				} else {
 					fragmentTransaction.show(mHouseFrament);
 					fragmentTransaction.commitAllowingStateLoss();
 				}
 			}
 		});
-		
+
 		myLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//mTitleBar.setText(getString(R.string.home_tab_my));
+				// mTitleBar.setText(getString(R.string.home_tab_my));
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
 				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon);
@@ -151,17 +151,18 @@ public class HomeActivity extends BaseActivity {
 				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
-				if (mMyFragment == null){
+				if (mMyFragment == null) {
 					mMyFragment = new MyFragment();
+					mMyFragment.setArguments(bundle);// 向fragment传值
 					fragmentTransaction.add(R.id.id_home_content, mMyFragment);
 					fragmentTransaction.commitAllowingStateLoss();
-				}else{
+				} else {
 					fragmentTransaction.show(mMyFragment);
 					fragmentTransaction.commitAllowingStateLoss();
 				}
 			}
 		});
-		
+
 		surroundlayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -176,11 +177,11 @@ public class HomeActivity extends BaseActivity {
 				historytext.setTextColor(Color.parseColor("#b2b2b2"));
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(fragmentTransaction);
-				if (mSurroundFragment == null){
+				if (mSurroundFragment == null) {
 					mSurroundFragment = new SurroundFragment();
 					fragmentTransaction.add(R.id.id_home_content, mSurroundFragment);
 					fragmentTransaction.commitAllowingStateLoss();
-				}else{
+				} else {
 					fragmentTransaction.show(mSurroundFragment);
 					fragmentTransaction.commitAllowingStateLoss();
 				}
@@ -189,7 +190,7 @@ public class HomeActivity extends BaseActivity {
 		historylayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//mTitleBar.setText(getString(R.string.home_tab_history));
+				// mTitleBar.setText(getString(R.string.home_tab_history));
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
 				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
@@ -198,22 +199,29 @@ public class HomeActivity extends BaseActivity {
 				surroundtext.setTextColor(Color.parseColor("#b2b2b2"));
 				historyicon.setBackgroundResource(R.drawable.history_icon);
 				historytext.setTextColor(Color.parseColor("#337ffd"));
-				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-				hideAllFragments(fragmentTransaction);
-				if (mHistoryFragment == null){
-					mHistoryFragment = new OrderFragment();
-					fragmentTransaction.add(R.id.id_home_content, mHistoryFragment);
-					fragmentTransaction.commitAllowingStateLoss();
-				}else{
-					fragmentTransaction.show(mHistoryFragment);
-					fragmentTransaction.commitAllowingStateLoss();
+				if (mUserName.equals("") || mUserName == null) {
+					Toast.makeText(HomeActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					;
+					startActivity(new Intent(HomeActivity.this, LoginUserActivity.class));
+				} else {
+
+					FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+					hideAllFragments(fragmentTransaction);
+					if (mHistoryFragment == null) {
+						mHistoryFragment = new OrderFragment();
+						fragmentTransaction.add(R.id.id_home_content, mHistoryFragment);
+						fragmentTransaction.commitAllowingStateLoss();
+					} else {
+						fragmentTransaction.show(mHistoryFragment);
+						fragmentTransaction.commitAllowingStateLoss();
+					}
 				}
+
 			}
 		});
 
 	}
-	
-	
+
 	private void getOpenDoorRequest(String lockId) {
 		String url = CommonUtil.mUserHost + "Services.asmx?op=OpenDoor";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOpenDoorAction));
@@ -221,8 +229,8 @@ public class HomeActivity extends BaseActivity {
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOpenDoorAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
-	
-	private void checkVersionUpdate(){
+
+	private void checkVersionUpdate() {
 		mVersionCode = GlobalUtil.getVersionCode(getApplicationContext());
 		String url = "http://www.guardts.com/UpgradeService/SystemUpgradeService.asmx?op=CheckUpgrade";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateAction));
@@ -231,16 +239,16 @@ public class HomeActivity extends BaseActivity {
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
-	
-	private void getUserInfo(){
-		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
+
+	private void getUserInfo() {
+		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUserInfoAction, rpc);
 		mPresenter.startPresentServiceTask();
-		
+
 	}
-	
+
 	private void hideAllFragments(FragmentTransaction transaction) {
 		if (mHouseFrament != null && !mHouseFrament.isHidden()) {
 			transaction.hide(mHouseFrament);
@@ -255,136 +263,139 @@ public class HomeActivity extends BaseActivity {
 			transaction.hide(mHistoryFragment);
 		}
 	}
-	
-	private Handler mHandler = new Handler(){
+
+	private Handler mHandler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			if (msg.what == 100){
-				if (msg.obj != null){
-					parseUserInfo((String)msg.obj);
+			if (msg.what == 100) {
+				if (msg.obj != null) {
+					parseUserInfo((String) msg.obj);
 				}
 				checkVersionUpdate();
-			}else if (msg.what == 101){
+			} else if (msg.what == 101) {
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
-			}else if (msg.what == 200){
-				if (msg.obj != null){
-					parseUpdateVersion((String)msg.obj);
+			} else if (msg.what == 200) {
+				if (msg.obj != null) {
+					parseUpdateVersion((String) msg.obj);
 					showUpdateVersionAlertDialog();
 				}
 			}
 		}
 	};
-	
-	private void showUpdateVersionAlertDialog() {  
-		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")){
-			Log.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile());
+
+	private void showUpdateVersionAlertDialog() {
+		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")) {
+			Log.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile());
 			return;
 		}
-		
-		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("升级云上之家");
-		  builder.setIcon(android.R.drawable.ic_dialog_info);
-		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-		         @Override  
-		  
-		         public void onClick(DialogInterface dialog, int which) {
-		        	 startActivity(new Intent(HomeActivity.this, DownloadAppActivity.class));
-		        	 finish();
-		         }  
-			
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("升级云上之家");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+			@Override
+
+			public void onClick(DialogInterface dialog, int which) {
+				startActivity(new Intent(HomeActivity.this, DownloadAppActivity.class));
+				finish();
+			}
+
 		});
 		builder.setCancelable(false);
 		builder.show();
 	}
-	
-	private void showOpenDoorAlertDialog(final String lockId) {  
-		
-		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("智能锁编号："+lockId);
-		  builder.setMessage("您确认要开锁吗？");
-		  builder.setIcon(android.R.drawable.ic_dialog_info);
-		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-		         @Override  
-		  
-		         public void onClick(DialogInterface dialog, int which) {
-		        	 getOpenDoorRequest(lockId);
-		         }  
-			
+
+	private void showOpenDoorAlertDialog(final String lockId) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("智能锁编号：" + lockId);
+		builder.setMessage("您确认要开锁吗？");
+		builder.setIcon(android.R.drawable.ic_dialog_info);
+		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+			@Override
+
+			public void onClick(DialogInterface dialog, int which) {
+				getOpenDoorRequest(lockId);
+			}
+
 		});
-		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
-			  
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
-	  
-	         }
+		builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+
+			@Override
+
+			public void onClick(DialogInterface dialog, int which) {
+
+				Log.i("alertdialog", " �뱣�����ݣ�");
+
+			}
 		});
 		builder.setCancelable(false);
 		builder.show();
 	}
-	
-	private  void parseUserInfo(String value) {
-		try{
+
+	private void parseUserInfo(String value) {
+		try {
 			JSONArray array = new JSONArray(value);
-			if (array != null){
-				Log.i("house", "parse house info "+array.length());
-				//for (int item = 0; item < array.length(); item++){
-					
-					JSONObject itemJsonObject = array.optJSONObject(0);
-//					userInfo = new HashMap<>();
-//					userInfo.put("NickName", itemJsonObject.optString("NickName"));
-//					userInfo.put("LoginName", itemJsonObject.optString("LoginName"));
-//					userInfo.put("Address", itemJsonObject.optString("Address"));
-//					userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
-					CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
-					CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
-					CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
-					SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
-					SharedPreferences.Editor editor = sharedata.edit();
-				    editor.putString("user_realname", CommonUtil.mRegisterRealName);
-				    editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
-				    editor.commit();
+			if (array != null) {
+				Log.i("house", "parse house info " + array.length());
+				// for (int item = 0; item < array.length(); item++){
+
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				// userInfo = new HashMap<>();
+				// userInfo.put("NickName",
+				// itemJsonObject.optString("NickName"));
+				// userInfo.put("LoginName",
+				// itemJsonObject.optString("LoginName"));
+				// userInfo.put("Address", itemJsonObject.optString("Address"));
+				// userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+				editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				editor.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private  void parseUpdateVersion(String value) {
-		try{
-			if (value != null){
-				//{"Result":"1","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success","IsEnforced":"True",
-					//"APKUrl":"UpgradeFolder\\APK20170731135631.apk","IOSUrl":"","CreatedDate":"2017-07-31 13:56:32"}
-					JSONObject itemJsonObject = new JSONObject(value);
-					String versionId = itemJsonObject.optString("VersionID");
-					if (versionId != null){
-						int versionCode = Integer.parseInt(versionId);
-						if (versionCode > mVersionCode){
-							String downloadUrl = itemJsonObject.optString("APKUrl");
-							if (downloadUrl != null && downloadUrl.length() > 5){
-								CommonUtil.DOWLOAD_URL = CommonUtil.UPDATE_VERSION_HOST+downloadUrl;
-							}
+
+	private void parseUpdateVersion(String value) {
+		try {
+			if (value != null) {
+				// {"Result":"1","AppId":"0","PackageName":"tenant.guardts.house","VersionID":"2","MSG":"Success","IsEnforced":"True",
+				// "APKUrl":"UpgradeFolder\\APK20170731135631.apk","IOSUrl":"","CreatedDate":"2017-07-31
+				// 13:56:32"}
+				JSONObject itemJsonObject = new JSONObject(value);
+				String versionId = itemJsonObject.optString("VersionID");
+				if (versionId != null) {
+					int versionCode = Integer.parseInt(versionId);
+					if (versionCode > mVersionCode) {
+						String downloadUrl = itemJsonObject.optString("APKUrl");
+						if (downloadUrl != null && downloadUrl.length() > 5) {
+							CommonUtil.DOWLOAD_URL = CommonUtil.UPDATE_VERSION_HOST + downloadUrl;
 						}
 					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private  String getUserIdNo(String value) {
-		HashMap<String,String> userInfo = null;
-		try{
+
+	private String getUserIdNo(String value) {
+		HashMap<String, String> userInfo = null;
+		try {
 			JSONArray array = new JSONArray(value);
-			if (array != null){
-				Log.i("house", "parse house info "+array.length());
-					JSONObject itemJsonObject = array.optJSONObject(0);
-					return itemJsonObject.optString("IDCard");
+			if (array != null) {
+				Log.i("house", "parse house info " + array.length());
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				return itemJsonObject.optString("IDCard");
 			}
 			return null;
 		} catch (Exception e) {
@@ -392,88 +403,88 @@ public class HomeActivity extends BaseActivity {
 			return null;
 		}
 	}
-	
-	
-	
-	 private long exitTime;
-	 @Override
+
+	private long exitTime;
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-					if ((System.currentTimeMillis() - exitTime) > 2000) {
-						GlobalUtil.shortToast(getApplication(), getString(R.string.press_again_to_exit), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-			            exitTime = System.currentTimeMillis();
-			        } else {
-			            finish();
-			            System.exit(0);
-			        }
-					return false;
-				
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				GlobalUtil.shortToast(getApplication(), getString(R.string.press_again_to_exit),
+						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
 			}
-			return super.onKeyDown(keyCode, event);
+			return false;
+
 		}
-	 
-	 @Override
-		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-			// TODO Auto-generated method stub
-			super.onActivityResult(requestCode, resultCode, data);
-			Log.w("mingguo", "HomeActivity  onActivityResult result code  "+resultCode+"   requestcode  "+requestCode+" data  "+data);
-			//处理扫描结果（在界面上显示）
-					if (resultCode == RESULT_OK  && requestCode == CommonUtil.mScanCodeRequestCode) {
-						//getOpenDoorRequest("0201002200100002");
-						Bundle bundle = data.getExtras();
-						String scanResult = bundle.getString("result");
-						Log.e("mingguo", "scan  result  "+scanResult);
-						//http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
-						int pos =   scanResult.lastIndexOf("=");
-						String lockNo = scanResult.substring(pos+1);
-						Log.e("mingguo", "scan  result pos "+pos+" lockNo  "+lockNo);
-						if (lockNo != null && lockNo.length() > 2){
-							showOpenDoorAlertDialog(lockNo+"");
-						}
-					}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode){
-						Bundle bundle = data.getExtras();
-						if (bundle != null){
-							String selectedCity = bundle.getString("city");
-							Log.e("mingguo", "homeActivity  onActivity  selected city  "+selectedCity);
-							if (!TextUtils.isEmpty(selectedCity)){
-								setSelectedCity(selectedCity);
-							}
-						}
-						
-					}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.w("mingguo", "HomeActivity  onActivityResult result code  " + resultCode + "   requestcode  " + requestCode
+				+ " data  " + data);
+		// 处理扫描结果（在界面上显示）
+		if (resultCode == RESULT_OK && requestCode == CommonUtil.mScanCodeRequestCode) {
+			// getOpenDoorRequest("0201002200100002");
+			Bundle bundle = data.getExtras();
+			String scanResult = bundle.getString("result");
+			Log.e("mingguo", "scan  result  " + scanResult);
+			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
+			int pos = scanResult.lastIndexOf("=");
+			String lockNo = scanResult.substring(pos + 1);
+			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + lockNo);
+			if (lockNo != null && lockNo.length() > 2) {
+				showOpenDoorAlertDialog(lockNo + "");
+			}
+		} else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode) {
+			Bundle bundle = data.getExtras();
+			if (bundle != null) {
+				String selectedCity = bundle.getString("city");
+				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
+				if (!TextUtils.isEmpty(selectedCity)) {
+					setSelectedCity(selectedCity);
+				}
+			}
+
 		}
-	 
-	 public void setSelectedCity(String city){
-		 mCity = city;
-	 }
-	 
-	 public String getSelectedCity(){
-		 return mCity;
-	 }
+	}
+
+	public void setSelectedCity(String city) {
+		mCity = city;
+	}
+
+	public String getSelectedCity() {
+		return mCity;
+	}
 
 	@Override
 	public void onStatusStart() {
-		
-		
+
 	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
-		if (action != null && templateInfo != null){}
-			if (action.equals(mUserInfoAction)){
-				Message message = mHandler.obtainMessage();
-				message.what = 100;
-				message.obj = templateInfo;
-				mHandler.sendMessage(message);
-			}else if (action.equals(mUpdateAction)){
-				Message message = mHandler.obtainMessage();
-				message.what = 200;
-				message.obj = templateInfo;
-				mHandler.sendMessageDelayed(message, 500);
-			}
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+		}
+		if (action.equals(mUserInfoAction)) {
+			Message message = mHandler.obtainMessage();
+			message.what = 100;
+			message.obj = templateInfo;
+			mHandler.sendMessage(message);
+		} else if (action.equals(mUpdateAction)) {
+			Message message = mHandler.obtainMessage();
+			message.what = 200;
+			message.obj = templateInfo;
+			mHandler.sendMessageDelayed(message, 500);
+		}
 	}
-
 
 }

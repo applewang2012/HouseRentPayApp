@@ -58,7 +58,7 @@ public class WelcomeActivity extends BaseActivity {
 			case 100:
 				
 //				if (mUsername != null && !mUsername.equals("") && mPassword != null && !mPassword.equals("")){
-					Intent intent = new Intent(WelcomeActivity.this, LoginUserActivity.class);
+					Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
 					intent.putExtra("user_name", mUsername);
 					intent.putExtra("user_password", mPassword);
 					startActivity(intent);

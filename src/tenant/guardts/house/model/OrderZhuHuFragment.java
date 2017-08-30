@@ -31,6 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -52,20 +53,18 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface,
 	private String mUserName = null;
 	private String mRentHistoryAction = "http://tempuri.org/GetRentHistory";
 	private String mCancelAttrbuteAction = "http://tempuri.org/CancelRentAttribute";
-
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
+		
 		mPresent = new HoursePresenter(mContext, OrderZhuHuFragment.this);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		Log.i("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_zufang_fragment, container, false);
 		initView();

@@ -38,7 +38,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 	private HoursePresenter mPresenter;
 	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
-	private String mUserName, mPassword, mPhone, mVerifyCode;
+	private String mUserName, mPhone, mVerifyCode,mPassword, mPasswordIndentify;;
 	private TextView mVerifyCodeText;
 	private int mTimeCount = -1;
 	
@@ -50,9 +50,9 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		ActivityController.addActivity(RegisterUserStep2Activity.this);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("手机绑定");
-		mUserName = getIntent().getStringExtra("username");
-		mPassword = getIntent().getStringExtra("password");
+		mTitleBar.setText("手机认证");
+		//mUserName = getIntent().getStringExtra("username");
+		//mPassword = getIntent().getStringExtra("password");
 //		initHandler();
 		initView();
 	}
@@ -63,6 +63,8 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		final EditText inputPhone = (EditText)findViewById(R.id.id_register_step2_input_phone);
 		final EditText inputVerify = (EditText)findViewById(R.id.id_register_step2_input_verifycode);
+		final EditText password = (EditText)findViewById(R.id.id_register_step1_input_password);
+		final EditText passowrdInditfy = (EditText)findViewById(R.id.id_register_step1_input_password_identify);
 		mVerifyCodeText = (TextView)findViewById(R.id.id_register_step2_get_verifycode);
 		mVerifyCodeText.setOnClickListener(new OnClickListener() {
 			
@@ -94,6 +96,9 @@ public class RegisterUserStep2Activity extends BaseActivity{
 			public void onClick(View v) {
 				mPhone = inputPhone.getEditableText().toString();
 				mVerifyCode = inputVerify.getEditableText().toString();
+				mPassword = password.getEditableText().toString();
+				mPasswordIndentify = passowrdInditfy.getEditableText().toString();
+				
 				if (mPhone == null || mPhone.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -106,6 +111,18 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					return;
 				}else if (mVerifyCode.length() != 6){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				
+				if (mPassword == null || mPassword.equals("")){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}else  if (mPassword.length() < 6){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				if (mPasswordIndentify == null || mPasswordIndentify.equals("") || !mPassword.equals(mPasswordIndentify)){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_again_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				showLoadingView();
@@ -162,25 +179,25 @@ public class RegisterUserStep2Activity extends BaseActivity{
 			}else if (msg.what == 102){
 				dismissLoadingView();
 				if (msg.obj != null){
-//					JSONObject json;
-//					try {
-//						json = new JSONObject((String)msg.obj);
-//						String ret = json.optString("ret");
-//						if (ret != null){
-//							if (ret.equals("0")){
+					JSONObject json;
+					try {
+						json = new JSONObject((String)msg.obj);
+						String ret = json.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
 								Intent nextIntent = new Intent(RegisterUserStep2Activity.this, RegisterUserStep3Activity.class);
 								nextIntent.putExtra("phone", mPhone);
-								nextIntent.putExtra("user_name", mUserName);
-								nextIntent.putExtra("user_password", mPassword);
+								nextIntent.putExtra("user_name", mPhone);
+								nextIntent.putExtra("user_password", mPasswordIndentify);
 								startActivity(nextIntent);
-//							}else{
-//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-//							}
-//						}
-//					} catch (JSONException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
+							}else{
+								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+							}
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 			}else if (msg.what == 105){
