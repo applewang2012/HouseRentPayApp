@@ -201,5 +201,6 @@
     <string name="title_activity_wallet">WalletActivity</string>
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_housing_details">HousingDetailsActivity</string>
+    <string name="title_activity_withdraw">WithdrawActivity</string>
 
 </resources>

@@ -201,7 +201,6 @@ public class HomeActivity extends BaseActivity {
 				historytext.setTextColor(Color.parseColor("#337ffd"));
 				if (mUserName.equals("") || mUserName == null) {
 					Toast.makeText(HomeActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					;
 					startActivity(new Intent(HomeActivity.this, LoginUserActivity.class));
 				} else {
 
