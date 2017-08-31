@@ -205,5 +205,7 @@
     <string name="title_activity_add_bank_card">AddBankCardActivity</string>
     <string name="title_activity_verify_phone_num">VerifyPhoneNumActivity</string>
     <string name="title_activity_withdraw_details">WithdrawDetailsActivity</string>
+    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="title_activity_house_payment">HousePaymentActivity</string>
 
 </resources>

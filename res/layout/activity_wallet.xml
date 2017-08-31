@@ -60,6 +60,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/wallet_btn_top_up"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
@@ -71,6 +72,7 @@
         android:textSize="@dimen/base_dimen_34" />
 
     <Button
+        android:id="@+id/wallet_btn_withdraw"
          android:layout_width="@dimen/base_dimen_680"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

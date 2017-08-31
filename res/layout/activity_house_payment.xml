@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#337ffd" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/short_lease_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="支付房款"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_120"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_dimen_40"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_46"
+            android:gravity="center_vertical"
+            android:text="支付金额"
+            android:textColor="#555555"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_dimen_40"
+            android:layout_marginLeft="@dimen/base_dimen_400"
+            android:layout_marginTop="@dimen/base_dimen_46"
+            android:text="¥500.0"
+            android:textColor="#337ffd"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff"
+        android:paddingBottom="@dimen/base_dimen_20"
+        android:paddingLeft="@dimen/base_dimen_30"
+        android:paddingTop="@dimen/base_dimen_20"
+        android:text="请选择支付方式"
+        android:textColor="#777777"
+        android:textSize="@dimen/base_dimen_28" />
+
+    <LinearLayout
+        android:paddingTop="@dimen/base_dimen_20"
+        android:paddingBottom="@dimen/base_dimen_20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:layout_marginTop="@dimen/base_dimen_1"
+         android:gravity="center_vertical"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_50"
+            android:layout_height="@dimen/base_dimen_38"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:src="@drawable/payment_wallet" />
+
+        <TextView
+              android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/base_dimen_28"
+              android:text="钱包支付"
+               android:layout_marginLeft="@dimen/base_dimen_22"
+            >
+        </TextView>
+        <CheckBox 
+            android:layout_width="@dimen/base_dimen_42"
+            android:layout_height="@dimen/base_dimen_42" 
+            android:button="@null"
+            android:background="@drawable/payment_checkbox_bg"
+              android:layout_marginLeft="@dimen/base_dimen_400"
+            />
+    </LinearLayout>
+     <LinearLayout
+        android:paddingTop="@dimen/base_dimen_20"
+        android:paddingBottom="@dimen/base_dimen_20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:layout_marginTop="@dimen/base_dimen_1"
+        android:gravity="center_vertical"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/base_dimen_50"
+            android:layout_height="@dimen/base_dimen_50"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:src="@drawable/payment_wechat" />
+
+        <TextView
+              android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:textSize="@dimen/base_dimen_28"
+              android:text="微信支付"
+               android:layout_marginLeft="@dimen/base_dimen_22"
+            >
+        </TextView>
+        <CheckBox 
+            android:layout_width="@dimen/base_dimen_42"
+            android:layout_height="@dimen/base_dimen_42" 
+            android:button="@null"
+            android:background="@drawable/payment_checkbox_bg"
+              android:layout_marginLeft="@dimen/base_dimen_400"
+            />
+    </LinearLayout>
+        <Button
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginTop="@dimen/base_dimen_400"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/withdraw_btn_bg"
+        android:textColor="#ffffff"
+        android:text="立即付款" />
+</LinearLayout>

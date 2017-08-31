@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_30"
-            android:text="卡       号"
+            android:text="卡        号"
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
@@ -130,13 +130,14 @@
             android:layout_height="@dimen/base_dimen_44"
             android:src="@drawable/more"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_200"
+            android:layout_marginLeft="@dimen/base_dimen_300"
             
             
             />
         
     </LinearLayout>
      <Button
+         android:id="@+id/add_bank_card_btn_next"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_height="@dimen/base_dimen_80"
         android:layout_marginTop="@dimen/base_dimen_46"

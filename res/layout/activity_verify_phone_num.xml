@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="${relativePackage}.${activityClass}" >
 
     <FrameLayout
@@ -52,6 +53,8 @@
         android:layout_height="wrap_content" >
 
         <EditText
+            android:maxLength="6"
+            android:maxLines="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -60,7 +63,7 @@
             android:layout_marginTop="@dimen/base_dimen_28"
             android:hint="请输入验证码"
             android:textColorHint="#b2b2b2"
-            android:background="@android:drawable/editbox_background"
+            android:background="@android:drawable/editbox_background_normal"
             android:textSize="@dimen/base_dimen_28" />
 
         <View
