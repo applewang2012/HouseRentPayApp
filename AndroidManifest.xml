@@ -119,7 +119,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -222,9 +222,9 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".HomeActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
@@ -302,7 +302,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
@@ -330,7 +330,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -360,6 +360,18 @@
         <activity
             android:name=".WithdrawActivity"
             android:label="@string/title_activity_withdraw" >
+        </activity>
+        <activity
+            android:name=".AddBankCardActivity"
+            android:label="@string/title_activity_add_bank_card" >
+        </activity>
+        <activity
+            android:name=".VerifyPhoneNumActivity"
+            android:label="@string/title_activity_verify_phone_num" >
+        </activity>
+        <activity
+            android:name=".WithdrawDetailsActivity"
+            android:label="@string/title_activity_withdraw_details" >
         </activity>
     </application>
 

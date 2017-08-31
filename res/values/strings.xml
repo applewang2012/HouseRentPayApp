@@ -202,5 +202,8 @@
     <string name="title_activity_about_us">AboutUsActivity</string>
     <string name="title_activity_housing_details">HousingDetailsActivity</string>
     <string name="title_activity_withdraw">WithdrawActivity</string>
+    <string name="title_activity_add_bank_card">AddBankCardActivity</string>
+    <string name="title_activity_verify_phone_num">VerifyPhoneNumActivity</string>
+    <string name="title_activity_withdraw_details">WithdrawDetailsActivity</string>
 
 </resources>

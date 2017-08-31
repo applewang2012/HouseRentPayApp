@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#337ffd" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/short_lease_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="验证手机号"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/base_dimen_28"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:layout_marginTop="@dimen/base_dimen_56"
+        android:text="验证码已发送至银行预留手机号上"
+        android:textColor="#b2b2b2"
+        android:textSize="@dimen/base_dimen_28" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#cccccc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/base_dimen_28"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_28"
+            android:hint="请输入验证码"
+            android:textColorHint="#b2b2b2"
+            android:background="@android:drawable/editbox_background"
+            android:textSize="@dimen/base_dimen_28" />
+
+        <View
+            android:layout_width="@dimen/base_dimen_1"
+            android:layout_height="@dimen/base_dimen_40"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_50"
+            android:background="#cccccc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_66"
+            android:lines="1"
+            android:text="30秒后重新获取"
+            android:textColor="#337ffd"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#cccccc" />
+    
+     <Button
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginTop="@dimen/base_dimen_90"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/withdraw_btn_bg"
+        android:textColor="#ffffff"
+        android:text="下一步" />
+
+</LinearLayout>
