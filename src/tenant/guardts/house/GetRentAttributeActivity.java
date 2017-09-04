@@ -12,7 +12,6 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
-import tenant.guardts.house.R;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -36,7 +35,6 @@ import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;

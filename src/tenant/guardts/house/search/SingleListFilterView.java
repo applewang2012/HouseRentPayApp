@@ -2,13 +2,13 @@ package tenant.guardts.house.search;
 
 import java.util.List;
 
-import tenant.guardts.house.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import tenant.guardts.house.R;
 import tenant.guardts.house.search.ExpandMenuView.ViewBaseAction;
 
 /**

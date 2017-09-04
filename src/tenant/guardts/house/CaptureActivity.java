@@ -6,8 +6,6 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import tenant.guardts.house.R;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -25,7 +23,6 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;

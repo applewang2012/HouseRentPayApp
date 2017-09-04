@@ -16,7 +16,7 @@
     	android:layout_height="wrap_content"
     	android:layout_marginTop="10dp"
     	android:singleLine="true"
-    	android:textColor="#afaeae"
+    	android:textColor="#444444"
     	android:textSize="15dp"
     	android:textStyle="bold" 
     	android:drawableLeft="@drawable/house_list_location_icon"

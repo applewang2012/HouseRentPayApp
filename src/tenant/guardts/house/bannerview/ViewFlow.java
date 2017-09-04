@@ -18,7 +18,6 @@ package tenant.guardts.house.bannerview;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -36,6 +35,7 @@ import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Scroller;
+import tenant.guardts.house.R;
 
 /**
  * 

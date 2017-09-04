@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

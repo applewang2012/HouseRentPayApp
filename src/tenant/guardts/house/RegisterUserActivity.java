@@ -10,7 +10,6 @@ import com.gzt.faceid5sdk.DetectionAuthentic;
 import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
-import tenant.guardts.house.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -39,7 +38,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;

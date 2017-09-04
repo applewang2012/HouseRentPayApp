@@ -1,20 +1,16 @@
 package tenant.guardts.house.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
-import org.w3c.dom.Text;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.a.r;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
@@ -34,53 +30,37 @@ import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
-import com.baidu.mapapi.search.sug.SuggestionSearchOption;
-import com.google.zxing.oned.rss.FinderPattern;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import tenant.guardts.house.AddHouseInfoActivity;
-import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.SelectShowCityActivity;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.view.HomeCustomView;
 import tenant.guardts.house.view.HomeFragmentListView;
 
 public class HouseFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener,
@@ -381,7 +361,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			}
 		});
 
-		mListView = (ListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
+		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 		// mListView.setAdapter(new );
 		// ///////////////////////////////////////////////////////////////////////////////
 
@@ -531,7 +511,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	private RadioButton mRbShare;
 	private RadioButton mRbOwner;
 	private RadioGroup mRadioGroup;
-	private ListView mListView;
+	private HomeFragmentListView mListView;
 	private UniversalAdapter<HouseInfoModel> mAdapter;
 	private TextView mLogin;
 	private String userName;

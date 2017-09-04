@@ -24,13 +24,13 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 
-import tenant.guardts.house.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.R;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.camera.PlanarYUVLuminanceSource;
 

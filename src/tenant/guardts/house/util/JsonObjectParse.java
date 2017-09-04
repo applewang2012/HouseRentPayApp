@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.util.Log;
-import tenant.guardts.house.AddRentAttributeActivity.IdentifyModel;
 import tenant.guardts.house.model.HouseInfoModel;
 
 public class JsonObjectParse {

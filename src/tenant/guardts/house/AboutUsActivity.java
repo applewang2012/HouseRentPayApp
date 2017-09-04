@@ -2,7 +2,6 @@ package tenant.guardts.house;
 
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
-import org.w3c.dom.Text;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,9 +12,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;

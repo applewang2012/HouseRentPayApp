@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -23,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import tenant.guardts.house.bannerview.ViewPagerFixed;
-import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.Bimp;
 
 /**

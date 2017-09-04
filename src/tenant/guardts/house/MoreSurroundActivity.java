@@ -1,18 +1,7 @@
 package tenant.guardts.house;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import tenant.guardts.house.GalleryActivity.MyPageAdapter;
-import tenant.guardts.house.bannerview.ViewPagerFixed;
 
 /**
  * 这个是用于进行图片浏览时的界面

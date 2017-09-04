@@ -1,6 +1,7 @@
 package tenant.guardts.house.map;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -10,8 +11,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.search.poi.PoiResult;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.os.Bundle;
 
 /**
  * 用于显示poi的overly

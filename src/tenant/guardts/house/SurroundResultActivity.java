@@ -3,8 +3,6 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kobjects.util.Util;
-
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -22,25 +20,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.SurroundInfo;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.search.ExpandMenuView;
-import tenant.guardts.house.search.Item;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 

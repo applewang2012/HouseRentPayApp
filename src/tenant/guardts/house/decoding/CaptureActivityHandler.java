@@ -21,7 +21,6 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import tenant.guardts.house.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.R;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.zxingview.ViewfinderResultPointCallback;
 

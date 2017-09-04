@@ -22,14 +22,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import tenant.guardts.house.R;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
@@ -39,6 +37,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import tenant.guardts.house.R;
 import tenant.guardts.house.download.DownloadManager;
 
 /**

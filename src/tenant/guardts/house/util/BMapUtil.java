@@ -3,9 +3,7 @@ package tenant.guardts.house.util;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;

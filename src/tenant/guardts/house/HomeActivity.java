@@ -6,7 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.hp.hpl.sparta.xpath.PositionEqualsExpr;
+import com.tencent.android.tpush.XGPushClickedResult;
+import com.tencent.android.tpush.XGPushManager;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
@@ -28,9 +29,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.OrderFragment;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
+import tenant.guardts.house.model.OrderFragment;
 import tenant.guardts.house.model.SurroundFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -56,7 +57,22 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// 判断是否从推送通知栏打开的
+	    XGPushClickedResult click = XGPushManager.onActivityStarted(this);
+	    if (click != null) {
+	        //从推送通知栏打开-Service打开Activity会重新执行Laucher流程
+	        //查看是不是全新打开的面板
+	        if (isTaskRoot()) {
+	            return;
+	        }
+	        //如果有面板存在则关闭当前的面板
+	        finish();
+	    }
+		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.home_layout);
+//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+//		mTitleBar.setText("手机注册");
 		bundle = new Bundle();
 		mUserName = getIntent().getStringExtra("user_name");
 		mPassword = getIntent().getStringExtra("user_password");

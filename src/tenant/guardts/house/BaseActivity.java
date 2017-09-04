@@ -1,12 +1,9 @@
 package tenant.guardts.house;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.Window;
-import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.util.GlobalUtil;
 
