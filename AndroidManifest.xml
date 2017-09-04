@@ -73,11 +73,6 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -119,7 +114,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -302,7 +297,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
@@ -323,14 +318,18 @@
             android:name=".wxapi.HousePayActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="sensor"
-            android:theme="@style/AppTheme" >
+          android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity

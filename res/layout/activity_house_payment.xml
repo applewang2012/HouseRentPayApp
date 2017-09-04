@@ -51,6 +51,7 @@
             android:textSize="@dimen/base_dimen_30" />
 
         <TextView
+            android:id="@+id/id_pay_price_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/base_dimen_40"
@@ -106,7 +107,7 @@
             android:layout_marginLeft="@dimen/base_dimen_400"
             android:background="@drawable/payment_checkbox_bg"
             android:button="@null"
-            android:clickable="false"/>
+            android:clickable="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -136,6 +137,7 @@
         </TextView>
 
         <CheckBox
+            android:checked="true"
             android:id="@+id/checkbox_wechat"
             android:layout_width="@dimen/base_dimen_42"
             android:layout_height="@dimen/base_dimen_42"
@@ -146,6 +148,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/id_button_pay_money_button"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_height="@dimen/base_dimen_80"
         android:layout_gravity="center_horizontal"
@@ -153,5 +156,9 @@
         android:background="@drawable/withdraw_btn_bg"
         android:text="立即付款"
         android:textColor="#ffffff" />
+
+    <include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog" />
 
 </LinearLayout>
