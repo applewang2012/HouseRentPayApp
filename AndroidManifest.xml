@@ -73,6 +73,11 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -319,11 +324,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="sensor"
           android:theme="@android:style/Theme.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+           
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -376,11 +377,7 @@
             android:label="@string/title_activity_withdraw_details"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity
-            android:name=".HousePaymentActivity"
-            android:label="@string/title_activity_house_payment"
-            android:theme="@style/AppTheme" >
-        </activity>
+    
     </application>
 
 </manifest>

@@ -45,7 +45,7 @@ public class HousePayActivity extends BaseActivity {
 	private LinearLayout mWechat;
 	private CheckBox mCheckBoxWallet;
 	private CheckBox mCheckBoxWechat;
-	private boolean isPayByWechat=true;
+	private boolean isPayByWechat=true;//是否使用微信支付
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,10 @@ public class HousePayActivity extends BaseActivity {
 		setContentView(R.layout.activity_house_payment);
 		initView();
 		initEvent();
-		final String price = getIntent().getStringExtra("pay_price");
+		final String price = "1.0";//////////////////////////////////
 		final String ownerId = getIntent().getStringExtra("owner_idcard");
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
+		
 		if (price == null || price.equals("null")) {
 
 			priceText.setText("0.0元");
@@ -91,9 +92,11 @@ public class HousePayActivity extends BaseActivity {
 				showLoadingView();
 
 				if (isPayByWechat) {
-
+					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
 					startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
+				}else{
+					Toast.makeText(HousePayActivity.this, "钱包支付", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
