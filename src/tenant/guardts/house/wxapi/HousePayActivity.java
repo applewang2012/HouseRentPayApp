@@ -97,6 +97,13 @@ public class HousePayActivity extends BaseActivity {
 					startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
 				}else{
 					Toast.makeText(HousePayActivity.this, "钱包支付", Toast.LENGTH_SHORT).show();
+					//////////////////////////////////////
+					
+					
+					
+					
+					
+					
 				}
 			}
 		});

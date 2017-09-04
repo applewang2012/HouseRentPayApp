@@ -740,7 +740,6 @@ public class AddHouseInfoActivity extends BaseActivity{
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
 				dismissLoadingView();
