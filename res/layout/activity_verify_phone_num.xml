@@ -63,7 +63,8 @@
             android:layout_marginTop="@dimen/base_dimen_28"
             android:hint="请输入验证码"
             android:textColorHint="#b2b2b2"
-            android:background="@android:drawable/editbox_background_normal"
+            android:background="@null"
+            android:gravity="center"
             android:textSize="@dimen/base_dimen_28" />
 
         <View

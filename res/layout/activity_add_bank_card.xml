@@ -58,13 +58,15 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_14"
-            android:text="毛乃筝 "
+            android:background="@null"
+            android:hint="请输入持卡人姓名"
             android:textColor="#555555"
+            android:textColorHint="#b2b2b2"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -72,11 +74,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_1"
         android:background="#cccccc" />
-    
-      <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_80"
-        
         android:background="#ffffff" >
 
         <TextView
@@ -88,13 +89,16 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_14"
-            android:text="6217 0000 6000 2526 625"
+            android:background="@null"
+            android:hint="请输入银行卡号		"
             android:textColor="#555555"
+            android:textColorHint="#b2b2b2"
+            android:inputType="number"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -102,10 +106,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_1"
         android:background="#cccccc" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_80"
-        
         android:background="#ffffff" >
 
         <TextView
@@ -125,25 +129,23 @@
             android:text="中国农业银行"
             android:textColor="#337ffd"
             android:textSize="@dimen/base_dimen_30" />
-        <ImageView 
+
+        <ImageView
             android:layout_width="@dimen/base_dimen_44"
             android:layout_height="@dimen/base_dimen_44"
-            android:src="@drawable/more"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_300"
-            
-            
-            />
-        
+            android:src="@drawable/more" />
     </LinearLayout>
-     <Button
-         android:id="@+id/add_bank_card_btn_next"
+
+    <Button
+        android:id="@+id/add_bank_card_btn_next"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_height="@dimen/base_dimen_80"
-        android:layout_marginTop="@dimen/base_dimen_46"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_dimen_46"
         android:background="@drawable/withdraw_btn_bg"
-        android:textColor="#ffffff"
-        android:text="下一步" />
+        android:text="下一步"
+        android:textColor="#ffffff" />
 
 </LinearLayout>

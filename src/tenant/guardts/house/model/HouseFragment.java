@@ -130,7 +130,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
 		userName = bundle.getString("user_name");
-		Log.e("", userName+"=============");
+		Log.e("", userName + "=============");
 		mContext = getActivity().getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
 
@@ -315,10 +315,11 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			public void onClick(View v) {
 				// 先判断是否登录
 				if (userName.equals("") || userName == null) {
-					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					;
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-                 //发布房屋
+					// 发布房屋
 					Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
 					intent.putExtra("user_name", CommonUtil.mUserLoginName);
 					startActivity(intent);
@@ -357,8 +358,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				
-                 //房屋检索
+
+				// 房屋检索
 				Intent intent = new Intent(mContext, HouseSearchActivity.class);
 				intent.putExtra("user_name", userName);
 				startActivity(intent);
@@ -369,7 +370,13 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mContext, MapRentHouseActivity.class));
+				if (userName.equals("") || userName == null) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+					// 地图租房
+					startActivity(new Intent(mContext, MapRentHouseActivity.class));
+				}
 
 			}
 		});

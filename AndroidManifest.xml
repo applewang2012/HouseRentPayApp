@@ -119,7 +119,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -302,7 +302,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
@@ -330,7 +330,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -358,30 +358,29 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-             android:theme="@style/AppTheme"
             android:name=".WithdrawActivity"
-            android:label="@string/title_activity_withdraw" >
+            android:label="@string/title_activity_withdraw"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
-             android:theme="@style/AppTheme"
             android:name=".AddBankCardActivity"
-            android:label="@string/title_activity_add_bank_card" >
+            android:label="@string/title_activity_add_bank_card"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
-             android:theme="@style/AppTheme"
             android:name=".VerifyPhoneNumActivity"
-            android:label="@string/title_activity_verify_phone_num" >
+            android:label="@string/title_activity_verify_phone_num"
+            android:theme="@style/AppTheme" >
         </activity>
         <activity
-             android:theme="@style/AppTheme"
             android:name=".WithdrawDetailsActivity"
-            android:label="@string/title_activity_withdraw_details" >
+            android:label="@string/title_activity_withdraw_details"
+            android:theme="@style/AppTheme" >
         </activity>
-    
         <activity
-             android:theme="@style/AppTheme"
             android:name=".HousePaymentActivity"
-            android:label="@string/title_activity_house_payment" >
+            android:label="@string/title_activity_house_payment"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
