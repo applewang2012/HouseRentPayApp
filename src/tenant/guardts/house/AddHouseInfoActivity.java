@@ -378,7 +378,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 		if (age.getText().toString() == null || age.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋价格", Toast.LENGTH_SHORT).show();
 			return false;
+		}else if(age.getText().toString().substring(0, 1).equals("0")){
+			Toast.makeText(getApplicationContext(), "价格输入有误，请重新输入", Toast.LENGTH_SHORT).show();
+			return false;
 		}else{
+			
 			mRHousePrice = age.getText().toString();
 		}
 		EditText area = (EditText)findViewById(R.id.id_add_house_area);

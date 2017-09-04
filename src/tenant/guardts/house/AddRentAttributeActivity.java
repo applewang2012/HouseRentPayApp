@@ -321,6 +321,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "请输入租金", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+		if(mRentPrice.getText().toString().substring(0, 1).equals("0")){
+			Toast.makeText(getApplicationContext(), "价格输入有误，请重新输入", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 		if (mRentPrice.getText().toString().equals("0")){
 			Toast.makeText(getApplicationContext(), "租金不能为0", Toast.LENGTH_SHORT).show();
 			return false;
