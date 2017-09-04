@@ -41,8 +41,10 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.view.AddressSelector;
+import tenant.guardts.house.view.CityInterface;
 
-public class OrderFangzhuFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
+public class OrderFangzhuFragment extends Fragment implements DataStatusInterface{
 	
 	private Context mContext;
 	private View mRootView;
@@ -86,7 +88,17 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		//mContentLayout.setVisibility(View.INVISIBLE);
 		initAdapter();
 		mlistView.setAdapter(mAdapter);
-		mlistView.setOnItemClickListener(this);
+		mlistView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+				intent.putExtra("order_detail", mHouseInfoList.get(position));
+				intent.putExtra("detail_type", "owner");
+				startActivity(intent);
+			}
+		});
 	}
 	
 	public void refreshData(){
@@ -123,7 +135,8 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					status.setText("待确认");
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
-					button1.setVisibility(View.VISIBLE);
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
 					button1.setOnClickListener(new OnClickListener() {
 						
 						@Override
@@ -134,11 +147,11 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 							startActivity(intent);
 						}
 					});
-					button2.setTextColor(Color.parseColor("#337ffd"));
-					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 					button2.setText("确认订单");
-					button3.setText("拒绝订单");
-					button2.setOnClickListener(new OnClickListener() {
+					button3.setText("确认订单");
+					button3.setOnClickListener(new OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
@@ -153,8 +166,6 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 						public void onClick(View v) {
 							//mCurrentPosition = holder.getPosition();
 							showCancelOrderDialog(holder.getPosition(), info.getHouseOrderId());
-							
-							
 						}
 					});
 				}else if (info.getHouseStatus().equals("1")){
@@ -199,10 +210,10 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					button1.setText("查看详情");
 					button1.setVisibility(View.INVISIBLE);
 					button2.setText("查看详情");
-					button3.setText("立即评价");
+					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button2.setOnClickListener(new OnClickListener() {
+					button3.setOnClickListener(new OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
@@ -449,12 +460,5 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
-		Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-		detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-		startActivity(detailIntent);
-	}
 	
 }

@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:paddingBottom="5dp"
     android:background="#ffffff"
+    android:descendantFocusability= "blocksDescendants"
     >
     <FrameLayout 
         android:layout_width="fill_parent" 

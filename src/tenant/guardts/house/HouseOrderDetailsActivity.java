@@ -89,6 +89,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 						}
 					});
 					button2.setText("拒绝订单");
+					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner);
 					button2.setOnClickListener(new OnClickListener() {
 						
 						@Override
