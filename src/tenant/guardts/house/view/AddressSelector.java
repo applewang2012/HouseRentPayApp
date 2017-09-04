@@ -1,5 +1,7 @@
 package tenant.guardts.house.view;
 
+import java.util.ArrayList;
+
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
@@ -14,9 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-
 import tenant.guardts.house.R;
 
 /**

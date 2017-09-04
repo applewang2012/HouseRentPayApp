@@ -17,7 +17,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings.Global;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,18 +30,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import tenant.guardts.house.HomeActivity;
-import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
-import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.view.AddressSelector;
-import tenant.guardts.house.view.CityInterface;
 
 public class OrderFangzhuFragment extends Fragment implements DataStatusInterface{
 	

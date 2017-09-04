@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.w3c.dom.Text;
 
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -18,9 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -29,8 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.RegisterUserStep1Activity;
-import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.wxpay.WeiXinPay;

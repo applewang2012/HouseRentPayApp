@@ -19,7 +19,6 @@ package tenant.guardts.house.download;
 import java.util.Collection;
 import java.util.HashMap;
 
-import tenant.guardts.house.R;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ContentUris;
@@ -29,6 +28,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import tenant.guardts.house.R;
 
 /**
  * This class handles the updating of the Notification Manager for the

@@ -5,17 +5,15 @@ package tenant.guardts.house.util;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.View.OnTouchListener;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 

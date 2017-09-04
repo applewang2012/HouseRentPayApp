@@ -1,35 +1,12 @@
 package tenant.guardts.house;
 
-import java.io.File;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-
-import tenant.guardts.house.R;
-import tenant.guardts.house.model.ActivityController;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
-import android.hardware.Camera.PictureCallback;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -40,12 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
 
 public class RegisterUserStep1Activity extends BaseActivity{
 

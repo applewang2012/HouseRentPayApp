@@ -4,19 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;

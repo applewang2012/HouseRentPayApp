@@ -1,7 +1,6 @@
 package tenant.guardts.house;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,20 +10,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
-import tenant.guardts.house.view.AddressSelector;
-import tenant.guardts.house.view.CityInterface;
 import tenant.guardts.house.view.HistoryRecordsView;
 
 public class SearchActivity extends Activity{

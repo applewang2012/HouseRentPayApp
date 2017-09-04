@@ -1,17 +1,16 @@
 package tenant.guardts.house.map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnPolylineClickListener;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLngBounds;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 
 /**
  * 该类提供一个能够显示和管理多个Overlay的基类

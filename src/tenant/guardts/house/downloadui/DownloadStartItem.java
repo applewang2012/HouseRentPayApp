@@ -17,11 +17,11 @@
 package tenant.guardts.house.downloadui;
 
 
-import tenant.guardts.house.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
+import tenant.guardts.house.R;
 
 /**
  * This class customizes RelativeLayout to directly handle clicks on the left part of the view and
