@@ -260,57 +260,46 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base_dimen_20" >
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/base_dimen_30" >
 
-            <Button
-                android:id="@+id/id_order_detail_button1"
-                android:layout_width="@dimen/base_dimen_150"
-                android:layout_height="@dimen/base_dimen_60"
-                android:layout_marginLeft="@dimen/base_dimen_330"
-                android:background="@drawable/item_shape_no_solid_corner"
-                android:gravity="center"
-                android:text="确认订单"
-                android:textColor="#999999"
-                android:textSize="@dimen/base_dimen_24" />
-
-            <Button
-                android:id="@+id/id_order_detail_button2"
-                android:layout_width="@dimen/base_dimen_150"
-                android:layout_height="@dimen/base_dimen_60"
-                android:layout_marginLeft="@dimen/base_dimen_500"
-                android:background="@drawable/item_shape_no_solid_corner"
-                android:gravity="center"
-                android:text="取消订单 "
-                android:textColor="#999999"
-                android:textSize="@dimen/base_dimen_24" />
-        </FrameLayout>
         <Button 
                  android:id="@+id/id_order_detail_contact"
-                 android:layout_width="@dimen/base_dimen_337"
-		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_170"
+                 android:layout_width="@dimen/base_dimen_180"
+		         android:layout_height="@dimen/base_dimen_70"
+		         android:layout_marginLeft="@dimen/base_dimen_130"
 		         android:text="电话联系"
 		         android:textColor="@drawable/button_text_selector"
 		         android:textSize="@dimen/base_dimen_30"
-		         android:layout_gravity="center_horizontal"
 		         android:gravity="center"
-		         android:background="@drawable/button_history_background_selector"
+		         android:background="@drawable/order_detail_btn_bg"
                  />
-        <Button 
-                 android:id="@+id/id_order_detail_back"
-                 android:layout_width="@dimen/base_dimen_337"
-		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_10"
-		         android:text="返回"
-		         android:textColor="@drawable/button_text_selector"
-		         android:textSize="@dimen/base_dimen_30"
-		         android:layout_gravity="center_horizontal"
-		         android:gravity="center"
-		         android:background="@drawable/button_history_background_selector"
-                 />
+            <Button
+                android:id="@+id/id_order_detail_button1"
+                android:layout_width="@dimen/base_dimen_180"
+		         android:layout_height="@dimen/base_dimen_70"
+                android:layout_marginLeft="@dimen/base_dimen_10"
+                android:background="@drawable/order_detail_btn_bg"
+                android:gravity="center"
+                android:text="确认订单"
+                android:textColor="@drawable/button_text_selector"
+                android:textSize="@dimen/base_dimen_30" />
+
+            <Button
+                android:id="@+id/id_order_detail_button2"
+               android:layout_width="@dimen/base_dimen_180"
+		         android:layout_height="@dimen/base_dimen_70"
+                android:layout_marginLeft="@dimen/base_dimen_10"
+               android:background="@drawable/order_detail_btn_bg"
+                android:gravity="center"
+                android:text="取消订单 "
+                android:textColor="@drawable/button_text_selector"
+                android:textSize="@dimen/base_dimen_30" />
+        </LinearLayout>
+     
     </LinearLayout>
 
     <include

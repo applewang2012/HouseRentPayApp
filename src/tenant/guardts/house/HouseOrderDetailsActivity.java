@@ -99,7 +99,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 						@Override
 						public void onClick(View v) {
-							// TODO Auto-generated method stub
 							showLoadingView();
 							confirmRentAttributeInfo(mOrderDetail.getHouseOrderId());
 						}
@@ -205,17 +204,15 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 		}
 
-		Button back = (Button) findViewById(R.id.id_order_detail_back);
-		back.setOnClickListener(new OnClickListener() {
+	
+		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
+		if (mDetailType.equals("owner")) {
+			btnContact .setText("联系房客");
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
-		// 联系
-		Button contact = (Button) findViewById(R.id.id_order_detail_contact);
+		} else if (mDetailType.equals("renter")) {
+			btnContact .setText("联系房主");
+
+		}
 		contact.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -417,6 +414,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private Button cancel;
 	private View parent;
 	private View view;
+	private Button btnContact;
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
