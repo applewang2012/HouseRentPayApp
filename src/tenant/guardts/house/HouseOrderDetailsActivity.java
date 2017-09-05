@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -213,12 +214,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			btnContact .setText("联系房主");
 
 		}
-		contact.setOnClickListener(new OnClickListener() {
+		btnContact.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				initPopupWindow();
-
 			}
 		});
 

@@ -8,6 +8,7 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="22" />
 
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -95,7 +96,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-                 <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -135,13 +136,13 @@
             android:name=".HouseOrderDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
-       
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity

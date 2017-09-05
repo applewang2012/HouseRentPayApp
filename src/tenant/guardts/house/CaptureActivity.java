@@ -6,15 +6,22 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -28,8 +35,10 @@ import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
+
 /**
  * Initial the camera
+ * 
  * @author Ryan.Tang
  */
 public class CaptureActivity extends BaseActivity implements Callback {
@@ -45,6 +54,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 	private Button cancelScanButton;
+	private boolean isLighting;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -53,14 +63,61 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.camera);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView titlebar = (TextView)findViewById(R.id.id_titlebar);
+		TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
 		titlebar.setText("扫一扫开锁");
-		//ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
+		// ViewUtil.addTopView(getApplicationContext(), this,
+		// R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
+		lighting = (Button) findViewById(R.id.btn_lighting);
+		camera = Camera.open();
+
+		lighting.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// 开启闪光灯
+				if (isLighting) {
+					TurnOnFlash();
+					isLighting = true;
+				} else {
+					// 关闭
+					TurnOffFlash();
+					isLighting = false;
+				}
+			}
+		});
+	}
+
+	private void TurnOnFlash() {
+		if (camera == null) {
+			camera = Camera.open();
+		}
+		if (camera != null) {
+			parameters = camera.getParameters();
+			parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+			camera.setParameters(parameters);
+			camera.autoFocus(new AutoFocusCallback() {
+
+				@Override
+				public void onAutoFocus(boolean success, Camera camera) {
+
+				}
+			});
+			camera.startPreview();
+		}
+	}
+
+	private void TurnOffFlash() {
+
+		if (camera != null) {
+			camera.stopPreview();
+			camera.release();
+			camera = null;
+		}
 	}
 
 	@Override
@@ -84,10 +141,10 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		}
 		initBeepSound();
 		vibrate = true;
-		
-		//quit the scan view
+
+		// quit the scan view
 		cancelScanButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				CaptureActivity.this.finish();
@@ -108,11 +165,16 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onDestroy() {
 		inactivityTimer.shutdown();
+		if (camera != null) {
+			camera.release();
+		}
+
 		super.onDestroy();
 	}
-	
+
 	/**
 	 * Handler scan result
+	 * 
 	 * @param result
 	 * @param barcode
 	 */
@@ -120,11 +182,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 		String resultString = result.getText();
-		//FIXME
+		// FIXME
 		if (resultString.equals("")) {
-			GlobalUtil.shortToast(getApplication(), "Scan failed  !", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-		}else {
-//			System.out.println("Result:"+resultString);
+			GlobalUtil.shortToast(getApplication(), "Scan failed  !",
+					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+		} else {
+			// System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
@@ -133,7 +196,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		}
 		CaptureActivity.this.finish();
 	}
-	
+
 	private void initCamera(SurfaceHolder surfaceHolder) {
 		try {
 			CameraManager.get().openDriver(surfaceHolder);
@@ -143,14 +206,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			return;
 		}
 		if (handler == null) {
-			handler = new CaptureActivityHandler(this, decodeFormats,
-					characterSet);
+			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
 		}
 	}
 
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
 	}
 
@@ -192,11 +253,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mediaPlayer.setOnCompletionListener(beepListener);
 
-			AssetFileDescriptor file = getResources().openRawResourceFd(
-					R.raw.beep);
+			AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.beep);
 			try {
-				mediaPlayer.setDataSource(file.getFileDescriptor(),
-						file.getStartOffset(), file.getLength());
+				mediaPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
 				file.close();
 				mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
 				mediaPlayer.prepare();
@@ -226,5 +285,8 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
+	private Button lighting;
+	private Camera camera;
+	private Parameters parameters;
 
 }
