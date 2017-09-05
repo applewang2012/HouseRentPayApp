@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
@@ -73,7 +74,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		lighting = (Button) findViewById(R.id.btn_lighting);
-		camera = Camera.open();
+//		camera = Camera.open();
 
 		lighting.setOnClickListener(new OnClickListener() {
 
@@ -100,6 +101,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			parameters = camera.getParameters();
 			parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
 			camera.setParameters(parameters);
+			camera.startPreview();
 			camera.autoFocus(new AutoFocusCallback() {
 
 				@Override
@@ -107,7 +109,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
 				}
 			});
-			camera.startPreview();
+			
 		}
 	}
 

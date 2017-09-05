@@ -255,7 +255,7 @@
                 android:layout_marginLeft="@dimen/base_dimen_400"
                 android:layout_marginTop="@dimen/base_dimen_28"
                 android:text="500"
-                android:textColor="#7aa5ef"
+                android:textColor="#337ffd"
                 android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
         </LinearLayout>
