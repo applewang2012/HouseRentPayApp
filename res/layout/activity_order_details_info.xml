@@ -287,12 +287,23 @@
                 android:textColor="#999999"
                 android:textSize="@dimen/base_dimen_24" />
         </FrameLayout>
-        
+        <Button 
+                 android:id="@+id/id_order_detail_contact"
+                 android:layout_width="@dimen/base_dimen_337"
+		         android:layout_height="@dimen/base_dimen_80"
+		         android:layout_marginTop="@dimen/base_dimen_170"
+		         android:text="电话联系"
+		         android:textColor="@drawable/button_text_selector"
+		         android:textSize="@dimen/base_dimen_30"
+		         android:layout_gravity="center_horizontal"
+		         android:gravity="center"
+		         android:background="@drawable/button_history_background_selector"
+                 />
         <Button 
                  android:id="@+id/id_order_detail_back"
                  android:layout_width="@dimen/base_dimen_337"
 		         android:layout_height="@dimen/base_dimen_80"
-		         android:layout_marginTop="@dimen/base_dimen_170"
+		         android:layout_marginTop="@dimen/base_dimen_10"
 		         android:text="返回"
 		         android:textColor="@drawable/button_text_selector"
 		         android:textSize="@dimen/base_dimen_30"
