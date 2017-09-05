@@ -458,17 +458,18 @@ public class HomeActivity extends BaseActivity {
 			if (lockNo != null && lockNo.length() > 2) {
 				showOpenDoorAlertDialog(lockNo + "");
 			}
-		} else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode) {
-			Bundle bundle = data.getExtras();
-			if (bundle != null) {
-				String selectedCity = bundle.getString("city");
-				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
-				if (!TextUtils.isEmpty(selectedCity)) {
-					setSelectedCity(selectedCity);
-				}
-			}
-
-		}
+		} 
+//		else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode) {
+//			Bundle bundle = data.getExtras();
+//			if (bundle != null) {
+//				String selectedCity = bundle.getString("city");
+//				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
+//				if (!TextUtils.isEmpty(selectedCity)) {
+//					setSelectedCity(selectedCity);
+//				}
+//			}
+//
+//		}
 	}
 
 	public void setSelectedCity(String city) {
