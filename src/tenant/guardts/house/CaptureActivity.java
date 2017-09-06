@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.style.MetricAffectingSpan;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -55,7 +56,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 	private Button cancelScanButton;
-	private boolean isLighting;
+	private boolean isLighting = true;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -74,53 +75,29 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		lighting = (Button) findViewById(R.id.btn_lighting);
-//		camera = Camera.open();
-
+		lighting.setText("开灯");
 		lighting.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// 开启闪光灯
-				if (isLighting) {
-					TurnOnFlash();
-					isLighting = true;
-				} else {
-					// 关闭
-					TurnOffFlash();
-					isLighting = false;
-				}
+				mCamera = CameraManager.getCamera();
+	            mParameters = mCamera.getParameters();
+	            // TODO 开灯
+	            if (isLighting) {
+	            	lighting.setText("关灯");
+	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+	                mCamera.setParameters(mParameters);
+	                isLighting = false;
+	            } else {  // 关灯
+	            	lighting.setText("开灯");
+	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+	            	mCamera.setParameters(mParameters);
+	                isLighting = true;
+	            }
 			}
 		});
 	}
 
-	private void TurnOnFlash() {
-		if (camera == null) {
-			camera = Camera.open();
-		}
-		if (camera != null) {
-			parameters = camera.getParameters();
-			parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
-			camera.setParameters(parameters);
-			camera.startPreview();
-			camera.autoFocus(new AutoFocusCallback() {
-
-				@Override
-				public void onAutoFocus(boolean success, Camera camera) {
-
-				}
-			});
-			
-		}
-	}
-
-	private void TurnOffFlash() {
-
-		if (camera != null) {
-			camera.stopPreview();
-			camera.release();
-			camera = null;
-		}
-	}
 
 	@Override
 	protected void onResume() {
@@ -167,9 +144,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onDestroy() {
 		inactivityTimer.shutdown();
-		if (camera != null) {
-			camera.release();
-		}
+//		if (camera != null) {
+//			camera.release();
+//		}
 
 		super.onDestroy();
 	}
@@ -229,7 +206,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		hasSurface = false;
-
+		if (mCamera != null) {
+            CameraManager.stopPreview();
+        }
 	}
 
 	public ViewfinderView getViewfinderView() {
@@ -288,7 +267,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		}
 	};
 	private Button lighting;
-	private Camera camera;
-	private Parameters parameters;
+	private Camera mCamera;
+	private Parameters mParameters;
 
 }

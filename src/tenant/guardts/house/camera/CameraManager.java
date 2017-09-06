@@ -59,19 +59,19 @@ public final class CameraManager {
 
   private final Context context;
   private final CameraConfigurationManager configManager;
-  private Camera camera;
+  private static Camera camera;
   private Rect framingRect;
   private Rect framingRectInPreview;
   private boolean initialized;
-  private boolean previewing;
-  private final boolean useOneShotPreviewCallback;
+  private static boolean previewing;
+  private static boolean useOneShotPreviewCallback;
   /**
    * Preview frames are delivered here, which we pass on to the registered handler. Make sure to
    * clear the handler so it will only receive one message.
    */
-  private final PreviewCallback previewCallback;
+  private  static PreviewCallback previewCallback;
   /** Autofocus callbacks arrive here, and are dispatched to the Handler which requested them. */
-  private final AutoFocusCallback autoFocusCallback;
+  private  static AutoFocusCallback autoFocusCallback;
 
   /**
    * Initializes this static object with the Context of the calling Activity.
@@ -138,6 +138,10 @@ public final class CameraManager {
       FlashlightManager.enableFlashlight();
     }
   }
+  
+  public static Camera getCamera(){
+      return camera;
+  }
 
   /**
    * Closes the camera driver if still in use.
@@ -163,7 +167,7 @@ public final class CameraManager {
   /**
    * Tells the camera to stop drawing preview frames.
    */
-  public void stopPreview() {
+  public static void stopPreview() {
     if (camera != null && previewing) {
       if (!useOneShotPreviewCallback) {
         camera.setPreviewCallback(null);
