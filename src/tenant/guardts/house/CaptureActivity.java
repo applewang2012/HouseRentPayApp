@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
@@ -74,23 +75,33 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		lighting = (Button) findViewById(R.id.btn_lighting);
-//		camera = Camera.open();
+		// camera = Camera.open();
 
 		lighting.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// 开启闪光灯
-				if (isLighting) {
-					TurnOnFlash();
-					isLighting = true;
-				} else {
-					// 关闭
-					TurnOffFlash();
-					isLighting = false;
+				if (checkFlashlight()) {
+					// 开启闪光灯
+					if (isLighting) {
+						TurnOnFlash();
+						isLighting = true;
+					} else {
+						// 关闭
+						TurnOffFlash();
+						isLighting = false;
+					}
 				}
 			}
 		});
+	}
+
+	private boolean checkFlashlight() {
+		if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+			Toast.makeText(this, "当前设备没有闪光灯", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		return true;
 	}
 
 	private void TurnOnFlash() {
@@ -98,18 +109,19 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			camera = Camera.open();
 		}
 		if (camera != null) {
-			parameters = camera.getParameters();
-			parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
-			camera.setParameters(parameters);
-			camera.startPreview();
-			camera.autoFocus(new AutoFocusCallback() {
+				parameters = camera.getParameters();
+				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+				camera.setParameters(parameters);
+				camera.startPreview();
+				camera.autoFocus(new AutoFocusCallback() {
 
-				@Override
-				public void onAutoFocus(boolean success, Camera camera) {
+					@Override
+					public void onAutoFocus(boolean success, Camera camera) {
 
-				}
-			});
+					}
+				});
 			
+
 		}
 	}
 
