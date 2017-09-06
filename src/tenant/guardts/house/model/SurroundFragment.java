@@ -51,6 +51,7 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.view.HomeFragmentListView;
 
 public class SurroundFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnItemClickListener{
 	
@@ -350,7 +351,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		}
 	};
 	private UniversalAdapter<SurroundInfo> mAdapter;
-	private ListView mSurroundListview;
+	private HomeFragmentListView mSurroundListview;
 	
 	public static HashMap<String,String> parseUserInfo(String value) {
 		HashMap<String,String> userInfo = null;
@@ -448,7 +449,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	}
 	
 	private void initAdapter(){
-		mSurroundListview = (ListView)mRootView.findViewById(R.id.id_fragment_surround_life_listview);
+		mSurroundListview = (HomeFragmentListView)mRootView.findViewById(R.id.id_fragment_surround_life_listview);
 		mAdapter = new UniversalAdapter<SurroundInfo>(mContext, R.layout.surround_fragment_list_item, mDataList) {
 
 			@Override

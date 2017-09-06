@@ -110,7 +110,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
 		userName = bundle.getString("user_name");
-		Log.e("", userName + "=============");
 		mContext = getActivity().getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
 

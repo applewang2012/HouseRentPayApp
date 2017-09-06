@@ -57,10 +57,11 @@
         />
     <TextView 
         android:id="@+id/id_surround_fragment_item_hot_address"
-         android:layout_width="@dimen/base_dimen_440" 
+         android:layout_width="fill_parent" 
     	android:layout_height="@dimen/base_dimen_66"
     	android:layout_marginTop="@dimen/base_dimen_60"
     	android:layout_marginLeft="@dimen/base_dimen_58"
+    	android:layout_marginRight="@dimen/base_dimen_58"
     	android:singleLine="true"
     	android:textColor="#b2b2b2"
     	android:textSize="@dimen/base_dimen_26"

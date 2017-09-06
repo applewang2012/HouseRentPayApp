@@ -3,331 +3,297 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f2f3"
-     >
-     <include
+    android:background="#f1f2f3" >
+
+    <include
         android:id="@+id/id_common_title_bar"
-        android:visibility="visible"
         layout="@layout/titlebar"
-       />
-     
-     <FrameLayout
-	        android:id="@+id/id_viewflow_framelayout"
-	        android:layout_width="fill_parent"
-	        android:layout_height="@dimen/base_dimen_284"
-	        android:layout_marginTop="@dimen/base_dimen_90"
-	         >
-	
-	        <tenant.guardts.house.bannerview.ViewFlow
-	            android:id="@+id/id_fragment_surround_life_viewflow"
-	            android:layout_width="fill_parent"
-	            android:layout_height="fill_parent"
-	            android:paddingLeft="@dimen/base_dimen_20"
-	            android:paddingRight="@dimen/base_dimen_20"
-	            android:paddingTop="@dimen/base_dimen_20"
-	            />
-	
-		        <FrameLayout
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:layout_gravity="bottom"
-		            android:background="@color/transparent"
-		            android:gravity="center"
-		            >
-			       <tenant.guardts.house.bannerview.CircleFlowIndicator 
-			            android:id="@+id/id_fragment_surround_life_viewflow_indicator"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            android:layout_gravity="center_horizontal|bottom"
-			            android:padding="2dip"
-			            app:activeColor="#ff0000"
-			            app:activeType="fill"
-			            app:circleSeparation="20dip"
-			            app:inactiveColor="#ffffff"
-			            app:inactiveType="fill"
-			            app:radius="4dip"
-			            />
-	        </FrameLayout>
+        android:visibility="visible" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/base_dimen_90" >
+
+        <FrameLayout
+            android:id="@+id/id_viewflow_framelayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <FrameLayout
+                android:id="@+id/id_viewflow_framelayout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/base_dimen_284" >
+
+                <tenant.guardts.house.bannerview.ViewFlow
+                    android:id="@+id/id_fragment_surround_life_viewflow"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingLeft="@dimen/base_dimen_20"
+                    android:paddingRight="@dimen/base_dimen_20"
+                    android:paddingTop="@dimen/base_dimen_20" />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/transparent"
+                    android:gravity="center" >
+
+                    <tenant.guardts.house.bannerview.CircleFlowIndicator
+                        android:id="@+id/id_fragment_surround_life_viewflow_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:padding="2dip"
+                        app:activeColor="#ff0000"
+                        app:activeType="fill"
+                        app:circleSeparation="20dip"
+                        app:inactiveColor="#ffffff"
+                        app:inactiveType="fill"
+                        app:radius="4dip" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_270"
+                android:layout_marginTop="@dimen/base_dimen_304"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/base_dimen_25"
+                android:paddingTop="@dimen/base_dimen_25" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_100"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_eat"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_eat" />
+
+                        <TextView
+                            android:layout_width="@dimen/base_dimen_76"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="美食"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_hotle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_hotel" />
+
+                        <TextView
+                            android:layout_width="@dimen/base_dimen_76"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="酒店"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_bank"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_bank" />
+
+                        <TextView
+                            android:layout_width="@dimen/base_dimen_76"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="银行"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_jingdian"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_travel" />
+
+                        <TextView
+                            android:layout_width="@dimen/base_dimen_76"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="景点"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_100"
+                    android:layout_marginTop="@dimen/base_dimen_20"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_traffic"
+                        android:layout_width="@dimen/base_dimen_76"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_traffic" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="交通"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_park"
+                        android:layout_width="@dimen/base_dimen_76"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_park" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="停车场"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_oil"
+                        android:layout_width="@dimen/base_dimen_76"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_oil" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="加油站"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/id_fragment_surround_more"
+                        android:layout_width="@dimen/base_dimen_76"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical" >
+
+                        <ImageView
+                            android:layout_width="@dimen/base_dimen_60"
+                            android:layout_height="@dimen/base_dimen_60"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/house_surround_life_hot_more" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_10"
+                            android:gravity="center"
+                            android:text="更多"
+                            android:textColor="#464646"
+                            android:textSize="@dimen/base_dimen_22" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <tenant.guardts.house.view.HomeFragmentListView
+                android:id="@+id/id_fragment_surround_life_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/base_dimen_584"
+                android:background="#f1f2f3"
+                android:cacheColorHint="#00000000"
+                android:divider="#00000000"
+                android:dividerHeight="@dimen/base_dimen_10"
+                android:fadingEdge="none" />
+
+            <tenant.guardts.house.headergridview.StickyGridHeadersGridView
+                android:id="@+id/sgv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:numColumns="3"
+                android:visibility="invisible" >
+            </tenant.guardts.house.headergridview.StickyGridHeadersGridView>
         </FrameLayout>
-        
-   <LinearLayout 
-       android:layout_width="match_parent"
-	   android:layout_height="@dimen/base_dimen_270"
-	   android:background="#ffffff"
-	   android:layout_marginTop="@dimen/base_dimen_394"
-	   android:paddingTop="@dimen/base_dimen_25"
-	   android:paddingBottom="@dimen/base_dimen_25"
-	   android:orientation="vertical"
-       >
-       <LinearLayout 
-           android:layout_width="match_parent"
-	   	   android:layout_height="@dimen/base_dimen_100"
-	   	   android:orientation="horizontal"
-           >
-           <LinearLayout 
-               android:layout_width="0dp"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:gravity="center"
-	   	   	   android:id="@+id/id_fragment_surround_eat"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_eat"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="@dimen/base_dimen_76"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="美食"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="0dp"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:gravity="center"
-	   	   	   android:id="@+id/id_fragment_surround_hotle"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_hotel"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="@dimen/base_dimen_76"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="酒店"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="0dp"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:gravity="center"
-	   	   	   android:id="@+id/id_fragment_surround_bank"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_bank"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="@dimen/base_dimen_76"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="银行"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="0dp"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:gravity="center"
-	   	   	   android:id="@+id/id_fragment_surround_jingdian"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_travel"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="@dimen/base_dimen_76"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="景点"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-       </LinearLayout>
-       
-       <LinearLayout 
-           android:layout_width="match_parent"
-	   	   android:layout_height="@dimen/base_dimen_100"
-	   	   android:layout_marginTop="@dimen/base_dimen_20"
-	   	   android:orientation="horizontal"
-           >
-           <LinearLayout 
-               android:layout_width="@dimen/base_dimen_76"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:id="@+id/id_fragment_surround_traffic"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_traffic"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="match_parent"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="交通"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="@dimen/base_dimen_76"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:id="@+id/id_fragment_surround_park"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_park"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="match_parent"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="停车场"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="@dimen/base_dimen_76"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:id="@+id/id_fragment_surround_oil"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_oil"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="match_parent"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="加油站"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-           <LinearLayout 
-               android:layout_width="@dimen/base_dimen_76"
-	   	   	   android:layout_height="match_parent"
-	   	   	   android:layout_weight="1"
-	   	   	   android:orientation="vertical"
-	   	   	   android:id="@+id/id_fragment_surround_more"
-	   	   	   android:clickable="true"
-               >
-               <ImageView 
-                   android:layout_width="@dimen/base_dimen_60"
-	   			   android:layout_height="@dimen/base_dimen_60"
-	   			   android:background="@drawable/house_surround_life_hot_more"
-	   			   android:layout_gravity="center_horizontal"
-                   />
-               <TextView 
-                   android:layout_width="match_parent"
-	   			   android:layout_height="@dimen/base_dimen_30"
-	   			   android:layout_marginTop="@dimen/base_dimen_10"
-	   			   android:text="更多"
-	   			   android:textColor="#464646"
-	   			   android:textSize="@dimen/base_dimen_22"
-	   			   android:gravity="center"
-                   />
-           </LinearLayout>
-       </LinearLayout>
-   </LinearLayout>
-   
-   <ListView
-            android:id="@+id/id_fragment_surround_life_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/base_dimen_674"
-			android:cacheColorHint="#00000000"
-			android:divider="#00000000"
-		    android:fadingEdge="none"
-		    android:background="#f1f2f3"
-		    android:dividerHeight="@dimen/base_dimen_10"
-             />
-     
-   <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="40dp"
-	        android:layout_marginTop="@dimen/base_dimen_90"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	        android:orientation="horizontal"
-	        android:visibility="invisible"
-	        >
-	        <EditText 
-		        android:id="@+id/id_fragment_surround_search_input"
-		        android:layout_width="@dimen/base_dimen_76"
-			    android:layout_height="match_parent"
-			    android:layout_weight="4"
-			    android:hint="请输入您感兴趣的周边信息"
-			    android:gravity="left|center_vertical"
-			    android:paddingLeft="3dp"
-			    android:textSize="14dp"
-			    android:background="@drawable/item_shape_no_solid_corner"
-			    android:textColor="#afaeae"
-		        />
-	        <Button 
-	            android:id="@+id/id_fragment_surround_search_button"
-				android:layout_width="@dimen/base_dimen_76"
-			    android:layout_height="35dp"
-			    android:layout_weight="1"
-			    android:layout_marginLeft="8dp"
-			    android:text="搜   索"
-			    android:textColor="#ffffff"
-			    android:textSize="13dp"
-			    android:gravity="center"
-			    android:layout_gravity="center_vertical"
-			    android:background="@drawable/button_background"
-	            />
-	        
-	   </LinearLayout>
-	    
-   <tenant.guardts.house.headergridview.StickyGridHeadersGridView
-            android:id="@+id/sgv"
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:numColumns="3" >
-   </tenant.guardts.house.headergridview.StickyGridHeadersGridView>
-    
-	  
+    </ScrollView>
+
 </FrameLayout>
