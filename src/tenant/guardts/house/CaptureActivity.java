@@ -6,14 +6,11 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
-import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -21,8 +18,6 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -30,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.camera.CameraManager;
@@ -56,7 +52,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
 	private Button cancelScanButton;
-	private boolean isLighting;
+	private boolean isLighting = true;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -71,27 +67,29 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		// R.string.scan_card);
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-		cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
-		lighting = (Button) findViewById(R.id.btn_lighting);
-		// camera = Camera.open();
-
+		lighting = (CheckBox) findViewById(R.id.capture_flash);
+		
 		lighting.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (checkFlashlight()) {
-					// 开启闪光灯
-					if (isLighting) {
-						TurnOnFlash();
-						isLighting = true;
-					} else {
-						// 关闭
-						TurnOffFlash();
-						isLighting = false;
-					}
-				}
+
+				mCamera = CameraManager.getCamera();
+	            mParameters = mCamera.getParameters();
+	           
+	            if (isLighting) {
+	            	lighting.setText("关闭手电筒");
+	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+	                mCamera.setParameters(mParameters);
+	                isLighting = false;
+	            } else { 
+	            	lighting.setText("打开手电筒");
+	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+	            	mCamera.setParameters(mParameters);
+	                isLighting = true;
+	            }
 			}
 		});
 	}
@@ -104,35 +102,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		return true;
 	}
 
-	private void TurnOnFlash() {
-		if (camera == null) {
-			camera = Camera.open();
-		}
-		if (camera != null) {
-				parameters = camera.getParameters();
-				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
-				camera.setParameters(parameters);
-				camera.startPreview();
-				camera.autoFocus(new AutoFocusCallback() {
-
-					@Override
-					public void onAutoFocus(boolean success, Camera camera) {
-
-					}
-				});
-			
-
-		}
-	}
-
-	private void TurnOffFlash() {
-
-		if (camera != null) {
-			camera.stopPreview();
-			camera.release();
-			camera = null;
-		}
-	}
+	
 
 	@Override
 	protected void onResume() {
@@ -156,14 +126,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 		initBeepSound();
 		vibrate = true;
 
-		// quit the scan view
-		cancelScanButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				CaptureActivity.this.finish();
-			}
-		});
+	
 	}
 
 	@Override
@@ -179,9 +142,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onDestroy() {
 		inactivityTimer.shutdown();
-		if (camera != null) {
-			camera.release();
-		}
+//		if (camera != null) {
+//			camera.release();
+//		}
 
 		super.onDestroy();
 	}
@@ -241,7 +204,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		hasSurface = false;
-
+		if (mCamera != null) {
+            CameraManager.stopPreview();
+        }
 	}
 
 	public ViewfinderView getViewfinderView() {
@@ -299,8 +264,8 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
-	private Button lighting;
-	private Camera camera;
-	private Parameters parameters;
+	private CheckBox lighting;
+	private Camera mCamera;
+	private Parameters mParameters;
 
 }

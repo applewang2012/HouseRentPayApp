@@ -31,10 +31,12 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
@@ -46,12 +48,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,15 +106,17 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 //	private SuggestionSearch mSuggestionSearch;
 //	private TextView mSelectCityText;
 	private TextView mTitleBar;
+	private TextView mSelectCityText;
+	private PoiSearch mPoiSearch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE); 
+//		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE); 
 		setContentView(R.layout.activity_map_rent_house_layout); 
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("地图租房");
+//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+//		mTitleBar.setText("地图租房");
 		
 		mContext = getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, this);
@@ -142,7 +148,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
         mMapView = null;
-//        mPoiSearch.destroy();
+        mPoiSearch.destroy();
 //        mSuggestionSearch.destroy();
         super.onDestroy();
      // 回收 bitmap 资源
@@ -154,20 +160,20 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 
 	private void initView(){
 
-//		LinearLayout button = (LinearLayout)findViewById(R.id.id_home_select_city_content);
-//		button.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
-//				intent.putExtra("current_city", mCurrentLocationCity);
-//				startActivityForResult(intent, CommonUtil.mSelectCityRequestCode);
-//				
-//			}
-//		});
-//		mSelectCityText = (TextView)findViewById(R.id.id_home_show_city_view);
-//		 mPoiSearch = PoiSearch.newInstance();
-//		 mPoiSearch.setOnGetPoiSearchResultListener(this);
+		LinearLayout button = (LinearLayout)findViewById(R.id.id_home_select_city_content);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mContext, SelectShowCityActivity.class);
+				intent.putExtra("current_city", mCurrentLocationCity);
+				startActivityForResult(intent, CommonUtil.SELECT_CITY_REQEUST_CODE);
+				
+			}
+		});
+		mSelectCityText = (TextView)findViewById(R.id.id_home_show_city_view);
+		 mPoiSearch = PoiSearch.newInstance();
+		 mPoiSearch.setOnGetPoiSearchResultListener(this);
 //		 mSearchListener = (AutoCompleteTextView)findViewById(R.id.button_search);  
 //		 sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this,
 //	                android.R.layout.simple_dropdown_item_1line);
@@ -315,29 +321,42 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
             }
         });  
         
-        Button rentToButton = (Button)findViewById(R.id.id_home_button_chuzu_house);
-        rentToButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(MapRentHouseActivity.this, RentToHouseActivity.class));
-				
-			}
-		});
-        Button rentButton = (Button)findViewById(R.id.id_home_button_rent_house);
-        rentButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(mContext, HouseSearchActivity.class);
-				startActivity(intent);
-			}
-		});
-        
 	
 	}
 	
-	// 查询周围2000米的某类建筑
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK && requestCode == CommonUtil.SELECT_CITY_REQEUST_CODE) {
+			Bundle bundle = data.getExtras();
+			if (bundle != null) {
+				String selectedCity = bundle.getString("city");
+				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
+				if (!TextUtils.isEmpty(selectedCity)) {
+					// if (activity.getSelectedCity() != null &&
+					// !activity.getSelectedCity().equals("")) {
+					 if (selectedCity != null && selectedCity.equalsIgnoreCase(mCurrentLocationCity)) {
+						 return;
+					 }
+					 mCurrentLocationCity = selectedCity;
+					 Log.i("mingguo", "house fragment on resume change currentCity " +mCurrentLocationCity);
+					 mSelectCityText.setText(mCurrentLocationCity);
+					 searchButtonProcess();
+				}
+			}
+
+		}
+	}
+
+
+	private void searchButtonProcess() {
+		String citystr = mCurrentLocationCity;
+		String keystr = "市政府";
+		mPoiSearch.searchInCity((new PoiCitySearchOption()).city(citystr).keyword(keystr).pageCapacity(1));
+	}
+
+		// 查询周围2000米的某类建筑
 		public void  searchNearbyProcess(String searchText) {
 	        //searchType = 2;
 	        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(searchText
@@ -413,7 +432,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 				}else if (msg.what == 300){
 					showSelectLocationMap();
 				}else if (msg.what == 500){
-					//updateLocationCity();
+					updateLocationCity();
 				}
 			}
 	    };
@@ -552,9 +571,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	        
 	    }
 	    
-//	    private void updateLocationCity(){
-//	    	mSelectCityText.setText(mCurrentLocationCity);
-//	    }
+	    private void updateLocationCity(){
+	    	mSelectCityText.setText(mCurrentLocationCity);
+	    }
 
 		
 		@Override

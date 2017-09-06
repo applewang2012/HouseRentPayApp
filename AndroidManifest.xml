@@ -110,7 +110,7 @@
         <activity
             android:name=".MapRentHouseActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".SurfaceViewTestActivity"
@@ -126,7 +126,7 @@
             android:name=".SelectShowCityActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".DownloadAppActivity"
             android:configChanges="orientation|keyboardHidden"

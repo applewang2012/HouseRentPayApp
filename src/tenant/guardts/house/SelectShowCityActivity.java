@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -47,7 +48,7 @@ import tenant.guardts.house.selectcity.MyLetterListView;
 import tenant.guardts.house.selectcity.MyLetterListView.OnTouchingLetterChangedListener;
 import tenant.guardts.house.selectcity.PingYinUtil;
 
-public class SelectShowCityActivity extends Activity implements OnScrollListener {
+public class SelectShowCityActivity extends BaseActivity implements OnScrollListener {
 	private BaseAdapter adapter;
 	private ResultListAdapter resultListAdapter;
 	private ListView personList;
@@ -78,7 +79,11 @@ public class SelectShowCityActivity extends Activity implements OnScrollListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.select_city_main);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar.setText("切换城市");
 		currentCity = getIntent().getStringExtra("current_city");
 		personList = (ListView) findViewById(R.id.list_view);
 		allCity_lists = new ArrayList<City>();

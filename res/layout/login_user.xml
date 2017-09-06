@@ -123,10 +123,10 @@
 		         android:layout_height="@dimen/base_dimen_80"
 		         android:layout_marginTop="@dimen/base_dimen_50"
 		         android:text="登录"
-		         android:textColor="@drawable/button_text_selector"
+		         android:textColor="#ffffff"
 		         android:textSize="@dimen/base_dimen_30"
 		         android:gravity="center"
-		         android:background="@drawable/button_background_selector"
+		         android:background="@drawable/item_shape_solid_corner_press"
                  />
              
              <Button 
@@ -138,7 +138,7 @@
 		         android:textColor="@drawable/button_text_selector"
 		         android:textSize="@dimen/base_dimen_30"
 		         android:gravity="center"
-		         android:background="@drawable/button_background_selector"
+		         android:background="@drawable/item_shape_solid_corner_normal"
                  />
              
              <FrameLayout 

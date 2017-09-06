@@ -42,7 +42,7 @@ public class CommonUtil {
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
-    public static int mSelectCityRequestCode = 2;
+    public static final int SELECT_CITY_REQEUST_CODE = 2;
     public static String mPayHouseOrderId = null;
     //weixin
     public static final String APP_ID = "wxae25cb3fefdc75ae";
