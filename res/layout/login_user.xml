@@ -124,9 +124,9 @@
 		         android:layout_marginTop="@dimen/base_dimen_50"
 		         android:text="登录"
 		         android:textColor="#ffffff"
+                 android:background="@drawable/item_shape_solid_corner_press"
 		         android:textSize="@dimen/base_dimen_30"
 		         android:gravity="center"
-		         android:background="@drawable/item_shape_solid_corner_press"
                  />
              
              <Button 
@@ -135,7 +135,7 @@
 		         android:layout_height="@dimen/base_dimen_80"
 		         android:layout_marginTop="@dimen/base_dimen_31"
 		         android:text="注册"
-		         android:textColor="@drawable/button_text_selector"
+		         android:textColor="#337ffd"
 		         android:textSize="@dimen/base_dimen_30"
 		         android:gravity="center"
 		         android:background="@drawable/item_shape_solid_corner_normal"

@@ -298,9 +298,11 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 					
 					@Override
 					public void onClick(View v) {
-						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-						detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
-						startActivity(detailIntent);
+						if (mHouserList.get(index).get("rentno") != null && !mHouserList.get(index).get("rentno").equals("")){
+							Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+							detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
+							startActivity(detailIntent);
+						}
 					}
 				});
 				return true;

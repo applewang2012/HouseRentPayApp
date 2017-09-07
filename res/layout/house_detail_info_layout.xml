@@ -429,8 +429,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@drawable/button_text_selector"
-                    android:background="@drawable/detail_button_background_selector"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/item_shape_solid_corner_press"
                     android:textSize="@dimen/base_dimen_32"
                     android:gravity="center"
                     android:text="联系房主" >
@@ -443,10 +443,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="@dimen/base_dimen_32"
-                    android:textColor="@drawable/button_text_selector"
+                    android:textColor="#337ffd"
                     android:gravity="center"
                     android:layout_marginLeft="@dimen/base_dimen_20"
-                    android:background="@drawable/detail_button_background_selector"
+                    android:background="@drawable/item_shape_solid_corner_normal"
                     android:text="申请租房" >
                 </Button>
             </LinearLayout>

@@ -245,9 +245,10 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".HomeActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2"
+            
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity

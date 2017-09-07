@@ -106,38 +106,38 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		if (context == null || message == null) {
 			return;
 		}
-		String text = "";
-		if (message.getActionType() == XGPushClickedResult.NOTIFACTION_CLICKED_TYPE) {
-			// 通知在通知栏被点击啦。。。。。
-			// APP自己处理点击的相关动作
-			// 这个动作可以在activity的onResume也能监听，请看第3点相关内容
-			text = "通知被打开 :" + message;
-		} else if (message.getActionType() == XGPushClickedResult.NOTIFACTION_DELETED_TYPE) {
-			// 通知被清除啦。。。。
-			// APP自己处理通知被清除后的相关动作
-			text = "通知被清除 :" + message;
-		}
-		Toast.makeText(context, "广播接收到通知被点击:" + message.toString(),
-				Toast.LENGTH_SHORT).show();
-		// 获取自定义key-value
+//		String text = "";
+//		if (message.getActionType() == XGPushClickedResult.NOTIFACTION_CLICKED_TYPE) {
+//			// 通知在通知栏被点击啦。。。。。
+//			// APP自己处理点击的相关动作
+//			// 这个动作可以在activity的onResume也能监听，请看第3点相关内容
+//			text = "通知被打开 :" + message;
+//		} else if (message.getActionType() == XGPushClickedResult.NOTIFACTION_DELETED_TYPE) {
+//			// 通知被清除啦。。。。
+//			// APP自己处理通知被清除后的相关动作
+//			text = "通知被清除 :" + message;
+//		}
+//		Toast.makeText(context, "广播接收到通知被点击:" + message.toString(),
+//				Toast.LENGTH_SHORT).show();
+//		// 获取自定义key-value
 		String customContent = message.getCustomContent();
 		Log.i("mingguo", "xinge click notification   "+message.toString());
 		if (customContent != null && customContent.length() != 0) {
-//			Intent intent = new Intent(context, HouseDetailInfoActivity.class);
-//	        //intent.putExtra("data", id.intValue());
-//	        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//	        context.startActivity(intent);
-			try {
-				JSONObject obj = new JSONObject(customContent);
-				// key1为前台配置的key
-				if (!obj.isNull("key")) {
-					String value = obj.getString("key");
-					Log.d(LogTag, "get custom value:" + value);
-				}
-				// ...
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+			Intent intent = new Intent(context, HomeActivity.class);
+	        //intent.putExtra("data", id.intValue());
+	        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        context.startActivity(intent);
+//			try {
+//				JSONObject obj = new JSONObject(customContent);
+//				// key1为前台配置的key
+//				if (!obj.isNull("key")) {
+//					String value = obj.getString("key");
+//					Log.d(LogTag, "get custom value:" + value);
+//				}
+//				// ...
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			}
 		}
 		// APP自主处理的过程。。。
 //		Log.w(LogTag, text);

@@ -93,7 +93,7 @@
 
                 <TextView
                     android:id="@+id/id_user_wallet"
-                    android:layout_width="@dimen/base_dimen_64"
+                    android:layout_width="@dimen/base_dimen_100"
                     android:layout_height="@dimen/base_dimen_28"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_520"

@@ -316,9 +316,12 @@ public class HouseSearchActivity extends BaseActivity {
 					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
 					startActivity(new Intent(HouseSearchActivity.this, LoginUserActivity.class));
 				}else{
-					Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-					detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-					startActivity(detailIntent);
+					if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
+						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+						startActivity(detailIntent);
+					}
+					
 				}
 			}
 		});

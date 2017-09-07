@@ -34,6 +34,7 @@ public class WelcomeActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
 		
 		setContentView(R.layout.welcome_main);
@@ -48,7 +49,7 @@ public class WelcomeActivity extends BaseActivity {
 	    }
 	    XGPushConfig.enableDebug(this, true);
 	    registerXinge();
-		mHandler.sendEmptyMessageDelayed(200, 100);
+		mHandler.sendEmptyMessageDelayed(200, 300);
 		
 	}
 	

@@ -213,10 +213,12 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
-		Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-		detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-		startActivity(detailIntent);
+		if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
+			Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+			detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+			startActivity(detailIntent);
+		}
+		
 	}
 	
 	

@@ -45,6 +45,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -132,7 +133,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			@Override
 			public void onClick(View v) {
 				if (userName.equals("") || userName == null) {
-
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				}
 
@@ -160,19 +160,12 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	@Override
 	public void onResume() {
 		super.onResume();
-		// HomeActivity activity = (HomeActivity) getActivity();
-		// if (activity.getSelectedCity() != null &&
-		// !activity.getSelectedCity().equals("")) {
-		// if (mCurrentLocationCity != null &&
-		// mCurrentLocationCity.equalsIgnoreCase(activity.getSelectedCity())) {
-		// return;
-		// }
-		// mCurrentLocationCity = activity.getSelectedCity();
-		// Log.i("mingguo", "house fragment on resume change currentCity " +
-		// mCurrentLocationCity);
-		// mSelectCityText.setText(mCurrentLocationCity);
-		// searchButtonProcess();
-		// }
+		Log.i("mingguo", "house fragment  on resume  login name   "+CommonUtil.mUserLoginName);
+		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
+			mLogin.setVisibility(View.GONE);
+		}else{
+			mLogin.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void startThreadfindLocation(final String locationName) {
@@ -380,17 +373,16 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		mSelectCityText = (TextView) mRootView.findViewById(R.id.id_home_show_city_view);
 		mPoiSearch = PoiSearch.newInstance();
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
-		TextView searchText = (TextView) mRootView.findViewById(R.id.button_search);
+		//TextView searchText = (TextView) mRootView.findViewById(R.id.button_search);
 		// sugAdapter = new ArrayAdapter<String>(getActivity(),
 		// android.R.layout.simple_dropdown_item_1line);
 		// mSearchListener.setAdapter(sugAdapter);
 		// mSearchListener.setThreshold(1);
-		LinearLayout searchLayout = (LinearLayout) mRootView.findViewById(R.id.home_search_container);
+		FrameLayout searchLayout = (FrameLayout) mRootView.findViewById(R.id.home_search_container);
 		searchLayout.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
 				startActivity(new Intent(mContext, HouseSearchActivity.class));
 			}
 		});
@@ -650,10 +642,12 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-		Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-		detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-		startActivity(detailIntent);
+		if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
+			Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+			detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+			startActivity(detailIntent);
+		}
+		
 	}
 
 	@Override

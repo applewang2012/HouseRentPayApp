@@ -73,17 +73,35 @@ public class HomeActivity extends BaseActivity {
 //		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 //		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 //		mTitleBar.setText("手机注册");
-		bundle = new Bundle();
-		mUserName = getIntent().getStringExtra("user_name");
-		mPassword = getIntent().getStringExtra("user_password");
-		bundle.putString("user_name", mUserName);
+		initData();
 		initView();
 		getUserInfo();
+	}
+	
+	
+	private void initData(){
+		mPresenter = new HoursePresenter(getApplicationContext(), this);
+		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
+		mUserName = sharedata.getString("user_name", "");
+		mPassword = sharedata.getString("user_password", "");
+		bundle = new Bundle();
+		bundle.putString("user_name", mUserName);
+		CommonUtil.mUserLoginName = mUserName;
+	}
+	
 
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		initData();
+		getUserInfo();
 	}
 
+
+
 	private void initView() {
-		mPresenter = new HoursePresenter(getApplicationContext(), this);
+		
 		Button scanButton = (Button) findViewById(R.id.id_scan_rent_house);
 		scanButton.setVisibility(View.VISIBLE);
 		scanButton.setOnClickListener(new OnClickListener() {
@@ -359,13 +377,7 @@ public class HomeActivity extends BaseActivity {
 				// for (int item = 0; item < array.length(); item++){
 
 				JSONObject itemJsonObject = array.optJSONObject(0);
-				// userInfo = new HashMap<>();
-				// userInfo.put("NickName",
-				// itemJsonObject.optString("NickName"));
-				// userInfo.put("LoginName",
-				// itemJsonObject.optString("LoginName"));
-				// userInfo.put("Address", itemJsonObject.optString("Address"));
-				// userInfo.put("IDCard", itemJsonObject.optString("IDCard"));
+				
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");

@@ -80,6 +80,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	@Override
 	public void onResume() {
 		super.onResume();
+		Log.w("mingguo", "my fragment  onresume  login name  "+CommonUtil.mUserLoginName);
 		initData();
 	}
 
@@ -253,6 +254,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 			HashMap<String, String> infoModel = parseUserInfo((String) msg.obj);
 			dismissLoadingView();
 			if (infoModel != null) {
+				
 				phone = infoModel.get("Phone");
 				mUserAddress.setText(phone);// 显示手机号
 				realName = infoModel.get("RealName");
@@ -266,7 +268,15 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 				} else {
 					mWallet.setText("¥" + wallet);
 				}
-
+				if (realName != null && !realName.equals("")){
+					mRegistAndLogin.setVisibility(View.GONE);
+					mUserNickname.setVisibility(View.VISIBLE);
+					mUserAddress.setVisibility(View.VISIBLE);
+				}else{
+					mRegistAndLogin.setVisibility(View.VISIBLE);
+					mUserNickname.setVisibility(View.GONE);
+					mUserAddress.setVisibility(View.GONE);
+				}
 			}
 		}
 	};
@@ -317,9 +327,14 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 						SharedPreferences.Editor editor = sharedata.edit();
 						editor.putString("user_name", "");
 						editor.putString("user_password", "");
+						editor.putString("user_realname", "");
+						editor.putString("user_idcard", "");
 						editor.commit();
 						mUserAddress.setVisibility(View.GONE);
 						mUserNickname.setVisibility(View.GONE);
+						CommonUtil.mUserLoginName = "";
+						CommonUtil.mRegisterRealName = "";
+						CommonUtil.mRegisterIdcard = "";
 						Intent intent = new Intent(mContext, LoginUserActivity.class);
 						startActivity(intent);
 						MyFragment.this.getActivity().finish();
