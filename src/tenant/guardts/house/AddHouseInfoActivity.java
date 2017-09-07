@@ -54,7 +54,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private Map<String, HouseSelectorModel> mSelectorInfo = new HashMap<>();
 	private TextView mPropertryTextView, mTypeTextView;
 	private TextView mDirectionTextView;
-	private TextView mStructureTextView;
+	//private TextView mStructureTextView;
 	private TextView mDistrictTextView;
 	private TextView mStrictTextView;
 	private TextView mStreetTextView;
@@ -63,7 +63,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private TextView mPoliceTextView;
 	private TextView mRentTypeTextView;
 	private TextView mHouseTypeTextView;
-	private TextView mOwnerTypeTextView;
+	//private TextView mOwnerTypeTextView;
 	private String mRentNo;
 	private String mRDName;
 	private String mRSName;
@@ -71,10 +71,10 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private String mRPSName;
 	private String mRAddress;
 	private String mRDoor;
-	private String mRTotalDoor;
+	//private String mRTotalDoor;
 	private String mRRoomType;
 	private String mRDirection;
-	private String mRStructure;
+	//private String mRStructure;
 	private String mRTotalFloor;
 	private String mRFloor;
 	private String mRHouseP;
@@ -84,9 +84,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private String mROwnerTel;
 	private String mRIDCard;
 	private String mRPSParentName;
-	private String mrentType, mownType;
-	private TextView mBuildingStructureTextView;
-	private String mRBuildingType;
+	private String mrentType;
+	//private TextView mBuildingStructureTextView;
+	//private String mRBuildingType;
 	private String mUserName;
 	//private boolean mValidHouseId = false;
 	//private EditText mHouseNo;
@@ -157,25 +157,25 @@ public class AddHouseInfoActivity extends BaseActivity{
 				getHouseDirection();
 			}
 		});
-		FrameLayout structionFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_structure);
-		mStructureTextView = (TextView)findViewById(R.id.id_add_house_structure_text);
-		structionFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getHouseStructure();
-			}
-		});
+//		FrameLayout structionFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_structure);
+//		mStructureTextView = (TextView)findViewById(R.id.id_add_house_structure_text);
+//		structionFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				getHouseStructure();
+//			}
+//		});
 		
-		FrameLayout buildStuctFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_building_structure);
-		mBuildingStructureTextView = (TextView)findViewById(R.id.id_add_house_building_structure_text);
-		buildStuctFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getHouseBuildingStructure();
-			}
-		});
+//		FrameLayout buildStuctFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_building_structure);
+//		mBuildingStructureTextView = (TextView)findViewById(R.id.id_add_house_building_structure_text);
+//		buildStuctFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				getHouseBuildingStructure();
+//			}
+//		});
 		
 		FrameLayout quyuFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_quyu);
 		mDistrictTextView = (TextView)findViewById(R.id.id_add_house_quyu_text);
@@ -261,15 +261,15 @@ public class AddHouseInfoActivity extends BaseActivity{
 			}
 		});
 		
-		FrameLayout ownerTypeFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_owner_type);
-		mOwnerTypeTextView = (TextView)findViewById(R.id.id_add_house_owner_type_text);
-		ownerTypeFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getHouseOwnersType();
-			}
-		});
+//		FrameLayout ownerTypeFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_owner_type);
+//		mOwnerTypeTextView = (TextView)findViewById(R.id.id_add_house_owner_type_text);
+//		ownerTypeFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				getHouseOwnersType();
+//			}
+//		});
 		
 		Button okButton = (Button)findViewById(R.id.id_add_house_info_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
@@ -310,19 +310,19 @@ public class AddHouseInfoActivity extends BaseActivity{
 			mRDirection = mSelectorInfo.get("direction").getHouseSelectId();
 		}
 		
-		if (mSelectorInfo.get("structure") == null || mSelectorInfo.get("structure").getHouseSelectId() == null){
-			Toast.makeText(getApplicationContext(), "请选择结构", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mRStructure = mSelectorInfo.get("structure").getHouseSelectId();
-		}
+//		if (mSelectorInfo.get("structure") == null || mSelectorInfo.get("structure").getHouseSelectId() == null){
+//			Toast.makeText(getApplicationContext(), "请选择结构", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mRStructure = mSelectorInfo.get("structure").getHouseSelectId();
+//		}
 		
-		if (mSelectorInfo.get("buildingstructure") == null || mSelectorInfo.get("buildingstructure").getHouseSelectId() == null){
-			Toast.makeText(getApplicationContext(), "请选择建筑结构", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mRBuildingType = mSelectorInfo.get("buildingstructure").getHouseSelectId();
-		}
+//		if (mSelectorInfo.get("buildingstructure") == null || mSelectorInfo.get("buildingstructure").getHouseSelectId() == null){
+//			Toast.makeText(getApplicationContext(), "请选择建筑结构", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mRBuildingType = mSelectorInfo.get("buildingstructure").getHouseSelectId();
+//		}
 		
 		if (mSelectorInfo.get("district") == null || mSelectorInfo.get("district").getHouseSelectId() == null){
 			Toast.makeText(getApplicationContext(), "请选择区域", Toast.LENGTH_SHORT).show();
@@ -366,12 +366,12 @@ public class AddHouseInfoActivity extends BaseActivity{
 			mrentType = mSelectorInfo.get("renttype").getHouseSelectId();
 		}
 		
-		if (mSelectorInfo.get("ownertype") == null || mSelectorInfo.get("ownertype").getHouseSelectId() == null){
-			Toast.makeText(getApplicationContext(), "请选择房屋类型", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mownType = mSelectorInfo.get("ownertype").getHouseSelectId();
-		}
+//		if (mSelectorInfo.get("ownertype") == null || mSelectorInfo.get("ownertype").getHouseSelectId() == null){
+//			Toast.makeText(getApplicationContext(), "请选择房屋类型", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mownType = mSelectorInfo.get("ownertype").getHouseSelectId();
+//		}
 		
 		EditText age = (EditText)findViewById(R.id.id_add_house_price);
 		if (age.getText().toString() == null || age.getText().toString().equals("")){
@@ -405,13 +405,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}else{ 
 			mRFloor = current_floor.getText().toString();
 		}
-		EditText total_num = (EditText)findViewById(R.id.id_add_house_total_num);
-		if (total_num.getText().toString() == null || total_num.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请输入每层户数", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mRTotalDoor = total_num.getText().toString();
-		}
+//		EditText total_num = (EditText)findViewById(R.id.id_add_house_total_num);
+//		if (total_num.getText().toString() == null || total_num.getText().toString().equals("")){
+//			Toast.makeText(getApplicationContext(), "请输入每层户数", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mRTotalDoor = total_num.getText().toString();
+//		}
 		EditText current_num = (EditText)findViewById(R.id.id_add_house_current_num);
 		if (current_num.getText().toString() == null || current_num.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入门牌号", Toast.LENGTH_SHORT).show();
@@ -521,37 +521,36 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}
 	}
 	
-	private void getHouseStructure(){
-		if (!mSelectorInfo.containsKey("structure")){
-			showLoadingView();
-			HouseSelectorModel direction = new HouseSelectorModel();
-			direction.setHouseOrginText((String) mStructureTextView.getText());
-			mSelectorInfo.put("structure", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseStructure";
-			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStuctureAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mStuctureAction, rpc);
-			mPresenter.startPresentServiceTask();
-		}else{
-			showAlertDialog(mStructureTextView, "structure", mSelectorInfo.get("structure").getHouseAllContent());
-		}
-		
-	}
+//	private void getHouseStructure(){
+//		if (!mSelectorInfo.containsKey("structure")){
+//			showLoadingView();
+//			HouseSelectorModel direction = new HouseSelectorModel();
+//			direction.setHouseOrginText((String) mStructureTextView.getText());
+//			mSelectorInfo.put("structure", direction);
+//			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseStructure";
+//			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStuctureAction));
+//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mStuctureAction, rpc);
+//			mPresenter.startPresentServiceTask();
+//		}else{
+//			showAlertDialog(mStructureTextView, "structure", mSelectorInfo.get("structure").getHouseAllContent());
+//		}
+//		
+//	}
 	
-	private void getHouseBuildingStructure(){
-		if (!mSelectorInfo.containsKey("buildingstructure")){
-			showLoadingView();
-			HouseSelectorModel direction = new HouseSelectorModel();
-			direction.setHouseOrginText((String) mBuildingStructureTextView.getText());
-			mSelectorInfo.put("buildingstructure", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetBuildingStructure";
-			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mBuildingStuctureAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mBuildingStuctureAction, rpc);
-			mPresenter.startPresentServiceTask();
-		}else{
-			showAlertDialog(mBuildingStructureTextView, "buildingstructure", mSelectorInfo.get("buildingstructure").getHouseAllContent());
-		}
-		
-	}
+//	private void getHouseBuildingStructure(){
+//		if (!mSelectorInfo.containsKey("buildingstructure")){
+//			showLoadingView();
+//			HouseSelectorModel direction = new HouseSelectorModel();
+//			direction.setHouseOrginText((String) mBuildingStructureTextView.getText());
+//			mSelectorInfo.put("buildingstructure", direction);
+//			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetBuildingStructure";
+//			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mBuildingStuctureAction));
+//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mBuildingStuctureAction, rpc);
+//			mPresenter.startPresentServiceTask();
+//		}else{
+//			showAlertDialog(mBuildingStructureTextView, "buildingstructure", mSelectorInfo.get("buildingstructure").getHouseAllContent());
+//		}
+//	}
 	
 	private void getHouseRentType(){
 		if (!mSelectorInfo.containsKey("renttype")){
@@ -568,21 +567,21 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}
 	}
 	
-	private void getHouseOwnersType(){
-		if (!mSelectorInfo.containsKey("ownertype")){
-			showLoadingView();
-			HouseSelectorModel direction = new HouseSelectorModel();
-			direction.setHouseOrginText((String) mOwnerTypeTextView.getText());
-			mSelectorInfo.put("ownertype", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseOwnType";
-			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOwnerTypeAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOwnerTypeAction, rpc);
-			mPresenter.startPresentServiceTask();
-		}else{
-			showAlertDialog(mOwnerTypeTextView, "ownertype", mSelectorInfo.get("ownertype").getHouseAllContent());
-		}
-		
-	}
+//	private void getHouseOwnersType(){
+//		if (!mSelectorInfo.containsKey("ownertype")){
+//			showLoadingView();
+//			HouseSelectorModel direction = new HouseSelectorModel();
+//			direction.setHouseOrginText((String) mOwnerTypeTextView.getText());
+//			mSelectorInfo.put("ownertype", direction);
+//			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseOwnType";
+//			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOwnerTypeAction));
+//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOwnerTypeAction, rpc);
+//			mPresenter.startPresentServiceTask();
+//		}else{
+//			showAlertDialog(mOwnerTypeTextView, "ownertype", mSelectorInfo.get("ownertype").getHouseAllContent());
+//		}
+//		
+//	}
 	
 	private void getHouseDistrict(){
 		if (mSelectorInfo.containsKey("street")){
@@ -623,10 +622,10 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 	private void startAddHouseInfo(){
 		Log.w("mingguo", "add house info mRentNo "+mRentNo+" mRDName "+mRDName+" mRSName "+mRSName+" mRRName "+mRRName+" mRPSName "+mRPSName
-				+" mRAddress "+mRAddress+" mRDoor "+mRDoor+" mRTotalDoor "+mRTotalDoor+" mRRoomType "+mRRoomType +" mRDirection "+mRDirection+
-				" mRStructure "+mRStructure+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
+				+" mRAddress "+mRAddress+" mRDoor "+"default null"+" mRTotalDoor "+"default null"+" mRRoomType "+mRRoomType +" mRDirection "+mRDirection+
+				" mRStructure "+"default null "+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
-				"mnz"+" mrentType "+mrentType+" mowntype "+mownType+"  RBuildingType "+mRBuildingType+"  RLocationDescription "+" desp ");
+				CommonUtil.mUserLoginName+" mrentType "+mrentType+" mowntype "+"default null"+"  RBuildingType "+"defautl null "+"  RLocationDescription "+" desp ");
 		showLoadingView();
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentInfo";
 		
@@ -639,12 +638,12 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RAddress", mSelectorInfo.get("district").getHouseSelectValue()+mSelectorInfo.get("street").getHouseSelectValue()
 				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress+mRDoor);   
 		rpc.addProperty("RDoor", mRDoor);    
-		rpc.addProperty("RTotalDoor", mRTotalDoor); 
+		rpc.addProperty("RTotalDoor", "6"); 
 		
 		rpc.addProperty("RRoomType", mRRoomType); 
 		rpc.addProperty("RDirection", mRDirection);   
-		rpc.addProperty("RStructure", mRStructure); 
-		rpc.addProperty("RBuildingType", mRBuildingType); 
+		rpc.addProperty("RStructure", "01"); 
+		rpc.addProperty("RBuildingType", "02"); 
 		rpc.addProperty("RFloor", mRFloor);     
 		rpc.addProperty("RTotalFloor", mRTotalFloor);   
 		rpc.addProperty("RHouseAge", "15");  
@@ -658,7 +657,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RPSParentName", mRPSParentName);            
 		rpc.addProperty("createdBy", CommonUtil.mUserLoginName);             
 		rpc.addProperty("rentType", mrentType);                
-		rpc.addProperty("ownType", mownType);         
+		rpc.addProperty("ownType", "02");         
 		
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddHouseAction, rpc);
 		mPresenter.startPresentServiceTask();
@@ -756,10 +755,10 @@ public class AddHouseInfoActivity extends BaseActivity{
 				mSelectorInfo.get("direction").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mDirectionTextView, "direction", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 103){
-				dismissLoadingView();
-				mSelectorInfo.get("structure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
-				mSelectorInfo.get("structure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
-				showAlertDialog(mStructureTextView, "structure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				dismissLoadingView();
+//				mSelectorInfo.get("structure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				mSelectorInfo.get("structure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
+//				showAlertDialog(mStructureTextView, "structure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 104){
 				dismissLoadingView();
 				mSelectorInfo.get("district").setHouseAllContent(JsonObjectParse.parseHouseDistrict((String)msg.obj).get(1));
@@ -791,16 +790,16 @@ public class AddHouseInfoActivity extends BaseActivity{
 				mSelectorInfo.get("renttype").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mRentTypeTextView, "renttype", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 110){
-				dismissLoadingView();
-				mSelectorInfo.get("ownertype").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
-				mSelectorInfo.get("ownertype").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
-				showAlertDialog(mOwnerTypeTextView, "ownertype", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				dismissLoadingView();
+//				mSelectorInfo.get("ownertype").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				mSelectorInfo.get("ownertype").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
+//				showAlertDialog(mOwnerTypeTextView, "ownertype", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				
 			}else if (msg.what == 111){
-				dismissLoadingView();
-				mSelectorInfo.get("buildingstructure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
-				mSelectorInfo.get("buildingstructure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
-				showAlertDialog(mBuildingStructureTextView, "buildingstructure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				dismissLoadingView();
+//				mSelectorInfo.get("buildingstructure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
+//				mSelectorInfo.get("buildingstructure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
+//				showAlertDialog(mBuildingStructureTextView, "buildingstructure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 888){
 				String value = (String)msg.obj;
 				if (value != null && value.equals("true")){

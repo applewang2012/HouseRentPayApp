@@ -161,7 +161,8 @@ public final class GlobalUtil {
 
 	public static void shortToast(Context context, CharSequence text,
 			Drawable icon) {
-		newtoast(context, text, icon, Toast.LENGTH_SHORT);
+		//newtoast(context, text, icon, Toast.LENGTH_SHORT);
+		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 	}
 
 	public static void shortToast(Context context, CharSequence text) {
