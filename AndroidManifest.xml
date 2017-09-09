@@ -142,7 +142,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -168,7 +168,8 @@
             android:name=".AddRentAttributeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
         <activity
             android:name=".ImageGridActivity"
             android:screenOrientation="portrait"
@@ -248,7 +249,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2"
-            
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity

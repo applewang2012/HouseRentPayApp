@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.gson.Gson;
 import com.gzt.faceid5sdk.DetectionAuthentic;
 import com.gzt.faceid5sdk.listener.ResultListener;
 import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
@@ -44,6 +45,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ServiceCharge;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;
@@ -215,6 +217,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void initView(){
+		password = (EditText) findViewById(R.id.door_password);//门锁密码
+		commission = (TextView) findViewById(R.id.id_commission);//手续费
+		explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
@@ -279,6 +284,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				if(s.length()>0){
 					getPayRateDesc(s+"");
 					
+				}else{
+					commission.setText("");
+					explanation.setText("");
 				}
 				
 			}
@@ -332,7 +340,15 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
     }
 	
 	private boolean checkInputContent(){
-		
+		//判断密码
+		if (password.getText().toString() == null || password.getText().toString().equals("")){
+			Toast.makeText(getApplicationContext(), "请设置门锁密码", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		if (password.getText().toString().length()<6){
+			Toast.makeText(getApplicationContext(), "密码输入有误", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 //		if (mHouseId.getText().toString() == null || mHouseId.getText().toString().equals("")){
 //			Toast.makeText(getApplicationContext(), "请输入产权编号", Toast.LENGTH_SHORT).show();
 //			return false;
@@ -362,8 +378,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "请输入租金", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if(mRentPrice.getText().toString().substring(0, 1).equals("0")){
-			Toast.makeText(getApplicationContext(), "价格输入有误，请重新输入", Toast.LENGTH_SHORT).show();
+		 String string = mRentPrice.getText().toString();
+		 
+		if(string.substring(0, 1).contains("0")){
+			Toast.makeText(getApplicationContext(), "价格第一位不能为0", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if (mRentPrice.getText().toString().equals("0")){
@@ -590,13 +608,25 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}
 			}else if(msg.what==818){
 				String value = (String)msg.obj;
+				Log.e("", value+"----------");
 				//显示服务费信息
 				///////////////////////////////////////////////////////////////////////////////
-				Toast.makeText(AddRentAttributeActivity.this, value+"======", Toast.LENGTH_LONG).show();
+				Gson gson=new Gson();
+				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
+				if(serviceCharge.fee.startsWith("0")){
+					commission.setText(serviceCharge.fee.substring(1)+"元");
+					
+				}else{
+					commission.setText(serviceCharge.fee+"元");
+				}
+				explanation.setText(serviceCharge.msg);
 			}
 		}
 		
 	};
+	private TextView commission;
+	private TextView explanation;
+	private EditText password;
 	
 	private void parseQueryStatus(String value){
 		if (value != null){
