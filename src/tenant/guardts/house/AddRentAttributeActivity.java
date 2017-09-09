@@ -27,6 +27,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -53,6 +55,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private TextView mTitleBar;
 	private View mLoadingView;
 	private HoursePresenter mPresenter;
+	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";//扣费提醒
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mQueryStatusAction = "http://tempuri.org/IsOrderConfirmed";
 	private String mSendMessageAction = "http://tempuri.org/SendMessageToPlice";
@@ -107,6 +110,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		super.onResume();
 		
 		//mHouseId.setText(mHouseNo);
+	}
+	
+	/**获取服务费信息
+	 * @param price
+	 */
+	private void getPayRateDesc(String price){
+//		showLoadingView();
+		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
+		rpc.addProperty("fee", price);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresenter.startPresentServiceTask();
+		
 	}
 
 	
@@ -244,6 +260,31 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
 		mRentPrice = (EditText)findViewById(R.id.id_rent_house_price);
+		mRentPrice.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				if(s.length()>0){
+					getPayRateDesc(s+"");
+					
+				}
+				
+			}
+		});
+		
+		
 		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
 			
@@ -547,6 +588,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}else if(msg.what==818){
+				String value = (String)msg.obj;
+				//显示服务费信息
+				///////////////////////////////////////////////////////////////////////////////
+				Toast.makeText(AddRentAttributeActivity.this, value+"======", Toast.LENGTH_LONG).show();
 			}
 		}
 		
@@ -741,6 +787,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				message.what = 110;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
+			}else if(action.equals(mGetPayRateDesc)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 818;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
 			}
 		}
 	}

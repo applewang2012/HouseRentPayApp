@@ -142,7 +142,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -443,7 +443,7 @@
         <!-- 【可选】APP实现的Receiver，用于接收消息透传和操作结果的回调，请根据需要添加 -->
         <!-- YOUR_PACKAGE_PATH.CustomPushReceiver需要改为自己的Receiver： -->
         <receiver
-            android:name="tenant.guardts.house.xinge.MessageReceiver"
+            android:name=".xinge.MessageReceiver"
             android:exported="true" >
             <intent-filter>
 
@@ -492,6 +492,20 @@
         <meta-data
             android:name="XG_V2_ACCESS_KEY"
             android:value="ASHT3N3427NX" />
+
+        <activity
+            android:name=".UserAgreementActivity"
+            android:label="@string/title_activity_user_agreement" >
+        </activity>
+        <activity
+            android:name=".TransactionDetailActivity"
+            android:label="@string/title_activity_transaction_detail"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".HomeSearchActivity"
+            android:label="@string/title_activity_home_search" >
+        </activity>
     </application>
 
 </manifest>

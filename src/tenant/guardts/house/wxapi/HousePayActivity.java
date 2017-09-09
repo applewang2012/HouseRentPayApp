@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.ksoap2.serialization.SoapObject;
 
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -14,6 +15,8 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,13 +29,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.AddRentAttributeActivity;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.wxpay.WeiXinPay;
 
-public class HousePayActivity extends BaseActivity {
+public class HousePayActivity extends BaseActivity implements DataStatusInterface{
 
 	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
 	private IWXAPI api;
@@ -43,6 +49,8 @@ public class HousePayActivity extends BaseActivity {
 	private CheckBox mCheckBoxWallet;
 	private CheckBox mCheckBoxWechat;
 	private boolean isPayByWechat=true;//是否使用微信支付
+	private String mPayUseWallet = "http://tempuri.org/PayUseWallet";//钱包支付
+	private HoursePresenter mPresenter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +104,7 @@ public class HousePayActivity extends BaseActivity {
 					Toast.makeText(HousePayActivity.this, "钱包支付", Toast.LENGTH_SHORT).show();
 					//////////////////////////////////////
 					
-					
+					payByWallet("370881198411094833","370881198411094833", price);
 					
 					
 					
@@ -106,8 +114,21 @@ public class HousePayActivity extends BaseActivity {
 		});
 
 	}
+	private void payByWallet(String renterID,String ownerID,String money){
+//		showLoadingView();
+		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=PayUseWallet";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPayUseWallet));
+		rpc.addProperty("rennteeIDCard", renterID);
+		rpc.addProperty("ownerIDCard", ownerID);
+		rpc.addProperty("money", money);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPayUseWallet, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+	
+	
 
 	private void initView() {
+		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mWallet = (LinearLayout) findViewById(R.id.payment_linearlayout_wallet);
 		mWechat = (LinearLayout) findViewById(R.id.payment_linearlayout_wechat);
 		mCheckBoxWallet = (CheckBox) findViewById(R.id.checkbox_wallet);
@@ -223,6 +244,27 @@ public class HousePayActivity extends BaseActivity {
 			}
 
 		}.execute();
+	}
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(Message msg) {
+			if(msg.what==818){
+				String value = (String)msg.obj;
+				//显示服务费信息
+				///////////////////////////////////////////////////////////////////////////////
+				Toast.makeText(HousePayActivity.this, value+"======", Toast.LENGTH_LONG).show();
+			}
+			
+			
+		};
+	};
+	public void onStatusSuccess(String action, String templateInfo) {
+		if(action.equals(mPayUseWallet)){
+			Message msg = mHandler.obtainMessage();
+			msg.what = 818;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}
 	}
 
 }

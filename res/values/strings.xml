@@ -207,5 +207,8 @@
     <string name="title_activity_withdraw_details">WithdrawDetailsActivity</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="title_activity_house_payment">HousePaymentActivity</string>
+    <string name="title_activity_user_agreement">UserAgreementActivity</string>
+    <string name="title_activity_transaction_detail">TransactionDetailActivity</string>
+    <string name="title_activity_home_search">HomeSearchActivity</string>
 
 </resources>

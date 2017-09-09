@@ -203,7 +203,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 					} else {
 						intent.putExtra("balance", wallet);
 					}
-
+					intent.putExtra("IDCard", idCard);//携带身份证号
 					startActivity(intent);
 
 				}

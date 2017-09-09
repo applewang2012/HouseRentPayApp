@@ -1,0 +1,142 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90"
+        android:background="#337ffd" >
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/short_lease_back"
+            android:clickable="true"
+            android:onClick="backFinish" />
+
+        <TextView
+            android:id="@+id/id_titlebar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="搜索房屋"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_110"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:gravity="center_vertical"
+            android:text="租赁类型"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:gravity="center_vertical"
+            android:text="请选择租赁类型"
+            android:textColor="#999999"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_20"
+            android:layout_height="@dimen/base_dimen_34"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_300"
+            android:background="@drawable/house_list_more_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_110"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="入住时间"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="退房时间"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_110"
+        android:layout_marginTop="@dimen/base_dimen_2"
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="请选择入住时间"
+            android:textColor="#999999"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <View
+            android:layout_width="@dimen/base_dimen_2"
+            android:layout_height="match_parent"
+            android:background="#f1f1f1" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="请选择退房时间"
+            android:textColor="#999999"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_110"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff"
+        android:hint="请输入关键字"
+        android:paddingLeft="@dimen/base_dimen_70" >
+    </EditText>
+    <Button
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginTop="@dimen/base_dimen_40"
+        android:background="@drawable/wallet_btn_bg1"
+        android:text="立即搜索"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/base_dimen_34" />
+</LinearLayout>

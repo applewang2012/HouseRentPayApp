@@ -60,6 +60,7 @@ public class LoginUserActivity extends BaseActivity{
 	}
 
 	private void initView(){
+		userAgreement = (TextView) findViewById(R.id.tv_user_agreement);//用户协议
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		dismissLoadingView();
@@ -73,6 +74,15 @@ public class LoginUserActivity extends BaseActivity{
 		if (mPassword != null && !mPassword.equals("")){
 			passwordEditText.setText(mPassword);
 		}
+		
+		userAgreement.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(LoginUserActivity.this, UserAgreementActivity.class));
+				
+			}
+		});
 		Button login = (Button)findViewById(R.id.id_login_user_button);
 		login.setOnClickListener(new OnClickListener() {
 			
@@ -261,6 +271,7 @@ public class LoginUserActivity extends BaseActivity{
 			}
 		}
 	};
+	private TextView userAgreement;
 	
 
 

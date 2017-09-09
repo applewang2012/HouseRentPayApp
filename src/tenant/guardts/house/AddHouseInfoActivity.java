@@ -11,10 +11,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
@@ -34,6 +37,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private TextView mTitleBar;
 	private View mLoadingView;
 	private HoursePresenter mPresenter;
+	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";//扣费提醒
 	private String mPropertyAction = "http://tempuri.org/GetHouseProperty";
 	private String mTypeAction ="http://tempuri.org/GetHouseType";
 	private String mDirectionAction ="http://tempuri.org/GetHouseDirection";
@@ -383,7 +387,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}else{
 			
 			mRHousePrice = age.getText().toString();
+			
 		}
+		
+		
+
 		EditText area = (EditText)findViewById(R.id.id_add_house_area);
 		if (area.getText().toString() == null || area.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋面积", Toast.LENGTH_SHORT).show();
@@ -473,6 +481,10 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidHouseIDAction, rpc);
 //			mPresenter.startPresentServiceTask();
 //	}
+
+	
+	
+	
 	
 	private void getHouseProperty(){
 		if (!mSelectorInfo.containsKey("property")){

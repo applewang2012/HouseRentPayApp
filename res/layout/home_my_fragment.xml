@@ -96,7 +96,7 @@
                     android:layout_width="@dimen/base_dimen_100"
                     android:layout_height="@dimen/base_dimen_28"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/base_dimen_520"
+                    android:layout_marginLeft="@dimen/base_dimen_480"
                     android:textColor="#d7d7d7"
                     android:textSize="@dimen/base_dimen_24" />
 
