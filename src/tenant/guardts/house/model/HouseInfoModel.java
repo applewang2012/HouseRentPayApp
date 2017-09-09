@@ -14,16 +14,26 @@ public class HouseInfoModel implements Serializable{
 	private boolean houseAvailable;
 	private String houseId;
 	private String ownerName;
-	private String ownerIdcard;
+	private String ownerIdcard;//房主身份证
+	private String renterIdcard;//租客身份证
 	private String houseTotalFloor;
 	private String houseStatus;
 	private String houseCurrentFloor;
 	private String price;
-	private String houseOrderId;
+	private String houseOrderId;//订单号
 	private String contactPhone;
 	private String contactName;
 	private String doorPassword;
 	
+	
+	public String getRenterIdcard() {
+		return renterIdcard;
+	}
+
+	public void setRenterIdcard(String renterIdcard) {
+		this.renterIdcard = renterIdcard;
+	}
+
 	public String getHouseId() {
 		return houseId;
 	}

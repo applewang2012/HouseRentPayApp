@@ -68,7 +68,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="@dimen/base_dimen_14"
 	            android:layout_marginTop="@dimen/base_dimen_38"
-	            android:text="3852 2576 6789 8900"
+	            
 	            android:textColor="#888888"
 	            android:textSize="@dimen/base_dimen_28" />
 	    </LinearLayout>
@@ -135,9 +135,9 @@
     
     </LinearLayout>
     
-    <include
-        android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog"
-       />   
+       <include
+	        android:id="@+id/id_data_loading"
+	        layout="@layout/layout_loading_dialog"
+       		/> 
 
 </FrameLayout>

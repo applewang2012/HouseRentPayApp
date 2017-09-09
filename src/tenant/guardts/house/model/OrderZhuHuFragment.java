@@ -402,7 +402,11 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
+
 					houseModel.setDoorPassword(itemJsonObject.optString("RRANationName"));
+
+					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
+
 					mHouseInfoList.add(houseModel);
 				}
 			}

@@ -405,11 +405,12 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
 					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
-					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
+					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));//房主身份证
 					houseModel.setHouseOrderId(itemJsonObject.optString("RRAID"));
 					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
+					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
 					mHouseInfoList.add(houseModel);
 				}
 			}

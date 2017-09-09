@@ -159,6 +159,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 									tenant.guardts.house.wxapi.HousePayActivity.class);
 							payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
 							payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
+							payIntent.putExtra("renter_idcard", mOrderDetail.getRenterIdcard());
+							Log.e("", mOrderDetail.getRenterIdcard()+"kkk");
+							payIntent.putExtra("orderID", mOrderDetail.getHouseOrderId());
 							startActivity(payIntent);
 						}
 					});
