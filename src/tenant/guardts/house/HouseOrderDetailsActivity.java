@@ -82,7 +82,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		status.setText(mOrderDetail.getHouseStatus());
 		ownerName.setText(mOrderDetail.getHouseOwnerName());
 		ownerPhone.setText(mOrderDetail.getHouseOwnerPhone());
-		money.setText(mOrderDetail.getHousePrice());
+		money.setText("¥ "+mOrderDetail.getHousePrice());
 		Button button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		Button button2 = (Button) findViewById(R.id.id_order_detail_button2);
 		if (mOrderDetail.getHouseStatus().equals("0")) {
