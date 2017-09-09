@@ -32,7 +32,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/add_house_type_text"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -61,7 +61,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/add_house_direction_text"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -100,7 +100,7 @@
 		        		android:background="@drawable/into_icon"
 		        		android:layout_gravity="right|center_vertical"
 	        	        />
-	        	</FrameLayout>
+	        	</FrameLayout>
             -->
             <!--
                 <ImageView 
@@ -131,7 +131,7 @@
 		        		android:background="@drawable/into_icon"
 		        		android:layout_gravity="right|center_vertical"
 	        	        />
-	        	</FrameLayout>
+	        	</FrameLayout>
             -->
 
             <ImageView
@@ -152,7 +152,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="租赁类型"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -180,7 +180,7 @@
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="房屋价格"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -194,7 +194,8 @@
                     android:inputType="number"
                     android:maxLength="5"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -277,71 +278,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:text="手续费"
-                    android:textColor="#666666"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/commission"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    android:textColor="#337ffd"
-                    android:textSize="15dp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0c000000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left|center_vertical"
-                    android:text="说明"
-                    android:textColor="#666666"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/explanation"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:gravity="center_vertical"
-                    android:lines="2"
-                    android:paddingLeft="5dp"
-                    android:textColor="#666666"
-                    android:textSize="15dp" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0c000000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left|center_vertical"
                     android:text="面	积"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -355,7 +293,8 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -376,7 +315,7 @@
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="总楼层"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -390,7 +329,8 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -411,7 +351,7 @@
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="楼	层"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -425,7 +365,8 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
             <!--
@@ -463,7 +404,7 @@
 		        		 android:background="#00000000"
 		        		 android:textColor="#afaeae"
 	        	        />
-	        	</LinearLayout>
+	        	</LinearLayout>
             -->
 
             <ImageView
@@ -483,7 +424,7 @@
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="门牌号"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -497,7 +438,8 @@
                     android:inputType="number"
                     android:maxLength="50"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -519,7 +461,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
                     android:text="区	域"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -548,7 +490,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="街	道"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -577,7 +519,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="道	路"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -606,7 +548,7 @@
                     android:gravity="left|center_vertical"
                     android:maxLength="50"
                     android:text="小区和楼号"
-                    android:textColor="#666666"
+                    android:textColor="#333333"
                     android:textSize="15dp" />
 
                 <EditText
@@ -618,7 +560,8 @@
                     android:gravity="center_vertical"
                     android:hint="请输入小区名称和楼号"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -710,7 +653,8 @@
                     android:gravity="center_vertical"
                     android:hint="请输入房主姓名"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -745,7 +689,8 @@
                     android:inputType="number"
                     android:maxLength="11"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -780,7 +725,8 @@
                     android:hint="请输入房主身份证号码"
                     android:maxLength="18"
                     android:paddingLeft="5dp"
-                    android:textColor="#afaeae"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
 
@@ -818,7 +764,7 @@
 		        		android:background="@drawable/into_icon"
 		        		android:layout_gravity="right|center_vertical"
 	        	        />
-	        	</FrameLayout>
+	        	</FrameLayout>
             -->
 
             <ImageView

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.gson.Gson;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.model.HouseSelectorModel;
+import tenant.guardts.house.model.ServiceCharge;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.JsonObjectParse;
@@ -95,6 +98,8 @@ public class AddHouseInfoActivity extends BaseActivity{
 	//private boolean mValidHouseId = false;
 	//private EditText mHouseNo;
 	private String mRHousePrice;
+	private TextView commission;
+	private TextView explanation;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,7 +128,35 @@ public class AddHouseInfoActivity extends BaseActivity{
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
-		
+		commission = (TextView) findViewById(R.id.commission);//手续费
+		explanation = (TextView) findViewById(R.id.explanation);//手续费描述
+		age = (EditText)findViewById(R.id.id_add_house_price);
+		age.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				if(s.length()>0){
+					getPayRateDesc(s+"");
+					
+				}else{
+					commission.setText("");
+					explanation.setText("");
+				}
+				
+			}
+		});
 //		mHouseNo = (EditText)findViewById(R.id.id_add_house_id_number);
 //		mHouseNo.setOnFocusChangeListener(new OnFocusChangeListener() {
 //			
@@ -290,7 +323,18 @@ public class AddHouseInfoActivity extends BaseActivity{
 			}
 		});
 	}
-	
+	/**获取服务费信息
+	 * @param price
+	 */
+	private void getPayRateDesc(String price){
+//		showLoadingView();
+		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
+		rpc.addProperty("fee", price);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresenter.startPresentServiceTask();
+		
+	}
 	private boolean checkInputContent(){
 		
 //		if (mSelectorInfo.get("property") == null || mSelectorInfo.get("property").getHouseSelectId() == null){
@@ -377,7 +421,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			mownType = mSelectorInfo.get("ownertype").getHouseSelectId();
 //		}
 		
-		EditText age = (EditText)findViewById(R.id.id_add_house_price);
+		
 		if (age.getText().toString() == null || age.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋价格", Toast.LENGTH_SHORT).show();
 			return false;
@@ -389,6 +433,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			mRHousePrice = age.getText().toString();
 			
 		}
+		
 		
 		
 
@@ -832,10 +877,25 @@ public class AddHouseInfoActivity extends BaseActivity{
 //					mValidHouseId = false;
 //					Toast.makeText(getApplicationContext(), "房产证编号输入有误", Toast.LENGTH_SHORT).show();
 //				}
+			}else if(msg.what==818){
+				String value = (String)msg.obj;
+				Log.e("", value+"----------");
+				//显示服务费信息
+				///////////////////////////////////////////////////////////////////////////////
+				Gson gson=new Gson();
+				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
+				if(serviceCharge.fee.startsWith("0")){
+					commission.setText(serviceCharge.fee.substring(1)+"元");
+					
+				}else{
+					commission.setText(serviceCharge.fee+"元");
+				}
+				explanation.setText(serviceCharge.msg);
 			}
 		}
 		
 	};
+	private EditText age;
 	
 	private void showLoadingView(){
 		if (mLoadingView != null) {
@@ -943,6 +1003,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 			}else if (action.equals(mValidHouseIDAction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 112;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if(action.equals(mGetPayRateDesc)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 818;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}

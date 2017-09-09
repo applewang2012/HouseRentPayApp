@@ -53,6 +53,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.HomeSearchActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
@@ -383,7 +384,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mContext, HouseSearchActivity.class));
+				startActivity(new Intent(mContext, HomeSearchActivity.class));
 			}
 		});
 
