@@ -367,7 +367,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
-
 			public void onClick(DialogInterface dialog, int which) {
 				// mCurrentPosition = id;
 				showLoadingView();

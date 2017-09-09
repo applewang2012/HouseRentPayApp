@@ -67,11 +67,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mQueryStatusAction = "http://tempuri.org/IsOrderConfirmed";
 	private String mSendMessageAction = "http://tempuri.org/SendMessageToPlice";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
-	private String mAppIDString = "0000004";
 	private String mRandNum = null;
-	//ret  1 desc SDT-HOUSE-3435333134303230313730333233313531373331343839
-	private String mQueryStatusUrl = null;
-//	private Map<String, String> mSelectedMap = new HashMap<>();
+	//	private Map<String, String> mSelectedMap = new HashMap<>();
 //	private Map<String, String> mOriginText = new HashMap<>();
 //	private Map<String, String[]> mAllList = new HashMap<>();
 	private Calendar cal = Calendar.getInstance();
@@ -79,7 +76,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private TextView mStartTime, mEndTime;
 	private long mStartTimeClipse, mEndTimeClipse;
 	private String mSetStartData, mSetEndData;
-	private String mOriginStartContent, mOriginEndContent, mOriginNationalContent, mOriginProvinceContent;
+	private String mOriginStartContent, mOriginEndContent;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mHouseNo;
 	private String mUsername;
@@ -746,7 +743,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			try {
 				JSONObject object = new JSONObject(value);
 				if (object != null){
-					String ret = object.optString("ret");
+					object.optString("ret");
 					mOrderId = object.optString("Id");
 					if (mOrderId != null && !mOrderId.equals("")){
 						mQrcodeView.setVisibility(View.VISIBLE);

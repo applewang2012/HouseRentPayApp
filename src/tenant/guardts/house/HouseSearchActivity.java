@@ -102,6 +102,9 @@ public class HouseSearchActivity extends BaseActivity {
 	private TextView mNoContent;
 	
 	private String userName=new String();
+	private String mSearch_tag;
+	private String mStartTime;
+	private String mEndTime;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,7 +132,9 @@ public class HouseSearchActivity extends BaseActivity {
 		});
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, HouseSearchActivity.this);
-		
+		mSearch_tag = getIntent().getStringExtra("search_tag");
+		mStartTime = getIntent().getStringExtra("start_time");
+		mEndTime = getIntent().getStringExtra("end_time");
 		initView();
 		initData();
 	}
@@ -258,6 +263,8 @@ public class HouseSearchActivity extends BaseActivity {
 		rpc.addProperty("address", inputCotent);
 		rpc.addProperty("isAvalible", "0");
 		rpc.addProperty("userID", "1");
+		rpc.addProperty("startdate", mStartTime);
+		rpc.addProperty("endate", mEndTime);
 		mPresent.readyPresentServiceParams(mContext, url, mSearchAction, rpc);
 		mPresent.startPresentServiceTask();
 		Log.i("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
@@ -325,7 +332,7 @@ public class HouseSearchActivity extends BaseActivity {
 			}
 		});
 		
-		searchHouseByFilterCondition("");
+		searchHouseByFilterCondition(mSearch_tag);
 		
 	}
 	

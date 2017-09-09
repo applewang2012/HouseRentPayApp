@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/id_home_seach_type_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_110"
         android:layout_marginTop="@dimen/base_dimen_10"
@@ -25,6 +26,7 @@
             android:textSize="@dimen/base_dimen_30" />
 
         <TextView
+            android:id="@+id/id_home_seach_type_show"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -74,12 +76,14 @@
         android:background="#ffffff" >
 
         <TextView
+            android:id="@+id/id_home_seach_start_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="请选择入住时间"
             android:textColor="#999999"
+            android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
 
         <View
@@ -88,16 +92,19 @@
             android:background="#f1f1f1" />
 
         <TextView
+            android:id="@+id/id_home_seach_end_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="请选择退房时间"
             android:textColor="#999999"
+            android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
     <EditText
+        android:id="@+id/id_home_seach_input_keyword"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_110"
         android:layout_marginTop="@dimen/base_dimen_10"
@@ -106,6 +113,7 @@
         android:paddingLeft="@dimen/base_dimen_70" >
     </EditText>
     <Button
+        android:id="@+id/id_home_start_seach_button"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
