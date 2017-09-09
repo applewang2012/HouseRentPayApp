@@ -99,6 +99,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "renter");
+				Log.i("mingguo", "password  "+mHouseInfoList.get(position).getDoorPassword());
 				startActivity(intent);
 			}
 		});
@@ -139,6 +140,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 							intent.putExtra("order_detail", info);
 							intent.putExtra("detail_type", "renter");
+							
 							startActivity(intent);
 						}
 					});
@@ -400,6 +402,7 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
+					houseModel.setDoorPassword(itemJsonObject.optString("RRANationName"));
 					mHouseInfoList.add(houseModel);
 				}
 			}

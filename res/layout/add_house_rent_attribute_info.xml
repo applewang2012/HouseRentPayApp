@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp" >
+     >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -37,7 +36,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="left|center_vertical"
-                        android:text="房屋类型"
+                        android:text="租赁类型"
                         android:textColor="#333333"
                         android:textSize="15dp" />
 
@@ -149,14 +148,11 @@
                         android:textSize="14dp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#0c000000" />
 
                 <LinearLayout
+                    android:id="@+id/id_commission_content"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
@@ -165,7 +161,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="手续费"
+                        android:text=""
                         android:textColor="#333333"
                         android:textSize="15dp" />
 
@@ -180,14 +176,10 @@
                         android:textSize="15dp" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#0c000000" />
-
                 <LinearLayout
+                    android:id="@+id/id_explanation_content"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
@@ -196,7 +188,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="说  明"
+                        android:text=""
                         android:textColor="#333333"
                         android:textSize="15dp" />
 
@@ -329,30 +321,54 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:gravity="left|center_vertical"
-                        android:text="设置门锁密码"
+                        android:text="门锁密码"
                         android:textColor="#333333"
                         android:textSize="15dp" />
 
-                    <ImageView
-                        android:layout_width="2px"
-                        android:layout_height="match_parent"
-                        android:background="#0c000000" />
 
                     <EditText
                         android:id="@+id/door_password"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="35dp"
                         android:layout_weight="3"
-                        android:background="@null"
-                        android:gravity="center"
+                        android:background="@drawable/item_shape_no_solid_corner"
+                        android:gravity="left|center_vertical"
                         android:hint="请输入门锁密码（6位数字）"
                         android:inputType="number"
-                        android:maxLength="6"
                         android:paddingLeft="5dp"
+                        android:maxLength="6"
                         android:textColor="#777777"
                         android:textColorHint="#b2b2b2"
+                        android:textSize="14dp" />
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text=""
+                        android:textColor="#333333"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/id_explanation"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:paddingLeft="5dp"
+                        android:textColor="#666666"
+                        android:text="您可在首页扫码开门，也可输入密码开门入住"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -368,10 +384,10 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/base_dimen_100"
                     android:layout_marginTop="@dimen/base_dimen_60"
-                    android:background="@drawable/button_background_selector"
+                    android:background="@drawable/house_button_press"
                     android:gravity="center"
                     android:text="确   定"
-                    android:textColor="@drawable/button_text_selector"
+                    android:textColor="#ffffff"
                     android:textSize="@dimen/base_dimen_30" />
             </LinearLayout>
         </LinearLayout>

@@ -22,6 +22,7 @@ public class HouseInfoModel implements Serializable{
 	private String houseOrderId;
 	private String contactPhone;
 	private String contactName;
+	private String doorPassword;
 	
 	public String getHouseId() {
 		return houseId;
@@ -166,6 +167,14 @@ public class HouseInfoModel implements Serializable{
 
 	public void setHouseStatus(String status) {
 		this.houseStatus = status;
+	}
+	
+	public String getDoorPassword() {
+		return doorPassword;
+	}
+
+	public void setDoorPassword(String password) {
+		this.doorPassword = password;
 	}
 
 }

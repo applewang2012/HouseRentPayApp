@@ -18,8 +18,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -42,7 +45,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.ServiceCharge;
@@ -71,13 +76,14 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //	private Map<String, String[]> mAllList = new HashMap<>();
 	private Calendar cal = Calendar.getInstance();
 	private SimpleDateFormat df;
-	private TextView mStartTime, mEndTime; 
+	private TextView mStartTime, mEndTime;
+	private long mStartTimeClipse, mEndTimeClipse;
 	private String mSetStartData, mSetEndData;
 	private String mOriginStartContent, mOriginEndContent, mOriginNationalContent, mOriginProvinceContent;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mHouseNo;
 	private String mUsername;
-	private String [] mOwnerType = new String[2];
+	private String [] mOwnerType = new String[3];
 	private String mOriginTypeText, mTypeIndex = null;
 	private String mOwnerName;
 	private String mOwnerIdcard;
@@ -135,12 +141,16 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			public void onClick(DialogInterface dialog, int which) {
 				mTypeIndex = which+"";
 				text.setText(mOriginTypeText +"   "+items[which]);
+				mSetStartData = "";
+				mSetEndData = "";
+				mStartTime.setText(mOriginStartContent +mSetStartData);
+				mEndTime.setText(mOriginEndContent+mSetEndData);
 			}
 		});
 		builder.show();
 	}
 
-	private void getStartTime(){
+	private void getStartDateAndTime(){
 		new DatePickerDialog(AddRentAttributeActivity.this , 
 				startlistener , 
 				cal.get(Calendar.YEAR ), 
@@ -149,7 +159,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				).show(); 
 	}
 	
+	private void getStartTime(){
+		new TimePickerDialog(AddRentAttributeActivity.this, starttimeListener, 
+				cal.get(Calendar.HOUR_OF_DAY), 0, true)
+			.show();
+	}
+	
 	private void getEndTime(){
+		new TimePickerDialog(AddRentAttributeActivity.this, endtimeListener, 
+				cal.get(Calendar.HOUR_OF_DAY), 0, true)
+			.show();
+	}
+	
+	private void getEndDateAndTime(){
 		new DatePickerDialog(AddRentAttributeActivity.this , 
 				endlistener , 
 				cal.get(Calendar.YEAR ), 
@@ -179,20 +201,64 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) { 
 		cal .set(Calendar. YEAR , arg1); 
 		cal .set(Calendar. MONTH , arg2); 
-		cal .set(Calendar. DAY_OF_MONTH , arg3); 
-		updateStartDate();
+		cal .set(Calendar. DAY_OF_MONTH , arg3);
+		
+		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
+			cal.set(Calendar.MINUTE, 00);
+			getStartTime();
+		}else{
+			cal.set(Calendar.HOUR_OF_DAY, 00);
+			cal.set(Calendar.MINUTE, 00);
+			updateStartDate();
+			}
 		} 
 	};
+	
+	private OnTimeSetListener starttimeListener = new OnTimeSetListener() {
+		
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			// TODO Auto-generated method stub
+			cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+			cal.set(Calendar.MINUTE, 0);
+			updateStartDate();
+		}
+	};
+	
+	
+	
 	
 	private DatePickerDialog.OnDateSetListener endlistener = new DatePickerDialog.OnDateSetListener(){  //
 		@Override 
 		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) { 
 		cal .set(Calendar. YEAR , arg1); 
 		cal .set(Calendar. MONTH , arg2); 
-		cal .set(Calendar. DAY_OF_MONTH , arg3); 
-		updateEndDate();
+		cal .set(Calendar. DAY_OF_MONTH , arg3);
+		
+		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+			getEndTime();
+		}else{
+			cal.set(Calendar.HOUR_OF_DAY, 00);
+			cal.set(Calendar.MINUTE, 00);
+			updateEndDate();
+			}
+		 
 		} 
 	};
+	
+	private OnTimeSetListener endtimeListener = new OnTimeSetListener() {
+		
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			// TODO Auto-generated method stub
+			cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+			cal.set(Calendar.MINUTE, 0);
+			updateEndDate();
+		}
+	};
+	
+	
 	//private TextView mHouseId;
 	private EditText mRentIDcard;
 	private EditText mRentName;
@@ -205,21 +271,27 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	
 	@SuppressLint("SimpleDateFormat")
 	private void updateStartDate(){ 
-		df = new SimpleDateFormat( "yyyy-MM-dd" ); 
+		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm"); 
 		mSetStartData = df.format(cal.getTime());
 		mStartTime.setText(mOriginStartContent + df.format(cal.getTime())); 
+		mStartTimeClipse = cal.getTimeInMillis();
 	}
 	
 	private void updateEndDate(){ 
-		df = new SimpleDateFormat( "yyyy-MM-dd" ); 
+		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm" ); 
 		mSetEndData = df.format(cal.getTime());
 		mEndTime.setText(mOriginEndContent + df.format(cal.getTime())); 
+		mEndTimeClipse = cal.getTimeInMillis();
 	}
 	
 	private void initView(){
 		password = (EditText) findViewById(R.id.door_password);//门锁密码
 		commission = (TextView) findViewById(R.id.id_commission);//手续费
 		explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
+		mCommissionContent = (LinearLayout)findViewById(R.id.id_commission_content);
+		mExplannationContent = (LinearLayout)findViewById(R.id.id_explanation_content);
+		mCommissionContent.setVisibility(View.GONE);
+		mExplannationContent.setVisibility(View.GONE);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
@@ -227,6 +299,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mQrcodeView.setVisibility(View.INVISIBLE);
 		mOwnerType[0] = "日租房";
 		mOwnerType[1] = "月租房";
+		mOwnerType[2] = "时租房";
 		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_rent_house_type);
 		mTypeTextView = (TextView)findViewById(R.id.id_rent_house_type_text);
 		mOriginTypeText = mTypeTextView.getText().toString();
@@ -245,7 +318,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
-				getStartTime();
+				getStartDateAndTime();
+				 
 			}
 		});
 		
@@ -256,7 +330,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
-				getEndTime();
+				getEndDateAndTime();
 			}
 		});
 		
@@ -285,6 +359,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					getPayRateDesc(s+"");
 					
 				}else{
+					mCommissionContent.setVisibility(View.GONE);
+					mExplannationContent.setVisibility(View.GONE);
 					commission.setText("");
 					explanation.setText("");
 				}
@@ -340,19 +416,26 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
     }
 	
 	private boolean checkInputContent(){
-		//判断密码
-		if (password.getText().toString() == null || password.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请设置门锁密码", Toast.LENGTH_SHORT).show();
+		
+		if (mTypeIndex == null || mTypeIndex.equals("")){
+			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (password.getText().toString().length()<6){
-			Toast.makeText(getApplicationContext(), "密码输入有误", Toast.LENGTH_SHORT).show();
+		
+		if (mSetStartData == null || mSetStartData.equals("")) {
+			Toast.makeText(getApplicationContext(), "请输入租房开始时间", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-//		if (mHouseId.getText().toString() == null || mHouseId.getText().toString().equals("")){
-//			Toast.makeText(getApplicationContext(), "请输入产权编号", Toast.LENGTH_SHORT).show();
-//			return false;
-//		}
+		if (mSetEndData == null || mSetEndData.equals("")) {
+			Toast.makeText(getApplicationContext(), "请输入租房结束时间", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		
+		if (mEndTimeClipse <= mStartTimeClipse){
+			Toast.makeText(getApplicationContext(), "租房起止时间选择有误！", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		
 		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
 			return false;
@@ -388,14 +471,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "租金不能为0", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mSetStartData == null || mSetStartData.equals("")){
-			Toast.makeText(getApplicationContext(), "请输入租房开始时间", Toast.LENGTH_SHORT).show();
+		
+
+		// 判断密码
+		if (password.getText().toString() == null || password.getText().toString().equals("")) {
+			Toast.makeText(getApplicationContext(), "请设置门锁密码", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mSetEndData == null || mSetEndData.equals("")){
-			Toast.makeText(getApplicationContext(), "请输入租房结束时间", Toast.LENGTH_SHORT).show();
+		if (password.getText().toString().length() < 6) {
+			Toast.makeText(getApplicationContext(), "密码长度为6位", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+		
+		
 		
 		return true;
 	}
@@ -414,6 +502,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			rpc.addProperty("RRAStartDate", mSetStartData);  
 			rpc.addProperty("RRAEndDate", mSetEndData); 
 			rpc.addProperty("RRADescription", "meiyou"); 
+			rpc.addProperty("password", password.getEditableText().toString()); 
 			rpc.addProperty("createdBy", mUsername);
 			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddRentAction, rpc);
 			mPresenter.startPresentServiceTask();
@@ -512,7 +601,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			obj.put("LesseeID", mRentIDcard.getText().toString());
 			obj.put("LesseeName", mRentName.getText().toString());
 			obj.put("Rent", mRentPrice.getText().toString());
-			obj.put("RentType", mTypeIndex);
+			obj.put("RentType", mTypeIndex);  //0，日租，1，月租，2，时租
 			obj.put("StartTime",mSetStartData);
 			obj.put("EndTime", mSetEndData);
 			
@@ -613,11 +702,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				///////////////////////////////////////////////////////////////////////////////
 				Gson gson=new Gson();
 				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
+				mCommissionContent.setVisibility(View.VISIBLE);
+				mExplannationContent.setVisibility(View.VISIBLE);
 				if(serviceCharge.fee.startsWith("0")){
-					commission.setText(serviceCharge.fee.substring(1)+"元");
+					commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
 					
 				}else{
-					commission.setText(serviceCharge.fee+"元");
+					commission.setText(serviceCharge.fee+"元（手续费）");
 				}
 				explanation.setText(serviceCharge.msg);
 			}
@@ -627,6 +718,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private TextView commission;
 	private TextView explanation;
 	private EditText password;
+	private LinearLayout mCommissionContent, mExplannationContent;
+	
 	
 	private void parseQueryStatus(String value){
 		if (value != null){

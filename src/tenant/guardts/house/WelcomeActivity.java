@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.util.CommonUtil;
 
 public class WelcomeActivity extends BaseActivity {
 	private LinearLayout mLoading_data;
@@ -108,14 +109,13 @@ public class WelcomeActivity extends BaseActivity {
 				theActivity = new WelcomeActivity();
 			}
 			if (msg != null) {
-				Log.w("mingguo", msg.obj.toString());
 //				TextView textView = (TextView) theActivity
 //						.findViewById(R.id.deviceToken);
 //				textView.setText(XGPushConfig.getToken(theActivity));
 				Log.w("mingguo",  "信鸽注册结果 "+XGPushConfig.getToken(theActivity));
+				CommonUtil.XINGE_TOKEN = XGPushConfig.getToken(theActivity);
 			}
-			// XGPushManager.registerCustomNotification(theActivity,
-			// "BACKSTREET", "BOYS", System.currentTimeMillis() + 5000, 0);
+			
 		}
 	}
 

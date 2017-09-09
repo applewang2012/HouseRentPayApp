@@ -159,6 +159,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/id_door_password_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_dimen_20"

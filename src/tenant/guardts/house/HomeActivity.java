@@ -3,12 +3,14 @@ package tenant.guardts.house;
 import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushManager;
 
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -24,6 +26,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +46,8 @@ public class HomeActivity extends BaseActivity {
 	// private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mUpdateAction = "http://tempuri.org/CheckUpgrade";
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
-	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";;
+	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";
+	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
@@ -53,6 +57,7 @@ public class HomeActivity extends BaseActivity {
 	private String mCity = null;
 	private int mVersionCode = -1;
 	private Bundle bundle;
+	private View mOpenLockLoadingView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,8 @@ public class HomeActivity extends BaseActivity {
 
 
 	private void initView() {
+		mOpenLockLoadingView = (View)findViewById(R.id.id_open_lock_layout);
+		mOpenLockLoadingView.setVisibility(View.INVISIBLE);
 		
 		Button scanButton = (Button) findViewById(R.id.id_scan_rent_house);
 		scanButton.setVisibility(View.VISIBLE);
@@ -279,7 +286,18 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("username", mUserName);
 		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUserInfoAction, rpc);
 		mPresenter.startPresentServiceTask();
-
+	}
+	
+	private void uploadXingeToken() {
+		if (CommonUtil.XINGE_TOKEN == null || CommonUtil.XINGE_TOKEN.equals("")){
+			return;
+		}
+		String url = CommonUtil.mUserHost + "services.asmx?op=UpdateDeviceID";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
+		rpc.addProperty("userId", mUserName);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mXingeTokenAction, rpc);
+		mPresenter.startPresentServiceTask();
 	}
 
 	private void hideAllFragments(FragmentTransaction transaction) {
@@ -315,6 +333,25 @@ public class HomeActivity extends BaseActivity {
 					parseUpdateVersion((String) msg.obj);
 					showUpdateVersionAlertDialog();
 				}
+				uploadXingeToken();
+			}else if (msg.what == 300){
+				dimissOpenDoorLoading();
+				JSONObject itemJsonObject;
+				try {
+					itemJsonObject = new JSONObject((String)msg.obj);
+					String ret = itemJsonObject.optString("ret");
+					if (ret != null) {
+						if (ret.equals("0")){
+							Toast.makeText(getApplicationContext(), "开锁成功"+itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
+						}else{
+							Toast.makeText(getApplicationContext(), itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	};
@@ -340,17 +377,32 @@ public class HomeActivity extends BaseActivity {
 		builder.setCancelable(false);
 		builder.show();
 	}
+	
+	private void showOpenDoorLoadingView(){
+		mOpenLockLoadingView.setVisibility(View.VISIBLE);
+		ImageView circleImage = (ImageView)mOpenLockLoadingView.findViewById(R.id.imageView2);
+		ObjectAnimator animator = ObjectAnimator.ofFloat(circleImage, "rotation", 0.0F,720.0F).setDuration(2000);
+		
+		animator.setRepeatCount(ObjectAnimator.INFINITE);
+		animator.setInterpolator(new LinearInterpolator());;
+		animator.start();
+	}
+	
+	private void dimissOpenDoorLoading(){
+		mOpenLockLoadingView.setVisibility(View.GONE);
+	}
 
 	private void showOpenDoorAlertDialog(final String lockId) {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		builder.setTitle("智能锁编号：" + lockId);
+		builder.setTitle("智能锁编号：\n" + lockId);
 		builder.setMessage("您确认要开锁吗？");
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
+				showOpenDoorLoadingView();
 				getOpenDoorRequest(lockId);
 			}
 
@@ -360,9 +412,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
-
 				Log.i("alertdialog", " �뱣�����ݣ�");
-
 			}
 		});
 		builder.setCancelable(false);
@@ -510,6 +560,11 @@ public class HomeActivity extends BaseActivity {
 		} else if (action.equals(mUpdateAction)) {
 			Message message = mHandler.obtainMessage();
 			message.what = 200;
+			message.obj = templateInfo;
+			mHandler.sendMessageDelayed(message, 500);
+		}else if (action.equals(mOpenDoorAction)){
+			Message message = mHandler.obtainMessage();
+			message.what = 300;
 			message.obj = templateInfo;
 			mHandler.sendMessageDelayed(message, 500);
 		}

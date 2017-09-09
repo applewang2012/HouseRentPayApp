@@ -138,7 +138,7 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 		
 		View titlebarView = (View)mRootView.findViewById(R.id.id_common_title_bar);
 		TextView titleText = (TextView) titlebarView.findViewById(R.id.id_titlebar);
-		titleText.setText("历史记录");
+		titleText.setText("订单管理");
 		FrameLayout backButton = (FrameLayout)titlebarView.findViewById(R.id.id_titlebar_back);
 		backButton.setVisibility(View.INVISIBLE);
 	}

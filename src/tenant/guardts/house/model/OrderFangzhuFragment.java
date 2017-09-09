@@ -158,7 +158,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 						@Override
 						public void onClick(View v) {
 							//mCurrentPosition = holder.getPosition();
-							showCancelOrderDialog(holder.getPosition(), info.getHouseOrderId());
+							showPositiveOrderDialog(holder.getPosition(), info.getHouseOrderId());
 						}
 					});
 				}else if (info.getHouseStatus().equals("1")){
@@ -260,11 +260,11 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		};
 	}
 	
-	private void showCancelOrderDialog(final int id, final String houseId) {  
+	private void showPositiveOrderDialog(final int id, final String houseId) {  
 		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("拒绝订单");
-		  builder.setMessage("您确认要拒绝该订单吗？");
+		  builder.setTitle("确认订单");
+		  builder.setMessage("您确认信息无误，确认该订单吗？");
 		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 		         @Override  

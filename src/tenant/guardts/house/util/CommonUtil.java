@@ -48,6 +48,7 @@ public class CommonUtil {
     public static final String APP_ID = "wxae25cb3fefdc75ae";
     public static final String WX_PARTNER_ID = "1481965242";
     public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
+    public static String XINGE_TOKEN = null;
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

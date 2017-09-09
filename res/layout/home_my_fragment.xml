@@ -125,7 +125,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
-                    android:text="发布房屋"
+                    android:text="登记房屋"
                     android:textColor="#555555"
                     android:textSize="@dimen/base_dimen_30" />
 

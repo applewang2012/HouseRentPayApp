@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		phone = (TextView) view.findViewById(R.id.id_button_contact_owner_show_phone);
 		contact = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
 		cancel = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
+		LinearLayout passwordContent = (LinearLayout)findViewById(R.id.id_door_password_content);
+		TextView password = (TextView)findViewById(R.id.door_password);
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
 		TextView address = (TextView) findViewById(R.id.id_order_detail_address);
@@ -85,6 +88,14 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		money.setText("¥ "+mOrderDetail.getHousePrice());
 		Button button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		Button button2 = (Button) findViewById(R.id.id_order_detail_button2);
+		if (mDetailType != null) {
+			if (mDetailType.equals("owner")) {
+				passwordContent.setVisibility(View.GONE);
+			}else{
+				passwordContent.setVisibility(View.VISIBLE);
+				password.setText(mOrderDetail.getDoorPassword());
+			}
+		}
 		if (mOrderDetail.getHouseStatus().equals("0")) {
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -377,7 +388,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 	private void rejectRentAttributeInfo(String id) {
 		mLoadingView.setVisibility(View.VISIBLE);
-		String url = CommonUtil.mUserHost + "Services.asmx?op=ConfirmRentAttribute";
+		String url = CommonUtil.mUserHost + "Services.asmx?op=RejectRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mRejectRentAction, rpc);

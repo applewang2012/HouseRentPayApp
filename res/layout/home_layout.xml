@@ -148,5 +148,9 @@
            </LinearLayout>
    </LinearLayout>
    
+    <include
+        android:id="@+id/id_open_lock_layout"
+        layout="@layout/open_lock_loading_layout"
+       />
 	  
 </FrameLayout>

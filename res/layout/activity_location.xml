@@ -42,7 +42,7 @@
            android:id="@+id/id_titlebar"
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
-           android:text="主页"
+           android:text="首页"
            android:textColor="#ffffff"
            android:gravity="center_vertical"
            android:layout_gravity="center"
@@ -237,7 +237,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/base_dimen_15"
                             android:gravity="center"
-                            android:text="发布房屋"
+                            android:text="登记房屋"
                             android:textColor="#999999"
                             android:textSize="@dimen/base_dimen_26" />
                     </LinearLayout>
