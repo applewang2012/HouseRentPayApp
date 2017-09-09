@@ -272,7 +272,8 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 		         public void onClick(DialogInterface dialog, int which) {
 		        	 mCurrentPosition = id;
 		        	 showLoadingView();
-					rejectRentAttributeInfo(houseId);
+					//rejectRentAttributeInfo(houseId);
+					confirmRentAttributeInfo(houseId);
 		         }  
 			
 		});
@@ -314,7 +315,7 @@ public class OrderFangzhuFragment extends Fragment implements DataStatusInterfac
 
 	private void rejectRentAttributeInfo(String id){
 		mLoadingView.setVisibility(View.VISIBLE);
-		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=RejectRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(mContext, url, mRejectRentAction, rpc);
