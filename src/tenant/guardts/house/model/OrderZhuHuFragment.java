@@ -179,6 +179,14 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 							Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
 							payIntent.putExtra("pay_price", info.getHousePrice());
 							payIntent.putExtra("owner_idcard", info.getHouseOwnerIdcard());
+							///////////
+							payIntent.putExtra("renter_idcard", info.getRenterIdcard());
+							payIntent.putExtra("orderID", info.getHouseOrderId());
+							payIntent.putExtra("rentNO", info.getHouseId());
+							payIntent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
+							
+							
+							
 							startActivity(payIntent);
 						}
 					});
@@ -191,6 +199,10 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 							Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
 							payIntent.putExtra("pay_price", info.getHousePrice());
 							payIntent.putExtra("owner_idcard", info.getHouseOwnerIdcard());
+							payIntent.putExtra("renter_idcard", info.getRenterIdcard());
+							payIntent.putExtra("orderID", info.getHouseOrderId());
+							payIntent.putExtra("rentNO", info.getHouseId());
+							payIntent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
 							startActivity(payIntent);
 						}
 					});
