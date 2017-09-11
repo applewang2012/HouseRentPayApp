@@ -210,5 +210,6 @@
     <string name="title_activity_user_agreement">UserAgreementActivity</string>
     <string name="title_activity_transaction_detail">TransactionDetailActivity</string>
     <string name="title_activity_home_search">HomeSearchActivity</string>
+    <string name="title_activity_recharge">RechargeActivity</string>
 
 </resources>
