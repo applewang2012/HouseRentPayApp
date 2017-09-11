@@ -96,11 +96,11 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-            <intent-filter>
+            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -510,7 +510,14 @@
         </activity>
         <activity
             android:name=".RechargeActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_recharge" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

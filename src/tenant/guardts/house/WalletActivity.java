@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import tenant.guardts.house.util.CommonUtil;
 
 public class WalletActivity extends BaseActivity {
 
@@ -34,8 +35,7 @@ public class WalletActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
+				startActivity(new Intent(WalletActivity.this, RechargeActivity.class));
 			}
 		});
 

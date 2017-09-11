@@ -1,15 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <LinearLayout 
+        android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="#ffffff"
+	    android:orientation="vertical"
+        >
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/base_dimen_30"
         android:layout_marginTop="@dimen/base_dimen_60"
+        android:paddingLeft="@dimen/base_dimen_30"
         android:text="请选择充值金额"
         android:textColor="#777777"
         android:textSize="@dimen/base_dimen_30" >
@@ -20,25 +27,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_dimen_28" >
 
-        <RadioButton
+        <CheckBox
+            android:id="@+id/id_rechange_money_800"
             android:layout_width="@dimen/base_dimen_320"
             android:layout_height="@dimen/base_dimen_70"
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
-            android:text="800元"
             android:gravity="center"
+            android:text="800元"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
 
-        <RadioButton
+        <CheckBox
+            android:id="@+id/id_rechange_money_500"
             android:layout_width="@dimen/base_dimen_320"
             android:layout_height="@dimen/base_dimen_70"
             android:layout_marginLeft="@dimen/base_dimen_20"
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
-            android:text="500元"
             android:gravity="center"
+            android:text="500元"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
@@ -48,39 +57,57 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_dimen_30" >
 
-        <RadioButton
+        <CheckBox
+            android:id="@+id/id_rechange_money_200"
             android:layout_width="@dimen/base_dimen_320"
             android:layout_height="@dimen/base_dimen_70"
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
-            android:text="200元"
             android:gravity="center"
+            android:text="200元"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
 
-        <EditText
+        <CheckBox
+            android:id="@+id/id_rechange_other_money"
             android:layout_width="@dimen/base_dimen_320"
             android:layout_height="@dimen/base_dimen_70"
             android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@android:drawable/editbox_background_normal"
-            android:hint="其他金额"
+            android:background="@drawable/recharge_checkbox_bg"
+            android:button="@null"
             android:gravity="center"
+            android:text="其他金额"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/id_rechange_input_other_monkey"
+        android:layout_width="@dimen/base_dimen_320"
+        android:layout_height="@dimen/base_dimen_70"
+        android:layout_marginLeft="@dimen/base_dimen_370"
+        android:layout_marginTop="@dimen/base_dimen_30"
+        android:background="@android:drawable/editbox_background_normal"
+        android:gravity="left"
+        android:hint="最低100元"
+        android:inputType="number"
+        android:textColor="#337ffd"
+        android:textColorHint="#555555"
+        android:textSize="@dimen/base_dimen_30"
+        android:visibility="invisible" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/base_dimen_30"
         android:layout_marginTop="@dimen/base_dimen_34"
+        android:paddingLeft="@dimen/base_dimen_30"
         android:text="请选择付款方式"
         android:textColor="#777777"
         android:textSize="@dimen/base_dimen_30" >
     </TextView>
-<LinearLayout
-        
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_90"
         android:layout_marginTop="@dimen/base_dimen_40"
@@ -103,30 +130,39 @@
             android:textColor="#000000"
             android:textSize="@dimen/base_dimen_28" >
         </TextView>
+
         <CheckBox
-            android:checked="true"
             android:id="@+id/checkbox_wechat"
             android:layout_width="@dimen/base_dimen_42"
             android:layout_height="@dimen/base_dimen_42"
             android:layout_marginLeft="@dimen/base_dimen_400"
             android:background="@drawable/payment_checkbox_bg"
             android:button="@null"
+            android:checked="true"
             android:clickable="false" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#f1f1f1" >
+        android:background="#f1f1f1"
+        android:orientation="vertical" >
 
-<Button
-        android:layout_width="@dimen/base_dimen_680"
-        android:layout_height="@dimen/base_dimen_80"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/base_dimen_400"
-        android:background="@drawable/withdraw_btn_bg"
-        android:text="立即付款"
-        android:textColor="#ffffff" />
-</LinearLayout>
-</LinearLayout>
+        <Button
+            android:id="@+id/id_rechange_button"
+            android:layout_width="@dimen/base_dimen_680"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_300"
+            android:background="@drawable/withdraw_btn_bg"
+            android:text="立即付款"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+    
+    </LinearLayout>
+
+    <include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog" />
+
+</FrameLayout>

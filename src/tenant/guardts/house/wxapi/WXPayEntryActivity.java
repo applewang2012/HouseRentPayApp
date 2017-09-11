@@ -47,6 +47,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 	private HoursePresenter mPresenter;
 	private String mCompleteRentAttribute =  "http://tempuri.org/CompleteRentAttribute";
 	private String mUpdateOrderAction =  "http://tempuri.org/UpdateOrderInfo";
+	private String mDepositWalletAction = "http://tempuri.org/DepositWallet";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,18 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		mPresenter.startPresentServiceTask();
 	}
     
+    private void depositWalletRequestInfo(String fee){
+    	if (fee == null || fee.equals("")){
+    		return;
+    	}
+		String url = CommonUtil.mUserHost+"Services.asmx?op=DepositWallet";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDepositWalletAction));
+		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
+		rpc.addProperty("fee", fee);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mDepositWalletAction, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+    
     private void updateOrderInfo(String id){
     	if (id == null || id.equals("")){
     		return;
@@ -154,17 +167,28 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr+" open  id  "+resp.openId);
+		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
 		ActivityController.finishAll();
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){
-				View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
-				mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-				mLoadingView = (View) v.findViewById(R.id.id_data_loading);
-				setContentView(v);
-				initSuccessView(v);
-				showLoadingView();
-				completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
+				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
+					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
+					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
+					mLoadingView = (View) v.findViewById(R.id.id_data_loading);
+					setContentView(v);
+					initSuccessView(v);
+					showLoadingView();
+					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
+				}else{
+					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
+					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
+					mLoadingView = (View) v.findViewById(R.id.id_data_loading);
+					setContentView(v);
+					initSuccessView(v);
+					showLoadingView();
+					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
+				}
+				
 			}else {
 				View v = getLayoutInflater().inflate(R.layout.activity_payment_failure, null);
 				setContentView(v);
@@ -198,6 +222,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 				mHandler.sendEmptyMessageDelayed(100, 100);
 			}else if (action.equals(mUpdateOrderAction)){
 				mHandler.sendEmptyMessageDelayed(101, 10);
+			}else if (action.equals(mDepositWalletAction)){
+				mHandler.sendEmptyMessageDelayed(102, 10);
 			}
 		}
 	}
