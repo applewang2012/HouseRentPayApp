@@ -83,8 +83,8 @@
 	        android:layout_width="wrap_content" 
 	    	android:layout_height="fill_parent"
 	    	android:textColor="#555555"
-	    	android:textSize="@dimen/base_dimen_28"
-	    	android:layout_marginLeft="@dimen/base_dimen_220"
+	    	android:textSize="@dimen/base_dimen_26"
+	    	android:layout_marginLeft="@dimen/base_dimen_200"
 	    	android:text="金额:￥"
 	    	android:gravity="left|center_vertical"
 	        />
@@ -94,9 +94,10 @@
 	        android:layout_width="wrap_content" 
 	    	android:layout_height="fill_parent"
 	    	android:textColor="#337ffd"
-	    	android:textSize="@dimen/base_dimen_28"
+	    	android:textSize="@dimen/base_dimen_26"
 	    	android:layout_gravity="center_vertical|right"
-	    	android:text="0"
+	    	android:text="3000.00"
+	    	android:lines="1"
 	    	android:gravity="left|center_vertical"
 	        />
 	</LinearLayout>

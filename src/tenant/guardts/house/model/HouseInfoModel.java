@@ -24,10 +24,21 @@ public class HouseInfoModel implements Serializable{
 	private String contactPhone;
 	private String contactName;
 	private String doorPassword;
+	private String orderCreatedDate;//下单时间
+	
+	
 	
 	
 	public String getRenterIdcard() {
 		return renterIdcard;
+	}
+
+	public String getOrderCreatedDate() {
+		return orderCreatedDate;
+	}
+
+	public void setOrderCreatedDate(String orderCreatedDate) {
+		this.orderCreatedDate = orderCreatedDate;
 	}
 
 	public void setRenterIdcard(String renterIdcard) {

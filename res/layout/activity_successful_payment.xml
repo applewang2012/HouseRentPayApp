@@ -92,7 +92,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="@dimen/base_dimen_14"
 	            android:layout_marginTop="@dimen/base_dimen_34"
-	            android:text="2017-8-24 14:05"
+	           
 	            android:textColor="#888888"
 	            android:textSize="@dimen/base_dimen_28" />
 	    </LinearLayout>
@@ -116,7 +116,6 @@
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="@dimen/base_dimen_14"
 	            android:layout_marginTop="@dimen/base_dimen_34"
-	            android:text="¥500.00"
 	            android:textColor="#337ffd"
 	            android:textSize="@dimen/base_dimen_28" />
 	    </LinearLayout>

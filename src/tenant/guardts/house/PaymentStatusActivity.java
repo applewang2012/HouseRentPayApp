@@ -14,24 +14,32 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.CompleteStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.wxapi.HousePayActivity;
+import tenant.guardts.house.util.UtilTool;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";
 	private HoursePresenter mPresenter;
 	private View mLoadingView;
+	private String rentNO;
+	private String orderCreatedDate;
+	private String price;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean successful = getIntent().getBooleanExtra("flag", false);
+		successful = getIntent().getBooleanExtra("flag", false);
 		orderID = getIntent().getStringExtra("orderID");
-		Log.e("", orderID+"===============");
+		rentNO = getIntent().getStringExtra("rentNO");
+		orderCreatedDate = getIntent().getStringExtra("orderCreatedDate");
+		price=getIntent().getStringExtra("pay_price");
+		
+		Log.e("", orderID + "===============");
 		if (successful) {
 			setContentView(R.layout.activity_successful_payment);
 		} else {
@@ -44,16 +52,17 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 
 	private void initEvent() {
 		finish.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				if(orderID!=null)
-				showLoadingView();
+				if (orderID != null)
+					showLoadingView();
 				completeHouseRentAttributeInfo(orderID);
 			}
 		});
-		
+
 	}
+
 	private void showLoadingView() {
 		if (mLoadingView != null) {
 			mLoadingView.setVisibility(View.VISIBLE);
@@ -72,12 +81,20 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		}
 	}
 
-
 	private void initView() {
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
 		finish = (Button) findViewById(R.id.id_button_finish_pay);
-		
+		if(successful){
+			TextView tvRentNO=(TextView) findViewById(R.id.id_pay_order_no);
+			tvRentNO.setText(rentNO);
+			TextView tvOrderCreatedDate=(TextView) findViewById(R.id.id_pay_oder_time);
+			String date = UtilTool.stampToNormalDate(orderCreatedDate.substring(6,orderCreatedDate.length()-2));
+			tvOrderCreatedDate.setText(date);
+			TextView money=(TextView) findViewById(R.id.id_pay_monkey);
+			money.setText("¥"+price);
+			
+		}
 	}
 
 	/**
@@ -97,19 +114,18 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		mPresenter.startPresentServiceTask();
 	}
 
-
-	Handler mHandler=new Handler(){
+	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
-			if(msg.what==818){
+			if (msg.what == 818) {
 				dismissLoadingView();
-				String value=(String) msg.obj;
-				Log.e("", value+"--");
+				String value = (String) msg.obj;
+				Log.e("", value + "--");
 				Gson gson = new Gson();
 				CompleteStatus completeStatus = gson.fromJson(value, CompleteStatus.class);
-				int ret=Integer.parseInt(completeStatus.ret);
-				if(ret==0){
+				int ret = Integer.parseInt(completeStatus.ret);
+				if (ret == 0) {
 					finish();
-				}else{
+				} else {
 					Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
 				}
 			}
@@ -117,19 +133,8 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	};
 	private Button finish;
 	private String orderID;
+	private boolean successful;
 
-	
-//		if (action != null && templateInfo != null){
-//			if (action.equals(mCompleteRentAttribute)){
-//				Message msg = mHandler.obtainMessage();
-//				msg.what = 818;
-//				msg.obj = templateInfo;
-//				msg.sendToTarget();
-//			}
-//		}
-	
-	
-	
 
 
 	@Override
@@ -146,13 +151,11 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 
 	@Override
 	public void onStatusStart() {
-		// TODO Auto-generated method stub
 		super.onStatusStart();
 	}
 
 	@Override
 	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
 	}
-	}
+}

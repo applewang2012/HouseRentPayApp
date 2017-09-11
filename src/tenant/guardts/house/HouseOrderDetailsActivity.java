@@ -2,6 +2,8 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.gson.Gson;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +29,7 @@ import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.ServiceCharge;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
@@ -41,6 +44,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private PopupWindow popupWindow;
 	private TextView ownerPhone;// 房主电话
 	private TextView contactPhone;// 房客电话
+	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";// 扣费提醒
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +57,36 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		mOrderDetail = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
 		mDetailType = getIntent().getStringExtra("detail_type");
 		mPresent = new HoursePresenter(HouseOrderDetailsActivity.this, this);
+		getPayRateDesc(mOrderDetail.getHousePrice());
 		initView();
 
 	}
 
+	/**
+	 * 获取服务费信息
+	 * 
+	 * @param price
+	 */
+	private void getPayRateDesc(String price) {
+		// showLoadingView();
+		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
+		rpc.addProperty("fee", price);
+		mPresent.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresent.startPresentServiceTask();
+
+	}
+
 	private void initView() {
+		tvServiceFee = (TextView) findViewById(R.id.order_service_fee);
 		parent = View.inflate(this, R.layout.activity_order_details_info, null);
 		view = View.inflate(this, R.layout.popupwindow_contact_owner, null);
 		title = (TextView) view.findViewById(R.id.popup_contact_title);
 		phone = (TextView) view.findViewById(R.id.id_button_contact_owner_show_phone);
 		contact = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
 		cancel = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
-		LinearLayout passwordContent = (LinearLayout)findViewById(R.id.id_door_password_content);
-		TextView password = (TextView)findViewById(R.id.door_password);
+		LinearLayout passwordContent = (LinearLayout) findViewById(R.id.id_door_password_content);
+		TextView password = (TextView) findViewById(R.id.door_password);
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
 		TextView address = (TextView) findViewById(R.id.id_order_detail_address);
@@ -85,13 +106,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		status.setText(mOrderDetail.getHouseStatus());
 		ownerName.setText(mOrderDetail.getHouseOwnerName());
 		ownerPhone.setText(mOrderDetail.getHouseOwnerPhone());
-		money.setText("¥ "+mOrderDetail.getHousePrice());
+		money.setText("¥ " + mOrderDetail.getHousePrice());
 		Button button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		Button button2 = (Button) findViewById(R.id.id_order_detail_button2);
 		if (mDetailType != null) {
 			if (mDetailType.equals("owner")) {
 				passwordContent.setVisibility(View.GONE);
-			}else{
+			} else {
 				passwordContent.setVisibility(View.VISIBLE);
 				password.setText(mOrderDetail.getDoorPassword());
 			}
@@ -160,8 +181,10 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 							payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
 							payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
 							payIntent.putExtra("renter_idcard", mOrderDetail.getRenterIdcard());
-							Log.e("", mOrderDetail.getRenterIdcard()+"kkk");
+							Log.e("", mOrderDetail.getRenterIdcard() + "kkk");
 							payIntent.putExtra("orderID", mOrderDetail.getHouseOrderId());
+							payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
+							payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
 							startActivity(payIntent);
 						}
 					});
@@ -219,13 +242,12 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 		}
 
-	
 		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
 		if (mDetailType.equals("owner")) {
-			btnContact .setText("联系房客");
+			btnContact.setText("联系房客");
 
 		} else if (mDetailType.equals("renter")) {
-			btnContact .setText("联系房主");
+			btnContact.setText("联系房主");
 
 		}
 		btnContact.setOnClickListener(new OnClickListener() {
@@ -244,7 +266,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 */
 	protected void initPopupWindow() {
 		setBackgroundAlpha(0.2f);
-		
+
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
 		if (title != null && phone != null) {
@@ -418,6 +440,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				finish();
 			} else if (msg.what == 102) {
 				finish();
+			} else if (msg.what == 818) {
+				String value = (String) msg.obj;
+				Gson gson=new Gson();
+				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
+				if(serviceCharge.fee.startsWith("00")){
+					tvServiceFee.setText("已包含服务费"+serviceCharge.fee.substring(1)+"元");
+					
+				}else{
+					tvServiceFee.setText("已包含服务费"+serviceCharge.fee+"元");;
+				}
+				
 			}
 		}
 	};
@@ -428,6 +461,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private View parent;
 	private View view;
 	private Button btnContact;
+	private TextView tvServiceFee;
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
@@ -447,6 +481,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		} else if (action.equals(mConfirmRentAttribute)) {
 			Message msg = mHandler.obtainMessage();
 			msg.what = 102;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		} else if (action.equals(mGetPayRateDesc)) {
+			Message msg = mHandler.obtainMessage();
+			msg.what = 818;
 			msg.obj = templateInfo;
 			msg.sendToTarget();
 		}

@@ -406,6 +406,8 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 					houseModel.setDoorPassword(itemJsonObject.optString("RRANationName"));
 
 					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
+					houseModel.setOrderCreatedDate(itemJsonObject.optString("RCreatedDate"));//下单时间
+					
 
 					mHouseInfoList.add(houseModel);
 				}

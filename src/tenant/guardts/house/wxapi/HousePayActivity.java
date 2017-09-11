@@ -58,6 +58,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	private boolean successful;
 	private String renterId;
 	private String orderID;
+	private String orderCreatedDate;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,10 +67,12 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		setContentView(R.layout.activity_house_payment);
 		initView();
 		initEvent();
-		final String price = "1.0";//////////////////////////////////
+		price = getIntent().getStringExtra("pay_price");
 		ownerId = getIntent().getStringExtra("owner_idcard");
 		renterId = getIntent().getStringExtra("renter_idcard");
 		orderID=getIntent().getStringExtra("orderID");
+		rentNO = getIntent().getStringExtra("rentNO");
+		orderCreatedDate=getIntent().getStringExtra("orderCreatedDate");//下单时间
 Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
 
@@ -268,6 +271,9 @@ Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).sh
 					Intent intent = new Intent(HousePayActivity.this, PaymentStatusActivity.class);
 					intent.putExtra("flag", successful);
 					intent.putExtra("orderID", orderID);
+					intent.putExtra("rentNO", rentNO);
+					intent.putExtra("orderCreatedDate", orderCreatedDate);
+					intent.putExtra("pay_price", price);
 					startActivity(intent);
 					finish();
 				} else if (ret == 1) {
@@ -286,6 +292,8 @@ Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).sh
 		};
 	};
 	private String ownerId;
+	private String rentNO;
+	private String price;
 
 	public void onStatusSuccess(String action, String templateInfo) {
 		if (action.equals(mPayUseWallet)) {

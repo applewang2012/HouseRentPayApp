@@ -287,6 +287,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/order_service_fee"
             android:background="#ffffff"
             android:gravity="left"
             android:layout_gravity="center_vertical"

@@ -701,7 +701,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
 				mCommissionContent.setVisibility(View.VISIBLE);
 				mExplannationContent.setVisibility(View.VISIBLE);
-				if(serviceCharge.fee.startsWith("0")){
+				if(serviceCharge.fee.startsWith("00")){
 					commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
 					
 				}else{

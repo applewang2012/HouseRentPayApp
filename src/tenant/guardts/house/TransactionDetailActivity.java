@@ -1,15 +1,12 @@
 package tenant.guardts.house;
 
-import java.security.KeyStore.PrivateKeyEntry;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +18,6 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.adapter.TransactionDetailAdapter;
 import tenant.guardts.house.bean.Detail;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -64,7 +60,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 		String idcard = getIntent().getStringExtra("IDCard");
 		// getBillLog(idcard);
 		// getBillLog("12010519780419061X");
-		getBillLog("210724197009190016");
+		getBillLog(idcard);
 
 	}
 	
