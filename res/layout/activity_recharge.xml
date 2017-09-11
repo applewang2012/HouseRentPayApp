@@ -27,6 +27,7 @@
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
             android:text="800元"
+            android:gravity="center"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
 
@@ -37,6 +38,7 @@
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
             android:text="500元"
+            android:gravity="center"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
@@ -53,6 +55,7 @@
             android:background="@drawable/recharge_checkbox_bg"
             android:button="@null"
             android:text="200元"
+            android:gravity="center"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
 
@@ -62,6 +65,7 @@
             android:layout_marginLeft="@dimen/base_dimen_20"
             android:background="@android:drawable/editbox_background_normal"
             android:hint="其他金额"
+            android:gravity="center"
             android:textColor="#555555"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
