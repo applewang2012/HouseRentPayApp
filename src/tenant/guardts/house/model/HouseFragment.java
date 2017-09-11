@@ -111,7 +111,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
-		userName = bundle.getString("user_name");
 		mContext = getActivity().getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
 
@@ -133,7 +132,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				if (userName.equals("") || userName == null) {
+				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				}
 
@@ -217,7 +216,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	private void initView() {
 		mLogin = (TextView) mRootView.findViewById(R.id.textview_login);
-		if (userName.equals("") || userName == null) {
+		if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
 
 		} else {
 			mLogin.setVisibility(View.GONE);
@@ -287,9 +286,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			@Override
 			public void onClick(View v) {
 				// 先判断是否登录
-				if (userName.equals("") || userName == null) {
+				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					;
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
 					// 发布房屋
@@ -340,7 +338,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				if (userName.equals("") || userName == null) {
+				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -503,7 +501,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	private HomeFragmentListView mListView;
 	private UniversalAdapter<HouseInfoModel> mAdapter;
 	private TextView mLogin;
-	private String userName;
 
 	private void parseLocationInfo(String obj) {
 		try {

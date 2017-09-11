@@ -73,7 +73,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		orderID=getIntent().getStringExtra("orderID");
 		rentNO = getIntent().getStringExtra("rentNO");
 		orderCreatedDate=getIntent().getStringExtra("orderCreatedDate");//下单时间
-Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
 
 		if (price == null || price.equals("null")) {
@@ -107,8 +107,7 @@ Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).sh
 
 			@Override
 			public void onClick(View v) {
-				 showLoadingView();
-
+				showLoadingView();
 				if (isPayByWechat) {
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
@@ -176,6 +175,7 @@ Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).sh
 	@Override
 	protected void onResume() {
 		super.onResume();
+		dismissLoadingView();
 	}
 
 	private void showLoadingView() {
