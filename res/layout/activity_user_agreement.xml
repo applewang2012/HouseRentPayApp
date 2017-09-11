@@ -2,10 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <FrameLayout
+   <!--  <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_90"
         android:background="#337ffd" >
@@ -29,16 +30,17 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_38"
             android:textStyle="bold" />
-    </FrameLayout>
+    </FrameLayout> -->
 
-    <ScrollView
+    <!-- <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/agreement"
             android:orientation="vertical" >
 
             <ImageView
@@ -46,6 +48,15 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/agreement" />
         </LinearLayout>
-    </ScrollView>
+    </ScrollView> -->
+    
+    <tenant.guardts.house.bannerview.ViewPagerFixed
+      android:id="@+id/agreenment_gallery" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:background="#000000"
+      android:unselectedAlpha="1">
+   	</tenant.guardts.house.bannerview.ViewPagerFixed>
 
 </LinearLayout>

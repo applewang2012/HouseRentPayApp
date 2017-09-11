@@ -4,42 +4,72 @@
     android:layout_height="match_parent" 
     android:background="#ffffff"
     android:orientation="vertical"
-    android:padding="3dp"
     >
+    
+    <FrameLayout
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/base_dimen_90"
+       android:orientation="horizontal"
+       android:background="#337ffd"
+       >
+       <FrameLayout
+          android:id="@+id/id_titlebar_back"
+	       android:layout_width="@dimen/base_dimen_100"
+	       android:layout_height="@dimen/base_dimen_90"
+	       android:clickable="true"
+	       android:focusable="true"
+	       android:onClick="backFinish" >
+	      <ImageView 
+	           android:layout_width="@dimen/base_dimen_44"
+	           android:layout_height="@dimen/base_dimen_44"
+	           android:background="@drawable/short_lease_back"
+	           android:layout_gravity="center_vertical"
+	           android:layout_marginLeft="@dimen/base_dimen_20"
+	          />
+      </FrameLayout>
+        
+       <LinearLayout 
+           android:layout_width="@dimen/base_dimen_600"
+       	   android:layout_height="@dimen/base_dimen_80"
+       	   android:layout_marginLeft="@dimen/base_dimen_80"
+       	   android:layout_gravity="center_vertical"
+       	   android:orientation="horizontal"
+       	   android:background="@drawable/search_input_background">
+	      <ImageView 
+	           android:layout_width="@dimen/base_dimen_34"
+	       	   android:layout_height="@dimen/base_dimen_34"
+	       	   android:background="@drawable/home_tab_search_icon"
+	       	   android:layout_marginLeft="@dimen/base_dimen_30"
+	       	   android:layout_gravity="center_vertical"
+	          />
+	      <TextView
+		        android:id="@+id/button_search"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:background="#00000000"
+		        android:ems="10"
+		        android:hint="想租房？来云上之家！"
+		        android:textSize="@dimen/base_dimen_28"
+		        android:textColorHint="#cccccc"
+		        android:textColor="#ffffff"
+		        android:imeOptions="actionSearch"
+		        android:inputType="text"
+		        android:paddingLeft="@dimen/base_dimen_20"
+		        android:gravity="center_vertical"
+		        android:clickable="true"
+		        />
+       </LinearLayout>
+	</FrameLayout>
+	
+    
+    
     <LinearLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" 
 	    android:background="#ffffff"
 	    android:orientation="vertical"
+	    android:layout_marginTop="@dimen/base_dimen_90"
 	    >
-	    
-	   
-	        <!-- <EditText 
-		        android:id="@+id/id_input_address"
-		        android:layout_width="0dp"
-			    android:layout_height="match_parent"
-			    android:layout_weight="4"
-			    android:hint="请输入详细地址进行搜索"
-			    android:gravity="left|center_vertical"
-			    android:paddingLeft="3dp"
-			    android:textSize="14dp"
-			    android:background="@drawable/item_shape_no_solid_corner"
-			    android:textColor="#afaeae"
-		        /> -->
-	        <TextView 
-	            android:id="@+id/id_show_search_content"
-				android:layout_width="@dimen/base_dimen_660"
-			    android:layout_height="35dp"
-			    android:layout_marginTop="@dimen/base_dimen_20"
-			    android:text="搜   索"
-			    android:textColor="#999999"
-			    android:textSize="@dimen/base_dimen_35"
-			    android:gravity="center"
-			    android:layout_gravity="center_horizontal"
-			    android:background="@drawable/item_shape_no_solid_corner_press"
-	            />
-	        
-	    
 	    
 	    <tenant.guardts.house.search.ExpandMenuView
 	        android:id="@+id/expandTabView"
@@ -49,19 +79,26 @@
 	        android:divider="#362e2b"
 	        />
 	    
+	    <ImageView 
+	        android:layout_width="match_parent"
+		    android:layout_height="@dimen/base_dimen_2" 
+		    android:background="#cccccc"
+	        />
+	    
 	    <ListView 
 	        android:id="@+id/listView"
 	        android:layout_width="fill_parent"
 		    android:layout_height="match_parent"
 		    android:cacheColorHint="#00000000"
 		    android:fadingEdge="none"
-		    android:divider="#afaeae"
+		    android:divider="#cccccc"
 		    android:paddingLeft="2dp"
 		    android:paddingRight="2dp"
-		    android:dividerHeight="1dp"
+		    android:dividerHeight="@dimen/base_dimen_1"
 	        />
 		  
 	</LinearLayout>
+	
 	<TextView 
 	        android:id="@+id/id_frament_house_no_cotent"
 	        android:layout_width="match_parent"

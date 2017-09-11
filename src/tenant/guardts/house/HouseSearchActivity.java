@@ -10,6 +10,8 @@ import org.ksoap2.serialization.SoapObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -101,26 +103,21 @@ public class HouseSearchActivity extends BaseActivity {
 	//private EditText mAddressEdit;
 	private TextView mNoContent;
 	
-	private String userName=new String();
 	private String mSearch_tag;
 	private String mStartTime;
 	private String mEndTime;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.house_search_layout);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("短租共享");
-//		TextView showSearch = (TextView)findViewById(R.id.id_show_search_content);
-//		showSearch.setVisibility(View.VISIBLE);
+//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+//		mTitleBar.setText("短租共享");
 		
 		Intent intent = getIntent();
-		userName=intent.getStringExtra("user_name");
 		
-		
-		Button searchButton = (Button)findViewById(R.id.id_add_rent_house);
+		TextView searchButton = (TextView)findViewById(R.id.button_search);
 		searchButton.setVisibility(View.VISIBLE);
 		searchButton.setOnClickListener(new OnClickListener() {
 			
@@ -130,6 +127,7 @@ public class HouseSearchActivity extends BaseActivity {
 				
 			}
 		});
+		
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, HouseSearchActivity.this);
 		mSearch_tag = getIntent().getStringExtra("search_tag");
@@ -222,16 +220,18 @@ public class HouseSearchActivity extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 1 && resultCode == Activity.RESULT_OK){
 			Bundle bundle = data.getExtras();
-			String search_tag = bundle.getString("search_tag");
-			Log.e("mingguo", "scan  result  "+search_tag);
-			TextView showSearch = (TextView)findViewById(R.id.id_show_search_content);
+			mSearch_tag = bundle.getString("search_tag");
+			Log.e("mingguo", "scan  result  "+mSearch_tag);
+			TextView showSearch = (TextView)findViewById(R.id.button_search);
 			
-			if (search_tag == null || search_tag.equals("")){
-				showSearch.setVisibility(View.GONE);
+			if (mSearch_tag == null || mSearch_tag.equals("")){
+				showSearch.setText("想租房？来云上之家！");
+				showSearch.setTextColor(Color.parseColor("##cccccc"));
+				
 			}else{
-				showSearch.setText("在地址关键词“"+search_tag+"”筛选");
-				showSearch.setVisibility(View.VISIBLE);
-				searchHouseByFilterCondition(search_tag);
+				showSearch.setText(mSearch_tag);
+				showSearch.setTextColor(Color.parseColor("#ffffff"));
+				searchHouseByFilterCondition(mSearch_tag);
 			}
 		}
 	}
@@ -411,7 +411,7 @@ public class HouseSearchActivity extends BaseActivity {
 			}
 			break;
 		}
-		searchHouseByFilterCondition("");
+		searchHouseByFilterCondition(mSearch_tag);
 	}
 	
 	/**

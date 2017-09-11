@@ -47,6 +47,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 	private HoursePresenter mPresenter;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mRegisterAction = "http://tempuri.org/AddUserInfo";
+	private String mIdCardValidAction = "http://tempuri.org/IsExistsIDCard";
 	private String mRealName, mIdCard;
 	private DetectionAuthentic authentic;
 //	private Bitmap mPressBitmap;
@@ -111,18 +112,19 @@ public class RegisterUserStep3Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(),getString(R.string.id_card_input_error) , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				GlobalUtil.longToast(getApplication(),"拍照认证！");
-				Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				file = ScreenShotUtil.createScreenshotDirectory(RegisterUserStep3Activity.this);
-				File out = new File(file);
-				Uri uri = Uri.fromFile(out);
-				getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);//鏍规嵁uri淇濆瓨鐓х墖
-				getPhoto.putExtra("return-data", true);
-				getPhoto.putExtra("camerasensortype", 2); // 调用前置摄像头
-				startActivityForResult(getPhoto, 1);//鍚姩鐩告満鎷嶇収
+				showLoadingView();
+				checkUserIdCardValid(mIdCard);
 			
 			}
 		});
+	}
+	
+	private void checkUserIdCardValid(String id){
+		String url = CommonUtil.mUserHost+"services.asmx?op=IsExistsIDCard";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdCardValidAction));
+		rpc.addProperty("idcard", id); 
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mIdCardValidAction, rpc);
+		mPresenter.startPresentServiceTask();
 	}
 	
 	private void startLiveIdentifyActivity(){
@@ -240,12 +242,52 @@ public class RegisterUserStep3Activity extends BaseActivity{
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 101){
 				dismissLoadingView();
-				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
-				SharedPreferences.Editor editor = sharedata.edit();
-			    editor.putString("user_name", mUserName);
-			    editor.putString("user_password", mPassword);
-			    editor.commit();
-			    mHandler.sendEmptyMessageDelayed(105, 200);
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
+								SharedPreferences.Editor editor = sharedata.edit();
+							    editor.putString("user_name", mUserName);
+							    editor.putString("user_password", mPassword);
+							    editor.commit();
+							    mHandler.sendEmptyMessageDelayed(105, 200);
+							}else{
+								GlobalUtil.shortToast(getApplication(), "登录失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			}else if (msg.what == 104){
+				dismissLoadingView();
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								GlobalUtil.longToast(getApplication(),"拍照认证！");
+								Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+								file = ScreenShotUtil.createScreenshotDirectory(RegisterUserStep3Activity.this);
+								File out = new File(file);
+								Uri uri = Uri.fromFile(out);
+								getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+								getPhoto.putExtra("return-data", true);
+								getPhoto.putExtra("camerasensortype", 2);
+								startActivityForResult(getPhoto, 1);
+							}else{
+								GlobalUtil.shortToast(getApplication(), object.optString("msg"), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}else if (msg.what == 105){
 				ActivityController.finishAll();
 				GlobalUtil.shortToast(getApplication(), getString(R.string.register_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
@@ -270,6 +312,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 //								if (similar != null && similar.length() > 3){
 //									Double rate = 100 *	Double.parseDouble(similar);
 									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+									showLoadingView();
 									registerUserName();
 									return;
 //								}
@@ -353,14 +396,18 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRegisterAction)){
-				if (templateInfo.equals("true")){
-					mHandler.sendEmptyMessage(101);
-				}else{
-					mHandler.sendEmptyMessage(110);
-				}
+				Message message = mHandler.obtainMessage();
+				message.what = 101;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}else if (action.equals(mIdentifyAction)){
 				Message message = mHandler.obtainMessage();
 				message.what = 102;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}else if (action.equals(mIdCardValidAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 104;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}

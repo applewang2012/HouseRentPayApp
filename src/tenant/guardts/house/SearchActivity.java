@@ -90,14 +90,15 @@ public class SearchActivity extends Activity{
 				// 3. 若存在，则不保存；若不存在，则将该搜索字段保存（插入）到数据库，并作为历史搜索记录
 				if (!hasData) {
 					insertData(mSearchText.getText().toString().trim());
-					queryData("");
+					//queryData("");
 				}
 				
-//				Intent resultIntent = new Intent();
-//				Bundle bundle = new Bundle();
-//				bundle.putString("search_tag", mSearchText.getText().toString().trim());
-//				resultIntent.putExtras(bundle);
-//				setResult(RESULT_OK, resultIntent);
+					Intent resultIntent = new Intent();
+					Bundle bundle = new Bundle();
+					bundle.putString("search_tag", mSearchText.getText().toString().trim());
+					resultIntent.putExtras(bundle);
+					setResult(RESULT_OK, resultIntent);
+					finish();
 				
 				}
 			

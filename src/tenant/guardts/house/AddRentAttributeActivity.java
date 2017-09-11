@@ -315,6 +315,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
+				if (mTypeIndex == null || mTypeIndex.equals("")){
+					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				getStartDateAndTime();
 				 
 			}
@@ -327,6 +331,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
+				if (mTypeIndex == null || mTypeIndex.equals("")){
+					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				getEndDateAndTime();
 			}
 		});
@@ -486,8 +494,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void startAddRentInfo(){
-			Log.w("mingguo", " mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
-					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe ");
+			Log.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
+					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
 			showLoadingView();
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));

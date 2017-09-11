@@ -88,7 +88,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		LinearLayout passwordContent = (LinearLayout) findViewById(R.id.id_door_password_content);
 		TextView password = (TextView) findViewById(R.id.door_password);
 		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		mLoadingView.setVisibility(View.GONE);
 		TextView address = (TextView) findViewById(R.id.id_order_detail_address);
 		TextView contactName = (TextView) findViewById(R.id.id_order_detail_contacn_name);
 		contactPhone = (TextView) findViewById(R.id.id_order_detail_contacn_phone);
@@ -121,7 +121,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("确认订单");
-			button1.setVisibility(View.INVISIBLE);
+			button1.setVisibility(View.GONE);
 
 			button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 			if (mDetailType != null) {
@@ -168,8 +168,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 			if (mDetailType != null) {
 				if (mDetailType.equals("owner")) {
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
+					button1.setVisibility(View.GONE);
+					button2.setVisibility(View.GONE);
 				} else if (mDetailType.equals("renter")) {
 					button1.setOnClickListener(new OnClickListener() {
 
@@ -202,9 +202,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("已支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
-			button1.setVisibility(View.INVISIBLE);
+			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
-			button2.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.GONE);
 			/*
 			 * button3.setText("查看详情");
 			 * button3.setTextColor(Color.parseColor("#337ffd"));
@@ -215,9 +215,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("待评价");
 			status.setTextColor(Color.parseColor("#8be487"));
 			button1.setText("查看详情");
-			button1.setVisibility(View.INVISIBLE);
+			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
-			button2.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.GONE);
 			// button3.setText("立即评价");
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
@@ -225,9 +225,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("已取消");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
-			button1.setVisibility(View.INVISIBLE);
+			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
-			button2.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.GONE);
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
@@ -235,8 +235,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("已拒绝");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
-			button1.setVisibility(View.INVISIBLE);
-			button2.setVisibility(View.INVISIBLE);
+			button1.setVisibility(View.GONE);
+			button2.setVisibility(View.GONE);
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
@@ -336,7 +336,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 	private void dismissLoadingView() {
 		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
+			mLoadingView.setVisibility(View.GONE);
 		}
 	}
 

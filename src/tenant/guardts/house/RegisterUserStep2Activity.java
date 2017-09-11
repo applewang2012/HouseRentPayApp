@@ -29,9 +29,10 @@ public class RegisterUserStep2Activity extends BaseActivity{
 	private TextView mTitleBar;
 	private View mLoadingView;
 	private HoursePresenter mPresenter;
+	private String mValidAction = "http://tempuri.org/ValidateLoginName";
 	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
-	private String mUserName, mPhone, mVerifyCode,mPassword, mPasswordIndentify;;
+	private String mUserName, mPhone, mVerifyCode,mPassword, mPasswordIndentify;
 	private TextView mVerifyCodeText;
 	private int mTimeCount = -1;
 	
@@ -119,13 +120,26 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					return;
 				}
 				showLoadingView();
-				checkPhoneVerifyCode(mPhone, mVerifyCode);
+				mUserName = mPhone;
+				if (mUserName != null && mUserName.length() > 0){
+					showLoadingView();
+					checkUserNameValid(mUserName);
+				}
+				
 			}
 		});
 		
 		mLoadingView = (View)findViewById(R.id.id_data_loading);
 		mLoadingView.setVisibility(View.INVISIBLE);
 		
+	}
+	
+	private void checkUserNameValid(String username){
+		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
+		rpc.addProperty("loginName", username); 
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidAction, rpc);
+		mPresenter.startPresentServiceTask();
 	}
 	
 	
@@ -168,7 +182,12 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
+			dismissLoadingView();
 			if (msg.what == 100){
+				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}else if (msg.what == 200){
+				showLoadingView();
+				checkPhoneVerifyCode(mPhone, mVerifyCode);
 			}else if (msg.what == 102){
 				dismissLoadingView();
 				if (msg.obj != null){
@@ -176,17 +195,17 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					try {
 						json = new JSONObject((String)msg.obj);
 						String ret = json.optString("ret");
-						if (ret != null){
-							if (ret.equals("0")){
+//						if (ret != null){
+//							if (ret.equals("0")){
 								Intent nextIntent = new Intent(RegisterUserStep2Activity.this, RegisterUserStep3Activity.class);
 								nextIntent.putExtra("phone", mPhone);
 								nextIntent.putExtra("user_name", mPhone);
 								nextIntent.putExtra("user_password", mPasswordIndentify);
 								startActivity(nextIntent);
-							}else{
-								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-							}
-						}
+//							}else{
+//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+//							}
+//						}
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -278,6 +297,13 @@ public class RegisterUserStep2Activity extends BaseActivity{
 				mHandler.sendMessage(message);
 			}else if (action.equals(mSendVerifyCodeAction)){
 				
+			}else if (action.equals(mValidAction)){
+				Log.i("mingguo", "on success  action valid ");
+				if (templateInfo.equals("false")){
+					mHandler.sendEmptyMessage(100);
+				}else{
+					mHandler.sendEmptyMessage(200);
+				}
 			}
 		}
 	}

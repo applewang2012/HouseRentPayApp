@@ -331,11 +331,8 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-
 				// 房屋检索
-				Intent intent = new Intent(mContext, HouseSearchActivity.class);
-				intent.putExtra("user_name", userName);
-				startActivity(intent);
+				startActivity(new Intent(mContext, HomeSearchActivity.class));
 			}
 		});
 		LinearLayout mapRentHouse = (LinearLayout) mRootView.findViewById(R.id.id_share_house_ditu);

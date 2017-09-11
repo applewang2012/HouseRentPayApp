@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:alpha="0.3"
+    android:background="@drawable/open_lock_loading_bg"
+    android:clickable="true"
     tools:context="${relativePackage}.${activityClass}" >
 
   
@@ -28,7 +28,9 @@
         android:text="开锁中，请稍后。。。"
         android:textColor="#ffffff"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/base_dimen_700"
+        android:textSize="@dimen/base_dimen_37"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/base_dimen_300"
         />
 
 </FrameLayout>

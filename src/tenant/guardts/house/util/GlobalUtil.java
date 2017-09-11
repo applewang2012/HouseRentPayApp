@@ -178,7 +178,7 @@ public final class GlobalUtil {
 	}
 
 	public static void longToast(Context context, CharSequence text) {
-		newtoast(context, text, null, Toast.LENGTH_LONG);
+		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 	}
 
 	/**

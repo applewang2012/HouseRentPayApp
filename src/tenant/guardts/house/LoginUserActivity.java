@@ -79,8 +79,11 @@ public class LoginUserActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(LoginUserActivity.this, UserAgreementActivity.class));
-				
+				//startActivity(new Intent(LoginUserActivity.this, UserAgreementActivity.class));
+				Intent loadIntent = new Intent(LoginUserActivity.this, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
+				loadIntent.putExtra("tab_name", "用户服务协议");
+				startActivity(loadIntent);
 			}
 		});
 		Button login = (Button)findViewById(R.id.id_login_user_button);

@@ -109,7 +109,7 @@
         android:layout_height="@dimen/base_dimen_110"
         android:layout_marginTop="@dimen/base_dimen_10"
         android:background="#ffffff"
-        android:hint="请输入关键字"
+        android:hint="请输入房屋地址关键字"
         android:paddingLeft="@dimen/base_dimen_70" >
     </EditText>
     <Button

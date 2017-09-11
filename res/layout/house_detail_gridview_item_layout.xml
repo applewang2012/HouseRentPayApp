@@ -9,7 +9,7 @@
         android:layout_width="100dp"
         android:layout_height="130dp"
         android:scaleType="fitXY"
-        android:src="@drawable/default_image_icon" >
+        android:src="@drawable/home_icon_default" >
     </ImageView>
 
 </LinearLayout>

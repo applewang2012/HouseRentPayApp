@@ -352,6 +352,8 @@ public class HomeActivity extends BaseActivity {
 					e.printStackTrace();
 				}
 				
+			}else if (msg.what == 1000){
+				dimissOpenDoorLoading();
 			}
 		}
 	};
@@ -389,7 +391,10 @@ public class HomeActivity extends BaseActivity {
 	}
 	
 	private void dimissOpenDoorLoading(){
-		mOpenLockLoadingView.setVisibility(View.GONE);
+		if (mOpenLockLoadingView != null){
+			mOpenLockLoadingView.setVisibility(View.GONE);
+		}
+		
 	}
 
 	private void showOpenDoorAlertDialog(final String lockId) {
@@ -546,6 +551,16 @@ public class HomeActivity extends BaseActivity {
 	public void onStatusStart() {
 
 	}
+	
+	
+
+	@Override
+	public void onStatusError(String action, String error) {
+		// TODO Auto-generated method stub
+		super.onStatusError(action, error);
+		mHandler.sendEmptyMessageDelayed(1000, 50);
+	}
+
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {

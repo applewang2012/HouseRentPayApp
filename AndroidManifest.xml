@@ -200,7 +200,7 @@
         <activity
             android:name=".HouseSearchActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
@@ -495,6 +495,7 @@
 
         <activity
             android:name=".UserAgreementActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_user_agreement" >
         </activity>
         <activity
