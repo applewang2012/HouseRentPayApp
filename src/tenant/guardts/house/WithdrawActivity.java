@@ -23,6 +23,8 @@ public class WithdrawActivity extends BaseActivity {
 	private String idCard;
 	private String num;
 	private String type;
+	private String cardNo;
+	private String bankName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class WithdrawActivity extends BaseActivity {
 		Intent intent = getIntent();
 		withdrawSum = intent.getStringExtra("balance");
 		idCard = intent.getStringExtra("IDCard");
+		cardNo = intent.getStringExtra("CardNO");
+		bankName = intent.getStringExtra("BankName");
 	}
 
 	private void initEvent() {
@@ -48,6 +52,7 @@ public class WithdrawActivity extends BaseActivity {
 				//添加银行卡
 				Intent intent = new Intent(WithdrawActivity.this, AddBankCardActivity.class);
 				intent.putExtra("IDCard", idCard);
+				
 				startActivityForResult(intent, 100);
 			}
 		});
@@ -99,7 +104,11 @@ public class WithdrawActivity extends BaseActivity {
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
 		popupWindow.setOutsideTouchable(false);
-		
+		if(cardNo==null||cardNo.equals("")){
+			mAddBankCard.setText("添加银行卡");
+		}else{
+			mAddBankCard.setText(bankName+"("+cardNo+")");
+		}
 	}
 	
 	@Override

@@ -78,6 +78,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 		return mRootView;
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -211,9 +212,13 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 						intent.putExtra("balance", wallet);
 					}
 					if (idCard != null) {
-						Toast.makeText(mContext, idCard, Toast.LENGTH_SHORT).show();
 						intent.putExtra("IDCard", idCard);// 携带身份证号
+						intent.putExtra("CardNO",cardNo.substring(cardNo.length()-4, cardNo.length()));// 携带银行卡号后四位
+						intent.putExtra("BankName", bankName);// 携带银行类型
+						
 					}
+					
+
 					startActivity(intent);
 
 				}
@@ -255,6 +260,8 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		}
 	}
 
+	private String cardNo;
+	private String bankName;
 	private Handler mHandler = new Handler() {
 
 		@Override
@@ -271,6 +278,8 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 					mUserNickname.setText(realName);// 显示姓名
 					idCard = infoModel.get("IDCard");
 					wallet = infoModel.get("Wallet");
+					cardNo = infoModel.get("CardNO");
+					bankName = infoModel.get("BankName");
 					// Toast.makeText(mContext, wallet,
 					// Toast.LENGTH_LONG).show();
 					if (wallet == null || wallet.equals("null")) {
@@ -318,6 +327,8 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 				userInfo.put("Phone", itemJsonObject.optString("Phone"));// 手机
 				userInfo.put("Wallet", itemJsonObject.optString("Wallet"));
 				userInfo.put("RealName", itemJsonObject.optString("RealName"));
+				userInfo.put("BankName", itemJsonObject.optString("BankName"));
+				userInfo.put("CardNO", itemJsonObject.optString("CardNO"));
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");

@@ -18,6 +18,8 @@ public class WalletActivity extends BaseActivity {
 	private String balance;
 	private TextView transactionDetail;
 	private String idCard;
+	private String cardNo;
+	private String bankName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class WalletActivity extends BaseActivity {
 		Intent intent = getIntent();
 		balance = intent.getStringExtra("balance");
 		idCard = intent.getStringExtra("IDCard");
+		cardNo = intent.getStringExtra("CardNO");
+		bankName = intent.getStringExtra("BankName");
+		
 		mBalance = (TextView) findViewById(R.id.text_balance);
 		mBalance.setText(balance);
 		initView();
@@ -49,6 +54,8 @@ public class WalletActivity extends BaseActivity {
 				Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
 				intent.putExtra("balance", balance);
 				intent.putExtra("IDCard", idCard);
+				intent.putExtra("CardNO",cardNo);
+				intent.putExtra("BankName", bankName);
 				startActivity(intent);
 
 			}

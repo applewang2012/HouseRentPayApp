@@ -73,6 +73,8 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 	private String bankCardNum;
 	private String bankCardType;
 	private String idCard;
+	private String cardNo;
+	private String bankName;
 
 	private void initEvent() {
 		mNext.setOnClickListener(new OnClickListener() {
@@ -80,7 +82,7 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 			@Override
 			public void onClick(View v) {
 				if(checkInputContent()){
-					updateCreditCard(idCard, bankCardNum, bankCardName);
+					updateCreditCard(idCard, bankCardNum, bankCardType);
 					
 				}
 			}
