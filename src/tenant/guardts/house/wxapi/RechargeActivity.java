@@ -1,4 +1,4 @@
-package tenant.guardts.house;
+package tenant.guardts.house.wxapi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,34 +13,31 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.BaseActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
-import tenant.guardts.house.wxapi.HousePayActivity;
 import tenant.guardts.house.wxpay.WeiXinPay;
 
-public class RechargeActivity extends Activity {
+public class RechargeActivity extends BaseActivity {
 
 	private TextView mTitleBar;
 	private CheckBox monkey800;
@@ -57,7 +54,7 @@ public class RechargeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_recharge);
-		
+		ActivityController.addActivity(this);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("钱包充值");
@@ -186,12 +183,9 @@ public class RechargeActivity extends Activity {
 		
 		Button pay = (Button)findViewById(R.id.id_rechange_button);
 		pay.setOnClickListener(new OnClickListener() {
-			
-			
 
 			@Override
 			public void onClick(View v) {
-				
 				
 				if (monkey800.isChecked()){
 					mChargePrice = "800";
@@ -212,17 +206,28 @@ public class RechargeActivity extends Activity {
 						return;
 					}
 					CommonUtil.mPayHouseOrderId = null;
-					CommonUtil.ORDER_MONKEY = mChargePrice+"00";
-					CommonUtil.ORDER_MONKEY = "1";
+					CommonUtil.ORDER_MONKEY = mChargePrice;
+					//CommonUtil.ORDER_MONKEY = mChargePrice+"00"; //真实价格
 					showLoadingView();
 					api = WXAPIFactory.createWXAPI(RechargeActivity.this, CommonUtil.APP_ID);
-					startPay(CommonUtil.ORDER_MONKEY, UtilTool.generateOrderNo(), "127.0.0.1");
+					startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
+				}else{
+					Toast.makeText(getApplicationContext(), "请选择充值金额！", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 		});
 	}
 	
+	
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		dismissLoadingView();
+	}
+
 	private void startPay(final String price, final String orderNo, final String ip) {
 
 		new AsyncTask<Void, Void, Void>() {

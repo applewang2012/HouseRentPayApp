@@ -309,10 +309,9 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 				userInfo.put("Phone", itemJsonObject.optString("Phone"));// 手机
 				userInfo.put("Wallet", itemJsonObject.optString("Wallet"));
 				userInfo.put("RealName", itemJsonObject.optString("RealName"));
-				// CommonUtil.mRegisterName =
-				// itemJsonObject.optString("RealName");
-				// CommonUtil.mRegisterIdcard =
-				// itemJsonObject.optString("IDCard");
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 			}
 			return userInfo;
 		} catch (Exception e) {

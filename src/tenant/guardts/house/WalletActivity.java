@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.wxapi.RechargeActivity;
 
 public class WalletActivity extends BaseActivity {
 
@@ -21,6 +23,7 @@ public class WalletActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wallet);
+		ActivityController.addActivity(this);
 		Intent intent = getIntent();
 		balance = intent.getStringExtra("balance");
 		idCard = intent.getStringExtra("IDCard");
@@ -32,7 +35,6 @@ public class WalletActivity extends BaseActivity {
 
 	private void initEvent() {
 		mTopUp.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(WalletActivity.this, RechargeActivity.class));

@@ -39,7 +39,6 @@ public class ModifyPasswordActivity extends BaseActivity{
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText(getString(R.string.modify_password));
 		
-		
 		initView();
 	}
 	

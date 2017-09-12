@@ -122,12 +122,17 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 				Log.e("", value + "--");
 				Gson gson = new Gson();
 				CompleteStatus completeStatus = gson.fromJson(value, CompleteStatus.class);
-				int ret = Integer.parseInt(completeStatus.ret);
-				if (ret == 0) {
-					finish();
-				} else {
-					Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
+				try {
+					int ret = Integer.parseInt(completeStatus.ret);
+					if (ret == 0) {
+						finish();
+					} else {
+						Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
+				
 			}
 		};
 	};

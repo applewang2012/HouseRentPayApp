@@ -175,6 +175,13 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+	}
+	
+
+	@Override
+	protected void onPause() {
+		super.onPause();
 		dismissLoadingView();
 	}
 

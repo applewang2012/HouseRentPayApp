@@ -53,6 +53,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
+        Log.w("mingguo", "wxpay entry activity  oncreate  ");
     	api = WXAPIFactory.createWXAPI(this, CommonUtil.APP_ID);
         api.handleIntent(getIntent(), this);
         
@@ -167,7 +168,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
+		Log.i(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
 		ActivityController.finishAll();
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){
@@ -209,6 +210,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 				updateOrderInfo(CommonUtil.mPayHouseOrderId);
 			}else if (msg.what == 101){
 				
+			}else if (msg.what == 102){
+				
 			}
 		}
 	};
@@ -223,7 +226,10 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 			}else if (action.equals(mUpdateOrderAction)){
 				mHandler.sendEmptyMessageDelayed(101, 10);
 			}else if (action.equals(mDepositWalletAction)){
-				mHandler.sendEmptyMessageDelayed(102, 10);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 102;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
 			}
 		}
 	}
