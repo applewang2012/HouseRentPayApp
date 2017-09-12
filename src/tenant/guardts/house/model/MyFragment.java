@@ -48,7 +48,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	private HoursePresenter mPresent;
 	private FrameLayout mPublishHouse;
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
-	private String mGetUserInfoAction =  "http://tempuri.org/GetUserInfo";
+	private String mGetUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private FrameLayout mPassword;
 	private FrameLayout mLogout;
 	// private String mUsername;
@@ -58,7 +58,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	private String phone;
 	private String idCard;
 	private FrameLayout mWalletFrameLayout;
-	private String userName=new String();
+	private String userName = new String();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,11 +78,16 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 		return mRootView;
 	}
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		initData();
+	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		Log.w("mingguo", "my fragment  onresume  login name  "+CommonUtil.mUserLoginName);
+		Log.w("mingguo", "my fragment  onresume  login name  " + CommonUtil.mUserLoginName);
 		initData();
 	}
 
@@ -121,7 +126,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals(""))  {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -141,7 +146,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals(""))  {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -156,7 +161,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals(""))  {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -170,7 +175,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals(""))  {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -193,7 +198,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals(""))  {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -205,7 +210,10 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 					} else {
 						intent.putExtra("balance", wallet);
 					}
-					intent.putExtra("IDCard", idCard);//携带身份证号
+					if (idCard != null) {
+						Toast.makeText(mContext, idCard, Toast.LENGTH_SHORT).show();
+						intent.putExtra("IDCard", idCard);// 携带身份证号
+					}
 					startActivity(intent);
 
 				}
@@ -221,7 +229,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 	private void getUserInfo() {
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
-		
+
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetUserInfoAction));
 		rpc.addProperty("username", CommonUtil.mUserLoginName);
 		mPresent.readyPresentServiceParams(mContext, url, mGetUserInfoAction, rpc);
@@ -254,7 +262,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			dismissLoadingView();
-			if (msg.what == 100){
+			if (msg.what == 100) {
 				HashMap<String, String> infoModel = parseUserInfo((String) msg.obj);
 				if (infoModel != null) {
 					phone = infoModel.get("Phone");
@@ -263,29 +271,30 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 					mUserNickname.setText(realName);// 显示姓名
 					idCard = infoModel.get("IDCard");
 					wallet = infoModel.get("Wallet");
-					// Toast.makeText(mContext, wallet, Toast.LENGTH_LONG).show();
+					// Toast.makeText(mContext, wallet,
+					// Toast.LENGTH_LONG).show();
 					if (wallet == null || wallet.equals("null")) {
 						mWallet.setText("¥0.0");
 
 					} else {
 						mWallet.setText("¥" + wallet);
 					}
-					if (realName != null && !realName.equals("")){
+					if (realName != null && !realName.equals("")) {
 						mRegistAndLogin.setVisibility(View.GONE);
 						mUserNickname.setVisibility(View.VISIBLE);
 						mUserAddress.setVisibility(View.VISIBLE);
-					}else{
+					} else {
 						mRegistAndLogin.setVisibility(View.VISIBLE);
 						mUserNickname.setVisibility(View.GONE);
 						mUserAddress.setVisibility(View.GONE);
 					}
 				}
-			}else if (msg.what == 101){
+			} else if (msg.what == 101) {
 				Intent intent = new Intent(mContext, LoginUserActivity.class);
 				startActivity(intent);
 				MyFragment.this.getActivity().finish();
 			}
-			
+
 		}
 	};
 	private ImageView mImageAvator;
@@ -356,9 +365,9 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 				}).show();
 	}
-	
+
 	private void uploadXingeToken() {
-		
+
 		String url = CommonUtil.mUserHost + "services.asmx?op=UpdateDeviceID";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
@@ -402,19 +411,19 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "on status success  "+action+ "  success " + templateInfo);
-		if (action.equals(mGetUserInfoAction)){
+		Log.e("mingguo", "on status success  " + action + "  success " + templateInfo);
+		if (action.equals(mGetUserInfoAction)) {
 			Message msgMessage = mHandler.obtainMessage();
 			msgMessage.what = 100;
 			msgMessage.obj = templateInfo;
 			msgMessage.sendToTarget();
-		}else if (action.equals(mXingeTokenAction)){
+		} else if (action.equals(mXingeTokenAction)) {
 			Message msgMessage = mHandler.obtainMessage();
 			msgMessage.what = 101;
 			msgMessage.obj = templateInfo;
 			msgMessage.sendToTarget();
 		}
-		
+
 	}
 
 	@Override

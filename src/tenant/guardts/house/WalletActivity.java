@@ -48,6 +48,7 @@ public class WalletActivity extends BaseActivity {
 				// 跳转提现
 				Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
 				intent.putExtra("balance", balance);
+				intent.putExtra("IDCard", idCard);
 				startActivity(intent);
 
 			}

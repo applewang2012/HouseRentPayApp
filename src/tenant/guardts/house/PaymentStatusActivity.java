@@ -87,7 +87,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		finish = (Button) findViewById(R.id.id_button_finish_pay);
 		if(successful){
 			TextView tvRentNO=(TextView) findViewById(R.id.id_pay_order_no);
-			tvRentNO.setText(rentNO);
+			tvRentNO.setText(orderID);
 			TextView tvOrderCreatedDate=(TextView) findViewById(R.id.id_pay_oder_time);
 			String date = UtilTool.stampToNormalDate(orderCreatedDate.substring(6,orderCreatedDate.length()-2));
 			tvOrderCreatedDate.setText(date);

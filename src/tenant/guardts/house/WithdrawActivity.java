@@ -20,6 +20,9 @@ public class WithdrawActivity extends BaseActivity {
 	private String withdrawSum;
 	private PopupWindow popupWindow;
 	private Button mWithdraw;
+	private String idCard;
+	private String num;
+	private String type;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class WithdrawActivity extends BaseActivity {
 	private void initData() {
 		Intent intent = getIntent();
 		withdrawSum = intent.getStringExtra("balance");
-		
+		idCard = intent.getStringExtra("IDCard");
 	}
 
 	private void initEvent() {
@@ -44,8 +47,8 @@ public class WithdrawActivity extends BaseActivity {
 			public void onClick(View v) {
 				//添加银行卡
 				Intent intent = new Intent(WithdrawActivity.this, AddBankCardActivity.class);
-				//startActivityForResult(intent, 100);
-				startActivity(intent);
+				intent.putExtra("IDCard", idCard);
+				startActivityForResult(intent, 100);
 			}
 		});
 		
@@ -101,12 +104,15 @@ public class WithdrawActivity extends BaseActivity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		//回传银行可类型及卡号后四位
+		//回传银行卡类型及卡号后四位
 		if(resultCode==RESULT_OK){
 			if(requestCode==100){
-				
+				num = data.getStringExtra("bankNum");
+				type = data.getStringExtra("bankType");
+				mAddBankCard.setText(type+"("+num+")");
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+	
 }
