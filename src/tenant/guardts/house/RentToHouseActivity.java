@@ -46,7 +46,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	
 	private Context mContext;
 	private ListView mlistView;
-	private View mLoadingView;
+	
 	private UniversalAdapter mAdapter;
 	private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	private HoursePresenter mPresent;
@@ -83,7 +83,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		mlistView = (ListView)findViewById(R.id.id_fragment_house_listview);
 		mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
+		
 		mContentLayout.setVisibility(View.INVISIBLE);
 		initAdapter();
 		mlistView.setAdapter(mAdapter);
@@ -125,7 +125,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	
 	private void initData(){
 		mPresent = new HoursePresenter(mContext, RentToHouseActivity.this);
-		showLoadingView();
+		
 		getHouseInfo();
 		
 	}
@@ -133,7 +133,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onResume() {
 		super.onResume();
-//		showLoadingView();
+//		
 //		mContentLayout.setVisibility(View.INVISIBLE);
 //		mAdapter.notifyDataSetChanged();
 	}
@@ -205,7 +205,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 //	         @Override  
 //	  
 //	         public void onClick(DialogInterface dialog, int which) {//ȷ����ť����Ӧ�¼�  
-//	        	 showLoadingView();
+//	        	 
 //	        	 deleteHouseInfo(mHouseInfoList.get(position).getHouseId());
 //	         }  
 //	  
@@ -221,7 +221,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseInfoByLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetHouseInfoAction));
 		rpc.addProperty("loginName", mUserName);
-		mPresent.readyPresentServiceParams(mContext, url, mGetHouseInfoAction, rpc);
+		mPresent.readyPresentServiceParams(this, url, mGetHouseInfoAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 	
@@ -229,7 +229,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfoAction));
 		rpc.addProperty("houseNo", houseNo);
-		mPresent.readyPresentServiceParams(mContext, url, mDeleteHouseInfoAction, rpc);
+		mPresent.readyPresentServiceParams(this, url, mDeleteHouseInfoAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 	
@@ -240,7 +240,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				getAdapterListData(parseUserHouseInfo((String)msg.obj));
 				if (mHouseInfoList.size() == 0){
 					mContentLayout.setVisibility(View.GONE);
@@ -252,7 +252,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				if ("true".equals((String)msg.obj)){
 					mHouseInfoList.remove(mDeleteIndex);
 					Log.w("housefragment", "delete house   "+mHouseInfoList.size());
@@ -316,44 +316,26 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		}
 	}
 
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.v("mingguo", "on status success  action  "+action+"  info  "+templateInfo);
-		if (action.equals(mGetHouseInfoAction)){
-			Message msgMessage = mHandler.obtainMessage();
-			msgMessage.what = 100;
-			msgMessage.obj = templateInfo;
-			msgMessage.sendToTarget();
-		}else if (action.equals(mDeleteHouseInfoAction)){
-			Message msgMessage = mHandler.obtainMessage();
-			msgMessage.what = 101;
-			msgMessage.obj = templateInfo;
-			msgMessage.sendToTarget();
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+			if (action.equals(mGetHouseInfoAction)){
+				Message msgMessage = mHandler.obtainMessage();
+				msgMessage.what = 100;
+				msgMessage.obj = templateInfo;
+				msgMessage.sendToTarget();
+			}else if (action.equals(mDeleteHouseInfoAction)){
+				Message msgMessage = mHandler.obtainMessage();
+				msgMessage.what = 101;
+				msgMessage.obj = templateInfo;
+				msgMessage.sendToTarget();
+			}
 		}
 		
-	}
-
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		Log.e("housefragment", "on start  ");
 	}
 
 	@Override

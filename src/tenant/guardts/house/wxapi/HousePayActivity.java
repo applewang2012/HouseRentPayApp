@@ -23,15 +23,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.AddRentAttributeActivity;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.PaymentStatusActivity;
 import tenant.guardts.house.R;
@@ -46,7 +42,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
 	private IWXAPI api;
-	private View mLoadingView;
+	
 	private String realPrice = null;
 	private LinearLayout mWallet;
 	private LinearLayout mWechat;
@@ -83,8 +79,8 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 			priceText.setText(price + "元");
 		}
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		CommonUtil.ORDER_MONKEY = price;
 		CommonUtil.OWNER_IDCARD = ownerId;
 		try {
@@ -107,7 +103,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 			@Override
 			public void onClick(View v) {
-				showLoadingView();
+				
 				if (isPayByWechat) {
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
@@ -126,13 +122,13 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	}
 
 	private void payByWallet(String renterID, String ownerID, String money) {
-		// showLoadingView();
+		// 
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=PayUseWallet";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPayUseWallet));
 		rpc.addProperty("rennteeIDCard", renterID);
 		rpc.addProperty("ownerIDCard", ownerID);
 		rpc.addProperty("money", money);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPayUseWallet, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mPayUseWallet, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -182,25 +178,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	@Override
 	protected void onPause() {
 		super.onPause();
-		dismissLoadingView();
-	}
-
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(HousePayActivity.this,
-						R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
+		
 	}
 
 	private void startPay(final String price, final String orderNo, final String ip) {
@@ -266,7 +244,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			dismissLoadingView();
+			
 			if (msg.what == 818) {
 				String value = (String) msg.obj;
 				///////////////////////////////////////////////////////////////////////////////
@@ -303,12 +281,16 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	private String price;
 
 	public void onStatusSuccess(String action, String templateInfo) {
-		if (action.equals(mPayUseWallet)) {
-			Log.e("", action + "======" + templateInfo);
-			Message msg = mHandler.obtainMessage();
-			msg.what = 818;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+			if (action.equals(mPayUseWallet)) {
+				Log.e("", action + "======" + templateInfo);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 818;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}
 		}
 	}
 

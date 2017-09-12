@@ -38,7 +38,7 @@ import tenant.guardts.house.util.JsonObjectParse;
 public class AddHouseInfoActivity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	//
 	private HoursePresenter mPresenter;
 	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";//扣费提醒
 	private String mPropertyAction = "http://tempuri.org/GetHouseProperty";
@@ -126,8 +126,8 @@ public class AddHouseInfoActivity extends BaseActivity{
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+//		
+//		
 		commission = (TextView) findViewById(R.id.commission);//手续费
 		explanation = (TextView) findViewById(R.id.explanation);//手续费描述
 		age = (EditText)findViewById(R.id.id_add_house_price);
@@ -327,11 +327,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 	 * @param price
 	 */
 	private void getPayRateDesc(String price){
-//		showLoadingView();
+//		
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mGetPayRateDesc, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
@@ -523,7 +523,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=ValidateHouseID";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidHouseIDAction));
 //			rpc.addProperty("houseID", mHouseNo.getText().toString());
-//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidHouseIDAction, rpc);
+//			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mValidHouseIDAction, rpc);
 //			mPresenter.startPresentServiceTask();
 //	}
 
@@ -533,13 +533,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 	private void getHouseProperty(){
 		if (!mSelectorInfo.containsKey("property")){
-			showLoadingView();
+			
 			HouseSelectorModel property = new HouseSelectorModel();
 			property.setHouseOrginText((String) mPropertryTextView.getText());
 			mSelectorInfo.put("property", property);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseProperty";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPropertyAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPropertyAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mPropertyAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mPropertryTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
@@ -550,13 +550,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 	private void getHouseType(){
 		if (!mSelectorInfo.containsKey("type")){
-			showLoadingView();
+			
 			HouseSelectorModel type = new HouseSelectorModel();
 			type.setHouseOrginText((String) mTypeTextView.getText());
 			mSelectorInfo.put("type", type);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mTypeAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mTypeAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mTypeAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mTypeTextView, "type", mSelectorInfo.get("type").getHouseAllContent());
@@ -565,13 +565,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 	private void getHouseDirection(){
 		if (!mSelectorInfo.containsKey("direction")){
-			showLoadingView();
+			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mDirectionTextView.getText());
 			mSelectorInfo.put("direction", direction);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseDirection";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDirectionAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mDirectionAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDirectionAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mDirectionTextView, "direction", mSelectorInfo.get("direction").getHouseAllContent());
@@ -580,13 +580,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 //	private void getHouseStructure(){
 //		if (!mSelectorInfo.containsKey("structure")){
-//			showLoadingView();
+//			
 //			HouseSelectorModel direction = new HouseSelectorModel();
 //			direction.setHouseOrginText((String) mStructureTextView.getText());
 //			mSelectorInfo.put("structure", direction);
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseStructure";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStuctureAction));
-//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mStuctureAction, rpc);
+//			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mStuctureAction, rpc);
 //			mPresenter.startPresentServiceTask();
 //		}else{
 //			showAlertDialog(mStructureTextView, "structure", mSelectorInfo.get("structure").getHouseAllContent());
@@ -596,13 +596,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 //	private void getHouseBuildingStructure(){
 //		if (!mSelectorInfo.containsKey("buildingstructure")){
-//			showLoadingView();
+//			
 //			HouseSelectorModel direction = new HouseSelectorModel();
 //			direction.setHouseOrginText((String) mBuildingStructureTextView.getText());
 //			mSelectorInfo.put("buildingstructure", direction);
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetBuildingStructure";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mBuildingStuctureAction));
-//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mBuildingStuctureAction, rpc);
+//			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mBuildingStuctureAction, rpc);
 //			mPresenter.startPresentServiceTask();
 //		}else{
 //			showAlertDialog(mBuildingStructureTextView, "buildingstructure", mSelectorInfo.get("buildingstructure").getHouseAllContent());
@@ -611,13 +611,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 	private void getHouseRentType(){
 		if (!mSelectorInfo.containsKey("renttype")){
-			showLoadingView();
+			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mRentTypeTextView.getText());
 			mSelectorInfo.put("renttype", direction);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseRentType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentTypeAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRentTypeAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRentTypeAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mRentTypeTextView, "renttype", mSelectorInfo.get("renttype").getHouseAllContent());
@@ -626,13 +626,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 	
 //	private void getHouseOwnersType(){
 //		if (!mSelectorInfo.containsKey("ownertype")){
-//			showLoadingView();
+//			
 //			HouseSelectorModel direction = new HouseSelectorModel();
 //			direction.setHouseOrginText((String) mOwnerTypeTextView.getText());
 //			mSelectorInfo.put("ownertype", direction);
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseOwnType";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOwnerTypeAction));
-//			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOwnerTypeAction, rpc);
+//			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mOwnerTypeAction, rpc);
 //			mPresenter.startPresentServiceTask();
 //		}else{
 //			showAlertDialog(mOwnerTypeTextView, "ownertype", mSelectorInfo.get("ownertype").getHouseAllContent());
@@ -648,13 +648,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 			mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
 		}
 		if (!mSelectorInfo.containsKey("district")){
-			showLoadingView();
+			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mDistrictTextView.getText());
 			mSelectorInfo.put("district", direction);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetDistrictList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDistrictAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mDistrictAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDistrictAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mDistrictTextView, "district", mSelectorInfo.get("district").getHouseAllContent());
@@ -663,7 +663,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void getHouseRoad(){
-		showLoadingView();
+		
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mRoadTextView.getText());
 			mSelectorInfo.put("road", direction);
@@ -672,7 +672,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			if (mSelectorInfo.get("street").getHouseSelectId() != null && !mSelectorInfo.get("street").getHouseSelectId().equals("")){
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
 				rpc.addProperty("street", mSelectorInfo.get("street").getHouseSelectId());
-				mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRoadAction, rpc);
+				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRoadAction, rpc);
 				mPresenter.startPresentServiceTask();
 			}
 	}
@@ -683,7 +683,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				" mRStructure "+"default null "+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
 				CommonUtil.mUserLoginName+" mrentType "+mrentType+" mowntype "+"default null"+"  RBuildingType "+"defautl null "+"  RLocationDescription "+" desp ");
-		showLoadingView();
+		
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentInfo";
 		
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddHouseAction));
@@ -716,7 +716,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("rentType", mrentType);                
 		rpc.addProperty("ownType", "02");         
 		
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddHouseAction, rpc);
+		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mAddHouseAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -724,7 +724,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		if (mSelectorInfo.containsKey("road")){
 			mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
 		}
-		showLoadingView();
+		
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mStreetTextView.getText());
 			mSelectorInfo.put("street", direction);
@@ -732,7 +732,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStreetAction));
 			if (mSelectorInfo.get("district").getHouseSelectId() != null && !mSelectorInfo.get("district").getHouseSelectId().equals("")){
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
-				mPresenter.readyPresentServiceParams(getApplicationContext(), url, mStreetAction, rpc);
+				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mStreetAction, rpc);
 				mPresenter.startPresentServiceTask();
 			}else{
 				
@@ -745,13 +745,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}
 		
 		if (!mSelectorInfo.containsKey("fenju")){
-			showLoadingView();
+			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mFenjuTextView.getText());
 			mSelectorInfo.put("fenju", direction);
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetPoliceStationList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mFenjuAction));
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mFenjuAction, rpc);
+			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mFenjuAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}else{
 			showAlertDialog(mFenjuTextView, "fenju", mSelectorInfo.get("fenju").getHouseAllContent());
@@ -759,7 +759,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void getHousePolice(){
-		showLoadingView();
+		
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mPoliceTextView.getText());
 			mSelectorInfo.put("police", direction);
@@ -767,7 +767,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPoliceAction));
 			if (mSelectorInfo.get("fenju").getHouseSelectId() != null && !mSelectorInfo.get("fenju").getHouseSelectId().equals("")){
 				rpc.addProperty("parentstationId", mSelectorInfo.get("fenju").getHouseSelectId());
-				mPresenter.readyPresentServiceParams(getApplicationContext(), url, mPoliceAction, rpc);
+				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mPoliceAction, rpc);
 				mPresenter.startPresentServiceTask();
 			}
 	}
@@ -797,63 +797,63 @@ public class AddHouseInfoActivity extends BaseActivity{
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("property").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				mSelectorInfo.get("property").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mPropertryTextView,"property" , JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("type").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				mSelectorInfo.get("type").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mTypeTextView, "type", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("direction").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				mSelectorInfo.get("direction").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mDirectionTextView, "direction", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 103){
-//				dismissLoadingView();
+//				
 //				mSelectorInfo.get("structure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 //				mSelectorInfo.get("structure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 //				showAlertDialog(mStructureTextView, "structure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 104){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("district").setHouseAllContent(JsonObjectParse.parseHouseDistrict((String)msg.obj).get(1));
 				mSelectorInfo.get("district").setHouseAllId(JsonObjectParse.parseHouseDistrict((String)msg.obj).get(0));
 				showAlertDialog(mDistrictTextView, "district", JsonObjectParse.parseHouseDistrict((String)msg.obj).get(1));
 			}else if (msg.what == 105){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("street").setHouseAllContent(JsonObjectParse.parseHouseStreet((String)msg.obj).get(1));
 				mSelectorInfo.get("street").setHouseAllId(JsonObjectParse.parseHouseStreet((String)msg.obj).get(0));
 				showAlertDialog(mStreetTextView, "street", JsonObjectParse.parseHouseStreet((String)msg.obj).get(1));
 			}else if (msg.what == 106){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("road").setHouseAllContent(JsonObjectParse.parseHouseRoad((String)msg.obj).get(1));
 				mSelectorInfo.get("road").setHouseAllId(JsonObjectParse.parseHouseRoad((String)msg.obj).get(0));
 				showAlertDialog(mRoadTextView, "road", JsonObjectParse.parseHouseRoad((String)msg.obj).get(1));
 			}else if (msg.what == 107){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("fenju").setHouseAllContent(JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 				mSelectorInfo.get("fenju").setHouseAllId(JsonObjectParse.parseHouseFenju((String)msg.obj).get(0));
 				showAlertDialog(mFenjuTextView, "fenju", JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 			}else if (msg.what == 108){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("police").setHouseAllContent(JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 				mSelectorInfo.get("police").setHouseAllId(JsonObjectParse.parseHouseFenju((String)msg.obj).get(0));
 				showAlertDialog(mPoliceTextView, "police", JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 			}else if (msg.what == 109){
-				dismissLoadingView();
+				
 				mSelectorInfo.get("renttype").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				mSelectorInfo.get("renttype").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 				showAlertDialog(mRentTypeTextView, "renttype", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 			}else if (msg.what == 110){
-//				dismissLoadingView();
+//				
 //				mSelectorInfo.get("ownertype").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 //				mSelectorInfo.get("ownertype").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 //				showAlertDialog(mOwnerTypeTextView, "ownertype", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 				
 			}else if (msg.what == 111){
-//				dismissLoadingView();
+//				
 //				mSelectorInfo.get("buildingstructure").setHouseAllContent(JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
 //				mSelectorInfo.get("buildingstructure").setHouseAllId(JsonObjectParse.parseHouseProperty((String)msg.obj).get(0));
 //				showAlertDialog(mBuildingStructureTextView, "buildingstructure", JsonObjectParse.parseHouseProperty((String)msg.obj).get(1));
@@ -897,43 +897,23 @@ public class AddHouseInfoActivity extends BaseActivity{
 	};
 	private EditText age;
 	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
+//			if (keyCode == KeyEvent.KEYCODE_BACK) {
+//				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
+//					
+//					return false;
+//				}
+//			}
 			return super.onKeyDown(keyCode, event);
 		}
 
 	@Override
-	public void onStatusStart() {
-		
-		
-	}
-
-	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mPropertyAction)){
 				Message msg = mHandler.obtainMessage();

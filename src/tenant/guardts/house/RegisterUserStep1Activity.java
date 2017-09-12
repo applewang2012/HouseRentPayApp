@@ -30,7 +30,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	private String mPassword, mPasswordIndentify;
 	private String mValidAction = "http://tempuri.org/ValidateLoginName";
 	//private boolean mUsernameValid;
-	private View mLoadingView;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,27 +53,10 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		initView();
 	}
 	
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
-	
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
+		
 		final EditText password = (EditText)findViewById(R.id.id_register_step1_input_password);
 		final EditText passowrdInditfy = (EditText)findViewById(R.id.id_register_step1_input_password_identify);
 		
@@ -127,7 +110,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 				
 				mUserName = userName.getEditableText().toString();
 				if (mUserName != null && mUserName.length() > 0){
-					showLoadingView();
+					
 					checkUserNameValid(mUserName);
 				}
 				
@@ -152,7 +135,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -163,7 +146,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
+			
 			if (msg.what == 100){
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 200){
@@ -180,14 +163,6 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	
 
 	@Override
-	public void onStatusStart() {
-		
-		
-	}
-	
-	
-
-	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
@@ -196,7 +171,8 @@ public class RegisterUserStep1Activity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
 				Log.i("mingguo", "on success  action valid ");

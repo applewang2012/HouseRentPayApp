@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/open_lock_loading_bg"
+    android:clickable="true"
+    tools:context="${relativePackage}.${activityClass}" >
+
+  
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/open_lock_loading_watch_bg" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/open_lock_loading_watch_indicator" />
+    
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/open_lock_loading_watch_indicator2" />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开锁中，请稍后。。。"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:textSize="@dimen/base_dimen_37"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/base_dimen_300"
+        />
+
+</FrameLayout>

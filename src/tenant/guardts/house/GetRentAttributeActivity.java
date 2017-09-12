@@ -44,7 +44,7 @@ import tenant.guardts.house.util.ScreenShotUtil;
 public class GetRentAttributeActivity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
@@ -148,8 +148,8 @@ public class GetRentAttributeActivity extends BaseActivity{
 	
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
 		mQrcodeView.setVisibility(View.INVISIBLE);
 		mOwnerType[0] = "日租房";
@@ -174,7 +174,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-//				showLoadingView();
+//				
 //				confirmRentAttributeInfo(mOrderId);
 				
 				if (CommonUtil.mRegisterIdcard != null && !CommonUtil.mRegisterIdcard.equals("")){
@@ -271,7 +271,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 			if(faceImages == null){
 				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
-			showLoadingView();
+			
 			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
 			identifyUserInfo(mFaceCaptureString, mCaptureString);
 			}
@@ -291,36 +291,36 @@ public class GetRentAttributeActivity extends BaseActivity{
 		rpc.addProperty("name", mRentName.getText().toString());
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, identifyUrl, mIdentifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
 
 	private void getRentAttributeByOrderId(String id){
 		
-		mLoadingView.setVisibility(View.VISIBLE);
+		
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentAttributeAction));
 		rpc.addProperty("id", id); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRentAttributeAction, rpc);
+		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mRentAttributeAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
 	private void confirmRentAttributeInfo(String id){
-		mLoadingView.setVisibility(View.VISIBLE);
+		
 		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mConfirmRentAttribute, rpc);
+		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mConfirmRentAttribute, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
 	private void completeHouseRentAttributeInfo(String id){
-		mLoadingView.setVisibility(View.VISIBLE);
+		
 		String url = CommonUtil.mUserHost+"Services.asmx?op=CompleteRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCompleteRentAttribute, rpc);
+		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mCompleteRentAttribute, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -332,16 +332,16 @@ public class GetRentAttributeActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				jsonAttributeInfoToView((String)msg.obj);
 			}else if (msg.what == 101){
 				completeHouseRentAttributeInfo(mOrderId);
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				GlobalUtil.shortToast(getApplication(), "订单已确认", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				finish();
 			}else if (msg.what == 103){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -354,7 +354,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 								//if (similar != null && similar.length() > 3){
 									Double rate = 100 *	Double.parseDouble(similar);
 									GlobalUtil.shortToast(getApplication(), mRentName.getText().toString() + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-									showLoadingView();
+									
 									confirmRentAttributeInfo(mOrderId);
 									return;
 								//}
@@ -370,7 +370,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 					e.printStackTrace();
 				}
 			}else if (msg.what == 200){
-				dismissLoadingView();
+				
 			}
 		}
 		
@@ -400,45 +400,13 @@ public class GetRentAttributeActivity extends BaseActivity{
 	}
 	
 	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-				if (mQrcodeView != null && mQrcodeView.getVisibility() == View.VISIBLE){
-					mQrcodeView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
 			return super.onKeyDown(keyCode, event);
 		}
 
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
-	
-	
 
 	@Override
 	public void onStatusError(String action, String error) {
@@ -450,7 +418,8 @@ public class GetRentAttributeActivity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentAttributeAction)){
 				Message msg = mHandler.obtainMessage();

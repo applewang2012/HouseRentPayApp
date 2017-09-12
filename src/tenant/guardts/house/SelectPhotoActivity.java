@@ -64,7 +64,7 @@ public class SelectPhotoActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	private int mUploadNum = 0;
 	private String mRentNo = "";
-	private View mLoadingView;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mAddImageBitmap = BitmapFactory.decodeResource(
@@ -80,8 +80,8 @@ public class SelectPhotoActivity extends BaseActivity {
 		mRentNo = getIntent().getStringExtra("rentNo");
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		pop = new PopupWindow(SelectPhotoActivity.this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
 
 		ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
@@ -171,7 +171,7 @@ public class SelectPhotoActivity extends BaseActivity {
 			Log.i("mingguo", "onclick  bitmap size  "+Bimp.tempSelectBitmap.size());
 			Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
 		}else{
-			showLoadingView();
+			
 			addRentHouseImageRequest(num);
 			//}
 			//for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++){
@@ -183,22 +183,6 @@ public class SelectPhotoActivity extends BaseActivity {
 		}
 	}
 	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
-	
 	private void addRentHouseImageRequest(int num){
 		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentImage";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddImageAction));
@@ -207,7 +191,7 @@ public class SelectPhotoActivity extends BaseActivity {
 		rpc.addProperty("memo", "");
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
 		rpc.addProperty("imageStr", BMapUtil.bitmapToBase64(Bimp.tempSelectBitmap.get(num-1).getBitmap()));
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddImageAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mAddImageAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -375,7 +359,7 @@ public class SelectPhotoActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
+			
 			if (msg.what == 100){
 				if (msg.obj != null){
 					JSONObject object;
@@ -407,7 +391,8 @@ public class SelectPhotoActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "select photeo upload  status  success  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddImageAction)){
 				Message message = mHandler.obtainMessage();
@@ -418,10 +403,6 @@ public class SelectPhotoActivity extends BaseActivity {
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		super.onStatusStart();
-	}
 
 	@Override
 	public void onStatusError(String action, String error) {

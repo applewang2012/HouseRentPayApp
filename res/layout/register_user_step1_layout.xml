@@ -301,9 +301,6 @@
 		         android:background="@drawable/button_background_selector"
                  />
     </LinearLayout>
-    
-    
-     
 
     <include
         android:id="@+id/id_data_loading"

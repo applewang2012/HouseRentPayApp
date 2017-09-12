@@ -47,7 +47,7 @@ import tenant.guardts.house.util.ScreenShotUtil;
 public class RegisterUserActivity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mValidAction = "http://tempuri.org/ValidateLoginName";
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
@@ -109,8 +109,8 @@ public class RegisterUserActivity extends BaseActivity{
 		frontCameraManager = new ScreenshotCameraManager(mFrontCamera, frontHolder);
 		
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		final EditText userName = (EditText)findViewById(R.id.id_register_username);
 		userName.setOnFocusChangeListener(new OnFocusChangeListener() {
 			
@@ -205,7 +205,7 @@ public class RegisterUserActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-//				showLoadingView();
+//				
 //				registerUserName();
 				
 				Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -253,7 +253,7 @@ public class RegisterUserActivity extends BaseActivity{
 			if(faceImages == null){
 				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
-			showLoadingView();
+			
 			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
 			identifyUserInfo(mFaceCaptureString, mCaptureString);
 		}
@@ -345,7 +345,7 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("name", mRealName);
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.readyPresentServiceParams(this, identifyUrl, mIdentifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
@@ -354,7 +354,7 @@ public class RegisterUserActivity extends BaseActivity{
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendVerifyCodeAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -363,7 +363,7 @@ public class RegisterUserActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
 		rpc.addProperty("number", code); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCheckVerifyCodeAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -371,7 +371,7 @@ public class RegisterUserActivity extends BaseActivity{
 		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -391,7 +391,7 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("nickName", mNickName);
 		rpc.addProperty("address", mAddress);
 		rpc.addProperty("status", "0"); //
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRegisterAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mRegisterAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -404,7 +404,7 @@ public class RegisterUserActivity extends BaseActivity{
 			if (msg.what == 100){
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_name", mUserName);
@@ -419,7 +419,7 @@ public class RegisterUserActivity extends BaseActivity{
 				startActivity(intent);
 				finish();
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -446,29 +446,13 @@ public class RegisterUserActivity extends BaseActivity{
 				}
 				
 			}else if (msg.what == 200){
-				dismissLoadingView();
+				
 			}
 			
 		}
 		
 	};
 	
-	private void showLoadingView(){
-		
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 	
 	
 	/**
@@ -522,22 +506,9 @@ public class RegisterUserActivity extends BaseActivity{
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
 			return super.onKeyDown(keyCode, event);
 		}
 
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
-	
-	
 
 	@Override
 	public void onStatusError(String action, String error) {
@@ -548,7 +519,8 @@ public class RegisterUserActivity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
 				Log.i("mingguo", "on success  action valid ");

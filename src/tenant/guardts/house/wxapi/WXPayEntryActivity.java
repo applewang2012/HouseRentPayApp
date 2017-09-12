@@ -14,7 +14,6 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,18 +21,16 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, DataStatusInterface{
+public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler, DataStatusInterface{
 	
 	private static final String TAG = "mingguo";
 	private View mSuccessFrameLayout, mFailedFrameLayout;
@@ -43,7 +40,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 	private TextView mOrderMonkey;
 	private Button mFinishPay;
 	private Button mFailedPay;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mCompleteRentAttribute =  "http://tempuri.org/CompleteRentAttribute";
 	private String mUpdateOrderAction =  "http://tempuri.org/UpdateOrderInfo";
@@ -57,8 +54,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
     	api = WXAPIFactory.createWXAPI(this, CommonUtil.APP_ID);
         api.handleIntent(getIntent(), this);
         
-//        mLoadingView = (View)findViewById(R.id.id_data_loading);
-//		mLoadingView.setVisibility(View.INVISIBLE);
+//        
+//		
         
     }
     
@@ -102,7 +99,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		String url = CommonUtil.mUserHost+"Services.asmx?op=CompleteRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCompleteRentAttribute, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mCompleteRentAttribute, rpc);
 		mPresenter.startPresentServiceTask();
 	}
     
@@ -114,7 +111,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDepositWalletAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		rpc.addProperty("fee", fee);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mDepositWalletAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mDepositWalletAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
     
@@ -132,25 +129,10 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		rpc.addProperty("fee", CommonUtil.ORDER_MONKEY);
 		rpc.addProperty("prepayId", CommonUtil.ORDER_PREPAY_ID );
 		rpc.addProperty("ownerIdCard", CommonUtil.OWNER_IDCARD );
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateOrderAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mUpdateOrderAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
     
-    private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -175,18 +157,16 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
 					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-					mLoadingView = (View) v.findViewById(R.id.id_data_loading);
 					setContentView(v);
 					initSuccessView(v);
-					showLoadingView();
+					
 					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 				}else{
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
 					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-					mLoadingView = (View) v.findViewById(R.id.id_data_loading);
 					setContentView(v);
 					initSuccessView(v);
-					showLoadingView();
+					
 					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
 				}
 				
@@ -204,9 +184,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
+			
 			if (msg.what == 100){
-				showLoadingView();
+				
 				updateOrderInfo(CommonUtil.mPayHouseOrderId);
 			}else if (msg.what == 101){
 				
@@ -220,6 +200,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCompleteRentAttribute)){
 				mHandler.sendEmptyMessageDelayed(100, 100);
@@ -234,15 +215,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler, 
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

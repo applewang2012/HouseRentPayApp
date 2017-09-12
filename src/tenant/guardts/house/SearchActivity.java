@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.view.HistoryRecordsView;
 
 public class SearchActivity extends Activity{
@@ -37,6 +38,7 @@ public class SearchActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_search);
+		ActivityController.addActivity(this);
 		init();
 	}
 

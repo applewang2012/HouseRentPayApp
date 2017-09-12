@@ -414,7 +414,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 			rpc.addProperty("lat", mCurrentLatLng.latitude+""); 
 			rpc.addProperty("lon", mCurrentLatLng.longitude+""); 
 			rpc.addProperty("distance", "15000"); 
-			mPresenter.readyPresentServiceParams(mContext, url, mLocationAction, rpc);
+			mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
 			mPresenter.startPresentServiceTask();
 		}
 	    
@@ -580,8 +580,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 		
 		@Override
 		public void onStatusSuccess(String action, String templateInfo) {
-			Log.i("mingguo", "on map view status success  action  "+action+"  info  "+templateInfo);
-			if (action != null){
+			super.onStatusSuccess(action, templateInfo);
+			Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+			if (action != null && templateInfo != null) {
 				if (action.equalsIgnoreCase(mLocationAction)){
 					Message message = mHandler.obtainMessage();
 					message.what = 100;
@@ -589,12 +590,6 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 					mHandler.sendMessage(message);
 				}
 			}
-		}
-
-		@Override
-		public void onStatusStart() {
-			// TODO Auto-generated method stub
-			Log.e("housefragment", "on start  ");
 		}
 
 		@Override

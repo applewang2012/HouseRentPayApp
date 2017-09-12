@@ -29,7 +29,7 @@ public class AboutUsActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	private int mVersionCode;
 	private String mVersinName;
-	private View mLoadingView;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,6 @@ public class AboutUsActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("关于我们");
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		TextView currentVersion = (TextView)findViewById(R.id.id_about_us_current_version);
 		currentVersion.setText(currentVersion.getText()+GlobalUtil.getVersionName(getApplicationContext()));
@@ -49,7 +47,6 @@ public class AboutUsActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				showLoadingView();
 				checkVersionUpdate();
 			}
 		});
@@ -62,7 +59,7 @@ public class AboutUsActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateAction));
 		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateAction, rpc);
+		mPresenter.readyPresentServiceParams(AboutUsActivity.this, url, mUpdateAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -85,22 +82,6 @@ public class AboutUsActivity extends BaseActivity {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(AboutUsActivity.this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
 		}
 	}
 	
@@ -133,7 +114,6 @@ public class AboutUsActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
 			if (msg.what == 200){
 				if (msg.obj != null){
 					parseUpdateVersion((String)msg.obj);

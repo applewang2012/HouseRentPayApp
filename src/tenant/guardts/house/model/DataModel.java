@@ -37,6 +37,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -124,9 +125,14 @@ public class DataModel {
 					valueObject = (SoapObject)envelope.bodyIn;				
 				}
 				String resultString = valueObject.getProperty(0).toString();
-				mPresenter.notifyDataRequestSuccess(mSoapAction, resultString);
+				Activity activity = (Activity) mContext;
+				if (activity.isFinishing()){
+					mPresenter.notifyDataRequestError(mSoapAction, "error from activity  finish ");
+				}else{
+					mPresenter.notifyDataRequestSuccess(mSoapAction, resultString);
+				}
 			} catch (Exception e) {
-				mPresenter.notifyDataRequestError(mSoapAction, "error from exception "+e);
+				mPresenter.notifyDataRequestError(mSoapAction, "error from exception ");
 			}
 			
 			return null;

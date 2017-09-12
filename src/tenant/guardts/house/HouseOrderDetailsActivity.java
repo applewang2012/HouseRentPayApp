@@ -37,7 +37,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private HouseInfoModel mOrderDetail;
 	private String mDetailType;
 	private HoursePresenter mPresent;
-	private View mLoadingView;
+	
 	private String mCancelAttrbuteAction = "http://tempuri.org/CancelRentAttribute";
 	private String mRejectRentAction = "http://tempuri.org/RejectRentAttribute";
 	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
@@ -68,11 +68,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 * @param price
 	 */
 	private void getPayRateDesc(String price) {
-		// showLoadingView();
+		// 
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
-		mPresent.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresent.readyPresentServiceParams(this, url, mGetPayRateDesc, rpc);
 		mPresent.startPresentServiceTask();
 
 	}
@@ -87,8 +87,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		cancel = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
 		LinearLayout passwordContent = (LinearLayout) findViewById(R.id.id_door_password_content);
 		TextView password = (TextView) findViewById(R.id.door_password);
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.GONE);
+		
 		TextView address = (TextView) findViewById(R.id.id_order_detail_address);
 		TextView contactName = (TextView) findViewById(R.id.id_order_detail_contacn_name);
 		contactPhone = (TextView) findViewById(R.id.id_order_detail_contacn_phone);
@@ -132,7 +131,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 						@Override
 						public void onClick(View v) {
-							showLoadingView();
+							
 							confirmRentAttributeInfo(mOrderDetail.getHouseOrderId());
 						}
 					});
@@ -322,23 +321,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		getWindow().setAttributes(params);
 	}
 
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(HouseOrderDetailsActivity.this,
-						R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.GONE);
-		}
-	}
 
 	private void showCancelOrderDialog(final int id, final String houseId) {
 
@@ -351,7 +333,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
-				showLoadingView();
+				
 				cancelRentAttributeInfo(houseId);
 
 			}
@@ -372,7 +354,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	}
 
 	private void confirmRentAttributeInfo(String id) {
-		mLoadingView.setVisibility(View.VISIBLE);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=ConfirmRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
@@ -391,7 +372,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// mCurrentPosition = id;
-				showLoadingView();
+				
 				rejectRentAttributeInfo(houseId);
 			}
 
@@ -411,7 +392,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	}
 
 	private void rejectRentAttributeInfo(String id) {
-		mLoadingView.setVisibility(View.VISIBLE);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=RejectRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
 		rpc.addProperty("id", id);
@@ -420,7 +400,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	}
 
 	private void cancelRentAttributeInfo(String id) {
-		mLoadingView.setVisibility(View.VISIBLE);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=CancelRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCancelAttrbuteAction));
 		rpc.addProperty("id", id);
@@ -433,7 +412,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		@Override
 		public void handleMessage(Message msg) {
 
-			dismissLoadingView();
+			
 			if (msg.what == 100) {
 				finish();
 			} else if (msg.what == 101) {
@@ -467,27 +446,29 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("mingguo", "action " + action + " success " + templateInfo);
-		if (action.equals(mRejectRentAction)) {
-			Message msg = mHandler.obtainMessage();
-			msg.what = 100;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
-		} else if (action.equals(mCancelAttrbuteAction)) {
-			Message msg = mHandler.obtainMessage();
-			msg.what = 101;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
-		} else if (action.equals(mConfirmRentAttribute)) {
-			Message msg = mHandler.obtainMessage();
-			msg.what = 102;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
-		} else if (action.equals(mGetPayRateDesc)) {
-			Message msg = mHandler.obtainMessage();
-			msg.what = 818;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+			if (action.equals(mRejectRentAction)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 100;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			} else if (action.equals(mCancelAttrbuteAction)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 101;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			} else if (action.equals(mConfirmRentAttribute)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 102;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			} else if (action.equals(mGetPayRateDesc)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 818;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}
 		}
 	}
 

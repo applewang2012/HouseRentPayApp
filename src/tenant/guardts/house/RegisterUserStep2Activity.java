@@ -27,7 +27,7 @@ import tenant.guardts.house.util.GlobalUtil;
 public class RegisterUserStep2Activity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mValidAction = "http://tempuri.org/ValidateLoginName";
 	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
@@ -119,18 +119,18 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_again_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				showLoadingView();
+				
 				mUserName = mPhone;
 				if (mUserName != null && mUserName.length() > 0){
-					showLoadingView();
+					
 					checkUserNameValid(mUserName);
 				}
 				
 			}
 		});
 		
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		
 	}
 	
@@ -138,7 +138,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mValidAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -161,7 +161,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendVerifyCodeAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -170,7 +170,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
 		rpc.addProperty("number", code); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCheckVerifyCodeAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -182,14 +182,14 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
+			
 			if (msg.what == 100){
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 200){
-				showLoadingView();
+				
 				checkPhoneVerifyCode(mPhone, mVerifyCode);
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				if (msg.obj != null){
 					JSONObject json;
 					try {
@@ -219,11 +219,11 @@ public class RegisterUserStep2Activity extends BaseActivity{
 				startActivity(intent);
 				finish();
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				
 				
 			}else if (msg.what == 200){
-				dismissLoadingView();
+				
 			}else if (msg.what == 1000){
 				if (mTimeCount >= 0){
 					mVerifyCodeText.setTextColor(Color.parseColor("#cccccc"));
@@ -242,25 +242,6 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		
 	};
 	
-	private void showLoadingView(){
-		
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
-	
-	
-	
 	
 	@Override
 	protected void onDestroy() {
@@ -269,15 +250,6 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		mHandler.removeCallbacksAndMessages(null);
 	}
 
-
-
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
-	
-	
 
 	@Override
 	public void onStatusError(String action, String error) {
@@ -288,7 +260,8 @@ public class RegisterUserStep2Activity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCheckVerifyCodeAction)){
 				Message message = mHandler.obtainMessage();

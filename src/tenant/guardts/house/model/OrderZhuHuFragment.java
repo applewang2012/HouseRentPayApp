@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,28 +20,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
-	
-
+public class OrderZhuHuFragment extends BaseFragment{
 	
 	private Context mContext;
 	private View mRootView;
 	private ListView mlistView;
-	private View mLoadingView;
 	private UniversalAdapter mAdapter;
 	private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	private HoursePresenter mPresent;
@@ -87,8 +79,6 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 	private void initView(){
 		mlistView = (ListView)mRootView.findViewById(R.id.id_fragment_house_listview);
 		mNoContent = (TextView)mRootView.findViewById(R.id.id_frament_house_no_cotent);
-		mLoadingView = (View)mRootView.findViewById(R.id.id_data_loading);
-		//mContentLayout.setVisibility(View.INVISIBLE);
 		initAdapter();
 		mlistView.setAdapter(mAdapter);
 		mlistView.setOnItemClickListener(new OnItemClickListener() {
@@ -290,7 +280,6 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 	}
 	
 	private void initData(){
-		showLoadingView();
 		getHouseHistoryData();
 	}
 	
@@ -304,7 +293,6 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 		         @Override  
 		  
 		         public void onClick(DialogInterface dialog, int which) {
-		        	 showLoadingView();
 					 cancelRentAttributeInfo(houseId);
 		        	 
 		         }  
@@ -328,41 +316,23 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
-		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
+		mPresent.readyPresentServiceParams(getActivity(), url, mRentHistoryAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 	
 	private void cancelRentAttributeInfo(String id){
-		mLoadingView.setVisibility(View.VISIBLE);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=CancelRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCancelAttrbuteAction));
 		rpc.addProperty("id", id);
-		mPresent.readyPresentServiceParams(mContext, url, mCancelAttrbuteAction, rpc);
+		mPresent.readyPresentServiceParams(getActivity(), url, mCancelAttrbuteAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getActivity(), R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 	
 	private Handler mHandler = new Handler(){
 
 		@Override
 		public void handleMessage(Message msg) {
-			
-			dismissLoadingView();
 			if (msg.what == 100){
 				parseUserHouseInfo((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
@@ -433,30 +403,22 @@ public class OrderZhuHuFragment extends Fragment implements DataStatusInterface{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "action "+action+" success "+templateInfo);
-		if (action.equals(mRentHistoryAction)){
-			Message msg = mHandler.obtainMessage();
-			msg.what = 100;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
-		}else if (action.equals(mCancelAttrbuteAction)){
-			Message msg = mHandler.obtainMessage();
-			msg.what = 101;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
+		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		if (action != null && templateInfo != null){
+			if (action.equals(mRentHistoryAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 100;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if (action.equals(mCancelAttrbuteAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 101;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

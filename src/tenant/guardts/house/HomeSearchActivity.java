@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import tenant.guardts.house.model.ActivityController;
 
 public class HomeSearchActivity extends BaseActivity {
 
@@ -43,7 +44,7 @@ public class HomeSearchActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("搜索房屋");
-		
+		ActivityController.addActivity(this);
 		initView();
 		initData();
 		

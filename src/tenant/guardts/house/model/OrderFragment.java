@@ -1,7 +1,6 @@
 package tenant.guardts.house.model;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -17,17 +16,16 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import tenant.guardts.house.R;
-import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 
-public class OrderFragment extends Fragment implements DataStatusInterface, OnItemClickListener{
+public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	
 
 	
 	private Context mContext;
 	private View mRootView;
 	private ListView mlistView;
-	private View mLoadingView;
+	
 	//private UniversalAdapter mAdapter;
 	//private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	private HoursePresenter mPresent;
@@ -162,7 +160,7 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 //	}
 	
 //	private void initData(){
-//		showLoadingView();
+//		
 //		getHouseHistoryData();
 //	}
 	
@@ -186,7 +184,7 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 //	}
 //	private void dismissLoadingView(){
 //		if (mLoadingView != null) {
-//			mLoadingView.setVisibility(View.INVISIBLE);
+//			
 //		}
 //	}
 	
@@ -195,7 +193,7 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 //		@Override
 //		public void handleMessage(Message msg) {
 //			
-//			dismissLoadingView();
+//			
 //			if (msg.what == 100){
 //				getAdapterListData((String)msg.obj);
 //				if (mHouseInfoList.size() == 0){
@@ -254,17 +252,7 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 //		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -273,5 +261,6 @@ public class OrderFragment extends Fragment implements DataStatusInterface, OnIt
 //		detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
 //		startActivity(detailIntent);
 	}
+
 	
 }

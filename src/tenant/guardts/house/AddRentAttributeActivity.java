@@ -50,6 +50,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.ServiceCharge;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
@@ -60,7 +61,7 @@ import tenant.guardts.house.util.ScreenShotUtil;
 public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";//扣费提醒
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
@@ -121,11 +122,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	 * @param price
 	 */
 	private void getPayRateDesc(String price){
-//		showLoadingView();
+//		
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mGetPayRateDesc, rpc);
+		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
@@ -290,8 +291,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mCommissionContent.setVisibility(View.GONE);
 		mExplannationContent.setVisibility(View.GONE);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
 		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
 		mQrcodeView.setVisibility(View.INVISIBLE);
 		mOwnerType[0] = "日租房";
@@ -380,7 +379,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			@Override
 			public void onClick(View v) {
 				if (checkInputContent()){
-					//showLoadingView();
+					//
 					//startAddRentInfo();
 					mRealName = mRentName.getEditableText().toString();
 					mIdCard = mRentIDcard.getEditableText().toString();
@@ -496,7 +495,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private void startAddRentInfo(){
 			Log.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
 					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
-			showLoadingView();
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
 			rpc.addProperty("RentNo", mHouseNo);   
@@ -509,7 +507,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			rpc.addProperty("RRADescription", "meiyou"); 
 			rpc.addProperty("password", password.getEditableText().toString()); 
 			rpc.addProperty("createdBy", mUsername);
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mAddRentAction, rpc);
+			mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mAddRentAction, rpc);
 			mPresenter.startPresentServiceTask();
 	}
 	
@@ -517,7 +515,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=IsOrderConfirmed";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mQueryStatusAction));
 		rpc.addProperty("id", orderId);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mQueryStatusAction, rpc);
+		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mQueryStatusAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -526,7 +524,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendMessageAction));
 //		rpc.addProperty("rentNo", mHouseId.getText().toString());
 //		rpc.addProperty("sign", "0");
-//		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mSendMessageAction, rpc);
+//		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mSendMessageAction, rpc);
 //		mPresenter.startPresentServiceTask();
 	}
 	
@@ -552,7 +550,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			if(faceImages == null){
 				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
-			showLoadingView();
+			
 			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
 			identifyUserInfo(mFaceCaptureString, mCaptureString);
 		}
@@ -588,7 +586,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		rpc.addProperty("name", mRealName);
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, identifyUrl, mIdentifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
@@ -621,7 +619,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //					+ "'AppID':'0000004','FunID':'000','OrderID':'02212121212'}";	
 			
 			hashMap.put("strData", obj.toString());
-			mPresenter.readyPresentHttpServiceParams(getApplicationContext(), mIdentifyUrl, hashMap);
+			mPresenter.readyPresentHttpServiceParams(AddRentAttributeActivity.this, mIdentifyUrl, hashMap);
 			mPresenter.startPresentHttpServiceTask();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -639,7 +637,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				String value = (String)msg.obj;
 				if (value != null && value.equals("true")){
 					mQrcodeView.setVisibility(View.INVISIBLE);
@@ -647,19 +645,20 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					Intent intent= new Intent();
 			        setResult(Activity.RESULT_OK, intent);
 			        finish();
-//					showLoadingView();
+//					
 //					startHttpService();
 				}else{
 					Toast.makeText(getApplicationContext(), "添加租赁信息失败", Toast.LENGTH_SHORT).show();
 				}
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
 						String ret = object.optString("ret");
 						if (ret != null){
 							if (ret.equals("0")){
+								ActivityController.finishAll();
 								showIndentifySuccessDialog();
 							}else{
 								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -676,7 +675,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}else if (msg.what == 103){
 				finish();
 			}else if (msg.what == 110){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -801,22 +800,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		
 	}
 	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
-	
 	public class IdentifyModel {
 		
 		private String status;
@@ -847,16 +830,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-				if (mQrcodeView != null && mQrcodeView.getVisibility() == View.VISIBLE){
-					mQrcodeView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
 			return super.onKeyDown(keyCode, event);
 		}
 	 
@@ -879,15 +852,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //			}
 //		}
 
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddRentAction)){
 				Message msg = mHandler.obtainMessage();

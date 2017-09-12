@@ -20,6 +20,7 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +37,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.LoadUrlTestActivity;
@@ -317,7 +317,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 //	}
 //	private void dismissLoadingView(){
 //		if (mLoadingView != null) {
-//			mLoadingView.setVisibility(View.INVISIBLE);
+//			
 //		}
 //	}
 	
@@ -341,7 +341,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			HashMap<String,String> infoModel = parseUserInfo((String)msg.obj);
-//			dismissLoadingView();
+//			
 //			if (infoModel != null){
 //				mUserContainer.setVisibility(View.VISIBLE);
 //				
@@ -388,11 +388,6 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		msgMessage.sendToTarget();
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onStatusError(String action, String error) {
@@ -479,6 +474,12 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 			loadIntent.putExtra("tab_name", mDataList.get(position).getNearName());
 			startActivity(loadIntent);
 		}
+	}
+
+	@Override
+	public void onStatusStart(Activity activity) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

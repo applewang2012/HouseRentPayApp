@@ -4,7 +4,10 @@ import java.util.HashMap;
 
 import org.ksoap2.serialization.SoapObject;
 
+import android.app.Activity;
 import android.content.Context;
+import tenant.guardts.house.MapActivity;
+import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.DataModel;
 
@@ -12,6 +15,7 @@ public class HoursePresenter {
 	private Context mContext;
 	private DataStatusInterface mDataInterface;
 	private DataModel mDataModel;
+	private Activity mActivity;
 
 	public HoursePresenter(Context context, DataStatusInterface statusInterface) {
 		mContext = context;
@@ -19,12 +23,13 @@ public class HoursePresenter {
 		mDataModel = new DataModel(this);
 	}
 	
-	public void readyPresentServiceParams(Context ctx, String url, String action, SoapObject object){
+	public void readyPresentServiceParams(Activity ctx, String url, String action, SoapObject object){
+		mActivity = ctx;
 		mDataModel.setAsyncTaskReady(ctx, url, action, object);
 	}
 	public void startPresentServiceTask(){
 		mDataModel.startDataRequestTask();
-		mDataInterface.onStatusStart();
+		mDataInterface.onStatusStart(mActivity);
 	}
 	public void readyPresentHttpServiceParams(Context ctx, String url, HashMap<String, String> data){
 		mDataModel.setHttpTaskReady(ctx, url, data);
@@ -32,7 +37,7 @@ public class HoursePresenter {
 	
 	public void startPresentHttpServiceTask(){
 		mDataModel.startHttpRequestTask();
-		mDataInterface.onStatusStart();
+		mDataInterface.onStatusStart(mActivity);
 	}
 	
 	public void notifyDataRequestSuccess(String action, String value){

@@ -47,7 +47,6 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if(msg.what==100){
-				dismissLoadingView();
 				String value=(String) msg.obj;
 				Gson gson=new Gson();
 				AddCardStatus cardStatus = gson.fromJson(value, AddCardStatus.class);
@@ -65,7 +64,6 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 			}
 		};
 	};
-	private View mLoadingView;
 	private EditText mBankCardName;
 	private EditText mBankCardNum;
 	private EditText mBankCardType;
@@ -101,21 +99,18 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 	 *            姓名
 	 */
 	private void updateCreditCard(String idCard, String cardNO, String bankName) {
-		showLoadingView();
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=UpdateCreditCard";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateCreditCard));
 		rpc.addProperty("idcard", idCard);
 		rpc.addProperty("cardNo", cardNO);
 		rpc.addProperty("bankName", bankName);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateCreditCard, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mUpdateCreditCard, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
 	private void initView() {
 //		getUserInfo();
 		idCard = getIntent().getStringExtra("IDCard");
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mNext = (Button) findViewById(R.id.add_bank_card_btn_next);
 		mBankCardName = (EditText) findViewById(R.id.bank_card_name);
@@ -162,31 +157,11 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		super.onStatusStart();
-	}
 
 	@Override
 	public void onStatusError(String action, String error) {
 		super.onStatusError(action, error);
 	}
 
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 }

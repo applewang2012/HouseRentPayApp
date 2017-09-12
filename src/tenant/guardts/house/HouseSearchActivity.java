@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
@@ -99,7 +100,7 @@ public class HouseSearchActivity extends BaseActivity {
 	private String mSearchAction = "http://tempuri.org/GetHousesByCondition";
 	private String mHouseType = "", mRentType = "";
 	private int mPageCount = 1000;
-	private View mLoadingView;
+	
 	//private EditText mAddressEdit;
 	private TextView mNoContent;
 	
@@ -114,9 +115,7 @@ public class HouseSearchActivity extends BaseActivity {
 //		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 //		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 //		mTitleBar.setText("短租共享");
-		
-		Intent intent = getIntent();
-		
+		ActivityController.addActivity(this);
 		TextView searchButton = (TextView)findViewById(R.id.button_search);
 		searchButton.setVisibility(View.VISIBLE);
 		searchButton.setOnClickListener(new OnClickListener() {
@@ -236,24 +235,9 @@ public class HouseSearchActivity extends BaseActivity {
 		}
 	}
 
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 	
 	private void searchHouseByFilterCondition(String inputCotent){
-		showLoadingView();
+		
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetHousesByCondition";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSearchAction));
 		rpc.addProperty("pageSize", mPageCount);
@@ -265,7 +249,7 @@ public class HouseSearchActivity extends BaseActivity {
 		rpc.addProperty("userID", "1");
 		rpc.addProperty("startdate", mStartTime);
 		rpc.addProperty("endate", mEndTime);
-		mPresent.readyPresentServiceParams(mContext, url, mSearchAction, rpc);
+		mPresent.readyPresentServiceParams(this, url, mSearchAction, rpc);
 		mPresent.startPresentServiceTask();
 		Log.i("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
 	}
@@ -293,10 +277,10 @@ public class HouseSearchActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
+		
 		//mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
 		mNoContent.setVisibility(View.VISIBLE);
 		//mContentLayout.setVisibility(View.INVISIBLE);
 		expandTabView = (ExpandMenuView) findViewById(R.id.expandTabView);
@@ -319,7 +303,7 @@ public class HouseSearchActivity extends BaseActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(CommonUtil.mUserLoginName ==null||CommonUtil.mUserLoginName.equals("")){
+				if(CommonUtil.mUserLoginName ==null || CommonUtil.mUserLoginName.equals("")){
 					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
 					startActivity(new Intent(HouseSearchActivity.this, LoginUserActivity.class));
 				}else{
@@ -437,7 +421,7 @@ public class HouseSearchActivity extends BaseActivity {
 			super.handleMessage(msg);
 			if (msg.what == 100){
 				if (msg.obj != null){
-					dismissLoadingView();
+					
 					jsonSearchResultData((String)msg.obj);
 					if (mHouseInfoList.size() == 0){
 						mSearchViewList.setVisibility(View.GONE);
@@ -488,20 +472,15 @@ public class HouseSearchActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.v("mingguo", "on status success  action  "+action+"  info  "+templateInfo);
-		if (action.equals(mSearchAction)){
-			Message msgMessage = mHandler.obtainMessage();
-			msgMessage.what = 100;
-			msgMessage.obj = templateInfo;
-			msgMessage.sendToTarget();
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+			if (action.equals(mSearchAction)){
+				Message msgMessage = mHandler.obtainMessage();
+				msgMessage.what = 100;
+				msgMessage.obj = templateInfo;
+				msgMessage.sendToTarget();
+			}
 		}
-	}
-
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		super.onStatusStart();
-		Log.i("mingguo", "on status start  action  ");
 	}
 
 	@Override

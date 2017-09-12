@@ -25,7 +25,7 @@ import tenant.guardts.house.util.GlobalUtil;
 public class ModifyPasswordActivity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mModifyAction = "http://tempuri.org/ChangePassword";
 	private String mUserName, mOldPassword, mNewPassword, mNewPasswordConfirm;
@@ -44,8 +44,8 @@ public class ModifyPasswordActivity extends BaseActivity{
 	
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		final EditText userName = (EditText)findViewById(R.id.id_password_username);
 		final EditText oldpassword = (EditText)findViewById(R.id.id_old_password);
 		final EditText newpassword = (EditText)findViewById(R.id.id_new_password);
@@ -79,7 +79,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.twice_pwd_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				showLoadingView();
+				
 				modifyUserPassword();
 			}
 		});
@@ -93,7 +93,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 		rpc.addProperty("oldPassword", mOldPassword);
 		rpc.addProperty("newPassword", mNewPassword);
 		rpc.addProperty("userType", "0");
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mModifyAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mModifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -104,7 +104,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_password", mNewPassword);
@@ -115,7 +115,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 			    setResult(RESULT_OK, passwordIntent);
 				finish();
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				GlobalUtil.shortToast(getApplication(), getString(R.string.modify_pwd_failed), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 			
@@ -123,44 +123,17 @@ public class ModifyPasswordActivity extends BaseActivity{
 		
 	};
 	
-	private void showLoadingView(){
-		
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
 			return super.onKeyDown(keyCode, event);
 		}
 
 	@Override
-	public void onStatusStart() {
-		
-		
-	}
-
-	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mModifyAction)){
 				if (templateInfo.equals("false")){

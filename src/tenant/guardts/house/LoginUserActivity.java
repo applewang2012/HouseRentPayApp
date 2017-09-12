@@ -33,7 +33,7 @@ import tenant.guardts.house.util.GlobalUtil;
 public class LoginUserActivity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+//	
 	private HoursePresenter mPresenter;
 	private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
@@ -62,8 +62,8 @@ public class LoginUserActivity extends BaseActivity{
 	private void initView(){
 		userAgreement = (TextView) findViewById(R.id.tv_user_agreement);//用户协议
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		dismissLoadingView();
+		//
+		
 		userNameEditText = (EditText)findViewById(R.id.id_login_username);
 		passwordEditText = (EditText)findViewById(R.id.id_login_password);
 		mUserName = getIntent().getStringExtra("user_name");
@@ -105,7 +105,7 @@ public class LoginUserActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				showLoadingView();
+				
 				loginUser();
 			}
 		});
@@ -143,7 +143,7 @@ public class LoginUserActivity extends BaseActivity{
 		rpc.addProperty("username", mUserName);
 		rpc.addProperty("password", mPassword);
 		rpc.addProperty("userType", "0");
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mLoginAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mLoginAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -152,11 +152,11 @@ public class LoginUserActivity extends BaseActivity{
 	    String host = sharedata.getString("host", "");
 	    Log.i("mingguo", "common service preference host  "+host);
 	    if (host == null || host.equals("")){
-	    	showLoadingView();
+	    	
 	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
 			rpc.addProperty("status", "1");
-			mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCommonServiceAction, rpc);
+			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
 			mPresenter.startPresentServiceTask();
 	    }else{
 	    	CommonUtil.mUserHost = host;
@@ -165,19 +165,19 @@ public class LoginUserActivity extends BaseActivity{
 	}
 	
 	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
+//		if (mLoadingView != null) {
+//			mLoadingView.setVisibility(View.VISIBLE);
+//        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
+//        	if (imageView != null) {
+//        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
+//        		imageView.startAnimation(rotate);
+//        	}
+//		}
 	}
 	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
+//		if (mLoadingView != null) {
+//			
+//		}
 	}
 	
 	
@@ -252,7 +252,7 @@ public class LoginUserActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				dismissLoadingView();
+				
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_name", mUserName);
@@ -266,10 +266,10 @@ public class LoginUserActivity extends BaseActivity{
 //				startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
 				finish();
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_failed), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 110){
-				dismissLoadingView();
+				
 				showSelectAlertDialog("请选择所在区域", parseCommonService((String)msg.obj));
 			}
 		}
@@ -282,25 +282,19 @@ public class LoginUserActivity extends BaseActivity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
 			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					dismissLoadingView();
-					return false;
-				}
+//				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
+//					
+//					return false;
+//				}
 			}
 			return super.onKeyDown(keyCode, event);
 		}
-
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
-	
 
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mLoginAction)){
 				if (templateInfo.equals("false")){

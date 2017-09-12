@@ -34,7 +34,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 
 	private Context mContext;
 	private ListView mlistView;
-	private View mLoadingView;
+	
 	private UniversalAdapter mAdapter;
 	private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	private HoursePresenter mPresent;
@@ -64,7 +64,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		mlistView = (ListView)findViewById(R.id.id_fragment_house_listview);
 		mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
+		
 		mContentLayout.setVisibility(View.INVISIBLE);
 		initAdapter();
 		mlistView.setAdapter(mAdapter);
@@ -93,7 +93,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	private void initData(){
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, HouseHistoryActivity.this);
-		showLoadingView();
+		
 		getHouseHistoryData();
 	}
 	
@@ -101,7 +101,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", mIdCard);
-		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
+		mPresent.readyPresentServiceParams(this, url, mRentHistoryAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 	
@@ -135,21 +135,6 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		
 	}
 	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 	
 	@Override
 	protected void onResume() {
@@ -169,7 +154,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
+			
 			if (msg.what == 100){
 				getAdapterListData((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
@@ -187,7 +172,8 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentHistoryAction)){
 				Message msg = mHandler.obtainMessage();
@@ -196,12 +182,6 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				msg.sendToTarget();
 			}
 		}
-	}
-
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		super.onStatusStart();
 	}
 
 	@Override

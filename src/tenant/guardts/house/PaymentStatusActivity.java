@@ -25,7 +25,7 @@ import tenant.guardts.house.util.UtilTool;
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";
 	private HoursePresenter mPresenter;
-	private View mLoadingView;
+	
 	private String rentNO;
 	private String orderCreatedDate;
 	private String price;
@@ -56,34 +56,17 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 			@Override
 			public void onClick(View v) {
 				if (orderID != null)
-					showLoadingView();
+					
 				completeHouseRentAttributeInfo(orderID);
 			}
 		});
 
 	}
 
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(PaymentStatusActivity.this,
-						R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	private void initView() {
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		finish = (Button) findViewById(R.id.id_button_finish_pay);
 		if(successful){
 			TextView tvRentNO=(TextView) findViewById(R.id.id_pay_order_no);
@@ -110,14 +93,14 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		String url = CommonUtil.mUserHost + "Services.asmx?op=CompleteRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCompleteRentAttribute, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mCompleteRentAttribute, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if (msg.what == 818) {
-				dismissLoadingView();
+				
 				String value = (String) msg.obj;
 				Log.e("", value + "--");
 				Gson gson = new Gson();
@@ -145,19 +128,18 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		if (action.equals(mCompleteRentAttribute)) {
-			Log.e("", action + "======" + templateInfo);
-			Message msg = mHandler.obtainMessage();
-			msg.what = 818;
-			msg.obj = templateInfo;
-			msg.sendToTarget();
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		if (action != null && templateInfo != null) {
+			if (action.equals(mCompleteRentAttribute)) {
+				Log.e("", action + "======" + templateInfo);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 818;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		super.onStatusStart();
-	}
 
 	@Override
 	public void onStatusError(String action, String error) {

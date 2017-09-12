@@ -1,5 +1,6 @@
 package tenant.guardts.house.model;
 
+import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +32,11 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -53,9 +56,9 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HomeSearchActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
-import tenant.guardts.house.HouseSearchActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
@@ -65,7 +68,7 @@ import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.view.HomeFragmentListView;
 
-public class HouseFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener,
+public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultListener,
 		OnGetSuggestionResultListener, OnItemClickListener {
 
 	private Context mContext;
@@ -102,6 +105,9 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 	// private HomeCustomView mBtnShareRight;
 	private LinearLayout mShareHouseLayout;
 	private LinearLayout mHouseOwnerLayout;
+	private String mUserName;
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
+	
 
 	public HouseFragment() {
 
@@ -132,7 +138,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				}
 
@@ -165,7 +171,19 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			mLogin.setVisibility(View.GONE);
 		}else{
 			mLogin.setVisibility(View.VISIBLE);
+			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+			mUserName = sharedata.getString("user_name", "");
+			getUserInfo();
 		}
+	}
+	
+	private void getUserInfo() {
+		Log.i("mingguo", "house fragment  get user info  "+mUserName);
+		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
+		rpc.addProperty("username", mUserName);
+		mPresenter.readyPresentServiceParams(getActivity(), url, mUserInfoAction, rpc);
+		mPresenter.startPresentServiceTask();
 	}
 
 	private void startThreadfindLocation(final String locationName) {
@@ -216,7 +234,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	private void initView() {
 		mLogin = (TextView) mRootView.findViewById(R.id.textview_login);
-		if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
+		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 
 		} else {
 			mLogin.setVisibility(View.GONE);
@@ -286,7 +304,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 			@Override
 			public void onClick(View v) {
 				// 先判断是否登录
-				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -338,7 +356,7 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName.equals("") || CommonUtil.mUserLoginName == null) {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
@@ -470,12 +488,35 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		rpc.addProperty("lat", mCurrentLatLng.latitude + "");
 		rpc.addProperty("lon", mCurrentLatLng.longitude + "");
 		rpc.addProperty("distance", "15000");
-		mPresenter.readyPresentServiceParams(mContext, url, mLocationAction, rpc);
+		mPresenter.readyPresentServiceParams(getActivity(), url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
 	private void startGetLocationFromHouse() {
 		getLocationByCoordinates();
+	}
+	
+	private void parseUserInfo(String value) {
+		try {
+			JSONArray array = new JSONArray(value);
+			if (array != null) {
+				Log.i("house", "parse house info " + array.length());
+				// for (int item = 0; item < array.length(); item++){
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				SharedPreferences sharedata = getActivity().getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+				editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				editor.commit();
+				mLogin.setVisibility(View.GONE);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Handler mHandler = new Handler() {
@@ -491,6 +532,10 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 				showSelectLocationMap();
 			} else if (msg.what == 500) {
 				updateLocationCity();
+			}else if (msg.what == 101){
+				if (msg.obj != null) {
+					parseUserInfo((String) msg.obj);
+				}
 			}
 		}
 	};
@@ -612,28 +657,24 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on map view status success  action  " + action + "  info  " + templateInfo);
-		if (action != null) {
+		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		if (action != null && templateInfo != null){
 			if (action.equalsIgnoreCase(mLocationAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 100;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}else if (action.equals(mUserInfoAction)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 101;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		Log.e("housefragment", "on start  ");
-	}
 
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		Log.e("housefragment", "error   " + error);
-	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -706,5 +747,6 @@ public class HouseFragment extends Fragment implements DataStatusInterface, OnGe
 		// mSearchListener.setAdapter(sugAdapter);
 		// sugAdapter.notifyDataSetChanged();
 	}
+
 
 }

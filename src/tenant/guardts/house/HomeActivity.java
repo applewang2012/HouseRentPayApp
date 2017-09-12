@@ -80,10 +80,22 @@ public class HomeActivity extends BaseActivity {
 //		mTitleBar.setText("手机注册");
 		initData();
 		initView();
-		getUserInfo();
+		checkVersionUpdate();
 	}
 	
 	
+	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//getUserInfo();
+	}
+
+
+
+
 	private void initData(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
@@ -91,7 +103,6 @@ public class HomeActivity extends BaseActivity {
 		mPassword = sharedata.getString("user_password", "");
 		bundle = new Bundle();
 		bundle.putString("user_name", mUserName);
-		CommonUtil.mUserLoginName = mUserName;
 	}
 	
 
@@ -100,7 +111,7 @@ public class HomeActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
 		initData();
-		getUserInfo();
+		
 	}
 
 
@@ -266,7 +277,7 @@ public class HomeActivity extends BaseActivity {
 		String url = CommonUtil.mUserHost + "Services.asmx?op=OpenDoor";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOpenDoorAction));
 		rpc.addProperty("lockId", lockId);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mOpenDoorAction, rpc);
+		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mOpenDoorAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -276,17 +287,18 @@ public class HomeActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateAction));
 		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUpdateAction, rpc);
+		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUpdateAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
-	private void getUserInfo() {
-		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
-		rpc.addProperty("username", mUserName);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mUserInfoAction, rpc);
-		mPresenter.startPresentServiceTask();
-	}
+//	private void getUserInfo() {
+//		Log.i("mingguo", "HomeActivity  get user info  "+mUserName);
+//		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
+//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
+//		rpc.addProperty("username", mUserName);
+//		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUserInfoAction, rpc);
+//		mPresenter.startPresentServiceTask();
+//	}
 	
 	private void uploadXingeToken() {
 		if (CommonUtil.XINGE_TOKEN == null || CommonUtil.XINGE_TOKEN.equals("")){
@@ -296,7 +308,7 @@ public class HomeActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
 		rpc.addProperty("userId", mUserName);
 		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mXingeTokenAction, rpc);
+		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mXingeTokenAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -388,6 +400,13 @@ public class HomeActivity extends BaseActivity {
 		animator.setRepeatCount(ObjectAnimator.INFINITE);
 		animator.setInterpolator(new LinearInterpolator());;
 		animator.start();
+		
+		ImageView circleImage2 = (ImageView)mOpenLockLoadingView.findViewById(R.id.imageView3);
+		ObjectAnimator animator2 = ObjectAnimator.ofFloat(circleImage2, "rotation", 0.0F,720.0F).setDuration(3000);
+		
+		animator2.setRepeatCount(ObjectAnimator.INFINITE);
+		animator2.setInterpolator(new LinearInterpolator());;
+		animator2.start();
 	}
 	
 	private void dimissOpenDoorLoading(){
@@ -547,12 +566,6 @@ public class HomeActivity extends BaseActivity {
 		return mCity;
 	}
 
-	@Override
-	public void onStatusStart() {
-
-	}
-	
-	
 
 	@Override
 	public void onStatusError(String action, String error) {
@@ -564,25 +577,27 @@ public class HomeActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
+		super.onStatusSuccess(action, templateInfo);
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
+			if (action.equals(mUserInfoAction)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 100;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			} else if (action.equals(mUpdateAction)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 200;
+				message.obj = templateInfo;
+				mHandler.sendMessageDelayed(message, 500);
+			}else if (action.equals(mOpenDoorAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 300;
+				message.obj = templateInfo;
+				mHandler.sendMessageDelayed(message, 500);
+			}
 		}
-		if (action.equals(mUserInfoAction)) {
-			Message message = mHandler.obtainMessage();
-			message.what = 100;
-			message.obj = templateInfo;
-			mHandler.sendMessage(message);
-		} else if (action.equals(mUpdateAction)) {
-			Message message = mHandler.obtainMessage();
-			message.what = 200;
-			message.obj = templateInfo;
-			mHandler.sendMessageDelayed(message, 500);
-		}else if (action.equals(mOpenDoorAction)){
-			Message message = mHandler.obtainMessage();
-			message.what = 300;
-			message.obj = templateInfo;
-			mHandler.sendMessageDelayed(message, 500);
-		}
+		
 	}
 
 }

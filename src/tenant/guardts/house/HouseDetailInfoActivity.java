@@ -39,6 +39,7 @@ import android.widget.TextView;
 import tenant.guardts.house.bannerview.CircleFlowIndicator;
 import tenant.guardts.house.bannerview.ImagePagerAdapter;
 import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.HouseImageInfo;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -48,7 +49,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private Button mButtonCall;//联系房主
 	private Button mButtonApply;//申请租房
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
@@ -83,7 +84,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.house_detail_info_layout);
-
+		ActivityController.addActivity(this);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋详情");
@@ -139,7 +140,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	        	 intent.putExtra("user_name", CommonUtil.mUserLoginName);
 	        	 intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
 	        	 intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
-	        	 startActivityForResult(intent, 100);
+	        	 startActivity(intent);
 	        	 finish();
 	         }  
 	  
@@ -273,8 +274,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 	private void initView() {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView) findViewById(R.id.id_rent_house_phone);
@@ -332,12 +333,12 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	}
 
 	private void getHouseDetailInfoByHouseId(String rentNo) {
-		showLoadingView();
-		mLoadingView.setVisibility(View.VISIBLE);
+		
+		
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetHouseDetailInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
 		rpc.addProperty("rentNo", rentNo);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mHouseDetailAction, rpc);
+		mPresenter.readyPresentServiceParams(HouseDetailInfoActivity.this, url, mHouseDetailAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -346,7 +347,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetRentImageList";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseImageListAction));
 		rpc.addProperty("rentNo", rentNo);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mHouseImageListAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mHouseImageListAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 
@@ -356,14 +357,14 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			if (msg.what == 100) {
-				dismissLoadingView();
+				
 				jsonHouseInfoToView((String) msg.obj);
-				showLoadingView();
+				
 				getHouseDetailImageListByHouseId(mRentNo);
 			} else if (msg.what == 101) {
 
 			} else if (msg.what == 200) {
-				dismissLoadingView();
+				
 				jsonHouseImageListData((String) msg.obj);
 				Log.i("mingguo", "handle message   image url list size  " + imageUrlList.size());
 				initBanner(imageUrlList);
@@ -474,43 +475,17 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		}
 	}
 
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE) {
-				mLoadingView.setVisibility(View.INVISIBLE);
-				return false;
-			}
-		}
 		return super.onKeyDown(keyCode, event);
 	}
 
-	@Override
-	public void onStatusStart() {
-
-	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-
+		super.onStatusSuccess(action, templateInfo);
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mHouseDetailAction)) {

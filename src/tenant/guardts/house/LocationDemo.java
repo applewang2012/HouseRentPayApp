@@ -204,7 +204,7 @@ public class LocationDemo extends BaseActivity {
 		rpc.addProperty("lat", mLati+""); 
 		rpc.addProperty("lon", mLongi+""); 
 		rpc.addProperty("distance", "15000"); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mLocationAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
     
@@ -371,11 +371,6 @@ public class LocationDemo extends BaseActivity {
 		}
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
-		super.onStatusStart();
-	}
 
 	@Override
 	public void onStatusError(String action, String error) {

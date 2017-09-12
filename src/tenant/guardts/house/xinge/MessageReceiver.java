@@ -15,9 +15,7 @@ import com.tencent.android.tpush.XGPushTextMessage;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 import tenant.guardts.house.HomeActivity;
-import tenant.guardts.house.HouseDetailInfoActivity;
 
 public class MessageReceiver extends XGPushBaseReceiver {
 	private Intent intent = new Intent("com.qq.xgdemo.activity.UPDATE_LISTVIEW");

@@ -46,7 +46,7 @@ public class SurroundMoreActivity extends BaseActivity{
 
 	
 	private Context mContext;
-	private View mLoadingView;
+	
 	private List<SurroundInfo> mDataList = new ArrayList<>();
 	private StickyGridHeadersGridView mHeadersGridView;
 	private List<String> mTitleList = new ArrayList<>();
@@ -256,22 +256,6 @@ public class SurroundMoreActivity extends BaseActivity{
 			num = num + childCount;
 		}
 		return num;
-	}
-	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
 	}
 	
 

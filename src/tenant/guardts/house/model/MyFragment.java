@@ -1,12 +1,12 @@
 package tenant.guardts.house.model;
 
-import java.security.spec.ECPrivateKeySpec;
 import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -37,13 +37,13 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-public class MyFragment extends Fragment implements DataStatusInterface {
+public class MyFragment extends BaseFragment {
 
 	private Context mContext;
 	private View mRootView;
 	private TextView mUserNickname;
 	// private TextView mUserId;
-	private View mLoadingView;
+	
 	private TextView mUserAddress;
 	private HoursePresenter mPresent;
 	private FrameLayout mPublishHouse;
@@ -58,14 +58,14 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	private String phone;
 	private String idCard;
 	private FrameLayout mWalletFrameLayout;
-	private String userName = new String();
+	private String mUserName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		Bundle bundle = getArguments();
-		userName = bundle.getString("user_name");
+		mUserName = bundle.getString("user_name");
 		mContext = getActivity().getApplicationContext();
 		mPresent = new HoursePresenter(mContext, MyFragment.this);
 	}
@@ -100,14 +100,13 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		mUserNickname = (TextView) mRootView.findViewById(R.id.id_user_nickname);
 		// mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
 		mUserAddress = (TextView) mRootView.findViewById(R.id.id_user_address);
-		mLoadingView = (View) mRootView.findViewById(R.id.id_data_loading);
-		// showLoadingView();
+		// 
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
 		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);// 修改密码
 		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_logout);// 退出登录
 		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);// 切换城市
-		if (userName.equals("") || userName == null) {
+		if (mUserName.equals("") || mUserName == null) {
 		} else {
 			mRegistAndLogin.setVisibility(View.GONE);
 			mUserNickname.setVisibility(View.VISIBLE);
@@ -225,40 +224,35 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 
 			}
 		});
-		// showLoadingView();
+		// 
 	}
 
 	private void initData() {
-		getUserInfo();
+		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
+			mRegistAndLogin.setVisibility(View.GONE);
+			mUserNickname.setText(CommonUtil.mRegisterRealName);
+			mUserAddress.setText(CommonUtil.mUserLoginName);
+			mUserNickname.setVisibility(View.VISIBLE);
+			mUserAddress.setVisibility(View.VISIBLE);
+		}else{
+			mRegistAndLogin.setVisibility(View.VISIBLE);
+			mUserNickname.setVisibility(View.GONE);
+			mUserAddress.setVisibility(View.GONE);
+			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+			mUserName = sharedata.getString("user_name", "");
+			getUserInfo();
+		}
 	}
 
 	private void getUserInfo() {
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
-
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetUserInfoAction));
-		rpc.addProperty("username", CommonUtil.mUserLoginName);
-		mPresent.readyPresentServiceParams(mContext, url, mGetUserInfoAction, rpc);
+		rpc.addProperty("username", mUserName);
+		mPresent.readyPresentServiceParams(getActivity(), url, mGetUserInfoAction, rpc);
 		mPresent.startPresentServiceTask();
 
 	}
 
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getActivity(),
-						R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 
 	private String cardNo;
 	private String bankName;
@@ -268,8 +262,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			dismissLoadingView();
-			if (msg.what == 100) {
+			if (msg.what == 100){
 				HashMap<String, String> infoModel = parseUserInfo((String) msg.obj);
 				if (infoModel != null) {
 					phone = infoModel.get("Phone");
@@ -363,7 +356,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 						CommonUtil.mRegisterRealName = "";
 						CommonUtil.mRegisterIdcard = "";
 						uploadXingeToken();
-						showLoadingView();
+						
 					}
 
 				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
@@ -383,7 +376,7 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
 		rpc.addProperty("deviceId", "");
-		mPresent.readyPresentServiceParams(mContext, url, mXingeTokenAction, rpc);
+		mPresent.readyPresentServiceParams(getActivity(), url, mXingeTokenAction, rpc);
 		mPresent.startPresentServiceTask();
 	}
 
@@ -422,31 +415,24 @@ public class MyFragment extends Fragment implements DataStatusInterface {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "on status success  " + action + "  success " + templateInfo);
-		if (action.equals(mGetUserInfoAction)) {
-			Message msgMessage = mHandler.obtainMessage();
-			msgMessage.what = 100;
-			msgMessage.obj = templateInfo;
-			msgMessage.sendToTarget();
-		} else if (action.equals(mXingeTokenAction)) {
-			Message msgMessage = mHandler.obtainMessage();
-			msgMessage.what = 101;
-			msgMessage.obj = templateInfo;
-			msgMessage.sendToTarget();
+		Log.e("mingguo", "on status success  "+action+ "  success " + templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		if (templateInfo != null){
+			if (action.equals(mGetUserInfoAction)){
+				Message msgMessage = mHandler.obtainMessage();
+				msgMessage.what = 100;
+				msgMessage.obj = templateInfo;
+				msgMessage.sendToTarget();
+			}else if (action.equals(mXingeTokenAction)){
+				Message msgMessage = mHandler.obtainMessage();
+				msgMessage.what = 101;
+				msgMessage.obj = templateInfo;
+				msgMessage.sendToTarget();
+			}
 		}
 
 	}
 
-	@Override
-	public void onStatusStart() {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

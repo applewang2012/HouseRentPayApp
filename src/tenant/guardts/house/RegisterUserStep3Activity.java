@@ -43,7 +43,7 @@ import tenant.guardts.house.util.ScreenShotUtil;
 public class RegisterUserStep3Activity extends BaseActivity{
 
 	private TextView mTitleBar;
-	private View mLoadingView;
+	
 	private HoursePresenter mPresenter;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mRegisterAction = "http://tempuri.org/AddUserInfo";
@@ -86,8 +86,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 	private void initView(){
 		
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		
 		final EditText realName = (EditText)findViewById(R.id.id_register_step3_input_name);
 		final EditText idCard = (EditText)findViewById(R.id.id_register_step3_input_idcard);
@@ -112,7 +112,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(),getString(R.string.id_card_input_error) , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				showLoadingView();
+				
 				checkUserIdCardValid(mIdCard);
 			
 			}
@@ -123,7 +123,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		String url = CommonUtil.mUserHost+"services.asmx?op=IsExistsIDCard";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdCardValidAction));
 		rpc.addProperty("idcard", id); 
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mIdCardValidAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mIdCardValidAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -149,7 +149,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			if(faceImages == null){
 				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
-			showLoadingView();
+			
 			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
 			identifyUserInfo(mFaceCaptureString, mCaptureString);
 		}
@@ -206,7 +206,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		rpc.addProperty("name", mRealName);
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
-		mPresenter.readyPresentServiceParams(getApplicationContext(), identifyUrl, mIdentifyAction, rpc);
+		mPresenter.readyPresentServiceParams(this, identifyUrl, mIdentifyAction, rpc);
 		mPresenter.startPresentServiceTask();
 		
 	}
@@ -228,7 +228,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		rpc.addProperty("nickName", "nick");
 		rpc.addProperty("address", "address");
 		rpc.addProperty("status", "0"); //
-		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mRegisterAction, rpc);
+		mPresenter.readyPresentServiceParams(this, url, mRegisterAction, rpc);
 		mPresenter.startPresentServiceTask();
 	}
 	
@@ -241,7 +241,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			if (msg.what == 100){
 				GlobalUtil.shortToast(getApplication(), getString(R.string.username_register_again), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 101){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -264,7 +264,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 				}
 				
 			}else if (msg.what == 104){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -299,7 +299,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 			}else if (msg.what == 110){
 				GlobalUtil.shortToast(getApplication(), "登录失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 102){
-				dismissLoadingView();
+				
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -312,7 +312,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 //								if (similar != null && similar.length() > 3){
 //									Double rate = 100 *	Double.parseDouble(similar);
 									GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-									showLoadingView();
+									
 									registerUserName();
 									return;
 //								}
@@ -327,29 +327,12 @@ public class RegisterUserStep3Activity extends BaseActivity{
 				}
 				
 			}else if (msg.what == 200){
-				dismissLoadingView();
+				
 			}
 			
 		}
 		
 	};
-	
-	private void showLoadingView(){
-		
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 	
 	
 	/**
@@ -367,23 +350,10 @@ public class RegisterUserStep3Activity extends BaseActivity{
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 			// TODO Auto-generated method stub
-			if (keyCode == KeyEvent.KEYCODE_BACK) {
-				if (mLoadingView != null && mLoadingView.getVisibility() == View.VISIBLE){
-					mLoadingView.setVisibility(View.INVISIBLE);
-					return false;
-				}
-			}
 			return super.onKeyDown(keyCode, event);
 		}
 	 
 	 
-
-	@Override
-	public void onStatusStart() {
-		
-		
-	}
-
 	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
@@ -393,7 +363,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRegisterAction)){
 				Message message = mHandler.obtainMessage();

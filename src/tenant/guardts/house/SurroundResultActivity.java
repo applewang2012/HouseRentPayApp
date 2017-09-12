@@ -58,7 +58,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	private Context mContext;
 	private HoursePresenter mPresent;
 	private PoiSearch mPoiSearch;
-	private View mLoadingView;
+	
 	private TextView mNoContent;
 	private UniversalAdapter<SurroundInfo> mAdapter;
 	private ListView mSurroundListview;
@@ -73,7 +73,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText(mSearchTag);
-		showLoadingView();
+		
 		initData();
 		initView();
 		
@@ -88,22 +88,6 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(this);
 		searchNearbyProcess(mSearchTag);
-	}
-	
-	private void showLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-        	if (imageView != null) {
-        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
-        		imageView.startAnimation(rotate);
-        	}
-		}
-	}
-	private void dismissLoadingView(){
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
 	}
 	
 
@@ -137,7 +121,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	}
 
 	private void initView() {
-		mLoadingView = (View)findViewById(R.id.id_data_loading);
+		
 		//mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
 		mNoContent.setVisibility(View.INVISIBLE);
@@ -174,7 +158,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 
 	@Override
 	public void onGetPoiResult(PoiResult result) {
-		dismissLoadingView();
+		
 		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
             Toast.makeText(mContext, "未找到结果", Toast.LENGTH_LONG)
                     .show();

@@ -12,7 +12,6 @@ import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,14 +19,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
@@ -45,7 +41,7 @@ public class RechargeActivity extends BaseActivity {
 	private CheckBox monkey200;
 	private CheckBox moneyOther;
 	private String mChargePrice;
-	private View mLoadingView;
+	
 	private IWXAPI api;
 	
 	
@@ -79,8 +75,8 @@ public class RechargeActivity extends BaseActivity {
 	
 	private void initView(){
 		
-		mLoadingView = (View) findViewById(R.id.id_data_loading);
-		mLoadingView.setVisibility(View.INVISIBLE);
+		
+		
 		
 		monkey800 = (CheckBox)findViewById(R.id.id_rechange_money_800);
 		monkey500 = (CheckBox)findViewById(R.id.id_rechange_money_500);
@@ -208,7 +204,7 @@ public class RechargeActivity extends BaseActivity {
 					CommonUtil.mPayHouseOrderId = null;
 					CommonUtil.ORDER_MONKEY = mChargePrice;
 					//CommonUtil.ORDER_MONKEY = mChargePrice+"00"; //真实价格
-					showLoadingView();
+					
 					api = WXAPIFactory.createWXAPI(RechargeActivity.this, CommonUtil.APP_ID);
 					startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
 				}else{
@@ -225,7 +221,7 @@ public class RechargeActivity extends BaseActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		dismissLoadingView();
+		
 	}
 
 	private void startPay(final String price, final String orderNo, final String ip) {
@@ -289,21 +285,4 @@ public class RechargeActivity extends BaseActivity {
 	}
 	
 	
-	private void showLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.VISIBLE);
-			ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-			if (imageView != null) {
-				RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(RechargeActivity.this,
-						R.anim.anim_rotate);
-				imageView.startAnimation(rotate);
-			}
-		}
-	}
-
-	private void dismissLoadingView() {
-		if (mLoadingView != null) {
-			mLoadingView.setVisibility(View.INVISIBLE);
-		}
-	}
 }
