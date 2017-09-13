@@ -507,6 +507,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
 				SharedPreferences sharedata = getActivity().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 				editor.putString("user_realname", CommonUtil.mRegisterRealName);

@@ -25,14 +25,22 @@
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+				
+                <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="房	型"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
                 <TextView
                     android:id="@+id/id_add_house_type_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="@string/add_house_type_text"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -54,14 +62,22 @@
                 android:layout_height="60dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+				
+                <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/add_house_direction_text"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
                 <TextView
                     android:id="@+id/id_add_house_direction_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="@string/add_house_direction_text"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -71,68 +87,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/into_icon" />
             </FrameLayout>
-            <!--
-                <ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<FrameLayout 
-	        	    android:id="@+id/id_add_house_structure"
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:id="@+id/id_add_house_structure_text"
-	        	        android:layout_width="wrap_content"
-		        		android:layout_height="match_parent"
-		        		android:text="结构"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="center"
-	        	        />
-	        	    <ImageView 
-	        	        android:layout_width="8dp"
-		        		android:layout_height="12dp"
-		        		android:layout_marginRight="10dp"
-		        		android:background="@drawable/into_icon"
-		        		android:layout_gravity="right|center_vertical"
-	        	        />
-	        	</FrameLayout>
-            -->
-            <!--
-                <ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<FrameLayout 
-	        	    android:id="@+id/id_add_house_building_structure"
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:id="@+id/id_add_house_building_structure_text"
-	        	        android:layout_width="wrap_content"
-		        		android:layout_height="match_parent"
-		        		android:text="建筑结构"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="center"
-	        	        />
-	        	    <ImageView 
-	        	        android:layout_width="8dp"
-		        		android:layout_height="12dp"
-		        		android:layout_marginRight="10dp"
-		        		android:background="@drawable/into_icon"
-		        		android:layout_gravity="right|center_vertical"
-	        	        />
-	        	</FrameLayout>
-            -->
+
 
             <ImageView
                 android:layout_width="match_parent"
@@ -145,14 +100,22 @@
                 android:layout_height="60dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+				
+                <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="租赁类型"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
                 <TextView
                     android:id="@+id/id_add_house_rent_type_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="租赁类型"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -175,9 +138,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="房屋价格"
                     android:textColor="#333333"
@@ -185,9 +147,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_price"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入房屋价格"
@@ -211,9 +173,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="手续费"
                     android:textColor="#333333"
@@ -221,9 +182,9 @@
 
                 <TextView
                     android:id="@+id/commission"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
                     android:textColor="#337ffd"
@@ -242,9 +203,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="说  明"
                     android:textColor="#333333"
@@ -252,9 +212,9 @@
 
                 <TextView
                     android:id="@+id/explanation"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:gravity="center_vertical"
                     android:lines="2"
                     android:paddingLeft="5dp"
@@ -274,9 +234,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="面	积"
                     android:textColor="#333333"
@@ -284,9 +243,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_area"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入房屋建筑面积"
@@ -310,9 +269,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="总楼层"
                     android:textColor="#333333"
@@ -320,9 +278,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_total_floor"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入总楼层"
@@ -346,9 +304,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="楼	层"
                     android:textColor="#333333"
@@ -356,9 +313,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_current_floor"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入房屋所在楼层"
@@ -369,43 +326,6 @@
                     android:textColorHint="#b2b2b2"
                     android:textSize="14dp" />
             </LinearLayout>
-            <!--
-                <ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<LinearLayout 
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:layout_width="0dp"
-		        		android:layout_height="match_parent"
-		        		android:layout_weight="1"
-		        		android:text="每层几户"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="left|center_vertical"
-	        	        />
-	        	    <EditText 
-	        	        android:id="@+id/id_add_house_total_num"
-	        	         android:layout_width="0dp"
-		        		 android:layout_height="35dp"
-		        		 android:layout_weight="3"
-		        		 android:hint="请输入每层户数"
-		        		 android:inputType="number"
-		        		 android:maxLength="50"
-		        		 android:gravity="center_vertical"
-		        		 android:paddingLeft="5dp"
-		        		 android:textSize="14dp"
-		        		 android:background="#00000000"
-		        		 android:textColor="#afaeae"
-	        	        />
-	        	</LinearLayout>
-            -->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -419,9 +339,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="门牌号"
                     android:textColor="#333333"
@@ -429,9 +348,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_current_num"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入当前门牌号"
@@ -454,14 +373,22 @@
                 android:layout_height="60dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal" >
-
+				
                 <TextView
-                    android:id="@+id/id_add_house_quyu_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
                     android:text="区	域"
                     android:textColor="#333333"
+                    android:textSize="15dp" />
+                
+                <TextView
+                    android:id="@+id/id_add_house_quyu_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
+                    android:gravity="center"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -485,12 +412,21 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="街	道"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
+                
+                <TextView
                     android:id="@+id/id_add_house_street_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="街	道"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -514,12 +450,21 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="道	路"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
+                
+                <TextView
                     android:id="@+id/id_add_house_road_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="道	路"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -542,9 +487,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:maxLength="50"
                     android:text="小区和楼号"
@@ -553,9 +497,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_address"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入小区名称和楼号"
@@ -578,13 +522,20 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="分	局"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
+                <TextView
                     android:id="@+id/id_add_house_police_fenju_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="分	局"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -608,12 +559,20 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:text="派出所"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+                
+                <TextView
                     android:id="@+id/id_add_house_police_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/base_dimen_180"
                     android:gravity="center"
-                    android:text="派出所"
-                    android:textColor="#333333"
+                    android:textColor="#444444"
                     android:textSize="15dp" />
 
                 <ImageView
@@ -636,9 +595,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="房主姓名"
                     android:textColor="#333333"
@@ -646,9 +604,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_owner_name"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入房主姓名"
@@ -670,9 +628,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="房主电话"
                     android:textColor="#333333"
@@ -680,9 +637,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_owner_phone"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入房主电话"
@@ -706,9 +663,8 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/base_dimen_150"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:gravity="left|center_vertical"
                     android:text="身份证"
                     android:textColor="#333333"
@@ -716,9 +672,9 @@
 
                 <EditText
                     android:id="@+id/id_add_house_owner_id_card"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_weight="3"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
                     android:background="#00000000"
                     android:digits="@string/edit_input"
                     android:gravity="center_vertical"
@@ -735,37 +691,6 @@
                 android:layout_height="1dp"
                 android:background="#0c000000" />
 
-            <!--
-                <ImageView 
-	        	     android:layout_width="match_parent"
-		        	 android:layout_height="1dp"
-		        	 android:background="#0c000000"
-	        	     />
-	        	<FrameLayout 
-	        	    android:id="@+id/id_add_house_owner_type"
-	        	    android:layout_width="match_parent"
-		        	android:layout_height="60dp"
-		        	android:orientation="horizontal"
-		        	android:gravity="center_vertical"
-	        	    >
-	        	    <TextView 
-	        	        android:id="@+id/id_add_house_owner_type_text"
-	        	        android:layout_width="wrap_content"
-		        		android:layout_height="match_parent"
-		        		android:text="房屋类型"
-		        		android:textColor="#666666"
-			    		android:textSize="15dp"
-			    		android:gravity="center"
-	        	        />
-	        	    <ImageView 
-	        	        android:layout_width="8dp"
-		        		android:layout_height="12dp"
-		        		android:layout_marginRight="10dp"
-		        		android:background="@drawable/into_icon"
-		        		android:layout_gravity="right|center_vertical"
-	        	        />
-	        	</FrameLayout>
-            -->
 
             <ImageView
                 android:layout_width="match_parent"

@@ -234,6 +234,7 @@ public class MyFragment extends BaseFragment {
 			mUserAddress.setText(CommonUtil.mUserLoginName);
 			mUserNickname.setVisibility(View.VISIBLE);
 			mUserAddress.setVisibility(View.VISIBLE);
+			mWallet.setText(CommonUtil.mUserWallet);
 		}else{
 			mRegistAndLogin.setVisibility(View.VISIBLE);
 			mUserNickname.setVisibility(View.GONE);
@@ -325,6 +326,7 @@ public class MyFragment extends BaseFragment {
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
 			}
 			return userInfo;
 		} catch (Exception e) {
@@ -355,6 +357,7 @@ public class MyFragment extends BaseFragment {
 						CommonUtil.mUserLoginName = "";
 						CommonUtil.mRegisterRealName = "";
 						CommonUtil.mRegisterIdcard = "";
+						CommonUtil.mUserWallet = "";
 						uploadXingeToken();
 						
 					}
@@ -389,13 +392,21 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
+						
+						mWallet.setText("¥0.0");
 						SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 						SharedPreferences.Editor editor = sharedata.edit();
 						editor.putString("user_name", "");
 						editor.putString("user_password", "");
-						editor.putString("area", "");
-						editor.putString("host", "");
+						editor.putString("user_realname", "");
+						editor.putString("user_idcard", "");
 						editor.commit();
+						mUserAddress.setVisibility(View.GONE);
+						mUserNickname.setVisibility(View.GONE);
+						CommonUtil.mUserLoginName = "";
+						CommonUtil.mRegisterRealName = "";
+						CommonUtil.mRegisterIdcard = "";
+						CommonUtil.mUserWallet = "";
 						Intent intent = new Intent(mContext, LoginUserActivity.class);
 						startActivity(intent);
 						MyFragment.this.getActivity().finish();

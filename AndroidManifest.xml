@@ -96,7 +96,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-            <intent-filter>
+ <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -137,13 +137,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".CaptureActivity"
@@ -163,6 +156,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
         </activity>
         <activity
             android:name=".AddRentAttributeActivity"

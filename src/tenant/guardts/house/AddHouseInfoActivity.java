@@ -332,7 +332,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mGetPayRateDesc, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 		
 	}
 	private boolean checkInputContent(){
@@ -648,7 +648,6 @@ public class AddHouseInfoActivity extends BaseActivity{
 			mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
 		}
 		if (!mSelectorInfo.containsKey("district")){
-			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mDistrictTextView.getText());
 			mSelectorInfo.put("district", direction);
@@ -724,7 +723,6 @@ public class AddHouseInfoActivity extends BaseActivity{
 		if (mSelectorInfo.containsKey("road")){
 			mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
 		}
-		
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mStreetTextView.getText());
 			mSelectorInfo.put("street", direction);
