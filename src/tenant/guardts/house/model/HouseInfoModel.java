@@ -27,12 +27,16 @@ public class HouseInfoModel implements Serializable{
 	private String orderCreatedDate;//下单时间
 	
 	
+<<<<<<< Updated upstream
 	
 	
+=======
+>>>>>>> Stashed changes
 	public String getRenterIdcard() {
 		return renterIdcard;
 	}
 
+<<<<<<< Updated upstream
 	public String getOrderCreatedDate() {
 		return orderCreatedDate;
 	}
@@ -41,6 +45,8 @@ public class HouseInfoModel implements Serializable{
 		this.orderCreatedDate = orderCreatedDate;
 	}
 
+=======
+>>>>>>> Stashed changes
 	public void setRenterIdcard(String renterIdcard) {
 		this.renterIdcard = renterIdcard;
 	}

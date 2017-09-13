@@ -21,6 +21,10 @@ import tenant.guardts.house.model.CompleteStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
+import android.widget.Button;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";
@@ -38,8 +42,9 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		rentNO = getIntent().getStringExtra("rentNO");
 		orderCreatedDate = getIntent().getStringExtra("orderCreatedDate");
 		price=getIntent().getStringExtra("pay_price");
-		
-		Log.e("", orderID + "===============");
+		boolean successful = getIntent().getBooleanExtra("flag", false);
+		orderID = getIntent().getStringExtra("orderID");
+		Log.e("", orderID+"===============");
 		if (successful) {
 			setContentView(R.layout.activity_successful_payment);
 		} else {
@@ -65,7 +70,13 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 
 
 	private void initView() {
-		
+			
+			@Override
+			public void onClick(View v) {
+				if(orderID!=null)
+				completeHouseRentAttributeInfo(orderID);
+			}
+		});
 		
 		finish = (Button) findViewById(R.id.id_button_finish_pay);
 		if(successful){
@@ -141,8 +152,74 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	}
 
 
+
+	/**
+	 * 通知后台更新订单状态
+	 * 
+	 * @param id
+	 *            房屋订单号
+	 */
+	private void completeHouseRentAttributeInfo(String id) {
+		if (id == null || id.equals("")) {
+			return;
+		}
+		String url = CommonUtil.mUserHost + "Services.asmx?op=CompleteRentAttribute";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
+		rpc.addProperty("id", id);
+		mPresenter.readyPresentServiceParams(getApplicationContext(), url, mCompleteRentAttribute, rpc);
+		mPresenter.startPresentServiceTask();
+	}
+
+
+	Handler mHandler=new Handler(){
+		public void handleMessage(Message msg) {
+			if(msg.what==818){
+				String value=(String) msg.obj;
+				Log.e("", value+"--");
+				Gson gson = new Gson();
+//				gson.fromJson(value, )
+			}
+		};
+	};
+	private Button finish;
+	private String orderID;
+
+	
+//		if (action != null && templateInfo != null){
+//			if (action.equals(mCompleteRentAttribute)){
+//				Message msg = mHandler.obtainMessage();
+//				msg.what = 818;
+//				msg.obj = templateInfo;
+//				msg.sendToTarget();
+//			}
+//		}
+	
+	
+	
+
+
+	@Override
+	public void onStatusSuccess(String action, String templateInfo) {
+		super.onStatusSuccess(action, templateInfo);
+		if (action.equals(mCompleteRentAttribute)) {
+			Log.e("", action + "======" + templateInfo);
+			Message msg = mHandler.obtainMessage();
+			msg.what = 818;
+			msg.obj = templateInfo;
+			msg.sendToTarget();
+		}
+	}
+
+	@Override
+	public void onStatusStart() {
+		// TODO Auto-generated method stub
+		super.onStatusStart();
+	}
+
 	@Override
 	public void onStatusError(String action, String error) {
+		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
 	}
-}
+	}
+>>>>>>> Stashed changes

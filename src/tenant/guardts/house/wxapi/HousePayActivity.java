@@ -70,6 +70,11 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		rentNO = getIntent().getStringExtra("rentNO");
 		orderCreatedDate=getIntent().getStringExtra("orderCreatedDate");//下单时间
 		//Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
+		final String price = "1.0";//////////////////////////////////
+		ownerId = getIntent().getStringExtra("owner_idcard");
+		renterId = getIntent().getStringExtra("renter_idcard");
+		orderID=getIntent().getStringExtra("orderID");
+Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
 
 		if (price == null || price.equals("null")) {
@@ -103,7 +108,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 			@Override
 			public void onClick(View v) {
-				
 				if (isPayByWechat) {
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
@@ -122,7 +126,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	}
 
 	private void payByWallet(String renterID, String ownerID, String money) {
-		// 
 		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=PayUseWallet";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPayUseWallet));
 		rpc.addProperty("rennteeIDCard", renterID);
@@ -244,7 +247,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			
 			if (msg.what == 818) {
 				String value = (String) msg.obj;
 				///////////////////////////////////////////////////////////////////////////////
@@ -261,6 +263,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					intent.putExtra("pay_price", price);
 					startActivity(intent);
 					finish();
+					startActivity(intent);
 				} else if (ret == 1) {
 					successful = false;
 					if (payment.msg != null) {

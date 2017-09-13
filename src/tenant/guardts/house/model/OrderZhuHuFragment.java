@@ -384,6 +384,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
+<<<<<<< Updated upstream
 
 					houseModel.setDoorPassword(itemJsonObject.optString("RRANationName"));
 
@@ -391,6 +392,9 @@ public class OrderZhuHuFragment extends BaseFragment{
 					houseModel.setOrderCreatedDate(itemJsonObject.optString("RCreatedDate"));//下单时间
 					
 
+=======
+					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
+>>>>>>> Stashed changes
 					mHouseInfoList.add(houseModel);
 				}
 			}
