@@ -346,7 +346,7 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
 		mPresenter.readyPresentServiceParams(this, identifyUrl, mIdentifyAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 	
@@ -355,7 +355,7 @@ public class RegisterUserActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
 		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void checkPhoneVerifyCode(String phone, String code){
@@ -364,7 +364,7 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("phone", phone); 
 		rpc.addProperty("number", code); 
 		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void checkUserNameValid(String username){
@@ -372,7 +372,7 @@ public class RegisterUserActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
 		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void registerUserName(){
@@ -392,7 +392,7 @@ public class RegisterUserActivity extends BaseActivity{
 		rpc.addProperty("address", mAddress);
 		rpc.addProperty("status", "0"); //
 		mPresenter.readyPresentServiceParams(this, url, mRegisterAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private Handler mHandler = new Handler(){

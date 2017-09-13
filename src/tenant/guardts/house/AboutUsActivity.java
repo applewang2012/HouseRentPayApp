@@ -60,7 +60,7 @@ public class AboutUsActivity extends BaseActivity {
 		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
 		mPresenter.readyPresentServiceParams(AboutUsActivity.this, url, mUpdateAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private  void parseUpdateVersion(String value) {

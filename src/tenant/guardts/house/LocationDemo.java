@@ -205,7 +205,7 @@ public class LocationDemo extends BaseActivity {
 		rpc.addProperty("lon", mLongi+""); 
 		rpc.addProperty("distance", "15000"); 
 		mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
     
     private void startGetLocationFromHouse(){

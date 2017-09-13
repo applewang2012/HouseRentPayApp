@@ -250,7 +250,7 @@ public class HouseSearchActivity extends BaseActivity {
 		rpc.addProperty("startdate", mStartTime);
 		rpc.addProperty("endate", mEndTime);
 		mPresent.readyPresentServiceParams(this, url, mSearchAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 		Log.i("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
 	}
 	

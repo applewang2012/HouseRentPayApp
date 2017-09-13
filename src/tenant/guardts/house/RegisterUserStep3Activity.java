@@ -124,7 +124,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdCardValidAction));
 		rpc.addProperty("idcard", id); 
 		mPresenter.readyPresentServiceParams(this, url, mIdCardValidAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void startLiveIdentifyActivity(){
@@ -207,7 +207,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
 		mPresenter.readyPresentServiceParams(this, identifyUrl, mIdentifyAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 	
@@ -229,7 +229,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 		rpc.addProperty("address", "address");
 		rpc.addProperty("status", "0"); //
 		mPresenter.readyPresentServiceParams(this, url, mRegisterAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private Handler mHandler = new Handler(){

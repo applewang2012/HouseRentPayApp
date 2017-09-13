@@ -222,7 +222,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetHouseInfoAction));
 		rpc.addProperty("loginName", mUserName);
 		mPresent.readyPresentServiceParams(this, url, mGetHouseInfoAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	private void deleteHouseInfo(String houseNo){
@@ -230,7 +230,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfoAction));
 		rpc.addProperty("houseNo", houseNo);
 		mPresent.readyPresentServiceParams(this, url, mDeleteHouseInfoAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	private Handler mHandler = new Handler(){

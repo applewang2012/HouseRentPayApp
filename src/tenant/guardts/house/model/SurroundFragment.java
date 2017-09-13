@@ -301,7 +301,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 //		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(soapaction));
 //		rpc.addProperty("username", mUsername);
 //		mPresent.readyPresentServiceParams(mContext, url, soapaction, rpc);
-//		mPresent.startPresentServiceTask();
+//		mPresent.startPresentServiceTask(true);
 //		
 //	}
 //

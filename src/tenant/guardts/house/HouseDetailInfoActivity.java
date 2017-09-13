@@ -339,7 +339,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
 		rpc.addProperty("rentNo", rentNo);
 		mPresenter.readyPresentServiceParams(HouseDetailInfoActivity.this, url, mHouseDetailAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void getHouseDetailImageListByHouseId(String rentNo) {
@@ -348,7 +348,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseImageListAction));
 		rpc.addProperty("rentNo", rentNo);
 		mPresenter.readyPresentServiceParams(this, url, mHouseImageListAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private Handler mHandler = new Handler() {

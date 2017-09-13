@@ -94,7 +94,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 		rpc.addProperty("newPassword", mNewPassword);
 		rpc.addProperty("userType", "0");
 		mPresenter.readyPresentServiceParams(this, url, mModifyAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private Handler mHandler = new Handler(){

@@ -332,7 +332,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mGetPayRateDesc, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 	private boolean checkInputContent(){
@@ -524,7 +524,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidHouseIDAction));
 //			rpc.addProperty("houseID", mHouseNo.getText().toString());
 //			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mValidHouseIDAction, rpc);
-//			mPresenter.startPresentServiceTask();
+//			mPresenter.startPresentServiceTask(true);
 //	}
 
 	
@@ -540,7 +540,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseProperty";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPropertyAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mPropertyAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mPropertryTextView, "property", mSelectorInfo.get("property").getHouseAllContent());
 		}
@@ -557,7 +557,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mTypeAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mTypeAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mTypeTextView, "type", mSelectorInfo.get("type").getHouseAllContent());
 		}
@@ -572,7 +572,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseDirection";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDirectionAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDirectionAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mDirectionTextView, "direction", mSelectorInfo.get("direction").getHouseAllContent());
 		}
@@ -587,7 +587,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseStructure";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStuctureAction));
 //			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mStuctureAction, rpc);
-//			mPresenter.startPresentServiceTask();
+//			mPresenter.startPresentServiceTask(true);
 //		}else{
 //			showAlertDialog(mStructureTextView, "structure", mSelectorInfo.get("structure").getHouseAllContent());
 //		}
@@ -603,7 +603,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetBuildingStructure";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mBuildingStuctureAction));
 //			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mBuildingStuctureAction, rpc);
-//			mPresenter.startPresentServiceTask();
+//			mPresenter.startPresentServiceTask(true);
 //		}else{
 //			showAlertDialog(mBuildingStructureTextView, "buildingstructure", mSelectorInfo.get("buildingstructure").getHouseAllContent());
 //		}
@@ -618,7 +618,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseRentType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentTypeAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRentTypeAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mRentTypeTextView, "renttype", mSelectorInfo.get("renttype").getHouseAllContent());
 		}
@@ -633,7 +633,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseOwnType";
 //			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOwnerTypeAction));
 //			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mOwnerTypeAction, rpc);
-//			mPresenter.startPresentServiceTask();
+//			mPresenter.startPresentServiceTask(true);
 //		}else{
 //			showAlertDialog(mOwnerTypeTextView, "ownertype", mSelectorInfo.get("ownertype").getHouseAllContent());
 //		}
@@ -655,7 +655,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetDistrictList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDistrictAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDistrictAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mDistrictTextView, "district", mSelectorInfo.get("district").getHouseAllContent());
 		}
@@ -673,7 +673,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
 				rpc.addProperty("street", mSelectorInfo.get("street").getHouseSelectId());
 				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRoadAction, rpc);
-				mPresenter.startPresentServiceTask();
+				mPresenter.startPresentServiceTask(true);
 			}
 	}
 	
@@ -717,7 +717,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("ownType", "02");         
 		
 		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mAddHouseAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void getHouseStreet(){
@@ -733,7 +733,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			if (mSelectorInfo.get("district").getHouseSelectId() != null && !mSelectorInfo.get("district").getHouseSelectId().equals("")){
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
 				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mStreetAction, rpc);
-				mPresenter.startPresentServiceTask();
+				mPresenter.startPresentServiceTask(true);
 			}else{
 				
 			}
@@ -752,7 +752,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetPoliceStationList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mFenjuAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mFenjuAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}else{
 			showAlertDialog(mFenjuTextView, "fenju", mSelectorInfo.get("fenju").getHouseAllContent());
 		}
@@ -768,7 +768,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			if (mSelectorInfo.get("fenju").getHouseSelectId() != null && !mSelectorInfo.get("fenju").getHouseSelectId().equals("")){
 				rpc.addProperty("parentstationId", mSelectorInfo.get("fenju").getHouseSelectId());
 				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mPoliceAction, rpc);
-				mPresenter.startPresentServiceTask();
+				mPresenter.startPresentServiceTask(true);
 			}
 	}
 	

@@ -27,9 +27,11 @@ public class HoursePresenter {
 		mActivity = ctx;
 		mDataModel.setAsyncTaskReady(ctx, url, action, object);
 	}
-	public void startPresentServiceTask(){
+	public void startPresentServiceTask(boolean loading){
+		if (loading){
+			mDataInterface.onStatusStart(mActivity);
+		}
 		mDataModel.startDataRequestTask();
-		mDataInterface.onStatusStart(mActivity);
 	}
 	public void readyPresentHttpServiceParams(Context ctx, String url, HashMap<String, String> data){
 		mDataModel.setHttpTaskReady(ctx, url, data);

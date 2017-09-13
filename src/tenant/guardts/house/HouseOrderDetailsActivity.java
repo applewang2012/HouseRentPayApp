@@ -73,7 +73,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresent.readyPresentServiceParams(this, url, mGetPayRateDesc, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 
 	}
 
@@ -358,7 +358,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mConfirmRentAttribute, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	private void showRejectOrderDialog(final String houseId) {
@@ -396,7 +396,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mRejectRentAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	private void cancelRentAttributeInfo(String id) {
@@ -404,7 +404,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCancelAttrbuteAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mCancelAttrbuteAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	private Handler mHandler = new Handler() {

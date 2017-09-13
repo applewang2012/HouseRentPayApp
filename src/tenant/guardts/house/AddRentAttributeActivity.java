@@ -127,7 +127,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 
@@ -508,7 +508,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			rpc.addProperty("password", password.getEditableText().toString()); 
 			rpc.addProperty("createdBy", mUsername);
 			mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mAddRentAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void queryIdentifyStatus(String orderId){
@@ -516,7 +516,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mQueryStatusAction));
 		rpc.addProperty("id", orderId);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mQueryStatusAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void sendMessageToFinish(){
@@ -525,7 +525,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //		rpc.addProperty("rentNo", mHouseId.getText().toString());
 //		rpc.addProperty("sign", "0");
 //		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mSendMessageAction, rpc);
-//		mPresenter.startPresentServiceTask();
+//		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void startLiveIdentifyActivity(){
@@ -587,7 +587,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, identifyUrl, mIdentifyAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 	

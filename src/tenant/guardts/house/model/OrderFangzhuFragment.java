@@ -291,7 +291,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		mPresent.readyPresentServiceParams(getActivity(), url, mRentHistoryAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	private void confirmRentAttributeInfo(String id){
@@ -299,7 +299,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(getActivity(), url, mConfirmRentAttribute, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	private void rejectRentAttributeInfo(String id){
@@ -307,7 +307,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRejectRentAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(getActivity(), url, mRejectRentAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	

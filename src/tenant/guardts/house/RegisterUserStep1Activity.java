@@ -136,7 +136,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
 		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	

@@ -94,7 +94,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
 		mPresenter.readyPresentServiceParams(this, url, mCompleteRentAttribute, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	Handler mHandler = new Handler() {

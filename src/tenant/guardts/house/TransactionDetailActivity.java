@@ -71,7 +71,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetBillLog));
 		rpc.addProperty("idCard", IDCard);
 		mPresenter.readyPresentServiceParams(this, url, mGetBillLog, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void initView() {

@@ -129,7 +129,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		rpc.addProperty("ownerIDCard", ownerID);
 		rpc.addProperty("money", money);
 		mPresenter.readyPresentServiceParams(this, url, mPayUseWallet, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void initView() {

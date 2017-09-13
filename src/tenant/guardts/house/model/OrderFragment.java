@@ -169,7 +169,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 //		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 //		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 //		mPresent.readyPresentServiceParams(mContext, url, mRentHistoryAction, rpc);
-//		mPresent.startPresentServiceTask();
+//		mPresent.startPresentServiceTask(true);
 //	}
 //
 //	private void showLoadingView(){

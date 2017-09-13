@@ -139,7 +139,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));
 		rpc.addProperty("loginName", username); 
 		mPresenter.readyPresentServiceParams(this, url, mValidAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	
@@ -162,7 +162,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
 		rpc.addProperty("phone", phone); 
 		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void checkPhoneVerifyCode(String phone, String code){
@@ -171,7 +171,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		rpc.addProperty("phone", phone); 
 		rpc.addProperty("number", code); 
 		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	

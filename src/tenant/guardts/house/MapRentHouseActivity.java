@@ -415,7 +415,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 			rpc.addProperty("lon", mCurrentLatLng.longitude+""); 
 			rpc.addProperty("distance", "15000"); 
 			mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 		}
 	    
 	    private void startGetLocationFromHouse(){

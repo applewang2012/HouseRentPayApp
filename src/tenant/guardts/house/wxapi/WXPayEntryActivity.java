@@ -100,7 +100,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
 		mPresenter.readyPresentServiceParams(this, url, mCompleteRentAttribute, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
     
     private void depositWalletRequestInfo(String fee){
@@ -112,7 +112,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		rpc.addProperty("fee", fee);
 		mPresenter.readyPresentServiceParams(this, url, mDepositWalletAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
     
     private void updateOrderInfo(String id){
@@ -130,7 +130,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		rpc.addProperty("prepayId", CommonUtil.ORDER_PREPAY_ID );
 		rpc.addProperty("ownerIdCard", CommonUtil.OWNER_IDCARD );
 		mPresenter.readyPresentServiceParams(this, url, mUpdateOrderAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
     
 

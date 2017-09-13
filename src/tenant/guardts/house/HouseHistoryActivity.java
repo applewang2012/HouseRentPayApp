@@ -102,7 +102,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", mIdCard);
 		mPresent.readyPresentServiceParams(this, url, mRentHistoryAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	private void getAdapterListData(String value){

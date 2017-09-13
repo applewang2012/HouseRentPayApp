@@ -317,7 +317,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		mPresent.readyPresentServiceParams(getActivity(), url, mRentHistoryAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 	
 	private void cancelRentAttributeInfo(String id){
@@ -325,7 +325,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCancelAttrbuteAction));
 		rpc.addProperty("id", id);
 		mPresent.readyPresentServiceParams(getActivity(), url, mCancelAttrbuteAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	

@@ -249,7 +249,7 @@ public class MyFragment extends BaseFragment {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetUserInfoAction));
 		rpc.addProperty("username", mUserName);
 		mPresent.readyPresentServiceParams(getActivity(), url, mGetUserInfoAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 
 	}
 
@@ -377,7 +377,7 @@ public class MyFragment extends BaseFragment {
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
 		rpc.addProperty("deviceId", "");
 		mPresent.readyPresentServiceParams(getActivity(), url, mXingeTokenAction, rpc);
-		mPresent.startPresentServiceTask();
+		mPresent.startPresentServiceTask(true);
 	}
 
 	private void changeUserAreaDialog() {

@@ -278,7 +278,7 @@ public class HomeActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOpenDoorAction));
 		rpc.addProperty("lockId", lockId);
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mOpenDoorAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void checkVersionUpdate() {
@@ -288,7 +288,7 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUpdateAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 //	private void getUserInfo() {
@@ -297,7 +297,7 @@ public class HomeActivity extends BaseActivity {
 //		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 //		rpc.addProperty("username", mUserName);
 //		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUserInfoAction, rpc);
-//		mPresenter.startPresentServiceTask();
+//		mPresenter.startPresentServiceTask(true);
 //	}
 	
 	private void uploadXingeToken() {
@@ -309,7 +309,7 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("userId", mUserName);
 		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mXingeTokenAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void hideAllFragments(FragmentTransaction transaction) {

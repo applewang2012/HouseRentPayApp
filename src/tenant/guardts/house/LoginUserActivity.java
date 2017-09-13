@@ -144,7 +144,7 @@ public class LoginUserActivity extends BaseActivity{
 		rpc.addProperty("password", mPassword);
 		rpc.addProperty("userType", "0");
 		mPresenter.readyPresentServiceParams(this, url, mLoginAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void commonServiceInterface(){
@@ -157,7 +157,7 @@ public class LoginUserActivity extends BaseActivity{
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
 			rpc.addProperty("status", "1");
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
-			mPresenter.startPresentServiceTask();
+			mPresenter.startPresentServiceTask(true);
 	    }else{
 	    	CommonUtil.mUserHost = host;
 	    }

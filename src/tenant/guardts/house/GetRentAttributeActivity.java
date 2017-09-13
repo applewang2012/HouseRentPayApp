@@ -292,7 +292,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		rpc.addProperty("base64Str", faceStr);
 		rpc.addProperty("picBase64Str", screenshotStr);
 		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, identifyUrl, mIdentifyAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 		
 	}
 
@@ -303,7 +303,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentAttributeAction));
 		rpc.addProperty("id", id); 
 		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mRentAttributeAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void confirmRentAttributeInfo(String id){
@@ -312,7 +312,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
 		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mConfirmRentAttribute, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void completeHouseRentAttributeInfo(String id){
@@ -321,7 +321,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCompleteRentAttribute));
 		rpc.addProperty("id", id);
 		mPresenter.readyPresentServiceParams(GetRentAttributeActivity.this, url, mCompleteRentAttribute, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	

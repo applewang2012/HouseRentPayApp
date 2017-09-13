@@ -183,7 +183,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
 		mPresenter.readyPresentServiceParams(getActivity(), url, mUserInfoAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void startThreadfindLocation(final String locationName) {
@@ -489,7 +489,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		rpc.addProperty("lon", mCurrentLatLng.longitude + "");
 		rpc.addProperty("distance", "15000");
 		mPresenter.readyPresentServiceParams(getActivity(), url, mLocationAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void startGetLocationFromHouse() {

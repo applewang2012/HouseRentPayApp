@@ -192,7 +192,7 @@ public class SelectPhotoActivity extends BaseActivity {
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
 		rpc.addProperty("imageStr", BMapUtil.bitmapToBase64(Bimp.tempSelectBitmap.get(num-1).getBitmap()));
 		mPresenter.readyPresentServiceParams(this, url, mAddImageAction, rpc);
-		mPresenter.startPresentServiceTask();
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	@SuppressLint("HandlerLeak")
