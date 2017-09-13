@@ -45,7 +45,6 @@ public class ModifyPasswordActivity extends BaseActivity{
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		
-		
 		final EditText userName = (EditText)findViewById(R.id.id_password_username);
 		final EditText oldpassword = (EditText)findViewById(R.id.id_old_password);
 		final EditText newpassword = (EditText)findViewById(R.id.id_new_password);

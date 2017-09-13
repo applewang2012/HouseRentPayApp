@@ -56,21 +56,7 @@ public class RechargeActivity extends BaseActivity {
 		mTitleBar.setText("钱包充值");
 		
 		initView();
-		
-//		try {
-//			int dotInex = price.indexOf(".");
-//			if (dotInex >= 0) {
-//				String priceInt = price.substring(0, dotInex);
-//				realPrice = priceInt + "00";
-//			} else {
-//				Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
-//				return;
-//			}
-//
-//			Log.i("mingguo", "pay activity  price int   " + realPrice);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+
 	}
 	
 	private void initView(){

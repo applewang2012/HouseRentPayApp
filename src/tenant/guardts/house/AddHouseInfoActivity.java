@@ -100,6 +100,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private String mRHousePrice;
 	private TextView commission;
 	private TextView explanation;
+	private EditText mOwnerName;
+	private EditText mOwnerPhone;
+	private EditText mOwnerIdCard;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -126,8 +129,12 @@ public class AddHouseInfoActivity extends BaseActivity{
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-//		
-//		
+		mOwnerName = (EditText)findViewById(R.id.id_add_house_owner_name);
+		mOwnerPhone = (EditText)findViewById(R.id.id_add_house_owner_phone);
+		mOwnerIdCard = (EditText)findViewById(R.id.id_add_house_owner_id_card);
+		mOwnerName.setText(CommonUtil.mRegisterRealName);
+		mOwnerPhone.setText(CommonUtil.mUserLoginName);
+		mOwnerIdCard.setText(CommonUtil.mRegisterIdcard);
 		commission = (TextView) findViewById(R.id.commission);//手续费
 		explanation = (TextView) findViewById(R.id.explanation);//手续费描述
 		age = (EditText)findViewById(R.id.id_add_house_price);
@@ -487,26 +494,26 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			mRentNo = mHouseNo.getText().toString();
 //		}
 		mRentNo = System.currentTimeMillis()+"";
-		EditText owner_name = (EditText)findViewById(R.id.id_add_house_owner_name);
-		if (owner_name.getText().toString() == null || owner_name.getText().toString().equals("")){
+		
+		if (mOwnerName.getText().toString() == null || mOwnerName.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房主姓名", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			mROwner = owner_name.getText().toString();
+			mROwner = mOwnerName.getText().toString();
 		}
-		EditText phone = (EditText)findViewById(R.id.id_add_house_owner_phone);
-		if (phone.getText().toString() == null || phone.getText().toString().equals("")){
+		
+		if (mOwnerPhone.getText().toString() == null || mOwnerPhone.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房主手机", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			mROwnerTel = phone.getText().toString();
+			mROwnerTel = mOwnerPhone.getText().toString();
 		}
-		EditText owner_id = (EditText)findViewById(R.id.id_add_house_owner_id_card);
-		if (owner_id.getText().toString() == null || owner_id.getText().toString().equals("")){
+		
+		if (mOwnerIdCard.getText().toString() == null || mOwnerIdCard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房主身份证号码", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			mRIDCard = owner_id.getText().toString();
+			mRIDCard = mOwnerIdCard.getText().toString();
 		}
 		
 		return true;

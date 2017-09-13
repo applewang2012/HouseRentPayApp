@@ -111,7 +111,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				if (isPayByWechat) {
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-					startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
+					startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 				} else {
 					Toast.makeText(HousePayActivity.this, "钱包支付", Toast.LENGTH_SHORT).show();
 					//////////////////////////////////////

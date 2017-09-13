@@ -83,7 +83,7 @@ public class MyFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		Log.w("mingguo", "my fragment  onresume  login name  " + CommonUtil.mUserLoginName);
+		
 		initData();
 	}
 
@@ -218,13 +218,15 @@ public class MyFragment extends BaseFragment {
 	}
 
 	private void initData() {
+		Log.w("mingguo", "my fragment  onresume  login name  " + CommonUtil.mUserLoginName+"  wallet  "+CommonUtil.mUserWallet);
 		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
 			mRegistAndLogin.setVisibility(View.GONE);
 			mUserNickname.setText(CommonUtil.mRegisterRealName);
 			mUserAddress.setText(CommonUtil.mUserLoginName);
 			mUserNickname.setVisibility(View.VISIBLE);
 			mUserAddress.setVisibility(View.VISIBLE);
-			if (CommonUtil.mUserWallet== null || CommonUtil.mUserWallet.equals("")) {
+			mWallet.setVisibility(View.VISIBLE);
+			if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("")) {
 				mWallet.setText("¥ 0.0");
 			} else {
 				mWallet.setText("¥ "+CommonUtil.mUserWallet);

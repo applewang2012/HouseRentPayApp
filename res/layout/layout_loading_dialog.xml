@@ -30,7 +30,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
 	        android:text="请稍后"
-	        android:textColor="#ffffff"
+	        android:textColor="#337ffd"
 	        android:textSize="@dimen/base_dimen_34"
 	        android:layout_marginTop="@dimen/base_dimen_130"
    	 	    />

@@ -342,6 +342,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentIDcard = (EditText)findViewById(R.id.id_rent_house_idcard);
 		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
+		mRentName.setText(CommonUtil.mRegisterRealName);
+		mRentPhone.setText(CommonUtil.mUserLoginName);
+		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
 		mRentPrice = (EditText)findViewById(R.id.id_rent_house_price);
 		mRentPrice.addTextChangedListener(new TextWatcher() {
 			

@@ -159,7 +159,6 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
 					setContentView(v);
 					initSuccessView(v);
-					
 					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 				}else{
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
