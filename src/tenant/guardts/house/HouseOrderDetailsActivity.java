@@ -185,6 +185,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 							payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
 							payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
 							startActivity(payIntent);
+							finish();
 						}
 					});
 					button2.setOnClickListener(new OnClickListener() {

@@ -49,6 +49,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -233,6 +234,12 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 
 	private void initView() {
+		
+//		ImageView homeTopImage = (ImageView)mRootView.findViewById(R.id.id_home_image);
+//		homeTopImage.setFocusable(true);  
+//		homeTopImage.setFocusableInTouchMode(true);  
+//		homeTopImage.requestFocus();  
+		
 		mLogin = (TextView) mRootView.findViewById(R.id.textview_login);
 		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 
@@ -244,8 +251,12 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		TextView mHeXiPower = (TextView) mRootView.findViewById(R.id.tv_hexi_power);// 河西力量
 		TextView mSafeguardRights = (TextView) mRootView.findViewById(R.id.tv_safeguard_rights);// 维权常识
 		TextView mMedicalInsurance = (TextView) mRootView.findViewById(R.id.tv_medical_insurance);// 医疗保险
-		TextView mUseFulNumber = (TextView) mRootView.findViewById(R.id.tv_useful_numbers);// 常用电话
+		TextView mUseFulNumber = (TextView) mRootView.findViewById(R.id.tv_phone);// 常用电话
 
+		TextView traffic = (TextView) mRootView.findViewById(R.id.tv_triffic);// 常用电话
+		TextView surround = (TextView) mRootView.findViewById(R.id.tv_surrounds);// 常用电话
+		TextView more = (TextView) mRootView.findViewById(R.id.tv_more);// 常用电话
+		
 		mGovernmentService.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -286,6 +297,33 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
+		
+		traffic.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		
+		surround.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
+		
+		more.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		});
 
 		mRbShare = (RadioButton) mRootView.findViewById(R.id.home_radio_share);
 		mRbOwner = (RadioButton) mRootView.findViewById(R.id.home_radio_owner);
@@ -295,8 +333,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		mShareHouseLayout.setVisibility(View.VISIBLE);
 		mHouseOwnerLayout.setVisibility(View.GONE);
 
-		LinearLayout fabuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_fabu);
-		LinearLayout dengjiLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_dengji);
+		LinearLayout fabuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_dengji);
 		LinearLayout weixiuLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_weixiu);
 		LinearLayout gaizhaoLayout = (LinearLayout) mRootView.findViewById(R.id.id_home_house_owner_gaizhao);
 		fabuLayout.setOnClickListener(new OnClickListener() {
@@ -313,14 +350,6 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 					intent.putExtra("user_name", CommonUtil.mUserLoginName);
 					startActivity(intent);
 				}
-			}
-		});
-		dengjiLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
 

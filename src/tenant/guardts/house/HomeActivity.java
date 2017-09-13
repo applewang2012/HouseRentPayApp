@@ -378,7 +378,24 @@ public class HomeActivity extends BaseActivity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+			}else if (msg.what == 301){
+				dimissOpenDoorLoading();
+				JSONObject itemJsonObject;
+				try {
+					itemJsonObject = new JSONObject((String)msg.obj);
+					String ret = itemJsonObject.optString("ret");
+					if (ret != null) {
+						if (ret.equals("0")){
+							showOpenDoorLoadingView();
+							showOpenDoorAlertDialog(mLockNumber);
+						}else{
+							Toast.makeText(getApplicationContext(), itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else if (msg.what == 1000){
 				dimissOpenDoorLoading();
 			}
@@ -524,6 +541,7 @@ public class HomeActivity extends BaseActivity {
 	}
 
 	private long exitTime;
+	private String mLockNumber;
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -557,10 +575,10 @@ public class HomeActivity extends BaseActivity {
 			Log.e("mingguo", "scan  result  " + scanResult);
 			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
 			int pos = scanResult.lastIndexOf("=");
-			String lockNo = scanResult.substring(pos + 1);
-			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + lockNo);
-			if (lockNo != null && lockNo.length() > 2) {
-				canOpenDoorRequest(lockNo, CommonUtil.mRegisterIdcard);
+			mLockNumber = scanResult.substring(pos + 1);
+			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);
+			if (mLockNumber != null && mLockNumber.length() > 2) {
+				canOpenDoorRequest(mLockNumber, CommonUtil.mRegisterIdcard);
 				//showOpenDoorAlertDialog(lockNo + "");
 			}
 		} 
@@ -597,12 +615,17 @@ public class HomeActivity extends BaseActivity {
 				Message message = mHandler.obtainMessage();
 				message.what = 200;
 				message.obj = templateInfo;
-				mHandler.sendMessageDelayed(message, 500);
+				mHandler.sendMessageDelayed(message, 50);
 			}else if (action.equals(mOpenDoorAction)){
 				Message message = mHandler.obtainMessage();
 				message.what = 300;
 				message.obj = templateInfo;
-				mHandler.sendMessageDelayed(message, 500);
+				mHandler.sendMessageDelayed(message, 50);
+			}else if (action.equals(mCanOpenDoorAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 301;
+				message.obj = templateInfo;
+				mHandler.sendMessageDelayed(message, 10);
 			}
 		}
 		

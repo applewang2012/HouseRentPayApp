@@ -70,11 +70,11 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		rentNO = getIntent().getStringExtra("rentNO");
 		orderCreatedDate=getIntent().getStringExtra("orderCreatedDate");//下单时间
 		//Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
-		final String price = "1.0";//////////////////////////////////
+		//final String price = "1.0";//////////////////////////////////
 		ownerId = getIntent().getStringExtra("owner_idcard");
 		renterId = getIntent().getStringExtra("renter_idcard");
 		orderID=getIntent().getStringExtra("orderID");
-Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
+
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
 
 		if (price == null || price.equals("null")) {

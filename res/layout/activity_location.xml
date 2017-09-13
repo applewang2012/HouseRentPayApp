@@ -106,7 +106,7 @@
             <RadioGroup
                 android:id="@+id/home_radiogrouop"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_80"
+                android:layout_height="@dimen/base_dimen_90"
                 android:orientation="horizontal" >
 
                 <RadioButton
@@ -150,12 +150,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_140" >
+                android:layout_height="@dimen/base_dimen_220" >
 
                 <LinearLayout
                     android:id="@+id/id_share_house_content"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/base_dimen_140"
+                    android:layout_height="@dimen/base_dimen_220"
                     android:orientation="horizontal" >
 
                     <LinearLayout
@@ -167,10 +167,10 @@
 
                         <ImageView
                             android:id="@+id/imageView1"
-                            android:layout_width="@dimen/base_dimen_70"
-                            android:layout_height="@dimen/base_dimen_54"
+                            android:layout_width="@dimen/base_dimen_80"
+                            android:layout_height="@dimen/base_dimen_80"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_20"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:background="@drawable/fgt_share_house_duanzu_share" />
 
                         <TextView
@@ -178,11 +178,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/base_dimen_15"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:gravity="center"
                             android:text="短租共享"
                             android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
+                            android:textSize="@dimen/base_dimen_32" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -193,54 +193,29 @@
                         android:orientation="vertical" >
 
                         <ImageView
-                            android:layout_width="@dimen/base_dimen_70"
-                            android:layout_height="@dimen/base_dimen_54"
+                            android:layout_width="@dimen/base_dimen_80"
+                            android:layout_height="@dimen/base_dimen_80"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_20"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:background="@drawable/fgt_share_house_map_zhufang" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_15"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:gravity="center"
                             android:text="地图租房"
                             android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
+                            android:textSize="@dimen/base_dimen_32" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/id_house_owner_content"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/base_dimen_140"
+                    android:layout_height="@dimen/base_dimen_220"
                     android:orientation="horizontal" >
-
-                    <LinearLayout
-                        android:id="@+id/id_home_house_owner_fabu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/base_dimen_20"
-                        android:layout_weight="1"
-                        android:orientation="vertical" >
-
-                        <ImageView
-                            android:layout_width="@dimen/base_dimen_64"
-                            android:layout_height="@dimen/base_dimen_52"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/fgt_house_owner_publish_house" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_15"
-                            android:gravity="center"
-                            android:text="登记房屋"
-                            android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/id_home_house_owner_dengji"
@@ -250,34 +225,34 @@
                         android:orientation="vertical" >
 
                         <ImageView
-                            android:layout_width="@dimen/base_dimen_64"
-                            android:layout_height="@dimen/base_dimen_52"
+                            android:layout_width="@dimen/base_dimen_80"
+                            android:layout_height="@dimen/base_dimen_80"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_20"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:background="@drawable/fgt_house_owner_dengji_house" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_15"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:gravity="center"
                             android:text="登记房屋"
                             android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
+                            android:textSize="@dimen/base_dimen_32" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/id_home_house_owner_weixiu"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/base_dimen_20"
+                        android:layout_marginTop="@dimen/base_dimen_30"
                         android:layout_weight="1"
                         android:orientation="vertical" >
 
                         <ImageView
-                            android:layout_width="@dimen/base_dimen_64"
-                            android:layout_height="@dimen/base_dimen_52"
+                            android:layout_width="@dimen/base_dimen_80"
+                            android:layout_height="@dimen/base_dimen_80"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/fgt_house_owner_remand_house" />
 
@@ -285,24 +260,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_15"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:gravity="center"
                             android:text="维修服务"
                             android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
+                            android:textSize="@dimen/base_dimen_32" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/id_home_house_owner_gaizhao"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/base_dimen_20"
+                        android:layout_marginTop="@dimen/base_dimen_30"
                         android:layout_weight="1"
                         android:orientation="vertical" >
 
                         <ImageView
-                            android:layout_width="@dimen/base_dimen_64"
-                            android:layout_height="@dimen/base_dimen_52"
+                            android:layout_width="@dimen/base_dimen_80"
+                            android:layout_height="@dimen/base_dimen_80"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/fgt_house_owner_update_house" />
 
@@ -310,11 +285,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_15"
+                            android:layout_marginTop="@dimen/base_dimen_30"
                             android:gravity="center"
                             android:text="改造房屋"
                             android:textColor="#999999"
-                            android:textSize="@dimen/base_dimen_26" />
+                            android:textSize="@dimen/base_dimen_32" />
                     </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
@@ -326,7 +301,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_120"
+                android:layout_height="@dimen/base_dimen_146"
                 android:layout_marginTop="6dp"
                 android:orientation="horizontal" >
 
@@ -339,7 +314,7 @@
                     android:gravity="center"
                     android:text="政府服务"
                     android:textColor="#464646"
-                    android:textSize="@dimen/base_dimen_20" />
+                    android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
                     android:id="@+id/tv_hexi_power"
@@ -350,7 +325,7 @@
                     android:gravity="center"
                     android:text="河西力量"
                     android:textColor="#464646"
-                    android:textSize="@dimen/base_dimen_20" />
+                    android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
                     android:id="@+id/tv_safeguard_rights"
@@ -361,7 +336,7 @@
                     android:gravity="center"
                     android:text="维权常识"
                     android:textColor="#464646"
-                    android:textSize="@dimen/base_dimen_20" />
+                    android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
                     android:id="@+id/tv_medical_insurance"
@@ -372,10 +347,28 @@
                     android:gravity="center"
                     android:text="医疗保险"
                     android:textColor="#464646"
-                    android:textSize="@dimen/base_dimen_20" />
+                    android:textSize="@dimen/base_dimen_26" />
+               
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_146"
+                android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/tv_useful_numbers"
+                    android:id="@+id/tv_triffic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/traffic"
+                    android:gravity="center"
+                    android:text="交通出行"
+                    android:textColor="#464646"
+                    android:textSize="@dimen/base_dimen_26" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -383,7 +376,30 @@
                     android:gravity="center"
                     android:text="常用电话"
                     android:textColor="#464646"
-                    android:textSize="@dimen/base_dimen_20" />
+                    android:textSize="@dimen/base_dimen_26" />
+
+                <TextView
+                    android:id="@+id/tv_surrounds"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/surrounds"
+                    android:gravity="center"
+                    android:text="周区商边"
+                    android:textColor="#464646"
+                    android:textSize="@dimen/base_dimen_26" />
+
+                <TextView
+                    android:id="@+id/tv_more"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/more_content"
+                    android:gravity="center"
+                    android:text="更多"
+                    android:textColor="#464646"
+                    android:textSize="@dimen/base_dimen_26" />
+
             </LinearLayout>
 
             <View

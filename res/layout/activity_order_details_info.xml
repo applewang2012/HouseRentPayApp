@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/base_dimen_30"
-                android:singleLine="true"
                 android:text="天津市和平区瞰和平16号楼1-202"
                 android:textColor="#333333"
                 android:textSize="@dimen/base_dimen_30" />
