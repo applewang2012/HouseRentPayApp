@@ -105,12 +105,13 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 		rpc.addProperty("cardNo", cardNO);
 		rpc.addProperty("bankName", bankName);
 		mPresenter.readyPresentServiceParams(this, url, mUpdateCreditCard, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 	}
 
 	private void initView() {
 //		getUserInfo();
 		idCard = getIntent().getStringExtra("IDCard");
+		
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mNext = (Button) findViewById(R.id.add_bank_card_btn_next);
 		mBankCardName = (EditText) findViewById(R.id.bank_card_name);

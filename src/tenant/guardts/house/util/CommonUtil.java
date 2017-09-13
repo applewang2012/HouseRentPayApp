@@ -39,6 +39,8 @@ public class CommonUtil {
     public static String mRegisterIdcard = null;
     public static String mUserLoginName = null;
     public static String mUserWallet = null;
+    public static String mBankName = null;
+    public static String mCardNo = null;
     public static String mUserHost = "http://qxw2332340157.my3w.com/";
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;

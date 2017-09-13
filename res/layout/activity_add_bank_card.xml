@@ -128,7 +128,7 @@
         android:text="下一步"
         android:textColor="#ffffff" />
     </LinearLayout>
- <include
+<!--  <include
         android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog" />
+        layout="@layout/layout_loading_dialog" /> -->
 </FrameLayout>

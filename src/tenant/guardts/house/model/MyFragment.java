@@ -6,9 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,8 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +29,6 @@ import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.PersonalInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.WalletActivity;
-import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
@@ -204,20 +199,15 @@ public class MyFragment extends BaseFragment {
 				} else {
 
 					Intent intent = new Intent(mContext, WalletActivity.class);
-					if (wallet == null || wallet.equals("null")) {
+					if (CommonUtil.mUserWallet== null || CommonUtil.mUserWallet.equals("")) {
 						intent.putExtra("balance", "0.0");
-
 					} else {
-						intent.putExtra("balance", wallet);
-					}
-					if (idCard != null) {
-						intent.putExtra("IDCard", idCard);// 携带身份证号
-						intent.putExtra("CardNO",cardNo.substring(cardNo.length()-4, cardNo.length()));// 携带银行卡号后四位
-						intent.putExtra("BankName", bankName);// 携带银行类型
-						
+						intent.putExtra("balance", CommonUtil.mUserWallet);
 					}
 					
-
+						intent.putExtra("IDCard",CommonUtil.mRegisterIdcard);// 携带身份证号
+						intent.putExtra("CardNO",CommonUtil.mCardNo.substring(CommonUtil.mCardNo.length()-4,CommonUtil.mCardNo.length()));// 携带银行卡号后四位
+						intent.putExtra("BankName", CommonUtil.mBankName);// 携带银行类型
 					startActivity(intent);
 
 				}
@@ -234,7 +224,11 @@ public class MyFragment extends BaseFragment {
 			mUserAddress.setText(CommonUtil.mUserLoginName);
 			mUserNickname.setVisibility(View.VISIBLE);
 			mUserAddress.setVisibility(View.VISIBLE);
-			mWallet.setText(CommonUtil.mUserWallet);
+			if (CommonUtil.mUserWallet== null || CommonUtil.mUserWallet.equals("")) {
+				mWallet.setText("¥ 0.0");
+			} else {
+				mWallet.setText("¥ "+CommonUtil.mUserWallet);
+			}
 		}else{
 			mRegistAndLogin.setVisibility(View.VISIBLE);
 			mUserNickname.setVisibility(View.GONE);
@@ -266,6 +260,7 @@ public class MyFragment extends BaseFragment {
 			if (msg.what == 100){
 				HashMap<String, String> infoModel = parseUserInfo((String) msg.obj);
 				if (infoModel != null) {
+					
 					phone = infoModel.get("Phone");
 					mUserAddress.setText(phone);// 显示手机号
 					realName = infoModel.get("RealName");
@@ -274,9 +269,10 @@ public class MyFragment extends BaseFragment {
 					wallet = infoModel.get("Wallet");
 					cardNo = infoModel.get("CardNO");
 					bankName = infoModel.get("BankName");
+					
 					// Toast.makeText(mContext, wallet,
 					// Toast.LENGTH_LONG).show();
-					if (wallet == null || wallet.equals("null")) {
+					if (wallet == null || wallet.equals("")) {
 						mWallet.setText("¥0.0");
 
 					} else {
@@ -327,6 +323,8 @@ public class MyFragment extends BaseFragment {
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
+				CommonUtil.mBankName= itemJsonObject.optString("BankName");
+				CommonUtil.mCardNo = itemJsonObject.optString("CardNO");
 			}
 			return userInfo;
 		} catch (Exception e) {
@@ -358,6 +356,9 @@ public class MyFragment extends BaseFragment {
 						CommonUtil.mRegisterRealName = "";
 						CommonUtil.mRegisterIdcard = "";
 						CommonUtil.mUserWallet = "";
+						CommonUtil.mBankName = "";
+						CommonUtil.mCardNo = "";
+						
 						uploadXingeToken();
 						
 					}
@@ -407,6 +408,8 @@ public class MyFragment extends BaseFragment {
 						CommonUtil.mRegisterRealName = "";
 						CommonUtil.mRegisterIdcard = "";
 						CommonUtil.mUserWallet = "";
+						CommonUtil.mBankName = "";
+						CommonUtil.mCardNo = "";
 						Intent intent = new Intent(mContext, LoginUserActivity.class);
 						startActivity(intent);
 						MyFragment.this.getActivity().finish();
@@ -425,8 +428,7 @@ public class MyFragment extends BaseFragment {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		// TODO Auto-generated method stub
-		Log.e("mingguo", "on status success  "+action+ "  success " + templateInfo);
+		Log.e("mingguo", "on status success-----  "+getClass().getName()+action+ "  success " + templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (templateInfo != null){
 			if (action.equals(mGetUserInfoAction)){

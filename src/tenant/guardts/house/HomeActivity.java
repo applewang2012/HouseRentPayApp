@@ -471,6 +471,8 @@ public class HomeActivity extends BaseActivity {
 				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
 				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
 				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
+				CommonUtil.mBankName= itemJsonObject.optString("BankName");
+				CommonUtil.mCardNo = itemJsonObject.optString("CardNO");
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 				editor.putString("user_realname", CommonUtil.mRegisterRealName);
