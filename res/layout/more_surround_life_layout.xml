@@ -35,7 +35,7 @@
 			    android:textSize="13dp"
 			    android:gravity="center"
 			    android:layout_gravity="center_vertical"
-			    android:background="@drawable/button_background"
+			    android:background="@drawable/house_button_press"
 	            />
 	        
 	   </LinearLayout>

@@ -1,9 +1,6 @@
 package tenant.guardts.house.model;
 
 public class HouseSelectorModel {
-
-
-
 	
 	private String[] allValue;
 	private String selectValue;
@@ -32,7 +29,7 @@ public class HouseSelectorModel {
 	}
 
 	public void setHouseOrginText(String text) {
-		this.orginText = text;
+		this.orginText = "";
 	}
 	
 	public String [] getHouseAllContent() {

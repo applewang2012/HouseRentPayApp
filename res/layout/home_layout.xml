@@ -149,6 +149,11 @@
    </LinearLayout>
    
     <include
+        android:id="@+id/id_data_loading"
+        android:visibility="invisible"
+        layout="@layout/layout_loading_dialog" />
+    
+    <include
         android:id="@+id/id_open_lock_layout"
         layout="@layout/open_lock_loading_layout2"
        />

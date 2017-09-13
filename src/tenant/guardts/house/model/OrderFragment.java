@@ -36,7 +36,6 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	private OrderZhuHuFragment mZuFangFrament;
 	private OrderFangzhuFragment mChuzuFragment;
 	private RadioGroup mRadioGroup;
-	private Bundle bundle;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -85,7 +84,6 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 					hideAllFragments(fragmentTransaction);
 					if (mZuFangFrament == null){
 						mZuFangFrament = new OrderZhuHuFragment();
-						mZuFangFrament.setArguments(bundle);
 						fragmentTransaction.add(R.id.id_house_child_fragment_content, mZuFangFrament);
 						fragmentTransaction.commitAllowingStateLoss();
 					}else{

@@ -47,6 +47,7 @@ public class HomeActivity extends BaseActivity {
 	private String mUpdateAction = "http://tempuri.org/CheckUpgrade";
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";
+	private String mCanOpenDoorAction = "http://tempuri.org/CanOpenDoor";
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
@@ -126,6 +127,11 @@ public class HomeActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				if (CommonUtil.mRegisterIdcard == null || CommonUtil.mRegisterIdcard.equals("")){
+					Toast.makeText(HomeActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(HomeActivity.this, LoginUserActivity.class));
+					return;
+				}
 				Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
 				startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
 			}
@@ -251,7 +257,7 @@ public class HomeActivity extends BaseActivity {
 				surroundtext.setTextColor(Color.parseColor("#b2b2b2"));
 				historyicon.setBackgroundResource(R.drawable.history_icon);
 				historytext.setTextColor(Color.parseColor("#337ffd"));
-				if (mUserName.equals("") || mUserName == null) {
+				if (CommonUtil.mRegisterIdcard == null || CommonUtil.mRegisterIdcard.equals("")) {
 					Toast.makeText(HomeActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(HomeActivity.this, LoginUserActivity.class));
 				} else {
@@ -280,6 +286,15 @@ public class HomeActivity extends BaseActivity {
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mOpenDoorAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
+	
+	private void canOpenDoorRequest(String lockId, String idcard) {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=CanOpenDoor";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCanOpenDoorAction));
+		rpc.addProperty("lockId", lockId);
+		rpc.addProperty("idCard", idcard);
+		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mCanOpenDoorAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
 
 	private void checkVersionUpdate() {
 		mVersionCode = GlobalUtil.getVersionCode(getApplicationContext());
@@ -288,7 +303,7 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("packageName", GlobalUtil.getPackageName(getApplicationContext()));
 		rpc.addProperty("versionId", GlobalUtil.getVersionCode(getApplicationContext()));
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUpdateAction, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 	}
 
 //	private void getUserInfo() {
@@ -309,7 +324,7 @@ public class HomeActivity extends BaseActivity {
 		rpc.addProperty("userId", mUserName);
 		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mXingeTokenAction, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 	}
 
 	private void hideAllFragments(FragmentTransaction transaction) {
@@ -395,14 +410,14 @@ public class HomeActivity extends BaseActivity {
 	private void showOpenDoorLoadingView(){
 		mOpenLockLoadingView.setVisibility(View.VISIBLE);
 		ImageView circleImage = (ImageView)mOpenLockLoadingView.findViewById(R.id.imageView2);
-		ObjectAnimator animator = ObjectAnimator.ofFloat(circleImage, "rotation", 0.0F,720.0F).setDuration(2000);
+		ObjectAnimator animator = ObjectAnimator.ofFloat(circleImage, "rotation", 0.0F,720.0F).setDuration(12000); //时针
 		
 		animator.setRepeatCount(ObjectAnimator.INFINITE);
 		animator.setInterpolator(new LinearInterpolator());;
 		animator.start();
 		
 		ImageView circleImage2 = (ImageView)mOpenLockLoadingView.findViewById(R.id.imageView3);
-		ObjectAnimator animator2 = ObjectAnimator.ofFloat(circleImage2, "rotation", 0.0F,720.0F).setDuration(3000);
+		ObjectAnimator animator2 = ObjectAnimator.ofFloat(circleImage2, "rotation", 0.0F,720.0F).setDuration(5000);  //分针
 		
 		animator2.setRepeatCount(ObjectAnimator.INFINITE);
 		animator2.setInterpolator(new LinearInterpolator());;
@@ -543,20 +558,10 @@ public class HomeActivity extends BaseActivity {
 			String lockNo = scanResult.substring(pos + 1);
 			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + lockNo);
 			if (lockNo != null && lockNo.length() > 2) {
-				showOpenDoorAlertDialog(lockNo + "");
+				canOpenDoorRequest(lockNo, CommonUtil.mRegisterIdcard);
+				//showOpenDoorAlertDialog(lockNo + "");
 			}
 		} 
-//		else if (resultCode == RESULT_OK && requestCode == CommonUtil.mSelectCityRequestCode) {
-//			Bundle bundle = data.getExtras();
-//			if (bundle != null) {
-//				String selectedCity = bundle.getString("city");
-//				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
-//				if (!TextUtils.isEmpty(selectedCity)) {
-//					setSelectedCity(selectedCity);
-//				}
-//			}
-//
-//		}
 	}
 
 	public void setSelectedCity(String city) {
