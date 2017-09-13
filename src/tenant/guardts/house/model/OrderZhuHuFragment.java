@@ -85,7 +85,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "renter");
@@ -406,7 +405,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		// TODO Auto-generated method stub
 		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
