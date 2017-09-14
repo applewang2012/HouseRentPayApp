@@ -145,7 +145,6 @@ public class MyFragment extends BaseFragment {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-
 					startActivity(new Intent(mContext, ModifyPasswordActivity.class));
 				}
 
@@ -403,6 +402,7 @@ public class MyFragment extends BaseFragment {
 						editor.putString("user_password", "");
 						editor.putString("user_realname", "");
 						editor.putString("user_idcard", "");
+						editor.putString("user_host", "");
 						editor.commit();
 						mUserAddress.setVisibility(View.GONE);
 						mUserNickname.setVisibility(View.GONE);
@@ -412,6 +412,7 @@ public class MyFragment extends BaseFragment {
 						CommonUtil.mUserWallet = "";
 						CommonUtil.mBankName = "";
 						CommonUtil.mCardNo = "";
+						CommonUtil.mUserHost = "";
 						Intent intent = new Intent(mContext, LoginUserActivity.class);
 						startActivity(intent);
 						MyFragment.this.getActivity().finish();

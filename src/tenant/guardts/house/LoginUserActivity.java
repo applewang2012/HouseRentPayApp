@@ -66,15 +66,14 @@ public class LoginUserActivity extends BaseActivity{
 		
 		userNameEditText = (EditText)findViewById(R.id.id_login_username);
 		passwordEditText = (EditText)findViewById(R.id.id_login_password);
-		mUserName = getIntent().getStringExtra("user_name");
-		mPassword = getIntent().getStringExtra("user_password");
-		if (mUserName != null && !mUserName.equals("")){
-			userNameEditText.setText(mUserName);
-		}
-		if (mPassword != null && !mPassword.equals("")){
-			passwordEditText.setText(mPassword);
-		}
-		
+//		mUserName = getIntent().getStringExtra("user_name");
+//		mPassword = getIntent().getStringExtra("user_password");
+//		if (mUserName != null && !mUserName.equals("")){
+//			userNameEditText.setText(mUserName);
+//		}
+//		if (mPassword != null && !mPassword.equals("")){
+//			passwordEditText.setText(mPassword);
+//		}
 		userAgreement.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -149,19 +148,17 @@ public class LoginUserActivity extends BaseActivity{
 	
 	private void commonServiceInterface(){
 		SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
-	    String host = sharedata.getString("host", "");
+	    String host = sharedata.getString("user_host", "");
 	    Log.i("mingguo", "common service preference host  "+host);
 	    if (host == null || host.equals("")){
-	    	
 	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
 			rpc.addProperty("status", "1");
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
-			mPresenter.startPresentServiceTask(true);
+			mPresenter.startPresentServiceTask(false);
 	    }else{
 	    	CommonUtil.mUserHost = host;
 	    }
-		
 	}
 	
 	private void showLoadingView(){
@@ -206,7 +203,7 @@ public class LoginUserActivity extends BaseActivity{
 				SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("area", data.get(0)[which]);
-			    editor.putString("host", data.get(1)[which]);
+			    editor.putString("user_host", data.get(1)[which]);
 			    editor.commit();
 			    CommonUtil.mUserArea = data.get(0)[which];
 			    CommonUtil.mUserHost = data.get(1)[which];
@@ -218,7 +215,7 @@ public class LoginUserActivity extends BaseActivity{
 		
 	}
 	
-	public static List<String[]> parseCommonService(String value) {
+	private  List<String[]> parseCommonService(String value) {
 		String [] areaName = null;
 		String [] areaHost;
 		List<String[]> list = new ArrayList<>();
@@ -252,11 +249,12 @@ public class LoginUserActivity extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100){
-				
+				Log.i("mingguo", "loginUserActivity  username   "+mUserName+"  password  "+mPassword);
 				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
 			    editor.putString("user_name", mUserName);
 			    editor.putString("user_password", mPassword);
+			    editor.putString("user_host", CommonUtil.mUserHost);
 			    editor.commit();
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);

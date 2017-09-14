@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -66,7 +67,7 @@ public class LoadUrlTestActivity extends BaseActivity {
  
                     setTitle(R.string.app_name);
  
-                    progressBar.setVisibility(4);
+                    progressBar.setVisibility(View.GONE);
                 }
  
             }

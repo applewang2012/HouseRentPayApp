@@ -76,12 +76,9 @@ public class HomeActivity extends BaseActivity {
 	    }
 		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.home_layout);
-//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-//		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-//		mTitleBar.setText("手机注册");
 		initData();
 		initView();
-		checkVersionUpdate();
+		mHandler.sendEmptyMessageDelayed(2000, 200);
 	}
 	
 	
@@ -93,8 +90,6 @@ public class HomeActivity extends BaseActivity {
 		super.onResume();
 		//getUserInfo();
 	}
-
-
 
 
 	private void initData(){
@@ -355,7 +350,9 @@ public class HomeActivity extends BaseActivity {
 				checkVersionUpdate();
 			} else if (msg.what == 101) {
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
-			} else if (msg.what == 200) {
+			}else if (msg.what == 2000){
+				checkVersionUpdate();
+			}else if (msg.what == 200) {
 				if (msg.obj != null) {
 					parseUpdateVersion((String) msg.obj);
 					showUpdateVersionAlertDialog();

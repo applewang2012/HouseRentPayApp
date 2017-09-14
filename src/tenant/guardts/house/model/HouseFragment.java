@@ -110,10 +110,6 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	
 
-	public HouseFragment() {
-
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -174,12 +170,13 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			mLogin.setVisibility(View.VISIBLE);
 			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 			mUserName = sharedata.getString("user_name", "");
-			getUserInfo();
+			Log.i("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
+			mHandler.sendEmptyMessageDelayed(6000, 100);
 		}
 	}
 	
 	private void getUserInfo() {
-		Log.i("mingguo", "house fragment  get user info  "+mUserName);
+		Log.i("mingguo", "house fragment  get user info  "+mUserName+"  common host   "+CommonUtil.mUserHost);
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
@@ -385,13 +382,13 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					startActivity(new Intent(mContext, LoginUserActivity.class));
-				} else {
+//				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+//					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+//					startActivity(new Intent(mContext, LoginUserActivity.class));
+//				} else {
 					// 地图租房
 					startActivity(new Intent(mContext, MapRentHouseActivity.class));
-				}
+//				}
 
 			}
 		});
@@ -562,8 +559,11 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				mAdapter.notifyDataSetChanged();
 			} else if (msg.what == 300) {
 				showSelectLocationMap();
-			} else if (msg.what == 500) {
+			} else if (msg.what == 5000) {
 				updateLocationCity();
+				startGetLocationFromHouse();
+			}else if (msg.what == 6000){
+				getUserInfo();
 			}else if (msg.what == 101){
 				if (msg.obj != null) {
 					parseUserInfo((String) msg.obj);
@@ -637,8 +637,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				Log.i("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
 						+ CommonUtil.mCurrentLati + "  CommonUtil.mCurrentLongi  " + CommonUtil.mCurrentLongi);
 			}
-			startGetLocationFromHouse();
-			mHandler.sendEmptyMessageDelayed(500, 100);
+			
+			mHandler.sendEmptyMessageDelayed(5000, 10);
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -710,10 +710,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
-			Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-			detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-			startActivity(detailIntent);
+		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+			Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+			startActivity(new Intent(mContext, LoginUserActivity.class));
+		} else {
+			if (mHouseInfoList.get(position).getHouseId() != null
+					&& !mHouseInfoList.get(position).getHouseId().equals("")) {
+				Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+				detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+				startActivity(detailIntent);
+			}
 		}
 		
 	}

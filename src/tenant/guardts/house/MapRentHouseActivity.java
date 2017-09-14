@@ -271,14 +271,25 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 //                contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
 //                "电话："+mHouserList.get(index).get("ROwnerTel"));
                 LatLng ll = marker.getPosition();
-                contact.setText("电话："+mHouserList.get(index).get("ROwnerTel"));
+                String phone = mHouserList.get(index).get("ROwnerTel");
+                String ownerName = mHouserList.get(index).get("ROwner");
+        		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+        			if (phone.length() > 5){
+        				contact.setText("电话："+phone.substring(0, 3)+"********");
+        			}
+        			if (ownerName.length() > 1){
+        				owner.setText("房主："+ownerName.substring(0, 1)+"**");
+        			}
+        		} else {
+        			contact.setText("电话："+phone);
+        		}
                 location.setText(mHouserList.get(index).get("RAddress"));
                 //status.setText(mHouserList.get(index).get("Status"));
                 direction.setText(mHouserList.get(index).get("rroomtypedesc"));
                 floor.setText(mHouserList.get(index).get("rFloor")+"/"+mHouserList.get(index).get("rtotalfloor")+"层");
                 //checkoutTime.setText(mHouserList.get(index).get("rroomtypedesc"));
                 area.setText(mHouserList.get(index).get("rrentarea")+"平米");
-                owner.setText("房主："+mHouserList.get(index).get("ROwner"));
+                
                 mInfoWindow = new InfoWindow(detailView, ll, -47);
                 mBaiduMap.showInfoWindow(mInfoWindow);
                 
@@ -298,10 +309,16 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 					
 					@Override
 					public void onClick(View v) {
-						if (mHouserList.get(index).get("rentno") != null && !mHouserList.get(index).get("rentno").equals("")){
-							Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-							detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
-							startActivity(detailIntent);
+						if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+							Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+							startActivity(new Intent(mContext, LoginUserActivity.class));
+							finish();
+						} else {
+							if (mHouserList.get(index).get("rentno") != null && !mHouserList.get(index).get("rentno").equals("")){
+								Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+								detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
+								startActivity(detailIntent);
+							}
 						}
 					}
 				});

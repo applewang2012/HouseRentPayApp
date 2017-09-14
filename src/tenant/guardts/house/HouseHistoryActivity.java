@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
@@ -193,12 +194,16 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
-			Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-			detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
-			startActivity(detailIntent);
+		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+			Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+			startActivity(new Intent(mContext, LoginUserActivity.class));
+		} else {
+			if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
+				Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+				detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
+				startActivity(detailIntent);
+			}
 		}
-		
 	}
 	
 	

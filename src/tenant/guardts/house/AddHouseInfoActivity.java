@@ -100,9 +100,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private String mRHousePrice;
 	private TextView commission;
 	private TextView explanation;
-	private EditText mOwnerName;
-	private EditText mOwnerPhone;
-	private EditText mOwnerIdCard;
+	private TextView mOwnerName;
+	private TextView mOwnerPhone;
+	private TextView mOwnerIdCard;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,9 +129,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mOwnerName = (EditText)findViewById(R.id.id_add_house_owner_name);
-		mOwnerPhone = (EditText)findViewById(R.id.id_add_house_owner_phone);
-		mOwnerIdCard = (EditText)findViewById(R.id.id_add_house_owner_id_card);
+		mOwnerName = (TextView)findViewById(R.id.id_add_house_owner_name);
+		mOwnerPhone = (TextView)findViewById(R.id.id_add_house_owner_phone);
+		mOwnerIdCard = (TextView)findViewById(R.id.id_add_house_owner_id_card);
 		mOwnerName.setText(CommonUtil.mRegisterRealName);
 		mOwnerPhone.setText(CommonUtil.mUserLoginName);
 		mOwnerIdCard.setText(CommonUtil.mRegisterIdcard);
@@ -441,9 +441,6 @@ public class AddHouseInfoActivity extends BaseActivity{
 			
 		}
 		
-		
-		
-
 		EditText area = (EditText)findViewById(R.id.id_add_house_area);
 		if (area.getText().toString() == null || area.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋面积", Toast.LENGTH_SHORT).show();

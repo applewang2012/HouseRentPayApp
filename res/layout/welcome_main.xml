@@ -42,4 +42,11 @@
     	android:layout_marginBottom="40dp"
     	android:visibility="invisible"
     	android:indeterminateOnly="true" />
+    
+    <include
+        android:id="@+id/id_data_loading"
+        android:visibility="invisible"
+        layout="@layout/layout_loading_dialog"
+       />
+    
 </FrameLayout>

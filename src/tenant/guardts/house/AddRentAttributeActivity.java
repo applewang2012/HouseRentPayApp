@@ -79,6 +79,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mSetStartData, mSetEndData;
 	private String mOriginStartContent, mOriginEndContent;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
+	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
+	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mHouseNo;
 	private String mUsername;
 	private String [] mOwnerType = new String[3];
@@ -92,6 +94,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mRealName, mIdCard;
 	private HandlerThread myHandlerThread ;
 	private Handler mSubHandler;
+	private TextView commission;
+	private TextView explanation;
+	private EditText password;
+	private LinearLayout mCommissionContent, mExplannationContent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +135,23 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
 		mPresenter.startPresentServiceTask(true);
 		
+	}
+	
+	private void sendPhoneVerifyCode(String phone){
+		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
+		rpc.addProperty("phone", phone); 
+		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+	
+	private void checkPhoneVerifyCode(String phone, String code){
+		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=ValidateIdentifyCode";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
+		rpc.addProperty("phone", phone); 
+		rpc.addProperty("number", code); 
+		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	
@@ -262,9 +285,17 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private EditText mRentName;
 	private EditText mRentPrice;
 	
-	private EditText mRentPhone;
+	private TextView mRentPhone;
 	private View mQrcodeView;
 	private TextView mTypeTextView;
+
+	private int mTimeCount = -1;
+
+	private TextView mGetVerifyCodeText;
+
+	private EditText mVerifyCodeText;
+
+	private String mVerifyCode;
 	
 	
 	@SuppressLint("SimpleDateFormat")
@@ -375,6 +406,34 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}
 		});
 		
+		mVerifyCodeText = (EditText)findViewById(R.id.id_rent_house_phone_verify);
+		
+		
+		mGetVerifyCodeText = (TextView)findViewById(R.id.id_rent_house_get_verifycode);
+		mGetVerifyCodeText.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String phone = mRentPhone.getEditableText().toString();
+				if (phone == null || phone.equals("")){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}else if (phone.length() < 11){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				Log.w("mingguo", "register step 2  phone  "+phone);
+				if (mTimeCount < 0){
+					mTimeCount = 60;
+					sendPhoneVerifyCode(phone);
+					mHandler.sendEmptyMessage(1000);
+				}else{
+					return;
+				}
+				
+			}
+		});
+		
 		
 		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
@@ -384,21 +443,25 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				if (checkInputContent()){
 					//
 					//startAddRentInfo();
-					mRealName = mRentName.getEditableText().toString();
-					mIdCard = mRentIDcard.getEditableText().toString();
-					
-					GlobalUtil.longToast(getApplication(),"拍照认证！");
-					Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-					file = ScreenShotUtil.createScreenshotDirectory(AddRentAttributeActivity.this);
-					File out = new File(file);
-					Uri uri = Uri.fromFile(out);
-					getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-					getPhoto.putExtra("return-data", true);
-					getPhoto.putExtra("camerasensortype", 2); 
-					startActivityForResult(getPhoto, 1);
+					checkPhoneVerifyCode(mRentPhone.getText().toString(), mVerifyCode);
 				}
 			}
 		});
+	}
+	
+	private void startIndentifyProcess(){
+		mRealName = mRentName.getEditableText().toString();
+		mIdCard = mRentIDcard.getEditableText().toString();
+		
+		GlobalUtil.longToast(getApplication(),"拍照认证！");
+		Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		file = ScreenShotUtil.createScreenshotDirectory(AddRentAttributeActivity.this);
+		File out = new File(file);
+		Uri uri = Uri.fromFile(out);
+		getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		getPhoto.putExtra("return-data", true);
+		getPhoto.putExtra("camerasensortype", 2); 
+		startActivityForResult(getPhoto, 1);
 	}
 	
 	private void initHandler(){
@@ -461,6 +524,16 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		}
 		if (mRentPhone.getText().toString().length()<11){
 			Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		
+		mVerifyCode = mVerifyCodeText.getText().toString();
+		
+		if (mVerifyCode == null || mVerifyCode.equals("") ){
+			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			return false;
+		}else if (mVerifyCode.length() != 6){
+			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
 		}
 		
@@ -718,14 +791,29 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					commission.setText(serviceCharge.fee+"元（手续费）");
 				}
 				explanation.setText(serviceCharge.msg);
+			}else if (msg.what == 1002){
+				if (msg.obj != null){
+					JSONObject json;
+					try {
+						json = new JSONObject((String)msg.obj);
+						String ret = json.optString("ret");
+//						if (ret != null){
+//							if (ret.equals("0")){
+						startIndentifyProcess();
+//							}else{
+//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+//							}
+//						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		
 	};
-	private TextView commission;
-	private TextView explanation;
-	private EditText password;
-	private LinearLayout mCommissionContent, mExplannationContent;
+
 	
 	
 	private void parseQueryStatus(String value){
@@ -892,6 +980,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				msg.what = 818;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
+			}else if (action.equals(mCheckVerifyCodeAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 1002;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}else if (action.equals(mSendVerifyCodeAction)){
+				
 			}
 		}
 	}
@@ -902,8 +997,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		super.onDestroy();
 		mHandler.removeCallbacksAndMessages(null);
 	}
-	
-	
 	
 	
 

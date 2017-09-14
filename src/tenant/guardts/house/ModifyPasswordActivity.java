@@ -2,6 +2,8 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+import com.baidu.mapapi.map.Text;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,7 +47,9 @@ public class ModifyPasswordActivity extends BaseActivity{
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		
-		final EditText userName = (EditText)findViewById(R.id.id_password_username);
+		final TextView userName = (TextView)findViewById(R.id.id_password_username);
+		mUserName = CommonUtil.mUserLoginName;
+		userName.setText(mUserName);
 		final EditText oldpassword = (EditText)findViewById(R.id.id_old_password);
 		final EditText newpassword = (EditText)findViewById(R.id.id_new_password);
 		final EditText newpasswordConfirm = (EditText)findViewById(R.id.id_new_password_confirml);
@@ -54,7 +58,6 @@ public class ModifyPasswordActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				mUserName = userName.getEditableText().toString();
 				mOldPassword = oldpassword.getEditableText().toString();
 				mNewPassword = newpassword.getEditableText().toString();
 				mNewPasswordConfirm = newpasswordConfirm.getEditableText().toString();
