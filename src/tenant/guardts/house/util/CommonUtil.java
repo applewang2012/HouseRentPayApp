@@ -53,6 +53,13 @@ public class CommonUtil {
     public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
     public static String XINGE_TOKEN = null;
     
+    public static final String URL_ZHENGFU_FUWU = "http://www.tjgaj.gov.cn/site/default.aspx";
+    public static final String URL_WEIQUAN_CHANGSHI = "http://ms.enorth.com.cn/xfwq/";
+    public static final String URL_YILIAO_BAOXIAN = "http://m.haodf.com/touch/hospital/DE4roiYGYZwmj5uuYe-Bqregr.htm?from=alading";
+    public static final String URL_JIAOTONG_CHUXING = "http://tianjin.gongjiao.com/";
+    public static final String URL_ZHOUBIAN_SHANGQU = "http://m.dianping.com/tianjin?from=city_hot";
+    public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
+    
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;
     public static  String ORDER_MONKEY = null;

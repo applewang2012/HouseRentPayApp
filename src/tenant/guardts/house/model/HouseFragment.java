@@ -60,6 +60,7 @@ import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HomeSearchActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
@@ -258,8 +259,11 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_ZHENGFU_FUWU);
+				loadIntent.putExtra("tab_name", "政府服务");
+				startActivity(loadIntent);
+				
 			}
 		});
 		mHeXiPower.setOnClickListener(new OnClickListener() {
@@ -275,7 +279,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_WEIQUAN_CHANGSHI);
+				loadIntent.putExtra("tab_name", "维权常识");
+				startActivity(loadIntent);
 			}
 		});
 		mMedicalInsurance.setOnClickListener(new OnClickListener() {
@@ -283,7 +290,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_YILIAO_BAOXIAN);
+				loadIntent.putExtra("tab_name", "医疗保险");
+				startActivity(loadIntent);
 			}
 		});
 		mUseFulNumber.setOnClickListener(new OnClickListener() {
@@ -299,8 +309,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_JIAOTONG_CHUXING);
+				loadIntent.putExtra("tab_name", "交通出行");
+				startActivity(loadIntent);
 			}
 		});
 		
@@ -309,7 +321,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_ZHOUBIAN_SHANGQU);
+				loadIntent.putExtra("tab_name", "周边商区");
+				startActivity(loadIntent);
 			}
 		});
 		
@@ -318,7 +333,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_MORE_CONTENT);
+				loadIntent.putExtra("tab_name", "更多");
+				startActivity(loadIntent);
 			}
 		});
 
