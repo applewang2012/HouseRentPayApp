@@ -62,7 +62,6 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	
 	private void initView(){
 		mlistView = (ListView)findViewById(R.id.listview);
-		
 		mlistView.setOnItemClickListener(this);
 		
 	}
@@ -78,9 +77,9 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				TextView directionText = (TextView)holderView.findViewById(R.id.id_house_direction);
 				TextView floorText = (TextView)holderView.findViewById(R.id.id_house_floor);
 				addressText.setText(info.getHouseAddress());
-//				typeText.setText(info.get);
-//				directionText.setText(info.get);
-//				floorText.setText(info.get);
+				typeText.setText(info.getHouseType());
+				directionText.setText(info.getHouseDirection());
+				floorText.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
 			}
 		};
 	}
@@ -115,12 +114,20 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 					HouseInfoModel infoModel = new HouseInfoModel();
 					infoModel.setHouseAddress(itemJsonObject.optString("RAddress"));
 					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
-					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
-					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwnerTel"));
-					infoModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
-					infoModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
+					infoModel.setHouseCurrentFloor(itemJsonObject.optString("RFloor"));
+					infoModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
+					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
-					mHouseInfoList.add(infoModel);
+					boolean isSameHouse = false;
+					for (int i = 0; i < mHouseInfoList.size(); i++){
+						if (infoModel.getHouseId().equals(mHouseInfoList.get(i).getHouseId())){
+							isSameHouse = true;
+							break;
+						}
+					}
+					if (!isSameHouse){
+						mHouseInfoList.add(infoModel);
+					}
 				}
 			}
 		} catch (JSONException e) {

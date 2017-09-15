@@ -47,36 +47,21 @@
 	           android:textSize="@dimen/base_dimen_38"
 	           android:textStyle="bold"
                />
-       <!-- <LinearLayout 
-           android:layout_width="@dimen/base_dimen_500"
-       	   android:layout_height="@dimen/base_dimen_70"
-       	   android:layout_marginLeft="@dimen/base_dimen_20"
-       	   android:layout_gravity="center_vertical"
-       	   android:orientation="horizontal"
-       	   android:background="@drawable/home_search_bg_shape_solid_corner">
+       <FrameLayout 
+           android:id="@+id/map_suggest_search"
+           android:layout_width="@dimen/base_dimen_100"
+       	   android:layout_height="match_parent"
+       	   android:layout_gravity="center_vertical|right"
+       	   >
 	      <ImageView 
 	           android:layout_width="@dimen/base_dimen_34"
 	       	   android:layout_height="@dimen/base_dimen_34"
 	       	   android:background="@drawable/home_tab_search_icon"
-	       	   android:layout_marginLeft="@dimen/base_dimen_30"
-	       	   android:layout_gravity="center_vertical"
+	       	   android:layout_gravity="center"
+	       	   android:layout_marginRight="@dimen/base_dimen_20"
 	          />
-	      <AutoCompleteTextView
-		        android:id="@+id/button_search"
-		        android:layout_width="match_parent"
-		        android:layout_height="match_parent"
-		        android:background="#00000000"
-		        android:ems="10"
-		        android:hint="想租房？来云上之家！"
-		        android:textSize="@dimen/base_dimen_28"
-		        android:textColorHint="#cccccc"
-		        android:textColor="#ffffff"
-		        android:imeOptions="actionSearch"
-		        android:inputType="text"
-		        android:paddingLeft="@dimen/base_dimen_20"
-		        android:gravity="center_vertical"
-		        />
-       </LinearLayout> -->
+	      
+       </FrameLayout>
 	</FrameLayout>
     
     <com.baidu.mapapi.map.MapView

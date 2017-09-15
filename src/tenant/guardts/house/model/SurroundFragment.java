@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -75,6 +76,9 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
 		mPresent = new HoursePresenter(mContext, SurroundFragment.this);
+//		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView bartext  = (TextView) getActivity().getWindow().findViewById(R.id.id_titlebar);
+//		bartext.setText("周边生活");
 	}
 
 	@Override

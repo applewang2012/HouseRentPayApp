@@ -15,6 +15,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import tenant.guardts.house.search.SortAlgorithm;
 
 /**
  * @author shenxiaolei
@@ -46,12 +47,14 @@ public class CommonUtil {
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
     public static final int SELECT_CITY_REQEUST_CODE = 2;
+    public static final int MAP_SUGGEST_REQEUST_CODE = 3;
     public static String mPayHouseOrderId = null;
     //weixin
     public static final String APP_ID = "wxae25cb3fefdc75ae";
     public static final String WX_PARTNER_ID = "1481965242";
     public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
     public static String XINGE_TOKEN = null;
+    public static final String APP_SECRET = "989e87b179368c9fbc0bff841b75941e";
     
     public static final String URL_ZHENGFU_FUWU = "http://www.tjgaj.gov.cn/site/default.aspx";
     public static final String URL_WEIQUAN_CHANGSHI = "http://ms.enorth.com.cn/xfwq/";

@@ -55,6 +55,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
@@ -311,8 +312,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 					public void onClick(View v) {
 						if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 							Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-							startActivity(new Intent(mContext, LoginUserActivity.class));
-							finish();
+							Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+							loginIntent.putExtra("intent_status", true);
+							startActivity(loginIntent);
 						} else {
 							if (mHouserList.get(index).get("rentno") != null && !mHouserList.get(index).get("rentno").equals("")){
 								Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
@@ -340,6 +342,17 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
             }
         });  
         
+        FrameLayout suggestButton = (FrameLayout)findViewById(R.id.map_suggest_search);
+        suggestButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent searchIntent = new Intent(MapRentHouseActivity.this, MapSuggestSearchActivity.class);
+				searchIntent.putExtra("select_city", mCurrentLocationCity);
+				startActivityForResult(searchIntent, CommonUtil.MAP_SUGGEST_REQEUST_CODE);
+			}
+		});
 	
 	}
 	
@@ -347,23 +360,28 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK && requestCode == CommonUtil.SELECT_CITY_REQEUST_CODE) {
-			Bundle bundle = data.getExtras();
-			if (bundle != null) {
-				String selectedCity = bundle.getString("city");
-				Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
-				if (!TextUtils.isEmpty(selectedCity)) {
-					// if (activity.getSelectedCity() != null &&
-					// !activity.getSelectedCity().equals("")) {
-					 if (selectedCity != null && selectedCity.equalsIgnoreCase(mCurrentLocationCity)) {
-						 return;
-					 }
-					 mCurrentLocationCity = selectedCity;
-					 Log.i("mingguo", "house fragment on resume change currentCity " +mCurrentLocationCity);
-					 mSelectCityText.setText(mCurrentLocationCity);
-					 searchButtonProcess();
+		Log.w("mingguo", "Map rent activity  onActivityResult   "+resultCode+"  resquestCode   "+requestCode);
+		if (resultCode == RESULT_OK) {
+				if (requestCode == CommonUtil.SELECT_CITY_REQEUST_CODE) {
+					Bundle bundle = data.getExtras();
+					if (bundle != null) {
+						String selectedCity = bundle.getString("city");
+						Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
+						if (!TextUtils.isEmpty(selectedCity)) {
+							 if (selectedCity != null && selectedCity.equalsIgnoreCase(mCurrentLocationCity)) {
+								 return;
+							 }
+							 mCurrentLocationCity = selectedCity;
+							 Log.i("mingguo", "house fragment on resume change currentCity " +mCurrentLocationCity);
+							 mSelectCityText.setText(mCurrentLocationCity);
+							 searchButtonProcess();
+						}
+					}
+				}else if (requestCode == CommonUtil.MAP_SUGGEST_REQEUST_CODE){
+						Bundle searchBundle = data.getExtras();
+						Log.i("mingguo", "Map rent onActivity Result  "+searchBundle.getString("search_tag"));
+						searchNearbyProcess(searchBundle.getString("search_tag"));
 				}
-			}
 
 		}
 	}
@@ -376,12 +394,12 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 	}
 
 		// 查询周围2000米的某类建筑
-		public void  searchNearbyProcess(String searchText) {
+		private void  searchNearbyProcess(String searchText) {
 	        //searchType = 2;
 	        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(searchText
 	                .toString()).sortType(PoiSortType.distance_from_near_to_far).location(mCurrentLatLng)
 	                .radius(2000);
-//	        mPoiSearch.searchNearby(nearbySearchOption);
+	        mPoiSearch.searchNearby(nearbySearchOption);
 	    }
 		
 		 private int getCurrentMarkerIndex(Marker marker){
@@ -675,12 +693,12 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 			if (res == null || res.getAllSuggestions() == null) {
 	            return;
 	        }    
-	        suggest = new ArrayList<String>();
-	        for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
-	            if (info.key != null) {
-	                suggest.add(info.key);
-	            }
-	        }
+//	        suggest = new ArrayList<String>();
+//	        for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
+//	            if (info.key != null) {
+//	                suggest.add(info.key);
+//	            }
+//	        }
 //	        sugAdapter = new ArrayAdapter<String>(MapRentHouseActivity.this, android.R.layout.simple_dropdown_item_1line, suggest);
 //	        mSearchListener.setAdapter(sugAdapter);
 //	        sugAdapter.notifyDataSetChanged();

@@ -304,9 +304,10 @@ public class HouseSearchActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if(CommonUtil.mUserLoginName ==null || CommonUtil.mUserLoginName.equals("")){
-					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();;
-					startActivity(new Intent(HouseSearchActivity.this, LoginUserActivity.class));
-					finish();
+					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+					loginIntent.putExtra("intent_status", true);
+					startActivity(loginIntent);
 				}else{
 					if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
 						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);

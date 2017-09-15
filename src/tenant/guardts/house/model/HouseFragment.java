@@ -37,14 +37,18 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -109,13 +113,18 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	private LinearLayout mHouseOwnerLayout;
 	private String mUserName;
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
+	private SwipeRefreshLayout mSwipeLayout;
+	//private FrameLayout mTitlebarContent;
 	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle bundle = getArguments();
 		mContext = getActivity().getApplicationContext();
+//		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.window_titlebar_home);
+//		mTitlebarContent  = (FrameLayout) getActivity().getWindow().findViewById(R.id.id_title_bar_home_content);
+		Bundle bundle = getArguments();
+		
 		mPresenter = new HoursePresenter(mContext, HouseFragment.this);
 
 	}
@@ -137,7 +146,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-					startActivity(new Intent(mContext, LoginUserActivity.class));
+					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+					startActivity(loginIntent);
 				}
 
 			}
@@ -177,7 +187,6 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 	
 	private void getUserInfo() {
-		Log.i("mingguo", "house fragment  get user info  "+mUserName+"  common host   "+CommonUtil.mUserHost);
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
@@ -270,7 +279,14 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-
+//				try {
+//	                Intent i = new Intent(Intent.ACTION_VIEW);
+//	                i.setData(Uri.parse("market://details?id="+getPackagename()));
+//	                startActivity(i);
+//	            } catch (Exception e) {
+//	                Toast.makeText(mContext, "您的手机上没有安装Android应用市场", Toast.LENGTH_SHORT).show();
+//	                e.printStackTrace();
+//	            }
 				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
 			}
 		});
@@ -358,7 +374,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				// 先判断是否登录
 				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					startActivity(new Intent(mContext, LoginUserActivity.class));
+					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+					startActivity(loginIntent);
 				} else {
 					// 发布房屋
 					Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
@@ -410,7 +427,20 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			}
 		});
-
+		
+		mSwipeLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_swipe_ly);
+		mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				
+				mHandler.sendEmptyMessageDelayed(4000, 5000);
+				//startGetLocationFromHouse();
+			}
+		});  
+        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,  
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);  
+        
 		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 		// mListView.setAdapter(new );
 		// ///////////////////////////////////////////////////////////////////////////////
@@ -586,6 +616,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				if (msg.obj != null) {
 					parseUserInfo((String) msg.obj);
 				}
+			}else if (msg.what == 4000){
+				mSwipeLayout.setRefreshing(false);
 			}
 		}
 	};
@@ -603,9 +635,6 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			if (array != null) {
 				mHouseInfoList.clear();
 				for (int item = 0; item < array.length(); item++) {
-					if (item > 15) {
-						break;
-					}
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel houseModel = new HouseInfoModel();
 					houseModel.setHouseAddress(itemJsonObject.optString("RAddress"));
@@ -619,7 +648,6 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 					houseModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
 					houseModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
 					houseModel.setHouseArea(itemJsonObject.optString("rrentarea"));
-
 					mHouseInfoList.add(houseModel);
 				}
 			}
@@ -730,7 +758,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 			Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-			startActivity(new Intent(mContext, LoginUserActivity.class));
+			Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+			startActivity(loginIntent);
 		} else {
 			if (mHouseInfoList.get(position).getHouseId() != null
 					&& !mHouseInfoList.get(position).getHouseId().equals("")) {

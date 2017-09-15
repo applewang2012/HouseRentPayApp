@@ -37,9 +37,11 @@ public class LoginUserActivity extends BaseActivity{
 	private HoursePresenter mPresenter;
 	private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private String mUserName, mPassword;
 	private EditText userNameEditText;
 	private EditText passwordEditText;
+	private boolean mIntentStatus = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class LoginUserActivity extends BaseActivity{
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
 		setContentView(R.layout.login_user); 
 		ActivityController.addActivity(LoginUserActivity.this);
+		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
 		commonServiceInterface();
 	}
@@ -240,7 +243,33 @@ public class LoginUserActivity extends BaseActivity{
 		}
 	}
 
-
+	private void parseUserInfo(String value) {
+		try {
+			JSONArray array = new JSONArray(value);
+			if (array != null) {
+				Log.i("house", "parse house info " + array.length());
+				// for (int item = 0; item < array.length(); item++){
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
+				CommonUtil.mBankName= itemJsonObject.optString("BankName");
+				CommonUtil.mCardNo = itemJsonObject.optString("CardNO");
+				SharedPreferences sharedata = getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+				editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				editor.putString("user_name", mUserName);
+				editor.putString("user_password", mPassword);
+				editor.putString("user_host", CommonUtil.mUserHost);
+				editor.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	private Handler mHandler = new Handler(){
 
@@ -250,31 +279,35 @@ public class LoginUserActivity extends BaseActivity{
 			super.handleMessage(msg);
 			if (msg.what == 100){
 				Log.i("mingguo", "loginUserActivity  username   "+mUserName+"  password  "+mPassword);
-				SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
-				SharedPreferences.Editor editor = sharedata.edit();
-			    editor.putString("user_name", mUserName);
-			    editor.putString("user_password", mPassword);
-			    editor.putString("user_host", CommonUtil.mUserHost);
-			    editor.commit();
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-				Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);
-				intent.putExtra("user_name", mUserName);
-				intent.putExtra("user_password", mPassword);
-				startActivity(intent);
-//				startActivity(new Intent(LoginUserActivity.this, HomeActivity.class));
-				finish();
+				getUserInfo(mUserName);
 			}else if (msg.what == 101){
 				
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_failed), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 110){
-				
 				showSelectAlertDialog("请选择所在区域", parseCommonService((String)msg.obj));
+			}else if (msg.what == 200){
+				parseUserInfo((String)msg.obj);
+				if (!mIntentStatus){
+					Intent intent = new Intent(LoginUserActivity.this, HomeActivity.class);
+					intent.putExtra("user_name", mUserName);
+					intent.putExtra("user_password", mPassword);
+					startActivity(intent);
+				}
+				
+				finish();
 			}
 		}
 	};
 	private TextView userAgreement;
 	
-
+	private void getUserInfo(String username) {
+		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
+		rpc.addProperty("username", username);
+		mPresenter.readyPresentServiceParams(LoginUserActivity.this, url, mUserInfoAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
 
 	 @Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -303,6 +336,11 @@ public class LoginUserActivity extends BaseActivity{
 			}else if (action.equals(mCommonServiceAction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 110;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
+			}else if (action.equals(mUserInfoAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 200;
 				msg.obj = templateInfo;
 				mHandler.sendMessage(msg);
 			}

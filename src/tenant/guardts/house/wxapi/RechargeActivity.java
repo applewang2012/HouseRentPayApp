@@ -109,6 +109,8 @@ public class RechargeActivity extends BaseActivity {
 					monkey200.setTextColor(Color.parseColor("#555555"));
 					moneyOther.setTextColor(Color.parseColor("#555555"));
 					//input.clearFocus();
+				}else{
+					monkey800.setTextColor(Color.parseColor("#555555"));
 				}
 			}
 		});
@@ -125,6 +127,8 @@ public class RechargeActivity extends BaseActivity {
 					monkey800.setTextColor(Color.parseColor("#555555"));
 					moneyOther.setTextColor(Color.parseColor("#555555"));
 					//input.clearFocus();
+				}else{
+					monkey200.setTextColor(Color.parseColor("#555555"));
 				}
 			}
 		});
@@ -141,6 +145,8 @@ public class RechargeActivity extends BaseActivity {
 					monkey200.setTextColor(Color.parseColor("#555555"));
 					moneyOther.setTextColor(Color.parseColor("#555555"));
 					//input.clearFocus();
+				}else{
+					monkey500.setTextColor(Color.parseColor("#555555"));
 				}
 			}
 		});
@@ -159,6 +165,7 @@ public class RechargeActivity extends BaseActivity {
 					input.setVisibility(View.VISIBLE);
 				}else{
 					input.setVisibility(View.INVISIBLE);
+					moneyOther.setTextColor(Color.parseColor("#555555"));
 				}
 			}
 		});

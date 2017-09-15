@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.hp.hpl.sparta.Sparta.Cache;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,6 +68,9 @@ public class MyFragment extends BaseFragment {
 		mUserName = bundle.getString("user_name");
 		mContext = getActivity().getApplicationContext();
 		mPresent = new HoursePresenter(mContext, MyFragment.this);
+//		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView bartext  = (TextView) getActivity().getWindow().findViewById(R.id.id_titlebar);
+//		bartext.setText("周边生活");
 	}
 
 	@Override
@@ -128,11 +134,12 @@ public class MyFragment extends BaseFragment {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-					if (realName != null && phone != null && idCard != null) {
+					if (CommonUtil.mRegisterRealName != null && CommonUtil.mUserLoginName != null
+							&& CommonUtil.mRegisterIdcard != null) {
 						Intent intent = new Intent(mContext, PersonalInfoActivity.class);
-						intent.putExtra("RealName", realName);
-						intent.putExtra("Phone", phone);
-						intent.putExtra("IDCard", idCard);
+						intent.putExtra("RealName", CommonUtil.mRegisterRealName);
+						intent.putExtra("Phone", CommonUtil.mUserLoginName);
+						intent.putExtra("IDCard", CommonUtil.mRegisterIdcard);
 						startActivity(intent);
 					}
 				}

@@ -111,6 +111,7 @@
             android:name=".MapRentHouseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2"
+            android:configChanges="keyboardHidden|orientation" 
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".SurfaceViewTestActivity"
@@ -328,6 +329,12 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search"
             android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <activity
+            android:name=".MapSuggestSearchActivity"
+            android:label="@string/title_activity_search"
+            android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity

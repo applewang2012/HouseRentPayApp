@@ -80,6 +80,11 @@
         </FrameLayout>
     </FrameLayout>
 
+    <android.support.v4.widget.SwipeRefreshLayout 
+        android:id="@+id/id_swipe_ly"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent" >  
+        
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" 
@@ -450,5 +455,6 @@
                 android:fadingEdge="none" />
         </LinearLayout>
     </ScrollView>
-
+	</android.support.v4.widget.SwipeRefreshLayout>
+	
 </FrameLayout>

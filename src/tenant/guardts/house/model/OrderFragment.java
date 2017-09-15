@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
@@ -41,10 +42,11 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
 		mContext = getActivity().getApplicationContext();
 		mPresent = new HoursePresenter(mContext, OrderFragment.this);
-		
+//		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView bartext  = (TextView) getActivity().getWindow().findViewById(R.id.id_titlebar);
+//		bartext.setText("订单管理");
 	}
 
 	@Override

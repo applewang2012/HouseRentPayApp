@@ -364,7 +364,6 @@ public class OrderFangzhuFragment extends BaseFragment{
 			if (array != null){
 				Log.i("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
-					
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel houseModel = new HouseInfoModel();
 					houseModel.setHouseStatus(itemJsonObject.optString("RRAStatus"));
