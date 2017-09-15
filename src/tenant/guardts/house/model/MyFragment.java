@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.PersonalInfoActivity;
@@ -54,6 +55,7 @@ public class MyFragment extends BaseFragment {
 	private String idCard;
 	private FrameLayout mWalletFrameLayout;
 	private String mUserName;
+	private FrameLayout mHistory;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class MyFragment extends BaseFragment {
 		// mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
 		mUserAddress = (TextView) mRootView.findViewById(R.id.id_user_address);
 		// 
+		mHistory = (FrameLayout) mRootView.findViewById(R.id.house_history);// 发布房屋
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
 		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);// 修改密码
@@ -136,7 +139,21 @@ public class MyFragment extends BaseFragment {
 
 			}
 		});
-
+		mHistory.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					startActivity(new Intent(mContext, LoginUserActivity.class));
+				} else {
+						Intent intent = new Intent(mContext, HouseHistoryActivity.class);
+						intent.putExtra("IDCard", CommonUtil.mRegisterIdcard);
+						startActivity(intent);
+				}
+				
+			}
+		});
 		mPassword.setOnClickListener(new OnClickListener() {
 
 			@Override

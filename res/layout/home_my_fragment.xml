@@ -135,7 +135,34 @@
                     android:layout_gravity="right|center_vertical"
                     android:background="@drawable/house_list_more_icon" />
             </FrameLayout>
+			<FrameLayout
+               
+                android:id="@+id/house_history"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_100" >
 
+                <ImageView
+                    android:layout_width="@dimen/base_dimen_38"
+                    android:layout_height="@dimen/base_dimen_38"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/history" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/base_dimen_72"
+                    android:gravity="center_vertical"
+                    android:text="我的房屋"
+                    android:textColor="#555555"
+                    android:textSize="@dimen/base_dimen_30" />
+
+                <ImageView
+                    android:layout_width="@dimen/base_dimen_20"
+                    android:layout_height="@dimen/base_dimen_34"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@drawable/house_list_more_icon" />
+            </FrameLayout>
             <FrameLayout
                 android:id="@+id/id_userinfo_change_area"
                 android:layout_width="match_parent"

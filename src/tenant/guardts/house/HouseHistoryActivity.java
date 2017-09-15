@@ -50,43 +50,37 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.house_history_layout);
+		setContentView(R.layout.house_history);
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("房屋记录");
-		mIdCard = getIntent().getStringExtra("idcard");
-		Log.i("mingguo", "house history  idcard  "+mIdCard);
-//		initView();
+		mTitleBar.setText("我的房屋");
+		mIdCard = getIntent().getStringExtra("IDCard");
+		initView();
 		initData();
 	}
 	
 	private void initView(){
-		mlistView = (ListView)findViewById(R.id.id_fragment_house_listview);
-		mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
-		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
+		mlistView = (ListView)findViewById(R.id.listview);
 		
-		mContentLayout.setVisibility(View.INVISIBLE);
-		//initAdapter();
-		mlistView.setAdapter(mAdapter);
 		mlistView.setOnItemClickListener(this);
 		
 	}
 	
 	private void initAdapter(){
-		mAdapter = new UniversalAdapter<HouseInfoModel>(getApplicationContext(), R.layout.2, mHouseInfoList) {
+		mAdapter = new UniversalAdapter<HouseInfoModel>(getApplicationContext(), R.layout.house_history_item, mHouseInfoList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
 				View holderView = holder.getConvertView();
-				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
-				//TextView areaText = (TextView)holderView.findViewById(R.id.id_history_area);
-				TextView contactText = (TextView)holderView.findViewById(R.id.id_order_end_time);
-				TextView timeText = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
+				TextView addressText = (TextView)holderView.findViewById(R.id.id_house_address);
+				TextView typeText = (TextView)holderView.findViewById(R.id.id_house_type);
+				TextView directionText = (TextView)holderView.findViewById(R.id.id_house_direction);
+				TextView floorText = (TextView)holderView.findViewById(R.id.id_house_floor);
 				addressText.setText(info.getHouseAddress());
-				//areaText.setText(info.getHouseArea()+" 平米");
-				contactText.setText(info.getHouseOwnerName()+" "+info.getHouseOwnerPhone());
-				timeText.setText(info.getHouseStartTime()+"至"+info.getHouseEndTime());
+//				typeText.setText(info.get);
+//				directionText.setText(info.get);
+//				floorText.setText(info.get);
 			}
 		};
 	}
@@ -95,13 +89,13 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, HouseHistoryActivity.this);
 		
-		getHouseHistoryData();
+		getHouseHistoryData(mIdCard);
 	}
 	
-	private void getHouseHistoryData(){
+	private void getHouseHistoryData(String idcard){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentOwnerHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
-		rpc.addProperty("idCard", "370881198411094833");
+		rpc.addProperty("idCard", idcard);
 		mPresent.readyPresentServiceParams(this, url, mRentHistoryAction, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
@@ -130,7 +124,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				}
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -153,20 +147,15 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			
 			if (msg.what == 100){
+				String value=(String) msg.obj;
 				getAdapterListData((String)msg.obj);
-				if (mHouseInfoList.size() == 0){
-					mContentLayout.setVisibility(View.GONE);
-					mNoContent.setVisibility(View.VISIBLE);
-				}else{
-					mContentLayout.setVisibility(View.VISIBLE);
-					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("housefragment", "house list  "+mHouseInfoList.size());
-					mAdapter.notifyDataSetChanged();
-				}
+				Log.e("", mHouseInfoList.size()+"---");
+					initAdapter();
+					mlistView.setAdapter(mAdapter);
+				
 			}
 		}
 	};
@@ -176,12 +165,12 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		super.onStatusSuccess(action, templateInfo);
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
-//			if (action.equals(mRentHistoryAction)){
-//				Message msg = mHandler.obtainMessage();
-//				msg.what = 100;
-//				msg.obj = templateInfo;
-//				msg.sendToTarget();
-//			}
+			if (action.equals(mRentHistoryAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 100;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}
 		}
 	}
 
