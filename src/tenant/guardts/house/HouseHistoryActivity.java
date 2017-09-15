@@ -42,7 +42,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	private LinearLayout mContentLayout;
 	private TextView mNoContent;
 	private String mUserName = null;
-	private String mRentHistoryAction = "http://tempuri.org/GetRentHistory";
+	private String mRentHistoryAction = "http://tempuri.org/GetRentOwnerHistory";
 	private String mIdCard;
 	
 
@@ -57,7 +57,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		mTitleBar.setText("房屋记录");
 		mIdCard = getIntent().getStringExtra("idcard");
 		Log.i("mingguo", "house history  idcard  "+mIdCard);
-		initView();
+//		initView();
 		initData();
 	}
 	
@@ -67,14 +67,14 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
 		
 		mContentLayout.setVisibility(View.INVISIBLE);
-		initAdapter();
+		//initAdapter();
 		mlistView.setAdapter(mAdapter);
 		mlistView.setOnItemClickListener(this);
 		
 	}
 	
 	private void initAdapter(){
-		mAdapter = new UniversalAdapter<HouseInfoModel>(getApplicationContext(), R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
+		mAdapter = new UniversalAdapter<HouseInfoModel>(getApplicationContext(), R.layout.2, mHouseInfoList) {
 
 			@Override
 			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
@@ -99,9 +99,9 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	}
 	
 	private void getHouseHistoryData(){
-		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentHistory";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentOwnerHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
-		rpc.addProperty("idCard", mIdCard);
+		rpc.addProperty("idCard", "370881198411094833");
 		mPresent.readyPresentServiceParams(this, url, mRentHistoryAction, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
@@ -176,12 +176,12 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		super.onStatusSuccess(action, templateInfo);
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
-			if (action.equals(mRentHistoryAction)){
-				Message msg = mHandler.obtainMessage();
-				msg.what = 100;
-				msg.obj = templateInfo;
-				msg.sendToTarget();
-			}
+//			if (action.equals(mRentHistoryAction)){
+//				Message msg = mHandler.obtainMessage();
+//				msg.what = 100;
+//				msg.obj = templateInfo;
+//				msg.sendToTarget();
+//			}
 		}
 	}
 

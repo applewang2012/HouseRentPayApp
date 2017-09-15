@@ -200,7 +200,13 @@
             android:name=".HouseHistoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+<!-- 			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+			</activity>
         <activity
             android:name=".RegisterUserActivity"
             android:screenOrientation="portrait"
