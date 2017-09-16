@@ -114,6 +114,7 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mNext = (Button) findViewById(R.id.add_bank_card_btn_next);
 		mBankCardName = (EditText) findViewById(R.id.bank_card_name);
+		mBankCardName.setText(CommonUtil.mRegisterRealName);
 		mBankCardNum = (EditText) findViewById(R.id.bank_card_num);
 		mBankCardType = (EditText) findViewById(R.id.bank_card_type);
 

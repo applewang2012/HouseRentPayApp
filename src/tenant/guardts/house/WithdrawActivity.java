@@ -92,6 +92,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 					String ret = json.optString("ret");
 					if (ret != null) {
 						if (ret.equals("0")) {
+							Toast.makeText(WithdrawActivity.this, "验证成功！", Toast.LENGTH_SHORT).show();
 							// 提现
 							// withdraw(CommonUtil.mRegisterRealName,
 							// CommonUtil.mBankName, CommonUtil.mCardNo,

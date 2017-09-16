@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +19,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.adapter.TransactionDetailAdapter;
 import tenant.guardts.house.bean.Detail;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -57,11 +59,8 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 
 
 	private void initData() {
-		String idcard = getIntent().getStringExtra("IDCard");
-		// getBillLog(idcard);
-		// getBillLog("12010519780419061X");
-		getBillLog(idcard);
-
+		if(!TextUtils.isEmpty(CommonUtil.mRegisterIdcard))
+		getBillLog(CommonUtil.mRegisterIdcard);
 	}
 	
 
@@ -75,10 +74,8 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 	}
 
 	private void initView() {
-		
-		
-		
 		mListView = (ListView) findViewById(R.id.transaction_listview);
+		mListView.setEmptyView(findViewById(R.id.transaction_detail_empty_layout));
 	}
 
 	private Handler mHandler = new Handler() {
@@ -87,10 +84,11 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 			
 			if (msg.what == 818) {
 				String value = (String) msg.obj;
+				Log.e("", value+"---交易明细---");
 				Gson gson = new Gson();
 				ArrayList<Detail> result = gson.fromJson(value, new TypeToken<ArrayList<Detail>>() {
 				}.getType());
-				
+		
 				mListView.setAdapter(new TransactionDetailAdapter(TransactionDetailActivity.this,result));
 
 			}

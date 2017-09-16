@@ -20,5 +20,12 @@
         android:visibility="invisible"
         layout="@layout/layout_loading_dialog"
        />
+    <include
+        layout="@layout/transaction_detail_empty_layout"
+         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/transaction_detail_empty_layout"
+        />
 
 </FrameLayout>
