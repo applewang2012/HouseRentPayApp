@@ -46,7 +46,6 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		
 		initData();
@@ -71,6 +70,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 
 	private void initView() {
 		mListView = (ListView) findViewById(R.id.transaction_listview);
+		//無交易信息时显示空
 		mListView.setEmptyView(findViewById(R.id.transaction_detail_empty_layout));
 	}
 
@@ -109,7 +109,6 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 
 	@Override
 	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
 
 	}
 }

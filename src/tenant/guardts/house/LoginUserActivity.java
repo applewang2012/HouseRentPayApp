@@ -60,10 +60,9 @@ public class LoginUserActivity extends BaseActivity{
 	}
 
 	private void initView(){
+		TextView forgetPassword=(TextView) findViewById(R.id.forget_password);
 		userAgreement = (TextView) findViewById(R.id.tv_user_agreement);//用户协议
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		//
-		
 		userNameEditText = (EditText)findViewById(R.id.id_login_username);
 		passwordEditText = (EditText)findViewById(R.id.id_login_password);
 //		mUserName = getIntent().getStringExtra("user_name");
@@ -74,6 +73,14 @@ public class LoginUserActivity extends BaseActivity{
 //		if (mPassword != null && !mPassword.equals("")){
 //			passwordEditText.setText(mPassword);
 //		}
+		//忘记密码
+		forgetPassword.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(LoginUserActivity.this, ResetActivity.class));
+			}
+		});
 		userAgreement.setOnClickListener(new OnClickListener() {
 			
 			@Override
