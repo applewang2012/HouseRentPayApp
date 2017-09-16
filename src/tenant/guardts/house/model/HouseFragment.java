@@ -1,6 +1,5 @@
 package tenant.guardts.house.model;
 
-import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +31,9 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,12 +44,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -61,14 +55,12 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
-import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HomeSearchActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
-import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -434,8 +426,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onRefresh() {
 				
-				mHandler.sendEmptyMessageDelayed(4000, 5000);
-				//startGetLocationFromHouse();
+				//mHandler.sendEmptyMessageDelayed(4000, 5000);
+				startGetLocationFromHouse();
 			}
 		});  
         mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,  
@@ -603,6 +595,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100) {
+				mSwipeLayout.setRefreshing(false);
 				parseLocationInfo((String) msg.obj);
 				mAdapter.notifyDataSetChanged();
 			} else if (msg.what == 300) {

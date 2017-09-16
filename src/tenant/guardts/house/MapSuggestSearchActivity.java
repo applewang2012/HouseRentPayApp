@@ -8,7 +8,6 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -30,11 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.MapRecordSQLiteHelper;
-import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
-import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.ViewUtil;
-import tenant.guardts.house.view.CityInterface;
-import tenant.guardts.house.view.HistoryRecordsView;
 
 public class MapSuggestSearchActivity extends Activity implements OnGetSuggestionResultListener{
 

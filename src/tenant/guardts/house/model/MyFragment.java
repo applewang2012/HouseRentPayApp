@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.hp.hpl.sparta.Sparta.Cache;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;

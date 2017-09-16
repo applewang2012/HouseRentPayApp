@@ -14,11 +14,14 @@ import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,10 +35,12 @@ import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.PaymentStatusActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.WalletPayment;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.util.ViewUtil;
 import tenant.guardts.house.wxpay.WeiXinPay;
 
 public class HousePayActivity extends BaseActivity implements DataStatusInterface {
@@ -61,6 +66,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_house_payment);
+		ActivityController.addActivity(this);
 		initView();
 		initEvent();
 		price = getIntent().getStringExtra("pay_price");
@@ -69,8 +75,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		orderID=getIntent().getStringExtra("orderID");
 		rentNO = getIntent().getStringExtra("rentNO");
 		orderCreatedDate=getIntent().getStringExtra("orderCreatedDate");//下单时间
-		//Toast.makeText(this, ownerId+"==="+renterId+"---"+orderID, Toast.LENGTH_LONG).show();
-		//final String price = "1.0";//////////////////////////////////
 		ownerId = getIntent().getStringExtra("owner_idcard");
 		renterId = getIntent().getStringExtra("renter_idcard");
 		orderID=getIntent().getStringExtra("orderID");
@@ -102,7 +106,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		final View loadingView = (View)findViewById(R.id.id_data_loading);
 		Button payButton = (Button) findViewById(R.id.id_button_pay_money_button);
 		payButton.setOnClickListener(new OnClickListener() {
 
@@ -110,19 +114,42 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 			public void onClick(View v) {
 				if (isPayByWechat) {
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
+					ViewUtil.showLoadingView(HousePayActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
 					startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 				} else {
-					Toast.makeText(HousePayActivity.this, "钱包支付", Toast.LENGTH_SHORT).show();
-					//////////////////////////////////////
+					
 					if (ownerId != null && renterId != null) {
-						payByWallet(renterId, ownerId, price);
+						showWalletPayDialog();
 					}
-
 				}
 			}
 		});
+	}
+	
+	private void showWalletPayDialog() {
+		new AlertDialog.Builder(HousePayActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle("钱包支付")
 
+				.setMessage("您确认要使用钱包余额支付吗？")// ������ʾ������
+
+				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+					@Override
+
+					public void onClick(DialogInterface dialog, int which) {
+						
+						payByWallet(renterId, ownerId, price);
+						
+					}
+
+				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+
+					@Override
+
+					public void onClick(DialogInterface dialog, int which) {
+						Log.i("alertdialog", " dialog interface ");
+					}
+
+				}).show();
 	}
 
 	private void payByWallet(String renterID, String ownerID, String money) {
@@ -181,7 +208,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
+		ViewUtil.dismissLoadingView();
 	}
 
 	private void startPay(final String price, final String orderNo, final String ip) {
@@ -252,28 +279,33 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				///////////////////////////////////////////////////////////////////////////////
 				Gson gson = new Gson();
 				WalletPayment payment = gson.fromJson(value, WalletPayment.class);
-				int ret = Integer.parseInt(payment.ret);
-				if (ret == 0) {
-					successful = true;
-					Intent intent = new Intent(HousePayActivity.this, PaymentStatusActivity.class);
-					intent.putExtra("flag", successful);
-					intent.putExtra("orderID", orderID);
-					intent.putExtra("rentNO", rentNO);
-					intent.putExtra("orderCreatedDate", orderCreatedDate);
-					intent.putExtra("pay_price", price);
-					startActivity(intent);
-					finish();
-					startActivity(intent);
-				} else if (ret == 1) {
-					successful = false;
-					if (payment.msg != null) {
-						Toast.makeText(HousePayActivity.this, payment.msg, Toast.LENGTH_LONG).show();
-					} else {
+				if (!TextUtils.isEmpty(payment.ret)){
+					if (payment.ret.equals("0")) {
+						successful = true;
 						Intent intent = new Intent(HousePayActivity.this, PaymentStatusActivity.class);
 						intent.putExtra("flag", successful);
+						intent.putExtra("orderID", orderID);
+						intent.putExtra("rentNO", rentNO);
+						intent.putExtra("orderCreatedDate", orderCreatedDate);
+						intent.putExtra("pay_price", price);
 						startActivity(intent);
+						if (!TextUtils.isEmpty(payment.fee)){
+							CommonUtil.mUserWallet = payment.fee;
+						}
+						finish();
+					} else{
+						successful = false;
+						if (payment.msg != null) {
+							Toast.makeText(HousePayActivity.this, payment.msg, Toast.LENGTH_LONG).show();
+						} else {
+							Intent intent = new Intent(HousePayActivity.this, PaymentStatusActivity.class);
+							intent.putExtra("flag", successful);
+							startActivity(intent);
+						}
 					}
 				}
+				
+				
 
 			}
 
@@ -285,7 +317,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mPayUseWallet)) {
 				Log.e("", action + "======" + templateInfo);

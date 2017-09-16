@@ -24,7 +24,7 @@ public class ViewUtil {
 	}
 	public static void dismissLoadingView(){
 		if (mLoadingView != null) {
-			
+			mLoadingView.setVisibility(View.INVISIBLE);
 		}
 	}
 	

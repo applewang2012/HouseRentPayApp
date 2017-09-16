@@ -2,19 +2,13 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import tenant.guardts.house.GalleryActivity.MyPageAdapter;
 import tenant.guardts.house.bannerview.ViewPagerFixed;
 
 public class UserAgreementActivity extends BaseActivity {

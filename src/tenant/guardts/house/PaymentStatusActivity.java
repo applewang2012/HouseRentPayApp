@@ -10,10 +10,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -21,10 +18,6 @@ import tenant.guardts.house.model.CompleteStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
-import android.widget.Button;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";

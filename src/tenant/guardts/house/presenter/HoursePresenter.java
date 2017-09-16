@@ -6,8 +6,6 @@ import org.ksoap2.serialization.SoapObject;
 
 import android.app.Activity;
 import android.content.Context;
-import tenant.guardts.house.MapActivity;
-import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.DataModel;
 

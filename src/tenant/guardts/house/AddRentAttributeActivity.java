@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
@@ -22,7 +23,6 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -38,8 +38,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,6 +55,7 @@ import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.ScreenShotUtil;
+import tenant.guardts.house.util.UtilTool;
 
 public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
 
@@ -67,6 +66,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mQueryStatusAction = "http://tempuri.org/IsOrderConfirmed";
 	private String mSendMessageAction = "http://tempuri.org/SendMessageToPlice";
+	private String mCanRentHouseListAction = "http://tempuri.org/CanRentTheHouse";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
 	private String mRandNum = null;
 	//	private Map<String, String> mSelectedMap = new HashMap<>();
@@ -98,6 +98,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private TextView explanation;
 	private EditText password;
 	private LinearLayout mCommissionContent, mExplannationContent;
+	private boolean mShowRentHouseDialog = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +114,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mOwnerIdcard = getIntent().getStringExtra("owner_id");
 		initView();
 		initHandler();
+		
+		
 	}
 	
 	
@@ -120,8 +123,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
-		//mHouseId.setText(mHouseNo);
 	}
 	
 	/**获取服务费信息
@@ -133,8 +134,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 		
+	}
+	
+	private void checkCanRentHouseTime(String houseno){
+		Log.i("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
+		String url = CommonUtil.mUserHost+"Services.asmx?op=CanRentTheHouse";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCanRentHouseListAction));
+		rpc.addProperty("rentNo", houseno); 
+		rpc.addProperty("startdate", mSetStartData); 
+		rpc.addProperty("enddate", mSetEndData); 
+		mPresenter.readyPresentServiceParams(this, url, mCanRentHouseListAction, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	private void sendPhoneVerifyCode(String phone){
@@ -169,6 +181,51 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}
 		});
 		builder.show();
+	}
+	
+	private String[] parseAlreadyRentHouseTime(String value){
+		String [] list = null;
+		Log.w("mingguo", " list item json  value  "+value);
+		try {
+			JSONArray array = new JSONArray(value);
+			Log.w("mingguo", " list item json  array  "+array);
+			if (array != null) {
+				list = new String[array.length()];
+				for (int item = 0; item < array.length(); item++){
+					JSONObject itemJsonObject = array.optJSONObject(item);
+					String startTime = itemJsonObject.optString("RRAStartDate");
+					String endTime = itemJsonObject.optString("RRAEndDate");
+					String newStartTime = UtilTool.stampToDateTime(startTime.substring(6,startTime.length()-2));
+					String newEndTime = UtilTool.stampToDateTime(endTime.substring(6,endTime.length()-2));
+					list[item] = newStartTime +"至"+newEndTime;
+					Log.w("mingguo", " list item  "+list[item]);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	private void showAlreadyRentHouseTime(String[] items) {  
+		AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("以下时间段，该房屋已出租");
+		builder.setItems(items, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		builder.show();
+		
+//		 AlertDialog.Builder builder2 = new AlertDialog.Builder(AddRentAttributeActivity.this, R.style.AlertDialog);
+//		  View view = LayoutInflater.from(AddRentAttributeActivity.this).inflate(R.layout.dialog_style_layout, null);
+//		  builder2.setView(view);
+//
+//		builder2.show();
 	}
 
 	private void getStartDateAndTime(){
@@ -434,6 +491,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}
 		});
 		
+		Button checkHouseTime = (Button)findViewById(R.id.id_check_can_rent_house);
+		checkHouseTime.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(checkInputTimeContent()){
+					mShowRentHouseDialog = true;
+					checkCanRentHouseTime(mHouseNo);
+				}
+			}
+		});
+		
 		
 		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
@@ -441,9 +511,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			@Override
 			public void onClick(View v) {
 				if (checkInputContent()){
-					//
-					//startAddRentInfo();
-					checkPhoneVerifyCode(mRentPhone.getText().toString(), mVerifyCode);
+					mShowRentHouseDialog = false;
+					checkCanRentHouseTime(mHouseNo);
 				}
 			}
 		});
@@ -485,8 +554,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
         
     }
 	
-	private boolean checkInputContent(){
-		
+	private boolean checkInputTimeContent(){
 		if (mTypeIndex == null || mTypeIndex.equals("")){
 			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
 			return false;
@@ -505,6 +573,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "租房起止时间选择有误！", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+		return true;
+	}
+	
+	private boolean checkInputContent(){
 		
 		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
@@ -750,6 +822,30 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				parseQueryStatus((String)msg.obj);
 			}else if (msg.what == 103){
 				finish();
+			}else if (msg.what == 105){
+				try {
+					Log.e("mingguo", "msg .obj   "+(String)msg.obj);
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							Log.e("mingguo", "ret  "+ret);
+							if (ret.equals("0")){
+								Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT).show();
+								if (!mShowRentHouseDialog){
+									checkPhoneVerifyCode(mRentPhone.getText().toString(), mVerifyCode);
+								}
+							}else if (ret.equals("1")){
+								Toast.makeText(getApplicationContext(), "该时间段房屋已出租，请选择其他时间", Toast.LENGTH_SHORT).show();
+								if (mShowRentHouseDialog){
+									showAlreadyRentHouseTime(parseAlreadyRentHouseTime(object.optString("RentRecord")));
+								}
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}else if (msg.what == 110){
 				
 				try {
@@ -814,7 +910,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		
 	};
 
-	
 	
 	private void parseQueryStatus(String value){
 		if (value != null){
@@ -947,6 +1042,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
+		
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddRentAction)){
@@ -987,6 +1083,12 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				mHandler.sendMessage(message);
 			}else if (action.equals(mSendVerifyCodeAction)){
 				
+			}else if (action.equals(mCanRentHouseListAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 105;
+				//message.obj = templateInfo.replace("\\", "");
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
 		}
 	}

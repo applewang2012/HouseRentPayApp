@@ -5,6 +5,8 @@ package tenant.guardts.house.wxapi;
 
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.tencent.mm.sdk.constants.ConstantsAPI;
@@ -23,12 +25,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler, DataStatusInterface{
 	
@@ -54,6 +58,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     	api = WXAPIFactory.createWXAPI(this, CommonUtil.APP_ID);
         api.handleIntent(getIntent(), this);
         
+        mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
 //        
 //		
         
@@ -68,12 +73,16 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         mOrderNo.setText(CommonUtil.ORDER_NO);
         mOrderMonkey.setText(CommonUtil.ORDER_MONKEY+"　元");
         mFinishPay = (Button)v.findViewById(R.id.id_button_finish_pay);
-        Log.i("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
+        Log.w("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
         		" CommonUtil.ORDER_NO "+CommonUtil.ORDER_NO+" CommonUtil.ORDER_MONKEY "+CommonUtil.ORDER_MONKEY);
         mFinishPay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
+					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
+				}else{
+					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
+				}
 			}
 		});
     }
@@ -151,23 +160,23 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 	@Override
 	public void onResp(BaseResp resp) {
 		Log.i(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
-		ActivityController.finishAll();
+		Log.w("mingguo", "wxpay entry activity  wallet  "+CommonUtil.ORDER_MONKEY+"  payHouse Order ID  "+CommonUtil.mPayHouseOrderId);
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){
-				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
+				ActivityController.finishAll();
+				//if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
-					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-					setContentView(v);
-					initSuccessView(v);
-					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
-				}else{
-					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
-					mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-					setContentView(v);
-					initSuccessView(v);
 					
-					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
-				}
+					setContentView(v);
+					initSuccessView(v);
+//					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
+//				}else{
+//					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
+//					setContentView(v);
+//					initSuccessView(v);
+//					
+//					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
+//				}
 				
 			}else {
 				View v = getLayoutInflater().inflate(R.layout.activity_payment_failure, null);
@@ -185,26 +194,60 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 			super.handleMessage(msg);
 			
 			if (msg.what == 100){
-				
 				updateOrderInfo(CommonUtil.mPayHouseOrderId);
 			}else if (msg.what == 101){
-				
+				//finish();
 			}else if (msg.what == 102){
-				
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								String walletValue = object.optString("fee");
+								if (walletValue != null && !walletValue.equals("")){
+									CommonUtil.mUserWallet = walletValue;
+									Toast.makeText(getApplicationContext(), "充值成功", Toast.LENGTH_SHORT).show();;
+								}
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
+				finish();
 			}
 		}
 	};
+	
+	
+	
+
+	@Override
+	public void onStatusError(String action, String error) {
+		// TODO Auto-generated method stub
+		super.onStatusError(action, error);
+		Log.w("mingguo", "on error  action "+action+"  error  "+error);
+	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCompleteRentAttribute)){
-				mHandler.sendEmptyMessageDelayed(100, 100);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 100;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
 			}else if (action.equals(mUpdateOrderAction)){
-				mHandler.sendEmptyMessageDelayed(101, 10);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 101;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
 			}else if (action.equals(mDepositWalletAction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 102;

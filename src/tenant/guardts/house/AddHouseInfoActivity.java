@@ -19,14 +19,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.Window;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.model.HouseSelectorModel;
@@ -111,7 +107,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("房屋信息");
+		mTitleBar.setText("登记房屋");
 		
 		initView();
 	}

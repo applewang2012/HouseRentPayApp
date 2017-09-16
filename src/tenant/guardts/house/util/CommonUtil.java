@@ -15,7 +15,6 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import tenant.guardts.house.search.SortAlgorithm;
 
 /**
  * @author shenxiaolei

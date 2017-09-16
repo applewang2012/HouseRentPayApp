@@ -10,8 +10,8 @@ import com.tencent.android.tpush.XGPushNotifactionCallback;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 

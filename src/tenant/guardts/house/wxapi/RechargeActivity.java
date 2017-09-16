@@ -31,6 +31,7 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.util.ViewUtil;
 import tenant.guardts.house.wxpay.WeiXinPay;
 
 public class RechargeActivity extends BaseActivity {
@@ -54,21 +55,16 @@ public class RechargeActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
 		mTitleBar.setText("钱包充值");
-		
 		initView();
-
 	}
 	
 	private void initView(){
-		
-		
-		
-		
 		monkey800 = (CheckBox)findViewById(R.id.id_rechange_money_800);
 		monkey500 = (CheckBox)findViewById(R.id.id_rechange_money_500);
 		monkey200 = (CheckBox)findViewById(R.id.id_rechange_money_200);
 		moneyOther = (CheckBox)findViewById(R.id.id_rechange_other_money);
 		final EditText input = (EditText)findViewById(R.id.id_rechange_input_other_monkey);
+		final View loadingView = (View)findViewById(R.id.id_data_loading);
 //		input.setOnFocusChangeListener(new OnFocusChangeListener() {
 //			
 //			@Override
@@ -197,9 +193,9 @@ public class RechargeActivity extends BaseActivity {
 					CommonUtil.mPayHouseOrderId = null;
 					CommonUtil.ORDER_MONKEY = mChargePrice;
 					//CommonUtil.ORDER_MONKEY = mChargePrice+"00"; //真实价格
-					
+					ViewUtil.showLoadingView(RechargeActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(RechargeActivity.this, CommonUtil.APP_ID);
-					startPay("2", UtilTool.generateOrderNo(), "127.0.0.1");
+					startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 				}else{
 					Toast.makeText(getApplicationContext(), "请选择充值金额！", Toast.LENGTH_SHORT).show();
 				}
@@ -209,12 +205,11 @@ public class RechargeActivity extends BaseActivity {
 	}
 	
 	
-	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		
+		ViewUtil.dismissLoadingView();
 	}
 
 	private void startPay(final String price, final String orderNo, final String ip) {
