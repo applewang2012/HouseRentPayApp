@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -227,10 +228,7 @@ public class MyFragment extends BaseFragment {
 					} else {
 						intent.putExtra("balance", CommonUtil.mUserWallet);
 					}
-					
-						intent.putExtra("IDCard",CommonUtil.mRegisterIdcard);// 携带身份证号
-						intent.putExtra("CardNO",CommonUtil.mCardNo.substring(CommonUtil.mCardNo.length()-4,CommonUtil.mCardNo.length()));// 携带银行卡号后四位
-						intent.putExtra("BankName", CommonUtil.mBankName);// 携带银行类型
+				
 					startActivity(intent);
 
 				}

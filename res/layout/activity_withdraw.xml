@@ -101,7 +101,7 @@
             android:layout_marginBottom="@dimen/base_dimen_20"
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:layout_marginTop="@dimen/base_dimen_20"
-            android:text="额外扣除0元手续费"
+            android:text="额外扣除1元手续费"
             android:textColor="#b2b2b2"
             android:textSize="@dimen/base_dimen_26" />
     </LinearLayout>

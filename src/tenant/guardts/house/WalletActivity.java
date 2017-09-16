@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,10 +30,6 @@ public class WalletActivity extends BaseActivity {
 		ActivityController.addActivity(this);
 		Intent intent = getIntent();
 		balance = intent.getStringExtra("balance");
-		idCard = intent.getStringExtra("IDCard");
-		cardNo = intent.getStringExtra("CardNO");
-		bankName = intent.getStringExtra("BankName");
-		
 		mBalance = (TextView) findViewById(R.id.text_balance);
 		mBalance.setText(balance);
 		initView();
@@ -52,12 +49,15 @@ public class WalletActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// 跳转提现
-				Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
-				intent.putExtra("balance", balance);
-				intent.putExtra("IDCard", idCard);
-				intent.putExtra("CardNO",cardNo);
-				intent.putExtra("BankName", bankName);
-				startActivity(intent);
+				if(!TextUtils.isEmpty(balance)){
+					if(balance.equals("0.0")){
+						Toast.makeText(WalletActivity.this, "您的钱包余额为0，暂不能使用提现功能", Toast.LENGTH_SHORT).show();
+					}else{
+						Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
+						intent.putExtra("balance", balance);
+						startActivity(intent);
+					}
+				}
 
 			}
 		});

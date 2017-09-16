@@ -21,7 +21,7 @@
         android:background="#ffffff"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/base_dimen_30"
-        android:text="请绑定用户本人银行卡"
+        android:text="已绑定的银行卡"
         android:textColor="#888888"
         android:textSize="@dimen/base_dimen_30" />
 
@@ -40,16 +40,14 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-        <EditText
+        <TextView
             android:id="@+id/bank_card_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_14"
-            android:background="@null"
-            android:hint="请输入持卡人姓名"
             android:textColor="#555555"
-            android:textColorHint="#b2b2b2"
+            
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -72,17 +70,13 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-        <EditText
+        <TextView
             android:id="@+id/bank_card_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_14"
-            android:background="@null"
-            android:hint="请输入银行卡号		"
             android:textColor="#555555"
-            android:textColorHint="#b2b2b2"
-            android:inputType="number"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -105,28 +99,17 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-      <EditText
+      <TextView
             android:id="@+id/bank_card_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_14"
-            android:background="@null"
-            android:hint="请输入所属银行		"
             android:textColor="#555555"
-            android:textColorHint="#b2b2b2"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_bank_card_btn_next"
-        android:layout_width="@dimen/base_dimen_680"
-        android:layout_height="@dimen/base_dimen_80"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/base_dimen_46"
-        android:background="@drawable/withdraw_btn_bg"
-        android:text="完成"
-        android:textColor="#ffffff" />
+
     </LinearLayout>
 <!--  <include
         android:id="@+id/id_data_loading"

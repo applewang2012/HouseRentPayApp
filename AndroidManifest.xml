@@ -96,7 +96,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-			<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -109,9 +109,9 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".MapRentHouseActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2"
-            android:configChanges="keyboardHidden|orientation" 
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".SurfaceViewTestActivity"
@@ -137,7 +137,6 @@
             android:name=".HouseOrderDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
-
         </activity>
         <activity
             android:name=".CaptureActivity"
@@ -202,12 +201,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
-<!-- 			<intent-filter>
+
+            <!--
+     			<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
-			</activity>
+            </intent-filter>
+            -->
+        </activity>
         <activity
             android:name=".RegisterUserActivity"
             android:screenOrientation="portrait"
@@ -516,14 +518,21 @@
         </activity>
         <activity
             android:name=".wxapi.RechargeActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/title_activity_recharge" >
-            
-            <!-- <intent-filter>
+            android:label="@string/title_activity_recharge"
+            android:theme="@style/AppTheme" >
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".BankActivity"
+            android:label="@string/title_activity_bank"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
