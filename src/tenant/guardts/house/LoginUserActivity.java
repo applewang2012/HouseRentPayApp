@@ -27,6 +27,7 @@ import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class LoginUserActivity extends BaseActivity{
 
@@ -88,6 +89,7 @@ public class LoginUserActivity extends BaseActivity{
 					Toast.makeText(getApplicationContext(), "手机号码输入有误！", Toast.LENGTH_SHORT).show();
 					return;
 				}
+				ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
 				Intent resetIntent = new Intent(LoginUserActivity.this, ResetActivity.class);
 				resetIntent.putExtra("user_name", mUserName);
 				resetIntent.putExtra("intent_status", mIntentStatus);

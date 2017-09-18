@@ -243,7 +243,7 @@ public class MyFragment extends BaseFragment {
 			mUserNickname.setVisibility(View.VISIBLE);
 			mUserAddress.setVisibility(View.VISIBLE);
 			mWallet.setVisibility(View.VISIBLE);
-			if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("")) {
+			if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("") || CommonUtil.mUserWallet.equalsIgnoreCase("null")) {
 				mWallet.setText("¥ 0.0");
 			} else {
 				mWallet.setText("¥ "+CommonUtil.mUserWallet);

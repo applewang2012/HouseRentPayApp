@@ -18,6 +18,7 @@ import android.widget.TextView;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class ModifyPasswordActivity extends BaseActivity{
 
@@ -76,7 +77,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.twice_pwd_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				
+				ViewUtil.forceCloseSoftKeyborad(ModifyPasswordActivity.this);
 				modifyUserPassword();
 			}
 		});

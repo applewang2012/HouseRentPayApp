@@ -37,6 +37,7 @@ import tenant.guardts.house.model.SurroundFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class HomeActivity extends BaseActivity {
 
@@ -85,6 +86,7 @@ public class HomeActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		
 	}
 
 

@@ -9,17 +9,22 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_90" 
-        android:onClick="backFinish"
         >
 
-        <ImageView
-            android:layout_width="@dimen/base_dimen_44"
-            android:layout_height="@dimen/base_dimen_44"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@drawable/wallet_back"
-            android:clickable="true"
-             />
+        <FrameLayout
+	        android:layout_width="@dimen/base_dimen_150"
+	        android:layout_height="@dimen/base_dimen_90" 
+	        android:onClick="backFinish"
+	        android:clickable="true"
+	        >
+	        <ImageView
+	            android:layout_width="@dimen/base_dimen_44"
+	            android:layout_height="@dimen/base_dimen_44"
+	            android:layout_gravity="center_vertical"
+	            android:layout_marginLeft="@dimen/base_dimen_20"
+	            android:background="@drawable/wallet_back"
+	             />
+	        </FrameLayout>
 
         <TextView
             android:id="@+id/id_titlebar"

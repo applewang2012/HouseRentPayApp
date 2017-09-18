@@ -29,6 +29,7 @@ import tenant.guardts.house.model.ResetStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class ResetActivity extends BaseActivity implements DataStatusInterface {
 
@@ -254,9 +255,9 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 			@Override
 			public void onClick(View v) {
 				if (checkContent()) {
+					ViewUtil.forceCloseSoftKeyborad(ResetActivity.this);
 					checkPhoneVerifyCode(mUserName, num);
 				}
-
 			}
 		});
 

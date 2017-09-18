@@ -10,6 +10,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class BaseActivity extends Activity implements DataStatusInterface{
 	View mBaseLoadingView ;
@@ -57,6 +58,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 	}
 	
 	public void backFinish(View view){
+		ViewUtil.forceCloseSoftKeyborad(BaseActivity.this);
 		finish();
 	}
 	
