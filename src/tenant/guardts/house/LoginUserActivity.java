@@ -319,6 +319,9 @@ public class LoginUserActivity extends BaseActivity{
 	private TextView userAgreement;
 	
 	private void getUserInfo(String username) {
+		if (username == null || username.equals("")){
+			return;
+		}
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", username);

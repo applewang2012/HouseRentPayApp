@@ -34,6 +34,7 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -179,6 +180,9 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 	
 	private void getUserInfo() {
+		if (mUserName == null || mUserName.equals("")){
+			return;
+		}
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
@@ -265,22 +269,25 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				loadIntent.putExtra("url", CommonUtil.URL_ZHENGFU_FUWU);
 				loadIntent.putExtra("tab_name", "政府服务");
 				startActivity(loadIntent);
-				
 			}
 		});
 		mHeXiPower.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-//				try {
-//	                Intent i = new Intent(Intent.ACTION_VIEW);
-//	                i.setData(Uri.parse("market://details?id="+getPackagename()));
-//	                startActivity(i);
-//	            } catch (Exception e) {
-//	                Toast.makeText(mContext, "您的手机上没有安装Android应用市场", Toast.LENGTH_SHORT).show();
-//	                e.printStackTrace();
-//	            }
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				try {
+					GlobalUtil.launcherAppWithPackageName(mContext, CommonUtil.HEXI_POWER_PACKAGE_NAME);
+				} catch (Exception e) {
+					try {
+		                Intent i = new Intent(Intent.ACTION_VIEW);
+		                i.setData(Uri.parse("market://details?id="+CommonUtil.HEXI_POWER_PACKAGE_NAME));
+		                startActivity(i);
+		            } catch (Exception e2) {
+		                Toast.makeText(mContext, "您的手机上没有安装Android应用市场", Toast.LENGTH_SHORT).show();
+		                e.printStackTrace();
+		            }
+				}
+				
 			}
 		});
 		mSafeguardRights.setOnClickListener(new OnClickListener() {

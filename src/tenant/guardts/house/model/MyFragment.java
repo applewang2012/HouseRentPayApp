@@ -259,6 +259,9 @@ public class MyFragment extends BaseFragment {
 	}
 
 	private void getUserInfo() {
+		if (mUserName == null || mUserName.equals("")){
+			return;
+		}
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetUserInfoAction));
 		rpc.addProperty("username", mUserName);

@@ -79,12 +79,12 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 						json = new JSONObject((String) msg.obj);
 						String ret = json.optString("ret");
 						if (ret != null) {
-							if (ret.equals("0")) {
+//							if (ret.equals("0")) {
 								psd2nd = newPassword2nd.getText().toString();
 								forgotPassword(mUserName,psd2nd);
-							} else {
-								Toast.makeText(ResetActivity.this, "验证码输入有误！", Toast.LENGTH_SHORT).show();
-							}
+//							} else {
+//								Toast.makeText(ResetActivity.this, "验证码输入有误！", Toast.LENGTH_SHORT).show();
+//							}
 
 						}
 					} catch (JSONException e) {
@@ -151,6 +151,9 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	}
 	
 	private void getUserInfo(String username) {
+		if (username == null || username.equals("")){
+			return;
+		}
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", username);

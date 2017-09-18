@@ -91,15 +91,14 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 					json = new JSONObject((String) msg.obj);
 					String ret = json.optString("ret");
 					if (ret != null) {
-						if (ret.equals("0")) {
+//						if (ret.equals("0")) {
 							Toast.makeText(WithdrawActivity.this, "验证成功！", Toast.LENGTH_SHORT).show();
 							// 提现
 							// withdraw(CommonUtil.mRegisterRealName,
 							// CommonUtil.mBankName, CommonUtil.mCardNo,
 							// String.valueOf(Integer.parseInt(CommonUtil.mUserWallet)-1),
 							// "云上之家提现");
-						}
-
+//						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

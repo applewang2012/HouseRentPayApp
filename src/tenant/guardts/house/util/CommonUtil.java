@@ -14,6 +14,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Environment;
+import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
 
 /**
@@ -61,6 +62,7 @@ public class CommonUtil {
     public static final String URL_JIAOTONG_CHUXING = "http://tianjin.gongjiao.com/";
     public static final String URL_ZHOUBIAN_SHANGQU = "http://m.dianping.com/tianjin?from=city_hot";
     public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
+    public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

@@ -159,6 +159,7 @@ public class RechargeActivity extends BaseActivity {
 					monkey800.setTextColor(Color.parseColor("#555555"));
 					monkey200.setTextColor(Color.parseColor("#555555"));
 					input.setVisibility(View.VISIBLE);
+					input.setText(100);
 				}else{
 					input.setVisibility(View.INVISIBLE);
 					moneyOther.setTextColor(Color.parseColor("#555555"));
