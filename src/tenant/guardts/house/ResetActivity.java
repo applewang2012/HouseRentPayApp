@@ -1,5 +1,6 @@
 package tenant.guardts.house;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
@@ -7,6 +8,9 @@ import org.ksoap2.serialization.SoapObject;
 import com.google.gson.Gson;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.ResetStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -35,6 +40,9 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mForgotPasswordAction = "http://tempuri.org/ForgotPassword";
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
+	private String mUserName;
+	private boolean mIntentStatus;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,8 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("重置密码");
+		mUserName = getIntent().getStringExtra("user_name");
+		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
 		initEvent();
 	}
@@ -51,18 +61,17 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 
-			if (msg.what <= 1) {
+			if (msg.what < 1) {
+				getVerifyNum.setTextColor(Color.parseColor("#337ffd"));
 				getVerifyNum.setText("获取验证码");
 				getVerifyNum.setClickable(true);
 
-			} 
-			if (msg.what <=60) {
-				getVerifyNum.setText(msg.what + "秒");
+			} else if (msg.what >= 1 && msg.what <=60) {
+				getVerifyNum.setTextColor(Color.parseColor("#cccccc"));
+				getVerifyNum.setText(msg.what + "秒重新发送");
 				mHandler.sendEmptyMessageDelayed(msg.what - 1, 1000);
 				getVerifyNum.setClickable(false);
-			}
-
-			if (msg.what == 100) {
+			}else if (msg.what == 100) {
 
 				if (msg.obj != null) {
 					JSONObject json;
@@ -71,13 +80,10 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 						String ret = json.optString("ret");
 						if (ret != null) {
 							if (ret.equals("0")) {
-								Toast.makeText(ResetActivity.this, "验证成功！", Toast.LENGTH_SHORT).show();
 								psd2nd = newPassword2nd.getText().toString();
-								strPhone = phone.getText().toString();
-								forgotPassword(strPhone,psd2nd);
-
+								forgotPassword(mUserName,psd2nd);
 							} else {
-								Toast.makeText(ResetActivity.this, "验证失败！", Toast.LENGTH_SHORT).show();
+								Toast.makeText(ResetActivity.this, "验证码输入有误！", Toast.LENGTH_SHORT).show();
 							}
 
 						}
@@ -85,18 +91,26 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 						e.printStackTrace();
 					}
 				}
-			}
-
-			if (msg.what == 200) {
+			}else if (msg.what == 200) {
 				String value = (String) msg.obj;
 				Gson gson = new Gson();
 				ResetStatus status=gson.fromJson(value, ResetStatus.class);
 				if(status.ret!=null){
 					if(status.ret.equals("0")){
 						Toast.makeText(ResetActivity.this, "密码重置成功！", Toast.LENGTH_SHORT).show();
-						finish();
+						getUserInfo(mUserName);
 					}
 				}
+			}else if (msg.what == 300){
+				parseUserInfo((String)msg.obj);
+				ActivityController.finishAll();
+				if (!mIntentStatus){
+					Intent intent = new Intent(ResetActivity.this, HomeActivity.class);
+					intent.putExtra("user_name", mUserName);
+					intent.putExtra("user_password", psd2nd);
+					startActivity(intent);
+				}
+				finish();
 			}
 
 		};
@@ -105,9 +119,45 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	private EditText newPassword;
 	private EditText newPassword2nd;
 	private String psd2nd;
-	private EditText phone;
-	private String strPhone;
+	private TextView mPhone;
 	private String num;
+	
+	private void parseUserInfo(String value) {
+		try {
+			JSONArray array = new JSONArray(value);
+			if (array != null) {
+				Log.i("house", "parse house info " + array.length());
+				// for (int item = 0; item < array.length(); item++){
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
+				CommonUtil.mBankName= itemJsonObject.optString("BankName");
+				CommonUtil.mCardNo = itemJsonObject.optString("CardNO");
+				SharedPreferences sharedata = getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+				editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				editor.putString("user_name", mUserName);
+				editor.putString("user_password", psd2nd);
+				editor.putString("user_host", CommonUtil.mUserHost);
+				editor.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void getUserInfo(String username) {
+		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
+		rpc.addProperty("username", username);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
+		mPresenter.readyPresentServiceParams(ResetActivity.this, url, mUserInfoAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
@@ -126,6 +176,11 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 				message.what = 200;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
+			}else if (action.equals(mUserInfoAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 300;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
 			}
 		}
 	}
@@ -181,9 +236,9 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 
 			@Override
 			public void onClick(View v) {
-				strPhone = phone.getText().toString();
-				if (!TextUtils.isEmpty(strPhone)) {
-					sendPhoneVerifyCode(strPhone);
+				
+				if (!TextUtils.isEmpty(mUserName)) {
+					sendPhoneVerifyCode(mUserName);
 					mHandler.sendEmptyMessageDelayed(60, 1000);
 				}
 
@@ -196,7 +251,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 			@Override
 			public void onClick(View v) {
 				if (checkContent()) {
-					checkPhoneVerifyCode(strPhone, num);
+					checkPhoneVerifyCode(mUserName, num);
 				}
 
 			}
@@ -206,8 +261,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 
 	private boolean checkContent() {
 
-		strPhone = phone.getText().toString();
-		if (TextUtils.isEmpty(strPhone)) {
+		if (TextUtils.isEmpty(mUserName)) {
 			GlobalUtil.shortToast(getApplication(), "手机号不能为空",
 					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
@@ -246,11 +300,12 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 
 	private void initView() {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		phone = (EditText) findViewById(R.id.id_phone);
+		mPhone = (TextView) findViewById(R.id.id_phone);
 		verifyNum = (EditText) findViewById(R.id.verify_num);
 		getVerifyNum = (TextView) findViewById(R.id.get_verify_num);
 		confirm = (Button) findViewById(R.id.btn_confirm);
 		newPassword = (EditText) findViewById(R.id.new_password);
 		newPassword2nd = (EditText) findViewById(R.id.new_password_second);
+		mPhone.setText(mUserName);
 	}
 }

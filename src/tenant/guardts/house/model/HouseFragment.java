@@ -182,6 +182,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", mUserName);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresenter.readyPresentServiceParams(getActivity(), url, mUserInfoAction, rpc);
 		mPresenter.startPresentServiceTask(false);
 	}

@@ -22,6 +22,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -78,7 +79,19 @@ public class LoginUserActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(LoginUserActivity.this, ResetActivity.class));
+				mUserName = userNameEditText.getEditableText().toString();
+				if (mUserName == null || mUserName.equals("")){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.please_input_username), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				if (mUserName.length() < 11){
+					Toast.makeText(getApplicationContext(), "手机号码输入有误！", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				Intent resetIntent = new Intent(LoginUserActivity.this, ResetActivity.class);
+				resetIntent.putExtra("user_name", mUserName);
+				resetIntent.putExtra("intent_status", mIntentStatus);
+				startActivity(resetIntent);
 			}
 		});
 		userAgreement.setOnClickListener(new OnClickListener() {
@@ -309,6 +322,7 @@ public class LoginUserActivity extends BaseActivity{
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
 		rpc.addProperty("username", username);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresenter.readyPresentServiceParams(LoginUserActivity.this, url, mUserInfoAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}

@@ -43,7 +43,6 @@ public class HomeActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	// private String mLoginAction = "http://tempuri.org/ValidateLogin";
 	private String mUpdateAction = "http://tempuri.org/CheckUpgrade";
-	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";
 	private String mCanOpenDoorAction = "http://tempuri.org/CanOpenDoor";
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
@@ -76,7 +75,7 @@ public class HomeActivity extends BaseActivity {
 		setContentView(R.layout.home_layout);
 		initData();
 		initView();
-		mHandler.sendEmptyMessageDelayed(2000, 200);
+		mHandler.sendEmptyMessageDelayed(2000, 20);
 	}
 	
 	
@@ -86,7 +85,6 @@ public class HomeActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//getUserInfo();
 	}
 
 
@@ -105,7 +103,6 @@ public class HomeActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
 		initData();
-		
 	}
 
 
@@ -299,26 +296,17 @@ public class HomeActivity extends BaseActivity {
 		mPresenter.startPresentServiceTask(false);
 	}
 
-//	private void getUserInfo() {
-//		Log.i("mingguo", "HomeActivity  get user info  "+mUserName);
-//		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
-//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
-//		rpc.addProperty("username", mUserName);
-//		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mUserInfoAction, rpc);
-//		mPresenter.startPresentServiceTask(true);
+//	private void uploadXingeToken() {
+//		if (CommonUtil.XINGE_TOKEN == null || CommonUtil.XINGE_TOKEN.equals("")){
+//			return;
+//		}
+//		String url = CommonUtil.mUserHost + "services.asmx?op=UpdateDeviceID";
+//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
+//		rpc.addProperty("userId", mUserName);
+//		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
+//		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mXingeTokenAction, rpc);
+//		mPresenter.startPresentServiceTask(false);
 //	}
-	
-	private void uploadXingeToken() {
-		if (CommonUtil.XINGE_TOKEN == null || CommonUtil.XINGE_TOKEN.equals("")){
-			return;
-		}
-		String url = CommonUtil.mUserHost + "services.asmx?op=UpdateDeviceID";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
-		rpc.addProperty("userId", mUserName);
-		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
-		mPresenter.readyPresentServiceParams(HomeActivity.this, url, mXingeTokenAction, rpc);
-		mPresenter.startPresentServiceTask(false);
-	}
 
 	private void hideAllFragments(FragmentTransaction transaction) {
 		if (mHouseFrament != null && !mHouseFrament.isHidden()) {
@@ -355,7 +343,7 @@ public class HomeActivity extends BaseActivity {
 					parseUpdateVersion((String) msg.obj);
 					showUpdateVersionAlertDialog();
 				}
-				uploadXingeToken();
+//				uploadXingeToken();
 			}else if (msg.what == 300){
 				dimissOpenDoorLoading();
 				JSONObject itemJsonObject;
@@ -601,12 +589,7 @@ public class HomeActivity extends BaseActivity {
 		super.onStatusSuccess(action, templateInfo);
 		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
-			if (action.equals(mUserInfoAction)) {
-				Message message = mHandler.obtainMessage();
-				message.what = 100;
-				message.obj = templateInfo;
-				mHandler.sendMessage(message);
-			} else if (action.equals(mUpdateAction)) {
+			if (action.equals(mUpdateAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 200;
 				message.obj = templateInfo;

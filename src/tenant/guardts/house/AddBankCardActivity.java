@@ -105,7 +105,7 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 	}
 
 	private void initView() {
-		// getUserInfo();
+		
 		idCard = getIntent().getStringExtra("IDCard");
 
 		mPresenter = new HoursePresenter(getApplicationContext(), this);

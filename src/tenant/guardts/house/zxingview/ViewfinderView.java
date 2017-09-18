@@ -108,7 +108,8 @@ public final class ViewfinderView extends View {
     private Collection<ResultPoint> possibleResultPoints;  
     private Collection<ResultPoint> lastPossibleResultPoints;  
   
-    boolean isFirst;  
+    boolean isFirst;
+	private int scanColor;  
 
   // This constructor is used when the class is built from an XML resource.
   public ViewfinderView(Context context, AttributeSet attrs) {
@@ -123,6 +124,7 @@ public final class ViewfinderView extends View {
     resultColor = resources.getColor(R.color.result_view);  
 
     resultPointColor = resources.getColor(R.color.possible_result_points);  
+    scanColor = getResources().getColor(R.color.scan_frame_and_move_color);
     possibleResultPoints = new HashSet<ResultPoint>(5);  
   }
 
@@ -164,7 +166,7 @@ public final class ViewfinderView extends View {
       } else {  
 
           //画扫描框边上的角，总共8个部分  
-          paint.setColor(Color.GREEN);  
+          paint.setColor(scanColor);  
           canvas.drawRect(frame.left, frame.top, frame.left + ScreenRate,  
                   frame.top + CORNER_WIDTH, paint);  
           canvas.drawRect(frame.left, frame.top, frame.left + CORNER_WIDTH, frame.top  

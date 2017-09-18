@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -479,11 +480,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				Log.w("mingguo", "register step 2  phone  "+phone);
 				if (mTimeCount < 0){
 					mTimeCount = 60;
 					sendPhoneVerifyCode(phone);
-					mHandler.sendEmptyMessage(1000);
+					mHandler.sendEmptyMessage(2000);
 				}else{
 					return;
 				}
@@ -584,6 +584,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		}
 		if (mRentIDcard.getText().toString().length()<18){
 			Toast.makeText(getApplicationContext(), "身份证信息输入有误", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		if (mRentIDcard.getText().toString().equals(CommonUtil.mRegisterIdcard)){
+			Toast.makeText(getApplicationContext(), "您无法租赁自己发布的房屋", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if (mRentName.getText().toString() == null || mRentName.getText().toString().equals("")){
@@ -905,6 +909,18 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						e.printStackTrace();
 					}
 				}
+			}else if (msg.what == 2000){
+				if (mTimeCount >= 0){
+					mGetVerifyCodeText.setTextColor(Color.parseColor("#cccccc"));
+					mGetVerifyCodeText.setText(mTimeCount +" 秒重新发送");
+					mTimeCount--;
+					mHandler.sendEmptyMessageDelayed(2000, 1000);
+				}else{
+					mGetVerifyCodeText.setTextColor(Color.parseColor("#337ffd"));
+					mGetVerifyCodeText.setText("获取验证码");
+				}
+				
+				
 			}
 		}
 		

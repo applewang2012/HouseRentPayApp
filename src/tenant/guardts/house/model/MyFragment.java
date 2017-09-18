@@ -181,7 +181,6 @@ public class MyFragment extends BaseFragment {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-
 					logoutUserDialog(0);
 				}
 
@@ -263,6 +262,7 @@ public class MyFragment extends BaseFragment {
 		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetUserInfoAction));
 		rpc.addProperty("username", mUserName);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresent.readyPresentServiceParams(getActivity(), url, mGetUserInfoAction, rpc);
 		mPresent.startPresentServiceTask(true);
 
@@ -280,7 +280,6 @@ public class MyFragment extends BaseFragment {
 			if (msg.what == 100){
 				HashMap<String, String> infoModel = parseUserInfo((String) msg.obj);
 				if (infoModel != null) {
-					
 					phone = infoModel.get("Phone");
 					mUserAddress.setText(phone);// 显示手机号
 					realName = infoModel.get("RealName");
@@ -432,9 +431,7 @@ public class MyFragment extends BaseFragment {
 						CommonUtil.mBankName = "";
 						CommonUtil.mCardNo = "";
 						CommonUtil.mUserHost = "";
-						Intent intent = new Intent(mContext, LoginUserActivity.class);
-						startActivity(intent);
-						MyFragment.this.getActivity().finish();
+						uploadXingeToken();
 					}
 
 				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť

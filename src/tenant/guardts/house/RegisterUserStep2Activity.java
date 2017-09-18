@@ -224,19 +224,15 @@ public class RegisterUserStep2Activity extends BaseActivity{
 			}else if (msg.what == 1000){
 				if (mTimeCount >= 0){
 					mVerifyCodeText.setTextColor(Color.parseColor("#cccccc"));
-					mVerifyCodeText.setText(mTimeCount +" 秒");
+					mVerifyCodeText.setText(mTimeCount +" 秒重新发送");
 					mTimeCount--;
 					mHandler.sendEmptyMessageDelayed(1000, 1000);
 				}else{
 					mVerifyCodeText.setTextColor(Color.parseColor("#337ffd"));
 					mVerifyCodeText.setText("获取验证码");
 				}
-				
-				
 			}
-			
 		}
-		
 	};
 	
 	

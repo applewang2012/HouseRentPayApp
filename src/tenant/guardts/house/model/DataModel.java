@@ -112,7 +112,7 @@ public class DataModel {
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "UserID", "admin");
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "PassWord", "Pa$$w0rd780419");
 	                
-				Log.e("house", "services  async taks  do inbackground ");
+				Log.e("house", "services  async taks  do inbackground action  "+mSoapAction);
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 				envelope.headerOut = header; 
 				envelope.bodyOut = mSoapObject;

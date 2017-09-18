@@ -298,32 +298,6 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	
 	
 	
-//	private void getUserInfo(){
-//		String url = CommonUtil.mUserHost+"services.asmx?op=GetUserInfo";
-//		String soapaction = "http://tempuri.org/GetUserInfo";
-//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(soapaction));
-//		rpc.addProperty("username", mUsername);
-//		mPresent.readyPresentServiceParams(mContext, url, soapaction, rpc);
-//		mPresent.startPresentServiceTask(true);
-//		
-//	}
-//
-//	private void showLoadingView(){
-//		if (mLoadingView != null) {
-//			mLoadingView.setVisibility(View.VISIBLE);
-//        	ImageView imageView = (ImageView) mLoadingView.findViewById(R.id.id_progressbar_img);
-//        	if (imageView != null) {
-//        		RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(getActivity(), R.anim.anim_rotate);
-//        		imageView.startAnimation(rotate);
-//        	}
-//		}
-//	}
-//	private void dismissLoadingView(){
-//		if (mLoadingView != null) {
-//			
-//		}
-//	}
-	
 	@Override
 	public void onDestroy() {
 		mPoiSearch.destroy();

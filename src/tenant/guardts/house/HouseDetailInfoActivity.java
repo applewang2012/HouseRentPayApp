@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.bannerview.CircleFlowIndicator;
 import tenant.guardts.house.bannerview.ImagePagerAdapter;
 import tenant.guardts.house.bannerview.ViewFlow;
@@ -133,13 +134,20 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	         @Override  
 	  
 	         public void onClick(DialogInterface dialog, int which) {
-	        	 Intent intent = new Intent(HouseDetailInfoActivity.this, AddRentAttributeActivity.class);
-	        	 intent.putExtra("house_id", mHouseInfo.getHouseId());
-	        	 intent.putExtra("user_name", CommonUtil.mUserLoginName);
-	        	 intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
-	        	 intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
-	        	 startActivity(intent);
-	        	 finish();
+	        	 if (mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")&&
+	        	 mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")&&
+	        			 mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")){
+	        		 Intent intent = new Intent(HouseDetailInfoActivity.this, AddRentAttributeActivity.class);
+		        	 intent.putExtra("house_id", mHouseInfo.getHouseId());
+		        	 intent.putExtra("user_name", CommonUtil.mUserLoginName);
+		        	 intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
+		        	 intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
+		        	 startActivity(intent);
+		        	 finish();
+	        	 }else{
+	        		 Toast.makeText(getApplicationContext(), "获取房屋详情异常，请重试！", Toast.LENGTH_SHORT).show();
+	        	 }
+	        	 
 	         }  
 	  
 	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
