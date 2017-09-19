@@ -435,7 +435,17 @@
                     android:gravity="center"
                     android:text="联系房主" >
                 </Button>
-                
+                  <Button
+                    android:id="@+id/detail_button_del"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                  	android:visibility="gone"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/item_shape_solid_corner_press"
+                    android:textSize="@dimen/base_dimen_32"
+                    android:gravity="center"
+                    android:text="删除房屋" >
+                </Button>
 
                 <Button
                    android:id="@+id/detail_button_apply"

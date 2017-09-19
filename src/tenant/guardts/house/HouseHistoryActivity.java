@@ -1,7 +1,6 @@
 package tenant.guardts.house;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,19 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.adapter.PublishedRecordAdapter;
 import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
-public class HouseHistoryActivity extends BaseActivity implements OnItemClickListener{
+public class HouseHistoryActivity extends BaseActivity implements OnItemClickListener,tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack{
 
 	private Context mContext;
 	private ListView mlistView;
 	
-	private UniversalAdapter mAdapter;
-	private List<HouseInfoModel> mHouseInfoList = new ArrayList<>();
+	private PublishedRecordAdapter mAdapter;
+	private ArrayList<HouseInfoModel> mHouseInfoList = new ArrayList<>();
 	private HoursePresenter mPresent;
 	private LinearLayout mContentLayout;
 	private TextView mNoContent;
@@ -63,23 +61,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 		
 	}
 	
-	private void initAdapter(){
-		mAdapter = new UniversalAdapter<HouseInfoModel>(getApplicationContext(), R.layout.house_history_item, mHouseInfoList) {
-
-			@Override
-			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
-				View holderView = holder.getConvertView();
-				TextView addressText = (TextView)holderView.findViewById(R.id.id_house_address);
-				TextView typeText = (TextView)holderView.findViewById(R.id.id_house_type);
-				TextView directionText = (TextView)holderView.findViewById(R.id.id_house_direction);
-				TextView floorText = (TextView)holderView.findViewById(R.id.id_house_floor);
-				addressText.setText(info.getHouseAddress());
-				typeText.setText(info.getHouseType());
-				directionText.setText(info.getHouseDirection());
-				floorText.setText(info.getHouseCurrentFloor()+"/"+info.getHouseTotalFloor()+"层");
-			}
-		};
-	}
+	
 	
 	private void initData(){
 		mContext = getApplicationContext();
@@ -115,6 +97,8 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 					infoModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
+					infoModel.setHouseType(itemJsonObject.optString("RoomTypeDesc"));
+					infoModel.setHouseDirection(itemJsonObject.optString("RoomDirectoryDesc"));
 					boolean isSameHouse = false;
 					for (int i = 0; i < mHouseInfoList.size(); i++){
 						if (infoModel.getHouseId().equals(mHouseInfoList.get(i).getHouseId())){
@@ -137,7 +121,6 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 //		mHouseNo = getIntent().getStringExtra("house_id");
 //		mUsername = getIntent().getStringExtra("user_name");
@@ -157,7 +140,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 				String value=(String) msg.obj;
 				getAdapterListData((String)msg.obj);
 				Log.e("", mHouseInfoList.size()+"---");
-					initAdapter();
+					mAdapter=new PublishedRecordAdapter(mContext,mHouseInfoList,HouseHistoryActivity.this);
 					mlistView.setAdapter(mAdapter);
 				
 			}
@@ -167,7 +150,7 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentHistoryAction)){
 				Message msg = mHandler.obtainMessage();
@@ -191,12 +174,40 @@ public class HouseHistoryActivity extends BaseActivity implements OnItemClickLis
 			Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 			startActivity(new Intent(mContext, LoginUserActivity.class));
 		} else {
+			
+			
 			if (mHouseInfoList.get(position).getHouseId() != null && !mHouseInfoList.get(position).getHouseId().equals("")){
 				Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
 				detailIntent.putExtra("rentNo", mHouseInfoList.get(position).getHouseId());
 				startActivity(detailIntent);
 			}
 		}
+	}
+
+	
+
+	@Override
+	public void click(View v) {
+		switch (v.getId()) {
+		case R.id.btn_del:
+			Toast.makeText(mContext, "del"+v.getTag(), Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.btn_detail:
+			Intent intent = new Intent(HouseHistoryActivity.this, HouseDetailInfoActivity.class);
+			intent.putExtra("rentNo", mHouseInfoList.get((Integer)(v.getTag())).getHouseId());
+			intent.putExtra("flag", "0");//表示从当前页跳入，详情页按钮会发生改变
+			startActivity(intent);
+			break;
+		case R.id.btn_history:
+			Intent intent2 = new Intent(HouseHistoryActivity.this, RentalDetailActivity.class);
+			intent2.putExtra("rentNo", mHouseInfoList.get((Integer)(v.getTag())).getHouseId());
+			startActivity(intent2);
+			break;
+			
+		default:
+			break;
+		}
+		
 	}
 	
 	

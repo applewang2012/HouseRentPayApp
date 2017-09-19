@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
@@ -13,7 +14,10 @@ public abstract class UniversalAdapter<T> extends BaseAdapter {
 	private int mLayoutResId;
 	private List<T> mDatas;
 	private LayoutInflater mLayoutInflater;
+
 	
+
+
 	public UniversalAdapter(Context context, int layoutResId, List<T> datas) {
 		this.mDatas = datas;
 		this.mLayoutResId = layoutResId;

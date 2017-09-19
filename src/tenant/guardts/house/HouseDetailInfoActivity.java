@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -87,8 +88,9 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋详情");
-		initView();
 		mRentNo = getIntent().getStringExtra("rentNo");
+		flag = getIntent().getStringExtra("flag");
+		initView();
 		// mRentNo = "888888888";
 		Log.e("mingguo", "rent no  " + mRentNo);
 		getHouseDetailInfoByHouseId(mRentNo);
@@ -232,8 +234,20 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		mRentNo = getIntent().getStringExtra("rentNo");
+		flag = getIntent().getStringExtra("flag");
+		if(!TextUtils.isEmpty(flag)){
+			if(flag.equals("0")){
+				mButtonCall.setVisibility(View.GONE);
+				mButtonApply.setVisibility(View.GONE);
+				mDel.setVisibility(View.VISIBLE);
+			}
+		}else{
+			mButtonCall.setVisibility(View.VISIBLE);
+			mButtonApply.setVisibility(View.VISIBLE);
+			mDel.setVisibility(View.GONE);
+		}
 		// mHouseNo = getIntent().getStringExtra("house_id");
 		// mUsername = getIntent().getStringExtra("user_name");
 		// mOwnerName = getIntent().getStringExtra("owner_name");
@@ -277,11 +291,14 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private CircleFlowIndicator mFlowIndicator;
 	private TextView mZhulinType;
 	private TextView mRoomNum, mHousePrice;
+	private Button mDel;
 
 	private void initView() {
+		
+		
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		
-		
+		mDel=(Button)findViewById(R.id.detail_button_del);
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView) findViewById(R.id.id_rent_house_phone);
@@ -315,6 +332,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 		mButtonCall = (Button) findViewById(R.id.detail_button_call);
 		mButtonApply = (Button) findViewById(R.id.detail_button_apply);
+		
+		
 
 	}
 
@@ -378,6 +397,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		}
 
 	};
+	private String flag;
 	
 	
 

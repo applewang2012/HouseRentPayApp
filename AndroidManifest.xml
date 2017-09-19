@@ -207,7 +207,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -526,7 +526,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -535,9 +535,14 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:theme="@style/AppTheme"
             android:name=".ResetActivity"
-            android:label="@string/title_activity_reset" >
+            android:label="@string/title_activity_reset"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".RentalDetailActivity"
+            android:label="@string/title_activity_rental_detail"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
