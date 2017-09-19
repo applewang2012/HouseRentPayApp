@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Window;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class RentalDetailActivity extends BaseActivity implements DataStatusInte
 								RentalDetail detail = gson.fromJson(value, RentalDetail.class);
 								ArrayList<RentRecord> list=gson.fromJson(detail.rentRecord,new TypeToken<ArrayList<RentRecord>>(){}.getType());
 								Log.e("", list.size()+"==");
+								
 								RentalDetailAdapter adapter = new RentalDetailAdapter(RentalDetailActivity.this, list);
 								mListView.setAdapter(adapter);
 							}

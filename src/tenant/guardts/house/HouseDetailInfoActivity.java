@@ -46,10 +46,10 @@ import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
 public class HouseDetailInfoActivity extends BaseActivity {
-	private Button mButtonCall;//联系房主
-	private Button mButtonApply;//申请租房
+	private Button mButtonCall;// 联系房主
+	private Button mButtonApply;// 申请租房
 	private TextView mTitleBar;
-	
+
 	private HoursePresenter mPresenter;
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
@@ -67,6 +67,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private String mOwnerIdcard;
 	private String mHouseDetailAction = "http://tempuri.org/GetHouseDetailInfo";
 	private String mHouseImageListAction = "http://tempuri.org/GetRentImageList";
+	private String mDeleteHouseInfo = "http://tempuri.org/DeleteHouseInfo";
 	private String mRentNo = "";
 	private String mfilePath;
 	private HandlerThread myHandlerThread;
@@ -79,6 +80,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private LinearLayout ll_popup;
 	private HouseInfoModel mHouseInfo;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,116 +105,120 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	 */
 	private void initEvent() {
 		mButtonCall.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				backgroundAlpha(0.3f);
-				ll_popup.startAnimation(AnimationUtils.loadAnimation(HouseDetailInfoActivity.this,R.anim.activity_translate_in));
+				ll_popup.startAnimation(
+						AnimationUtils.loadAnimation(HouseDetailInfoActivity.this, R.anim.activity_translate_in));
 				pop.showAtLocation(mButtonCall, Gravity.BOTTOM, 0, 0);
-				
-				TextView phone = (TextView)ll_popup.findViewById(R.id.id_button_contact_owner_show_phone);
+
+				TextView phone = (TextView) ll_popup.findViewById(R.id.id_button_contact_owner_show_phone);
 				phone.setText(mRentPhone.getText());
 			}
 		});
-		
-		
+
 		mButtonApply.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+
 				showPublicAttributeDialog();
 			}
 		});
-		
+
 	}
-	
-	private void showPublicAttributeDialog(){
-		new AlertDialog.Builder(HouseDetailInfoActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.rent_house_title)) 
-		  
-	     .setMessage(getString(R.string.rent_house_content))  
-	  
-	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() { 
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	        	 if (mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")&&
-	        	 mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")&&
-	        			 mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")){
-	        		 Intent intent = new Intent(HouseDetailInfoActivity.this, AddRentAttributeActivity.class);
-		        	 intent.putExtra("house_id", mHouseInfo.getHouseId());
-		        	 intent.putExtra("user_name", CommonUtil.mUserLoginName);
-		        	 intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
-		        	 intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
-		        	 startActivity(intent);
-		        	 finish();
-	        	 }else{
-	        		 Toast.makeText(getApplicationContext(), "获取房屋详情异常，请重试！", Toast.LENGTH_SHORT).show();
-	        	 }
-	        	 
-	         }  
-	  
-	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
-	  
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-	  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
-	  
-	         }  
-	  
-	     }).show(); 
+
+	private void showPublicAttributeDialog() {
+		new AlertDialog.Builder(HouseDetailInfoActivity.this, AlertDialog.THEME_HOLO_LIGHT)
+				.setTitle(getString(R.string.rent_house_title))
+
+				.setMessage(getString(R.string.rent_house_content))
+
+				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+					@Override
+
+					public void onClick(DialogInterface dialog, int which) {
+						if (mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")
+								&& mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")
+								&& mHouseInfo.getHouseOwnerName() != null
+								&& !mHouseInfo.getHouseOwnerName().equals("")) {
+							Intent intent = new Intent(HouseDetailInfoActivity.this, AddRentAttributeActivity.class);
+							intent.putExtra("house_id", mHouseInfo.getHouseId());
+							intent.putExtra("user_name", CommonUtil.mUserLoginName);
+							intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
+							intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
+							startActivity(intent);
+							finish();
+						} else {
+							Toast.makeText(getApplicationContext(), "获取房屋详情异常，请重试！", Toast.LENGTH_SHORT).show();
+						}
+
+					}
+
+				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
+
+					@Override
+
+					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
+
+						Log.i("alertdialog", " �뱣�����ݣ�");
+
+					}
+
+				}).show();
 	}
-	
-	
+
 	/**
 	 * 初始化PopupWindow
 	 */
 	protected void initPopupWindow() {
 
-//		View view = View.inflate(this, R.layout.popupwindow_contact_owner, null);
-//		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//		popupWindow.setFocusable(true);
-//		popupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-//		int popHeight = popupWindow.getContentView().getMeasuredHeight();
-//		popupWindow.showAsDropDown(mButtonCall, 0, -popHeight);
-		
+		// View view = View.inflate(this, R.layout.popupwindow_contact_owner,
+		// null);
+		// popupWindow = new PopupWindow(view,
+		// ViewGroup.LayoutParams.MATCH_PARENT,
+		// ViewGroup.LayoutParams.WRAP_CONTENT);
+		// popupWindow.setFocusable(true);
+		// popupWindow.getContentView().measure(View.MeasureSpec.UNSPECIFIED,
+		// View.MeasureSpec.UNSPECIFIED);
+		// int popHeight = popupWindow.getContentView().getMeasuredHeight();
+		// popupWindow.showAsDropDown(mButtonCall, 0, -popHeight);
+
 		pop = new PopupWindow(HouseDetailInfoActivity.this);
 		View view = getLayoutInflater().inflate(R.layout.popupwindow_contact_owner, null);
 		ll_popup = (LinearLayout) view.findViewById(R.id.id_contact_owner_content);
-		
+
 		pop.setWidth(LayoutParams.MATCH_PARENT);
 		pop.setHeight(LayoutParams.WRAP_CONTENT);
 		pop.setBackgroundDrawable(new BitmapDrawable());
 		pop.setFocusable(true);
 		pop.setOutsideTouchable(true);
 		pop.setContentView(view);
-		
-		
-		
-		Button dialPhoneButton = (Button)view.findViewById(R.id.id_button_contact_owner_dial);
-		Button cancelContactButton = (Button)view.findViewById(R.id.id_button_contact_owner_cancel);
+
+		Button dialPhoneButton = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
+		Button cancelContactButton = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
 		dialPhoneButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				pop.dismiss();
 				ll_popup.clearAnimation();
 				try {
-					Intent intent1=  new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+mRentPhone.getText().toString()));  
-		            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		            startActivity(intent1);
+					Intent intent1 = new Intent(Intent.ACTION_CALL,
+							Uri.parse("tel:" + mRentPhone.getText().toString()));
+					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent1);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
-		
+
 		cancelContactButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -220,16 +226,16 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				ll_popup.clearAnimation();
 			}
 		});
-		
+
 		pop.setOnDismissListener(new OnDismissListener() {
-			
+
 			@Override
 			public void onDismiss() {
 				backgroundAlpha(1);
-				
+
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -237,13 +243,21 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		super.onResume();
 		mRentNo = getIntent().getStringExtra("rentNo");
 		flag = getIntent().getStringExtra("flag");
-		if(!TextUtils.isEmpty(flag)){
-			if(flag.equals("0")){
+		if (!TextUtils.isEmpty(flag)) {
+			if (flag.equals("0")) {
 				mButtonCall.setVisibility(View.GONE);
 				mButtonApply.setVisibility(View.GONE);
 				mDel.setVisibility(View.VISIBLE);
+				mDel.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// 删除房屋
+						initDialog();
+					}
+				});
 			}
-		}else{
+		} else {
 			mButtonCall.setVisibility(View.VISIBLE);
 			mButtonApply.setVisibility(View.VISIBLE);
 			mDel.setVisibility(View.GONE);
@@ -254,12 +268,41 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		// mOwnerIdcard = getIntent().getStringExtra("owner_id");
 		// mHouseId.setText(mHouseNo);
 	}
-	
-	private void backgroundAlpha(float bgAlpha)   {  
-        WindowManager.LayoutParams lp = getWindow().getAttributes();  
-       lp.alpha = bgAlpha; //0.0-1.0  
-                getWindow().setAttributes(lp);  
-    }  
+
+	/**
+	 * 删除房屋
+	 * 
+	 * @param rentNO
+	 */
+	private void setDeleteHouseInfo(String rentNO) {
+		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=DeleteHouseInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfo));
+		rpc.addProperty("rentNO", rentNO);
+		mPresenter.readyPresentServiceParams(this, url, mDeleteHouseInfo, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+
+	private void initDialog() {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("是否删除该房屋？").setNegativeButton("是", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// 删除房屋
+				if (!TextUtils.isEmpty(mRentNo)) {
+					setDeleteHouseInfo(mRentNo);
+				}
+			}
+		}).setPositiveButton("否", null).show();
+
+	}
+
+	private void backgroundAlpha(float bgAlpha) {
+		WindowManager.LayoutParams lp = getWindow().getAttributes();
+		lp.alpha = bgAlpha; // 0.0-1.0
+		getWindow().setAttributes(lp);
+	}
 
 	private void showAlertDialog(final TextView text, final String[] items) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(HouseDetailInfoActivity.this,
@@ -294,11 +337,10 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private Button mDel;
 
 	private void initView() {
-		
-		
+
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		
-		mDel=(Button)findViewById(R.id.detail_button_del);
+
+		mDel = (Button) findViewById(R.id.detail_button_del);
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView) findViewById(R.id.id_rent_house_phone);
@@ -307,8 +349,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		mRentAddress = (TextView) findViewById(R.id.id_rent_house_address);
 		mZhulinType = (TextView) findViewById(R.id.id_rent_house_lease_type);
 		mRoomNum = (TextView) findViewById(R.id.id_rent_house_num);
-		mLocationPolice = (TextView)findViewById(R.id.id_rent_house_district);
-		mHousePrice = (TextView)findViewById(R.id.id_rent_house_price);
+		mLocationPolice = (TextView) findViewById(R.id.id_rent_house_district);
+		mHousePrice = (TextView) findViewById(R.id.id_rent_house_price);
 		// mHouseInfoGridview = (GridView)
 		// findViewById(R.id.id_house_detail_info_image);
 		// mHouseInfoGridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -332,8 +374,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 		mButtonCall = (Button) findViewById(R.id.detail_button_call);
 		mButtonApply = (Button) findViewById(R.id.detail_button_apply);
-		
-		
 
 	}
 
@@ -358,8 +398,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	}
 
 	private void getHouseDetailInfoByHouseId(String rentNo) {
-		
-		
+
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetHouseDetailInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
 		rpc.addProperty("rentNo", rentNo);
@@ -382,24 +421,33 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			if (msg.what == 100) {
-				
+
 				jsonHouseInfoToView((String) msg.obj);
-				
+
 				getHouseDetailImageListByHouseId(mRentNo);
 			} else if (msg.what == 101) {
 
 			} else if (msg.what == 200) {
-				
+
 				jsonHouseImageListData((String) msg.obj);
 				Log.i("mingguo", "handle message   image url list size  " + imageUrlList.size());
 				initBanner(imageUrlList);
+			} else if (msg.what == 300) {
+				String value = (String) msg.obj;
+				if (value != null) {
+
+					if (value.equals("true")) {
+						Toast.makeText(HouseDetailInfoActivity.this, "删除成功！", Toast.LENGTH_SHORT).show();
+						finish();
+					} else {
+						Toast.makeText(HouseDetailInfoActivity.this, "删除失败！", Toast.LENGTH_SHORT).show();
+					}
+				}
 			}
 		}
 
 	};
 	private String flag;
-	
-	
 
 	private void jsonHouseInfoToView(String value) {
 		if (value != null) {
@@ -418,8 +466,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mZhulinType.setText(object.getString("RRentTypeDesc"));
 					mRoomNum.setText(object.getString("RDoor"));
 					mLocationPolice.setText(object.getString("RPSName"));
-					mHousePrice.setText(object.getString("RLocationDescription")+" 元");
-					
+					mHousePrice.setText(object.getString("RLocationDescription") + " 元");
+
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));
@@ -501,13 +549,11 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		}
 	}
 
-
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		return super.onKeyDown(keyCode, event);
 	}
-
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
@@ -522,6 +568,11 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			} else if (action.equals(mHouseImageListAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 200;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			} else if (action.equals(mDeleteHouseInfo)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 300;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}

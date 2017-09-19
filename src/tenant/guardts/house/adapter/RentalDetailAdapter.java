@@ -3,6 +3,8 @@ package tenant.guardts.house.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -24,7 +26,7 @@ public class RentalDetailAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-		return list.get(childPosition);
+		return list.get(groupPosition);
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class RentalDetailAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getGroupCount() {
-		return list != null ? list.size() : 0;
+		return list.size();
 	}
 
 	@Override
@@ -88,13 +90,14 @@ public class RentalDetailAdapter extends BaseExpandableListAdapter {
 			holder = new ViewHolder();
 			convertView = View.inflate(context, R.layout.expandable_group_item, null);
 			holder.title = (TextView) convertView.findViewById(R.id.title);
+			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.img = (ImageView) convertView.findViewById(R.id.img);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		holder.name.setText(list.get(groupPosition).RRAContactName);
 		String startTime = list.get(groupPosition).RRAStartDate;
-		;
 		holder.title.setText("入住时间" + UtilTool.stampToDateTime(startTime.substring(6, startTime.length() - 2)));
 		if (isExpanded) {
 			holder.img.setImageResource(R.drawable.history_up);
@@ -117,7 +120,9 @@ public class RentalDetailAdapter extends BaseExpandableListAdapter {
 
 	class ViewHolder {
 		TextView title;
+		TextView name;
 		ImageView img;
+		
 	}
 
 	class ChildHolder {
