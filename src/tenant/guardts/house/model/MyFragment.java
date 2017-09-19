@@ -311,6 +311,7 @@ public class MyFragment extends BaseFragment {
 					}
 				}
 			} else if (msg.what == 101) {
+				resetUserInfo();
 				Intent intent = new Intent(mContext, LoginUserActivity.class);
 				startActivity(intent);
 				MyFragment.this.getActivity().finish();
@@ -364,23 +365,6 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
-						mWallet.setText("¥0.0");
-						SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
-						SharedPreferences.Editor editor = sharedata.edit();
-						editor.putString("user_name", "");
-						editor.putString("user_password", "");
-						editor.putString("user_realname", "");
-						editor.putString("user_idcard", "");
-						editor.commit();
-						mUserAddress.setVisibility(View.GONE);
-						mUserNickname.setVisibility(View.GONE);
-						CommonUtil.mUserLoginName = "";
-						CommonUtil.mRegisterRealName = "";
-						CommonUtil.mRegisterIdcard = "";
-						CommonUtil.mUserWallet = "";
-						CommonUtil.mBankName = "";
-						CommonUtil.mCardNo = "";
-						
 						uploadXingeToken();
 						
 					}
@@ -415,25 +399,6 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
-						
-						mWallet.setText("¥0.0");
-						SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
-						SharedPreferences.Editor editor = sharedata.edit();
-						editor.putString("user_name", "");
-						editor.putString("user_password", "");
-						editor.putString("user_realname", "");
-						editor.putString("user_idcard", "");
-						editor.putString("user_host", "");
-						editor.commit();
-						mUserAddress.setVisibility(View.GONE);
-						mUserNickname.setVisibility(View.GONE);
-						CommonUtil.mUserLoginName = "";
-						CommonUtil.mRegisterRealName = "";
-						CommonUtil.mRegisterIdcard = "";
-						CommonUtil.mUserWallet = "";
-						CommonUtil.mBankName = "";
-						CommonUtil.mCardNo = "";
-						CommonUtil.mUserHost = "";
 						uploadXingeToken();
 					}
 
@@ -446,6 +411,27 @@ public class MyFragment extends BaseFragment {
 					}
 
 				}).show();
+	}
+	
+	private void resetUserInfo(){
+		mWallet.setText("¥0.0");
+		SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+		SharedPreferences.Editor editor = sharedata.edit();
+		editor.putString("user_name", "");
+		editor.putString("user_password", "");
+		editor.putString("user_realname", "");
+		editor.putString("user_idcard", "");
+		editor.putString("user_host", "");
+		editor.commit();
+		mUserAddress.setVisibility(View.GONE);
+		mUserNickname.setVisibility(View.GONE);
+		CommonUtil.mUserLoginName = "";
+		CommonUtil.mRegisterRealName = "";
+		CommonUtil.mRegisterIdcard = "";
+		CommonUtil.mUserWallet = "";
+		CommonUtil.mBankName = "";
+		CommonUtil.mCardNo = "";
+		CommonUtil.mUserHost = "";
 	}
 
 	@Override
