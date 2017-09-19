@@ -48,13 +48,13 @@ public class RentalDetailAdapter extends BaseExpandableListAdapter {
 		} else {
 			holder = (ChildHolder) convertView.getTag();
 		}
-		String startTime = list.get(childPosition).RRAStartDate;
-		String endTime = list.get(childPosition).RRAEndDate;
+		String startTime = list.get(groupPosition).RRAStartDate;
+		String endTime = list.get(groupPosition).RRAEndDate;
 		holder.start.setText(UtilTool.stampToDateTime(startTime.substring(6, startTime.length() - 2)));
 		holder.end.setText(UtilTool.stampToDateTime(endTime.substring(6, endTime.length() - 2)));
-		holder.name.setText(list.get(childPosition).RRAContactName);
-		holder.phone.setText(list.get(childPosition).RRAContactTel);
-		holder.fee.setText(list.get(childPosition).RRentPrice);
+		holder.name.setText(list.get(groupPosition).RRAContactName);
+		holder.phone.setText(list.get(groupPosition).RRAContactTel);
+		holder.fee.setText(list.get(groupPosition).RRentPrice);
 
 		return convertView;
 	}

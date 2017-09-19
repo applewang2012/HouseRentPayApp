@@ -12,6 +12,7 @@ import com.tencent.android.tpush.XGPushManager;
 
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -80,13 +81,27 @@ public class HomeActivity extends BaseActivity {
 	}
 	
 	
-	
-	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
+	}
+
+	//解决重叠
+	
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		
+		if (mHouseFrament == null && fragment instanceof HouseFragment) {
+			mHouseFrament = (HouseFragment) fragment;
+		} else if (mMyFragment == null && fragment instanceof MyFragment) {
+			mMyFragment = (MyFragment) fragment;
+		} else if (mSurroundFragment == null && fragment instanceof SurroundFragment) {
+			mSurroundFragment = (SurroundFragment) fragment;
+		} else if (mHistoryFragment == null && fragment instanceof OrderFragment) {
+			mHistoryFragment = (OrderFragment) fragment;
+		}
 	}
 
 

@@ -106,7 +106,7 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 //	private SuggestionSearch mSuggestionSearch;
 //	private TextView mSelectCityText;
 	private TextView mTitleBar;
-	private TextView mSelectCityText;
+	private Button mSelectCityText;
 	private PoiSearch mPoiSearch;
 
 	@Override
@@ -159,9 +159,9 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
     }
 
 	private void initView(){
-
-		LinearLayout button = (LinearLayout)findViewById(R.id.id_home_select_city_content);
-		button.setOnClickListener(new OnClickListener() {
+		
+		mSelectCityText = (Button)findViewById(R.id.id_home_show_city_view);
+		mSelectCityText.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -171,7 +171,6 @@ public class MapRentHouseActivity extends BaseActivity implements DataStatusInte
 				
 			}
 		});
-		mSelectCityText = (TextView)findViewById(R.id.id_home_show_city_view);
 		 mPoiSearch = PoiSearch.newInstance();
 		 mPoiSearch.setOnGetPoiSearchResultListener(this);
 //		 mSearchListener = (AutoCompleteTextView)findViewById(R.id.button_search);  

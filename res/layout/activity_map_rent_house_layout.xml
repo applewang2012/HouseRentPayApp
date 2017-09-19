@@ -14,28 +14,37 @@
            android:layout_width="wrap_content"
        	   android:layout_height="match_parent"
        	   android:orientation="horizontal"
-       	   android:clickable="true"
            >
-           <TextView 
+	           <FrameLayout
+		          android:id="@+id/id_titlebar_back"
+			       android:layout_width="@dimen/base_dimen_80"
+			       android:layout_height="@dimen/base_dimen_90"
+			       android:clickable="true"
+			       android:focusable="true"
+			       android:onClick="backFinish" >
+			      <ImageView 
+			           android:layout_width="@dimen/base_dimen_44"
+			           android:layout_height="@dimen/base_dimen_44"
+			           android:background="@drawable/short_lease_back"
+			           android:layout_gravity="center_vertical"
+			           android:layout_marginLeft="@dimen/base_dimen_20"
+			          />
+		      </FrameLayout>
+           <Button 
                android:id="@+id/id_home_show_city_view"
-               android:layout_width="wrap_content"
-	       	   android:layout_height="match_parent"
+               android:layout_width="@dimen/base_dimen_122"
+	       	   android:layout_height="@dimen/base_dimen_52"
 	       	   android:layout_marginLeft="@dimen/base_dimen_20"
 	       	   android:orientation="horizontal"
-	       	   android:text="天津天津"
+	       	   android:text=""
 	       	   android:textColor="#ffffff"
 	       	   android:textSize="@dimen/base_dimen_30"
 	       	   android:textStyle="bold"
 	       	   android:gravity="center"
+	       	   android:background="@drawable/button_map_select_city_selector"
 	       	   android:layout_gravity="center_vertical"
                />
-           <ImageView 
-               android:layout_width="@dimen/base_dimen_20"
-	       	   android:layout_height="@dimen/base_dimen_11"
-	       	   android:background="@drawable/home_select_city_more"
-	       	   android:layout_marginLeft="@dimen/base_dimen_10"
-	       	   android:layout_gravity="center_vertical"
-               />
+           
        </LinearLayout>
         <TextView 
                android:layout_width="wrap_content"
