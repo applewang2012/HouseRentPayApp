@@ -198,7 +198,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	 *            新密码
 	 */
 	private void forgotPassword(String phone, String newPasssword) {
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=ForgotPassword";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ForgotPassword";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mForgotPasswordAction));
 		rpc.addProperty("LoginName", phone);
 		rpc.addProperty("newPassword", newPasssword);

@@ -131,7 +131,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	 */
 	private void getPayRateDesc(String price){
 //		
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
@@ -647,7 +647,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private void startAddRentInfo(){
 			Log.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
 					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentRecord";
+			String url = CommonUtil.mUserHost+"services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
 			rpc.addProperty("RentNo", mHouseNo);   
 			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
@@ -664,7 +664,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void queryIdentifyStatus(String orderId){
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=IsOrderConfirmed";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=IsOrderConfirmed";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mQueryStatusAction));
 		rpc.addProperty("id", orderId);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mQueryStatusAction, rpc);

@@ -65,7 +65,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 */
 	private void getPayRateDesc(String price) {
 		// 
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresent.readyPresentServiceParams(this, url, mGetPayRateDesc, rpc);

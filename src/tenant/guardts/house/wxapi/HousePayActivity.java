@@ -153,7 +153,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	}
 
 	private void payByWallet(String renterID, String ownerID, String money) {
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=PayUseWallet";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=PayUseWallet";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPayUseWallet));
 		rpc.addProperty("rennteeIDCard", renterID);
 		rpc.addProperty("ownerIDCard", ownerID);

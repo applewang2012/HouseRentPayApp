@@ -6,6 +6,7 @@
     android:background="#ffffff"
     android:orientation="vertical"
     android:paddingBottom="5dp"
+    android:descendantFocusability="blocksDescendants"
     android:paddingLeft="@dimen/base_dimen_30"
     android:paddingRight="@dimen/base_dimen_30" >
 

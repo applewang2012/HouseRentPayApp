@@ -215,7 +215,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 //	}
 	
 	private void getHouseInfo(){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseInfoByLoginName";
+		String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseInfoByLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetHouseInfoAction));
 		rpc.addProperty("loginName", mUserName);
 		mPresent.readyPresentServiceParams(this, url, mGetHouseInfoAction, rpc);
@@ -223,7 +223,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	}
 	
 	private void deleteHouseInfo(String houseNo){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=DeleteHouseInfo";
+		String url = CommonUtil.mUserHost+"services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfoAction));
 		rpc.addProperty("houseNo", houseNo);
 		mPresent.readyPresentServiceParams(this, url, mDeleteHouseInfoAction, rpc);

@@ -61,7 +61,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 
 	private void getBillLog(String IDCard) {
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetBillLog";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetBillLog";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetBillLog));
 		rpc.addProperty("idCard", IDCard);
 		mPresenter.readyPresentServiceParams(this, url, mGetBillLog, rpc);

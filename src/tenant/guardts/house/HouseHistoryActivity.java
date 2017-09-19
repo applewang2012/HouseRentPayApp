@@ -29,6 +29,7 @@ import tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.view.CityInterface;
 
 public class HouseHistoryActivity extends BaseActivity
 		implements OnItemClickListener, CallBack{
@@ -58,6 +59,24 @@ public class HouseHistoryActivity extends BaseActivity
 		mIdCard = getIntent().getStringExtra("IDCard");
 		initView();
 		initData();
+		initEvent();
+	}
+
+	private void initEvent() {
+		mlistView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// 点击进入详情
+				Intent intent = new Intent(HouseHistoryActivity.this, HouseDetailInfoActivity.class);
+				intent.putExtra("flag", "0");// 表示从当前页跳入，详情页按钮会发生改变
+				intent.putExtra("rentNo", mHouseInfoList.get(arg2).getHouseId());
+				startActivity(intent);
+				
+				
+			}
+		});
+		
 	}
 
 	private void initView() {
@@ -79,7 +98,7 @@ public class HouseHistoryActivity extends BaseActivity
 		mPresent.startPresentServiceTask(true);
 	}
 	private void setDeleteHouseInfo(String rentNO) {
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=DeleteHouseInfo";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfo));
 		rpc.addProperty("rentNO", rentNO);
 		mPresent.readyPresentServiceParams(this, url, mDeleteHouseInfo, rpc);
@@ -243,7 +262,7 @@ public class HouseHistoryActivity extends BaseActivity
 			public void onClick(DialogInterface dialog, int which) {
 				// 删除房屋
 				if(mHouseInfoList!=null&&mAdapter!=null){
-					setDeleteHouseInfo(mHouseInfoList.get((Integer) (v.getTag())).getHouseId());
+/////////////////////////////////////////////////////////				setDeleteHouseInfo(mHouseInfoList.get((Integer) (v.getTag())).getHouseId());
 					mHouseInfoList.remove(position);
 					mAdapter.notifyDataSetChanged();
 				}

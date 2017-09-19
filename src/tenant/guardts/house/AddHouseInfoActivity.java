@@ -331,7 +331,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	 */
 	private void getPayRateDesc(String price){
 //		
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=GetPayRateDesc";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mGetPayRateDesc, rpc);
@@ -537,7 +537,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel property = new HouseSelectorModel();
 			property.setHouseOrginText((String) mPropertryTextView.getText());
 			mSelectorInfo.put("property", property);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseProperty";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseProperty";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPropertyAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mPropertyAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -554,7 +554,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel type = new HouseSelectorModel();
 			type.setHouseOrginText((String) mTypeTextView.getText());
 			mSelectorInfo.put("type", type);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseType";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mTypeAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mTypeAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -569,7 +569,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mDirectionTextView.getText());
 			mSelectorInfo.put("direction", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseDirection";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseDirection";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDirectionAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDirectionAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -615,7 +615,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mRentTypeTextView.getText());
 			mSelectorInfo.put("renttype", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetHouseRentType";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetHouseRentType";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentTypeAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRentTypeAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -651,7 +651,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mDistrictTextView.getText());
 			mSelectorInfo.put("district", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetDistrictList";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetDistrictList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDistrictAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mDistrictAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -666,7 +666,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mRoadTextView.getText());
 			mSelectorInfo.put("road", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetRoadList";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetRoadList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRoadAction));
 			if (mSelectorInfo.get("street").getHouseSelectId() != null && !mSelectorInfo.get("street").getHouseSelectId().equals("")){
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
@@ -683,7 +683,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
 				CommonUtil.mUserLoginName+" mrentType "+mrentType+" mowntype "+"default null"+"  RBuildingType "+"defautl null "+"  RLocationDescription "+" desp ");
 		
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentInfo";
+		String url = CommonUtil.mUserHost+"services.asmx?op=AddRentInfo";
 		
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddHouseAction));
 		rpc.addProperty("RentNo", mRentNo);   
@@ -726,7 +726,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mStreetTextView.getText());
 			mSelectorInfo.put("street", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetStreetList";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetStreetList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mStreetAction));
 			if (mSelectorInfo.get("district").getHouseSelectId() != null && !mSelectorInfo.get("district").getHouseSelectId().equals("")){
 				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
@@ -747,7 +747,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mFenjuTextView.getText());
 			mSelectorInfo.put("fenju", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetPoliceStationList";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetPoliceStationList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mFenjuAction));
 			mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mFenjuAction, rpc);
 			mPresenter.startPresentServiceTask(true);
@@ -761,7 +761,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mPoliceTextView.getText());
 			mSelectorInfo.put("police", direction);
-			String url = "http://qxw2332340157.my3w.com/services.asmx?op=GetLocalPoliceStationList";
+			String url = CommonUtil.mUserHost+"services.asmx?op=GetLocalPoliceStationList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPoliceAction));
 			if (mSelectorInfo.get("fenju").getHouseSelectId() != null && !mSelectorInfo.get("fenju").getHouseSelectId().equals("")){
 				rpc.addProperty("parentstationId", mSelectorInfo.get("fenju").getHouseSelectId());

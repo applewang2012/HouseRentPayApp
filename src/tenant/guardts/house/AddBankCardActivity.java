@@ -95,7 +95,7 @@ public class AddBankCardActivity extends BaseActivity implements DataStatusInter
 	 *            姓名
 	 */
 	private void updateCreditCard(String idCard, String cardNO, String bankName) {
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=UpdateCreditCard";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=UpdateCreditCard";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateCreditCard));
 		rpc.addProperty("idcard", idCard);
 		rpc.addProperty("cardNo", cardNO);

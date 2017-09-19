@@ -183,7 +183,7 @@ public class SelectPhotoActivity extends BaseActivity {
 	}
 	
 	private void addRentHouseImageRequest(int num){
-		String url = "http://qxw2332340157.my3w.com/services.asmx?op=AddRentImage";
+		String url = CommonUtil.mUserHost+"services.asmx?op=AddRentImage";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddImageAction));
 		rpc.addProperty("RentNO", mRentNo);
 		rpc.addProperty("fileName", Bimp.tempSelectBitmap.get(num-1).getImageName());

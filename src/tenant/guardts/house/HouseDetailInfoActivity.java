@@ -275,7 +275,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	 * @param rentNO
 	 */
 	private void setDeleteHouseInfo(String rentNO) {
-		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=DeleteHouseInfo";
+		String url = CommonUtil.mUserHost+"Services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfo));
 		rpc.addProperty("rentNO", rentNO);
 		mPresenter.readyPresentServiceParams(this, url, mDeleteHouseInfo, rpc);
@@ -291,7 +291,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// 删除房屋
 				if (!TextUtils.isEmpty(mRentNo)) {
-					setDeleteHouseInfo(mRentNo);
+//					setDeleteHouseInfo(mRentNo);//////////////////////////////////////////
 				}
 			}
 		}).setPositiveButton("否", null).show();
