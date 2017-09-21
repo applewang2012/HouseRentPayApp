@@ -59,6 +59,7 @@ public class CommonUtil {
     public static final String URL_ZHENGFU_FUWU = "http://www.tjgaj.gov.cn/site/default.aspx";
     public static final String URL_WEIQUAN_CHANGSHI = "http://ms.enorth.com.cn/xfwq/";
     public static final String URL_YILIAO_BAOXIAN = "http://m.haodf.com/touch/hospital/DE4roiYGYZwmj5uuYe-Bqregr.htm?from=alading";
+    public static final String URL_COMMON_PHONE = "http://www.jihaoba.com/changyongdianhua/tianjin.htm";
     public static final String URL_JIAOTONG_CHUXING = "http://tianjin.gongjiao.com/";
     public static final String URL_ZHOUBIAN_SHANGQU = "http://m.dianping.com/tianjin?from=city_hot";
     public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";

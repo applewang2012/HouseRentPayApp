@@ -317,7 +317,10 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				GlobalUtil.shortToast(mContext, "该模块正在开发中，敬请期待！！", getResources().getDrawable(R.drawable.ic_dialog_no));
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", CommonUtil.URL_COMMON_PHONE);
+				loadIntent.putExtra("tab_name", "常用电话");
+				startActivity(loadIntent);
 			}
 		});
 		
