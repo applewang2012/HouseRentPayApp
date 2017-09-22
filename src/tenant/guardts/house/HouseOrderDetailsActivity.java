@@ -74,6 +74,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	}
 
 	private void initView() {
+		//取消和拒绝，隐藏
+		priceLinearLayout = (LinearLayout) findViewById(R.id.order_detail_ll);
+		//取消和拒绝，隐藏
 		tvServiceFee = (TextView) findViewById(R.id.order_service_fee);
 		parent = View.inflate(this, R.layout.activity_order_details_info, null);
 		view = View.inflate(this, R.layout.popupwindow_contact_owner, null);
@@ -201,6 +204,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
+			priceLinearLayout.setVisibility(View.VISIBLE);
+			tvServiceFee.setVisibility(View.VISIBLE);
 			/*
 			 * button3.setText("查看详情");
 			 * button3.setTextColor(Color.parseColor("#337ffd"));
@@ -218,21 +223,25 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 		} else if (mOrderDetail.getHouseStatus().equals("8")) {
-			status.setText("已取消");
+			status.setText("已取消");/////////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
 			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
+			priceLinearLayout.setVisibility(View.GONE);
+			tvServiceFee.setVisibility(View.GONE);
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 		} else if (mOrderDetail.getHouseStatus().equals("9")) {
-			status.setText("已拒绝");
+			status.setText("已拒绝");/////////////////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
+			priceLinearLayout.setVisibility(View.GONE);
+			tvServiceFee.setVisibility(View.GONE);
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#337ffd"));
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
@@ -438,6 +447,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private View view;
 	private Button btnContact;
 	private TextView tvServiceFee;
+	private LinearLayout priceLinearLayout;
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
