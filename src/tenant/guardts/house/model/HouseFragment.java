@@ -692,6 +692,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
+			
 
 		}
 

@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base_dimen_60"
+        android:layout_marginTop="@dimen/base_dimen_30"
         android:paddingLeft="@dimen/base_dimen_30"
         android:text="请选择充值金额"
         android:textColor="#777777"
@@ -153,7 +153,7 @@
             android:layout_width="@dimen/base_dimen_680"
             android:layout_height="@dimen/base_dimen_80"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/base_dimen_300"
+            android:layout_marginTop="@dimen/base_dimen_360"
             android:background="@drawable/withdraw_btn_bg"
             android:text="立即付款"
             android:textColor="#ffffff" />
