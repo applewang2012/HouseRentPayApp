@@ -108,7 +108,7 @@ public class HomeSearchActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if (checkInputContent()){
-					Intent intent = new Intent(HomeSearchActivity.this, HouseSearchActivity.class);
+					Intent intent = new Intent(HomeSearchActivity.this, SearchResultActivity.class);
 					intent.putExtra("search_tag", keywordInput.getEditableText().toString());
 					intent.putExtra("start_time", mStartTimeText.getText());
 					intent.putExtra("end_time", mEndTimeText.getText());

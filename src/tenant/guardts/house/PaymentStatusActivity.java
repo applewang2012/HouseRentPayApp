@@ -191,5 +191,5 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
 	}
-	}
+}
 

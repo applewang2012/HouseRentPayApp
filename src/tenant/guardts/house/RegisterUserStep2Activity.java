@@ -192,17 +192,17 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					try {
 						json = new JSONObject((String)msg.obj);
 						String ret = json.optString("ret");
-//						if (ret != null){
-//							if (ret.equals("0")){
+						if (ret != null){
+							if (CommonUtil.version_test || ret.equals("0")){
 								Intent nextIntent = new Intent(RegisterUserStep2Activity.this, RegisterUserStep3Activity.class);
 								nextIntent.putExtra("phone", mPhone);
 								nextIntent.putExtra("user_name", mPhone);
 								nextIntent.putExtra("user_password", mPasswordIndentify);
 								startActivity(nextIntent);
-//							}else{
-//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-//							}
-//						}
+							}else{
+								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+							}
+						}
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

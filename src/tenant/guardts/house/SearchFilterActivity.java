@@ -20,9 +20,10 @@ import android.widget.TextView;
 import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
 import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.util.ViewUtil;
 import tenant.guardts.house.view.HistoryRecordsView;
 
-public class SearchActivity extends Activity{
+public class SearchFilterActivity extends Activity{
 
 	private AutoCompleteTextView mSearchText;
 	private RecordSQLiteOpenHelper helper;
@@ -94,7 +95,7 @@ public class SearchActivity extends Activity{
 					insertData(mSearchText.getText().toString().trim());
 					//queryData("");
 				}
-				
+				ViewUtil.forceCloseSoftKeyborad(SearchFilterActivity.this);
 					Intent resultIntent = new Intent();
 					Bundle bundle = new Bundle();
 					bundle.putString("search_tag", mSearchText.getText().toString().trim());
@@ -201,6 +202,7 @@ public class SearchActivity extends Activity{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ViewUtil.forceCloseSoftKeyborad(SearchFilterActivity.this);
 				Intent resultIntent = new Intent();
 				Bundle bundle = new Bundle();
 				bundle.putString("search_tag", list.get(position));

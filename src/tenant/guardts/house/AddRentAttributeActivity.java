@@ -898,13 +898,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					try {
 						json = new JSONObject((String)msg.obj);
 						String ret = json.optString("ret");
-//						if (ret != null){
-//							if (ret.equals("0")){
-						startIndentifyProcess();
-//							}else{
-//								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
-//							}
-//						}
+						if (ret != null){
+							if (CommonUtil.version_test || ret.equals("0")){
+								startIndentifyProcess();
+							}else{
+								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+							}
+						}
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

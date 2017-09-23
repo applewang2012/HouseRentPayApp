@@ -115,7 +115,12 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					ViewUtil.showLoadingView(HousePayActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-					startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+					if (CommonUtil.version_test){
+						startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+					}else{
+						startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
+					}
+					
 				} else {
 					
 					if (ownerId != null && renterId != null) {

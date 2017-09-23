@@ -52,7 +52,7 @@ import tenant.guardts.house.util.CommonUtil;
  * 	@tags An overview of this file: 可扩展的条件筛选菜单Demo主页
  * 
  */
-public class HouseSearchActivity extends BaseActivity {
+public class SearchResultActivity extends BaseActivity {
 
 	/**
 	 * 列表原数据
@@ -117,13 +117,13 @@ public class HouseSearchActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				startActivityForResult(new Intent(HouseSearchActivity.this, SearchActivity.class), 1);
+				startActivityForResult(new Intent(SearchResultActivity.this, SearchFilterActivity.class), 1);
 				
 			}
 		});
 		
 		mContext = getApplicationContext();
-		mPresent = new HoursePresenter(mContext, HouseSearchActivity.this);
+		mPresent = new HoursePresenter(mContext, SearchResultActivity.this);
 		mSearch_tag = getIntent().getStringExtra("search_tag");
 		mStartTime = getIntent().getStringExtra("start_time");
 		mEndTime = getIntent().getStringExtra("end_time");
@@ -299,7 +299,7 @@ public class HouseSearchActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				if(CommonUtil.mUserLoginName ==null || CommonUtil.mUserLoginName.equals("")){
-					Toast.makeText(HouseSearchActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					Toast.makeText(SearchResultActivity.this, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
 					loginIntent.putExtra("intent_status", true);
 					startActivity(loginIntent);

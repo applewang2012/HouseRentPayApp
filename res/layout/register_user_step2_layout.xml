@@ -305,10 +305,10 @@
             android:layout_height="@dimen/base_dimen_80"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/base_dimen_70"
-            android:background="@drawable/button_background_selector"
+            android:background="@drawable/btn_pressed"
             android:gravity="center"
             android:text="下一步"
-            android:textColor="@drawable/button_text_selector"
+            android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 

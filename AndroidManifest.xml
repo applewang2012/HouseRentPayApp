@@ -199,7 +199,7 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".HouseSearchActivity"
+            android:name=".SearchResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
@@ -336,7 +336,7 @@
         <activity android:name="com.gzt.faceid5sdk.LivenessDetectionActivity" >
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".SearchFilterActivity"
             android:label="@string/title_activity_search"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >

@@ -80,12 +80,12 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 						json = new JSONObject((String) msg.obj);
 						String ret = json.optString("ret");
 						if (ret != null) {
-//							if (ret.equals("0")) {
+							if (CommonUtil.version_test || ret.equals("0")) {
 								psd2nd = newPassword2nd.getText().toString();
 								forgotPassword(mUserName,psd2nd);
-//							} else {
-//								Toast.makeText(ResetActivity.this, "验证码输入有误！", Toast.LENGTH_SHORT).show();
-//							}
+							} else {
+								Toast.makeText(ResetActivity.this, "验证码输入有误！", Toast.LENGTH_SHORT).show();
+							}
 
 						}
 					} catch (JSONException e) {
