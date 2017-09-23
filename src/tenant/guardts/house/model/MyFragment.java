@@ -102,7 +102,7 @@ public class MyFragment extends BaseFragment {
 		// mUserId = (TextView)mRootView.findViewById(R.id.id_user_id);
 		mUserAddress = (TextView) mRootView.findViewById(R.id.id_user_address);
 		// 
-		mHistory = (FrameLayout) mRootView.findViewById(R.id.house_history);// 发布房屋
+		mHistory = (FrameLayout) mRootView.findViewById(R.id.house_history);// 我的房屋
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
 		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);// 修改密码

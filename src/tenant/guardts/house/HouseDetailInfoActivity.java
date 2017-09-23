@@ -253,7 +253,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						// 删除房屋
-						initDialog();
+//						initDialog();
+						Toast.makeText(HouseDetailInfoActivity.this, "该功能正在开发中，敬请期待!!", Toast.LENGTH_SHORT).show();
 					}
 				});
 			}

@@ -231,8 +231,8 @@ public class HouseHistoryActivity extends BaseActivity
 	public void click(View v) {
 		switch (v.getId()) {
 		case R.id.btn_del:
-//			Toast.makeText(mContext, "del" + v.getTag(), Toast.LENGTH_SHORT).show();
-			initDialog(v,(Integer)v.getTag());
+			Toast.makeText(mContext, "该功能正在开发中，敬请期待!!", Toast.LENGTH_SHORT).show();
+//			initDialog(v,(Integer)v.getTag());
 			
 			break;
 		case R.id.btn_detail:

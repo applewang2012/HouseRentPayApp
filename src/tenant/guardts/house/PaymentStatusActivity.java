@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.UtilTool;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
+	private String mAddBillLog="http://tempuri.org/AddBillLog";
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";
 	private HoursePresenter mPresenter;
 	
@@ -78,6 +80,17 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 			
 		}
 	}
+	
+	private void addBillLog(String rentIDCard,String ownerIDCard,String fee){
+		String url = CommonUtil.mUserHost + "Services.asmx?op=AddBillLog";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddBillLog));
+		rpc.addProperty("renteeIDCard", rentIDCard);
+		rpc.addProperty("ownerIDCard", ownerIDCard);
+		rpc.addProperty("fee", fee);
+		mPresenter.readyPresentServiceParams(this, url, mAddBillLog, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+	
 
 	/**
 	 * 通知后台更新订单状态
@@ -101,13 +114,16 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 			if (msg.what == 818) {
 				
 				String value = (String) msg.obj;
-				Log.e("", value + "--");
 				Gson gson = new Gson();
 				CompleteStatus completeStatus = gson.fromJson(value, CompleteStatus.class);
 				try {
 					int ret = Integer.parseInt(completeStatus.ret);
 					if (ret == 0) {
-						finish();
+						if(!TextUtils.isEmpty(CommonUtil.OWNER_IDCARD)&&!TextUtils.isEmpty(CommonUtil.mRegisterIdcard)&&!TextUtils.isEmpty(price))
+						//////////////
+						addBillLog(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price);
+						
+//						finish();
 					} else {
 						Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
 					}
@@ -115,6 +131,10 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 					// TODO: handle exception
 				}
 				
+			}
+			if(msg.what==100){
+				String value = (String) msg.obj;
+				Log.e("", value + "-addbill-");
 			}
 		};
 	};
@@ -133,6 +153,12 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 				Log.e("", action + "======" + templateInfo);
 				Message msg = mHandler.obtainMessage();
 				msg.what = 818;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if(action.equals(mAddBillLog)){
+				Log.e("", action + "======" + templateInfo);
+				Message msg = mHandler.obtainMessage();
+				msg.what = 100;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}
