@@ -102,6 +102,7 @@
 		        		 android:inputType="textPassword"
 		        		 android:paddingLeft="5dp"
 		        		 android:textSize="14dp"
+		        		 android:maxLength="18"
 		        		 android:background="@drawable/item_shape_no_solid_corner"
 		        		 android:textColor="#afaeae"
 	        	        />

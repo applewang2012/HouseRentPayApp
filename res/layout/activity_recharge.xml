@@ -94,6 +94,7 @@
         android:inputType="number"
         android:textColor="#337ffd"
         android:textColorHint="#555555"
+        android:maxLength="6"
         android:textSize="@dimen/base_dimen_30"
         android:visibility="invisible" />
 

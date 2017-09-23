@@ -126,7 +126,7 @@ public class LoginUserActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				
+				ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
 				loginUser();
 			}
 		});

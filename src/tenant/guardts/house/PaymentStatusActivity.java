@@ -1,5 +1,7 @@
 package tenant.guardts.house;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.google.gson.Gson;
@@ -18,6 +20,7 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.CompleteStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.UtilTool;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
@@ -122,19 +125,34 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 						if(!TextUtils.isEmpty(CommonUtil.OWNER_IDCARD)&&!TextUtils.isEmpty(CommonUtil.mRegisterIdcard)&&!TextUtils.isEmpty(price))
 						//////////////
 						addBillLog(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price);
-						
-//						finish();
 					} else {
 						Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					e.printStackTrace();
 				}
 				
-			}
-			if(msg.what==100){
-				String value = (String) msg.obj;
-				Log.e("", value + "-addbill-");
+			}else if(msg.what == 100){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+//								String walletValue = object.optString("fee");
+//								if (walletValue != null && !walletValue.equals("")){
+//									CommonUtil.mUserWallet = walletValue;
+									Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
+									finish();
+//								}
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		};
 	};

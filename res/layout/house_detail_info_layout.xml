@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    android:paddingLeft="2dp"
-    android:paddingRight="2dp" >
+     >
 
     <ScrollView
         android:scrollbars="none"
@@ -82,7 +81,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="出租方式"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -92,7 +91,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:maxLength="20"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="15dp" />
                 </LinearLayout> -->
 
@@ -113,7 +112,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="租赁类型"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -123,7 +122,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:maxLength="20"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -144,7 +143,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="房型"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -155,7 +154,7 @@
                         android:gravity="left|center_vertical"
                         android:maxLength="50"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -176,7 +175,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="朝向"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -186,7 +185,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -207,7 +206,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="面积"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -219,7 +218,7 @@
                         android:gravity="left|center_vertical"
                         android:maxLength="18"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
                 <ImageView
@@ -239,7 +238,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="价格"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -251,7 +250,7 @@
                         android:gravity="left|center_vertical"
                         android:maxLength="18"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -272,7 +271,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="所在区域"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -282,7 +281,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -303,7 +302,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="详细地址"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -313,7 +312,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -334,7 +333,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="门牌号"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -345,7 +344,7 @@
                         android:gravity="left|center_vertical"
                         android:maxLength="50"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -366,7 +365,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="房主姓名"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -376,7 +375,7 @@
                         android:layout_weight="3"
                         android:gravity="left|center_vertical"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -397,7 +396,7 @@
                         android:layout_weight="1"
                         android:gravity="left|center_vertical"
                         android:text="房主电话"
-                        android:textColor="#666666"
+                        android:textColor="#333333"
                         android:textSize="15dp" />
 
                     <TextView
@@ -409,10 +408,15 @@
                         android:inputType="number"
                         android:maxLength="11"
                         android:paddingLeft="5dp"
-                        android:textColor="#afaeae"
+                        android:textColor="#555555"
                         android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
+            
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"

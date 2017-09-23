@@ -152,6 +152,7 @@
                         android:hint="请输入新密码"
                         android:paddingLeft="5dp"
                         android:textColor="#666666"
+                        android:maxLength="18"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -191,6 +192,7 @@
                         android:background="#00000000"
                         android:paddingLeft="5dp"
                         android:textColorHint="#afaeae"
+                        android:maxLength="18"
                         android:textColor="#666666"
                         android:textSize="14dp" />
                 </LinearLayout>

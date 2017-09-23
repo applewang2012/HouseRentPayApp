@@ -250,6 +250,7 @@
 		        		 android:inputType="textPassword"
 		        		 android:gravity="center_vertical"
 		        		 android:textSize="@dimen/base_dimen_28"
+		        		 android:maxLength="18"
 		        		 android:background="#00000000"
 		        		 android:textColorHint="#cccccc"
 		        		 android:textColor="#000000"
@@ -284,6 +285,7 @@
 		        		 android:textSize="@dimen/base_dimen_28"
 		        		 android:background="#00000000"
 		        		 android:textColorHint="#cccccc"
+		        		 android:maxLength="18"
 		        		 android:textColor="#000000"
 	        	        />
 	       	</FrameLayout>

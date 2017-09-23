@@ -31,7 +31,8 @@
 	        android:layout_gravity="center"
 	        android:text="请稍后"
 	        android:textColor="#337ffd"
-	        android:textSize="@dimen/base_dimen_34"
+	        android:textSize="@dimen/base_dimen_38"
+	        android:textStyle="bold"
 	        android:layout_marginTop="@dimen/base_dimen_130"
    	 	    />
    	 

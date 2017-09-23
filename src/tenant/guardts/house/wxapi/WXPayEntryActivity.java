@@ -77,6 +77,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         mFinishPay = (Button)v.findViewById(R.id.id_button_finish_pay);
         Log.w("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
         		" CommonUtil.ORDER_NO "+CommonUtil.ORDER_NO+" CommonUtil.ORDER_MONKEY "+CommonUtil.ORDER_MONKEY);
+        Toast.makeText(getApplicationContext(), "请点击完成，刷新订单信息", Toast.LENGTH_LONG).show();
         mFinishPay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -180,7 +181,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 			if (resp.errCode == 0){
 				ActivityController.finishAll();
 				//if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
-				Toast.makeText(getApplicationContext(), "请点击完成，刷新订单信息", Toast.LENGTH_LONG).show();
+				
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
 					setContentView(v);
 					initSuccessView(v);
@@ -222,7 +223,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 								String walletValue = object.optString("fee");
 								if (walletValue != null && !walletValue.equals("")){
 									CommonUtil.mUserWallet = walletValue;
-									Toast.makeText(getApplicationContext(), "充值成功", Toast.LENGTH_SHORT).show();
+									Toast.makeText(getApplicationContext(), "恭喜您充值成功", Toast.LENGTH_SHORT).show();
+									finish();
 								}
 							}else{
 								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -232,10 +234,28 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 				}catch (JSONException e) {
 					e.printStackTrace();
 				}
-				finish();
 			}else if (msg.what == 103){
-				Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
-				finish();
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+//								String walletValue = object.optString("fee");
+//								if (walletValue != null && !walletValue.equals("")){
+//									CommonUtil.mUserWallet = walletValue;
+									Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
+									finish();
+//								}
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	};

@@ -89,7 +89,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 			priceText.setText(price + "元");
 		}
 		
-		
 		CommonUtil.ORDER_MONKEY = price;
 		CommonUtil.OWNER_IDCARD = ownerId;
 		try {
