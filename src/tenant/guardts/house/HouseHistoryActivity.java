@@ -267,9 +267,9 @@ public class HouseHistoryActivity extends BaseActivity
 				
 			}
 		}).setPositiveButton("否", null).show();
-
+		
 	}
-
+	
 	
 
 }

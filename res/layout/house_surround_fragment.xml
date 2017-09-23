@@ -16,7 +16,6 @@
         android:layout_marginTop="@dimen/base_dimen_90" >
 
         <FrameLayout
-            android:id="@+id/id_viewflow_framelayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
 

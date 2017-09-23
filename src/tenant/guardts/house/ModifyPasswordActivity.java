@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -69,10 +70,25 @@ public class ModifyPasswordActivity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.new_pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				if(!TextUtils.isEmpty(mNewPassword)){
+					if(mNewPassword.length()<6){
+						GlobalUtil.shortToast(getApplication(), "新密码不能小于6位", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						return ;
+					}
+				}
+				
 				if (mNewPasswordConfirm == null || mNewPasswordConfirm.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.new_again_pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
+				
+				if(!TextUtils.isEmpty(mNewPasswordConfirm)){
+					if(mNewPasswordConfirm.length()<6){
+						GlobalUtil.shortToast(getApplication(), "确认密码不能小于6位", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						return ;
+					}
+				}
+				
 				if (!mNewPassword.equals(mNewPasswordConfirm)){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.twice_pwd_not_same), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
