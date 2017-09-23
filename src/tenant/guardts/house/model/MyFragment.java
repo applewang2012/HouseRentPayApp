@@ -89,7 +89,6 @@ public class MyFragment extends BaseFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
 		initData();
 	}
 
@@ -268,7 +267,6 @@ public class MyFragment extends BaseFragment {
 		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
 		mPresent.readyPresentServiceParams(getActivity(), url, mGetUserInfoAction, rpc);
 		mPresent.startPresentServiceTask(true);
-
 	}
 
 
@@ -323,7 +321,7 @@ public class MyFragment extends BaseFragment {
 	private TextView mWallet;
 	private TextView mRegistAndLogin;
 
-	public static HashMap<String, String> parseUserInfo(String value) {
+	private  HashMap<String, String> parseUserInfo(String value) {
 		HashMap<String, String> userInfo = null;
 		try {
 			JSONArray array = new JSONArray(value);

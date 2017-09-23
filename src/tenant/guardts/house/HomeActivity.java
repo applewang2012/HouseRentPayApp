@@ -578,8 +578,8 @@ public class HomeActivity extends BaseActivity {
 			mLockNumber = scanResult.substring(pos + 1);
 			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);
 			if (mLockNumber != null && mLockNumber.length() > 2) {
-				canOpenDoorRequest(mLockNumber, CommonUtil.mRegisterIdcard);
-				//showOpenDoorAlertDialog(lockNo + "");
+				//canOpenDoorRequest(mLockNumber, CommonUtil.mRegisterIdcard);
+				showOpenDoorAlertDialog(mLockNumber + "");
 			}
 		} 
 	}

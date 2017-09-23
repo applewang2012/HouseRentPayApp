@@ -37,11 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="开锁中，请稍后。。。"
-        android:textColor="#ffffff"
+        android:textColor="#337ffd"
         android:layout_gravity="center"
         android:textSize="@dimen/base_dimen_37"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/base_dimen_230"
+        android:layout_marginTop="@dimen/base_dimen_180"
         />
 
 </FrameLayout>

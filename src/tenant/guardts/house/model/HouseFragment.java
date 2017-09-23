@@ -558,6 +558,9 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 
 	private void getLocationByCoordinates() {
+		if (mCurrentLatLng == null){
+			return;
+		}
 		Log.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
 				+ mCurrentLatLng.longitude);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentsByCoodinates";

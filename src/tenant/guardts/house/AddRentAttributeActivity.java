@@ -586,7 +586,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "身份证信息输入有误", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentIDcard.getText().toString().equals(CommonUtil.mRegisterIdcard)){
+		
+		if (mOwnerIdcard.equals(CommonUtil.mRegisterIdcard)){
 			Toast.makeText(getApplicationContext(), "您无法租赁自己发布的房屋", Toast.LENGTH_SHORT).show();
 			return false;
 		}
