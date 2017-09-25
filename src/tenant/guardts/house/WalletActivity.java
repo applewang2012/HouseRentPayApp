@@ -39,7 +39,11 @@ public class WalletActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		balance = CommonUtil.mUserWallet;
+		if (TextUtils.isEmpty(CommonUtil.mUserWallet)) {
+			balance="0.0";
+		} else {
+			balance = CommonUtil.mUserWallet;
+		}
 		mBalance.setText(balance);
 	}
 
