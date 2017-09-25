@@ -3,6 +3,7 @@ package tenant.guardts.house;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,28 +27,23 @@ public class WalletActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wallet);
-		Intent intent = getIntent();
-		balance = intent.getStringExtra("balance");
-		mBalance = (TextView) findViewById(R.id.text_balance);
-		mBalance.setText(balance);
+
 		initView();
 		initEvent();
 	}
-	
-	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (TextUtils.isEmpty(CommonUtil.mUserWallet)) {
-			balance="0.0";
+		Log.e("", (CommonUtil.mUserWallet instanceof String) + "");
+
+		if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("")
+				|| CommonUtil.mUserWallet.equalsIgnoreCase("null")) {
+			mBalance.setText("¥ 0.0");
 		} else {
-			balance = CommonUtil.mUserWallet;
+			mBalance.setText("¥ " + CommonUtil.mUserWallet);
 		}
-		mBalance.setText(balance);
 	}
-
-
 
 	private void initEvent() {
 		mTopUp.setOnClickListener(new OnClickListener() {
@@ -62,27 +58,26 @@ public class WalletActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// 跳转提现
-				if(!TextUtils.isEmpty(balance)){
-					if(balance.equals("0.0")){
-						Toast.makeText(WalletActivity.this, "您的钱包余额为0，暂不能使用提现功能", Toast.LENGTH_SHORT).show();
-					}else{
-						Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
-						intent.putExtra("balance", balance);
-						startActivity(intent);
-					}
+					Log.e("",CommonUtil.mUserWallet+"---");
+				if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("")
+						|| CommonUtil.mUserWallet.equalsIgnoreCase("null")||CommonUtil.mUserWallet.equals("0.0")) {
+					Toast.makeText(WalletActivity.this, "您的钱包余额为0，暂不能使用提现功能", Toast.LENGTH_SHORT).show();
+				} else {
+					Intent intent = new Intent(WalletActivity.this, WithdrawActivity.class);
+					startActivity(intent);
 				}
 
 			}
 		});
 		transactionDetail.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				//跳转到交易明细
+				// 跳转到交易明细
 				Intent intent = new Intent(WalletActivity.this, TransactionDetailActivity.class);
 				intent.putExtra("IDCard", idCard);
 				startActivity(intent);
-				
+
 			}
 		});
 
@@ -92,6 +87,7 @@ public class WalletActivity extends BaseActivity {
 		mTopUp = (Button) findViewById(R.id.wallet_btn_top_up);
 		mWithdraw = (Button) findViewById(R.id.wallet_btn_withdraw);
 		transactionDetail = (TextView) findViewById(R.id.wallet_details);
+		mBalance = (TextView) findViewById(R.id.text_balance);
 
 	}
 }

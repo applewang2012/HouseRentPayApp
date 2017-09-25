@@ -218,12 +218,7 @@ public class MyFragment extends BaseFragment {
 				} else {
 
 					Intent intent = new Intent(mContext, WalletActivity.class);
-					if (TextUtils.isEmpty(CommonUtil.mUserWallet)) {
-						intent.putExtra("balance", "0.0");
-					} else {
-						intent.putExtra("balance", CommonUtil.mUserWallet);
-					}
-				
+					
 					startActivity(intent);
 
 				}

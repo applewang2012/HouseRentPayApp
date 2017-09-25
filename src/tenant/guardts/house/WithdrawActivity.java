@@ -126,28 +126,23 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_withdraw);
-		initData();
 		initView();
 		initEvent();
 	}
 
-	private void initData() {
-		Intent intent = getIntent();
-		withdrawSum = intent.getStringExtra("balance");
 
-	}
 
 	private void initEvent() {
 		mAddBankCard.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mCardNo == null) {
+				if (TextUtils.isEmpty(CommonUtil.mCardNo)||CommonUtil.mCardNo.equalsIgnoreCase("null")) {
 					// 添加银行卡
 					Intent intent = new Intent(WithdrawActivity.this, AddBankCardActivity.class);
 					intent.putExtra("IDCard", CommonUtil.mRegisterIdcard);
 					startActivityForResult(intent, 100);
-				} else {
+				} else if(!CommonUtil.mCardNo.equalsIgnoreCase("null")){
 
 					Intent intent = new Intent(WithdrawActivity.this, BankActivity.class);
 					startActivity(intent);
@@ -160,7 +155,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 			@Override
 			public void onClick(View v) {
 
-				if (TextUtils.isEmpty(CommonUtil.mCardNo)) {
+				if (TextUtils.isEmpty(CommonUtil.mCardNo)||CommonUtil.mCardNo.equalsIgnoreCase("null")) {
 					Toast.makeText(WithdrawActivity.this, "尚未添加银行卡，请先添加银行卡", Toast.LENGTH_SHORT).show();
 				} else {
 					// 提现验证码
@@ -295,7 +290,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mAddBankCard = (TextView) findViewById(R.id.tv_add_bank_card);
 		mSum = (TextView) findViewById(R.id.withdraw_tv_sum);
-		mSum.setText("¥ " + withdrawSum);
+		mSum.setText("¥ " +CommonUtil.mUserWallet);
 		mWithdraw = (Button) findViewById(R.id.btn_withdraw);
 		view = View.inflate(this, R.layout.withdraw_popupwindow, null);
 		TextView popupSum = (TextView) view.findViewById(R.id.popup_sum);
@@ -303,7 +298,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
 		popupWindow.setOutsideTouchable(false);
-		if (TextUtils.isEmpty(CommonUtil.mCardNo)) {
+		if (TextUtils.isEmpty(CommonUtil.mCardNo)||CommonUtil.mCardNo.equalsIgnoreCase("null")) {
 			mAddBankCard.setText("添加银行卡");
 		} else {
 			mAddBankCard.setText(CommonUtil.mBankName + "("
