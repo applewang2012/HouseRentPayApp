@@ -40,11 +40,11 @@
 		         android:layout_height="@dimen/base_dimen_80"
 		         android:layout_marginTop="@dimen/base_dimen_50"
 		         android:text="立即使用"
-		         android:textColor="@drawable/button_text_selector"
+		         android:textColor="#ffffff"
 		         android:textSize="@dimen/base_dimen_30"
 		         android:layout_gravity="center_horizontal"
 		         android:gravity="center"
-		         android:background="@drawable/button_background_selector"
+		         android:background="@drawable/btn_pressed"
                 />
         </LinearLayout>
     </FrameLayout>

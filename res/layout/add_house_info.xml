@@ -327,7 +327,43 @@
                     android:textSize="14dp" />
             </LinearLayout>
 
+           
+            
             <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#0c000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="@dimen/base_dimen_150"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:maxLength="50"
+                    android:text="楼号和楼门"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/id_add_house_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
+                    android:background="#00000000"
+                    android:gravity="center_vertical"
+                    android:hint="请输入几号楼和几门"
+                    android:paddingLeft="5dp"
+                    android:textColor="#777777"
+                    android:textColorHint="#b2b2b2"
+                    android:textSize="14dp" />
+            </LinearLayout>
+            
+             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#0c000000" />
@@ -475,40 +511,7 @@
                     android:background="@drawable/into_icon" />
             </FrameLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#0c000000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="@dimen/base_dimen_150"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center_vertical"
-                    android:maxLength="50"
-                    android:text="小区和楼号"
-                    android:textColor="#333333"
-                    android:textSize="15dp" />
-
-                <EditText
-                    android:id="@+id/id_add_house_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="@dimen/base_dimen_30"
-                    android:background="#00000000"
-                    android:gravity="center_vertical"
-                    android:hint="请输入小区名称和楼号"
-                    android:paddingLeft="5dp"
-                    android:textColor="#777777"
-                    android:textColorHint="#b2b2b2"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
+            
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

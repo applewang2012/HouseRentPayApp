@@ -156,12 +156,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_220" >
+                android:layout_height="@dimen/base_dimen_180" >
 
                 <LinearLayout
                     android:id="@+id/id_share_house_content"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/base_dimen_220"
+                    android:layout_height="@dimen/base_dimen_180"
                     android:orientation="horizontal" >
 
                     <LinearLayout
@@ -184,7 +184,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_1"
                             android:gravity="center"
                             android:text="短租共享"
                             android:textColor="#999999"
@@ -209,7 +209,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_1"
                             android:gravity="center"
                             android:text="地图租房"
                             android:textColor="#999999"
@@ -220,7 +220,7 @@
                 <LinearLayout
                     android:id="@+id/id_house_owner_content"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/base_dimen_220"
+                    android:layout_height="@dimen/base_dimen_180"
                     android:orientation="horizontal" >
 
                     <LinearLayout
@@ -241,7 +241,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_1"
                             android:gravity="center"
                             android:text="登记房屋"
                             android:textColor="#999999"
@@ -266,7 +266,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_1"
                             android:gravity="center"
                             android:text="维修服务"
                             android:textColor="#999999"
@@ -291,7 +291,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/base_dimen_30"
+                            android:layout_marginTop="@dimen/base_dimen_1"
                             android:gravity="center"
                             android:text="改造房屋"
                             android:textColor="#999999"

@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/base_dimen_30"
         android:layout_marginTop="@dimen/base_dimen_30"
-        android:text="房主：王安石"
+        android:text=""
         android:textColor="#666666"
         android:textSize="@dimen/base_dimen_32" 
 

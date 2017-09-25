@@ -110,8 +110,8 @@ public class RegisterUserStep3Activity extends BaseActivity{
 					return;
 				}
 				
-				checkUserIdCardValid(mIdCard);
-			
+				//checkUserIdCardValid(mIdCard);
+				registerUserName();
 			}
 		});
 	}

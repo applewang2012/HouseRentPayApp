@@ -65,7 +65,7 @@ public class CommonUtil {
     public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
     public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
-    public static boolean version_test = false;
+    public static boolean version_test = true;
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

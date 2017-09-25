@@ -369,7 +369,7 @@ public class HomeActivity extends BaseActivity {
 					String ret = itemJsonObject.optString("ret");
 					if (ret != null) {
 						if (ret.equals("0")){
-							Toast.makeText(getApplicationContext(), "开锁成功"+itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
+							Toast.makeText(getApplicationContext(), ""+itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
 						}else{
 							Toast.makeText(getApplicationContext(), itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();
 						}
