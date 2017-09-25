@@ -275,10 +275,18 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 			GlobalUtil.shortToast(getApplication(), getString(R.string.new_pwd_not_null),
 					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
+		}else if (psd.length() < 6) {
+			GlobalUtil.shortToast(getApplication(), "密码小于6位，请重新输入",
+					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			return false;
 		}
 		psd2nd = newPassword2nd.getText().toString();
 		if (TextUtils.isEmpty(psd2nd)) {
 			GlobalUtil.shortToast(getApplication(), getString(R.string.new_again_pwd_not_null),
+					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			return false;
+		}else if (psd2nd.length() < 6) {
+			GlobalUtil.shortToast(getApplication(), "确认密码小于6位，请重新输入",
 					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
 		}
