@@ -1,5 +1,7 @@
 package tenant.guardts.house.model;
 
-public class CompleteStatus {
+import java.io.Serializable;
+
+public class CompleteStatus implements Serializable{
 	public String ret;
 }

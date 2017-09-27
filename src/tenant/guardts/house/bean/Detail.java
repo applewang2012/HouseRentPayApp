@@ -1,8 +1,10 @@
 package tenant.guardts.house.bean;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Detail {
+public class Detail implements Serializable{
 	@SerializedName("Fee")
 	public String fee;
 	@SerializedName("Memo")

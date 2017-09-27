@@ -1,6 +1,8 @@
 package tenant.guardts.house.model;
 
-public class RentRecord {
+import java.io.Serializable;
+
+public class RentRecord implements Serializable{
 	public String RRAStartDate;
 	public String RRAEndDate;
 	public String RRentPrice;

@@ -1,6 +1,8 @@
 package tenant.guardts.house.model;
 
-public class ResetStatus {
+import java.io.Serializable;
+
+public class ResetStatus implements Serializable{
 	public String ret;
 	public String msg;
 }
