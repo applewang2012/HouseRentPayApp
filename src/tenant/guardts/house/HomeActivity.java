@@ -1,5 +1,6 @@
 package tenant.guardts.house;
 
+import java.io.File;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -7,6 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushManager;
 
@@ -17,10 +21,15 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,8 +45,10 @@ import tenant.guardts.house.model.MyFragment;
 import tenant.guardts.house.model.OrderFragment;
 import tenant.guardts.house.model.SurroundFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 import tenant.guardts.house.util.ViewUtil;
 
 public class HomeActivity extends BaseActivity {
@@ -48,6 +59,7 @@ public class HomeActivity extends BaseActivity {
 	private String mOpenDoorAction = "http://tempuri.org/OpenDoor";
 	private String mCanOpenDoorAction = "http://tempuri.org/CanOpenDoor";
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
+	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mUserName, mPassword;
 	private HouseFragment mHouseFrament;
 	private MyFragment mMyFragment;
@@ -58,6 +70,13 @@ public class HomeActivity extends BaseActivity {
 	private int mVersionCode = -1;
 	private Bundle bundle;
 	private View mOpenLockLoadingView;
+	private HandlerThread myHandlerThread ;
+	private Handler mSubHandler;
+	private long exitTime;
+	private String mLockNumber;
+	private DetectionAuthentic authentic;
+	private String mFaceCaptureString, mCaptureString;
+	private String file;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +96,7 @@ public class HomeActivity extends BaseActivity {
 		setContentView(R.layout.home_layout);
 		initData();
 		initView();
+		initHandler();
 		mHandler.sendEmptyMessageDelayed(2000, 20);
 	}
 	
@@ -122,6 +142,20 @@ public class HomeActivity extends BaseActivity {
 		initData();
 	}
 
+	
+	
+	private void startIndentifyProcess(){
+		
+		GlobalUtil.longToast(getApplication(),"开锁前需要实名认证，开始拍照！");
+		Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		file = ScreenShotUtil.createScreenshotDirectory(HomeActivity.this);
+		File out = new File(file);
+		Uri uri = Uri.fromFile(out);
+		getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		getPhoto.putExtra("return-data", true);
+		getPhoto.putExtra("camerasensortype", 2); 
+		startActivityForResult(getPhoto, CommonUtil.mIndentifyUserRequestCode);
+	}
 
 
 	private void initView() {
@@ -139,8 +173,14 @@ public class HomeActivity extends BaseActivity {
 					startActivity(new Intent(HomeActivity.this, LoginUserActivity.class));
 					return;
 				}
-				Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
-				startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
+				if (!CommonUtil.mIsForceIdentifyUser){
+					Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
+					startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
+				}else{
+					startIndentifyProcess();
+				}
+				//强制活体
+				
 			}
 		});
 
@@ -355,6 +395,29 @@ public class HomeActivity extends BaseActivity {
 				Toast.makeText(HomeActivity.this, "", Toast.LENGTH_SHORT).show();
 			}else if (msg.what == 2000){
 				checkVersionUpdate();
+			}else if (msg.what == 110){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String compareResult = object.optString("verify_result");
+						String result = object.optString("result");
+						if (result != null && result.equals("0")){
+							if (compareResult != null && compareResult.equals("0")){
+								GlobalUtil.shortToast(getApplication(), CommonUtil.mRegisterRealName + " 身份认证成功 ,您可以扫描开锁入住了！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+								Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
+								startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
+							}else{
+								GlobalUtil.shortToast(getApplication(), CommonUtil.mRegisterRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}else{
+							GlobalUtil.shortToast(getApplication(), CommonUtil.mRegisterRealName + " 身份认证失败，请重试 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						}
+						
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else if (msg.what == 200) {
 				if (msg.obj != null) {
 					parseUpdateVersion((String) msg.obj);
@@ -540,8 +603,7 @@ public class HomeActivity extends BaseActivity {
 		}
 	}
 
-	private long exitTime;
-	private String mLockNumber;
+	
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -581,8 +643,81 @@ public class HomeActivity extends BaseActivity {
 				//canOpenDoorRequest(mLockNumber, CommonUtil.mRegisterIdcard);
 				showOpenDoorAlertDialog(mLockNumber + "");
 			}
-		} 
+		}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mIndentifyUserRequestCode) {
+			 Log.w("mingguo", "activity result  width data   "+data);
+			 mSubHandler.sendEmptyMessage(1000);
+			 startLiveIdentifyActivity();
+		}
 	}
+	
+	private void startLiveIdentifyActivity(){
+		authentic = DetectionAuthentic.getInstance(HomeActivity.this, new ResultListener() {
+
+		@Override
+		public void onSDKUsingFail(String errorMessage, String errorCode) {
+			// TODO Auto-generated method stub
+			GlobalUtil.shortToast(getApplication(), errorMessage, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			
+		}
+		
+		@Override
+		public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
+			if(faceImages == null){
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+		}
+		
+		@Override
+		public void onFaceImageCaptured(byte[] faceImages) {
+			if(faceImages == null){
+				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
+			
+			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
+			identifyUserInfo(mFaceCaptureString, mCaptureString);
+		}
+		});
+	
+		authentic.autenticateToCaptureAction(HomeActivity.this, CommonUtil.mRegisterRealName, CommonUtil.mRegisterIdcard);
+	}
+	
+	private void identifyUserInfo(String faceStr, String screenshotStr){
+		if (faceStr == null || screenshotStr == null){
+			return;
+		}
+		Log.i("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		Log.i("mingguo", "register interface  CommonUtil.mRegisterIdcard  "+CommonUtil.mRegisterIdcard+"  CommonUtil.mRegisterRealName  "+CommonUtil.mRegisterRealName);
+		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
+		rpc.addProperty("idcard", CommonUtil.mRegisterIdcard);
+		rpc.addProperty("name", CommonUtil.mRegisterRealName);
+		rpc.addProperty("base64Str", faceStr);
+		rpc.addProperty("picBase64Str", screenshotStr);
+		mPresenter.readyPresentServiceParams(HomeActivity.this, identifyUrl, mIdentifyAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+		
+	}
+	
+	private void initHandler(){
+    	//创建一个线程,线程名字：handler-thread
+        myHandlerThread = new HandlerThread( "handler-thread") ;
+        myHandlerThread.start();
+        
+        mSubHandler = new Handler(myHandlerThread.getLooper()){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                int degree = BMapUtil.readPictureDegree(file);
+                Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
+   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
+   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
+                
+            }
+        };
+        
+    }
 
 	public void setSelectedCity(String city) {
 		mCity = city;
@@ -621,7 +756,13 @@ public class HomeActivity extends BaseActivity {
 				message.what = 301;
 				message.obj = templateInfo;
 				mHandler.sendMessageDelayed(message, 10);
+			}else if (action.equals(mIdentifyAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 110;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
+			
 		}
 		
 	}

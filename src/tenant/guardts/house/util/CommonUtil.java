@@ -46,6 +46,7 @@ public class CommonUtil {
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
+    public static int mIndentifyUserRequestCode = 10;
     public static final int SELECT_CITY_REQEUST_CODE = 2;
     public static final int MAP_SUGGEST_REQEUST_CODE = 3;
     public static String mPayHouseOrderId = null;
@@ -66,6 +67,7 @@ public class CommonUtil {
     public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
     public static boolean version_test = true;
+    public static boolean mIsForceIdentifyUser = true;
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

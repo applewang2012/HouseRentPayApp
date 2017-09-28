@@ -417,7 +417,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-
 			
 			if (msg.what == 100) {
 				finish();
