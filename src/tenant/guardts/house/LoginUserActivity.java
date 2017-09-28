@@ -74,7 +74,7 @@ public class LoginUserActivity extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidateLoginNameAction));
 		rpc.addProperty("loginName", loginName);
 		mPresenter.readyPresentServiceParams(this, url, mValidateLoginNameAction, rpc);
-		mPresenter.startPresentServiceTask(true);
+		mPresenter.startPresentServiceTask(false);
 
 	}
 
