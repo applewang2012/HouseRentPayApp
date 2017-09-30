@@ -27230,57 +27230,59 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     java.lang.String mSendMessageAction -> g
     java.lang.String mCanRentHouseListAction -> h
     java.lang.String mIdentifyUrl -> i
-    java.lang.String mRandNum -> j
-    java.util.Calendar cal -> k
-    java.text.SimpleDateFormat df -> l
-    android.widget.TextView mStartTime -> m
-    android.widget.TextView mEndTime -> n
-    long mStartTimeClipse -> o
-    long mEndTimeClipse -> p
-    java.lang.String mSetStartData -> q
-    java.lang.String mSetEndData -> r
-    java.lang.String mOriginStartContent -> s
-    java.lang.String mOriginEndContent -> t
-    java.lang.String mIdentifyAction -> u
-    java.lang.String mSendVerifyCodeAction -> v
-    java.lang.String mCheckVerifyCodeAction -> w
-    java.lang.String mHouseNo -> x
-    java.lang.String mUsername -> y
-    java.lang.String[] mOwnerType -> z
-    java.lang.String mOriginTypeText -> A
-    java.lang.String mTypeIndex -> B
-    java.lang.String mOwnerName -> C
-    java.lang.String mOwnerIdcard -> D
-    java.lang.String mOrderId -> E
-    java.lang.String file -> F
-    com.gzt.faceid5sdk.DetectionAuthentic authentic -> G
-    java.lang.String mFaceCaptureString -> H
-    java.lang.String mCaptureString -> I
-    java.lang.String mRealName -> J
-    java.lang.String mIdCard -> K
-    android.os.HandlerThread myHandlerThread -> L
-    android.os.Handler mSubHandler -> M
-    android.widget.TextView commission -> N
-    android.widget.TextView explanation -> O
-    android.widget.EditText password -> P
-    android.widget.LinearLayout mCommissionContent -> Q
-    android.widget.LinearLayout mExplannationContent -> R
-    boolean mShowRentHouseDialog -> S
-    android.app.DatePickerDialog$OnDateSetListener startlistener -> T
-    android.app.TimePickerDialog$OnTimeSetListener starttimeListener -> U
-    android.app.DatePickerDialog$OnDateSetListener endlistener -> V
-    android.app.TimePickerDialog$OnTimeSetListener endtimeListener -> W
-    android.widget.EditText mRentIDcard -> X
-    android.widget.EditText mRentName -> Y
-    android.widget.EditText mRentPrice -> Z
-    android.widget.TextView mRentPhone -> aa
-    android.view.View mQrcodeView -> ab
-    android.widget.TextView mTypeTextView -> ac
-    int mTimeCount -> ad
-    android.widget.TextView mGetVerifyCodeText -> ae
-    android.widget.EditText mVerifyCodeText -> af
-    java.lang.String mVerifyCode -> ag
-    android.os.Handler mHandler -> ah
+    java.lang.String mGetSystemClockAction -> j
+    java.lang.String mRandNum -> k
+    java.util.Calendar cal -> l
+    java.text.SimpleDateFormat df -> m
+    android.widget.TextView mStartTime -> n
+    android.widget.TextView mEndTime -> o
+    long mStartTimeClipse -> p
+    long mEndTimeClipse -> q
+    long mSystemClockTime -> r
+    java.lang.String mSetStartData -> s
+    java.lang.String mSetEndData -> t
+    java.lang.String mOriginStartContent -> u
+    java.lang.String mOriginEndContent -> v
+    java.lang.String mIdentifyAction -> w
+    java.lang.String mSendVerifyCodeAction -> x
+    java.lang.String mCheckVerifyCodeAction -> y
+    java.lang.String mHouseNo -> z
+    java.lang.String mUsername -> A
+    java.lang.String[] mOwnerType -> B
+    java.lang.String mOriginTypeText -> C
+    java.lang.String mTypeIndex -> D
+    java.lang.String mOwnerName -> E
+    java.lang.String mOwnerIdcard -> F
+    java.lang.String mOrderId -> G
+    java.lang.String file -> H
+    com.gzt.faceid5sdk.DetectionAuthentic authentic -> I
+    java.lang.String mFaceCaptureString -> J
+    java.lang.String mCaptureString -> K
+    java.lang.String mRealName -> L
+    java.lang.String mIdCard -> M
+    android.os.HandlerThread myHandlerThread -> N
+    android.os.Handler mSubHandler -> O
+    android.widget.TextView commission -> P
+    android.widget.TextView explanation -> Q
+    android.widget.EditText password -> R
+    android.widget.LinearLayout mCommissionContent -> S
+    android.widget.LinearLayout mExplannationContent -> T
+    boolean mShowRentHouseDialog -> U
+    android.app.DatePickerDialog$OnDateSetListener startlistener -> V
+    android.app.TimePickerDialog$OnTimeSetListener starttimeListener -> W
+    android.app.DatePickerDialog$OnDateSetListener endlistener -> X
+    android.app.TimePickerDialog$OnTimeSetListener endtimeListener -> Y
+    android.widget.EditText mRentIDcard -> Z
+    android.widget.EditText mRentName -> aa
+    android.widget.EditText mRentPrice -> ab
+    android.widget.TextView mRentPhone -> ac
+    android.view.View mQrcodeView -> ad
+    android.widget.TextView mTypeTextView -> ae
+    int mTimeCount -> af
+    android.widget.TextView mGetVerifyCodeText -> ag
+    android.widget.EditText mVerifyCodeText -> ah
+    java.lang.String mVerifyCode -> ai
+    android.os.Handler mHandler -> aj
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void getPayRateDesc(java.lang.String) -> a
@@ -27300,12 +27302,13 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     void initView() -> h
     void startIndentifyProcess() -> i
     void initHandler() -> j
-    boolean checkInputTimeContent() -> k
-    boolean checkInputContent() -> l
-    void startAddRentInfo() -> m
+    void getSystemClock() -> k
+    boolean checkInputTimeContent() -> l
+    boolean checkInputContent() -> m
+    void startAddRentInfo() -> n
     void queryIdentifyStatus(java.lang.String) -> e
-    void sendMessageToFinish() -> n
-    void startLiveIdentifyActivity() -> o
+    void sendMessageToFinish() -> o
+    void startLiveIdentifyActivity() -> p
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     void identifyUserInfo(java.lang.String,java.lang.String) -> d
     void parseQueryStatus(java.lang.String) -> f
@@ -27327,45 +27330,48 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     void access$12(tenant.guardts.house.AddRentAttributeActivity,java.lang.String,java.lang.String) -> a
     java.lang.String[] access$13(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> b
     void access$14(tenant.guardts.house.AddRentAttributeActivity,java.lang.String[]) -> a
-    java.lang.String access$15(tenant.guardts.house.AddRentAttributeActivity) -> l
-    void access$16(tenant.guardts.house.AddRentAttributeActivity) -> m
-    android.widget.LinearLayout access$17(tenant.guardts.house.AddRentAttributeActivity) -> n
-    android.widget.LinearLayout access$18(tenant.guardts.house.AddRentAttributeActivity) -> o
-    android.widget.TextView access$19(tenant.guardts.house.AddRentAttributeActivity) -> p
-    android.widget.TextView access$20(tenant.guardts.house.AddRentAttributeActivity) -> q
-    void access$21(tenant.guardts.house.AddRentAttributeActivity) -> r
-    int access$22(tenant.guardts.house.AddRentAttributeActivity) -> s
-    android.widget.TextView access$23(tenant.guardts.house.AddRentAttributeActivity) -> t
-    void access$24(tenant.guardts.house.AddRentAttributeActivity,int) -> a
-    android.os.Handler access$25(tenant.guardts.house.AddRentAttributeActivity) -> u
-    void access$26(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> c
-    java.lang.String access$27(tenant.guardts.house.AddRentAttributeActivity) -> v
-    void access$28(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> d
-    void access$29(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> e
-    android.widget.TextView access$30(tenant.guardts.house.AddRentAttributeActivity) -> w
-    java.lang.String access$31(tenant.guardts.house.AddRentAttributeActivity) -> x
-    java.lang.String access$32(tenant.guardts.house.AddRentAttributeActivity) -> y
-    android.widget.TextView access$33(tenant.guardts.house.AddRentAttributeActivity) -> z
-    java.lang.String access$34(tenant.guardts.house.AddRentAttributeActivity) -> A
-    java.lang.String access$35(tenant.guardts.house.AddRentAttributeActivity) -> B
-    android.widget.TextView access$36(tenant.guardts.house.AddRentAttributeActivity) -> C
-    java.lang.String[] access$37(tenant.guardts.house.AddRentAttributeActivity) -> D
-    void access$38(tenant.guardts.house.AddRentAttributeActivity,android.widget.TextView,java.lang.String[]) -> a
-    void access$39(tenant.guardts.house.AddRentAttributeActivity) -> E
-    void access$40(tenant.guardts.house.AddRentAttributeActivity) -> F
-    void access$41(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> f
-    void access$42(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> g
-    boolean access$43(tenant.guardts.house.AddRentAttributeActivity) -> G
-    void access$44(tenant.guardts.house.AddRentAttributeActivity,boolean) -> a
-    java.lang.String access$45(tenant.guardts.house.AddRentAttributeActivity) -> H
-    void access$46(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> h
-    boolean access$47(tenant.guardts.house.AddRentAttributeActivity) -> I
+    void access$15(tenant.guardts.house.AddRentAttributeActivity,long) -> a
+    long access$16(tenant.guardts.house.AddRentAttributeActivity) -> l
+    java.lang.String access$17(tenant.guardts.house.AddRentAttributeActivity) -> m
+    void access$18(tenant.guardts.house.AddRentAttributeActivity) -> n
+    android.widget.LinearLayout access$19(tenant.guardts.house.AddRentAttributeActivity) -> o
+    android.widget.LinearLayout access$20(tenant.guardts.house.AddRentAttributeActivity) -> p
+    android.widget.TextView access$21(tenant.guardts.house.AddRentAttributeActivity) -> q
+    android.widget.TextView access$22(tenant.guardts.house.AddRentAttributeActivity) -> r
+    void access$23(tenant.guardts.house.AddRentAttributeActivity) -> s
+    int access$24(tenant.guardts.house.AddRentAttributeActivity) -> t
+    android.widget.TextView access$25(tenant.guardts.house.AddRentAttributeActivity) -> u
+    void access$26(tenant.guardts.house.AddRentAttributeActivity,int) -> a
+    android.os.Handler access$27(tenant.guardts.house.AddRentAttributeActivity) -> v
+    void access$28(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> c
+    java.lang.String access$29(tenant.guardts.house.AddRentAttributeActivity) -> w
+    void access$30(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> d
+    void access$31(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> e
+    android.widget.TextView access$32(tenant.guardts.house.AddRentAttributeActivity) -> x
+    java.lang.String access$33(tenant.guardts.house.AddRentAttributeActivity) -> y
+    java.lang.String access$34(tenant.guardts.house.AddRentAttributeActivity) -> z
+    android.widget.TextView access$35(tenant.guardts.house.AddRentAttributeActivity) -> A
+    java.lang.String access$36(tenant.guardts.house.AddRentAttributeActivity) -> B
+    java.lang.String access$37(tenant.guardts.house.AddRentAttributeActivity) -> C
+    android.widget.TextView access$38(tenant.guardts.house.AddRentAttributeActivity) -> D
+    java.lang.String[] access$39(tenant.guardts.house.AddRentAttributeActivity) -> E
+    void access$40(tenant.guardts.house.AddRentAttributeActivity,android.widget.TextView,java.lang.String[]) -> a
+    void access$41(tenant.guardts.house.AddRentAttributeActivity) -> F
+    void access$42(tenant.guardts.house.AddRentAttributeActivity) -> G
+    void access$43(tenant.guardts.house.AddRentAttributeActivity) -> H
+    void access$44(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> f
+    void access$45(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> g
+    boolean access$46(tenant.guardts.house.AddRentAttributeActivity) -> I
+    void access$47(tenant.guardts.house.AddRentAttributeActivity,boolean) -> a
     java.lang.String access$48(tenant.guardts.house.AddRentAttributeActivity) -> J
-    void access$49(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> i
-    void access$50(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> j
-    java.lang.String access$51(tenant.guardts.house.AddRentAttributeActivity) -> K
-    java.lang.String access$52(tenant.guardts.house.AddRentAttributeActivity) -> L
-    void access$53(tenant.guardts.house.AddRentAttributeActivity,java.lang.String,java.lang.String) -> b
+    void access$49(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> h
+    boolean access$50(tenant.guardts.house.AddRentAttributeActivity) -> K
+    java.lang.String access$51(tenant.guardts.house.AddRentAttributeActivity) -> L
+    void access$52(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> i
+    void access$53(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> j
+    java.lang.String access$54(tenant.guardts.house.AddRentAttributeActivity) -> M
+    java.lang.String access$55(tenant.guardts.house.AddRentAttributeActivity) -> N
+    void access$56(tenant.guardts.house.AddRentAttributeActivity,java.lang.String,java.lang.String) -> b
 tenant.guardts.house.AddRentAttributeActivity$1 -> tenant.guardts.house.s:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
@@ -33726,6 +33732,7 @@ tenant.guardts.house.util.UtilTool -> tenant.guardts.house.util.k:
     java.lang.String stampToDate(java.lang.String) -> c
     java.lang.String stampToNormalDate(java.lang.String) -> d
     java.lang.String stampToDateTime(java.lang.String) -> e
+    long DateTimeToStamp(java.lang.String) -> f
     java.lang.String generateOrderNo() -> a
 tenant.guardts.house.util.ViewUtil -> tenant.guardts.house.util.l:
     android.view.View mLoadingView -> a

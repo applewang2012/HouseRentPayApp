@@ -71,7 +71,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 	private void initView() {
 		mListView = (ListView) findViewById(R.id.transaction_listview);
 		//無交易信息时显示空
-		mListView.setEmptyView(findViewById(R.id.transaction_detail_empty_layout));
+		
 	}
 
 	private Handler mHandler = new Handler() {
@@ -84,7 +84,9 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 				Gson gson = new Gson();
 				ArrayList<Detail> result = gson.fromJson(value, new TypeToken<ArrayList<Detail>>() {
 				}.getType());
-		
+				if (result != null && result.size() == 0){
+					mListView.setEmptyView(findViewById(R.id.transaction_detail_empty_layout));
+				}
 				mListView.setAdapter(new TransactionDetailAdapter(TransactionDetailActivity.this,result));
 
 			}

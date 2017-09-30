@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="暂无租房历史"
+        android:text="暂无订单"
         android:textColor="#888888"
         android:textSize="@dimen/base_dimen_30"
         android:visibility="invisible" />

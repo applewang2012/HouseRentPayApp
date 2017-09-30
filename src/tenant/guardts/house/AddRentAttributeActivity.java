@@ -69,6 +69,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mSendMessageAction = "http://tempuri.org/SendMessageToPlice";
 	private String mCanRentHouseListAction = "http://tempuri.org/CanRentTheHouse";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
+	private String mGetSystemClockAction = "http://tempuri.org/GetSystemClock";
 	private String mRandNum = null;
 	//	private Map<String, String> mSelectedMap = new HashMap<>();
 //	private Map<String, String> mOriginText = new HashMap<>();
@@ -76,7 +77,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private Calendar cal = Calendar.getInstance();
 	private SimpleDateFormat df;
 	private TextView mStartTime, mEndTime;
-	private long mStartTimeClipse, mEndTimeClipse;
+	private long mStartTimeClipse, mEndTimeClipse, mSystemClockTime;
 	private String mSetStartData, mSetEndData;
 	private String mOriginStartContent, mOriginEndContent;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
@@ -369,6 +370,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mSetEndData = df.format(cal.getTime());
 		mEndTime.setText(mOriginEndContent + df.format(cal.getTime())); 
 		mEndTimeClipse = cal.getTimeInMillis();
+		Log.i("mingguo", "update end time data  "+mEndTimeClipse);
 	}
 	
 	private void initView(){
@@ -424,6 +426,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					return;
 				}
 				getEndDateAndTime();
+				getSystemClock();
 			}
 		});
 		
@@ -554,7 +557,16 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
         
     }
 	
+	private void getSystemClock(){
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetSystemClock";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetSystemClockAction));
+		//rpc.addProperty("id", orderId);
+		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetSystemClockAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+	
 	private boolean checkInputTimeContent(){
+		
 		if (mTypeIndex == null || mTypeIndex.equals("")){
 			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
 			return false;
@@ -573,10 +585,20 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "租房起止时间选择有误！", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+		
 		return true;
 	}
 	
 	private boolean checkInputContent(){
+		
+		if (!checkInputTimeContent()){
+			return false;
+		}
+		Log.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
+//		if (mEndTimeClipse + 200000 < mSystemClockTime){
+//			Toast.makeText(getApplicationContext(), "租房截止时间选择有误！", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}
 		
 		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
@@ -851,6 +873,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}catch (JSONException e) {
 					e.printStackTrace();
 				}
+			}else if (msg.what ==106){
+				mSystemClockTime = UtilTool.DateTimeToStamp((String)msg.obj);
+				Log.i("mingguo", "date to string  system clock  "+mSystemClockTime);
 			}else if (msg.what == 110){
 				
 				try {
@@ -1104,6 +1129,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				Message message = mHandler.obtainMessage();
 				message.what = 105;
 				//message.obj = templateInfo.replace("\\", "");
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			}else if (action.equals(mGetSystemClockAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 106;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}

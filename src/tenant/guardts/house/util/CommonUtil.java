@@ -67,7 +67,7 @@ public class CommonUtil {
     public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
     public static boolean version_test = true;
-    public static boolean mIsForceIdentifyUser = true;
+    public static boolean mIsForceIdentifyUser = false;
     public static boolean mIsFreshWallet = false;
     
     public static  String ORDER_TIME = null;

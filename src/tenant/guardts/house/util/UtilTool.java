@@ -3,6 +3,8 @@ package tenant.guardts.house.util;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -148,6 +150,20 @@ public class UtilTool {
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
         return res;
+    }
+    
+    public static long DateTimeToStamp(String time){
+    	SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+        Date date;
+		try {
+			date = format.parse(time);
+			return date.getTime();  
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        return 0;
+       
     }
     
     public static String generateOrderNo(){
