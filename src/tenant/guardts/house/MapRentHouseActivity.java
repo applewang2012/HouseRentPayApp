@@ -2,8 +2,11 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,12 +53,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -409,49 +416,41 @@ public class MapRentHouseActivity extends BaseActivity
 		return -1;
 	}
 
+	/**
+	 * 获取相同经纬度的房屋集合并设置overlay
+	 */
 	public void initOverlay() {
-		ArrayList<ArrayList<Map<String, String>>> all=new ArrayList<>();
-		ArrayList<Map<String, String>> list = null;
-		ArrayList<Integer> markList = new ArrayList<>();
-		for (int i = 0; i < mHouserList.size()-1; i++) {
-			Map<String, String> child = (Map<String, String>) mHouserList.get(i);
-			list = new ArrayList<>();
-			
-			if (!markList.contains(i)){
-				list.add(child);
-				markList.add(i);
-			}else{
-				continue;
-			}
-			
-			for (int j = i+1; j < mHouserList.size(); j++) {
-				Map<String, String> child2 = (Map<String, String>) mHouserList.get(j);
-				
-					if (child.get("Latitude").equals(child2.get("Latitude"))
-							&& child.get("Longitude").equals(child2.get("Longitude"))) {
-						//if (j == 1){
-						//	markList.add(i);
-						//}
-						if (!markList.contains(i)){
-							list.add(child2);
-							markList.add(i);
-						}
-					
-				}
-			}
-			all.add(list);
+		//key：经纬度   value:相对应的集合
+		HashMap <String,ArrayList<Map<String, String>>> all=new HashMap<String,ArrayList<Map<String, String>>>();
+		for(Map<String, String> child : mHouserList){
+			ArrayList<Map<String, String>> list=new ArrayList<>();
+			all.put(child.get("Latitude")+"-"+child.get("Longitude"), list);
 		}
-		if(all!=null){
-			Log.e("", all.size()+ "========");
-		}
-		if (list != null) {
-			for (int i = 0; i < all.size(); i++) {
-				for(int j=0;j<all.get(i).size();j++){
-					
-					Log.e("",  all.get(i).get(j).get("Latitude")+ "=="+all.get(i).get(j).get("RAddress")+"=="+all.get(i).get(j).get("Longitude"));
+		
+		
+		
+		for(Map<String, String> child : mHouserList){
+			for(String keyname:all.keySet()){
+				if((child.get("Latitude")+"-"+child.get("Longitude")).equals(keyname)){
+					all.get(keyname).add(child);
 				}
 			}
 		}
+		
+		Iterator<Entry<String, ArrayList<Map<String, String>>>> iterator = all.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry entry = (Map.Entry) iterator.next();
+			Log.e("", entry.getValue()+"===");
+			//获得key
+			String key=(String) entry.getKey();
+			String[] split = key.split("-");
+			LatLng llA = new LatLng(Double.parseDouble(split[0]),
+					Double.parseDouble(split[1]));
+			MarkerOptions options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
+			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
+		}
+			
+
 
 		if (mHouserList.size() == 0) {
 			GlobalUtil.shortToast(mContext, "抱歉，该位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -459,25 +458,7 @@ public class MapRentHouseActivity extends BaseActivity
 		}
 		GlobalUtil.shortToast(mContext, "共搜索到 " + mHouserList.size() + " 套房源！",
 				getResources().getDrawable(R.drawable.ic_dialog_no));
-		for (int index = 0; index < mHouserList.size(); index++) {
-			Map<String, String> child = (Map<String, String>) mHouserList.get(index);
-			LatLng llA = new LatLng(Double.parseDouble(child.get("Latitude")),
-					Double.parseDouble(child.get("Longitude")));
-			// LatLng llA = new LatLng(mLati, mLongi+0.0008);
-			MarkerOptions options = null;
-			String status = child.get("Status");
-			if (status != null && status.equals("0")) {
-				options = new MarkerOptions().position(llA).icon(icon_blue).zIndex(9).draggable(false);
-			} else if (status != null && status.equals("1")) {
-				options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
-			} else if (status != null && status.equals("2")) {
-				options = new MarkerOptions().position(llA).icon(icon_yellow).zIndex(9).draggable(false);
-
-			} else {
-				options = new MarkerOptions().position(llA).icon(icon_blue).zIndex(9).draggable(false);
-			}
-			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
-		}
+		
 
 	}
 
@@ -545,6 +526,34 @@ public class MapRentHouseActivity extends BaseActivity
 			return true;
 		}
 	}
+	/**
+	 * 设置背景透明度
+	 * 
+	 * @param alpha
+	 */
+	public void setBackgroundAlpha(float alpha) {
+		WindowManager.LayoutParams params = getWindow().getAttributes();
+		params.alpha = alpha;
+		getWindow().setAttributes(params);
+	}
+//	private void initPopupWindow(){
+//		setBackgroundAlpha(0.2f);
+//		view = View.inflate(this, R.layout.popupwindow_contact_owner, null);
+//		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//		popupWindow.setFocusable(true);
+//		if (title != null && phone != null) {
+//			
+//		}
+//		popupWindow.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+//		popupWindow.setOnDismissListener(new OnDismissListener() {
+//
+//			@Override
+//			public void onDismiss() {
+//				setBackgroundAlpha(1f);
+//
+//			}
+//		});
+//	}
 
 	private void parseLocationInfo(String value) {
 		mHouserList = new ArrayList<>();
