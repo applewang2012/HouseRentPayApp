@@ -13,7 +13,7 @@
             android:layout_marginTop="@dimen/base_dimen_26"
             android:text="付款成功"
             android:textColor="#000000"
-            android:textStyle="bold"
+            
             android:gravity="center_vertical"
             android:textSize="@dimen/base_dimen_36" />
     

@@ -95,7 +95,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mGetBillLog)) {
 				Message msg = mHandler.obtainMessage();

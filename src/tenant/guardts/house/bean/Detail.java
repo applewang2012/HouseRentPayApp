@@ -15,5 +15,8 @@ public class Detail implements Serializable{
 	public String payType;
 	@SerializedName("PayDate")
 	public String payDate;
-	
+	@SerializedName("PayFrom")
+	public String payFrom;
+	@SerializedName("PayTo")
+	public String payTo;
 }

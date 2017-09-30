@@ -139,7 +139,10 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
-						if (mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")
+						if (mHouseInfo == null){
+							return;
+						}
+						if (mHouseInfo != null && mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")
 								&& mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")
 								&& mHouseInfo.getHouseOwnerName() != null
 								&& !mHouseInfo.getHouseOwnerName().equals("")) {

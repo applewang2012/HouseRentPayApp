@@ -43,7 +43,7 @@ public class HouseHistoryActivity extends BaseActivity
 	private LinearLayout mContentLayout;
 	private TextView mNoContent;
 	private String mUserName = null;
-	private String mRentHistoryAction = "http://tempuri.org/GetRentOwnerHistory";
+	private String mRentListAction = "http://tempuri.org/GetRentList";
 	private String mDeleteHouseInfo="http://tempuri.org/DeleteHouseInfo";
 	private String mIdCard;
 
@@ -89,10 +89,10 @@ public class HouseHistoryActivity extends BaseActivity
 	}
 
 	private void getHouseHistoryData(String idcard) {
-		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentOwnerHistory";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
-		rpc.addProperty("idCard", idcard);
-		mPresent.readyPresentServiceParams(this, url, mRentHistoryAction, rpc);
+		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentList";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentListAction));
+		rpc.addProperty("idcard", idcard);
+		mPresent.readyPresentServiceParams(this, url, mRentListAction, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
 	private void setDeleteHouseInfo(String rentNO) {
@@ -117,12 +117,11 @@ public class HouseHistoryActivity extends BaseActivity
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel infoModel = new HouseInfoModel();
 					infoModel.setHouseAddress(itemJsonObject.optString("RAddress"));
-					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseCurrentFloor(itemJsonObject.optString("RFloor"));
 					infoModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
-					infoModel.setHouseType(itemJsonObject.optString("RoomTypeDesc"));
+					infoModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
 					infoModel.setHouseDirection(itemJsonObject.optString("RoomDirectoryDesc"));
 					boolean isSameHouse = false;
 					for (int i = 0; i < mHouseInfoList.size(); i++) {
@@ -189,7 +188,7 @@ public class HouseHistoryActivity extends BaseActivity
 		super.onStatusSuccess(action, templateInfo);
 		Log.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
-			if (action.equals(mRentHistoryAction)) {
+			if (action.equals(mRentListAction)) {
 				Message msg = mHandler.obtainMessage();
 				msg.what = 100;
 				msg.obj = templateInfo;

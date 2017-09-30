@@ -50,7 +50,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 	private String mUpdateOrderAction =  "http://tempuri.org/UpdateOrderInfo";
 	private String mDepositWalletAction = "http://tempuri.org/DepositWallet";
 	private String mAddBillLogAction = "http://tempuri.org/AddBillLog";
-	
+	private String mUpdateWalletction = "http://tempuri.org/UpdateUserWallet";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
 					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 				}else{
-					depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
+					//depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
+					updateWalletRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.ORDER_MONKEY);
 				}
 			}
 		});
@@ -127,16 +128,30 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		mPresenter.startPresentServiceTask(true);
 	}
     
-    private void addBillLogRequestInfo(String fee){
+    private void addBillLogRequestInfo(String renterId, String ownerId, String fee, String type){
     	if (fee == null || fee.equals("")){
     		return;
     	}
 		String url = CommonUtil.mUserHost+"Services.asmx?op=AddBillLog";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddBillLogAction));
-		rpc.addProperty("renteeIDCard", CommonUtil.mRegisterIdcard);
-		rpc.addProperty("ownerIDCard", CommonUtil.OWNER_IDCARD);
+		rpc.addProperty("renteeIDCard", renterId);
+		rpc.addProperty("ownerIDCard", ownerId);
 		rpc.addProperty("fee", fee);
+		rpc.addProperty("type", type);
 		mPresenter.readyPresentServiceParams(this, url, mAddBillLogAction, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+    
+    private void updateWalletRequestInfo(String idcard, String fee){
+    	if (fee == null || fee.equals("")){
+    		return;
+    	}
+		String url = CommonUtil.mUserHost+"Services.asmx?op=UpdateUserWallet";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateWalletction));
+		rpc.addProperty("idCard", idcard);
+		rpc.addProperty("fee", fee);
+		rpc.addProperty("type", "0");  //0增加，1减少
+		mPresenter.readyPresentServiceParams(this, url, mUpdateWalletction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
     
@@ -210,9 +225,37 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 			super.handleMessage(msg);
 			
 			if (msg.what == 100){
-				updateOrderInfo(CommonUtil.mPayHouseOrderId);
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								updateOrderInfo(CommonUtil.mPayHouseOrderId);
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，完成订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}else if (msg.what == 101){
-				addBillLogRequestInfo(CommonUtil.ORDER_MONKEY);
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+									updateWalletRequestInfo(CommonUtil.OWNER_IDCARD, CommonUtil.ORDER_MONKEY);
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}else if (msg.what == 102){
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
@@ -235,6 +278,26 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					e.printStackTrace();
 				}
 			}else if (msg.what == 103){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					if (object != null){
+						String ret = object.optString("ret");
+						if (ret != null){
+							if (ret.equals("0")){
+								if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
+									addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, CommonUtil.ORDER_MONKEY, "0"); //0微信，1钱包
+								}else{
+									addBillLogRequestInfo("", CommonUtil.mRegisterIdcard, CommonUtil.ORDER_MONKEY, "0"); //0微信，1钱包
+								}
+							}else{
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							}
+						}
+					}
+				}catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}else if (msg.what == 104){
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -292,6 +355,11 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 				msg.obj = templateInfo;
 				mHandler.sendMessage(msg);
 			}else if (action.equals(mAddBillLogAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 104;
+				msg.obj = templateInfo;
+				mHandler.sendMessage(msg);
+			}else if (action.equals(mUpdateWalletction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 103;
 				msg.obj = templateInfo;

@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/id_house_status"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/base_dimen_44"
+        android:layout_height="@dimen/base_dimen_50"
         android:layout_marginLeft="@dimen/base_dimen_32"
         android:layout_marginTop="@dimen/base_dimen_30"
         android:text="房屋信息"

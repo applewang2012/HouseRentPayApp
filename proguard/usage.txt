@@ -4941,10 +4941,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     private java.lang.String mOwnerName
     private java.lang.String mOwnerIdcard
 tenant.guardts.house.HomeActivity:
-    298:304:private void canOpenDoorRequest(java.lang.String,java.lang.String)
-    528:539:private java.lang.String getUserIdNo(java.lang.String)
-    588:589:public void setSelectedCity(java.lang.String)
-    592:592:public java.lang.String getSelectedCity()
+    591:602:private java.lang.String getUserIdNo(java.lang.String)
+    723:724:public void setSelectedCity(java.lang.String)
+    727:727:public java.lang.String getSelectedCity()
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -4969,7 +4968,7 @@ tenant.guardts.house.HouseHistoryActivity:
     private android.widget.LinearLayout mContentLayout
     private android.widget.TextView mNoContent
     99:104:private void setDeleteHouseInfo(java.lang.String)
-    256:271:private void initDialog(android.view.View,int)
+    255:270:private void initDialog(android.view.View,int)
 tenant.guardts.house.HouseHistoryActivity$3
 tenant.guardts.house.LocationDemo:
     com.baidu.mapapi.map.BitmapDescriptor mCurrentMarker
@@ -4988,10 +4987,15 @@ tenant.guardts.house.MapRentHouseActivity:
     android.widget.Button requestLocButton
     private android.widget.TextView mTitleBar
     private java.util.ArrayList suggest
+    538:543:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    547:556:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
+    672:675:public void setBackgroundAlpha(float)
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner:
-    586:586:public void onReceivePoi(com.baidu.location.BDLocation)
+    773:773:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.MapSuggestSearchActivity:
     134:137:protected boolean hasData(java.lang.String)
+tenant.guardts.house.PaymentStatusActivity:
+    114:124:private void updateWalletRequestInfo(java.lang.String,java.lang.String)
 tenant.guardts.house.R:
     10:10:public R()
 tenant.guardts.house.RegisterUserActivity:
@@ -5003,8 +5007,6 @@ tenant.guardts.house.RegisterUserActivity$10
 tenant.guardts.house.RegisterUserFinishActivity:
     private java.lang.String mPasswordIndentify
     private boolean mUsernameValid
-tenant.guardts.house.RegisterUserStep3Activity:
-    120:125:private void checkUserIdCardValid(java.lang.String)
 tenant.guardts.house.RentToHouseActivity:
     226:231:private void deleteHouseInfo(java.lang.String)
 tenant.guardts.house.ResetActivity:
@@ -5486,12 +5488,12 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String URL_MORE_CONTENT
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
     24:24:public CommonUtil()
-    77:78:public static void setCanvas(android.graphics.Canvas)
-    141:144:public static void uninstallApk(android.content.Context,java.lang.String)
-    158:158:private static double Rad(double)
-    169:178:public static double GetDistance(double,double,double,double)
-    182:203:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    208:231:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    80:81:public static void setCanvas(android.graphics.Canvas)
+    144:147:public static void uninstallApk(android.content.Context,java.lang.String)
+    161:161:private static double Rad(double)
+    172:181:public static double GetDistance(double,double,double,double)
+    185:206:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    211:234:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)
@@ -5577,6 +5579,7 @@ tenant.guardts.house.wxapi.WXPayEntryActivity:
     private static final java.lang.String TAG
     private android.view.View mSuccessFrameLayout
     private android.view.View mFailedFrameLayout
+    120:129:private void depositWalletRequestInfo(java.lang.String)
 tenant.guardts.house.wxpay.HttpClientUtil:
     public static final java.lang.String SunX509
     public static final java.lang.String JKS

@@ -69,7 +69,7 @@ public class PublishedRecordAdapter extends BaseAdapter implements OnClickListen
 		holder.history.setTag(position);
 		holder.title.setText(list.get(position).getHouseAddress());
 		holder.type.setText(list.get(position).getHouseType());
-		holder.direction.setText(list.get(position).getHouseDirection());
+		holder.direction.setText(list.get(position).getHouseArea()+" 平米");
 		holder.floor.setText(
 				list.get(position).getHouseCurrentFloor() + "/" + list.get(position).getHouseTotalFloor() + "层");
 		return convertView;

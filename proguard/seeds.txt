@@ -24179,6 +24179,8 @@ tenant.guardts.house.bean.Detail: java.lang.String memo
 tenant.guardts.house.bean.Detail: java.lang.String billDesc
 tenant.guardts.house.bean.Detail: java.lang.String payType
 tenant.guardts.house.bean.Detail: java.lang.String payDate
+tenant.guardts.house.bean.Detail: java.lang.String payFrom
+tenant.guardts.house.bean.Detail: java.lang.String payTo
 tenant.guardts.house.decoding.CaptureActivityHandler$State
 tenant.guardts.house.decoding.CaptureActivityHandler$State: tenant.guardts.house.decoding.CaptureActivityHandler$State[] values()
 tenant.guardts.house.decoding.CaptureActivityHandler$State: tenant.guardts.house.decoding.CaptureActivityHandler$State valueOf(java.lang.String)

@@ -68,6 +68,7 @@ public class CommonUtil {
     
     public static boolean version_test = true;
     public static boolean mIsForceIdentifyUser = true;
+    public static boolean mIsFreshWallet = false;
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

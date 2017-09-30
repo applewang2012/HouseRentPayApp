@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.google.gson.Gson;
+import com.tencent.android.tpush.service.channel.exception.CommandMappingException;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	private String mAddBillLog="http://tempuri.org/AddBillLog";
 	private String mCompleteRentAttribute = "http://tempuri.org/CompleteRentAttribute";
 	private HoursePresenter mPresenter;
+	private String mUpdateWalletction = "http://tempuri.org/UpdateUserWallet";
 	
 	private String rentNO;
 	private String orderCreatedDate;
@@ -84,13 +86,40 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		}
 	}
 	
-	private void addBillLog(String rentIDCard,String ownerIDCard,String fee){
-		String url = CommonUtil.mUserHost + "Services.asmx?op=AddBillLog";
+//	private void addBillLog(String rentIDCard,String ownerIDCard,String fee){
+//		String url = CommonUtil.mUserHost + "Services.asmx?op=AddBillLog";
+//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddBillLog));
+//		rpc.addProperty("renteeIDCard", rentIDCard);
+//		rpc.addProperty("ownerIDCard", ownerIDCard);
+//		rpc.addProperty("fee", fee);
+//		mPresenter.readyPresentServiceParams(this, url, mAddBillLog, rpc);
+//		mPresenter.startPresentServiceTask(true);
+//	}
+	
+	private void addBillLogRequestInfo(String renterId, String ownerId, String fee, String type){
+    	if (fee == null || fee.equals("")){
+    		return;
+    	}
+		String url = CommonUtil.mUserHost+"Services.asmx?op=AddBillLog";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddBillLog));
-		rpc.addProperty("renteeIDCard", rentIDCard);
-		rpc.addProperty("ownerIDCard", ownerIDCard);
+		rpc.addProperty("renteeIDCard", renterId);
+		rpc.addProperty("ownerIDCard", ownerId);
 		rpc.addProperty("fee", fee);
+		rpc.addProperty("type", type);  //0微信，1钱包
 		mPresenter.readyPresentServiceParams(this, url, mAddBillLog, rpc);
+		mPresenter.startPresentServiceTask(true);
+	}
+	
+	private void updateWalletRequestInfo(String idcard, String fee){
+    	if (fee == null || fee.equals("")){
+    		return;
+    	}
+		String url = CommonUtil.mUserHost+"Services.asmx?op=UpdateUserWallet";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateWalletction));
+		rpc.addProperty("idCard", idcard);
+		rpc.addProperty("fee", fee);
+		rpc.addProperty("type", "0");  //0增加，1减少
+		mPresenter.readyPresentServiceParams(this, url, mUpdateWalletction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
 	
@@ -123,8 +152,8 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 					int ret = Integer.parseInt(completeStatus.ret);
 					if (ret == 0) {
 						if(!TextUtils.isEmpty(CommonUtil.OWNER_IDCARD)&&!TextUtils.isEmpty(CommonUtil.mRegisterIdcard)&&!TextUtils.isEmpty(price))
-						//////////////
-						addBillLog(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price);
+						//updateWalletRequestInfo(CommonUtil.OWNER_IDCARD, CommonUtil.ORDER_MONKEY);
+						addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price, "1");
 					} else {
 						Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
 					}
@@ -132,7 +161,9 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 					e.printStackTrace();
 				}
 				
-			}else if(msg.what == 100){
+			}else if (msg.what == 819){
+				addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price, "1");
+		}else if(msg.what == 100){
 				try {
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
@@ -177,6 +208,11 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 				Log.e("", action + "======" + templateInfo);
 				Message msg = mHandler.obtainMessage();
 				msg.what = 100;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if (action.equals(mUpdateWalletction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 819;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}

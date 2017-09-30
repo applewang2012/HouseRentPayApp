@@ -16,6 +16,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.location.a.k;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
@@ -91,6 +92,7 @@ public class MapRentHouseActivity extends BaseActivity
 	boolean isFirstLoc = true; // 是否首次定位
 	private HoursePresenter mPresenter;
 	private ArrayList<Map<String, String>> mHouserList;
+	private HashMap <String,ArrayList<Map<String, String>>> mLocationMap;
 	// 初始化全局 bitmap 信息，不用时及时 recycle
 	BitmapDescriptor icon_blue = BitmapDescriptorFactory.fromResource(R.drawable.blue);
 	BitmapDescriptor icon_red = BitmapDescriptorFactory.fromResource(R.drawable.red);
@@ -250,89 +252,95 @@ public class MapRentHouseActivity extends BaseActivity
 
 			public boolean onMarkerClick(final Marker marker) {
 
-				final int index = getCurrentMarkerIndex(marker);
-				if (index == -1) {
-					return true;
-				}
-				View detailView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_layout, null);
-				TextView contact = (TextView) detailView.findViewById(R.id.id_house_contacts);
-				TextView location = (TextView) detailView.findViewById(R.id.id_house_location);
-				TextView status = (TextView) detailView.findViewById(R.id.id_house_status);
-				TextView direction = (TextView) detailView.findViewById(R.id.id_house_direction);
-				TextView floor = (TextView) detailView.findViewById(R.id.id_house_floor);
-				// TextView checkoutTime =
-				// (TextView)detailView.findViewById(R.id.id_house_check_out_time);
-				TextView area = (TextView) detailView.findViewById(R.id.id_house_area);
-				TextView owner = (TextView) detailView.findViewById(R.id.id_house_owner);
-
-				// Button button = new Button(mContext);
-				// button.setBackgroundResource(R.drawable.popup);
-				// button.setTextColor(Color.parseColor("#000000"));
-				// OnInfoWindowClickListener listener = null;
-				// desp.setText(mHouserList.get(index).get("rroomtypedesc")+" |
-				// "+mHouserList.get(index).get("rrentarea")+"平米 | "+
-				// mHouserList.get(index).get("RPropertyDesc") +" |
-				// "+mHouserList.get(index).get("rdirectiondesc"));
-				// location.setText("地址:"+mHouserList.get(index).get("RAddress"));
-				// Log.i("mingguo", "index "+index+" owner
-				// "+mHouserList.get(index).get("ROwner"));
-				// contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
-				// "电话："+mHouserList.get(index).get("ROwnerTel"));
-				LatLng ll = marker.getPosition();
-				String phone = mHouserList.get(index).get("ROwnerTel");
-				String ownerName = mHouserList.get(index).get("ROwner");
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-					if (phone.length() > 5) {
-						contact.setText("电话：" + phone.substring(0, 3) + "********");
-					}
-					if (ownerName.length() > 1) {
-						owner.setText("房主：" + ownerName.substring(0, 1) + "**");
-					}
-				} else {
-					contact.setText("电话：" + phone);
-				}
-				location.setText(mHouserList.get(index).get("RAddress"));
-				// status.setText(mHouserList.get(index).get("Status"));
-				direction.setText(mHouserList.get(index).get("rroomtypedesc"));
-				floor.setText(
-						mHouserList.get(index).get("rFloor") + "/" + mHouserList.get(index).get("rtotalfloor") + "层");
-				// checkoutTime.setText(mHouserList.get(index).get("rroomtypedesc"));
-				area.setText(mHouserList.get(index).get("rrentarea") + "平米");
-
-				mInfoWindow = new InfoWindow(detailView, ll, -47);
-				mBaiduMap.showInfoWindow(mInfoWindow);
-
-				Button showView = (Button) detailView.findViewById(R.id.id_house_detail_show);
-				showView.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-						loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
-						loadIntent.putExtra("tab_name", "全景图");
-						startActivity(loadIntent);
-					}
-				});
-				Button houseSearch = (Button) detailView.findViewById(R.id.id_house_detail_search);
-				houseSearch.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-							Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-							Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
-							loginIntent.putExtra("intent_status", true);
-							startActivity(loginIntent);
-						} else {
-							if (mHouserList.get(index).get("rentno") != null
-									&& !mHouserList.get(index).get("rentno").equals("")) {
-								Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
-								detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
-								startActivity(detailIntent);
-							}
-						}
-					}
-				});
+//				final int index = getCurrentMarkerIndex(marker);
+//				if (index == -1) {
+//					return true;
+//				}
+				showClickMarkerView(marker);
+//				int num = getSameLocationHouseSize(marker);
+//				if (num <= 0){
+//					return true;
+//				}
+//				if (num )
+//				View detailView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_layout, null);
+//				TextView contact = (TextView) detailView.findViewById(R.id.id_house_contacts);
+//				TextView location = (TextView) detailView.findViewById(R.id.id_house_location);
+//				TextView status = (TextView) detailView.findViewById(R.id.id_house_status);
+//				TextView direction = (TextView) detailView.findViewById(R.id.id_house_direction);
+//				TextView floor = (TextView) detailView.findViewById(R.id.id_house_floor);
+//				// TextView checkoutTime =
+//				// (TextView)detailView.findViewById(R.id.id_house_check_out_time);
+//				TextView area = (TextView) detailView.findViewById(R.id.id_house_area);
+//				TextView owner = (TextView) detailView.findViewById(R.id.id_house_owner);
+//
+//				// Button button = new Button(mContext);
+//				// button.setBackgroundResource(R.drawable.popup);
+//				// button.setTextColor(Color.parseColor("#000000"));
+//				// OnInfoWindowClickListener listener = null;
+//				// desp.setText(mHouserList.get(index).get("rroomtypedesc")+" |
+//				// "+mHouserList.get(index).get("rrentarea")+"平米 | "+
+//				// mHouserList.get(index).get("RPropertyDesc") +" |
+//				// "+mHouserList.get(index).get("rdirectiondesc"));
+//				// location.setText("地址:"+mHouserList.get(index).get("RAddress"));
+//				// Log.i("mingguo", "index "+index+" owner
+//				// "+mHouserList.get(index).get("ROwner"));
+//				// contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
+//				// "电话："+mHouserList.get(index).get("ROwnerTel"));
+//				LatLng ll = marker.getPosition();
+//				String phone = mHouserList.get(index).get("ROwnerTel");
+//				String ownerName = mHouserList.get(index).get("ROwner");
+//				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+//					if (phone.length() > 5) {
+//						contact.setText("电话：" + phone.substring(0, 3) + "********");
+//					}
+//					if (ownerName.length() > 1) {
+//						owner.setText("房主：" + ownerName.substring(0, 1) + "**");
+//					}
+//				} else {
+//					contact.setText("电话：" + phone);
+//				}
+//				location.setText(mHouserList.get(index).get("RAddress"));
+//				// status.setText(mHouserList.get(index).get("Status"));
+//				direction.setText(mHouserList.get(index).get("rroomtypedesc"));
+//				floor.setText(
+//						mHouserList.get(index).get("rFloor") + "/" + mHouserList.get(index).get("rtotalfloor") + "层");
+//				// checkoutTime.setText(mHouserList.get(index).get("rroomtypedesc"));
+//				area.setText(mHouserList.get(index).get("rrentarea") + "平米");
+//
+//				mInfoWindow = new InfoWindow(detailView, ll, -47);
+//				mBaiduMap.showInfoWindow(mInfoWindow);
+//
+//				Button showView = (Button) detailView.findViewById(R.id.id_house_detail_show);
+//				showView.setOnClickListener(new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//						loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+//						loadIntent.putExtra("tab_name", "全景图");
+//						startActivity(loadIntent);
+//					}
+//				});
+//				Button houseSearch = (Button) detailView.findViewById(R.id.id_house_detail_search);
+//				houseSearch.setOnClickListener(new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+//							Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+//							Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+//							loginIntent.putExtra("intent_status", true);
+//							startActivity(loginIntent);
+//						} else {
+//							if (mHouserList.get(index).get("rentno") != null
+//									&& !mHouserList.get(index).get("rentno").equals("")) {
+//								Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+//								detailIntent.putExtra("rentNo", mHouserList.get(index).get("rentno"));
+//								startActivity(detailIntent);
+//							}
+//						}
+//					}
+//				});
 				return true;
 
 			}
@@ -364,6 +372,125 @@ public class MapRentHouseActivity extends BaseActivity
 		});
 
 	}
+	
+	private void showMarkerDetail(LatLng ll, final Map<String, String> itemMap){
+		View detailView = LayoutInflater.from(mContext).inflate(R.layout.map_marker_layout, null);
+		TextView contact = (TextView) detailView.findViewById(R.id.id_house_contacts);
+		TextView location = (TextView) detailView.findViewById(R.id.id_house_location);
+		TextView status = (TextView) detailView.findViewById(R.id.id_house_status);
+		TextView direction = (TextView) detailView.findViewById(R.id.id_house_direction);
+		TextView floor = (TextView) detailView.findViewById(R.id.id_house_floor);
+		TextView area = (TextView) detailView.findViewById(R.id.id_house_area);
+		TextView owner = (TextView) detailView.findViewById(R.id.id_house_owner);
+		String phone = itemMap.get("ROwnerTel");
+		String ownerName = itemMap.get("ROwner");
+		if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+			if (phone.length() > 5) {
+				contact.setText("电话：" + phone.substring(0, 3) + "********");
+			}
+			if (ownerName.length() > 1) {
+				owner.setText("房主：" + ownerName.substring(0, 1) + "**");
+			}
+		} else {
+			contact.setText("电话：" + phone);
+			if (ownerName.length() > 1) {
+				owner.setText("房主：" + ownerName);
+			}
+		}
+		location.setText(itemMap.get("RAddress"));
+		// status.setText(itemMap.get("Status"));
+		direction.setText(itemMap.get("rroomtypedesc"));
+		floor.setText(
+				itemMap.get("rFloor") + "/" + itemMap.get("rtotalfloor") + "层");
+		area.setText(itemMap.get("rrentarea") + "平米");
+
+		mInfoWindow = new InfoWindow(detailView, ll, -47);
+		mBaiduMap.showInfoWindow(mInfoWindow);
+
+		Button showView = (Button) detailView.findViewById(R.id.id_house_detail_show);
+		showView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+				loadIntent.putExtra("tab_name", "全景图");
+				startActivity(loadIntent);
+			}
+		});
+		Button houseSearch = (Button) detailView.findViewById(R.id.id_house_detail_search);
+		houseSearch.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+					loginIntent.putExtra("intent_status", true);
+					startActivity(loginIntent);
+				} else {
+					if (itemMap.get("rentno") != null
+							&& !itemMap.get("rentno").equals("")) {
+						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", itemMap.get("rentno"));
+						startActivity(detailIntent);
+					}
+				}
+			}
+		});
+	}
+	
+	private void showClickMarkerView(Marker marker){
+		
+		LatLng ll = marker.getPosition();
+		
+		String key = ll.latitude + "-" + ll.longitude;
+		Log.w("mingguo", "show click marker view  "+key);
+		ArrayList<Map<String, String>> child = mLocationMap.get(key);
+		
+		if (child != null){
+			Log.w("mingguo", "show click marker view  "+child.size());
+			if (child.size() == 1){
+				showMarkerDetail(ll, child.get(0));
+			}else if (child.size() > 1){
+				String[] listItem = new String[child.size()];
+				for (int i = 0; i < child.size(); i++){
+					String showInfo = null;
+					String phone = child.get(i).get("ROwnerTel");
+					String ownerName = child.get(i).get("ROwner");
+					if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+						if (phone.length() > 5) {
+							showInfo = "房主：" + ownerName.substring(0, 1) + "**" + " 电话：" + phone.substring(0, 3) + "********";
+						}
+						
+					}else{
+						showInfo = "房主：" + ownerName  + " 电话：" + phone;
+					}
+					listItem[i] = showInfo; 
+				}
+				showAlertDialog(listItem, ll, child);
+			}
+			
+		}
+		
+		
+		
+		
+	}
+	
+	
+	private void showAlertDialog(String[] items, final LatLng ll, final ArrayList<Map<String, String>> child){
+		AlertDialog.Builder builder =new AlertDialog.Builder(MapRentHouseActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setItems(items, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				showMarkerDetail(ll, child.get(which));
+			}
+		});
+		builder.show();
+	}
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -415,42 +542,52 @@ public class MapRentHouseActivity extends BaseActivity
 		}
 		return -1;
 	}
+	
+	private int getSameLocationHouseSize(Marker marker){
+		for (int i = 0; i < mMarkList.size(); i++){
+			if (marker == mMarkList.get(i)) {
+				String key = marker.getPosition().latitude + "-" + marker.getPosition().longitude;
+				ArrayList<Map<String, String>> child = mLocationMap.get(key);
+				if (child != null){
+					return child.size();
+				}
+			}
+		}
+		return 0;
+	}
 
 	/**
 	 * 获取相同经纬度的房屋集合并设置overlay
 	 */
 	public void initOverlay() {
 		//key：经纬度   value:相对应的集合
-		HashMap <String,ArrayList<Map<String, String>>> all=new HashMap<String,ArrayList<Map<String, String>>>();
+		//mLocationMap =new HashMap<String,ArrayList<Map<String, String>>>();
 		for(Map<String, String> child : mHouserList){
 			ArrayList<Map<String, String>> list=new ArrayList<>();
-			all.put(child.get("Latitude")+"-"+child.get("Longitude"), list);
+			mLocationMap.put(child.get("Latitude")+"-"+child.get("Longitude"), list);
 		}
 		
-		
-		
 		for(Map<String, String> child : mHouserList){
-			for(String keyname:all.keySet()){
+			for(String keyname:mLocationMap.keySet()){
 				if((child.get("Latitude")+"-"+child.get("Longitude")).equals(keyname)){
-					all.get(keyname).add(child);
+					mLocationMap.get(keyname).add(child);
 				}
 			}
 		}
 		
-		Iterator<Entry<String, ArrayList<Map<String, String>>>> iterator = all.entrySet().iterator();
+		Iterator<Entry<String, ArrayList<Map<String, String>>>> iterator = mLocationMap.entrySet().iterator();
 		while(iterator.hasNext()){
 			Map.Entry entry = (Map.Entry) iterator.next();
-			Log.e("", entry.getValue()+"===");
 			//获得key
 			String key=(String) entry.getKey();
+			Log.e("mingguo", "key  "+key);
 			String[] split = key.split("-");
 			LatLng llA = new LatLng(Double.parseDouble(split[0]),
 					Double.parseDouble(split[1]));
 			MarkerOptions options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
 			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
 		}
-			
-
+		Log.e("mingguo", "list size  "+mHouserList.size()+"  market size  "+mMarkList.size()+"  locationmap size   "+mLocationMap.size());
 
 		if (mHouserList.size() == 0) {
 			GlobalUtil.shortToast(mContext, "抱歉，该位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -558,12 +695,16 @@ public class MapRentHouseActivity extends BaseActivity
 	private void parseLocationInfo(String value) {
 		mHouserList = new ArrayList<>();
 		mMarkList = new ArrayList<>();
+		mLocationMap = new HashMap<>();
 		try {
 			if (mHouserList != null) {
 				mHouserList.clear();
 			}
 			if (mMarkList != null) {
 				mMarkList.clear();
+			}
+			if (mLocationMap != null){
+				mLocationMap.clear();
 			}
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
@@ -572,8 +713,9 @@ public class MapRentHouseActivity extends BaseActivity
 					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					itemHouse.put("ROwnerTel", itemJsonObject.optString("ROwnerTel"));
-					itemHouse.put("Latitude", itemJsonObject.optString("Latitude"));
-					itemHouse.put("Longitude", itemJsonObject.optString("Longitude"));
+					itemHouse.put("Latitude", Double.parseDouble(itemJsonObject.optString("Latitude"))+"");
+					itemHouse.put("Longitude", Double.parseDouble(itemJsonObject.optString("Longitude"))+"");
+					
 					itemHouse.put("rid", itemJsonObject.optString("rid"));
 					itemHouse.put("ROwner", itemJsonObject.optString("ROwner"));
 					itemHouse.put("RIDCard", itemJsonObject.optString("RIDCard"));
@@ -657,7 +799,7 @@ public class MapRentHouseActivity extends BaseActivity
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equalsIgnoreCase(mLocationAction)) {
 				Message message = mHandler.obtainMessage();

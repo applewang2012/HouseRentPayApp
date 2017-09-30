@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1f2f3"
@@ -10,7 +10,11 @@
         android:divider="#f1f2f3"
         android:dividerHeight="@dimen/base_dimen_10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </ListView>
+    
+  <include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog" />
 
-</LinearLayout>
+</FrameLayout>

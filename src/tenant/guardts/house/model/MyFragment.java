@@ -140,7 +140,6 @@ public class MyFragment extends BaseFragment {
 						startActivity(intent);
 					}
 				}
-
 			}
 		});
 		mHistory.setOnClickListener(new OnClickListener() {
@@ -155,7 +154,6 @@ public class MyFragment extends BaseFragment {
 						intent.putExtra("IDCard", CommonUtil.mRegisterIdcard);
 						startActivity(intent);
 				}
-				
 			}
 		});
 		mPassword.setOnClickListener(new OnClickListener() {
@@ -242,6 +240,7 @@ public class MyFragment extends BaseFragment {
 			} else {
 				mWallet.setText("¥ "+CommonUtil.mUserWallet);
 			}
+			getUserInfo();
 		}else{
 			mRegistAndLogin.setVisibility(View.VISIBLE);
 			mUserNickname.setVisibility(View.GONE);
@@ -285,14 +284,12 @@ public class MyFragment extends BaseFragment {
 					cardNo = infoModel.get("CardNO");
 					bankName = infoModel.get("BankName");
 					
-					// Toast.makeText(mContext, wallet,
-					// Toast.LENGTH_LONG).show();
-					if (wallet == null || wallet.equals("")) {
-						mWallet.setText("¥0.0");
-
+					if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("") || CommonUtil.mUserWallet.equalsIgnoreCase("null")) {
+						mWallet.setText("¥ 0.0");
 					} else {
-						mWallet.setText("¥" + wallet);
+						mWallet.setText("¥ "+CommonUtil.mUserWallet);
 					}
+					
 					if (realName != null && !realName.equals("")) {
 						mRegistAndLogin.setVisibility(View.GONE);
 						mUserNickname.setVisibility(View.VISIBLE);
