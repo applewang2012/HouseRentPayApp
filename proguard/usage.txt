@@ -4900,8 +4900,8 @@ tenant.guardts.house.AddHouseInfoActivity:
     535:549:private void getHouseProperty()
 tenant.guardts.house.AddRentAttributeActivity:
     771:802:private void startHttpService()
-    977:1000:private void getIndentifyInfo(java.lang.String)
-    1003:1029:private void getQueryStatusInfo(java.lang.String)
+    978:1001:private void getIndentifyInfo(java.lang.String)
+    1004:1030:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -4960,8 +4960,10 @@ tenant.guardts.house.HouseDetailInfoActivity:
     282:287:private void setDeleteHouseInfo(java.lang.String)
     291:303:private void initDialog()
     312:322:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    65:65:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
-    65:65:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
+    415:420:private void getHouseDetailImageListByHouseId(java.lang.String)
+    71:71:static synthetic java.lang.String access$11(tenant.guardts.house.HouseDetailInfoActivity)
+    65:65:static synthetic void access$12(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
+    65:65:static synthetic java.lang.String access$13(tenant.guardts.house.HouseDetailInfoActivity)
 tenant.guardts.house.HouseDetailInfoActivity$10
 tenant.guardts.house.HouseDetailInfoActivity$11
 tenant.guardts.house.HouseHistoryActivity:
@@ -5071,7 +5073,7 @@ tenant.guardts.house.camera.AutoFocusCallback:
 tenant.guardts.house.camera.CameraConfigurationManager:
     private static final int TEN_DESIRED_ZOOM
     private static final int DESIRED_SHARPNESS
-    275:275:public static int getDesiredSharpness()
+    341:341:public static int getDesiredSharpness()
 tenant.guardts.house.camera.CameraManager:
     private static final int MIN_FRAME_WIDTH
     private static final int MIN_FRAME_HEIGHT

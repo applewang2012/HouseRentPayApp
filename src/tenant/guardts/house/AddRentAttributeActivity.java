@@ -661,7 +661,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "密码长度为6位", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
+		if (password.getText().toString().equals("000000")) {
+			Toast.makeText(getApplicationContext(), "密码不能设置为6个0", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 		
 		
 		return true;
@@ -858,8 +861,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						if (ret != null){
 							Log.e("mingguo", "ret  "+ret);
 							if (ret.equals("0")){
-								Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT).show();
-								if (!mShowRentHouseDialog){
+								if (mShowRentHouseDialog){
+									Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT).show();
+								}else{
 									checkPhoneVerifyCode(mRentPhone.getText().toString(), mVerifyCode);
 								}
 							}else if (ret.equals("1")){

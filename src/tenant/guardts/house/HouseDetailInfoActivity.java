@@ -428,7 +428,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 				jsonHouseInfoToView((String) msg.obj);
 
-				getHouseDetailImageListByHouseId(mRentNo);
+				//getHouseDetailImageListByHouseId(mRentNo);
 			} else if (msg.what == 101) {
 
 			} else if (msg.what == 200) {

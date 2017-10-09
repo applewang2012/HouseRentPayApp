@@ -141,7 +141,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		// TODO Auto-generated method stub
 		Log.i("mingguo", " detail result  "+arg0.name);
 		for (int i = 0; i < mDataList.size(); i++){
-			if (arg0.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
+			if (arg0.getUid() != null && arg0.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
 				mDataList.get(i).setNearDetailUrl(arg0.getDetailUrl());
 			}
 		}

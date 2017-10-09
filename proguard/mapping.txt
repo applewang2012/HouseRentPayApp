@@ -27974,25 +27974,22 @@ tenant.guardts.house.HouseDetailInfoActivity -> tenant.guardts.house.HouseDetail
     void initView() -> d
     void initBanner(java.util.List) -> a
     void getHouseDetailInfoByHouseId(java.lang.String) -> a
-    void getHouseDetailImageListByHouseId(java.lang.String) -> b
-    void jsonHouseInfoToView(java.lang.String) -> c
-    void jsonHouseImageListData(java.lang.String) -> d
+    void jsonHouseInfoToView(java.lang.String) -> b
+    void jsonHouseImageListData(java.lang.String) -> c
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onDestroy() -> onDestroy
     void access$0(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String) -> a
-    java.lang.String access$1(tenant.guardts.house.HouseDetailInfoActivity) -> a
-    void access$2(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String) -> b
-    void access$3(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String) -> c
-    java.util.ArrayList access$4(tenant.guardts.house.HouseDetailInfoActivity) -> b
-    void access$5(tenant.guardts.house.HouseDetailInfoActivity,java.util.List) -> a
-    void access$6(tenant.guardts.house.HouseDetailInfoActivity,float) -> a
-    android.widget.LinearLayout access$7(tenant.guardts.house.HouseDetailInfoActivity) -> c
-    android.widget.PopupWindow access$8(tenant.guardts.house.HouseDetailInfoActivity) -> d
-    android.widget.Button access$9(tenant.guardts.house.HouseDetailInfoActivity) -> e
-    android.widget.TextView access$10(tenant.guardts.house.HouseDetailInfoActivity) -> f
-    void access$11(tenant.guardts.house.HouseDetailInfoActivity) -> g
-    tenant.guardts.house.model.HouseInfoModel access$12(tenant.guardts.house.HouseDetailInfoActivity) -> h
+    void access$1(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String) -> b
+    java.util.ArrayList access$2(tenant.guardts.house.HouseDetailInfoActivity) -> a
+    void access$3(tenant.guardts.house.HouseDetailInfoActivity,java.util.List) -> a
+    void access$4(tenant.guardts.house.HouseDetailInfoActivity,float) -> a
+    android.widget.LinearLayout access$5(tenant.guardts.house.HouseDetailInfoActivity) -> b
+    android.widget.PopupWindow access$6(tenant.guardts.house.HouseDetailInfoActivity) -> c
+    android.widget.Button access$7(tenant.guardts.house.HouseDetailInfoActivity) -> d
+    android.widget.TextView access$8(tenant.guardts.house.HouseDetailInfoActivity) -> e
+    void access$9(tenant.guardts.house.HouseDetailInfoActivity) -> f
+    tenant.guardts.house.model.HouseInfoModel access$10(tenant.guardts.house.HouseDetailInfoActivity) -> g
 tenant.guardts.house.HouseDetailInfoActivity$1 -> tenant.guardts.house.bv:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -31957,6 +31954,7 @@ tenant.guardts.house.camera.CameraConfigurationManager -> tenant.guardts.house.b
     java.lang.String getPreviewFormatString() -> d
     android.graphics.Point getCameraResolution(android.hardware.Camera$Parameters,android.graphics.Point) -> a
     android.graphics.Point findBestPreviewSizeValue(java.lang.CharSequence,android.graphics.Point) -> a
+    android.graphics.Point findBestPreviewSizeValue(android.hardware.Camera$Parameters,android.graphics.Point) -> b
     int findBestMotZoomValue(java.lang.CharSequence,int) -> a
     void setFlash(android.hardware.Camera$Parameters) -> a
     void setZoom(android.hardware.Camera$Parameters) -> b

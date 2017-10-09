@@ -137,7 +137,7 @@ public final class ViewfinderView extends View {
       }  
         
       //初始化中间线滑动的最上边和最下边  
-      if(!isFirst){  
+      if(!isFirst){
           isFirst = true;  
           slideTop = frame.top;  
           slideBottom = frame.bottom;  

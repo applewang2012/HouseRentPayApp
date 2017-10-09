@@ -37,14 +37,18 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
+import com.tencent.android.tpush.horse.Tools;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.UtilTool;
 
 public class DataModel {
 
@@ -105,14 +109,28 @@ public class DataModel {
 	                userName.addChild(Node.TEXT, "admin"); 
 	                header[0].addChild(Node.ELEMENT, userName); 
 	                
-	                Element pass = new Element().createElement(CommonUtil.NAMESPACE, "PassWord"); 
-	                pass.addChild(Node.TEXT, "Pa$$w0rd780419"); 
-	                header[0].addChild(Node.ELEMENT, pass); 
+	                Element passwd = new Element().createElement(CommonUtil.NAMESPACE, "PassWord"); 
+	                passwd.addChild(Node.TEXT, "Pa$$w0rd780419"); 
+	                header[0].addChild(Node.ELEMENT, passwd); 
+	                
+	                String timestamp = System.currentTimeMillis()+"";
+	                Element time = new Element().createElement(CommonUtil.NAMESPACE, "TimeStamp"); 
+	                time.addChild(Node.TEXT, timestamp); 
+	                header[0].addChild(Node.ELEMENT, time);
+	                
+	                Element token = new Element().createElement(CommonUtil.NAMESPACE, "Token"); 
+	                token.addChild(Node.TEXT, UtilTool.MD5Encode("guardts"+timestamp+"house")); 
+	                header[0].addChild(Node.ELEMENT, token);
 	                
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "UserID", "admin");
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "PassWord", "Pa$$w0rd780419");
 	                
-				Log.e("house", "services  async taks  do inbackground action  "+mSoapAction);
+				Log.e("mingguo", "services  async taks  do inbackground action url  "+mUrl);
+				//添加单用户校验
+				if (!TextUtils.isEmpty(CommonUtil.mUserLoginName) && !TextUtils.isEmpty(CommonUtil.XINGE_TOKEN)){
+					mSoapObject.addProperty("checkUser", CommonUtil.mUserLoginName);
+					mSoapObject.addProperty("checkToken", CommonUtil.XINGE_TOKEN);
+				}
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 				envelope.headerOut = header; 
 				envelope.bodyOut = mSoapObject;

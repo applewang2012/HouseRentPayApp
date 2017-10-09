@@ -52,7 +52,7 @@ public class WelcomeActivity extends BaseActivity {
 		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 		mUsername = sharedata.getString("user_name", "");
 		mPassword = sharedata.getString("user_password", "");
-		CommonUtil.mUserHost = sharedata.getString("user_host", "");
+		//CommonUtil.mUserHost = sharedata.getString("user_host", "");
 	    
 	    XGPushConfig.enableDebug(this, true);
 	    registerXinge();

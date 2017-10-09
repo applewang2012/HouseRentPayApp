@@ -21,7 +21,9 @@ import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.hardware.Camera;
+import android.hardware.Camera.Size;
 import android.os.Build;
 import android.util.Log;
 import android.view.Display;
@@ -58,7 +60,16 @@ final class CameraConfigurationManager {
     Display display = manager.getDefaultDisplay();
     screenResolution = new Point(display.getWidth(), display.getHeight());
     Log.d(TAG, "Screen resolution: " + screenResolution);
-    cameraResolution = getCameraResolution(parameters, screenResolution);
+    Point screenResolutionForCamera = new Point();  
+    screenResolutionForCamera.x = screenResolution.x;  
+    screenResolutionForCamera.y = screenResolution.y;  
+    // preview size is always something like 480*320, other 320*480  
+    if (screenResolution.x < screenResolution.y) {  
+    screenResolutionForCamera.x = screenResolution.y;  
+    screenResolutionForCamera.y = screenResolution.x;  
+    }  
+
+    cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
     Log.d(TAG, "Camera resolution: " + screenResolution);
   }
 
@@ -108,25 +119,38 @@ final class CameraConfigurationManager {
   }
 
   private static Point getCameraResolution(Camera.Parameters parameters, Point screenResolution) {
-
-    String previewSizeValueString = parameters.get("preview-size-values");
-    // saw this on Xperia
-    if (previewSizeValueString == null) {
-      previewSizeValueString = parameters.get("preview-size-value");
-    }
-
+//
+//    String previewSizeValueString = parameters.get("preview-size-values");
+//    // saw this on Xperia
+//    if (previewSizeValueString == null) {
+//      previewSizeValueString = parameters.get("preview-size-value");
+//    }
+//
+//    Point cameraResolution = null;
+//
+//    if (previewSizeValueString != null) {
+//      Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
+//      cameraResolution = findBestPreviewSizeValue(previewSizeValueString, screenResolution);
+//    }
+//
+//    if (cameraResolution == null) {
+//      // Ensure that the camera resolution is a multiple of 8, as the screen may not be.
+//      cameraResolution = new Point(
+//          (screenResolution.x >> 3) << 3,
+//          (screenResolution.y >> 3) << 3);
+//    }
+//
+//    return cameraResolution;
+    
     Point cameraResolution = null;
-
-    if (previewSizeValueString != null) {
-      Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
-      cameraResolution = findBestPreviewSizeValue(previewSizeValueString, screenResolution);
-    }
+    
+    cameraResolution = findBestPreviewSizeValue(parameters, screenResolution);
 
     if (cameraResolution == null) {
-      // Ensure that the camera resolution is a multiple of 8, as the screen may not be.
-      cameraResolution = new Point(
-          (screenResolution.x >> 3) << 3,
-          (screenResolution.y >> 3) << 3);
+        // Ensure that the camera resolution is a multiple of 8, as the
+        // screen may not be.
+        cameraResolution = new Point((screenResolution.x >> 3) << 3,
+            (screenResolution.y >> 3) << 3);
     }
 
     return cameraResolution;
@@ -155,7 +179,8 @@ final class CameraConfigurationManager {
         continue;
       }
 
-      int newDiff = Math.abs(newX - screenResolution.x) + Math.abs(newY - screenResolution.y);
+      //int newDiff = Math.abs(newX - screenResolution.x) + Math.abs(newY - screenResolution.y);
+      int newDiff=Math.abs(newY - screenResolution.x) + Math.abs(newX - screenResolution.y);
       if (newDiff == 0) {
         bestX = newX;
         bestY = newY;
@@ -173,6 +198,47 @@ final class CameraConfigurationManager {
     }
     return null;
   }
+  
+  //add the new method
+	private static Point findBestPreviewSizeValue(Camera.Parameters parameters, Point screenResolution) {
+		Point point = null;
+
+		Rect frame = CameraManager.get().getFramingRect();
+		int frameSize = frame.right - frame.left;
+		int discountMax = Integer.MAX_VALUE;
+		int width = 0;
+		int height = 0;
+		List<Size> supportedPreviewSizes = parameters.getSupportedPreviewSizes();
+		for (Size size : supportedPreviewSizes) {
+			int discount = size.height - frameSize;
+			if (discount > 0 && size.height * screenResolution.x == screenResolution.y * size.width) {
+				if (discount < discountMax) {
+					discountMax = discount;
+					width = size.width;
+					height = size.height;
+				}
+			}
+		}
+		if (width * height != 0) {
+			point = new Point(width, height);
+		}
+		if (point == null) {
+			String previewSizeValueString = parameters.get("preview-size-values");
+			// saw this on Xperia
+			if (previewSizeValueString == null) {
+				previewSizeValueString = parameters.get("preview-size-value");
+			}
+
+			if (previewSizeValueString != null) {
+				Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
+				return findBestPreviewSizeValue(previewSizeValueString, screenResolution);
+			} else {
+				return null;
+			}
+		} else {
+			return point;
+		}
+	}
 
   private static int findBestMotZoomValue(CharSequence stringValues, int tenDesiredZoom) {
     int tenBestValue = 0;

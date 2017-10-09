@@ -232,7 +232,7 @@ public class LoginUserActivity extends BaseActivity {
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
 			mPresenter.startPresentServiceTask(false);
 		} else {
-			CommonUtil.mUserHost = host;
+			//CommonUtil.mUserHost = host;
 		}
 	}
 
