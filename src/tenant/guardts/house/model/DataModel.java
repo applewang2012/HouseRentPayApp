@@ -103,7 +103,7 @@ public class DataModel {
 		protected Void doInBackground(Void... params) {
 			try {
 				 Element[] header = new Element[1]; 
-	                header[0] = new Element().createElement(CommonUtil.NAMESPACE, "MySoapHeader"); 
+	                header[0] = new Element().createElement(CommonUtil.NAMESPACE, "Authentication"); 
 	                
 	                Element userName = new Element().createElement(CommonUtil.NAMESPACE, "UserID"); 
 	                userName.addChild(Node.TEXT, "admin"); 
@@ -124,8 +124,6 @@ public class DataModel {
 	                
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "UserID", "admin");
 //	                header[0].setAttribute(CommonUtil.NAMESPACE, "PassWord", "Pa$$w0rd780419");
-	                
-				Log.e("mingguo", "services  async taks  do inbackground action url  "+mUrl);
 				//添加单用户校验
 				if (!TextUtils.isEmpty(CommonUtil.mUserLoginName) && !TextUtils.isEmpty(CommonUtil.XINGE_TOKEN)){
 					mSoapObject.addProperty("checkUser", CommonUtil.mUserLoginName);
@@ -139,18 +137,26 @@ public class DataModel {
 				HttpTransportSE transport = new HttpTransportSE(mUrl,30000);
 				transport.call(mSoapAction, envelope);
 				SoapObject valueObject = null;
+				Log.i("mingguo", "result string  "+envelope.getResponse());
 				if(envelope.getResponse()!=null){
 					valueObject = (SoapObject)envelope.bodyIn;				
 				}
 				String resultString = valueObject.getProperty(0).toString();
+				if (resultString != null && resultString.contains("headerError")){
+					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error from header !");
+					Log.e("mingguo", "exception  action   "+mSoapAction+" error from header !");
+					return null;
+				}
 				Activity activity = (Activity) mContext;
 				if (activity.isFinishing()){
 					mPresenter.notifyDataRequestError(mSoapAction, "error from activity  finish ");
 				}else{
 					mPresenter.notifyDataRequestSuccess(mSoapAction, resultString);
 				}
+				
 			} catch (Exception e) {
 				mPresenter.notifyDataRequestError(mSoapAction, "error from exception ");
+				Log.e("mingguo", "exception  action   "+mSoapAction+"  e  "+e);
 			}
 			
 			return null;

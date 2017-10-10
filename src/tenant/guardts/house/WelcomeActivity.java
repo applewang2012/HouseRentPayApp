@@ -21,6 +21,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
@@ -41,6 +42,8 @@ public class WelcomeActivity extends BaseActivity {
 	private HoursePresenter mPresenter;
 	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
 	
+	private String mHelloWordAction = "http://tempuri.org/HelloWord";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,12 +55,12 @@ public class WelcomeActivity extends BaseActivity {
 		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 		mUsername = sharedata.getString("user_name", "");
 		mPassword = sharedata.getString("user_password", "");
-		//CommonUtil.mUserHost = sharedata.getString("user_host", "");
+		CommonUtil.mUserHost = sharedata.getString("user_host", "");
 	    
 	    XGPushConfig.enableDebug(this, true);
 	    registerXinge();
 		mHandler.sendEmptyMessageDelayed(200, 300);
-		
+		//testHelloword();
 	}
 	
 	private void commonServiceInterface(){
@@ -67,7 +70,18 @@ public class WelcomeActivity extends BaseActivity {
 			rpc.addProperty("status", "1");
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
 			mPresenter.startPresentServiceTask(true);
-	    
+	}
+	
+	private void testHelloword(){
+		mPresenter = new HoursePresenter(getApplicationContext(), this);
+    	String url = "http://qxw2332340157.my3w.com/Services.asmx?op=HelloWord";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHelloWordAction));
+		rpc.addProperty("user", "1");
+		rpc.addProperty("pass", "1");
+		rpc.addProperty("timestamp", "");
+		rpc.addProperty("token", "1");
+		mPresenter.readyPresentServiceParams(this, url, mHelloWordAction, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
 	
 	@Override
@@ -242,6 +256,7 @@ public class WelcomeActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
+		Log.i("mingguo", "onstatus sucess  "+action+" info "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCommonServiceAction)){
 				Message msg = mHandler.obtainMessage();

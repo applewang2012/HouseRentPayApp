@@ -232,7 +232,7 @@ public class LoginUserActivity extends BaseActivity {
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
 			mPresenter.startPresentServiceTask(false);
 		} else {
-			//CommonUtil.mUserHost = host;
+			CommonUtil.mUserHost = host;
 		}
 	}
 
@@ -419,9 +419,9 @@ public class LoginUserActivity extends BaseActivity {
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mLoginAction)) {
-				if (templateInfo.equals("false")) {
+				if (templateInfo.equalsIgnoreCase("false")) {
 					mHandler.sendEmptyMessage(101);
-				} else if (templateInfo.equals("true")) {
+				} else if (templateInfo.equalsIgnoreCase("true")) {
 					mHandler.sendEmptyMessage(100);
 				}
 			} else if (action.equals(mCommonServiceAction)) {

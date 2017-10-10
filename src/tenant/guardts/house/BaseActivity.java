@@ -53,7 +53,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 	public void onStatusError(String action, String error) {
 		Message msg = mHandler.obtainMessage();
 		msg.what = 100;
-		msg.obj = action;
+		msg.obj = action + " " + error;
 		mHandler.sendMessage(msg);
 	}
 	
