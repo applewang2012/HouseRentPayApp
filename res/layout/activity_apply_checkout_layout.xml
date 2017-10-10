@@ -1,0 +1,201 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+     >
+     
+    <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:text="退房原因"
+         android:textColor="#333333"
+         android:gravity="center_vertical"
+         android:textSize="@dimen/base_dimen_32" />
+    
+     <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+     
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:text="请与房客联系协商退款金额，进行线下退款。"
+         android:textColor="#555555"
+         android:gravity="center_vertical"
+         android:textSize="@dimen/base_dimen_26" />
+     
+     <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+     
+     <LinearLayout 
+         android:id="@+id/checkout_house_reason_content1"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:orientation="horizontal"
+         android:gravity="center_vertical"
+         android:clickable="true"
+         >
+         <ImageView 
+             android:id="@+id/checkout_house_reason_icon1"
+             android:layout_width="@dimen/base_dimen_30"
+         	 android:layout_height="@dimen/base_dimen_30"
+         	 android:background="@drawable/checkout_house_selected"
+             />
+         <TextView
+             android:id="@+id/checkout_house_reason_text1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="@dimen/base_dimen_90"
+	         android:layout_marginLeft="@dimen/base_dimen_20"
+	         android:text="房客行程有变化"
+	         android:textColor="#337ffd"
+	         android:gravity="center_vertical"
+	         android:textSize="@dimen/base_dimen_32" />
+     </LinearLayout>
+     
+     <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+     
+     <LinearLayout 
+         android:id="@+id/checkout_house_reason_content2"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:orientation="horizontal"
+         android:gravity="center_vertical"
+         android:clickable="true"
+         >
+         <ImageView 
+             android:id="@+id/checkout_house_reason_icon2"
+             android:layout_width="@dimen/base_dimen_30"
+         	 android:layout_height="@dimen/base_dimen_30"
+         	 android:background="@drawable/checkout_house_normal"
+             />
+         <TextView
+             android:id="@+id/checkout_house_reason_text2"
+	         android:layout_width="wrap_content"
+	         android:layout_height="@dimen/base_dimen_90"
+	         android:layout_marginLeft="@dimen/base_dimen_20"
+	         android:text="房屋改进"
+	         android:textColor="#333333"
+	         android:gravity="center_vertical"
+	         android:textSize="@dimen/base_dimen_32" />
+     </LinearLayout>
+     
+     <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#0c000000" />
+     <LinearLayout 
+         android:id="@+id/checkout_house_reason_content3"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:orientation="horizontal"
+         android:gravity="center_vertical"
+         android:clickable="true"
+         >
+         <ImageView 
+             android:id="@+id/checkout_house_reason_icon3"
+             android:layout_width="@dimen/base_dimen_30"
+         	 android:layout_height="@dimen/base_dimen_30"
+         	 android:background="@drawable/checkout_house_normal"
+             />
+         <TextView
+             android:id="@+id/checkout_house_reason_text3"
+	         android:layout_width="wrap_content"
+	         android:layout_height="@dimen/base_dimen_90"
+	         android:layout_marginLeft="@dimen/base_dimen_20"
+	         android:text="态度恶劣"
+	         android:textColor="#333333"
+	         android:gravity="center_vertical"
+	         android:textSize="@dimen/base_dimen_32" />
+     </LinearLayout>
+     
+     <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#0c000000" />
+     <LinearLayout 
+         android:id="@+id/checkout_house_reason_content4"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/base_dimen_90"
+         android:layout_marginLeft="@dimen/base_dimen_20"
+         android:orientation="horizontal"
+         android:gravity="center_vertical"
+         android:clickable="true"
+         >
+         <ImageView 
+             android:id="@+id/checkout_house_reason_icon4"
+             android:layout_width="@dimen/base_dimen_30"
+         	 android:layout_height="@dimen/base_dimen_30"
+         	 android:background="@drawable/checkout_house_normal"
+             />
+         <TextView
+             android:id="@+id/checkout_house_reason_text4"
+	         android:layout_width="wrap_content"
+	         android:layout_height="@dimen/base_dimen_90"
+	         android:layout_marginLeft="@dimen/base_dimen_20"
+	         android:text="其他原因"
+	         android:textColor="#333333"
+	         android:gravity="center_vertical"
+	         android:textSize="@dimen/base_dimen_32" />
+     </LinearLayout>
+     
+      <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+    
+    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_dimen_80" 
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/base_dimen_20"
+                android:paddingRight="@dimen/base_dimen_20"
+                >
+
+                <Button
+                    android:id="@+id/checkout_house_contact_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/item_shape_solid_corner_press"
+                    android:textSize="@dimen/base_dimen_32"
+                    android:gravity="center"
+                    android:text="联系房主" >
+                </Button>
+
+                <Button
+                   android:id="@+id/checkout_house_checkout_ok"
+                   android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/base_dimen_32"
+                    android:textColor="#337ffd"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/base_dimen_20"
+                    android:background="@drawable/item_shape_solid_corner_normal"
+                    android:text="确认退房" >
+                </Button>
+            </LinearLayout>
+            
+    <include
+        android:id="@+id/id_data_loading"
+        android:visibility="invisible"
+        layout="@layout/layout_loading_dialog" />
+
+</LinearLayout>

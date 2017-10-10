@@ -25,6 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import tenant.guardts.house.ApplyForCheckoutActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -200,8 +201,16 @@ public class OrderZhuHuFragment extends BaseFragment{
 					status.setTextColor(Color.parseColor("#de6262"));
 					button1.setText("查看详情");
 					button1.setVisibility(View.INVISIBLE);
-					button2.setText("查看详情");
+					button2.setText("申请退房");
 					button2.setVisibility(View.INVISIBLE);
+					button2.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							
+							
+						}
+					});
 					button3.setText("查看详情");
 					button3.setTextColor(Color.parseColor("#337ffd"));
 					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);

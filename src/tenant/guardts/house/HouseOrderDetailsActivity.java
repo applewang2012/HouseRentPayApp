@@ -107,6 +107,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		money.setText("¥ " + mOrderDetail.getHousePrice());
 		Button button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		Button button2 = (Button) findViewById(R.id.id_order_detail_button2);
+		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
 		if (mDetailType != null) {
 			if (mDetailType.equals("owner")) {
 				passwordContent.setVisibility(View.GONE);
@@ -202,16 +203,29 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
 			button1.setVisibility(View.GONE);
-			button2.setText("查看详情");
-			button2.setVisibility(View.GONE);
+			button2.setText("申请退房");
+			button2.setVisibility(View.VISIBLE);
 			priceLinearLayout.setVisibility(View.VISIBLE);
 			tvServiceFee.setVisibility(View.VISIBLE);
-			/*
-			 * button3.setText("查看详情");
-			 * button3.setTextColor(Color.parseColor("#337ffd"));
-			 * button3.setBackgroundResource(R.drawable.
-			 * item_shape_no_solid_corner_press);
-			 */
+			btnContact.setTextColor(Color.parseColor("#337ffd"));
+			btnContact.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button2.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(HouseOrderDetailsActivity.this, ApplyForCheckoutActivity.class);
+					if (mDetailType.equals("owner")) {
+						intent.putExtra("type_phone", mOrderDetail.getHouseContactPhone());
+
+					} else if (mDetailType.equals("renter")) {
+						intent.putExtra("type_phone", mOrderDetail.getHouseOwnerPhone());
+
+					}
+					intent.putExtra("detail_type", mDetailType);
+					startActivity(intent);
+
+				}
+			});
 		} else if (mOrderDetail.getHouseStatus().equals("3")) {
 			status.setText("待评价");
 			status.setTextColor(Color.parseColor("#8be487"));
@@ -247,7 +261,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 		}
 
-		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
+		
 		if (mDetailType.equals("owner")) {
 			btnContact.setText("联系房客");
 
