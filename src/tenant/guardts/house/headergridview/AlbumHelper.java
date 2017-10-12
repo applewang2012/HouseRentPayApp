@@ -69,7 +69,7 @@ public class AlbumHelper {
 				image_path = cur.getString(dataColumn);
 
 				// Do something with the values.
-				// Log.i(TAG, _id + " image_id:" + image_id + " path:"
+				// Log.w(TAG, _id + " image_id:" + image_id + " path:"
 				// + image_path + "---");
 				// HashMap<String, String> hash = new HashMap<String, String>();
 				// hash.put("image_id", image_id + "");
@@ -115,7 +115,7 @@ public class AlbumHelper {
 				numOfSongs = cur.getInt(numOfSongsColumn);
 
 				// Do something with the values.
-				Log.i(TAG, _id + " album:" + album + " albumArt:" + albumArt
+				Log.w(TAG, _id + " album:" + album + " albumArt:" + albumArt
 						+ "albumKey: " + albumKey + " artist: " + artist
 						+ " numOfSongs: " + numOfSongs + "---");
 				HashMap<String, String> hash = new HashMap<String, String>();
@@ -166,7 +166,7 @@ public class AlbumHelper {
 				String bucketId = cur.getString(bucketIdIndex);
 				String picasaId = cur.getString(picasaIdIndex);
 
-				Log.i(TAG, _id + ", bucketId: " + bucketId + ", picasaId: "
+				Log.w(TAG, _id + ", bucketId: " + bucketId + ", picasaId: "
 						+ picasaId + " name:" + name + " path:" + path
 						+ " title: " + title + " size: " + size + " bucket: "
 						+ bucketName + "---");
@@ -225,7 +225,7 @@ public class AlbumHelper {
 
 	String getOriginalImagePath(String image_id) {
 		String path = null;
-		Log.i(TAG, "---(^o^)----" + image_id);
+		Log.w(TAG, "---(^o^)----" + image_id);
 		String[] projection = { Media._ID, Media.DATA };
 		Cursor cursor = cr.query(Media.EXTERNAL_CONTENT_URI, projection,
 				Media._ID + "=" + image_id, null, Media.DATE_MODIFIED + " desc");

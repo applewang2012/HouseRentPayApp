@@ -190,7 +190,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Log.i(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
+		Log.w(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
 		Log.w("mingguo", "wxpay entry activity  wallet  "+CommonUtil.ORDER_MONKEY+"  payHouse Order ID  "+CommonUtil.mPayHouseOrderId);
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){

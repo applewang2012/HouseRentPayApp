@@ -112,7 +112,7 @@ public class HouseHistoryActivity extends BaseActivity
 		try {
 			array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				for (int item = 0; item < array.length(); item++) {
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel infoModel = new HouseInfoModel();

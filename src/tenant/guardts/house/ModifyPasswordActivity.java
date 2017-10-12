@@ -147,7 +147,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mModifyAction)){
 				if (templateInfo.equals("false")){

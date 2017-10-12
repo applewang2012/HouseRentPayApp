@@ -24,20 +24,54 @@ public class HouseInfoModel implements Serializable{
 	private String contactPhone;
 	private String contactName;
 	private String doorPassword;
-	private String orderCreatedDate;//下单时间
-	
+	private String orderCreateDate;
+	private long orderCreatedDateStamp;//下单时间
+	private long orderExpiredDate;
+	private long currentDate;  //当前时间
+	private String mShowTimeDown;
 
 	public String getRenterIdcard() {
 		return renterIdcard;
 	}
 
-
 	public String getOrderCreatedDate() {
-		return orderCreatedDate;
+		return orderCreateDate;
 	}
 
 	public void setOrderCreatedDate(String orderCreatedDate) {
-		this.orderCreatedDate = orderCreatedDate;
+		this.orderCreateDate = orderCreatedDate;
+	}
+
+	public long getOrderCreatedDateStamp() {
+		return orderCreatedDateStamp;
+	}
+
+	public void setOrderCreatedDateStamp(long orderCreatedDate) {
+		this.orderCreatedDateStamp = orderCreatedDate;
+	}
+	
+	public long getOrderExpiredDate() {
+		return orderExpiredDate;
+	}
+
+	public void setOrderExpiredDate(long expiredDate) {
+		this.orderExpiredDate = expiredDate;
+	}
+	
+	public long getCurrentdDate() {
+		return currentDate;
+	}
+
+	public void setCurrentDate(long currentDate) {
+		this.currentDate = currentDate;
+	}
+	
+	public String getShowTimeDownTime() {
+		return mShowTimeDown;
+	}
+
+	public void setShowTimeDownTime(String time) {
+		this.mShowTimeDown = time;
 	}
 
 	public void setRenterIdcard(String renterIdcard) {

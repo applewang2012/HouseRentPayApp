@@ -201,7 +201,7 @@ class DownloadNotification {
             intent.putExtra("multiple", item.mTitleCount > 1);
 
             n.contentIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            Log.i("mingguo", "DownloadNotification   intent download receiver  progresss  "+getDownloadingText(item.mTotalTotal, item.mTotalCurrent));
+            Log.w("mingguo", "DownloadNotification   intent download receiver  progresss  "+getDownloadingText(item.mTotalTotal, item.mTotalCurrent));
             mSystemFacade.postNotification(item.mId, n);
 
         }

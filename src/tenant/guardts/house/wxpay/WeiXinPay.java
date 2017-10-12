@@ -55,12 +55,12 @@ public class WeiXinPay {
 //		int dotIndex = signA.lastIndexOf("&");
 //		signA = (String) signA.subSequence(0, dotIndex);
 		String stringSignTemp = signA + "key=" + CommonUtil.SIGN_KEY; // 根据签名格式组装数据，详见微信支付api
-		Log.i("mingguo","signA=" + signA);
-		Log.i("mingguo","stringSignTemp=" + stringSignTemp);
+		Log.w("mingguo","signA=" + signA);
+		Log.w("mingguo","stringSignTemp=" + stringSignTemp);
 //		String sign = DigestUtils.md5Hex(
 //				getContentBytes(stringSignTemp, "UTF-8")).toUpperCase(); // 把组装好的签名数据md5之后字母都转换为大写，详见微信支付api
 		String sign = UtilTool.MD5Encode(stringSignTemp).toUpperCase();
-		Log.i("mingguo","sign=" + sign);
+		Log.w("mingguo","sign=" + sign);
 		nvps.add(new BasicNameValuePair("sign", sign)); // 把签名后的数据组装成参数
 		TenpayHttpClient httpClient = new TenpayHttpClient();
 		httpClient.setReqContent(url);
@@ -69,7 +69,7 @@ public class WeiXinPay {
 			resContent = httpClient.getResContent();
 			String result = new String(resContent.getBytes("GBK"), "UTF-8");
 			
-			Log.i("mingguo","请求返回的结果=" + result);
+			Log.w("mingguo","请求返回的结果=" + result);
 			return result;
 		}
 		return null;

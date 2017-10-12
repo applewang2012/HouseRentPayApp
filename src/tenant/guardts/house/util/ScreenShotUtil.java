@@ -108,7 +108,7 @@ public class ScreenShotUtil {
 			file.mkdir();
 		}
 		String filename = file.getPath()+"/"+"guardtsuser"+".jpg";
-		Log.i("mingguo", "generate  file name   "+filename);
+		Log.w("mingguo", "generate  file name   "+filename);
 		return filename;
 	}
 	
@@ -121,7 +121,7 @@ public class ScreenShotUtil {
     		 	File file = files[i];
     		 	if (file != null && file.exists()){
     		 		if (file.delete()){
-    		 			Log.i("mingguo", "delete file success "+file.getPath());
+    		 			Log.w("mingguo", "delete file success "+file.getPath());
     		 		}
     		 	}
     	  }
@@ -340,7 +340,7 @@ public class ScreenShotUtil {
 
 
 		        if(runningTaskInfos != null){
-		        	Log.i("mingguo"  ,"package name  "+ packageName+"  activity  "+topActivity.toString()) ;
+		        	Log.w("mingguo"  ,"package name  "+ packageName+"  activity  "+topActivity.toString()) ;
 		        }
 
 		        	
@@ -360,9 +360,9 @@ public class ScreenShotUtil {
 		int deepth = localPixelFormat1.bytesPerPixel;//位深
 			    
 		File mydir= new File("/dev/graphics/"); 
-		Log.i("mingguo", "mdydir    "+mydir.exists());
+		Log.w("mingguo", "mdydir    "+mydir.exists());
 		File fbfile = new File(mydir, "fb0");  
-		Log.i("mingguo", "fbfile     "+fbfile.exists());
+		Log.w("mingguo", "fbfile     "+fbfile.exists());
 		FileInputStream inStream = new FileInputStream(fbfile);
 		
 		byte[] piex = new byte[height * width * deepth];
@@ -380,7 +380,7 @@ public class ScreenShotUtil {
 				}
 			}
 			Bitmap bitmap = Bitmap.createBitmap(colors, width, height, Bitmap.Config.ARGB_8888);
-			Log.i("mingguo", "bitmap   "+bitmap);
+			Log.w("mingguo", "bitmap   "+bitmap);
 			Date nowDate = new Date();
 			
 			FileOutputStream out;
@@ -405,7 +405,7 @@ public class ScreenShotUtil {
 				//vibrator.cancel();
 				//vibrator.cancel();
 			} catch (Exception e) {
-				Log.i("mingguo", "exception    "+e);
+				Log.w("mingguo", "exception    "+e);
 				e.printStackTrace();
 			}
 		}

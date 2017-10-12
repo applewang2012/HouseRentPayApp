@@ -256,7 +256,7 @@ public class WelcomeActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "onstatus sucess  "+action+" info "+templateInfo);
+		Log.w("mingguo", "onstatus sucess  "+action+" info "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCommonServiceAction)){
 				Message msg = mHandler.obtainMessage();

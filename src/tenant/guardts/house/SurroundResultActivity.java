@@ -89,7 +89,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	
 
 	public void  searchNearbyProcess(String text ) {
-		Log.i("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
+		Log.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
         		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
                 .radius(2000).pageCapacity(20);
@@ -139,7 +139,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult arg0) {
 		// TODO Auto-generated method stub
-		Log.i("mingguo", " detail result  "+arg0.name);
+		Log.w("mingguo", " detail result  "+arg0.name);
 		for (int i = 0; i < mDataList.size(); i++){
 			if (arg0.getUid() != null && arg0.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
 				mDataList.get(i).setNearDetailUrl(arg0.getDetailUrl());
@@ -161,7 +161,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
                     .show();
             return;
         }
-        Log.i("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
+        Log.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
        for (int index = 0; index < result.getAllPoi().size(); index++){
     	   PoiInfo info = result.getAllPoi().get(index);
     	   SurroundInfo surroundInfo = new SurroundInfo();

@@ -83,7 +83,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 				mPassword = password.getEditableText().toString();
 				mPasswordIndentify = passowrdInditfy.getEditableText().toString();
 				
-				Log.i("mingguo", "user name  "+mUserName);
+				Log.w("mingguo", "user name  "+mUserName);
 				if (mUserName == null || mUserName.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -121,7 +121,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
+		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
 		if (resultCode == RESULT_OK && requestCode == 1) {
 			 Log.w("mingguo", "activity result  width data   "+data);
 		}
@@ -169,10 +169,10 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
-				Log.i("mingguo", "on success  action valid ");
+				Log.w("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
 					

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,6 +33,7 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.UtilTool;
 
 public class OrderFangzhuFragment extends BaseFragment{
 	
@@ -47,7 +49,9 @@ public class OrderFangzhuFragment extends BaseFragment{
 	private String mRentHistoryAction = "http://tempuri.org/GetRentOwnerHistory";
 	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
 	private String mRejectRentAction = "http://tempuri.org/RejectRentAttribute";
-	private int mCurrentPosition = 0;
+	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
+	private int mCurrentPosition = 0, mExpirePosition = -1;
+	private long mTimeTag ;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.i("fragmenttest", "homefragment onCreateView ");
+		Log.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_zufang_fragment, container, false);
 		initView();
 		//initData();
@@ -100,210 +104,43 @@ public class OrderFangzhuFragment extends BaseFragment{
 		super.onResume();
 		refreshData();
 	}
+	
+	 @Override  
+	 public void onDestroy() {  
+	        updateTimeHandler.removeCallbacksAndMessages(null);  
+	        super.onDestroy();  
+	 }  
 
 	private void initAdapter(){
 		mAdapter = new UniversalAdapter<HouseInfoModel>(mContext, R.layout.house_fragment_zufang_list_item, mHouseInfoList) {
 
 			@Override
-			public void convert(final UniversalViewHolder holder, final HouseInfoModel info) {
+			public void convert(UniversalViewHolder holder, HouseInfoModel info) {
 				View holderView = holder.getConvertView();
 				TextView addressText = (TextView)holderView.findViewById(R.id.id_history_address);
-				TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
 				TextView endTime = (TextView)holderView.findViewById(R.id.id_order_end_time);
 				TextView money = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
-				Button button1 = (Button)holderView.findViewById(R.id.id_order_button_status1);
-				Button button2 = (Button)holderView.findViewById(R.id.id_order_button_status2);
-				Button button3 = (Button)holderView.findViewById(R.id.id_order_button_status3);
+				TextView timeDown = (TextView)holderView.findViewById(R.id.id_order_time_down);
 				addressText.setText(info.getHouseAddress());
 				endTime.setText(info.getHouseEndTime());
 				money.setText(info.getHousePrice());
-				if (info.getHouseStatus().equals("0")){
-					status.setText("待确认");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setText("查看详情");
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button1.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button2.setText("确认订单");
-					button3.setText("确认订单");
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							mCurrentPosition = holder.getPosition();
-							confirmRentAttributeInfo(info.getHouseOrderId());
-						}
-					});
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							//mCurrentPosition = holder.getPosition();
-							showPositiveOrderDialog(holder.getPosition(), info.getHouseOrderId());
-						}
-					});
-				}else if (info.getHouseStatus().equals("1")){
-					status.setText("待支付");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setText("查看详情");
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-				}else if (info.getHouseStatus().equals("2")){
-					status.setText("已支付");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setText("查看详情");
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-				}else if (info.getHouseStatus().equals("3")){
-					status.setText("待评价");
-					status.setTextColor(Color.parseColor("#8be487"));
-					button1.setText("查看详情");
-					button1.setVisibility(View.INVISIBLE);
-					button2.setText("查看详情");
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-				}else if (info.getHouseStatus().equals("8")){
-					status.setText("已取消");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setText("查看详情");
-					button1.setVisibility(View.INVISIBLE);
-					button2.setText("查看详情");
-					button2.setVisibility(View.INVISIBLE);
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-				}else if (info.getHouseStatus().equals("9")){
-					status.setText("已拒绝");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setText("查看详情");
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "owner");
-							startActivity(intent);
-						}
-					});
-				}else if(info.getHouseStatus().equals("6")){
-					status.setText("待退房");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "renter");
-							startActivity(intent);
-						}
-					});
-				}else if(info.getHouseStatus().equals("7")){
-					status.setText("已过期");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "renter");
-							startActivity(intent);
-						}
-					});
-				}else if(info.getHouseStatus().equals("5")){
-					status.setText("已退房");
-					status.setTextColor(Color.parseColor("#de6262"));
-					button1.setVisibility(View.INVISIBLE);
-					button2.setVisibility(View.INVISIBLE);
-					button3.setText("查看详情");
-					button3.setTextColor(Color.parseColor("#337ffd"));
-					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-					button3.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-							intent.putExtra("order_detail", info);
-							intent.putExtra("detail_type", "renter");
-							startActivity(intent);
-						}
-					});
-				}
+				timeDown.setText(info.getShowTimeDownTime());
+				updateOrderStatusView(holder, info);
 			}
 		};
+	}
+	
+	private void needUpdateTimeDownTime(){
+		int firstShowPositon = mlistView.getFirstVisiblePosition();
+		int lastShowPosition = mlistView.getLastVisiblePosition();
+		for (int index = firstShowPositon; index <= lastShowPosition; index++){
+			if (mHouseInfoList.get(index).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
+				mAdapter.notifyDataSetChanged();
+//				timeHandler.sendEmptyMessage(900);
+//				mTimeTag = System.currentTimeMillis();
+				break;
+			}
+		}
 	}
 	
 	private void showPositiveOrderDialog(final int id, final String houseId) {  
@@ -328,7 +165,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	  
 	         public void onClick(DialogInterface dialog, int which) {
 	  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	             Log.w("alertdialog"," �뱣�����ݣ�");  
 	  
 	         }
 		});
@@ -355,6 +192,14 @@ public class OrderFangzhuFragment extends BaseFragment{
 		mPresent.readyPresentServiceParams(getActivity(), url, mConfirmRentAttribute, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
+	
+	private void expireHouseRequest(String id){
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ExpiredOrder";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mExpireOrderAction));
+		rpc.addProperty("rraId", id);
+		mPresent.readyPresentServiceParams(getActivity(), url, mExpireOrderAction, rpc);
+		mPresent.startPresentServiceTask(true);
+	}
 
 	private void rejectRentAttributeInfo(String id){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=RejectRentAttribute";
@@ -371,6 +216,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
 				parseUserHouseInfo((String)msg.obj);
+				
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无出租历史");
 					mNoContent.setVisibility(View.VISIBLE);
@@ -386,7 +232,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 					String ret = object.optString("ret");
 					if (ret != null){
 						if (ret.equals("0")){
-							mHouseInfoList.get(mCurrentPosition).setHouseStatus("1");
+							mHouseInfoList.get(mCurrentPosition).setHouseStatus(CommonUtil.ORDER_STATUS_NEED_PAY);
+							mHouseInfoList.get(mCurrentPosition).setShowTimeDownTime("请联系房客尽快付款");
 							mAdapter.notifyDataSetChanged();
 						}else{
 							GlobalUtil.shortToast(mContext, "订单确认失败，请重试！", getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -407,20 +254,310 @@ public class OrderFangzhuFragment extends BaseFragment{
 					Log.w("mingguo", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
+			}else if (msg.what == 103){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					String ret = object.optString("ret");
+					if (ret != null){
+						if (ret.equals("0")){
+							if (mExpirePosition != -1){
+								mHouseInfoList.get(mExpirePosition).setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
+							}
+							mAdapter.notifyDataSetChanged();
+						}else{
+							GlobalUtil.shortToast(mContext, "订单过期失败，请重试！", getResources().getDrawable(R.drawable.ic_dialog_no));
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	};
+	
+    
+    private Handler updateTimeHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			boolean isUpdate = false;
+			for (int i = 0; i < mHouseInfoList.size(); i++){
+				if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
+					mHouseInfoList.get(i).setCurrentDate(mHouseInfoList.get(i).getCurrentdDate() + 1000L);
+					Log.w("mingguo", "current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
+					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDate(),
+							mHouseInfoList.get(i).getHouseOrderId(), i));
+					isUpdate = true;
+				}else if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+					mHouseInfoList.get(i).setShowTimeDownTime("请联系房客尽快付款");
+				}else{
+					mHouseInfoList.get(i).setShowTimeDownTime("");
+				}
+			}
+			
+			if (isUpdate){
+				needUpdateTimeDownTime();
+				updateTimeHandler.sendEmptyMessageDelayed(800, 1000);
+			}else{
+				mAdapter.notifyDataSetChanged();
+			}
+		}  
+    	
+    };
+    
+    private void updateOrderStatusView(final UniversalViewHolder holder, final HouseInfoModel info){
+    	View holderView = holder.getConvertView();
+		TextView status = (TextView)holderView.findViewById(R.id.id_zufang_item_status);
+		Button button1 = (Button)holderView.findViewById(R.id.id_order_button_status1);
+		Button button2 = (Button)holderView.findViewById(R.id.id_order_button_status2);
+		Button button3 = (Button)holderView.findViewById(R.id.id_order_button_status3);
+    	if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
+			status.setText("待确认");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button1.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button2.setText("确认订单");
+			button3.setText("确认订单");
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					mCurrentPosition = holder.getPosition();
+					confirmRentAttributeInfo(info.getHouseOrderId());
+				}
+			});
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//mCurrentPosition = holder.getPosition();
+					showPositiveOrderDialog(holder.getPosition(), info.getHouseOrderId());
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+			status.setText("待支付");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setText("查看详情");
+			
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_HAS_PAYED)){
+			status.setText("已支付");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setText("查看详情");
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals("3")){
+			status.setText("待评价");
+			status.setTextColor(Color.parseColor("#8be487"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setText("查看详情");
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CANCELED)){
+			status.setText("已取消");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setText("查看详情");
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_REJECTED)){
+			status.setText("已拒绝");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)){
+			status.setText("已过期");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CHECKOUTED)){
+			status.setText("已退房");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
+			status.setText("待退房");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看详情");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
+				}
+			});
+		}
+    }
+    
+    /**** 
+     * 刷新倒计时控件 
+     */  
+    public String updateTimeTextView(long times_remain, String orderId, int position) {  
+        if (times_remain <= 0) {  
+            expireHouseRequest(orderId);
+            mExpirePosition = position;
+            return "超时未确认订单已过期";  
+        }  
+        //秒钟  
+        long time_second = (times_remain/1000)%60;  
+        String str_second;  
+        if (time_second < 10) {  
+            str_second = "0" + time_second;  
+        } else {  
+            str_second = "" + time_second;  
+        }  
+          
+        long time_temp = ((times_remain / 1000) - time_second) / 60;  
+        //分钟  
+        long time_minute = time_temp % 60;  
+        String str_minute;  
+        if (time_minute < 10) {  
+            str_minute = "0" + time_minute;  
+        } else {  
+            str_minute = "" + time_minute;  
+        }  
+          
+        time_temp = (time_temp - time_minute) / 60;  
+        //小时  
+        long time_hour = time_temp;  
+        String str_hour;  
+        if (time_hour < 10) {  
+            str_hour = "0" + time_hour;  
+        } else {  
+            str_hour = "" + time_hour;  
+        }  
+        return (str_minute+"分"+str_second+"秒 未确认订单自动取消"); 
+
+    }  
+      
 	
 	private  void parseUserHouseInfo(String value) {
 		mHouseInfoList.clear();
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("mingguo", "parse house info "+array.length());
+				Log.w("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel houseModel = new HouseInfoModel();
 					houseModel.setHouseStatus(itemJsonObject.optString("RRAStatus"));
+					//houseModel.setHouseStatus(CommonUtil.ORDER_STATUS_SUBMITT);
 					houseModel.setHouseAddress(itemJsonObject.optString("RAddress"));
 					houseModel.setHousePrice(itemJsonObject.optString("RRentPrice"));
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
@@ -436,8 +573,22 @@ public class OrderFangzhuFragment extends BaseFragment{
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
 					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
+					houseModel.setOrderCreatedDateStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("CreatedOn")));
+					houseModel.setOrderCreatedDate(itemJsonObject.optString("RRACreatedDate"));//下单时间
+					houseModel.setOrderExpiredDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("CreatedOn"))+CommonUtil.TIME_STAMP_10_MINUTES); //过期时间
+					houseModel.setCurrentDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("SysDate")));  //当前时间
+//					houseModel.setOrderCreatedDate(1507777210000l);//下单时间
+//					houseModel.setOrderExpiredDate(1507777210000l+CommonUtil.TIME_STAMP_10_MINUTES);//过期时间
+//					houseModel.setCurrentDate(1507777450000l);  //当前时间
+					
+					houseModel.setShowTimeDownTime("");
 					mHouseInfoList.add(houseModel);
 				}
+				if (mHouseInfoList.size() > 0){
+					updateTimeHandler.removeMessages(800);
+					updateTimeHandler.sendEmptyMessage(800);
+				}
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -465,6 +616,11 @@ public class OrderFangzhuFragment extends BaseFragment{
 			}else if (action.equals(mRejectRentAction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 102;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if (action.equals(mExpireOrderAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 103;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}

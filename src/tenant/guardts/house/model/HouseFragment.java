@@ -167,14 +167,14 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	@Override
 	public void onResume() {
 		super.onResume();
-		Log.i("mingguo", "house fragment  on resume  login name   "+CommonUtil.mUserLoginName);
+		Log.w("mingguo", "house fragment  on resume  login name   "+CommonUtil.mUserLoginName);
 		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
 			mLogin.setVisibility(View.GONE);
 		}else{
 			mLogin.setVisibility(View.VISIBLE);
 			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 			mUserName = sharedata.getString("user_name", "");
-			Log.i("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
+			Log.w("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
 			mHandler.sendEmptyMessageDelayed(6000, 100);
 		}
 	}
@@ -522,7 +522,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		// /**
 		// * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		// */
-		// Log.i("mingguo", "house fragment onTextChanged " +
+		// Log.w("mingguo", "house fragment onTextChanged " +
 		// mCurrentLocationCity);
 		// mSuggestionSearch.requestSuggestion(
 		// (new
@@ -580,7 +580,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				
@@ -658,7 +658,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 					mHouseInfoList.add(houseModel);
 				}
 			}
-			Log.i("mingguo", "search  result  mHouseInfoList  " + mHouseInfoList.size());
+			Log.w("mingguo", "search  result  mHouseInfoList  " + mHouseInfoList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -687,7 +687,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 				MapStatus.Builder builder = new MapStatus.Builder();
 				builder.target(mCurrentLatLng).zoom(18.0f);
-				Log.i("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
+				Log.w("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
 						+ CommonUtil.mCurrentLati + "  CommonUtil.mCurrentLongi  " + CommonUtil.mCurrentLongi);
 			}
 			
@@ -727,7 +727,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 
 	private void showSelectLocationMap() {
-		Log.i("mingguo",
+		Log.w("mingguo",
 				"select location site  lati  " + mCurrentLatLng.latitude + "  longi  " + mCurrentLatLng.longitude);
 		MyLocationData locData = new MyLocationData.Builder().accuracy(0)
 				// 此处设置开发者获取到的方向信息，顺时针0-360

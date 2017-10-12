@@ -34,7 +34,7 @@ public class DemoApplication extends Application {
 
      						@Override
      						public void handleNotify(XGNotifaction xGNotifaction) {
-     							Log.i("test", "处理信鸽通知：" + xGNotifaction);
+     							Log.w("test", "处理信鸽通知：" + xGNotifaction);
      							// 获取标签、内容、自定义内容
      							String title = xGNotifaction.getTitle();
      							String content = xGNotifaction.getContent();

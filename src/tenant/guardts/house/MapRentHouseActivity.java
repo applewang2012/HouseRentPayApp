@@ -229,7 +229,7 @@ public class MapRentHouseActivity extends BaseActivity
 		// /**
 		// * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		// */
-		// Log.i("mingguo", "house fragment onTextChanged
+		// Log.w("mingguo", "house fragment onTextChanged
 		// "+mCurrentLocationCity);
 		// mSuggestionSearch
 		// .requestSuggestion((new SuggestionSearchOption())
@@ -282,7 +282,7 @@ public class MapRentHouseActivity extends BaseActivity
 //				// mHouserList.get(index).get("RPropertyDesc") +" |
 //				// "+mHouserList.get(index).get("rdirectiondesc"));
 //				// location.setText("地址:"+mHouserList.get(index).get("RAddress"));
-//				// Log.i("mingguo", "index "+index+" owner
+//				// Log.w("mingguo", "index "+index+" owner
 //				// "+mHouserList.get(index).get("ROwner"));
 //				// contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
 //				// "电话："+mHouserList.get(index).get("ROwnerTel"));
@@ -508,14 +508,14 @@ public class MapRentHouseActivity extends BaseActivity
 							return;
 						}
 						mCurrentLocationCity = selectedCity;
-						Log.i("mingguo", "house fragment on resume change currentCity " + mCurrentLocationCity);
+						Log.w("mingguo", "house fragment on resume change currentCity " + mCurrentLocationCity);
 						mSelectCityText.setText(mCurrentLocationCity);
 						searchButtonProcess();
 					}
 				}
 			} else if (requestCode == CommonUtil.MAP_SUGGEST_REQEUST_CODE) {
 				Bundle searchBundle = data.getExtras();
-				Log.i("mingguo", "Map rent onActivity Result  " + searchBundle.getString("search_tag"));
+				Log.w("mingguo", "Map rent onActivity Result  " + searchBundle.getString("search_tag"));
 				searchNearbyProcess(searchBundle.getString("search_tag"));
 			}
 
@@ -710,7 +710,7 @@ public class MapRentHouseActivity extends BaseActivity
 			}
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("mingguo", "house  location  num   " + array.length());
+				Log.w("mingguo", "house  location  num   " + array.length());
 				for (int item = 0; item < array.length(); item++) {
 					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -782,7 +782,7 @@ public class MapRentHouseActivity extends BaseActivity
 	}
 
 	private void showSelectLocationMap() {
-		Log.i("mingguo",
+		Log.w("mingguo",
 				"select location site  lati  " + mCurrentLatLng.latitude + "  longi  " + mCurrentLatLng.longitude);
 		MyLocationData locData = new MyLocationData.Builder().accuracy(0)
 				// 此处设置开发者获取到的方向信息，顺时针0-360

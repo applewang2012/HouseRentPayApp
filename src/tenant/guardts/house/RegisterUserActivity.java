@@ -89,7 +89,7 @@ public class RegisterUserActivity extends BaseActivity{
 //		
 //		ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
 //		if (bmp != null){
-//			Log.i("mingguo", " bmp  width  "+bmp.getWidth()+"  height  "+bmp.getHeight());
+//			Log.w("mingguo", " bmp  width  "+bmp.getWidth()+"  height  "+bmp.getHeight());
 //			shot.setImageBitmap(bmp);
 //		}
 		
@@ -173,7 +173,7 @@ public class RegisterUserActivity extends BaseActivity{
 				mAddress = address.getEditableText().toString();
 				mPosition = position.getEditableText().toString();
 				mEmail = email.getEditableText().toString();
-				Log.i("mingguo", "user name  "+mUserName);
+				Log.w("mingguo", "user name  "+mUserName);
 				if (mUserName == null || mUserName.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -263,7 +263,7 @@ public class RegisterUserActivity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
 		if (resultCode == RESULT_OK && requestCode == 1) {
 			 Log.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
@@ -283,7 +283,7 @@ public class RegisterUserActivity extends BaseActivity{
 //			shot.setImageBitmap(newBitmap);
 //			int scale = 0;
 //				scale = getZoomScale(imageFile);//寰楀埌缂╂斁鍊嶆暟
-//				Log.i(TAG, "scale = "+scale);
+//				Log.w(TAG, "scale = "+scale);
 //				BitmapFactory.Options options = new BitmapFactory.Options();
 //				options.inSampleSize = scale;
 //				photoImageView.setImageBitmap(BitmapFactory.decodeFile(strImgPath,options));//鎸夋寚瀹歰ptions鏄剧ず鍥剧墖闃叉OOM
@@ -335,7 +335,7 @@ public class RegisterUserActivity extends BaseActivity{
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.i("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		Log.w("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -517,10 +517,10 @@ public class RegisterUserActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
-				Log.i("mingguo", "on success  action valid ");
+				Log.w("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
 					mUsernameValid = false;

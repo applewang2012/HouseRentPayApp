@@ -206,7 +206,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+mfilePath);
+		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+mfilePath);
 		if (resultCode == RESULT_OK && requestCode == 1) {
 			 Log.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
@@ -281,7 +281,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.i("mingguo", "mRealNamem  "+mRentName.getText().toString()+"  IdCard  "+mRentIDcard.getText().toString());
+		Log.w("mingguo", "mRealNamem  "+mRentName.getText().toString()+"  IdCard  "+mRentIDcard.getText().toString());
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mRentIDcard.getText().toString());
@@ -416,7 +416,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentAttributeAction)){
 				Message msg = mHandler.obtainMessage();

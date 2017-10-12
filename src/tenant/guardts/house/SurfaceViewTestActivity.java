@@ -292,7 +292,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
     private class SeekBarChangeListener implements OnSeekBarChangeListener {
 
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            Log.i("mingguo", "on progress changed  "+progress);
+            Log.w("mingguo", "on progress changed  "+progress);
             if (progress >= 0) {
                 // 如果是用户手动拖动控件，则设置视频跳转�??
                 if (fromUser) {

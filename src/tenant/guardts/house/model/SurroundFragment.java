@@ -84,7 +84,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.i("fragmenttest", "homefragment onCreateView ");
+		Log.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_surround_fragment, container, false);
 		initTitleBar();
 		initAdapter();
@@ -218,7 +218,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 	}
 	
 	public void  searchNearbyProcess(String text ) {
-		Log.i("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
+		Log.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
         		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
                 .radius(2000).pageCapacity(20);
@@ -335,7 +335,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				//for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(0);
@@ -374,7 +374,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
 
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
-		Log.i("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
+		Log.w("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
 		
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(mContext, "抱歉，未找到结果", Toast.LENGTH_SHORT)
@@ -402,7 +402,7 @@ public class SurroundFragment extends Fragment implements DataStatusInterface, O
                     .show();
             return;
         }
-        Log.i("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
+        Log.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
         for (int index = 0; index < result.getAllPoi().size(); index++){
      	   PoiInfo info = result.getAllPoi().get(index);
      	   SurroundInfo surroundInfo = new SurroundInfo();

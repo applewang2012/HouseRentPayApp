@@ -229,9 +229,8 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
 
 							@Override
-							public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
+							public void onClick(DialogInterface dialog, int which) {
 
-								Log.i("alertdialog", " �뱣�����ݣ�");
 
 							}
 
@@ -519,7 +518,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			} else if (msg.what == 200) {
 
 				jsonHouseImageListData((String) msg.obj);
-				Log.i("mingguo", "handle message   image url list size  " + imageUrlList.size());
+				Log.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
 			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
 				if (value != null) {
@@ -659,7 +658,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mHouseDetailAction)) {
 				Message msg = mHandler.obtainMessage();

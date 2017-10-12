@@ -143,12 +143,12 @@ public class ScreenshotCameraManager {
 			}
 			File pictureFile = new File(PHOTO_PATH, getPhotoFileName());
 			try {
-				Log.i("mingguo", " bmp  width  "+bitmap.getWidth()+"  height  "+bitmap.getHeight());
+				Log.w("mingguo", " bmp  width  "+bitmap.getWidth()+"  height  "+bitmap.getHeight());
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
 				bitmap.recycle();
 				fos.close();
-				Log.i(TAG, "拍摄成功！");
+				Log.w(TAG, "拍摄成功！");
 			} catch (Exception error) {
 				Log.e(TAG, "拍摄失败");
 				error.printStackTrace();

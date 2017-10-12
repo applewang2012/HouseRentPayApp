@@ -80,7 +80,7 @@ public class GalleryActivity extends Activity {
 		if (mImageStringList != null){
 			mTotalNum = mImageStringList.size();
 			for (int i = 0; i < mImageStringList.size(); i++){
-				Log.i("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
+				Log.w("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
 				initListViewsByMemoryBitmap(i);
 			}
 		}

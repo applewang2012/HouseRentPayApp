@@ -128,7 +128,7 @@ public class DownloadAppActivity extends BaseActivity{
 
 			@Override
 			public void downloadStatus(int status) {
-				Log.i("mingguo", "downloadStatu  update  "+status);
+				Log.w("mingguo", "downloadStatu  update  "+status);
 				updateDownloadStatus(status);
 				
 			}
@@ -142,7 +142,7 @@ public class DownloadAppActivity extends BaseActivity{
         		.moveToNext()) {
 			String databasepath = mSizeSortedCursor.getString(mLocalUriColumnId);
 			String downloadUrl = mSizeSortedCursor.getString(mDownloadUrlColumnId);
-			Log.i("mingguo", "database  download path  "+databasepath+"  download url  "+downloadUrl);
+			Log.w("mingguo", "database  download path  "+databasepath+"  download url  "+downloadUrl);
 			if (downloadUrl != null && downloadUrl.equalsIgnoreCase(CommonUtil.DOWLOAD_URL)){
 				int downloadId =  mSizeSortedCursor.getInt(mIdColumnId);
 				if (downloadpath == null){

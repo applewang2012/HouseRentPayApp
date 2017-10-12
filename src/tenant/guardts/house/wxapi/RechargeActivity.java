@@ -95,7 +95,7 @@ public class RechargeActivity extends BaseActivity {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				Log.i("mingguo", "oncheck changed listen  "+isChecked);
+				Log.w("mingguo", "oncheck changed listen  "+isChecked);
 				if (isChecked){
 					monkey500.setChecked(false);
 					monkey200.setChecked(false);
@@ -257,10 +257,10 @@ public class RechargeActivity extends BaseActivity {
 					}
 					String signA = sb.toString(); // 根据签名格式组装数据，详见微信支付api
 					String stringSignTemp = signA + "key=" + CommonUtil.SIGN_KEY; // 根据签名格式组装数据，详见微信支付api
-					Log.i("mingguo", "signA  " + signA);
-					Log.i("mingguo", "stringSignTemp  " + stringSignTemp);
+					Log.w("mingguo", "signA  " + signA);
+					Log.w("mingguo", "stringSignTemp  " + stringSignTemp);
 					String sign = UtilTool.MD5Encode(stringSignTemp).toUpperCase();
-					Log.i("mingguo", "sign=" + sign);
+					Log.w("mingguo", "sign=" + sign);
 					nvps.add(new BasicNameValuePair("sign", sign));
 					req.sign = sign;
 					api.sendReq(req);

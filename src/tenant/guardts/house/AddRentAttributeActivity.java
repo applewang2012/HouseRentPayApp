@@ -141,7 +141,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void checkCanRentHouseTime(String houseno){
-		Log.i("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
+		Log.w("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=CanRentTheHouse";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCanRentHouseListAction));
 		rpc.addProperty("rentNo", houseno); 
@@ -370,7 +370,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mSetEndData = df.format(cal.getTime());
 		mEndTime.setText(mOriginEndContent + df.format(cal.getTime())); 
 		mEndTimeClipse = cal.getTimeInMillis();
-		Log.i("mingguo", "update end time data  "+mEndTimeClipse);
+		Log.w("mingguo", "update end time data  "+mEndTimeClipse);
 	}
 	
 	private void initView(){
@@ -595,10 +595,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			return false;
 		}
 		Log.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
-//		if (mEndTimeClipse + 200000 < mSystemClockTime){
-//			Toast.makeText(getApplicationContext(), "租房截止时间选择有误！", Toast.LENGTH_SHORT).show();
-//			return false;
-//		}
+		if (mStartTimeClipse + 60000L < mSystemClockTime){
+			Toast.makeText(getApplicationContext(), "租房时间需要在当前时间之后！", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 		
 		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
@@ -741,7 +741,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.i("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
 		if (resultCode == RESULT_OK && requestCode == 1) {
 			 Log.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
@@ -756,8 +756,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.i("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
-		Log.i("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		Log.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		Log.w("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -879,7 +879,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}
 			}else if (msg.what ==106){
 				mSystemClockTime = UtilTool.DateTimeToStamp((String)msg.obj);
-				Log.i("mingguo", "date to string  system clock  "+mSystemClockTime);
+				Log.w("mingguo", "date to string  system clock  "+mSystemClockTime);
 			}else if (msg.what == 110){
 				
 				try {
@@ -1089,7 +1089,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
 		
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddRentAction)){
 				Message msg = mHandler.obtainMessage();

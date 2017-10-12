@@ -73,7 +73,7 @@ public class MyFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Log.i("fragmenttest", "homefragment onCreateView ");
+		Log.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.home_my_fragment, container, false);
 		initView();
 
@@ -318,7 +318,7 @@ public class MyFragment extends BaseFragment {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 
 				JSONObject itemJsonObject = array.optJSONObject(0);
@@ -364,7 +364,7 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
-						Log.i("alertdialog", " dialog interface ");
+						Log.w("alertdialog", " dialog interface ");
 					}
 
 				}).show();
@@ -397,7 +397,7 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
-						Log.i("alertdialog", " �뱣�����ݣ�");
+						Log.w("alertdialog", " �뱣�����ݣ�");
 					}
 
 				}).show();

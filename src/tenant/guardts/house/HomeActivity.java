@@ -531,7 +531,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
-				Log.i("alertdialog", " �뱣�����ݣ�");
+				Log.w("alertdialog", " �뱣�����ݣ�");
 			}
 		});
 		builder.setCancelable(false);
@@ -542,7 +542,7 @@ public class HomeActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 
 				JSONObject itemJsonObject = array.optJSONObject(0);
@@ -592,7 +592,7 @@ public class HomeActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				return itemJsonObject.optString("IDCard");
 			}
@@ -685,8 +685,8 @@ public class HomeActivity extends BaseActivity {
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.i("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
-		Log.i("mingguo", "register interface  CommonUtil.mRegisterIdcard  "+CommonUtil.mRegisterIdcard+"  CommonUtil.mRegisterRealName  "+CommonUtil.mRegisterRealName);
+		Log.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		Log.w("mingguo", "register interface  CommonUtil.mRegisterIdcard  "+CommonUtil.mRegisterIdcard+"  CommonUtil.mRegisterRealName  "+CommonUtil.mRegisterRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", CommonUtil.mRegisterIdcard);
@@ -739,7 +739,7 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mUpdateAction)) {
 				Message message = mHandler.obtainMessage();

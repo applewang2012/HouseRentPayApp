@@ -124,7 +124,7 @@ public class AboutUsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		if (action.equals(mUpdateAction)){
 			Message message = mHandler.obtainMessage();
 			message.what = 200;

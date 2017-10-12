@@ -165,7 +165,7 @@ public class DownloadThread extends Thread {
 
 			boolean finished = false;
 			while (!finished) {
-				Log.i(DownloadConstants.TAG, "Initiating request for download "
+				Log.w(DownloadConstants.TAG, "Initiating request for download "
 						+ mInfo.mId + "   request uri   " + state.mRequestUri);
 				HttpGet request = new HttpGet(state.mRequestUri);
 				try {
@@ -502,7 +502,7 @@ public class DownloadThread extends Thread {
 			logNetworkState();
 			ContentValues values = new ContentValues();
 			values.put(Downloads.COLUMN_CURRENT_BYTES, innerState.mBytesSoFar);
-			Log.i("mingguo",
+			Log.w("mingguo",
 					"DownloadThread    readFromResponse  exception  current byte    "
 							+ innerState.mBytesSoFar);
 			mContext.getContentResolver().update(mInfo.getAllDownloadsUri(),
@@ -537,7 +537,7 @@ public class DownloadThread extends Thread {
 
 	private void logNetworkState() {
 		if (DownloadConstants.LOGX) {
-			Log.i(DownloadConstants.TAG,
+			Log.w(DownloadConstants.TAG,
 					"Net "
 							+ (Helpers.isNetworkAvailable(mSystemFacade) ? "Up"
 									: "Down"));
@@ -871,7 +871,7 @@ public class DownloadThread extends Thread {
 				}
 			}
 		}
-		Log.i("mingguo", "DownloadThread   setupDestinationFile   ");
+		Log.w("mingguo", "DownloadThread   setupDestinationFile   ");
 		if (state.mStream != null
 				&& mInfo.mDestination == Downloads.DESTINATION_EXTERNAL) {
 			closeDestination(state);

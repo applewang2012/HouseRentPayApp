@@ -101,7 +101,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				return;
 			}
 
-			Log.i("mingguo", "pay activity  price int   " + realPrice);
+			Log.w("mingguo", "pay activity  price int   " + realPrice);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,7 +150,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
-						Log.i("alertdialog", " dialog interface ");
+						Log.w("alertdialog", " dialog interface ");
 					}
 
 				}).show();
@@ -258,10 +258,10 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					}
 					String signA = sb.toString(); // 根据签名格式组装数据，详见微信支付api
 					String stringSignTemp = signA + "key=" + CommonUtil.SIGN_KEY; // 根据签名格式组装数据，详见微信支付api
-					Log.i("mingguo", "signA  " + signA);
-					Log.i("mingguo", "stringSignTemp  " + stringSignTemp);
+					Log.w("mingguo", "signA  " + signA);
+					Log.w("mingguo", "stringSignTemp  " + stringSignTemp);
 					String sign = UtilTool.MD5Encode(stringSignTemp).toUpperCase();
-					Log.i("mingguo", "sign=" + sign);
+					Log.w("mingguo", "sign=" + sign);
 					nvps.add(new BasicNameValuePair("sign", sign));
 					req.sign = sign;
 					api.sendReq(req);

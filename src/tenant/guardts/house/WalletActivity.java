@@ -123,7 +123,7 @@ public class WalletActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");

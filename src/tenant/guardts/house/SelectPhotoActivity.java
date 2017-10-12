@@ -143,7 +143,7 @@ public class SelectPhotoActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if (arg2 == Bimp.tempSelectBitmap.size()) {
-					Log.i("ddddddd", "----------");
+					Log.w("ddddddd", "----------");
 					ll_popup.startAnimation(AnimationUtils.loadAnimation(SelectPhotoActivity.this,R.anim.activity_translate_in));
 					pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
 				} else {
@@ -167,7 +167,7 @@ public class SelectPhotoActivity extends BaseActivity {
 	
 	private void startAddRentHouseImage(int num){
 		if (Bimp.tempSelectBitmap.size() < 1){
-			Log.i("mingguo", "onclick  bitmap size  "+Bimp.tempSelectBitmap.size());
+			Log.w("mingguo", "onclick  bitmap size  "+Bimp.tempSelectBitmap.size());
 			Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
 		}else{
 			
@@ -391,7 +391,7 @@ public class SelectPhotoActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddImageAction)){
 				Message message = mHandler.obtainMessage();

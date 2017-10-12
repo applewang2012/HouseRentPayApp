@@ -203,7 +203,7 @@ public final class DownloadProvider extends ContentProvider {
 	    } else if (oldV < 100) {
 		// no logic to upgrade from these older version, just recreate
 		// the DB
-		Log.i(DownloadConstants.TAG,
+		Log.w(DownloadConstants.TAG,
 			"Upgrading downloads database from version " + oldV
 				+ " to version " + newV
 				+ ", which will destroy all old data");
@@ -212,7 +212,7 @@ public final class DownloadProvider extends ContentProvider {
 		// user must have downgraded software; we have no way to know
 		// how to downgrade the
 		// DB, so just recreate it
-		Log.i(DownloadConstants.TAG,
+		Log.w(DownloadConstants.TAG,
 			"Downgrading downloads database from version " + oldV
 				+ " (current version is " + newV
 				+ "), destroying all old data");

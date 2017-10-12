@@ -228,7 +228,6 @@ public class CircleFlowIndicator extends View implements FlowIndicator,
 	 */
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		Log.i("mingguo", "on measure ");
 		setMeasuredDimension(measureWidth(widthMeasureSpec),
 				measureHeight(heightMeasureSpec));
 	}

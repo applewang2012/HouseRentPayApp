@@ -110,7 +110,7 @@ public class LocationDemo extends BaseActivity {
                 button.setTextColor(Color.parseColor("#000000"));
                 OnInfoWindowClickListener listener = null;
                 int index = getCurrentMarkerIndex(marker);
-                Log.i("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
+                Log.w("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
                 button.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
                 "电话："+mHouserList.get(index).get("ROwnerTel"));
                 LatLng ll = marker.getPosition();
@@ -242,7 +242,7 @@ public class LocationDemo extends BaseActivity {
 			}
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("mingguo", "house  location  num   "+array.length());
+				Log.w("mingguo", "house  location  num   "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -358,7 +358,7 @@ public class LocationDemo extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		
 		if (action != null){

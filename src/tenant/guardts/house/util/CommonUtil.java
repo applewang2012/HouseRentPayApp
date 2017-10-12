@@ -14,7 +14,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Environment;
-import android.renderscript.ScriptIntrinsicYuvToRGB;
 import android.util.Log;
 
 /**
@@ -75,7 +74,16 @@ public class CommonUtil {
     public static  String ORDER_MONKEY = null;
     public static String ORDER_PREPAY_ID = null;
     public static String OWNER_IDCARD = null;
+    public static final long TIME_STAMP_10_MINUTES = 600000L;
     
+    public static String ORDER_STATUS_SUBMITT = "0";    //待确认
+    public static String ORDER_STATUS_NEED_PAY = "1";   //待支付
+    public static String ORDER_STATUS_HAS_PAYED = "2";  //已支付
+    public static String ORDER_STATUS_REJECTED = "9";  //已拒绝
+    public static String ORDER_STATUS_CANCELED = "8"; //已取消
+    public static String ORDER_STATUS_NEED_CHECKOUT = "6"; //退房待确认
+    public static String ORDER_STATUS_EXPIRED = "7"; //已过期
+    public static String ORDER_STATUS_CHECKOUTED = "5"; //已退房
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;
     }
@@ -108,7 +116,7 @@ public class CommonUtil {
             // 不存在获取内部存
             return null;
         }
-        Log.i("mingguo", "common util get default download path  "+path);
+        Log.w("mingguo", "common util get default download path  "+path);
        return path;
     }
     
@@ -193,8 +201,8 @@ public class CommonUtil {
 		      //计算经纬度
 		      double Latitude=address_temp.getLatitude();
 		      double Longitude=address_temp.getLongitude();
-		      Log.i("mingguo", "经度："+Latitude);
-		      Log.i("mingguo", "纬度："+Longitude);
+		      Log.w("mingguo", "经度："+Latitude);
+		      Log.w("mingguo", "纬度："+Longitude);
 		      //生产GeoPoint
 		      gpGeoPoint = new GeoPoint((int)Latitude, (int)Longitude);
 		    }
@@ -221,8 +229,8 @@ public class CommonUtil {
 					      //计算经纬度
 					       Latitude = address_temp.getLatitude();
 					       Longitude = address_temp.getLongitude();
-					      Log.i("mingguo", "经度："+Latitude);
-					      Log.i("mingguo", "纬度："+Longitude);
+					      Log.w("mingguo", "经度："+Latitude);
+					      Log.w("mingguo", "纬度："+Longitude);
 					      //生产GeoPoint
 					    }
 		        	}

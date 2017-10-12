@@ -17,7 +17,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -35,7 +35,7 @@ public class JsonObjectParse {
 					list.add(houseModel);
 				}
 			}
-			Log.i("house", "for item  "+list.size());
+			Log.w("house", "for item  "+list.size());
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class JsonObjectParse {
 //		try{
 //			JSONArray array = new JSONArray(value);
 //			if (array != null){
-//				Log.i("house", "parse house info "+array.length());
+//				Log.w("house", "parse house info "+array.length());
 //				//for (int item = 0; item < array.length(); item++){
 //					
 //					JSONObject itemJsonObject = array.optJSONObject(0);
@@ -72,7 +72,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				nameId = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -96,7 +96,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					
@@ -119,7 +119,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				name = new String[array.length()];
 				nameId = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -145,7 +145,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				name = new String[array.length()];
 				nameId = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -171,7 +171,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				name = new String[array.length()];
 				nameId = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -195,7 +195,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					
@@ -217,7 +217,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				name = new String[array.length()];
 				nameId = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -241,7 +241,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					
@@ -261,7 +261,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					
@@ -281,7 +281,7 @@ public class JsonObjectParse {
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				property = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					

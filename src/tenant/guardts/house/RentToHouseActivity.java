@@ -186,7 +186,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	  
 	             // TODO Auto-generated method stub  
 	  
-	             Log.i("alertdialog"," �뱣�����ݣ�");  
+	             Log.w("alertdialog"," �뱣�����ݣ�");  
 	  
 	         }  
 	  
@@ -209,7 +209,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 //	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
 //	         @Override  
 //	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-//	             Log.i("alertdialog"," �뱣�����ݣ�");  
+//	             Log.w("alertdialog"," �뱣�����ݣ�");  
 //	         }  
 //	     }).show();
 //	}
@@ -266,7 +266,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.i("house", "parse house info "+array.length());
+				Log.w("house", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -284,7 +284,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 					list.add(houseModel);
 				}
 			}
-			Log.i("house", "for item  "+list.size());
+			Log.w("house", "for item  "+list.size());
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -318,7 +318,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mGetHouseInfoAction)){
 				Message msgMessage = mHandler.obtainMessage();

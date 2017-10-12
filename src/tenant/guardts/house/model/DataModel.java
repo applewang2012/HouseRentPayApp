@@ -137,7 +137,6 @@ public class DataModel {
 				HttpTransportSE transport = new HttpTransportSE(mUrl,30000);
 				transport.call(mSoapAction, envelope);
 				SoapObject valueObject = null;
-				Log.i("mingguo", "result string  "+envelope.getResponse());
 				if(envelope.getResponse()!=null){
 					valueObject = (SoapObject)envelope.bodyIn;				
 				}
@@ -207,7 +206,7 @@ public class DataModel {
 		            //���ز���
 		            for(Map.Entry<String, String> entry:mPostData.entrySet()){    
 		            	urlList.add(new BasicNameValuePair(entry.getKey(), entry.getValue())); 
-		            	Log.i("house", "entry.getKey()  "+entry.getKey()+"  entry.getValue()  "+entry.getValue());
+		            	Log.w("house", "entry.getKey()  "+entry.getKey()+"  entry.getValue()  "+entry.getValue());
 		            }   
 		            
 		            HttpEntity entity = new UrlEncodedFormEntity(urlList, HTTP.UTF_8);

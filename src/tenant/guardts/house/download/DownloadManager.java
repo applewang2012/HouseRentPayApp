@@ -849,8 +849,8 @@ public class DownloadManager {
 	public long enqueue(Request request) {
 		ContentValues values = request.toContentValues(mPackageName);
 		// add for appstore
-		Log.i("mingguo", "DownloadManager   enqueue   packagename    "+mPackageName);
-		Log.i("mingguo", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
+		Log.w("mingguo", "DownloadManager   enqueue   packagename    "+mPackageName);
+		Log.w("mingguo", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
 		//values.put(Downloads.COLUMN_FILE_NAME_HINT, (String) request.mTitle);
 		values.put(Downloads.COLUMN_PACKAGE_NAME, request.mRequestPackageName);
 		//values.put(Downloads.COLUMN_NOTIFICATION_CLASS, HomeTabActivity.class.getName());

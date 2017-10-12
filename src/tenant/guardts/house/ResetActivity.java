@@ -127,7 +127,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				

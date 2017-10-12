@@ -403,7 +403,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				Log.i("alertdialog", " �뱣�����ݣ�");
+				Log.w("alertdialog", " �뱣�����ݣ�");
 
 			}
 		});
@@ -440,7 +440,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				Log.i("alertdialog", " �뱣�����ݣ�");
+				Log.w("alertdialog", " �뱣�����ݣ�");
 
 			}
 		});
@@ -570,7 +570,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mRejectRentAction)) {
 				Message msg = mHandler.obtainMessage();

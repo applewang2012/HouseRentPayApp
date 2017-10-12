@@ -246,7 +246,7 @@ public class SearchResultActivity extends BaseActivity {
 		rpc.addProperty("endate", mEndTime);
 		mPresent.readyPresentServiceParams(this, url, mSearchAction, rpc);
 		mPresent.startPresentServiceTask(true);
-		Log.i("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
+		Log.w("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
 	}
 	
 	
@@ -351,7 +351,7 @@ public class SearchResultActivity extends BaseActivity {
 //			}
 //			HouseInfo grad2 = grads2.get(pos);
 //			gradId2 = grad2.getId();
-			Log.i("mingguo", "postion  == 0  pos  "+pos);
+			Log.w("mingguo", "postion  == 0  pos  "+pos);
 			if (pos == 0){
 				mHouseType = "";
 			}else if (pos == 1){
@@ -369,7 +369,7 @@ public class SearchResultActivity extends BaseActivity {
 //			}
 //			HouseInfo grad = grads.get(pos);
 //			gradId = grad.getId();
-			Log.i("mingguo", "postion  == 1  pos  "+pos);
+			Log.w("mingguo", "postion  == 1  pos  "+pos);
 			if (pos == 0){
 				mRentType = "";
 			}else if (pos == 1){
@@ -380,7 +380,7 @@ public class SearchResultActivity extends BaseActivity {
 			break;
 		case 2:// 排序
 			sort = pos;
-			Log.i("mingguo", "postion  == 2  pos  "+pos);
+			Log.w("mingguo", "postion  == 2  pos  "+pos);
 			if (pos == 0){
 				mPageCount = 999;
 			}else if (pos == 1){
@@ -439,7 +439,7 @@ public class SearchResultActivity extends BaseActivity {
 			try{
 				JSONArray array = new JSONArray(obj);
 				if (array != null){
-					Log.i("mingguo", "parse house info "+array.length());
+					Log.w("mingguo", "parse house info "+array.length());
 					mHouseInfoList.clear();
 					for (int item = 0; item < array.length(); item++){
 						
@@ -459,7 +459,7 @@ public class SearchResultActivity extends BaseActivity {
 						mHouseInfoList.add(houseModel);
 					}
 				}
-				Log.i("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
+				Log.w("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -469,7 +469,7 @@ public class SearchResultActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mSearchAction)){
 				Message msgMessage = mHandler.obtainMessage();
@@ -484,7 +484,7 @@ public class SearchResultActivity extends BaseActivity {
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
-		Log.i("mingguo", "on status error  action  "+error);
+		Log.w("mingguo", "on status error  action  "+error);
 	}
 	
 	

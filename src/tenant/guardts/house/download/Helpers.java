@@ -266,7 +266,7 @@ public class Helpers {
     	//add for appstore
     	//File cacheDirFile = new File(context.getCacheDir(), "/");
     	File cacheDirFile = new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL), "/");
-    	Log.i("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
+    	Log.w("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
     	if (!cacheDirFile.isDirectory() && !cacheDirFile.mkdir()) {
     	    // Can't create download directory, e.g. because a file called
     	    // "download"

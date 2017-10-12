@@ -155,7 +155,7 @@ public class BMapUtil {
 	       //旋转图片 动作   
 	       Matrix matrix = new Matrix();;  
 	       matrix.postRotate(angle);  
-	       Log.i("mingguo", "image  rotation  angle = " + angle);  
+	       Log.w("mingguo", "image  rotation  angle = " + angle);  
 	       // 创建新的图片   
 	       Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,  
 	               bitmap.getWidth(), bitmap.getHeight(), matrix, true);  

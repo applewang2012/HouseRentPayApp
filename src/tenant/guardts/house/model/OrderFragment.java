@@ -52,7 +52,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.i("fragmenttest", "homefragment onCreateView ");
+		Log.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_layout, container, false);
 		initTitleBar();
 		initView();
@@ -217,7 +217,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 //		try {
 //			array = new JSONArray(value);
 //			if (array != null){
-//				Log.i("house", "parse house info "+array.length());
+//				Log.w("house", "parse house info "+array.length());
 //				for (int item = 0; item < array.length(); item++){
 //					JSONObject itemJsonObject = array.optJSONObject(item);
 //					HouseInfoModel infoModel = new HouseInfoModel();

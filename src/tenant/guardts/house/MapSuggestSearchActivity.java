@@ -246,7 +246,7 @@ public class MapSuggestSearchActivity extends Activity implements OnGetSuggestio
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ViewUtil.forceCloseSoftKeyborad(MapSuggestSearchActivity.this);
-				Log.i("mingguo", "map search suggest item click  "+mSearchText.getText().toString());
+				Log.w("mingguo", "map search suggest item click  "+mSearchText.getText().toString());
 				insertData(mSearchText.getText().toString().trim());
 				Intent resultIntent = new Intent();
 				Bundle bundle = new Bundle();

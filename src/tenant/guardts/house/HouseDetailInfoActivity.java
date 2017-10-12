@@ -165,7 +165,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
 
-						Log.i("alertdialog", " �뱣�����ݣ�");
+						Log.w("alertdialog", " �뱣�����ݣ�");
 
 					}
 
@@ -434,7 +434,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			} else if (msg.what == 200) {
 
 				jsonHouseImageListData((String) msg.obj);
-				Log.i("mingguo", "handle message   image url list size  " + imageUrlList.size());
+				Log.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
 				initBanner(imageUrlList);
 			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
@@ -562,7 +562,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mHouseDetailAction)) {
 				Message msg = mHandler.obtainMessage();

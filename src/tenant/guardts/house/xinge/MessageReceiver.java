@@ -119,7 +119,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //				Toast.LENGTH_SHORT).show();
 //		// 获取自定义key-value
 		String customContent = message.getCustomContent();
-		Log.i("mingguo", "xinge click notification   "+message.toString());
+		Log.w("mingguo", "xinge click notification   "+message.toString());
 		if (customContent != null && customContent.length() != 0) {
 			Intent intent = new Intent(context, HomeActivity.class);
 	        //intent.putExtra("data", id.intValue());

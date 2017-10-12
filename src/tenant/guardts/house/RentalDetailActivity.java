@@ -75,7 +75,7 @@ public class RentalDetailActivity extends BaseActivity implements DataStatusInte
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCanRentHouseListAction)){
 				Message message = mHandler.obtainMessage();

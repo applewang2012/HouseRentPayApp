@@ -224,7 +224,7 @@ public class LoginUserActivity extends BaseActivity {
 	private void commonServiceInterface() {
 		SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
 		String host = sharedata.getString("user_host", "");
-		Log.i("mingguo", "common service preference host  " + host);
+		Log.w("mingguo", "common service preference host  " + host);
 		if (host == null || host.equals("")) {
 			String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
@@ -263,7 +263,7 @@ public class LoginUserActivity extends BaseActivity {
 			if (data != null) {
 				mPassword = data.getStringExtra("new_password");
 				passwordEditText.setText(mPassword);
-				Log.i("mingguo", "login activity  onActivityResult password  " + mPassword);
+				Log.w("mingguo", "login activity  onActivityResult password  " + mPassword);
 			}
 		}
 	}
@@ -321,7 +321,7 @@ public class LoginUserActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.i("house", "parse house info " + array.length());
+				Log.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 
@@ -352,7 +352,7 @@ public class LoginUserActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100) {
-				Log.i("mingguo", "loginUserActivity  username   " + mUserName + "  password  " + mPassword);
+				Log.w("mingguo", "loginUserActivity  username   " + mUserName + "  password  " + mPassword);
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success),
 						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				getUserInfo(mUserName);
@@ -415,7 +415,7 @@ public class LoginUserActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.i("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mLoginAction)) {
