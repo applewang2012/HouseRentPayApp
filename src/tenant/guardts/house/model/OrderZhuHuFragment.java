@@ -282,6 +282,60 @@ public class OrderZhuHuFragment extends BaseFragment{
 							startActivity(intent);
 						}
 					});
+				}else if(info.getHouseStatus().equals("6")){
+					status.setText("待退房");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
+				}else if(info.getHouseStatus().equals("7")){
+					status.setText("已过期");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
+				}else if(info.getHouseStatus().equals("5")){
+					status.setText("已退房");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.INVISIBLE);
+					button2.setVisibility(View.INVISIBLE);
+					button3.setText("查看详情");
+					button3.setTextColor(Color.parseColor("#337ffd"));
+					button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
 				}
 			}
 		};

@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import tenant.guardts.house.view.CustomRatingBar;
 
+/**评价
+ * @author Zhou
+ *
+ */
 public class EvaluationActivity extends BaseActivity {
 
 	private TextView mHouseLocation;//房屋所在地

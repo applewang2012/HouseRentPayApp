@@ -214,5 +214,6 @@
     <string name="title_activity_bank">BankActivity</string>
     <string name="title_activity_reset">ResetActivity</string>
     <string name="title_activity_rental_detail">RentalDetailActivity</string>
+    <string name="title_activity_evaluation_detail">EvaluationDetailActivity</string>
 
 </resources>

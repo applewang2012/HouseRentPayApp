@@ -461,10 +461,12 @@ public class MapRentHouseActivity extends BaseActivity
 					if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 						if (phone.length() > 5) {
 							showInfo = "房主：" + ownerName.substring(0, 1) + "**" + " 电话：" + phone.substring(0, 3) + "********";
+//							showInfo="纬"+child.get(i).get("Latitude")+"==经"+child.get(i).get("Longitude");
 						}
 						
 					}else{
-						showInfo = "房主：" + ownerName  + " 电话：" + phone;
+						showInfo = "房主：" + ownerName  + " 电话：" + phone;////////////////////
+//						showInfo="纬"+child.get(i).get("Latitude")+"==经"+child.get(i).get("Longitude");
 					}
 					listItem[i] = showInfo; 
 				}

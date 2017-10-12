@@ -8,8 +8,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.ApplyForCheckOut;
+import tenant.guardts.house.model.HouseImageInfo;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,28 +37,24 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.HouseImageInfo;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
+
+import com.google.gson.Gson;
+import com.gzt.faceid5sdk.DetectionAuthentic;
 
 public class ApplyForCheckoutActivity extends BaseActivity {
 	private Button mButtonCall;// 联系房主
-	private Button mButtonApply;// 申请租房
+	private Button mButtonApply;// 申请退房
 	private TextView mTitleBar;
+	private String reason;// 退房原因
 
 	private HoursePresenter mPresenter;
+	private String mApplyCheckOutActioin = "http://tempuri.org/ApplyCheckOut";// 申请退房
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
 	private String mAppIDString = "0000004";
@@ -84,7 +86,14 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	private String mDetailType;
 	private String mPhoneNumber;
 
-	
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,16 +105,15 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		mTitleBar.setText("申请退房");
 		mDetailType = getIntent().getStringExtra("detail_type");
 		mPhoneNumber = getIntent().getStringExtra("type_phone");
-//		flag = getIntent().getStringExtra("flag");
+		mRRAID = getIntent().getStringExtra("RRAID");
+		// flag = getIntent().getStringExtra("flag");
 		initView();
-//		// mRentNo = "888888888";
-//		Log.e("mingguo", "rent no  " + mRentNo);
-//		getHouseDetailInfoByHouseId(mRentNo);
+		// // mRentNo = "888888888";
+		// Log.e("mingguo", "rent no  " + mRentNo);
+		// getHouseDetailInfoByHouseId(mRentNo);
 		initPopupWindow();
 		initEvent();
 	}
-	
-	
 
 	/**
 	 * 点击事件
@@ -116,8 +124,8 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				backgroundAlpha(0.3f);
-				ll_popup.startAnimation(
-						AnimationUtils.loadAnimation(ApplyForCheckoutActivity.this, R.anim.activity_translate_in));
+				ll_popup.startAnimation(AnimationUtils.loadAnimation(ApplyForCheckoutActivity.this,
+						R.anim.activity_translate_in));
 				pop.showAtLocation(mButtonCall, Gravity.BOTTOM, 0, 0);
 
 				TextView phone = (TextView) ll_popup.findViewById(R.id.id_button_contact_owner_show_phone);
@@ -129,11 +137,64 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				String reason = getReason();
+				if (TextUtils.isEmpty(reason)) {
+					Toast.makeText(ApplyForCheckoutActivity.this, "请选择退房原因！", Toast.LENGTH_SHORT).show();
+				} else {
+					initAlertDialog(reason);
+				}
 
-				
 			}
 		});
 
+	}
+
+	protected void initAlertDialog(final String reason) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		builder.setTitle("是否申请退房？");
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				builder.create().dismiss();
+
+			}
+		});
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (!TextUtils.isEmpty(mRRAID)) {
+					Toast.makeText(ApplyForCheckoutActivity.this, "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason, Toast.LENGTH_SHORT).show();
+
+					ApplyCheckOut(mRRAID, CommonUtil.mUserLoginName, reason);
+				}
+
+			}
+		});
+
+		builder.show();
+	}
+
+	/**
+	 * 申请退房
+	 * 
+	 * @param rraid
+	 *            RRAID
+	 * @param applyer
+	 *            租户用户名（手机号）
+	 * @param reason
+	 *            退房原因
+	 */
+	private void ApplyCheckOut(String rraid, String applyer, String reason) {
+
+		String url = CommonUtil.mUserHost + "Services.asmx?op=ApplyCheckOut";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mApplyCheckOutActioin));
+		rpc.addProperty("rraId", rraid);
+		rpc.addProperty("applyer", applyer);
+		rpc.addProperty("reason", reason);
+		mPresenter.readyPresentServiceParams(this, url, mApplyCheckOutActioin, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void showPublicAttributeDialog() {
@@ -144,14 +205,13 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 					@Override
-
 					public void onClick(DialogInterface dialog, int which) {
-						if (mHouseInfo == null){
+						if (mHouseInfo == null) {
 							return;
 						}
-						if (mHouseInfo != null && mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")
-								&& mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")
-								&& mHouseInfo.getHouseOwnerName() != null
+						if (mHouseInfo != null && mHouseInfo.getHouseId() != null
+								&& !mHouseInfo.getHouseId().equals("") && mHouseInfo.getHouseOwnerName() != null
+								&& !mHouseInfo.getHouseOwnerName().equals("") && mHouseInfo.getHouseOwnerName() != null
 								&& !mHouseInfo.getHouseOwnerName().equals("")) {
 							Intent intent = new Intent(ApplyForCheckoutActivity.this, AddRentAttributeActivity.class);
 							intent.putExtra("house_id", mHouseInfo.getHouseId());
@@ -168,17 +228,16 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
 
-					@Override
+							@Override
+							public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
 
-					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
+								Log.i("alertdialog", " �뱣�����ݣ�");
 
-						Log.i("alertdialog", " �뱣�����ݣ�");
+							}
 
-					}
-
-				}).show();
+						}).show();
 	}
-	
+
 	private void initView() {
 
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
@@ -187,21 +246,20 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		LinearLayout mReasonContent2 = (LinearLayout) findViewById(R.id.checkout_house_reason_content2);
 		LinearLayout mReasonContent3 = (LinearLayout) findViewById(R.id.checkout_house_reason_content3);
 		LinearLayout mReasonContent4 = (LinearLayout) findViewById(R.id.checkout_house_reason_content4);
-		
-		final ImageView reasonIcon1 = (ImageView)findViewById(R.id.checkout_house_reason_icon1);
-		final ImageView reasonIcon2 = (ImageView)findViewById(R.id.checkout_house_reason_icon2);
-		final ImageView reasonIcon3 = (ImageView)findViewById(R.id.checkout_house_reason_icon3);
-		final ImageView reasonIcon4 = (ImageView)findViewById(R.id.checkout_house_reason_icon4);
-		
+
+		final ImageView reasonIcon1 = (ImageView) findViewById(R.id.checkout_house_reason_icon1);
+		final ImageView reasonIcon2 = (ImageView) findViewById(R.id.checkout_house_reason_icon2);
+		final ImageView reasonIcon3 = (ImageView) findViewById(R.id.checkout_house_reason_icon3);
+		final ImageView reasonIcon4 = (ImageView) findViewById(R.id.checkout_house_reason_icon4);
+
 		final TextView reasonText1 = (TextView) findViewById(R.id.checkout_house_reason_text1);
 		final TextView reasonText2 = (TextView) findViewById(R.id.checkout_house_reason_text2);
 		final TextView reasonText3 = (TextView) findViewById(R.id.checkout_house_reason_text3);
 		final TextView reasonText4 = (TextView) findViewById(R.id.checkout_house_reason_text4);
 		mReasonContent1.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				reasonIcon1.setBackgroundResource(R.drawable.checkout_house_selected);
 				reasonIcon2.setBackgroundResource(R.drawable.checkout_house_normal);
 				reasonIcon3.setBackgroundResource(R.drawable.checkout_house_normal);
@@ -210,11 +268,12 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				reasonText2.setTextColor(Color.parseColor("#333333"));
 				reasonText3.setTextColor(Color.parseColor("#333333"));
 				reasonText4.setTextColor(Color.parseColor("#333333"));
+				setReason(reasonText1.getText().toString());
 			}
 		});
-		
+
 		mReasonContent2.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -226,6 +285,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				reasonText2.setTextColor(Color.parseColor("#337ffd"));
 				reasonText3.setTextColor(Color.parseColor("#333333"));
 				reasonText4.setTextColor(Color.parseColor("#333333"));
+				setReason(reasonText2.getText().toString());
 			}
 		});
 
@@ -242,6 +302,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				reasonText2.setTextColor(Color.parseColor("#333333"));
 				reasonText3.setTextColor(Color.parseColor("#337ffd"));
 				reasonText4.setTextColor(Color.parseColor("#333333"));
+				setReason(reasonText3.getText().toString());
 			}
 		});
 
@@ -258,19 +319,20 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				reasonText2.setTextColor(Color.parseColor("#333333"));
 				reasonText3.setTextColor(Color.parseColor("#333333"));
 				reasonText4.setTextColor(Color.parseColor("#337ffd"));
+				setReason(reasonText4.getText().toString());
 			}
 		});
 
 		mButtonCall = (Button) findViewById(R.id.checkout_house_contact_phone);
 		mButtonApply = (Button) findViewById(R.id.checkout_house_checkout_ok);
-		
+
 		if (mDetailType.equals("owner")) {
 			mButtonCall.setText("联系房客");
 			reasonText1.setText("房客行程有变");
 			reasonText2.setText("房屋改造");
 			reasonText3.setText("态度恶劣");
 			reasonText4.setText("其它原因");
-		}else{
+		} else {
 			mButtonCall.setText("联系房主");
 			reasonText1.setText("行程有变");
 			reasonText2.setText("环境一般");
@@ -308,7 +370,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		TextView contactTitle = (TextView) view.findViewById(R.id.popup_contact_title);
 		if (mDetailType.equals("owner")) {
 			contactTitle.setText("联系房客");
-		}else{
+		} else {
 			contactTitle.setText("联系房主");
 		}
 		Button dialPhoneButton = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
@@ -321,8 +383,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				pop.dismiss();
 				ll_popup.clearAnimation();
 				try {
-					Intent intent1 = new Intent(Intent.ACTION_CALL,
-							Uri.parse("tel:" + mPhoneNumber));
+					Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPhoneNumber));
 					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent1);
 				} catch (Exception e) {
@@ -356,7 +417,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 	}
 
 	/**
@@ -365,7 +426,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	 * @param rentNO
 	 */
 	private void setDeleteHouseInfo(String rentNO) {
-		String url = CommonUtil.mUserHost+"Services.asmx?op=DeleteHouseInfo";
+		String url = CommonUtil.mUserHost + "Services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfo));
 		rpc.addProperty("rentNO", rentNO);
 		mPresenter.readyPresentServiceParams(this, url, mDeleteHouseInfo, rpc);
@@ -381,7 +442,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// 删除房屋
 				if (!TextUtils.isEmpty(mRentNo)) {
-//					setDeleteHouseInfo(mRentNo);//////////////////////////////////////////
+					// setDeleteHouseInfo(mRentNo);//////////////////////////////////////////
 				}
 			}
 		}).setPositiveButton("否", null).show();
@@ -425,9 +486,6 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	private TextView mRoomNum, mHousePrice;
 	private Button mDel;
 
-	
-
-
 	private void getHouseDetailInfoByHouseId(String rentNo) {
 
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetHouseDetailInfo";
@@ -455,7 +513,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 				jsonHouseInfoToView((String) msg.obj);
 
-				//getHouseDetailImageListByHouseId(mRentNo);
+				// getHouseDetailImageListByHouseId(mRentNo);
 			} else if (msg.what == 101) {
 
 			} else if (msg.what == 200) {
@@ -473,11 +531,25 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 						Toast.makeText(ApplyForCheckoutActivity.this, "删除失败！", Toast.LENGTH_SHORT).show();
 					}
 				}
+			} else if (msg.what == 400) {
+				String value = (String) msg.obj;
+				Gson gson = new Gson();
+				ApplyForCheckOut checkOut = gson.fromJson(value, ApplyForCheckOut.class);
+				if(checkOut.ret!=null){
+					if(checkOut.ret.equals("0")){
+						if (mDetailType.equals("owner")) {
+							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待租户确认！", Toast.LENGTH_SHORT).show();
+						} else {
+							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待房主确认！", Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
 			}
 		}
 
 	};
 	private String flag;
+	private String mRRAID;
 
 	private void jsonHouseInfoToView(String value) {
 		if (value != null) {
@@ -602,6 +674,11 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			} else if (action.equals(mDeleteHouseInfo)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 300;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			} else if (action.equals(mApplyCheckOutActioin)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 400;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}

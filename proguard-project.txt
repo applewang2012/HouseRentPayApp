@@ -37,6 +37,8 @@
 -keep class tenant.guardts.house.model.WalletPayment
 -keep class tenant.guardts.house.model.WithdrawStatus
 -keep class tenant.guardts.house.model.HouseInfoModel
+-keep class tenant.guardts.house.model.ApplyForCheckOut
+-keep class tenant.guardts.house.model.ConfirmCheckout
 -keep class tenant.guardts.house.bean.Detail
 -keep class com.google.** { *; }
  -keep class com.tencent.** { *;}  

@@ -96,19 +96,22 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-            <intent-filter>
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
             <intent-filter>
-			   	   <action android:name="android.intent.action.VIEW"/>
-				   <category android:name="android.intent.category.DEFAULT"/>
-				   <category android:name="android.intent.category.BROWSABLE"/>
-				   <data android:scheme="guardtsapp" android:host="tenant.guardts.house" android:pathPrefix="/launcher"/>
-			</intent-filter>
-			
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="tenant.guardts.house"
+                    android:pathPrefix="/launcher"
+                    android:scheme="guardtsapp" />
+            </intent-filter>  
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -160,7 +163,6 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
         <activity
             android:name=".HouseDetailInfoActivity"
             android:screenOrientation="portrait"
@@ -223,7 +225,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -246,7 +248,8 @@
             android:name=".RegisterUserStep3Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
         <activity
             android:name=".RegisterUserFinishActivity"
             android:screenOrientation="portrait"
@@ -542,7 +545,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -559,6 +562,16 @@
             android:name=".RentalDetailActivity"
             android:label="@string/title_activity_rental_detail"
             android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".EvaluationDetailActivity"
+            android:label="@string/title_activity_evaluation_detail"
+            android:theme="@style/AppTheme" >
+         <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
         </activity>
     </application>
 
