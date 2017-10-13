@@ -483,7 +483,15 @@ public class HomeActivity extends BaseActivity {
 			}
 
 		});
-		builder.setCancelable(false);
+		builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+			@Override
+
+			public void onClick(DialogInterface dialog, int which) {
+				
+			}
+
+		});
+		builder.setCancelable(true);
 		builder.show();
 	}
 	

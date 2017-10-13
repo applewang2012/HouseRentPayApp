@@ -3,17 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1f2f3" >
-
-    <ListView
-        android:id="@+id/id_fragment_house_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:background="#f1f2f3"
-        android:cacheColorHint="#00000000"
-        android:divider="#00000000"
-        android:dividerHeight="@dimen/base_dimen_10"
-        android:fadingEdge="none"
-      />
+	<!-- <android.support.v4.widget.SwipeRefreshLayout 
+        android:id="@+id/id_fangzhu_pull_refresh"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent" 
+        >  --> 
+	    <ListView
+	        android:id="@+id/id_fragment_house_listview"
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"
+	        android:background="#f1f2f3"
+	        android:cacheColorHint="#00000000"
+	        android:divider="#00000000"
+	        android:dividerHeight="@dimen/base_dimen_10"
+	        android:fadingEdge="none"
+	      />
+	<!--  </android.support.v4.widget.SwipeRefreshLayout> -->
 
     <TextView
         android:id="@+id/id_frament_house_no_cotent"

@@ -1,5 +1,7 @@
 package tenant.guardts.house;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.google.gson.Gson;
@@ -31,6 +33,7 @@ import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.ServiceCharge;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
 
 public class HouseOrderDetailsActivity extends BaseActivity {
 	private HouseInfoModel mOrderDetail;
@@ -44,6 +47,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private TextView ownerPhone;// 房主电话
 	private TextView contactPhone;// 房客电话
 	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";// 扣费提醒
+	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
+	private long mEnterTimeStamp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +60,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		mTitleBar.setText("订单详情");
 		mOrderDetail = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
 		mDetailType = getIntent().getStringExtra("detail_type");
+		
 		mPresent = new HoursePresenter(HouseOrderDetailsActivity.this, this);
 		getPayRateDesc(mOrderDetail.getHousePrice());
 		initView();
-
+		initData();
 	}
 
 	/**
@@ -74,6 +80,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		mPresent.readyPresentServiceParams(this, url, mGetPayRateDesc, rpc);
 		mPresent.startPresentServiceTask(true);
 
+	}
+	
+	private void initData(){
+		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT) || mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+			mEnterTimeStamp = mOrderDetail.getCurrentdDate();
+			updateTimeHandler.sendEmptyMessage(800);
+		}
 	}
 
 	private void initView() {
@@ -137,8 +150,86 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				initPopupWindow();
 			}
 		});
-
 	}
+	
+	private void expireHouseRequest(String id){
+		String url = CommonUtil.mUserHost+"Services.asmx?op=ExpiredOrder";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mExpireOrderAction));
+		rpc.addProperty("rraId", id);
+		mPresent.readyPresentServiceParams(this, url, mExpireOrderAction, rpc);
+		mPresent.startPresentServiceTask(true);
+	}
+	
+	
+	
+	/**** 
+     * 刷新倒计时控件 
+     */  
+    public String updateTimeTextView(long times_remain, String orderId) {  
+        if (times_remain <= 0) {  
+            expireHouseRequest(orderId);
+            return "00:00";  
+        }  
+        //秒钟  
+        long time_second = (times_remain/1000)%60;  
+        String str_second;  
+        if (time_second < 10) {  
+            str_second = "0" + time_second;  
+        } else {  
+            str_second = "" + time_second;  
+        }  
+          
+        long time_temp = ((times_remain / 1000) - time_second) / 60;  
+        //分钟  
+        long time_minute = time_temp % 60;  
+        String str_minute;  
+        if (time_minute < 10) {  
+            str_minute = "0" + time_minute;  
+        } else {  
+            str_minute = "" + time_minute;  
+        }  
+          
+        time_temp = (time_temp - time_minute) / 60;  
+        //小时  
+        long time_hour = time_temp;  
+        String str_hour;  
+        if (time_hour < 10) {  
+            str_hour = "0" + time_hour;  
+        } else {  
+            str_hour = "" + time_hour;  
+        }  
+        return (str_minute+":"+str_second+""); 
+
+    }  
+	
+	private Handler updateTimeHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			mEnterTimeStamp = mEnterTimeStamp + 1000L;
+			updateShowTimeDown(updateTimeTextView(mOrderDetail.getOrderExpiredDate() - mEnterTimeStamp,
+					mOrderDetail.getHouseOrderId()));
+			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT) || mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+				updateTimeHandler.sendEmptyMessageDelayed(800, 1000);
+			}
+			
+		}  
+    };
+    
+    private void updateShowTimeDown(String timeContent){
+    	if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
+    		if (mDetailType.equals("owner")) {
+    			button1.setText("确认 "+timeContent);
+    		}
+    	}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+    		if (mDetailType.equals("renter")){
+    			button1.setText("支付 "+timeContent);
+    		}
+    	}
+	}
+    
 
 	/**
 	 * 更新订单状态
@@ -155,11 +246,12 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button1.setText("确认订单");
 			button1.setVisibility(View.GONE);
 
-			button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			if (mDetailType != null) {
 				if (mDetailType.equals("owner")) {
 					button1.setVisibility(View.VISIBLE);
-					button1.setTextColor(Color.parseColor("#337ffd"));
+					button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					button1.setTextColor(Color.parseColor("#ffffff"));
 					button1.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -179,7 +271,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					});
 				} else if (mDetailType.equals("renter")) {
 					button2.setText("取消订单");
-					button2.setTextColor(Color.parseColor("#337ffd"));
+					button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					button2.setTextColor(Color.parseColor("#ffffff"));
 					button2.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -194,8 +287,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("待支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("立即付款");
-			button1.setTextColor(Color.parseColor("#337ffd"));
-			button1.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button1.setTextColor(Color.parseColor("#ffffff"));
+			button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			button2.setText("取消订单");
 
 			if (mDetailType != null) {
@@ -240,8 +333,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setVisibility(View.VISIBLE);
 			priceLinearLayout.setVisibility(View.VISIBLE);
 			tvServiceFee.setVisibility(View.VISIBLE);
-			btnContact.setTextColor(Color.parseColor("#337ffd"));
-			btnContact.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			btnContact.setTextColor(Color.parseColor("#ffffff"));
+			btnContact.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			button2.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -268,8 +361,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
 			// button3.setText("立即评价");
-			// button3.setTextColor(Color.parseColor("#337ffd"));
-			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			// button3.setTextColor(Color.parseColor("#ffffff"));
+			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 		} else if (mOrderDetail.getHouseStatus().equals("8")) {
 			status.setText("已取消");// ///////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -280,8 +373,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
 			// button3.setText("查看详情");
-			// button3.setTextColor(Color.parseColor("#337ffd"));
-			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			// button3.setTextColor(Color.parseColor("#ffffff"));
+			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 		} else if (mOrderDetail.getHouseStatus().equals("9")) {
 			status.setText("已拒绝");// ///////////////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -291,8 +384,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
 			// button3.setText("查看详情");
-			// button3.setTextColor(Color.parseColor("#337ffd"));
-			// button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			// button3.setTextColor(Color.parseColor("#ffffff"));
+			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 		} else if (mOrderDetail.getHouseStatus().equals("6")) {
 			status.setText("待退房");
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -504,6 +597,15 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mCancelAttrbuteAction, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
+	
+	
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		updateTimeHandler.removeCallbacksAndMessages(null);
+	}
 
 	private Handler mHandler = new Handler() {
 
@@ -516,6 +618,23 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				finish();
 			} else if (msg.what == 102) {
 				finish();
+			}else if (msg.what == 103){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					String ret = object.optString("ret");
+					if (ret != null){
+						if (ret.equals("0")){
+							updateTimeHandler.removeMessages(800);
+							mOrderDetail.setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
+							updateStatus(status, button1, button2);
+						}else{
+							GlobalUtil.shortToast(HouseOrderDetailsActivity.this, "订单更新失败！", getResources().getDrawable(R.drawable.ic_dialog_no));
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else if (msg.what == 818) {
 				String value = (String) msg.obj;
 				Gson gson = new Gson();
@@ -580,6 +699,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			} else if (action.equals(mCancelAttrbuteAction)) {
 				Message msg = mHandler.obtainMessage();
 				msg.what = 101;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			} else if (action.equals(mExpireOrderAction)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 103;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			} else if (action.equals(mConfirmRentAttribute)) {

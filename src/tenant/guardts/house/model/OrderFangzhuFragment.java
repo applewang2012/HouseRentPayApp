@@ -18,6 +18,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
 	private int mCurrentPosition = 0, mExpirePosition = -1;
 	private long mTimeTag ;
+	private SwipeRefreshLayout mSwipeLayout;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,18 @@ public class OrderFangzhuFragment extends BaseFragment{
 				startActivity(intent);
 			}
 		});
+		
+//		mSwipeLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_fangzhu_pull_refresh);
+//		mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
+//			
+//			@Override
+//			public void onRefresh() {
+//				Log.e("mingguo", "on Refresh  "+mSwipeLayout);
+//				getHouseHistoryData();
+//			}
+//		});  
+//        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,  
+//                android.R.color.holo_orange_light, android.R.color.holo_red_light);  
 	}
 	
 	public void refreshData(){
@@ -215,8 +230,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
+				//mSwipeLayout.setRefreshing(false);
 				parseUserHouseInfo((String)msg.obj);
-				
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无出租历史");
 					mNoContent.setVisibility(View.VISIBLE);
@@ -305,7 +320,6 @@ public class OrderFangzhuFragment extends BaseFragment{
 				mAdapter.notifyDataSetChanged();
 			}
 		}  
-    	
     };
     
     private void updateOrderStatusView(final UniversalViewHolder holder, final HouseInfoModel info){

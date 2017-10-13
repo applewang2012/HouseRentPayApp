@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.model.HouseSelectorModel;
@@ -179,7 +180,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //				getHouseProperty();
 //			}
 //		});
-		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_type);
+		LinearLayout typeFrameLayout = (LinearLayout)findViewById(R.id.id_add_house_type);
 		mTypeTextView = (TextView)findViewById(R.id.id_add_house_type_text);
 		typeFrameLayout.setOnClickListener(new OnClickListener() {
 			
@@ -188,7 +189,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				getHouseType();
 			}
 		});
-		FrameLayout directionFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_direction);
+		LinearLayout directionFrameLayout = (LinearLayout)findViewById(R.id.id_add_house_direction);
 		mDirectionTextView = (TextView)findViewById(R.id.id_add_house_direction_text);
 		directionFrameLayout.setOnClickListener(new OnClickListener() {
 			
@@ -472,13 +473,23 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}else{
 			mRDoor = current_num.getText().toString();
 		}
-		EditText address = (EditText)findViewById(R.id.id_add_house_address);
-		if (address.getText().toString() == null || address.getText().toString().equals("")){
-			Toast.makeText(getApplicationContext(), "请输入详细地址", Toast.LENGTH_SHORT).show();
+		EditText louhao = (EditText)findViewById(R.id.id_add_house_loudong_number);
+		EditText menhao = (EditText)findViewById(R.id.id_add_house_loumen_hao);
+		if (louhao.getText().toString() == null || louhao.getText().toString().equals("")){
+			Toast.makeText(getApplicationContext(), "请输入楼栋号", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			mRAddress = address.getText().toString();
+			
 		}
+		
+		if (menhao.getText().toString() == null || menhao.getText().toString().equals("")){
+			Toast.makeText(getApplicationContext(), "请输入楼门号", Toast.LENGTH_SHORT).show();
+			return false;
+		}else{
+			
+		}
+		
+		mRAddress = louhao.getText().toString()+"号楼"+menhao.getText().toString()+"门";
 		
 //		if (mHouseNo.getText().toString() == null || mHouseNo.getText().toString().equals("")){
 //			Toast.makeText(getApplicationContext(), "请输入房产证编号", Toast.LENGTH_SHORT).show();
