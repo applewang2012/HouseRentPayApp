@@ -4897,15 +4897,46 @@ tenant.guardts.house.AddHouseInfoActivity:
     private android.widget.TextView mStrictTextView
     private android.widget.TextView mHouseTypeTextView
     private java.lang.String mRHouseP
-    535:549:private void getHouseProperty()
+    546:560:private void getHouseProperty()
 tenant.guardts.house.AddRentAttributeActivity:
-    771:802:private void startHttpService()
-    978:1001:private void getIndentifyInfo(java.lang.String)
-    1004:1030:private void getQueryStatusInfo(java.lang.String)
+    774:805:private void startHttpService()
+    981:1004:private void getIndentifyInfo(java.lang.String)
+    1007:1033:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
 tenant.guardts.house.AlbumActivity$PreviewListener
+tenant.guardts.house.ApplyForCheckoutActivity:
+    private java.lang.String mHouseNo
+    private java.lang.String mUsername
+    private java.lang.String mOriginTypeText
+    private java.lang.String mOwnerName
+    private java.lang.String mOwnerIdcard
+    private java.lang.String mfilePath
+    private android.os.HandlerThread myHandlerThread
+    private android.os.Handler mSubHandler
+    private android.widget.PopupWindow popupWindow
+    private android.widget.TextView mRentReadMe
+    private android.widget.TextView mRentOrderId
+    private com.gzt.faceid5sdk.DetectionAuthentic authentic
+    private tenant.guardts.house.bannerview.ViewFlow mViewFlow
+    private tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator
+    private android.widget.Button mDel
+    private java.lang.String flag
+    201:238:private void showPublicAttributeDialog()
+    428:433:private void setDeleteHouseInfo(java.lang.String)
+    437:449:private void initDialog()
+    458:468:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    490:495:private void getHouseDetailInfoByHouseId(java.lang.String)
+    499:504:private void getHouseDetailImageListByHouseId(java.lang.String)
+    85:85:static synthetic tenant.guardts.house.model.HouseInfoModel access$11(tenant.guardts.house.ApplyForCheckoutActivity)
+    75:75:static synthetic java.lang.String access$12(tenant.guardts.house.ApplyForCheckoutActivity)
+    69:69:static synthetic void access$13(tenant.guardts.house.ApplyForCheckoutActivity,java.lang.String)
+    69:69:static synthetic java.lang.String access$14(tenant.guardts.house.ApplyForCheckoutActivity)
+tenant.guardts.house.ApplyForCheckoutActivity$15
+tenant.guardts.house.ApplyForCheckoutActivity$16
+tenant.guardts.house.ApplyForCheckoutActivity$6
+tenant.guardts.house.ApplyForCheckoutActivity$7
 tenant.guardts.house.BankActivity:
     private java.lang.String cardNo
     private java.lang.String bankName
@@ -4941,9 +4972,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     private java.lang.String mOwnerName
     private java.lang.String mOwnerIdcard
 tenant.guardts.house.HomeActivity:
-    591:602:private java.lang.String getUserIdNo(java.lang.String)
-    723:724:public void setSelectedCity(java.lang.String)
-    727:727:public java.lang.String getSelectedCity()
+    599:610:private java.lang.String getUserIdNo(java.lang.String)
+    731:732:public void setSelectedCity(java.lang.String)
+    735:735:public java.lang.String getSelectedCity()
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -4989,11 +5020,11 @@ tenant.guardts.house.MapRentHouseActivity:
     android.widget.Button requestLocButton
     private android.widget.TextView mTitleBar
     private java.util.ArrayList suggest
-    538:543:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
-    547:556:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
-    672:675:public void setBackgroundAlpha(float)
+    540:545:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    549:558:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
+    674:677:public void setBackgroundAlpha(float)
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner:
-    773:773:public void onReceivePoi(com.baidu.location.BDLocation)
+    775:775:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.MapSuggestSearchActivity:
     134:137:protected boolean hasData(java.lang.String)
 tenant.guardts.house.PaymentStatusActivity:
@@ -5048,6 +5079,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
+    76:85:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
@@ -5379,15 +5411,24 @@ tenant.guardts.house.model.DataModel:
     private java.lang.String[] mDistrictID
     private java.lang.String[] mStreetID
     private java.util.HashMap mPostData
-    73:76:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
-    89:94:public void startHttpRequestTask()
-    244:254:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
-    316:327:private void jsonStreetData(java.lang.String)
-    330:334:public java.lang.String getSoapName(java.lang.String)
-    339:353:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
-    58:58:static synthetic java.util.HashMap access$5(tenant.guardts.house.model.DataModel)
+    77:80:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
+    93:98:public void startHttpRequestTask()
+    267:277:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
+    339:350:private void jsonStreetData(java.lang.String)
+    353:357:public java.lang.String getSoapName(java.lang.String)
+    362:376:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
+    62:62:static synthetic java.util.HashMap access$5(tenant.guardts.house.model.DataModel)
 tenant.guardts.house.model.DataModel$HttpAsyncTask
 tenant.guardts.house.model.DataModel$RelationServiceAsyncTask
+tenant.guardts.house.model.EvaluationDetail:
+    22:23:public void setUser(java.lang.String)
+    28:29:public void setDate(java.lang.String)
+    31:31:public java.lang.String getServiceRating()
+    34:35:public void setServiceRating(java.lang.String)
+    37:37:public java.lang.String getEnvironmentalRating()
+    40:41:public void setEnvironmentalRating(java.lang.String)
+    43:43:public java.lang.String getPriceRating()
+    46:47:public void setPriceRating(java.lang.String)
 tenant.guardts.house.model.HouseFragment:
     private com.baidu.mapapi.map.MyLocationConfiguration$LocationMode mCurrentMode
     private boolean mShowInfoWindow
@@ -5402,11 +5443,17 @@ tenant.guardts.house.model.HouseFragment$4
 tenant.guardts.house.model.HouseFragment$MyLocationListenner:
     700:700:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.model.HouseImageInfo
+tenant.guardts.house.model.HouseInfoModel:
+    46:46:public long getOrderCreatedDateStamp()
 tenant.guardts.house.model.OrderFangzhuFragment:
-    306:311:private void rejectRentAttributeInfo(java.lang.String)
+    private long mTimeTag
+    private android.support.v4.widget.SwipeRefreshLayout mSwipeLayout
+    220:225:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
+tenant.guardts.house.model.OrderZhuHuFragment:
+    private long mTimeTag
 tenant.guardts.house.model.SurroundFragment:
     private tenant.guardts.house.headergridview.StickyGridHeadersGridView mHeadersGridView
     290:295:private int getContentCount()
@@ -5489,13 +5536,14 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String URL_ZHOUBIAN_SHANGQU
     public static final java.lang.String URL_MORE_CONTENT
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
-    24:24:public CommonUtil()
-    80:81:public static void setCanvas(android.graphics.Canvas)
-    144:147:public static void uninstallApk(android.content.Context,java.lang.String)
-    161:161:private static double Rad(double)
-    172:181:public static double GetDistance(double,double,double,double)
-    185:206:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    211:234:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    public static final long TIME_STAMP_10_MINUTES
+    23:23:public CommonUtil()
+    88:89:public static void setCanvas(android.graphics.Canvas)
+    152:155:public static void uninstallApk(android.content.Context,java.lang.String)
+    169:169:private static double Rad(double)
+    180:189:public static double GetDistance(double,double,double,double)
+    193:214:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    219:242:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)

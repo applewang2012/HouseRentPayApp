@@ -117,7 +117,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		initView();
 		initHandler();
 		
-		
 	}
 	
 	
@@ -594,9 +593,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		if (!checkInputTimeContent()){
 			return false;
 		}
-		Log.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
-		if (mStartTimeClipse + 60000L < mSystemClockTime){
-			Toast.makeText(getApplicationContext(), "租房时间需要在当前时间之后！", Toast.LENGTH_SHORT).show();
+		//Log.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
+		if (mEndTimeClipse + 60000L < mSystemClockTime){
+			Toast.makeText(getApplicationContext(), "租房结束时间需要在当前时间之后！", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		

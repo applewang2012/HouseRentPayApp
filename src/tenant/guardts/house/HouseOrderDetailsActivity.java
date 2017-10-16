@@ -418,7 +418,26 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("已退房");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
-			button2.setVisibility(View.GONE);
+			button2.setVisibility(View.VISIBLE);
+			button2.setText("立即评价");
+			button2.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+//					Intent intent = new Intent(HouseOrderDetailsActivity.this, ApplyForCheckoutActivity.class);
+//					if (mDetailType.equals("owner")) {
+//						intent.putExtra("type_phone", mOrderDetail.getHouseContactPhone());
+//
+//					} else if (mDetailType.equals("renter")) {
+//						intent.putExtra("type_phone", mOrderDetail.getHouseOwnerPhone());
+//
+//					}
+//					intent.putExtra("detail_type", mDetailType);
+//					intent.putExtra("RRAID", mOrderDetail.getHouseOrderId());
+//					startActivityForResult(intent, 888);
+
+				}
+			});
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)) {
 			status.setText("已过期");
 			status.setTextColor(Color.parseColor("#de6262"));

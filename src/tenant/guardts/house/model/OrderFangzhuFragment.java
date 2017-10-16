@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -52,7 +54,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 	private String mConfirmRentAttribute = "http://tempuri.org/ConfirmRentAttribute";
 	private String mRejectRentAction = "http://tempuri.org/RejectRentAttribute";
 	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
-	private int mCurrentPosition = 0, mExpirePosition = -1;
+	private String mConfirmCheckOutAction = "http://tempuri.org/ConfirmCheckOut";// 确认退房
+	private int mCurrentPosition = 0, mExpirePosition = -1, mCheckoutPosition = -1;
 	private long mTimeTag ;
 	private SwipeRefreshLayout mSwipeLayout;
 	
@@ -287,6 +290,24 @@ public class OrderFangzhuFragment extends BaseFragment{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}else if (msg.what == 104){
+				try {
+					JSONObject object = new JSONObject((String)msg.obj);
+					String ret = object.optString("ret");
+					if (ret != null){
+						if (ret.equals("0")){
+							if (mCheckoutPosition != -1){
+								mHouseInfoList.get(mCheckoutPosition).setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
+							}
+							mAdapter.notifyDataSetChanged();
+						}else{
+							GlobalUtil.shortToast(mContext, "退房失败，请重试！", getResources().getDrawable(R.drawable.ic_dialog_no));
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	};
@@ -484,17 +505,17 @@ public class OrderFangzhuFragment extends BaseFragment{
 			button1.setText("查看详情");
 			button1.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
-			button3.setText("查看详情");
+			button3.setText("立即评价");
 			button3.setTextColor(Color.parseColor("#337ffd"));
 			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 			button3.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-					intent.putExtra("order_detail", info);
-					intent.putExtra("detail_type", "owner");
-					startActivity(intent);
+//					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+//					intent.putExtra("order_detail", info);
+//					intent.putExtra("detail_type", "owner");
+//					startActivity(intent);
 				}
 			});
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
@@ -506,18 +527,64 @@ public class OrderFangzhuFragment extends BaseFragment{
 			button3.setText("查看详情");
 			button3.setTextColor(Color.parseColor("#337ffd"));
 			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
-			button3.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
+			if (!TextUtils.isEmpty(info.getCheckOutPerson())) {
+				if (info.getCheckOutPerson().equals(CommonUtil.mUserLoginName)) {
+					button3.setText("查看详情");
 					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
+				} else {
+					button3.setText("确认退房");
+					button3.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							mCheckoutPosition = holder.getPosition();
+							initAlertDialog(mCheckoutPosition);// 确认退房
+						}
+					});
 				}
-			});
+			}
+			
 		}
     }
+    
+    protected void initAlertDialog(final int position) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		builder.setTitle("是否确认退房？");
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				builder.create().dismiss();
+
+			}
+		});
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String mRRAID = mHouseInfoList.get(position).getHouseOrderId();
+				if (!TextUtils.isEmpty(mRRAID)) {
+					confirmCheckOut(mRRAID);
+				}
+
+			}
+		});
+
+		builder.show();
+	}
+    
+    
+    private void confirmCheckOut(String rraID) {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=ConfirmCheckOut";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmCheckOutAction));
+		rpc.addProperty("rraId", rraID);
+		mPresent.readyPresentServiceParams(getActivity(), url, mConfirmCheckOutAction, rpc);
+		mPresent.startPresentServiceTask(true);
+	}
+
     
     /**** 
      * 刷新倒计时控件 
@@ -635,6 +702,11 @@ public class OrderFangzhuFragment extends BaseFragment{
 			}else if (action.equals(mExpireOrderAction)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 103;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			} else if (action.equals(mConfirmCheckOutAction)) {
+				Message msg = mHandler.obtainMessage();
+				msg.what = 104;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}

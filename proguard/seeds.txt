@@ -21820,6 +21820,8 @@ tenant.guardts.house.AddRentAttributeActivity
 tenant.guardts.house.AddRentAttributeActivity: AddRentAttributeActivity()
 tenant.guardts.house.AlbumActivity
 tenant.guardts.house.AlbumActivity: AlbumActivity()
+tenant.guardts.house.ApplyForCheckoutActivity
+tenant.guardts.house.ApplyForCheckoutActivity: ApplyForCheckoutActivity()
 tenant.guardts.house.BankActivity
 tenant.guardts.house.BankActivity: BankActivity()
 tenant.guardts.house.BaseActivity
@@ -21834,6 +21836,8 @@ tenant.guardts.house.DownloadAppActivity: DownloadAppActivity()
 tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver
 tenant.guardts.house.EvaluationActivity
 tenant.guardts.house.EvaluationActivity: EvaluationActivity()
+tenant.guardts.house.EvaluationDetailActivity
+tenant.guardts.house.EvaluationDetailActivity: EvaluationDetailActivity()
 tenant.guardts.house.GalleryActivity
 tenant.guardts.house.GalleryActivity: GalleryActivity()
 tenant.guardts.house.GetRentAttributeActivity
@@ -22830,6 +22834,8 @@ tenant.guardts.house.R$drawable: int button_text_selector
 tenant.guardts.house.R$drawable: int call
 tenant.guardts.house.R$drawable: int capture_flash_bg
 tenant.guardts.house.R$drawable: int capture_flash_text_bg
+tenant.guardts.house.R$drawable: int checkout_house_normal
+tenant.guardts.house.R$drawable: int checkout_house_selected
 tenant.guardts.house.R$drawable: int chuzu_icon
 tenant.guardts.house.R$drawable: int chuzu_icon_default
 tenant.guardts.house.R$drawable: int cityhot_edittext_bg
@@ -23179,6 +23185,20 @@ tenant.guardts.house.R$id: int cameraPreviewView
 tenant.guardts.house.R$id: int capture_flash
 tenant.guardts.house.R$id: int checkbox_wallet
 tenant.guardts.house.R$id: int checkbox_wechat
+tenant.guardts.house.R$id: int checkout_house_checkout_ok
+tenant.guardts.house.R$id: int checkout_house_contact_phone
+tenant.guardts.house.R$id: int checkout_house_reason_content1
+tenant.guardts.house.R$id: int checkout_house_reason_content2
+tenant.guardts.house.R$id: int checkout_house_reason_content3
+tenant.guardts.house.R$id: int checkout_house_reason_content4
+tenant.guardts.house.R$id: int checkout_house_reason_icon1
+tenant.guardts.house.R$id: int checkout_house_reason_icon2
+tenant.guardts.house.R$id: int checkout_house_reason_icon3
+tenant.guardts.house.R$id: int checkout_house_reason_icon4
+tenant.guardts.house.R$id: int checkout_house_reason_text1
+tenant.guardts.house.R$id: int checkout_house_reason_text2
+tenant.guardts.house.R$id: int checkout_house_reason_text3
+tenant.guardts.house.R$id: int checkout_house_reason_text4
 tenant.guardts.house.R$id: int choosedbt
 tenant.guardts.house.R$id: int city
 tenant.guardts.house.R$id: int clear
@@ -23195,6 +23215,7 @@ tenant.guardts.house.R$id: int detail_date
 tenant.guardts.house.R$id: int detail_desp
 tenant.guardts.house.R$id: int detail_sum
 tenant.guardts.house.R$id: int detail_type
+tenant.guardts.house.R$id: int detail_user
 tenant.guardts.house.R$id: int door_password
 tenant.guardts.house.R$id: int download_icon
 tenant.guardts.house.R$id: int download_progress
@@ -23204,6 +23225,7 @@ tenant.guardts.house.R$id: int encode_failed
 tenant.guardts.house.R$id: int encode_succeeded
 tenant.guardts.house.R$id: int end
 tenant.guardts.house.R$id: int evaluation_btn_submit
+tenant.guardts.house.R$id: int evaluation_detail_listview
 tenant.guardts.house.R$id: int evaluation_edittext_explanation
 tenant.guardts.house.R$id: int evaluation_environmental_rating
 tenant.guardts.house.R$id: int evaluation_overall_rating
@@ -23234,13 +23256,14 @@ tenant.guardts.house.R$id: int house_history
 tenant.guardts.house.R$id: int icon_image
 tenant.guardts.house.R$id: int id_about_us_check_version
 tenant.guardts.house.R$id: int id_about_us_current_version
-tenant.guardts.house.R$id: int id_add_house_address
 tenant.guardts.house.R$id: int id_add_house_area
 tenant.guardts.house.R$id: int id_add_house_current_floor
 tenant.guardts.house.R$id: int id_add_house_current_num
 tenant.guardts.house.R$id: int id_add_house_direction
 tenant.guardts.house.R$id: int id_add_house_direction_text
 tenant.guardts.house.R$id: int id_add_house_info_confirm
+tenant.guardts.house.R$id: int id_add_house_loudong_number
+tenant.guardts.house.R$id: int id_add_house_loumen_hao
 tenant.guardts.house.R$id: int id_add_house_owner_id_card
 tenant.guardts.house.R$id: int id_add_house_owner_name
 tenant.guardts.house.R$id: int id_add_house_owner_phone
@@ -23364,6 +23387,7 @@ tenant.guardts.house.R$id: int id_order_detail_status
 tenant.guardts.house.R$id: int id_order_end_time
 tenant.guardts.house.R$id: int id_order_monkey
 tenant.guardts.house.R$id: int id_order_monkey_input
+tenant.guardts.house.R$id: int id_order_time_down
 tenant.guardts.house.R$id: int id_password_username
 tenant.guardts.house.R$id: int id_pay_monkey
 tenant.guardts.house.R$id: int id_pay_oder_time
@@ -23651,8 +23675,10 @@ tenant.guardts.house.R$id: R$id()
 tenant.guardts.house.R$layout
 tenant.guardts.house.R$layout: int activity_about_us
 tenant.guardts.house.R$layout: int activity_add_bank_card
+tenant.guardts.house.R$layout: int activity_apply_checkout_layout
 tenant.guardts.house.R$layout: int activity_bank
 tenant.guardts.house.R$layout: int activity_evaluation
+tenant.guardts.house.R$layout: int activity_evaluation_detail
 tenant.guardts.house.R$layout: int activity_home_search
 tenant.guardts.house.R$layout: int activity_house_payment
 tenant.guardts.house.R$layout: int activity_housing_details
@@ -23686,6 +23712,7 @@ tenant.guardts.house.R$layout: int camera
 tenant.guardts.house.R$layout: int custom_view_layout
 tenant.guardts.house.R$layout: int download_app_layout
 tenant.guardts.house.R$layout: int download_list_item
+tenant.guardts.house.R$layout: int evaluation_detail_item
 tenant.guardts.house.R$layout: int expandable_child_item
 tenant.guardts.house.R$layout: int expandable_group_item
 tenant.guardts.house.R$layout: int get_house_rent_attribute_info
@@ -23994,6 +24021,7 @@ tenant.guardts.house.R$string: int title_activity_add_bank_card
 tenant.guardts.house.R$string: int title_activity_bank
 tenant.guardts.house.R$string: int title_activity_contact_owner
 tenant.guardts.house.R$string: int title_activity_evaluation
+tenant.guardts.house.R$string: int title_activity_evaluation_detail
 tenant.guardts.house.R$string: int title_activity_example_liveness
 tenant.guardts.house.R$string: int title_activity_example_result
 tenant.guardts.house.R$string: int title_activity_example_start
@@ -24246,9 +24274,15 @@ tenant.guardts.house.headergridview.StickyGridHeadersGridView$SavedState: androi
 tenant.guardts.house.model.AddCardStatus
 tenant.guardts.house.model.AddCardStatus: java.lang.String ret
 tenant.guardts.house.model.AddCardStatus: java.lang.String msg
+tenant.guardts.house.model.ApplyForCheckOut
+tenant.guardts.house.model.ApplyForCheckOut: java.lang.String ret
+tenant.guardts.house.model.ApplyForCheckOut: java.lang.String msg
 tenant.guardts.house.model.BaseFragment
 tenant.guardts.house.model.CompleteStatus
 tenant.guardts.house.model.CompleteStatus: java.lang.String ret
+tenant.guardts.house.model.ConfirmCheckout
+tenant.guardts.house.model.ConfirmCheckout: java.lang.String ret
+tenant.guardts.house.model.ConfirmCheckout: java.lang.String msg
 tenant.guardts.house.model.HouseFragment
 tenant.guardts.house.model.HouseInfoModel
 tenant.guardts.house.model.HouseInfoModel: long serialVersionUID
@@ -24272,7 +24306,11 @@ tenant.guardts.house.model.HouseInfoModel: java.lang.String houseOrderId
 tenant.guardts.house.model.HouseInfoModel: java.lang.String contactPhone
 tenant.guardts.house.model.HouseInfoModel: java.lang.String contactName
 tenant.guardts.house.model.HouseInfoModel: java.lang.String doorPassword
-tenant.guardts.house.model.HouseInfoModel: java.lang.String orderCreatedDate
+tenant.guardts.house.model.HouseInfoModel: java.lang.String orderCreateDate
+tenant.guardts.house.model.HouseInfoModel: long orderCreatedDateStamp
+tenant.guardts.house.model.HouseInfoModel: long orderExpiredDate
+tenant.guardts.house.model.HouseInfoModel: long currentDate
+tenant.guardts.house.model.HouseInfoModel: java.lang.String mShowTimeDown
 tenant.guardts.house.model.MyFragment
 tenant.guardts.house.model.OrderFangzhuFragment
 tenant.guardts.house.model.OrderFragment
