@@ -25,6 +25,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
@@ -80,7 +81,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private LinearLayout ll_popup;
 	private HouseInfoModel mHouseInfo;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -109,8 +109,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				backgroundAlpha(0.3f);
-				ll_popup.startAnimation(
-						AnimationUtils.loadAnimation(HouseDetailInfoActivity.this, R.anim.activity_translate_in));
+				ll_popup.startAnimation(AnimationUtils.loadAnimation(HouseDetailInfoActivity.this,
+						R.anim.activity_translate_in));
 				pop.showAtLocation(mButtonCall, Gravity.BOTTOM, 0, 0);
 
 				TextView phone = (TextView) ll_popup.findViewById(R.id.id_button_contact_owner_show_phone);
@@ -126,8 +126,65 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				showPublicAttributeDialog();
 			}
 		});
+		mInputIDCard.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				intputIDCard();
+
+			}
+		});
 
 	}
+
+	/**
+	 * 录入身份证
+	 */
+	protected void intputIDCard() {
+		setBackgroundAlpha(0.3f);
+		View parent=View.inflate(this, R.layout.house_detail_info_layout, null);
+		View view = View.inflate(this, R.layout.popupwindow_input_identity_info, null);
+		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+		Button btnConfirm=(Button) view.findViewById(R.id.btn_input_idcard_confirm);
+		Button btnCancel=(Button) view.findViewById(R.id.btn_input_idcard_cancel);
+		btnConfirm.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btnCancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				popupWindow.dismiss();
+				
+			}
+		});
+		popupWindow.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				setBackgroundAlpha(1f);
+
+			}
+		});
+	}
+
+	/**
+	 * 设置背景透明度
+	 * 
+	 * @param alpha
+	 */
+	public void setBackgroundAlpha(float alpha) {
+		WindowManager.LayoutParams params = getWindow().getAttributes();
+		params.alpha = alpha;
+		getWindow().setAttributes(params);
+	}
+
 
 	private void showPublicAttributeDialog() {
 		new AlertDialog.Builder(HouseDetailInfoActivity.this, AlertDialog.THEME_HOLO_LIGHT)
@@ -137,14 +194,13 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 					@Override
-
 					public void onClick(DialogInterface dialog, int which) {
-						if (mHouseInfo == null){
+						if (mHouseInfo == null) {
 							return;
 						}
-						if (mHouseInfo != null && mHouseInfo.getHouseId() != null && !mHouseInfo.getHouseId().equals("")
-								&& mHouseInfo.getHouseOwnerName() != null && !mHouseInfo.getHouseOwnerName().equals("")
-								&& mHouseInfo.getHouseOwnerName() != null
+						if (mHouseInfo != null && mHouseInfo.getHouseId() != null
+								&& !mHouseInfo.getHouseId().equals("") && mHouseInfo.getHouseOwnerName() != null
+								&& !mHouseInfo.getHouseOwnerName().equals("") && mHouseInfo.getHouseOwnerName() != null
 								&& !mHouseInfo.getHouseOwnerName().equals("")) {
 							Intent intent = new Intent(HouseDetailInfoActivity.this, AddRentAttributeActivity.class);
 							intent.putExtra("house_id", mHouseInfo.getHouseId());
@@ -161,15 +217,14 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
 
-					@Override
+							@Override
+							public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
 
-					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
+								Log.w("alertdialog", " �뱣�����ݣ�");
 
-						Log.w("alertdialog", " �뱣�����ݣ�");
+							}
 
-					}
-
-				}).show();
+						}).show();
 	}
 
 	/**
@@ -209,8 +264,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				pop.dismiss();
 				ll_popup.clearAnimation();
 				try {
-					Intent intent1 = new Intent(Intent.ACTION_CALL,
-							Uri.parse("tel:" + mRentPhone.getText().toString()));
+					Intent intent1 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mRentPhone.getText().toString()));
 					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent1);
 				} catch (Exception e) {
@@ -256,7 +310,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						// 删除房屋
-//						initDialog();
+						// initDialog();
 						Toast.makeText(HouseDetailInfoActivity.this, "该功能正在开发中，敬请期待!!", Toast.LENGTH_SHORT).show();
 					}
 				});
@@ -279,7 +333,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	 * @param rentNO
 	 */
 	private void setDeleteHouseInfo(String rentNO) {
-		String url = CommonUtil.mUserHost+"Services.asmx?op=DeleteHouseInfo";
+		String url = CommonUtil.mUserHost + "Services.asmx?op=DeleteHouseInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDeleteHouseInfo));
 		rpc.addProperty("rentNO", rentNO);
 		mPresenter.readyPresentServiceParams(this, url, mDeleteHouseInfo, rpc);
@@ -295,7 +349,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				// 删除房屋
 				if (!TextUtils.isEmpty(mRentNo)) {
-//					setDeleteHouseInfo(mRentNo);//////////////////////////////////////////
+					// setDeleteHouseInfo(mRentNo);//////////////////////////////////////////
 				}
 			}
 		}).setPositiveButton("否", null).show();
@@ -343,7 +397,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private void initView() {
 
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-
+		mInputIDCard = (TextView) findViewById(R.id.idcard_input);// 录身份证
 		mDel = (Button) findViewById(R.id.detail_button_del);
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
@@ -387,8 +441,8 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			viewflowContent.setVisibility(View.GONE);
 			return;
 		}
-		mViewFlow.setAdapter(
-				new ImagePagerAdapter(HouseDetailInfoActivity.this, imageUrlList, null, null).setInfiniteLoop(true));
+		mViewFlow.setAdapter(new ImagePagerAdapter(HouseDetailInfoActivity.this, imageUrlList, null, null)
+				.setInfiniteLoop(true));
 		mViewFlow.setmSideBuffer(imageUrlList.size()); // 实际图片张数，
 														// 我的ImageAdapter实际图片张数为3
 		mFlowIndicator.setIndicatorCount(imageUrlList.size());
@@ -428,7 +482,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 				jsonHouseInfoToView((String) msg.obj);
 
-				//getHouseDetailImageListByHouseId(mRentNo);
+				// getHouseDetailImageListByHouseId(mRentNo);
 			} else if (msg.what == 101) {
 
 			} else if (msg.what == 200) {
@@ -452,6 +506,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 	};
 	private String flag;
+	private TextView mInputIDCard;
 
 	private void jsonHouseInfoToView(String value) {
 		if (value != null) {

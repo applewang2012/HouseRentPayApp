@@ -150,6 +150,14 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				initPopupWindow();
 			}
 		});
+		TextView inputIDCard=(TextView) findViewById(R.id.input_idcard);
+		inputIDCard.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				intputIDCard();
+			}
+		});
 	}
 	
 	private void expireHouseRequest(String id){
@@ -240,7 +248,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 * @param button2
 	 */
 	public void updateStatus(TextView status, Button button1, Button button2) {
-		if (mOrderDetail.getHouseStatus().equals("0")) {
+		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("确认订单");
@@ -283,7 +291,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				}
 			}
 
-		} else if (mOrderDetail.getHouseStatus().equals("1")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
 			status.setText("待支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("立即付款");
@@ -324,7 +332,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					});
 				}
 			}
-		} else if (mOrderDetail.getHouseStatus().equals("2")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_HAS_PAYED)) {
 			status.setText("已支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
@@ -349,11 +357,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					}
 					intent.putExtra("detail_type", mDetailType);
 					intent.putExtra("RRAID", mOrderDetail.getHouseOrderId());
-					startActivity(intent);
+					startActivityForResult(intent, 888);
 
 				}
 			});
-		} else if (mOrderDetail.getHouseStatus().equals("3")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_EVALUATION)) {
 			status.setText("待评价");
 			status.setTextColor(Color.parseColor("#8be487"));
 			button1.setText("查看详情");
@@ -363,7 +371,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setText("立即评价");
 			// button3.setTextColor(Color.parseColor("#ffffff"));
 			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-		} else if (mOrderDetail.getHouseStatus().equals("8")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CANCELED)) {
 			status.setText("已取消");// ///////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
@@ -375,7 +383,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#ffffff"));
 			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-		} else if (mOrderDetail.getHouseStatus().equals("9")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_REJECTED)) {
 			status.setText("已拒绝");// ///////////////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("查看详情");
@@ -386,7 +394,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			// button3.setText("查看详情");
 			// button3.setTextColor(Color.parseColor("#ffffff"));
 			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-		} else if (mOrderDetail.getHouseStatus().equals("6")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)) {
 			status.setText("待退房");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
@@ -400,12 +408,12 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				}
 			});
 
-		} else if (mOrderDetail.getHouseStatus().equals("5")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CHECKOUTED)) {
 			status.setText("已退房");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
-		} else if (mOrderDetail.getHouseStatus().equals("7")) {
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)) {
 			status.setText("已过期");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
@@ -724,5 +732,57 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			}
 		}
 	}
+	/**
+	 * 录入身份证
+	 */
+	protected void intputIDCard() {
+		setBackgroundAlpha(0.3f);
+		View parent=View.inflate(this, R.layout.activity_order_details_info, null);
+		View view = View.inflate(this, R.layout.popupwindow_input_identity_info, null);
+		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+		Button btnConfirm=(Button) view.findViewById(R.id.btn_input_idcard_confirm);
+		Button btnCancel=(Button) view.findViewById(R.id.btn_input_idcard_cancel);
+		btnConfirm.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btnCancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				popupWindow.dismiss();
+				
+			}
+		});
+		popupWindow.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				setBackgroundAlpha(1f);
+
+			}
+		});
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode==RESULT_OK){
+			if(requestCode==888){
+				boolean flag = data.getBooleanExtra("flag", false);
+				if(flag){
+					status.setText("待退房");
+					status.setTextColor(Color.parseColor("#de6262"));
+					button1.setVisibility(View.GONE);
+					button2.setVisibility(View.GONE);
+				}
+			}
+		}
+	}
+
 
 }

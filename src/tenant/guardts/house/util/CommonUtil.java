@@ -75,7 +75,7 @@ public class CommonUtil {
     public static String ORDER_PREPAY_ID = null;
     public static String OWNER_IDCARD = null;
     public static final long TIME_STAMP_10_MINUTES = 600000L;
-    
+    public static String ORDER_STATUS_NEED_EVALUATION="3";//待评价
     public static String ORDER_STATUS_SUBMITT = "0";    //待确认
     public static String ORDER_STATUS_NEED_PAY = "1";   //待支付
     public static String ORDER_STATUS_HAS_PAYED = "2";  //已支付

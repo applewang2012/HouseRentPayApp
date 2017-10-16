@@ -541,6 +541,10 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 						} else {
 							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待房主确认！", Toast.LENGTH_SHORT).show();
 						}
+						Intent intent = new Intent();
+						intent.putExtra("flag", true);
+						setResult(RESULT_OK, intent);
+						finish();
 					}
 				}
 			}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/base_dimen_590"
+    android:layout_height="@dimen/base_dimen_460"
+    android:background="@drawable/popup_input_idcard_bg"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="@dimen/base_dimen_207"
+        android:layout_height="@dimen/base_dimen_207"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_dimen_40"
+        android:src="@drawable/input_idcard_img" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#a0a0a0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_20"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/base_dimen_16"
+        android:lines="2"
+        
+        android:text="请将您的身份证至于门锁中间滴声后即成功录入"
+        android:layout_marginLeft="@dimen/base_dimen_85"
+        android:layout_marginRight="@dimen/base_dimen_85"
+        
+        android:textColor="#333333"
+        android:textSize="@dimen/base_dimen_30" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base_dimen_20" 
+        android:layout_marginTop="@dimen/base_dimen_30" >
+        
+
+        <Button
+            android:id="@+id/btn_input_idcard_confirm"
+            android:layout_width="@dimen/base_dimen_270"
+            android:layout_height="@dimen/base_dimen_70"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:background="@drawable/popup_input_idcard_btn_bg"
+            android:text="确认"
+            android:textColor="@drawable/btn_text_selector"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <Button
+            android:id="@+id/btn_input_idcard_cancel"
+            android:layout_width="@dimen/base_dimen_270"
+            android:layout_height="@dimen/base_dimen_70"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:layout_marginRight="@dimen/base_dimen_20"
+            android:background="@drawable/popup_input_idcard_btn_bg"
+            android:text="取消"
+            android:textColor="@drawable/btn_text_selector" />
+    </FrameLayout>
+
+</LinearLayout>

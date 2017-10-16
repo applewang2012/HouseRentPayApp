@@ -411,6 +411,37 @@
                         android:textColor="#555555"
                         android:textSize="@dimen/base_dimen_28" />
                 </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_90"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="读入身份证"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/base_dimen_30" />
+
+                    <TextView
+                        android:id="@+id/idcard_input"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="3"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="#337ffd"
+                        android:text="立即录入"
+                        android:textSize="@dimen/base_dimen_28" />
+                </LinearLayout>
             </LinearLayout>
             
             <ImageView
