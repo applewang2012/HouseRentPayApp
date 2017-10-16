@@ -28,9 +28,64 @@ public class CustomRatingBar2 extends LinearLayout {
 	}
 
 	public void setScore(int score) {
-
+		
 		this.score = score;
-		invalidate();
+		initScore();
+	}
+
+	
+		
+		
+
+	private void initScore() {
+		switch (getScore()) {
+		case 0:
+			box1.setChecked(false);
+			box2.setChecked(false);
+			box3.setChecked(false);
+			box4.setChecked(false);
+			box5.setChecked(false);
+			break;
+		case 1:
+			box1.setChecked(true);
+			box2.setChecked(false);
+			box3.setChecked(false);
+			box4.setChecked(false);
+			box5.setChecked(false);
+			break;
+		case 2:
+			box1.setChecked(true);
+			box2.setChecked(true);
+			box3.setChecked(false);
+			box4.setChecked(false);
+			box5.setChecked(false);
+			break;
+		case 3:
+			box1.setChecked(true);
+			box2.setChecked(true);
+			box3.setChecked(true);
+			box4.setChecked(false);
+			box5.setChecked(false);
+			break;
+		case 4:
+			box1.setChecked(true);
+			box2.setChecked(true);
+			box3.setChecked(true);
+			box4.setChecked(true);
+			box5.setChecked(false);
+			break;
+		case 5:
+			box1.setChecked(true);
+			box2.setChecked(true);
+			box3.setChecked(true);
+			box4.setChecked(true);
+			box5.setChecked(true);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 
 	public CustomRatingBar2(Context context, AttributeSet attrs, int defStyle) {
@@ -42,16 +97,11 @@ public class CustomRatingBar2 extends LinearLayout {
 		box4 = (CheckBox) view.findViewById(R.id.c4);
 		box5 = (CheckBox) view.findViewById(R.id.c5);
 		box = new CheckBox[] { box1, box2, box3, box4, box5 };
-		if (getScore() != 0) {
-			for (int i = 0; i < 5; i++) {
-				int score = getScore();
-				if (i < score) {
-					box[i].setChecked(true);
-				}
-			}
-		}
+		
+		
 
 	}
+
 
 	public CustomRatingBar2(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
