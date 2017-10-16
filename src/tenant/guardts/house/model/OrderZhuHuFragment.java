@@ -595,7 +595,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 //					houseModel.setCurrentDate(1507776190000l);  //当前时间
 
 					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
-
+					houseModel.setCheckOutPerson(itemJsonObject.optString("RRACheckOutPerson"));//退房申请人
 					mHouseInfoList.add(houseModel);
 				}
 				if (mHouseInfoList.size() > 0){

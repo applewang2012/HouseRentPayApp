@@ -165,7 +165,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (!TextUtils.isEmpty(mRRAID)) {
-					Toast.makeText(ApplyForCheckoutActivity.this, "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason, Toast.LENGTH_SHORT).show();
+//					Toast.makeText(ApplyForCheckoutActivity.this, "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason, Toast.LENGTH_SHORT).show();
 
 					ApplyCheckOut(mRRAID, CommonUtil.mUserLoginName, reason);
 				}

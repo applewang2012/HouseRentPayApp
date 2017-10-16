@@ -191,7 +191,7 @@ public class MyFragment extends BaseFragment {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-
+ 
 					Intent intent = new Intent(mContext, AddHouseInfoActivity.class);
 					intent.putExtra("user_name", CommonUtil.mUserLoginName);
 					startActivity(intent);

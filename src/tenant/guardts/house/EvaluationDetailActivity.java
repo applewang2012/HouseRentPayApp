@@ -37,16 +37,16 @@ public class EvaluationDetailActivity extends BaseActivity {
 	private void initView() {
 		ArrayList<EvaluationDetail> list=new ArrayList<>();
 		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
-		list.add(new EvaluationDetail("张三", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("李四", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("王五", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("赵二", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("流弊", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("阿萨德", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("欧吉", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("张哈", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("撒地", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("好玩", "2019-09-08 12:000", "3", "3", "3"));
+		list.add(new EvaluationDetail("还萨迪", "2019-09-08 12:000", "3", "3", "3"));
 		mListView = (ListView) findViewById(R.id.evaluation_detail_listview);
 		mListView.setAdapter(new EvaluationDetailAdapter(this,list));
 		

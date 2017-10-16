@@ -594,7 +594,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 //					houseModel.setOrderCreatedDate(1507777210000l);//下单时间
 //					houseModel.setOrderExpiredDate(1507777210000l+CommonUtil.TIME_STAMP_10_MINUTES);//过期时间
 //					houseModel.setCurrentDate(1507777450000l);  //当前时间
-					
+					houseModel.setCheckOutPerson(itemJsonObject.optString("RRACheckOutPerson"));//退房申请人
 					houseModel.setShowTimeDownTime("");
 					mHouseInfoList.add(houseModel);
 				}

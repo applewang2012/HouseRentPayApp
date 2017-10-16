@@ -19,11 +19,11 @@
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_30" />
 
-        <tenant.guardts.house.view.CustomRatingBar
+        <tenant.guardts.house.view.CustomRatingBar2
             android:id="@+id/evaluation_overall_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-        </tenant.guardts.house.view.CustomRatingBar>
+        </tenant.guardts.house.view.CustomRatingBar2>
     </LinearLayout>
 
     <View

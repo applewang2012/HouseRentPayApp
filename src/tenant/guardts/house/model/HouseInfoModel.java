@@ -29,6 +29,16 @@ public class HouseInfoModel implements Serializable{
 	private long orderExpiredDate;
 	private long currentDate;  //当前时间
 	private String mShowTimeDown;
+	private String checkOutPerson;//退房申请人
+	
+
+	public String getCheckOutPerson() {
+		return checkOutPerson;
+	}
+
+	public void setCheckOutPerson(String checkOutPerson) {
+		this.checkOutPerson = checkOutPerson;
+	}
 
 	public String getRenterIdcard() {
 		return renterIdcard;
