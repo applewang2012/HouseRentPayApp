@@ -47,13 +47,19 @@ public class BaseFragment extends Fragment implements DataStatusInterface {
 	@Override
 	public void onStatusStart(Activity activity) {
 		// TODO Auto-generated method stub
-		
+		Message msg = mHandler.obtainMessage();
+		msg.what = 1000;
+		msg.obj = activity;
+		mHandler.sendMessage(msg);
 	}
 
 	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
-		
+		Message msg = mHandler.obtainMessage();
+		msg.what = 100;
+		msg.obj = action + " " + error;
+		mHandler.sendMessage(msg);
 	}
 
 	private void showLoadingView(Context ctx, View loadingView){

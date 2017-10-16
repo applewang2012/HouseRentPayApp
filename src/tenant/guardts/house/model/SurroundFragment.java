@@ -53,7 +53,7 @@ import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.view.HomeFragmentListView;
 
-public class SurroundFragment extends Fragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnItemClickListener{
+public class SurroundFragment extends BaseFragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnItemClickListener{
 	
 
 	
