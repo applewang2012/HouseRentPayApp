@@ -187,7 +187,7 @@
             android:layout_weight="1"
             android:background="@drawable/item_shape_solid_corner_normal"
             android:gravity="center"
-            android:text="确认退房"
+            android:text="申请退房"
             android:textColor="#337ffd"
             android:textSize="@dimen/base_dimen_32" >
         </Button>

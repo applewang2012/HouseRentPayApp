@@ -22,8 +22,6 @@ public class CustomRatingBar extends LinearLayout implements OnClickListener {
 	private int lastPos;
 	private CheckBox[] box;
 	private int score;
-	
-
 
 	private int getScore() {
 		return score;
@@ -42,6 +40,8 @@ public class CustomRatingBar extends LinearLayout implements OnClickListener {
 		box4 = (CheckBox) view.findViewById(R.id.c4);
 		box5 = (CheckBox) view.findViewById(R.id.c5);
 		box = new CheckBox[] { box1, box2, box3, box4, box5 };
+	
+		
 		initEvent();
 
 	}
@@ -62,6 +62,7 @@ public class CustomRatingBar extends LinearLayout implements OnClickListener {
 	public CustomRatingBar(Context context) {
 		this(context, null);
 	}
+
 
 	@Override
 	public void onClick(View v) {
@@ -92,36 +93,38 @@ public class CustomRatingBar extends LinearLayout implements OnClickListener {
 				if (currentPos > lastPos) {
 					if (i >= lastPos && i <= currentPos) {
 						box[i].setChecked(true);
+						
 					}
 				} else if (currentPos < lastPos) {
 					if (i > currentPos && i <= lastPos) {
 
 						box[i].setChecked(false);
-
+					
 					}
 				}
-				
 				if(box[i].isChecked()){
 					count++;
+					
 				}
-				
 
+				
 			}
+			
 
 		}
-		
 		setScore(count);
 		
 
 	}
-	
-	/**获得评价的分数
+
+	/**
+	 * 获得评价的分数
+	 * 
 	 * @return
 	 */
-	public int getCount(){
+	public int getCount() {
 		return getScore();
-	}
 
-	
+	}
 
 }

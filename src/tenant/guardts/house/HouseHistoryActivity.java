@@ -45,6 +45,7 @@ public class HouseHistoryActivity extends BaseActivity
 	private String mUserName = null;
 	private String mRentListAction = "http://tempuri.org/GetRentList";
 	private String mDeleteHouseInfo="http://tempuri.org/DeleteHouseInfo";
+	
 	private String mIdCard;
 
 	@Override

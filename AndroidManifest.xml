@@ -372,6 +372,11 @@
             android:name=".EvaluationActivity"
             android:label="@string/title_activity_evaluation"
             android:theme="@style/AppTheme" >
+           <!--      <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>   -->
         </activity>
         <activity
             android:name=".PaymentStatusActivity"
@@ -567,11 +572,7 @@
             android:name=".EvaluationDetailActivity"
             android:label="@string/title_activity_evaluation_detail"
             android:theme="@style/AppTheme" >
-         <!--  <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
+       
         </activity>
     </application>
 

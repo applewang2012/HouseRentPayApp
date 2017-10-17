@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.ApplyForCheckoutActivity;
+import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -383,7 +384,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
-					intent.putExtra("detail_type", "owner");
+					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
 				}
 			});
@@ -400,10 +401,10 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-//					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-//					intent.putExtra("order_detail", info);
-//					intent.putExtra("detail_type", "owner");
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(), EvaluationActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "renter");
+					startActivity(intent);
 				}
 			});
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
@@ -420,7 +421,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 					button3.setText("查看详情");
 					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
-					intent.putExtra("detail_type", "owner");
+					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
 				} else {
 					button3.setText("确认退房");

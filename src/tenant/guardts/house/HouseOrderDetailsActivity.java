@@ -435,7 +435,10 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 //					intent.putExtra("detail_type", mDetailType);
 //					intent.putExtra("RRAID", mOrderDetail.getHouseOrderId());
 //					startActivityForResult(intent, 888);
-
+					Intent intent = new Intent(HouseOrderDetailsActivity.this, EvaluationActivity.class);
+					intent.putExtra("order_detail", mOrderDetail);
+					intent.putExtra("detail_type", mDetailType);
+					startActivity(intent);
 				}
 			});
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)) {

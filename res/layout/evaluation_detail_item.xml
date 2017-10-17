@@ -23,7 +23,7 @@
             android:id="@+id/detail_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/base_dimen_360"
+            android:layout_marginLeft="@dimen/base_dimen_200"
             android:layout_marginTop="@dimen/base_dimen_20"
             android:gravity="center_vertical"
             android:text="2017-09-25 12:00"
