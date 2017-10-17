@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,12 @@ public class EvaluationActivity extends BaseActivity {
 	private String mAddEvaluationAction = "http://tempuri.org/AddEvaluation";// 添加评论
 	private HoursePresenter mPresent;
 	private Context mContext;
+	private CheckBox box1;
+	private CheckBox box2;
+	private CheckBox box3;
+	private CheckBox box4;
+	private CheckBox box5;
+	private CheckBox box6;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,21 @@ public class EvaluationActivity extends BaseActivity {
 		type = getIntent().getStringExtra("detail_type");
 		info = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
 		mHouseLocation.setText(info.getHouseAddress());
+		if (type.equals("renter")) {
+			box1.setText("环境良好");
+			box2.setText("交通方便");
+			box3.setText("态度好");
+			box4.setText("家电齐全");
+			box5.setText("价格公道");
+			box6.setText("环境较差");
+		} else if (type.equals("owner")) {
+			box1.setText("诚实守信");
+			box2.setText("环境整洁");
+			box3.setText("友好沟通");
+			box4.setText("与人为善");
+			box5.setText("有破环行为");
+			box6.setText("环境较差");
+		}
 	}
 
 	private void initEvent() {
@@ -68,18 +90,46 @@ public class EvaluationActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				StringBuilder desc = new StringBuilder();
+				if (box1.isChecked()) {
+					desc.append(box1.getText().toString()+",");
+				}
+				if (box2.isChecked()) {
+					desc.append(box2.getText().toString()+",");
+				}
+				if (box3.isChecked()) {
+					desc.append(box3.getText().toString()+",");
+				}
+				if (box4.isChecked()) {
+					desc.append(box4.getText().toString()+",");
+				}
+				if (box5.isChecked()) {
+					desc.append(box5.getText().toString()+",");
+				}
+				if (box6.isChecked()) {
+					desc.append(box6.getText().toString()+",");
+				}
 				// 提交评论
-				if (!TextUtils.isEmpty(type)&&info!=null) {
-					int service=mServiceRating.getCount();
-					int enviroment=mEnvironmentalRating.getCount();
-					int cost=mPriceRating.getCount();
-				if (type.equals("renter")) {
-						if(service!=0&&enviroment!=0&&cost!=0)
-						 addEvaluation(info.getHouseOrderId(), "1", service, enviroment, cost,
-						 "描述", CommonUtil.mUserLoginName);
-					} else {
-						 addEvaluation(info.getRenterIdcard(), "0", service, enviroment, cost,
-						 "描述", CommonUtil.mUserLoginName);
+				if (!TextUtils.isEmpty(type) && info != null) {
+					int service = mServiceRating.getCount();
+					int enviroment = mEnvironmentalRating.getCount();
+					int cost = mPriceRating.getCount();
+					if (type.equals("renter")) {
+						if (service == 0 || enviroment == 0 || cost == 0) {
+							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
+						} else {
+							
+							addEvaluation(info.getHouseId(), "1", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+									CommonUtil.mUserLoginName);
+
+						}
+					} else if (type.equals("owner")) {
+						if (service == 0 || enviroment == 0 || cost == 0) {
+							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
+						} else {
+							addEvaluation(info.getRenterIdcard(), "0", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+									CommonUtil.mUserLoginName);
+						}
 					}
 				}
 
@@ -92,7 +142,7 @@ public class EvaluationActivity extends BaseActivity {
 	 * 添加评价
 	 * 
 	 * @param evaObject
-	 *            评价对象的id RRAID：房屋，IDCard：房客身份证
+	 *            评价对象的id 房屋id，IDCard：房客身份证
 	 * @param evaType
 	 *            评价对象的类型 1：房屋，0：房客
 	 * @param service
@@ -106,8 +156,8 @@ public class EvaluationActivity extends BaseActivity {
 	 * @param evaPerson
 	 *            评价人用户名（手机号）
 	 */
-	private void addEvaluation(String evaObject, String evaType, int service, int enviroment, int cost,
-			String desc, String evaPerson) {
+	private void addEvaluation(String evaObject, String evaType, int service, int enviroment, int cost, String desc,
+			String evaPerson) {
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentList";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddEvaluationAction));
 		rpc.addProperty("evaObject", evaObject);
@@ -129,26 +179,39 @@ public class EvaluationActivity extends BaseActivity {
 		mServiceRating = (CustomRatingBar) findViewById(R.id.evaluation_service_rating);// 服务评分
 		mEnvironmentalRating = (CustomRatingBar) findViewById(R.id.evaluation_environmental_rating);// 环境评分
 		mPriceRating = (CustomRatingBar) findViewById(R.id.evaluation_price_rating);// 价格评分
-		mExplanation = (EditText) findViewById(R.id.evaluation_edittext_explanation);
+		box1 = (CheckBox) findViewById(R.id.eval_checkbox1);
+		box2 = (CheckBox) findViewById(R.id.eval_checkbox2);
+		box3 = (CheckBox) findViewById(R.id.eval_checkbox3);
+		box4 = (CheckBox) findViewById(R.id.eval_checkbox4);
+		box5 = (CheckBox) findViewById(R.id.eval_checkbox5);
+		box6 = (CheckBox) findViewById(R.id.eval_checkbox6);
+		box1.setChecked(true);
+		box2.setChecked(true);
+		box3.setChecked(true);
 		mBtnSubmit = (Button) findViewById(R.id.evaluation_btn_submit);
+		
 	}
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if (msg.what == 100) {
 				String value = (String) msg.obj;
-				Gson gson=new Gson();
+				Gson gson = new Gson();
 				Evaluation evaluation = gson.fromJson(value, Evaluation.class);
-				if(!TextUtils.isEmpty(evaluation.ret)){
-					if(evaluation.ret.equals("0")){
+				if (!TextUtils.isEmpty(evaluation.ret)) {
+					if (evaluation.ret.equals("0")) {
 						Toast.makeText(EvaluationActivity.this, "评价成功", Toast.LENGTH_SHORT).show();
-						Intent intent = new Intent(EvaluationActivity.this,EvaluationDetailActivity.class);
-						if(info!=null)
-						intent.putExtra("rraid", info.getHouseOrderId());
-						startActivity(intent);
-						finish();
-					}else{
+						if (!TextUtils.isEmpty(type) && info != null) {
+							if (type.equals("renter")) {
+								Intent intent = new Intent(EvaluationActivity.this, EvaluationDetailActivity.class);
+								intent.putExtra("rraid", info.getHouseOrderId());
+								startActivity(intent);
+							}
+							finish();
+						}
+					} else {
 						Toast.makeText(EvaluationActivity.this, "评价失败", Toast.LENGTH_SHORT).show();
+
 					}
 				}
 			}

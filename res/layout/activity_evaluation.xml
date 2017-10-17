@@ -5,7 +5,6 @@
     android:background="#ffffff"
     android:orientation="vertical" >
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +33,6 @@
         android:orientation="horizontal" >
 
         <TextView
-            
             android:layout_width="@dimen/base_dimen_122"
             android:layout_height="@dimen/base_dimen_34"
             android:layout_marginLeft="@dimen/base_dimen_26"
@@ -62,7 +60,6 @@
         android:orientation="horizontal" >
 
         <TextView
-            
             android:layout_width="@dimen/base_dimen_122"
             android:layout_height="@dimen/base_dimen_34"
             android:layout_marginLeft="@dimen/base_dimen_26"
@@ -126,22 +123,85 @@
         android:layout_marginTop="@dimen/base_dimen_24"
         android:background="#f1f2f3" />
 
-    <EditText
-        android:id="@+id/evaluation_edittext_explanation"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base_dimen_170"
-        android:layout_marginBottom="@dimen/base_dimen_8"
-        android:layout_marginLeft="@dimen/base_dimen_26"
-        android:layout_marginRight="@dimen/base_dimen_26"
-        android:layout_marginTop="@dimen/base_dimen_8"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="其他补充说明"
-        android:lines="5"
-        android:maxLength="200"
-        android:textColor="#000000"
-        android:textColorHint="#b2b2b2"
-        android:textSize="@dimen/base_dimen_26" />
+        android:layout_height="wrap_content"
+        android:background="#f1f2f3"
+        android:paddingTop="@dimen/base_dimen_16" >
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="环境良好"
+            android:id="@+id/eval_checkbox1"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="交通方便"
+            android:id="@+id/eval_checkbox2"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="态度好"
+            android:id="@+id/eval_checkbox3"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f1f2f3"
+        android:paddingTop="@dimen/base_dimen_16" >
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="家电齐全"
+            android:id="@+id/eval_checkbox4"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="价格公道"
+            android:id="@+id/eval_checkbox5"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+
+        <CheckBox
+            android:layout_width="@dimen/base_dimen_213"
+            android:layout_height="@dimen/base_dimen_60"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:background="@drawable/checkbox_evaluation_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="环境较差"
+            android:id="@+id/eval_checkbox6"
+            android:textColor="@drawable/checkbox_eval_text_bg" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

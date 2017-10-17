@@ -6,4 +6,5 @@ public class EvaluationItem {
 	public String EvaluateItem1;
 	public String EvaluateItem2;
 	public String EvaluateDate;
+	public String EvaluateObject;
 }

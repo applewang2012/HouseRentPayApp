@@ -91,14 +91,15 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 					json = new JSONObject((String) msg.obj);
 					String ret = json.optString("ret");
 					if (ret != null) {
-//						if (ret.equals("0")) {
+						if (ret.equals("0")) {
 							Toast.makeText(WithdrawActivity.this, "验证成功！", Toast.LENGTH_SHORT).show();
 							// 提现
 							// withdraw(CommonUtil.mRegisterRealName,
 							// CommonUtil.mBankName, CommonUtil.mCardNo,
 							// String.valueOf(Integer.parseInt(CommonUtil.mUserWallet)-1),
 							// "云上之家提现");
-//						}
+							popupWindow.dismiss();
+						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -111,6 +112,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 				WithdrawStatus status = gson.fromJson(value, WithdrawStatus.class);
 				if (status.retCode.equals("0000")) {
 					Toast.makeText(WithdrawActivity.this, status.retMsg, Toast.LENGTH_SHORT).show();
+					
 				}
 			}
 
@@ -199,7 +201,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 		getVerifyNum = (TextView) view.findViewById(R.id.withdraw_getverify_num);
 		checkVerifyNum = (Button) view.findViewById(R.id.btn_check_verify_num);
 		cancel = (Button) view.findViewById(R.id.btn_cancel);
-
+		popupWindow.setFocusable(true);
 		verifyNum = (EditText) view.findViewById(R.id.edittext_verify_num);
 		getVerifyNum.setOnClickListener(new OnClickListener() {
 
@@ -228,6 +230,14 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 					checkPhoneVerifyCode(CommonUtil.mUserLoginName, num);
 				}
 
+			}
+		});
+		cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				popupWindow.dismiss();
+				
 			}
 		});
 	}
@@ -294,6 +304,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 		mWithdraw = (Button) findViewById(R.id.btn_withdraw);
 		view = View.inflate(this, R.layout.withdraw_popupwindow, null);
 		TextView popupSum = (TextView) view.findViewById(R.id.popup_sum);
+		withdrawSum=CommonUtil.mUserWallet;
 		popupSum.setText("转出" + withdrawSum + "元");
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);

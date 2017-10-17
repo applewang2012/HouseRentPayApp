@@ -18,6 +18,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -31,10 +32,11 @@ public class EvaluationDetailActivity extends BaseActivity {
 
 	private TextView mTitleBar;
 	private ListView mListView;
-	private String mGetEvaluationListAction = "http://tempuri.org/GetEvaluationList";//获得评论列表
+	private String mGetEvaluationListAction = "http://tempuri.org/GetEvaluationList";// 获得评论列表
 	private Context mContext;
 	private HoursePresenter mPresent;
 	ArrayList<EvaluationItem> list = new ArrayList<>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,42 +51,54 @@ public class EvaluationDetailActivity extends BaseActivity {
 		initView();
 		initEvent();
 	}
+
 	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if (msg.what == 100) {
 				String value = (String) msg.obj;
-				
-				Gson gson=new Gson();
-				EvaluationResult result=gson.fromJson(value, EvaluationResult.class);
-				Type type = new TypeToken<ArrayList<EvaluationItem>>(){}.getType();
-				list=gson.fromJson(result.msg,type);
-				mListView.setAdapter(new UniversalAdapter<EvaluationItem>(EvaluationDetailActivity.this, R.layout.evaluation_detail_item, list) {
+
+				Gson gson = new Gson();
+				EvaluationResult result = gson.fromJson(value, EvaluationResult.class);
+				Type type = new TypeToken<ArrayList<EvaluationItem>>() {
+				}.getType();
+				list = gson.fromJson(result.msg, type);
+				mListView.setAdapter(new UniversalAdapter<EvaluationItem>(EvaluationDetailActivity.this,
+						R.layout.evaluation_detail_item, list) {
 					@Override
 					public void convert(UniversalViewHolder holder, EvaluationItem info) {
 						View convertView = holder.getConvertView();
 						TextView user = (TextView) convertView.findViewById(R.id.detail_user);
 						TextView date = (TextView) convertView.findViewById(R.id.detail_date);
-						CustomRatingBar2 serviceBar = (CustomRatingBar2) convertView.findViewById(R.id.evaluation_service_rating);
-						CustomRatingBar2 environmentBar = (CustomRatingBar2) convertView.findViewById(R.id.evaluation_environmental_rating);
-						CustomRatingBar2 pirceBar = (CustomRatingBar2) convertView.findViewById(R.id.evaluation_price_rating);
-						user.setText(info.EvaluatePerson.substring(0,3)+"****"+info.EvaluatePerson.substring(8));
-						date.setText(UtilTool.stampToNormalDate(info.EvaluateDate.substring(6, info.EvaluateDate.length()-2)));
+						CustomRatingBar2 serviceBar = (CustomRatingBar2) convertView
+								.findViewById(R.id.evaluation_service_rating);
+						CustomRatingBar2 environmentBar = (CustomRatingBar2) convertView
+								.findViewById(R.id.evaluation_environmental_rating);
+						CustomRatingBar2 pirceBar = (CustomRatingBar2) convertView
+								.findViewById(R.id.evaluation_price_rating);
+						user.setText(info.EvaluatePerson.substring(0, 3) + "****" + info.EvaluatePerson.substring(8));
+						date.setText(UtilTool.stampToNormalDate(info.EvaluateDate.substring(6,
+								info.EvaluateDate.length() - 2)));
 						serviceBar.setScore(convert2Integer(info.EvaluateItem0));
 						environmentBar.setScore(convert2Integer(info.EvaluateItem1));
 						pirceBar.setScore(convert2Integer(info.EvaluateItem2));
 					}
 				});
-				
+
 			}
 		};
 	};
-	private int convert2Integer(String str){
-		int idx = str.lastIndexOf(".");//查找小数点的位置
-        String strNum = str.substring(0,idx);
+
+	private int convert2Integer(String str) {
+		int idx = str.lastIndexOf(".");// 查找小数点的位置
+		String strNum = str.substring(0, idx);
 		return Integer.valueOf(strNum);
 	}
-	/**获得评论列表
-	 * @param obj 评价对象的id RRAID：房屋
+
+	/**
+	 * 获得评论列表
+	 * 
+	 * @param obj
+	 *            评价对象的id RRAID：房屋 idcard：房客身份证
 	 */
 	private void getEvaluationList(String obj) {
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetEvaluationList";
@@ -93,6 +107,7 @@ public class EvaluationDetailActivity extends BaseActivity {
 		mPresent.readyPresentServiceParams(this, url, mGetEvaluationListAction, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
+
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
@@ -106,10 +121,13 @@ public class EvaluationDetailActivity extends BaseActivity {
 			}
 		}
 	}
+
 	private void initData() {
+
 		String rraid = getIntent().getStringExtra("rraid");
+
 		getEvaluationList(rraid);
-		
+
 	}
 
 	private void initEvent() {
@@ -117,10 +135,8 @@ public class EvaluationDetailActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		
-	
+
 		mListView = (ListView) findViewById(R.id.evaluation_detail_listview);
-		
 
 	}
 }

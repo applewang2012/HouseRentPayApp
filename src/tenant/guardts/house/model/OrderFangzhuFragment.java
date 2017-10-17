@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -512,10 +513,10 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-//					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-//					intent.putExtra("order_detail", info);
-//					intent.putExtra("detail_type", "owner");
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(), EvaluationActivity.class);
+					intent.putExtra("order_detail", info);
+					intent.putExtra("detail_type", "owner");
+					startActivity(intent);
 				}
 			});
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
