@@ -157,8 +157,7 @@
         android:background="#cccccc" />
 
     <LinearLayout
-        android:id="@+id/about_us_linearlayout"
-        
+        android:id="@+id/modify_password_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_130" >
 
@@ -168,7 +167,35 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_34"
-            android:text="关于我们"
+            android:text="修改密码"
+            android:textColor="#333333"
+            android:textSize="@dimen/base_dimen_32" />
+
+        <ImageView
+            android:layout_width="@dimen/base_dimen_44"
+            android:layout_height="@dimen/base_dimen_44"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_498"
+            android:src="@drawable/more" />
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#cccccc" />
+    
+    <LinearLayout
+        android:id="@+id/id_userinfo_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_130" >
+
+        <TextView
+            
+            android:layout_width="@dimen/base_dimen_128"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_34"
+            android:text="退出登录"
             android:textColor="#333333"
             android:textSize="@dimen/base_dimen_32" />
 

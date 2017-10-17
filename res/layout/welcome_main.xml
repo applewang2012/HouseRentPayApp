@@ -11,11 +11,11 @@
 	    android:src="@drawable/house_splash_bg"
 	    />
 	<ImageView
-	    android:layout_width="@dimen/base_dimen_496"
+	    android:layout_width="@dimen/base_dimen_514"
 	    android:layout_height="@dimen/base_dimen_702"
 	    android:src="@drawable/splash_app_logo"
-	    android:layout_marginLeft="@dimen/base_dimen_132"
-	    android:layout_marginTop="@dimen/base_dimen_146"
+	    android:layout_marginLeft="@dimen/base_dimen_90"
+	    android:layout_marginTop="@dimen/base_dimen_134"
 	    />
 	<FrameLayout 
 	    android:id="@+id/id_splash_show_logo_animation"

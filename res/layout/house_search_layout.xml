@@ -48,7 +48,7 @@
 		        android:layout_height="match_parent"
 		        android:background="#00000000"
 		        android:ems="10"
-		        android:hint="想租房？来云上之家！"
+		        android:hint="想租房？来链心锁！"
 		        android:textSize="@dimen/base_dimen_28"
 		        android:textColorHint="#cccccc"
 		        android:textColor="#ffffff"

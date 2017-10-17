@@ -132,7 +132,6 @@ public class EvaluationActivity extends BaseActivity {
 						}
 					}
 				}
-
 			}
 		});
 
@@ -192,7 +191,7 @@ public class EvaluationActivity extends BaseActivity {
 		
 	}
 
-	Handler mHandler = new Handler() {
+	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			if (msg.what == 100) {
 				String value = (String) msg.obj;
@@ -209,7 +208,9 @@ public class EvaluationActivity extends BaseActivity {
 							}
 							finish();
 						}
-					} else {
+
+					}else{
+
 						Toast.makeText(EvaluationActivity.this, "评价失败", Toast.LENGTH_SHORT).show();
 
 					}

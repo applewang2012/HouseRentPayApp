@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.AboutUsActivity;
 import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.LoginUserActivity;
@@ -46,7 +47,7 @@ public class MyFragment extends BaseFragment {
 	private FrameLayout mPublishHouse;
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
 	private String mGetUserInfoAction = "http://tempuri.org/GetUserInfo";
-	private FrameLayout mPassword;
+	private FrameLayout mAboutUs;
 	private FrameLayout mLogout;
 	// private String mUsername;
 	private FrameLayout mChangeArea;
@@ -104,7 +105,7 @@ public class MyFragment extends BaseFragment {
 		mHistory = (FrameLayout) mRootView.findViewById(R.id.house_history);// 我的房屋
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
-		mPassword = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_password_modify);// 修改密码
+		mAboutUs = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_about_us);// 修改密码
 		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_logout);// 退出登录
 		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);// 切换城市
 		if (mUserName.equals("") || mUserName == null) {
@@ -156,17 +157,11 @@ public class MyFragment extends BaseFragment {
 				}
 			}
 		});
-		mPassword.setOnClickListener(new OnClickListener() {
+		mAboutUs.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					startActivity(new Intent(mContext, LoginUserActivity.class));
-				} else {
-					startActivity(new Intent(mContext, ModifyPasswordActivity.class));
-				}
-
+				startActivity(new Intent(mContext, AboutUsActivity.class));
 			}
 		});
 

@@ -84,6 +84,7 @@ public class CommonUtil {
     public static String ORDER_STATUS_NEED_CHECKOUT = "6"; //退房待确认
     public static String ORDER_STATUS_EXPIRED = "7"; //已过期
     public static String ORDER_STATUS_CHECKOUTED = "5"; //已退房
+    public static String ORDER_STATUS_COMPLETE = "11"; //已完成
     public static void setCanvas(Canvas canvas) {
         CommonUtil.canvas = canvas;
     }

@@ -47,7 +47,18 @@ public class AboutUsActivity extends BaseActivity {
 				checkVersionUpdate();
 			}
 		});
-		
+		Button serviceContent = (Button)findViewById(R.id.id_about_us_service_content);
+		serviceContent.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent loadIntent = new Intent(AboutUsActivity.this, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
+				loadIntent.putExtra("tab_name", "用户服务协议");
+				startActivity(loadIntent);
+				
+			}
+		});
 	}
 	
 	private void checkVersionUpdate(){
@@ -90,7 +101,7 @@ public class AboutUsActivity extends BaseActivity {
 		}
 		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(AboutUsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("升级云上之家");
+		  builder.setTitle("检测到新版本，是否升级？");
 		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 		         @Override  
@@ -101,7 +112,7 @@ public class AboutUsActivity extends BaseActivity {
 		         }  
 			
 		});
-		builder.setCancelable(false);
+		builder.setCancelable(true);
 		builder.show();
 	}
 	

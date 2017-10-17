@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.EvaluationActivity;
+import tenant.guardts.house.EvaluationDetailActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -556,6 +557,24 @@ public class OrderFangzhuFragment extends BaseFragment{
 				}
 			}
 			
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)){
+			status.setText("已完成");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看评价");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), EvaluationDetailActivity.class);
+					intent.putExtra("rraid", info.getHouseId());
+					startActivity(intent);
+				}
+			});
 		}
     }
     

@@ -4899,9 +4899,9 @@ tenant.guardts.house.AddHouseInfoActivity:
     private java.lang.String mRHouseP
     546:560:private void getHouseProperty()
 tenant.guardts.house.AddRentAttributeActivity:
-    774:805:private void startHttpService()
-    981:1004:private void getIndentifyInfo(java.lang.String)
-    1007:1033:private void getQueryStatusInfo(java.lang.String)
+    773:804:private void startHttpService()
+    980:1003:private void getIndentifyInfo(java.lang.String)
+    1006:1032:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -4957,6 +4957,8 @@ tenant.guardts.house.DownloadAppActivity:
 tenant.guardts.house.DownloadAppActivity$3:
     121:121:public void onDownloadSelectionChanged(long,boolean)
     126:126:public boolean isDownloadSelected(long)
+tenant.guardts.house.EvaluationActivity:
+    private android.widget.EditText mExplanation
 tenant.guardts.house.GalleryActivity:
     private android.widget.TextView positionTextView
     android.widget.RelativeLayout photo_relativeLayout
@@ -4972,9 +4974,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     private java.lang.String mOwnerName
     private java.lang.String mOwnerIdcard
 tenant.guardts.house.HomeActivity:
-    599:610:private java.lang.String getUserIdNo(java.lang.String)
-    731:732:public void setSelectedCity(java.lang.String)
-    735:735:public java.lang.String getSelectedCity()
+    598:609:private java.lang.String getUserIdNo(java.lang.String)
+    730:731:public void setSelectedCity(java.lang.String)
+    734:734:public java.lang.String getSelectedCity()
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -4984,24 +4986,22 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mfilePath
     private android.os.HandlerThread myHandlerThread
     private android.os.Handler mSubHandler
-    private android.widget.PopupWindow popupWindow
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-    282:287:private void setDeleteHouseInfo(java.lang.String)
-    291:303:private void initDialog()
-    312:322:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    415:420:private void getHouseDetailImageListByHouseId(java.lang.String)
-    71:71:static synthetic java.lang.String access$11(tenant.guardts.house.HouseDetailInfoActivity)
-    65:65:static synthetic void access$12(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
-    65:65:static synthetic java.lang.String access$13(tenant.guardts.house.HouseDetailInfoActivity)
-tenant.guardts.house.HouseDetailInfoActivity$10
-tenant.guardts.house.HouseDetailInfoActivity$11
+    336:341:private void setDeleteHouseInfo(java.lang.String)
+    345:357:private void initDialog()
+    366:376:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    469:474:private void getHouseDetailImageListByHouseId(java.lang.String)
+    66:66:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
+    66:66:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
+tenant.guardts.house.HouseDetailInfoActivity$14
+tenant.guardts.house.HouseDetailInfoActivity$15
 tenant.guardts.house.HouseHistoryActivity:
     private android.widget.LinearLayout mContentLayout
     private android.widget.TextView mNoContent
-    99:104:private void setDeleteHouseInfo(java.lang.String)
-    255:270:private void initDialog(android.view.View,int)
+    100:105:private void setDeleteHouseInfo(java.lang.String)
+    256:271:private void initDialog(android.view.View,int)
 tenant.guardts.house.HouseHistoryActivity$3
 tenant.guardts.house.LocationDemo:
     com.baidu.mapapi.map.BitmapDescriptor mCurrentMarker
@@ -5084,7 +5084,7 @@ tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
     private java.lang.String bankName
-    250:259:private void withdraw(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+    261:270:private void withdraw(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 tenant.guardts.house.adapter.HistoryRecordsAdapter$ViewHolder:
     android.widget.ImageView image
 tenant.guardts.house.adapter.TransactionDetailAdapter$ViewHolder:
@@ -5420,15 +5420,10 @@ tenant.guardts.house.model.DataModel:
     62:62:static synthetic java.util.HashMap access$5(tenant.guardts.house.model.DataModel)
 tenant.guardts.house.model.DataModel$HttpAsyncTask
 tenant.guardts.house.model.DataModel$RelationServiceAsyncTask
-tenant.guardts.house.model.EvaluationDetail:
-    22:23:public void setUser(java.lang.String)
-    28:29:public void setDate(java.lang.String)
-    31:31:public java.lang.String getServiceRating()
-    34:35:public void setServiceRating(java.lang.String)
-    37:37:public java.lang.String getEnvironmentalRating()
-    40:41:public void setEnvironmentalRating(java.lang.String)
-    43:43:public java.lang.String getPriceRating()
-    46:47:public void setPriceRating(java.lang.String)
+tenant.guardts.house.model.EvaluationItem:
+    public java.lang.String EvaluateObject
+tenant.guardts.house.model.EvaluationResult:
+    public java.lang.String ret
 tenant.guardts.house.model.HouseFragment:
     private com.baidu.mapapi.map.MyLocationConfiguration$LocationMode mCurrentMode
     private boolean mShowInfoWindow
@@ -5444,11 +5439,11 @@ tenant.guardts.house.model.HouseFragment$MyLocationListenner:
     700:700:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.model.HouseImageInfo
 tenant.guardts.house.model.HouseInfoModel:
-    46:46:public long getOrderCreatedDateStamp()
+    56:56:public long getOrderCreatedDateStamp()
 tenant.guardts.house.model.OrderFangzhuFragment:
     private long mTimeTag
     private android.support.v4.widget.SwipeRefreshLayout mSwipeLayout
-    220:225:private void rejectRentAttributeInfo(java.lang.String)
+    225:230:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
@@ -5538,12 +5533,12 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
     public static final long TIME_STAMP_10_MINUTES
     23:23:public CommonUtil()
-    88:89:public static void setCanvas(android.graphics.Canvas)
-    152:155:public static void uninstallApk(android.content.Context,java.lang.String)
-    169:169:private static double Rad(double)
-    180:189:public static double GetDistance(double,double,double,double)
-    193:214:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    219:242:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    89:90:public static void setCanvas(android.graphics.Canvas)
+    153:156:public static void uninstallApk(android.content.Context,java.lang.String)
+    170:170:private static double Rad(double)
+    181:190:public static double GetDistance(double,double,double,double)
+    194:215:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    220:243:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)
@@ -5588,6 +5583,7 @@ tenant.guardts.house.util.NewToast
 tenant.guardts.house.util.NewToast$1
 tenant.guardts.house.util.NewToast$OnDismissListener
 tenant.guardts.house.util.NewToast$PopupViewContainer
+tenant.guardts.house.util.PrefsUtils
 tenant.guardts.house.util.PublicWay:
     15:15:public PublicWay()
 tenant.guardts.house.util.ScreenShotUtil:

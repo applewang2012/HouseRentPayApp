@@ -138,12 +138,6 @@ public class ModifyPasswordActivity extends BaseActivity{
 	};
 	
 
-	 @Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			return super.onKeyDown(keyCode, event);
-		}
-
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);

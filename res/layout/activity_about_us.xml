@@ -10,34 +10,6 @@
         android:orientation="vertical"
         tools:context="${relativePackage}.${activityClass}" >
 
-        <!--
-         <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base_dimen_90"
-        android:background="#337ffd" >
-
-        <ImageView
-            android:layout_width="@dimen/base_dimen_44"
-            android:layout_height="@dimen/base_dimen_44"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@drawable/short_lease_back"
-            android:clickable="true"
-            android:onClick="backFinish" />
-
-        <TextView
-            android:id="@+id/id_titlebar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:text="关于我们"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/base_dimen_38"
-            android:textStyle="bold" />
-    </FrameLayout>
-        -->
-
         <ImageView
             android:layout_width="@dimen/base_dimen_144"
             android:layout_height="@dimen/base_dimen_144"
@@ -55,7 +27,8 @@
             android:textColor="#666666"
             android:textSize="@dimen/base_dimen_28" />
 
-        <TextView
+        <Button
+            android:id="@+id/id_about_us_service_content"
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_95"
             android:layout_marginTop="@dimen/base_dimen_70"

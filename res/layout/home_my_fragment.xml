@@ -192,7 +192,7 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/id_userinfo_password_modify"
+                android:id="@+id/id_userinfo_about_us"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_100" >
 
@@ -200,7 +200,7 @@
                     android:layout_width="@dimen/base_dimen_38"
                     android:layout_height="@dimen/base_dimen_38"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/my_frament_modify_password" />
+                    android:background="@drawable/my_frament_about_us" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -208,7 +208,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
-                    android:text="修改密码"
+                    android:text="关于我们"
                     android:textColor="#555555"
                     android:textSize="@dimen/base_dimen_30" />
 
@@ -222,6 +222,7 @@
             <FrameLayout
                 android:clickable="false"
                 android:id="@+id/id_userinfo_logout"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_100" >
 

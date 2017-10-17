@@ -22834,6 +22834,8 @@ tenant.guardts.house.R$drawable: int button_text_selector
 tenant.guardts.house.R$drawable: int call
 tenant.guardts.house.R$drawable: int capture_flash_bg
 tenant.guardts.house.R$drawable: int capture_flash_text_bg
+tenant.guardts.house.R$drawable: int checkbox_eval_text_bg
+tenant.guardts.house.R$drawable: int checkbox_evaluation_bg
 tenant.guardts.house.R$drawable: int checkout_house_normal
 tenant.guardts.house.R$drawable: int checkout_house_selected
 tenant.guardts.house.R$drawable: int chuzu_icon
@@ -22856,6 +22858,8 @@ tenant.guardts.house.R$drawable: int dialog_wait
 tenant.guardts.house.R$drawable: int drawablefgt_house_owner_dengji_house
 tenant.guardts.house.R$drawable: int edit
 tenant.guardts.house.R$drawable: int edit_press
+tenant.guardts.house.R$drawable: int eval_checked
+tenant.guardts.house.R$drawable: int eval_normal
 tenant.guardts.house.R$drawable: int evaluation_btn_bg
 tenant.guardts.house.R$drawable: int evaluation_location
 tenant.guardts.house.R$drawable: int evaluation_star_bg
@@ -22945,6 +22949,9 @@ tenant.guardts.house.R$drawable: int icon_markh
 tenant.guardts.house.R$drawable: int icon_marki
 tenant.guardts.house.R$drawable: int icon_markj
 tenant.guardts.house.R$drawable: int icon_search
+tenant.guardts.house.R$drawable: int input_btn_normal
+tenant.guardts.house.R$drawable: int input_btn_pressed
+tenant.guardts.house.R$drawable: int input_idcard_img
 tenant.guardts.house.R$drawable: int into_icon
 tenant.guardts.house.R$drawable: int item_shape_no_solid_corner
 tenant.guardts.house.R$drawable: int item_shape_no_solid_corner_press
@@ -22971,6 +22978,7 @@ tenant.guardts.house.R$drawable: int my_fragment_exchange_city
 tenant.guardts.house.R$drawable: int my_fragment_exti
 tenant.guardts.house.R$drawable: int my_fragment_publish
 tenant.guardts.house.R$drawable: int my_fragment_search_house
+tenant.guardts.house.R$drawable: int my_frament_about_us
 tenant.guardts.house.R$drawable: int my_frament_modify_password
 tenant.guardts.house.R$drawable: int my_icon
 tenant.guardts.house.R$drawable: int my_icon_default
@@ -23072,6 +23080,8 @@ tenant.guardts.house.R$drawable: int plugin_camera_title_btn_preview
 tenant.guardts.house.R$drawable: int pop
 tenant.guardts.house.R$drawable: int popup
 tenant.guardts.house.R$drawable: int popup_down
+tenant.guardts.house.R$drawable: int popup_input_idcard_bg
+tenant.guardts.house.R$drawable: int popup_input_idcard_btn_bg
 tenant.guardts.house.R$drawable: int popup_left
 tenant.guardts.house.R$drawable: int popup_middle
 tenant.guardts.house.R$drawable: int popup_right
@@ -23151,7 +23161,6 @@ tenant.guardts.house.R$drawable: int yellow
 tenant.guardts.house.R$drawable: R$drawable()
 tenant.guardts.house.R$id
 tenant.guardts.house.R$id: int MyLetterListView01
-tenant.guardts.house.R$id: int about_us_linearlayout
 tenant.guardts.house.R$id: int active_state
 tenant.guardts.house.R$id: int add_bank_card_btn_next
 tenant.guardts.house.R$id: int address
@@ -23169,6 +23178,8 @@ tenant.guardts.house.R$id: int btn_confirm
 tenant.guardts.house.R$id: int btn_del
 tenant.guardts.house.R$id: int btn_detail
 tenant.guardts.house.R$id: int btn_history
+tenant.guardts.house.R$id: int btn_input_idcard_cancel
+tenant.guardts.house.R$id: int btn_input_idcard_confirm
 tenant.guardts.house.R$id: int btn_withdraw
 tenant.guardts.house.R$id: int button_play
 tenant.guardts.house.R$id: int button_replay
@@ -23210,7 +23221,7 @@ tenant.guardts.house.R$id: int decode_succeeded
 tenant.guardts.house.R$id: int description
 tenant.guardts.house.R$id: int detail_button_apply
 tenant.guardts.house.R$id: int detail_button_call
-tenant.guardts.house.R$id: int detail_button_del
+tenant.guardts.house.R$id: int detail_button_comment
 tenant.guardts.house.R$id: int detail_date
 tenant.guardts.house.R$id: int detail_desp
 tenant.guardts.house.R$id: int detail_sum
@@ -23224,9 +23235,14 @@ tenant.guardts.house.R$id: int edittext_verify_num
 tenant.guardts.house.R$id: int encode_failed
 tenant.guardts.house.R$id: int encode_succeeded
 tenant.guardts.house.R$id: int end
+tenant.guardts.house.R$id: int eval_checkbox1
+tenant.guardts.house.R$id: int eval_checkbox2
+tenant.guardts.house.R$id: int eval_checkbox3
+tenant.guardts.house.R$id: int eval_checkbox4
+tenant.guardts.house.R$id: int eval_checkbox5
+tenant.guardts.house.R$id: int eval_checkbox6
 tenant.guardts.house.R$id: int evaluation_btn_submit
 tenant.guardts.house.R$id: int evaluation_detail_listview
-tenant.guardts.house.R$id: int evaluation_edittext_explanation
 tenant.guardts.house.R$id: int evaluation_environmental_rating
 tenant.guardts.house.R$id: int evaluation_overall_rating
 tenant.guardts.house.R$id: int evaluation_price_rating
@@ -23256,6 +23272,7 @@ tenant.guardts.house.R$id: int house_history
 tenant.guardts.house.R$id: int icon_image
 tenant.guardts.house.R$id: int id_about_us_check_version
 tenant.guardts.house.R$id: int id_about_us_current_version
+tenant.guardts.house.R$id: int id_about_us_service_content
 tenant.guardts.house.R$id: int id_add_house_area
 tenant.guardts.house.R$id: int id_add_house_current_floor
 tenant.guardts.house.R$id: int id_add_house_current_num
@@ -23483,12 +23500,13 @@ tenant.guardts.house.R$id: int id_user_nickname
 tenant.guardts.house.R$id: int id_user_publish_house
 tenant.guardts.house.R$id: int id_user_shot
 tenant.guardts.house.R$id: int id_user_wallet
+tenant.guardts.house.R$id: int id_userinfo_about_us
 tenant.guardts.house.R$id: int id_userinfo_change_area
 tenant.guardts.house.R$id: int id_userinfo_container
 tenant.guardts.house.R$id: int id_userinfo_logout
-tenant.guardts.house.R$id: int id_userinfo_password_modify
 tenant.guardts.house.R$id: int id_viewflow_framelayout
 tenant.guardts.house.R$id: int id_zufang_item_status
+tenant.guardts.house.R$id: int idcard_input
 tenant.guardts.house.R$id: int imageCaptureMainLayout
 tenant.guardts.house.R$id: int imageView1
 tenant.guardts.house.R$id: int imageView2
@@ -23497,6 +23515,7 @@ tenant.guardts.house.R$id: int image_view
 tenant.guardts.house.R$id: int img
 tenant.guardts.house.R$id: int img_avator
 tenant.guardts.house.R$id: int innerBackgroundImageView
+tenant.guardts.house.R$id: int input_idcard
 tenant.guardts.house.R$id: int item_address_img
 tenant.guardts.house.R$id: int item_address_tv
 tenant.guardts.house.R$id: int item_grida_image
@@ -23521,6 +23540,7 @@ tenant.guardts.house.R$id: int lng_city
 tenant.guardts.house.R$id: int locate
 tenant.guardts.house.R$id: int locateHint
 tenant.guardts.house.R$id: int map_suggest_search
+tenant.guardts.house.R$id: int modify_password_layout
 tenant.guardts.house.R$id: int myGrid
 tenant.guardts.house.R$id: int myText
 tenant.guardts.house.R$id: int name
@@ -23762,8 +23782,10 @@ tenant.guardts.house.R$layout: int plugin_camera_album
 tenant.guardts.house.R$layout: int plugin_camera_gallery
 tenant.guardts.house.R$layout: int plugin_camera_select_imageview
 tenant.guardts.house.R$layout: int popupwindow_contact_owner
+tenant.guardts.house.R$layout: int popupwindow_input_identity_info
 tenant.guardts.house.R$layout: int popupwindow_layout
 tenant.guardts.house.R$layout: int rating_bar
+tenant.guardts.house.R$layout: int rating_bar2
 tenant.guardts.house.R$layout: int register_user_finish_layout
 tenant.guardts.house.R$layout: int register_user_step1_layout
 tenant.guardts.house.R$layout: int register_user_step2_layout
@@ -24283,6 +24305,9 @@ tenant.guardts.house.model.CompleteStatus: java.lang.String ret
 tenant.guardts.house.model.ConfirmCheckout
 tenant.guardts.house.model.ConfirmCheckout: java.lang.String ret
 tenant.guardts.house.model.ConfirmCheckout: java.lang.String msg
+tenant.guardts.house.model.Evaluation
+tenant.guardts.house.model.Evaluation: java.lang.String ret
+tenant.guardts.house.model.Evaluation: java.lang.String msg
 tenant.guardts.house.model.HouseFragment
 tenant.guardts.house.model.HouseInfoModel
 tenant.guardts.house.model.HouseInfoModel: long serialVersionUID
@@ -24311,6 +24336,7 @@ tenant.guardts.house.model.HouseInfoModel: long orderCreatedDateStamp
 tenant.guardts.house.model.HouseInfoModel: long orderExpiredDate
 tenant.guardts.house.model.HouseInfoModel: long currentDate
 tenant.guardts.house.model.HouseInfoModel: java.lang.String mShowTimeDown
+tenant.guardts.house.model.HouseInfoModel: java.lang.String checkOutPerson
 tenant.guardts.house.model.MyFragment
 tenant.guardts.house.model.OrderFangzhuFragment
 tenant.guardts.house.model.OrderFragment
@@ -24389,6 +24415,12 @@ tenant.guardts.house.view.CustomRatingBar: CustomRatingBar(android.content.Conte
 tenant.guardts.house.view.CustomRatingBar: CustomRatingBar(android.content.Context,android.util.AttributeSet)
 tenant.guardts.house.view.CustomRatingBar: CustomRatingBar(android.content.Context)
 tenant.guardts.house.view.CustomRatingBar: int getCount()
+tenant.guardts.house.view.CustomRatingBar2
+tenant.guardts.house.view.CustomRatingBar2: int getScore()
+tenant.guardts.house.view.CustomRatingBar2: void setScore(int)
+tenant.guardts.house.view.CustomRatingBar2: CustomRatingBar2(android.content.Context,android.util.AttributeSet,int)
+tenant.guardts.house.view.CustomRatingBar2: CustomRatingBar2(android.content.Context,android.util.AttributeSet)
+tenant.guardts.house.view.CustomRatingBar2: CustomRatingBar2(android.content.Context)
 tenant.guardts.house.view.HistoryRecordsView
 tenant.guardts.house.view.HistoryRecordsView: HistoryRecordsView(android.content.Context,android.util.AttributeSet,int)
 tenant.guardts.house.view.HistoryRecordsView: HistoryRecordsView(android.content.Context,android.util.AttributeSet)

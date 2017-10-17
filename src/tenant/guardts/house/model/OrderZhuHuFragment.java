@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.ApplyForCheckoutActivity;
 import tenant.guardts.house.EvaluationActivity;
+import tenant.guardts.house.EvaluationDetailActivity;
 import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -125,6 +126,9 @@ public class OrderZhuHuFragment extends BaseFragment{
 					isUpdate = true;
 				}else if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
 					mHouseInfoList.get(i).setShowTimeDownTime("请联系房主尽快确认订单");
+				}else if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT) 
+						&& mHouseInfoList.get(i).getCheckOutPerson().equals(CommonUtil.mUserLoginName)){
+					mHouseInfoList.get(i).setShowTimeDownTime("请联系对方退房");
 				}else{
 					mHouseInfoList.get(i).setShowTimeDownTime("");
 				}
@@ -261,9 +265,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 					payIntent.putExtra("orderID", info.getHouseOrderId());
 					payIntent.putExtra("rentNO", info.getHouseId());
 					payIntent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
-					
-					
-					
 					startActivity(payIntent);
 				}
 			});
@@ -419,10 +420,19 @@ public class OrderZhuHuFragment extends BaseFragment{
 			if (!TextUtils.isEmpty(info.getCheckOutPerson())) {
 				if (info.getCheckOutPerson().equals(CommonUtil.mUserLoginName)) {
 					button3.setText("查看详情");
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-					intent.putExtra("order_detail", info);
-					intent.putExtra("detail_type", "renter");
-					startActivity(intent);
+					info.setShowTimeDownTime("请联系对方退房");
+					button3.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "renter");
+							startActivity(intent);
+						}
+					});
+					
 				} else {
 					button3.setText("确认退房");
 					button3.setOnClickListener(new OnClickListener() {
@@ -435,6 +445,24 @@ public class OrderZhuHuFragment extends BaseFragment{
 					});
 				}
 			}
+		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)){
+			status.setText("已完成");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setText("查看详情");
+			button1.setVisibility(View.INVISIBLE);
+			button2.setVisibility(View.INVISIBLE);
+			button3.setText("查看评价");
+			button3.setTextColor(Color.parseColor("#337ffd"));
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), EvaluationDetailActivity.class);
+					intent.putExtra("rraid", info.getHouseId());
+					startActivity(intent);
+				}
+			});
 		}
 	}
 	

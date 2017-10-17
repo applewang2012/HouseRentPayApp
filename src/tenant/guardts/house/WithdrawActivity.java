@@ -100,6 +100,7 @@ public class WithdrawActivity extends BaseActivity implements DataStatusInterfac
 							// "云上之家提现");
 							popupWindow.dismiss();
 						}
+
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

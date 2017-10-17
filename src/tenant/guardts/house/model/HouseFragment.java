@@ -175,7 +175,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 			mUserName = sharedata.getString("user_name", "");
 			Log.w("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
-			mHandler.sendEmptyMessageDelayed(6000, 100);
+			mHandler.sendEmptyMessageDelayed(6000, 5);
 		}
 	}
 	
@@ -806,7 +806,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			if (result.getAllPoi().size() > 0) {
 				mCurrentLatLng = result.getAllPoi().get(0).location;
 			}
-			startGetLocationFromHouse();
+//			startGetLocationFromHouse();
 			return;
 		} else {
 			GlobalUtil.shortToast(mContext, "抱歉，定位城市失败！", getResources().getDrawable(R.drawable.ic_dialog_no));

@@ -471,7 +471,7 @@ public class HomeActivity extends BaseActivity {
 		}
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		builder.setTitle("升级云上之家");
+		builder.setTitle("检测到新版本，是否升级？");
 		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override

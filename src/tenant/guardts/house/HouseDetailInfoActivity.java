@@ -117,6 +117,17 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				phone.setText(mRentPhone.getText());
 			}
 		});
+		
+		mShowCommentButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HouseDetailInfoActivity.this, EvaluationDetailActivity.class);
+				intent.putExtra("rraid", mRentNo);
+				startActivity(intent);
+				
+			}
+		});
 
 		mButtonApply.setOnClickListener(new OnClickListener() {
 
@@ -304,21 +315,10 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			if (flag.equals("0")) {
 				mButtonCall.setVisibility(View.GONE);
 				mButtonApply.setVisibility(View.GONE);
-				mDel.setVisibility(View.VISIBLE);
-				mDel.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// 删除房屋
-						// initDialog();
-						Toast.makeText(HouseDetailInfoActivity.this, "该功能正在开发中，敬请期待!!", Toast.LENGTH_SHORT).show();
-					}
-				});
 			}
 		} else {
 			mButtonCall.setVisibility(View.VISIBLE);
 			mButtonApply.setVisibility(View.VISIBLE);
-			mDel.setVisibility(View.GONE);
 		}
 		// mHouseNo = getIntent().getStringExtra("house_id");
 		// mUsername = getIntent().getStringExtra("user_name");
@@ -392,13 +392,13 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private CircleFlowIndicator mFlowIndicator;
 	private TextView mZhulinType;
 	private TextView mRoomNum, mHousePrice;
-	private Button mDel;
+	private Button mShowCommentButton;
 
 	private void initView() {
 
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mInputIDCard = (TextView) findViewById(R.id.idcard_input);// 录身份证
-		mDel = (Button) findViewById(R.id.detail_button_del);
+		mShowCommentButton = (Button) findViewById(R.id.detail_button_comment);
 		mRentArea = (TextView) findViewById(R.id.id_rent_house_area);
 		mRentName = (TextView) findViewById(R.id.id_rent_house_name);
 		mRentPhone = (TextView) findViewById(R.id.id_rent_house_phone);

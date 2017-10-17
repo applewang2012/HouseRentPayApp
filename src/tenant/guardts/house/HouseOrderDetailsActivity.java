@@ -446,6 +446,22 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
+		}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)){
+			status.setText("已完成");
+			status.setTextColor(Color.parseColor("#de6262"));
+			button1.setVisibility(View.GONE);
+			button2.setVisibility(View.VISIBLE);
+			button2.setText("查看评价");
+			button2.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(HouseOrderDetailsActivity.this,EvaluationDetailActivity.class);
+					intent.putExtra("rraid", mOrderDetail.getHouseId());
+					startActivity(intent);
+				}
+				
+			});
 		}
 	}
 
