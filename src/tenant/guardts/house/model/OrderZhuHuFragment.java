@@ -560,7 +560,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 				}else{
 					//mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("housefragment", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 101){

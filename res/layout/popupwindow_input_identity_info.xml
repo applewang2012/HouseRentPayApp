@@ -45,9 +45,9 @@
             android:layout_height="@dimen/base_dimen_70"
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@drawable/popup_input_idcard_btn_bg"
+            android:background="@drawable/input_btn_pressed"
             android:text="确认"
-            android:textColor="@drawable/btn_text_selector"
+            android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_32" />
 
         <Button

@@ -180,7 +180,6 @@ public class HomeActivity extends BaseActivity {
 					startIndentifyProcess();
 				}
 				//强制活体
-				
 			}
 		});
 

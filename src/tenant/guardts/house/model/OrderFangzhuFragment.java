@@ -530,10 +530,18 @@ public class OrderFangzhuFragment extends BaseFragment{
 			if (!TextUtils.isEmpty(info.getCheckOutPerson())) {
 				if (info.getCheckOutPerson().equals(CommonUtil.mUserLoginName)) {
 					button3.setText("查看详情");
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
-					intent.putExtra("order_detail", info);
-					intent.putExtra("detail_type", "owner");
-					startActivity(intent);
+					button3.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							intent.putExtra("order_detail", info);
+							intent.putExtra("detail_type", "owner");
+							startActivity(intent);
+						}
+					});
+					
 				} else {
 					button3.setText("确认退房");
 					button3.setOnClickListener(new OnClickListener() {
