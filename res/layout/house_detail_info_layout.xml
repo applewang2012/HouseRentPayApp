@@ -468,7 +468,7 @@
                     android:textSize="@dimen/base_dimen_32"
                     android:textColor="#337ffd"
                     android:gravity="center"
-                    android:text="查看评价" >
+                    android:text="评价详情" >
                 </Button>
                 
                 <Button

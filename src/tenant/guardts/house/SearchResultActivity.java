@@ -220,7 +220,7 @@ public class SearchResultActivity extends BaseActivity {
 			
 			if (mSearch_tag == null || mSearch_tag.equals("")){
 				showSearch.setText("想租房？来链心锁！");
-				showSearch.setTextColor(Color.parseColor("##cccccc"));
+				showSearch.setTextColor(Color.parseColor("#cccccc"));
 				
 			}else{
 				showSearch.setText(mSearch_tag);
