@@ -69,6 +69,9 @@ public class EvaluationActivity extends BaseActivity {
 		info = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
 		mHouseLocation.setText(info.getHouseAddress());
 		if (type.equals("renter")) {
+			title1.setText("服务评分");
+			title2.setText("环境评分");
+			title3.setText("价格评分");
 			box1.setText("环境良好");
 			box2.setText("交通方便");
 			box3.setText("态度好");
@@ -76,6 +79,9 @@ public class EvaluationActivity extends BaseActivity {
 			box5.setText("价格公道");
 			box6.setText("环境较差");
 		} else if (type.equals("owner")) {
+			title1.setText("环境评分");
+			title2.setText("信誉评分");
+			title3.setText("态度评分");
 			box1.setText("诚实守信");
 			box2.setText("环境整洁");
 			box3.setText("友好沟通");
@@ -184,6 +190,9 @@ public class EvaluationActivity extends BaseActivity {
 		box4 = (CheckBox) findViewById(R.id.eval_checkbox4);
 		box5 = (CheckBox) findViewById(R.id.eval_checkbox5);
 		box6 = (CheckBox) findViewById(R.id.eval_checkbox6);
+		title1 = (TextView) findViewById(R.id.title1);
+		title2 = (TextView) findViewById(R.id.title2);
+		title3 = (TextView) findViewById(R.id.title3);
 		box1.setChecked(true);
 		box2.setChecked(true);
 		box3.setChecked(true);
@@ -221,6 +230,9 @@ public class EvaluationActivity extends BaseActivity {
 	};
 	private String type;
 	private HouseInfoModel info;
+	private TextView title1;
+	private TextView title2;
+	private TextView title3;
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {

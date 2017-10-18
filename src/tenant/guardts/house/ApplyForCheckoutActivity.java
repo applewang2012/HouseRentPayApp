@@ -119,6 +119,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	 * 点击事件
 	 */
 	private void initEvent() {
+//		setReason(reason);
 		mButtonCall.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -138,11 +139,8 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				String reason = getReason();
-				if (TextUtils.isEmpty(reason)) {
-					Toast.makeText(ApplyForCheckoutActivity.this, "请选择退房原因！", Toast.LENGTH_SHORT).show();
-				} else {
-					initAlertDialog(reason);
-				}
+//				Toast.makeText(ApplyForCheckoutActivity.this, reason, Toast.LENGTH_SHORT).show();
+				initAlertDialog(reason);
 
 			}
 		});
@@ -165,7 +163,9 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (!TextUtils.isEmpty(mRRAID)) {
-//					Toast.makeText(ApplyForCheckoutActivity.this, "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason, Toast.LENGTH_SHORT).show();
+					// Toast.makeText(ApplyForCheckoutActivity.this,
+					// "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason,
+					// Toast.LENGTH_SHORT).show();
 
 					ApplyCheckOut(mRRAID, CommonUtil.mUserLoginName, reason);
 				}
@@ -231,7 +231,6 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 
-
 							}
 
 						}).show();
@@ -255,6 +254,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		final TextView reasonText2 = (TextView) findViewById(R.id.checkout_house_reason_text2);
 		final TextView reasonText3 = (TextView) findViewById(R.id.checkout_house_reason_text3);
 		final TextView reasonText4 = (TextView) findViewById(R.id.checkout_house_reason_text4);
+		setReason(reasonText1.getText().toString());
 		mReasonContent1.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -534,12 +534,14 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				String value = (String) msg.obj;
 				Gson gson = new Gson();
 				ApplyForCheckOut checkOut = gson.fromJson(value, ApplyForCheckOut.class);
-				if(checkOut.ret!=null){
-					if(checkOut.ret.equals("0")){
+				if (checkOut.ret != null) {
+					if (checkOut.ret.equals("0")) {
 						if (mDetailType.equals("owner")) {
-							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待租户确认！", Toast.LENGTH_SHORT).show();
+							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待租户确认！", Toast.LENGTH_SHORT)
+									.show();
 						} else {
-							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待房主确认！", Toast.LENGTH_SHORT).show();
+							Toast.makeText(ApplyForCheckoutActivity.this, "退房申请成功，正在等待房主确认！", Toast.LENGTH_SHORT)
+									.show();
 						}
 						Intent intent = new Intent();
 						intent.putExtra("flag", true);
