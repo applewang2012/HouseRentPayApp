@@ -79,14 +79,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private TextView mStartTime, mEndTime;
 	private long mStartTimeClipse, mEndTimeClipse, mSystemClockTime;
 	private String mSetStartData, mSetEndData;
-	private String mOriginStartContent, mOriginEndContent;
 	private String mIdentifyAction = "http://tempuri.org/IdentifyValidateLive";
 	private String mSendVerifyCodeAction = "http://tempuri.org/SendIdentifyCodeMsg";
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mHouseNo;
 	private String mUsername;
 	private String [] mOwnerType = new String[3];
-	private String mOriginTypeText, mTypeIndex = null;
+	private String  mTypeIndex = null;
 	private String mOwnerName;
 	private String mOwnerIdcard;
 	private String mOrderId;
@@ -96,11 +95,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mRealName, mIdCard;
 	private HandlerThread myHandlerThread ;
 	private Handler mSubHandler;
-	private TextView commission;
-	private TextView explanation;
+	//private TextView commission;
+	//private TextView explanation;
 	private EditText password;
-	private LinearLayout mCommissionContent, mExplannationContent;
+	//private LinearLayout mCommissionContent, mExplannationContent;
 	private boolean mShowRentHouseDialog = false;
+
+	private String mHousePrice;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mUsername = getIntent().getStringExtra("user_name");
 		mOwnerName = getIntent().getStringExtra("owner_name");
 		mOwnerIdcard = getIntent().getStringExtra("owner_id");
+		mHousePrice = getIntent().getStringExtra("house_price");
 		initView();
 		initHandler();
 		
@@ -174,11 +176,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mTypeIndex = which+"";
-				text.setText(mOriginTypeText +"   "+items[which]);
+				text.setText(items[which]);
 				mSetStartData = "";
 				mSetEndData = "";
-				mStartTime.setText(mOriginStartContent +mSetStartData);
-				mEndTime.setText(mOriginEndContent+mSetEndData);
+				mStartTime.setText(mSetStartData);
+				mEndTime.setText(mSetEndData);
 			}
 		});
 		builder.show();
@@ -341,7 +343,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	//private TextView mHouseId;
 	private EditText mRentIDcard;
 	private EditText mRentName;
-	private EditText mRentPrice;
+	private TextView mRentPrice;
 	
 	private TextView mRentPhone;
 	private View mQrcodeView;
@@ -360,26 +362,26 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private void updateStartDate(){ 
 		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm"); 
 		mSetStartData = df.format(cal.getTime());
-		mStartTime.setText(mOriginStartContent + df.format(cal.getTime())); 
+		mStartTime.setText(df.format(cal.getTime())); 
 		mStartTimeClipse = cal.getTimeInMillis();
 	}
 	
 	private void updateEndDate(){ 
 		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm" ); 
 		mSetEndData = df.format(cal.getTime());
-		mEndTime.setText(mOriginEndContent + df.format(cal.getTime())); 
+		mEndTime.setText(df.format(cal.getTime())); 
 		mEndTimeClipse = cal.getTimeInMillis();
 		Log.w("mingguo", "update end time data  "+mEndTimeClipse);
 	}
 	
 	private void initView(){
 		password = (EditText) findViewById(R.id.door_password);//门锁密码
-		commission = (TextView) findViewById(R.id.id_commission);//手续费
-		explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
-		mCommissionContent = (LinearLayout)findViewById(R.id.id_commission_content);
-		mExplannationContent = (LinearLayout)findViewById(R.id.id_explanation_content);
-		mCommissionContent.setVisibility(View.GONE);
-		mExplannationContent.setVisibility(View.GONE);
+//		commission = (TextView) findViewById(R.id.id_commission);//手续费
+//		explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
+//		mCommissionContent = (LinearLayout)findViewById(R.id.id_commission_content);
+//		mExplannationContent = (LinearLayout)findViewById(R.id.id_explanation_content);
+//		mCommissionContent.setVisibility(View.GONE);
+//		mExplannationContent.setVisibility(View.GONE);
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
 		mQrcodeView.setVisibility(View.INVISIBLE);
@@ -388,7 +390,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mOwnerType[2] = "时租房";
 		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_rent_house_type);
 		mTypeTextView = (TextView)findViewById(R.id.id_rent_house_type_text);
-		mOriginTypeText = mTypeTextView.getText().toString();
+		//mOriginTypeText = mTypeTextView.getText().toString();
 		typeFrameLayout.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -399,7 +401,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		
 		FrameLayout startTime = (FrameLayout)findViewById(R.id.id_rent_house_start_date);
 		mStartTime = (TextView)findViewById(R.id.id_rent_house_start_date_text);
-		mOriginStartContent = (String) mStartTime.getText()+"  ";
 		startTime.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -415,7 +416,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		
 		FrameLayout endTime = (FrameLayout)findViewById(R.id.id_rent_house_end_date);
 		mEndTime = (TextView)findViewById(R.id.id_rent_house_end_date_text);
-		mOriginEndContent = (String) mEndTime.getText()+"  ";
 		endTime.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -436,35 +436,36 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentName.setText(CommonUtil.mRegisterRealName);
 		mRentPhone.setText(CommonUtil.mUserLoginName);
 		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
-		mRentPrice = (EditText)findViewById(R.id.id_rent_house_price);
-		mRentPrice.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				if(s.length()>0){
-					getPayRateDesc(s+"");
-					
-				}else{
-					mCommissionContent.setVisibility(View.GONE);
-					mExplannationContent.setVisibility(View.GONE);
-					commission.setText("");
-					explanation.setText("");
-				}
-				
-			}
-		});
+		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
+		mRentPrice.setText(mHousePrice);
+//		mRentPrice.addTextChangedListener(new TextWatcher() {
+//			
+//			@Override
+//			public void onTextChanged(CharSequence s, int start, int before, int count) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void afterTextChanged(Editable s) {
+//				if(s.length()>0){
+//					getPayRateDesc(s+"");
+//					
+//				}else{
+//					mCommissionContent.setVisibility(View.GONE);
+//					mExplannationContent.setVisibility(View.GONE);
+//					commission.setText("");
+//					explanation.setText("");
+//				}
+//				
+//			}
+//		});
 		
 		mVerifyCodeText = (EditText)findViewById(R.id.id_rent_house_phone_verify);
 		
@@ -911,15 +912,15 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				///////////////////////////////////////////////////////////////////////////////
 				Gson gson=new Gson();
 				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
-				mCommissionContent.setVisibility(View.VISIBLE);
-				mExplannationContent.setVisibility(View.VISIBLE);
-				if(serviceCharge.fee.startsWith("00")){
-					commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
-					
-				}else{
-					commission.setText(serviceCharge.fee+"元（手续费）");
-				}
-				explanation.setText(serviceCharge.msg);
+//				mCommissionContent.setVisibility(View.VISIBLE);
+//				mExplannationContent.setVisibility(View.VISIBLE);
+//				if(serviceCharge.fee.startsWith("00")){
+//					commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
+//					
+//				}else{
+//					commission.setText(serviceCharge.fee+"元（手续费）");
+//				}
+//				explanation.setText(serviceCharge.msg);
 			}else if (msg.what == 1002){
 				if (msg.obj != null){
 					JSONObject json;
@@ -927,7 +928,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						json = new JSONObject((String)msg.obj);
 						String ret = json.optString("ret");
 						if (ret != null){
-							if (CommonUtil.version_test || ret.equals("0")){
+							if (CommonUtil.verify_code_test || ret.equals("0")){
 								startIndentifyProcess();
 							}else{
 								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));

@@ -128,7 +128,6 @@ public class DownloadAppActivity extends BaseActivity{
 
 			@Override
 			public void downloadStatus(int status) {
-				Log.w("mingguo", "downloadStatu  update  "+status);
 				updateDownloadStatus(status);
 				
 			}

@@ -34153,24 +34153,25 @@ tenant.guardts.house.util.CommonUtil -> tenant.guardts.house.util.e:
     java.lang.String mPayHouseOrderId -> p
     java.lang.String XINGE_TOKEN -> q
     boolean version_test -> r
-    boolean mIsForceIdentifyUser -> s
-    boolean mIsFreshWallet -> t
-    java.lang.String ORDER_TIME -> u
-    java.lang.String ORDER_NO -> v
-    java.lang.String ORDER_MONKEY -> w
-    java.lang.String ORDER_PREPAY_ID -> x
-    java.lang.String OWNER_IDCARD -> y
-    java.lang.String ORDER_STATUS_NEED_EVALUATION -> z
-    java.lang.String ORDER_STATUS_SUBMITT -> A
-    java.lang.String ORDER_STATUS_NEED_PAY -> B
-    java.lang.String ORDER_STATUS_HAS_PAYED -> C
-    java.lang.String ORDER_STATUS_REJECTED -> D
-    java.lang.String ORDER_STATUS_CANCELED -> E
-    java.lang.String ORDER_STATUS_NEED_CHECKOUT -> F
-    java.lang.String ORDER_STATUS_EXPIRED -> G
-    java.lang.String ORDER_STATUS_CHECKOUTED -> H
-    java.lang.String ORDER_STATUS_COMPLETE -> I
-    double dEARTH_RADIUS -> J
+    boolean verify_code_test -> s
+    boolean mIsForceIdentifyUser -> t
+    boolean mIsFreshWallet -> u
+    java.lang.String ORDER_TIME -> v
+    java.lang.String ORDER_NO -> w
+    java.lang.String ORDER_MONKEY -> x
+    java.lang.String ORDER_PREPAY_ID -> y
+    java.lang.String OWNER_IDCARD -> z
+    java.lang.String ORDER_STATUS_NEED_EVALUATION -> A
+    java.lang.String ORDER_STATUS_SUBMITT -> B
+    java.lang.String ORDER_STATUS_NEED_PAY -> C
+    java.lang.String ORDER_STATUS_HAS_PAYED -> D
+    java.lang.String ORDER_STATUS_REJECTED -> E
+    java.lang.String ORDER_STATUS_CANCELED -> F
+    java.lang.String ORDER_STATUS_NEED_CHECKOUT -> G
+    java.lang.String ORDER_STATUS_EXPIRED -> H
+    java.lang.String ORDER_STATUS_CHECKOUTED -> I
+    java.lang.String ORDER_STATUS_COMPLETE -> J
+    double dEARTH_RADIUS -> K
     java.lang.String getDefaultDownloadPath(java.lang.String) -> a
     boolean deleteInstalledApkFile() -> a
     void installApk(android.content.Context,java.lang.String) -> a

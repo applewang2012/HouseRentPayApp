@@ -52,7 +52,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 		setContentView(R.layout.activity_reset);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
-		mTitleBar.setText("重置密码");
+		mTitleBar.setText("忘记密码");
 		mUserName = getIntent().getStringExtra("user_name");
 		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
@@ -80,7 +80,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 						json = new JSONObject((String) msg.obj);
 						String ret = json.optString("ret");
 						if (ret != null) {
-							if (CommonUtil.version_test || ret.equals("0")) {
+							if (CommonUtil.verify_code_test || ret.equals("0")) {
 								psd2nd = newPassword2nd.getText().toString();
 								forgotPassword(mUserName,psd2nd);
 							} else {
@@ -302,7 +302,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
 		} else if (num.length() < 6) {
-			GlobalUtil.shortToast(getApplication(), "验证码输入错误",
+			GlobalUtil.shortToast(getApplication(), "验证码输入有误",
 					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
 		}

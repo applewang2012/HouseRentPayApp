@@ -18,6 +18,7 @@ import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.download.Downloads;
 import tenant.guardts.house.model.HouseFragment;
 import tenant.guardts.house.model.MyFragment;
 import tenant.guardts.house.model.OrderFragment;
@@ -466,13 +468,14 @@ public class HomeActivity extends BaseActivity {
 
 	private void showUpdateVersionAlertDialog() {
 		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")) {
-			Log.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile());
+			
 			return;
 		}
-
+		Log.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile()+" delete database "
+				+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
+			
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("检测到新版本，是否升级？");
-		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 
@@ -523,7 +526,6 @@ public class HomeActivity extends BaseActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("智能锁编号：\n" + lockId);
 		builder.setMessage("您确认要开锁吗？");
-		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 

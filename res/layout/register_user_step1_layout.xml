@@ -95,7 +95,7 @@
 	            <ImageView 
 	                    android:layout_width="@dimen/base_dimen_60"  
 		         		android:layout_height="@dimen/base_dimen_2"
-		         		android:background="#cccccc"
+		         		android:background="#b2b2b2"
 		         		android:layout_gravity="center_vertical"
 	                    />
             </LinearLayout>
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"  
          		android:layout_height="wrap_content"
          		android:text="手机绑定"
-         		android:textColor="#cccccc"
+         		android:textColor="#b2b2b2"
          		android:textSize="@dimen/base_dimen_26"
          		android:layout_marginTop="@dimen/base_dimen_14"
          		android:layout_gravity="center_horizontal"
@@ -126,7 +126,7 @@
                 <ImageView 
                     android:layout_width="@dimen/base_dimen_60"  
 	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#cccccc"
+	         		android:background="#b2b2b2"
 		         	android:layout_gravity="center_vertical"
                     />
 	            <ImageView
@@ -139,7 +139,7 @@
 	            <ImageView 
 	                    android:layout_width="@dimen/base_dimen_60"  
 		         		android:layout_height="@dimen/base_dimen_2"
-		         		android:background="#cccccc"
+		         		android:background="#b2b2b2"
 		         		android:layout_gravity="center_vertical"
 	                    />
             </LinearLayout>
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"  
          		android:layout_height="wrap_content"
          		android:text="实名认证"
-         		android:textColor="#cccccc"
+         		android:textColor="#b2b2b2"
          		android:textSize="@dimen/base_dimen_26"
          		android:layout_marginTop="@dimen/base_dimen_14"
          		android:layout_gravity="center_horizontal"
@@ -170,7 +170,7 @@
                 <ImageView 
                     android:layout_width="@dimen/base_dimen_60"  
 	         		android:layout_height="@dimen/base_dimen_2"
-	         		android:background="#cccccc"
+	         		android:background="#b2b2b2"
 		         	android:layout_gravity="center_vertical"
                     />
 	            <ImageView
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"  
          		android:layout_height="wrap_content"
          		android:text="注册完成"
-         		android:textColor="#cccccc"
+         		android:textColor="#b2b2b2"
          		android:textSize="@dimen/base_dimen_26"
          		android:layout_marginTop="@dimen/base_dimen_14"
          		android:layout_gravity="center_horizontal"
@@ -219,7 +219,7 @@
 		        		 android:layout_marginLeft="@dimen/base_dimen_64"
 		        		 android:background="#00000000"
 		        		 android:textSize="@dimen/base_dimen_28"
-		        		 android:textColorHint="#cccccc"
+		        		 android:textColorHint="#b2b2b2"
 		        		 android:textColor="#000000"
 	        	        />
 	        	
@@ -252,7 +252,7 @@
 		        		 android:textSize="@dimen/base_dimen_28"
 		        		 android:maxLength="18"
 		        		 android:background="#00000000"
-		        		 android:textColorHint="#cccccc"
+		        		 android:textColorHint="#b2b2b2"
 		        		 android:textColor="#000000"
 	        	        />
 	        	
@@ -284,7 +284,7 @@
 		        		 android:gravity="center_vertical"
 		        		 android:textSize="@dimen/base_dimen_28"
 		        		 android:background="#00000000"
-		        		 android:textColorHint="#cccccc"
+		        		 android:textColorHint="#b2b2b2"
 		        		 android:maxLength="18"
 		        		 android:textColor="#000000"
 	        	        />

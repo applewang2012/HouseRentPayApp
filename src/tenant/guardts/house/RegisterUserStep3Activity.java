@@ -30,6 +30,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.BMapUtil;
@@ -268,7 +269,7 @@ public class RegisterUserStep3Activity extends BaseActivity{
 						String ret = object.optString("ret");
 						if (ret != null){
 							if (ret.equals("0")){
-								GlobalUtil.longToast(getApplication(),"拍照认证！");
+								Toast.makeText(getApplicationContext(), "请打开前置摄像头进行拍照认证！", Toast.LENGTH_LONG).show();
 								Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 								file = ScreenShotUtil.createScreenshotDirectory(RegisterUserStep3Activity.this);
 								File out = new File(file);

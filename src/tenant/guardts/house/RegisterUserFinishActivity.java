@@ -38,7 +38,6 @@ public class RegisterUserFinishActivity extends BaseActivity{
 
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		
 		Button interButton = (Button)findViewById(R.id.id_register_user_enter_app);
 		interButton.setOnClickListener(new OnClickListener() {
 			

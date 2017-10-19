@@ -49,9 +49,12 @@ public class LoginUserActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.login_user);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar.setText("登 录");
+		
 		ActivityController.addActivity(LoginUserActivity.this);
 		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
@@ -126,12 +129,11 @@ public class LoginUserActivity extends BaseActivity {
 
 				mUserName = userNameEditText.getEditableText().toString();
 				if (mUserName == null || mUserName.equals("")) {
-					GlobalUtil.shortToast(getApplication(), getString(R.string.please_input_username),
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					Toast.makeText(getApplicationContext(), "请输入手机号码", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				if (mUserName.length() < 11) {
-					Toast.makeText(getApplicationContext(), "手机号码输入有误！", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
 					return;
 				}
 
@@ -163,12 +165,13 @@ public class LoginUserActivity extends BaseActivity {
 				mUserName = userNameEditText.getEditableText().toString();
 				mPassword = passwordEditText.getEditableText().toString();
 				if (mUserName == null || mUserName.equals("")) {
-					GlobalUtil.shortToast(getApplication(), getString(R.string.please_input_username),
+					GlobalUtil.shortToast(getApplication(), "请输入手机号码",
 							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					
 					return;
 				}
 				if (mPassword == null || mPassword.equals("")) {
-					GlobalUtil.shortToast(getApplication(), getString(R.string.please_input_username),
+					GlobalUtil.shortToast(getApplication(), "请输入密码",
 							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
@@ -269,9 +272,19 @@ public class LoginUserActivity extends BaseActivity {
 	}
 
 	private void showSelectAlertDialog(final String title, final List<String[]> data) {
+		if (data != null && data.size() == 1){
+			SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
+			SharedPreferences.Editor editor = sharedata.edit();
+			editor.putString("area", data.get(0)[0]);
+			editor.putString("user_host", data.get(1)[0]);
+			editor.commit();
+			CommonUtil.mUserArea = data.get(0)[0];
+			CommonUtil.mUserHost = data.get(1)[0];
+			return;
+		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(LoginUserActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle(title);
-		builder.setIcon(android.R.drawable.ic_dialog_info);
+		//ic_);
 		builder.setItems(data.get(0), new DialogInterface.OnClickListener() {
 
 			@Override

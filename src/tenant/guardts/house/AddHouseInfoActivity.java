@@ -870,13 +870,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 				String value = (String)msg.obj;
 				if (value != null && value.equals("true")){
 					Log.e("mingguo", "add rent info success ");
-					Toast.makeText(getApplicationContext(), "添加租房信息成功", Toast.LENGTH_SHORT).show();
-					Intent photoIntent = new Intent(AddHouseInfoActivity.this, SelectPhotoActivity.class);
-					photoIntent.putExtra("rentNo", mRentNo);
-					startActivity(photoIntent);
+					Toast.makeText(getApplicationContext(), "登记房屋成功", Toast.LENGTH_SHORT).show();
+//					Intent photoIntent = new Intent(AddHouseInfoActivity.this, SelectPhotoActivity.class);
+//					photoIntent.putExtra("rentNo", mRentNo);
+//					startActivity(photoIntent);
 					finish();
 				}else{
-					Toast.makeText(getApplicationContext(), "添加租房信息失败", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "登记房屋失败", Toast.LENGTH_SHORT).show();
 				}
 			}else if (msg.what == 112){
 				String value = (String)msg.obj;

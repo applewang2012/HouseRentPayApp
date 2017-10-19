@@ -136,7 +136,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 			
 			if (isUpdate){
 				needUpdateTimeDownTime();
-				Log.w("mingguo", "update data");
 				updateTimeHandler.sendEmptyMessageDelayed(800, 1000);
 			}else{
 				mAdapter.notifyDataSetChanged();
@@ -529,7 +528,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle("取消订单");
 		  builder.setMessage("您确认要取消该订单吗？");
-		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 		         @Override  
 		  

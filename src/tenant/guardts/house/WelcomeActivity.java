@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
@@ -41,8 +42,8 @@ public class WelcomeActivity extends BaseActivity {
 	private Message m;
 	private HoursePresenter mPresenter;
 	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
-	
 	private String mHelloWordAction = "http://tempuri.org/HelloWord";
+	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +57,37 @@ public class WelcomeActivity extends BaseActivity {
 		mUsername = sharedata.getString("user_name", "");
 		mPassword = sharedata.getString("user_password", "");
 		CommonUtil.mUserHost = sharedata.getString("user_host", "");
-	    
+		mPresenter = new HoursePresenter(getApplicationContext(), this);
 	    XGPushConfig.enableDebug(this, true);
 	    registerXinge();
-		mHandler.sendEmptyMessageDelayed(200, 300);
+		mHandler.sendEmptyMessageDelayed(200, 30);
 		//testHelloword();
 	}
 	
 	private void commonServiceInterface(){
-		mPresenter = new HoursePresenter(getApplicationContext(), this);
+		
 	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
 			rpc.addProperty("status", "1");
 			mPresenter.readyPresentServiceParams(this, url, mCommonServiceAction, rpc);
-			mPresenter.startPresentServiceTask(true);
+			mPresenter.startPresentServiceTask(false);
+	}
+	
+	private void getUserInfo() {
+		if (mUsername == null || mUsername.equals("")){
+			Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+			intent.putExtra("user_name", "");
+			intent.putExtra("user_password", "");
+			startActivity(intent);
+			finish();
+			return;
+		}
+		String url = CommonUtil.mUserHost + "services.asmx?op=GetUserInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUserInfoAction));
+		rpc.addProperty("username", mUsername);
+		rpc.addProperty("deviceId", CommonUtil.XINGE_TOKEN);
+		mPresenter.readyPresentServiceParams(this, url, mUserInfoAction, rpc);
+		mPresenter.startPresentServiceTask(false);
 	}
 	
 	private void testHelloword(){
@@ -122,10 +140,28 @@ public class WelcomeActivity extends BaseActivity {
 				});
 	}
 	
-	private void showSelectAlertDialog(final String title, final List<String[]> data) {  
+	private void showSelectAlertDialog(final String title, final List<String[]> data) { 
+		if (data != null && data.size()> 0 && data.get(0).length == 1){
+			SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
+			SharedPreferences.Editor editor = sharedata.edit();
+			editor.putString("area", data.get(0)[0]);
+			editor.putString("user_host", data.get(1)[0]);
+			editor.commit();
+			CommonUtil.mUserArea = data.get(0)[0];
+			CommonUtil.mUserHost = data.get(1)[0];
+			Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
+//			Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+//			intent.putExtra("user_name", mUsername);
+//			intent.putExtra("user_password", mPassword);
+//			startActivity(intent);
+//			finish();
+			getUserInfo();
+			return;
+		}
+		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(WelcomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle(title);
-		  builder.setIcon(android.R.drawable.ic_dialog_info);
+		  //ic_dialog_alert);
 		  builder.setItems(data.get(0), new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -137,12 +173,13 @@ public class WelcomeActivity extends BaseActivity {
 			    editor.commit();
 			    CommonUtil.mUserArea = data.get(0)[which];
 			    CommonUtil.mUserHost = data.get(1)[which];
-			    
-			    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-				intent.putExtra("user_name", mUsername);
-				intent.putExtra("user_password", mPassword);
-				startActivity(intent);
-				finish();
+			    Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
+			    getUserInfo();
+//			    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+//				intent.putExtra("user_name", mUsername);
+//				intent.putExtra("user_password", mPassword);
+//				startActivity(intent);
+//				finish();
 			}
 		});
 		builder.setCancelable(false);
@@ -188,6 +225,7 @@ public class WelcomeActivity extends BaseActivity {
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					areaName[item] = itemJsonObject.optString("AreaName");
 					areaHost[item] = itemJsonObject.optString("RentHost");
+					
 				}
 				list.add(areaName);
 				list.add(areaHost);
@@ -210,30 +248,49 @@ public class WelcomeActivity extends BaseActivity {
             alphaAnimation.setDuration(3500);//动画持续时间，单位为毫秒
            
     }
+	
+	private void parseUserInfo(String value) {
+		try {
+			JSONArray array = new JSONArray(value);
+			if (array != null) {
+				Log.w("house", "parse house info " + array.length());
+				// for (int item = 0; item < array.length(); item++){
+				JSONObject itemJsonObject = array.optJSONObject(0);
+				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
+				CommonUtil.mRegisterRealName = itemJsonObject.optString("RealName");
+				CommonUtil.mRegisterIdcard = itemJsonObject.optString("IDCard");
+				CommonUtil.mUserWallet = itemJsonObject.optString("Wallet");
+				CommonUtil.mBankName= itemJsonObject.optString("BankName");
+				CommonUtil.mCardNo = itemJsonObject.optString("CardNO");
+				SharedPreferences sharedata = getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+				editor.putString("user_realname", CommonUtil.mRegisterRealName);
+				editor.putString("user_idcard", CommonUtil.mRegisterIdcard);
+				editor.commit();
+				
+				Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+				intent.putExtra("user_name", mUsername);
+				intent.putExtra("user_password", mPassword);
+				startActivity(intent);
+				finish();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private Handler mHandler = new Handler(){
 
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
+				Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
 				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")){
 			    	commonServiceInterface();
 			    }else{
-			    	Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-					intent.putExtra("user_name", mUsername);
-					intent.putExtra("user_password", mPassword);
-					startActivity(intent);
-					finish();
+			    	getUserInfo();
 			    }
-//				if (mUsername != null && !mUsername.equals("") && mPassword != null && !mPassword.equals("")){
-					/*Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-					intent.putExtra("user_name", mUsername);
-					intent.putExtra("user_password", mPassword);
-					startActivity(intent);*/
-//				}else{
-//					Intent intent = new Intent(WelcomeActivity.this, RegisterUserActivity.class);
-//					startActivity(intent);
-//				}
 				break;
 			case 200:
 				changeAlpha();
@@ -241,10 +298,13 @@ public class WelcomeActivity extends BaseActivity {
 				break;
 			case 110:
 				showSelectAlertDialog("请选择所在区域", parseCommonService((String)msg.obj));
-				break;
-			case 202:
 				
-			
+				break;
+			case 101:
+				if (msg.obj != null) {
+					parseUserInfo((String) msg.obj);
+				}
+				break;
 			default:
 				break;
 			}
@@ -263,6 +323,11 @@ public class WelcomeActivity extends BaseActivity {
 				msg.what = 110;
 				msg.obj = templateInfo;
 				mHandler.sendMessage(msg);
+			}else if (action.equals(mUserInfoAction)){
+				Message message = mHandler.obtainMessage();
+				message.what = 101;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
 			}
 		}
 	}

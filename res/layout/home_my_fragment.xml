@@ -34,7 +34,7 @@
                 android:text="注册/登录"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/base_dimen_30"
+                android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/base_dimen_18"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/base_dimen_30"
+                android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:clickable="false"
                 android:id="@+id/id_user_house_wallet"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100"
+                android:layout_height="@dimen/base_dimen_120"
                 android:layout_marginTop="@dimen/base_dimen_80" >
 
                 <ImageView
@@ -88,17 +88,17 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="我的钱包"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <TextView
                     android:id="@+id/id_user_wallet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/base_dimen_28"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/base_dimen_480"
-                    android:textColor="#d7d7d7"
-                    android:textSize="@dimen/base_dimen_24" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="@dimen/base_dimen_40"
+                    android:textColor="#777777"
+                    android:textSize="@dimen/base_dimen_28" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"
@@ -111,7 +111,7 @@
                 android:clickable="false"
                 android:id="@+id/id_user_publish_house"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100" >
+                android:layout_height="@dimen/base_dimen_120" >
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_38"
@@ -126,8 +126,8 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="登记房屋"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"
@@ -139,7 +139,7 @@
                
                 android:id="@+id/house_history"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100" >
+                android:layout_height="@dimen/base_dimen_120" >
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_38"
@@ -154,8 +154,8 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="我的房屋"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"
@@ -166,7 +166,7 @@
             <FrameLayout
                 android:id="@+id/id_userinfo_change_area"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100" >
+                android:layout_height="@dimen/base_dimen_120" >
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_38"
@@ -181,8 +181,8 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="切换城市"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"
@@ -194,7 +194,7 @@
             <FrameLayout
                 android:id="@+id/id_userinfo_about_us"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100" >
+                android:layout_height="@dimen/base_dimen_120" >
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_38"
@@ -209,8 +209,8 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="关于我们"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"
@@ -224,7 +224,7 @@
                 android:id="@+id/id_userinfo_logout"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base_dimen_100" >
+                android:layout_height="@dimen/base_dimen_120" >
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_38"
@@ -239,8 +239,8 @@
                     android:layout_marginLeft="@dimen/base_dimen_72"
                     android:gravity="center_vertical"
                     android:text="退出登陆"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_30" />
+                    android:textColor="#444444"
+                    android:textSize="@dimen/base_dimen_32" />
 
                 <ImageView
                     android:layout_width="@dimen/base_dimen_20"

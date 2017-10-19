@@ -96,7 +96,7 @@ public class MapRentHouseActivity extends BaseActivity
 	// 初始化全局 bitmap 信息，不用时及时 recycle
 	BitmapDescriptor icon_blue = BitmapDescriptorFactory.fromResource(R.drawable.blue);
 	BitmapDescriptor icon_red = BitmapDescriptorFactory.fromResource(R.drawable.red);
-	BitmapDescriptor icon_yellow = BitmapDescriptorFactory.fromResource(R.drawable.yellow);
+	BitmapDescriptor icon_yellow = null;
 
 	// private double mLati, mLongi;
 	private LatLng mCurrentLatLng;
@@ -126,7 +126,8 @@ public class MapRentHouseActivity extends BaseActivity
 
 		mContext = getApplicationContext();
 		mPresenter = new HoursePresenter(mContext, this);
-
+		
+		
 		initView();
 
 	}
@@ -460,13 +461,12 @@ public class MapRentHouseActivity extends BaseActivity
 					String ownerName = child.get(i).get("ROwner");
 					if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 						if (phone.length() > 5) {
-							showInfo = "房主：" + ownerName.substring(0, 1) + "**" + " 电话：" + phone.substring(0, 3) + "********";
-//							showInfo="纬"+child.get(i).get("Latitude")+"==经"+child.get(i).get("Longitude");
+							showInfo = "门牌号：" +  "101**" +  " 房主：" + ownerName.substring(0, 1) + "**";
 						}
 						
 					}else{
-						showInfo = "房主：" + ownerName  + " 电话：" + phone;////////////////////
-//						showInfo="纬"+child.get(i).get("Latitude")+"==经"+child.get(i).get("Longitude");
+						showInfo = "门牌号：" +  "101**" +  " 房主：" + ownerName;
+//						showInfo = "房主：" + ownerName  + " 电话：" + phone;////////////////////
 					}
 					listItem[i] = showInfo; 
 				}
@@ -486,8 +486,10 @@ public class MapRentHouseActivity extends BaseActivity
 		  builder.setItems(items, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
-				showMarkerDetail(ll, child.get(which));
+				//showMarkerDetail(ll, child.get(which));
+				Intent detailIntent = new Intent(MapRentHouseActivity.this, HouseDetailInfoActivity.class);
+				detailIntent.putExtra("rentNo", child.get(which).get("rentno"));
+				startActivity(detailIntent);
 			}
 		});
 		builder.show();
@@ -586,7 +588,21 @@ public class MapRentHouseActivity extends BaseActivity
 			String[] split = key.split("-");
 			LatLng llA = new LatLng(Double.parseDouble(split[0]),
 					Double.parseDouble(split[1]));
-			MarkerOptions options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
+			ArrayList<Map<String, String>> itemLocationList = (ArrayList<Map<String, String>>)entry.getValue();
+			MarkerOptions options = null;
+			if (itemLocationList != null){
+				if (itemLocationList.size() == 1){
+					options = new MarkerOptions().position(llA).icon(icon_red).zIndex(9).draggable(false);
+				}else{
+					View mHouseMore = getLayoutInflater().inflate(R.layout.map_more_house_icon, null);
+					TextView houseNum = (TextView)mHouseMore.findViewById(R.id.textView1);
+					houseNum.setText(itemLocationList.size()+"");
+					icon_yellow = BitmapDescriptorFactory.fromView(mHouseMore);
+					options = new MarkerOptions().position(llA).icon(icon_yellow).zIndex(9).draggable(false);
+					
+				}
+			}
+			
 			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
 		}
 		Log.e("mingguo", "list size  "+mHouserList.size()+"  market size  "+mMarkList.size()+"  locationmap size   "+mLocationMap.size());

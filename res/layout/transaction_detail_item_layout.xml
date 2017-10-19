@@ -42,7 +42,7 @@
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:layout_marginTop="@dimen/base_dimen_1"
             android:text=""
-            android:textColor="#858585"
+            android:textColor="#444444"
             android:gravity="center_vertical"
             android:textSize="@dimen/base_dimen_30" />
     
@@ -54,7 +54,7 @@
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:layout_marginTop="@dimen/base_dimen_20"
             android:text="微信支付"
-            android:textColor="#858585"
+            android:textColor="#444444"
             android:layout_gravity="right"
             android:textSize="@dimen/base_dimen_30" /> -->
      
@@ -65,7 +65,7 @@
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:layout_marginTop="@dimen/base_dimen_1"
             android:text="2017-06-30  10:38"
-            android:textColor="#858585"
+            android:textColor="#444444"
             android:gravity="center_vertical"
             android:textSize="@dimen/base_dimen_30" />
      

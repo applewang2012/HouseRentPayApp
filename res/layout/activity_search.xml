@@ -44,7 +44,7 @@
                 android:inputType="text"
                 android:paddingLeft="@dimen/base_dimen_20"
                 android:textColor="#ffffff"
-                android:textColorHint="#cccccc"
+                android:textColorHint="#b2b2b2"
                 android:textSize="@dimen/base_dimen_28" />
         </LinearLayout>
 

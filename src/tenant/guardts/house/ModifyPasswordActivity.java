@@ -72,7 +72,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 				}
 				if(!TextUtils.isEmpty(mNewPassword)){
 					if(mNewPassword.length()<6){
-						GlobalUtil.shortToast(getApplication(), "新密码不能小于6位", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						GlobalUtil.shortToast(getApplication(), "密码小于6位，请重新输入", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						return ;
 					}
 				}
@@ -84,7 +84,7 @@ public class ModifyPasswordActivity extends BaseActivity{
 				
 				if(!TextUtils.isEmpty(mNewPasswordConfirm)){
 					if(mNewPasswordConfirm.length()<6){
-						GlobalUtil.shortToast(getApplication(), "确认密码不能小于6位", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						GlobalUtil.shortToast(getApplication(), "确认密码小于6位，请重新输入", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 						return ;
 					}
 				}

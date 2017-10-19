@@ -1,6 +1,8 @@
 package tenant.guardts.house.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,12 +28,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AboutUsActivity;
 import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.HomeActivity;
 import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.ModifyPasswordActivity;
 import tenant.guardts.house.PersonalInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.WalletActivity;
+import tenant.guardts.house.WelcomeActivity;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
@@ -47,6 +51,7 @@ public class MyFragment extends BaseFragment {
 	private FrameLayout mPublishHouse;
 	private String mXingeTokenAction = "http://tempuri.org/UpdateDeviceID";
 	private String mGetUserInfoAction = "http://tempuri.org/GetUserInfo";
+	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
 	private FrameLayout mAboutUs;
 	private FrameLayout mLogout;
 	// private String mUsername;
@@ -198,7 +203,8 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				changeUserAreaDialog();
+				commonServiceInterface();
+				//changeUserAreaDialog();
 			}
 		});
 		mWalletFrameLayout.setOnClickListener(new OnClickListener() {
@@ -243,6 +249,15 @@ public class MyFragment extends BaseFragment {
 		}
 	}
 
+	private void commonServiceInterface(){
+		mPresent = new HoursePresenter(mContext, this);
+	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
+			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
+			rpc.addProperty("status", "1");
+			mPresent.readyPresentServiceParams(getActivity(), url, mCommonServiceAction, rpc);
+			mPresent.startPresentServiceTask(true);
+	}
+	
 	private void getUserInfo() {
 		if (mUserName == null || mUserName.equals("")){
 			return;
@@ -297,10 +312,39 @@ public class MyFragment extends BaseFragment {
 				Intent intent = new Intent(mContext, LoginUserActivity.class);
 				startActivity(intent);
 				MyFragment.this.getActivity().finish();
+			}else if (msg.what == 110){
+				showSelectAlertDialog("请选择所在区域", parseCommonService((String)msg.obj));
 			}
 
 		}
 	};
+	
+	private  List<String[]> parseCommonService(String value) {
+		String [] areaName = null;
+		String [] areaHost;
+		List<String[]> list = new ArrayList<>();
+		try{
+			JSONArray array = new JSONArray(value);
+			if (array != null){
+				areaName = new String[array.length()];
+				areaHost = new String[array.length()];
+				for (int item = 0; item < array.length(); item++){
+					JSONObject itemJsonObject = array.optJSONObject(item);
+					areaName[item] = itemJsonObject.optString("AreaName");
+					areaHost[item] = itemJsonObject.optString("RentHost");
+					
+				}
+				list.add(areaName);
+				list.add(areaHost);
+			}
+			
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return list;
+		}
+	}
+	
 	private ImageView mImageAvator;
 	private TextView mWallet;
 	private TextView mRegistAndLogin;
@@ -363,7 +407,7 @@ public class MyFragment extends BaseFragment {
 	}
 
 	private void uploadXingeToken() {
-
+		
 		String url = CommonUtil.mUserHost + "services.asmx?op=UpdateDeviceID";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mXingeTokenAction));
 		rpc.addProperty("userId", CommonUtil.mUserLoginName);
@@ -393,6 +437,47 @@ public class MyFragment extends BaseFragment {
 					}
 
 				}).show();
+	}
+	
+	private void showSelectAlertDialog(final String title, final List<String[]> data) { 
+		if (data != null && data.size()> 0 && data.get(0).length == 1){
+			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+			SharedPreferences.Editor editor = sharedata.edit();
+			editor.putString("area", data.get(0)[0]);
+			editor.putString("user_host", data.get(1)[0]);
+			editor.commit();
+			CommonUtil.mUserArea = data.get(0)[0];
+			CommonUtil.mUserHost = data.get(1)[0];
+			return;
+		}
+		
+		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setTitle(title);
+		  //ic_dialog_alert);
+		  builder.setItems(data.get(0), new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor editor = sharedata.edit();
+			    editor.putString("area", data.get(0)[which]);
+			    editor.putString("user_host", data.get(1)[which]);
+			    editor.commit();
+			    CommonUtil.mUserArea = data.get(0)[which];
+			    CommonUtil.mUserHost = data.get(1)[which];
+			    
+			    if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")){
+				    Message msgMessage = mHandler.obtainMessage();
+					msgMessage.what = 101;
+					msgMessage.sendToTarget();
+				}else{
+					 uploadXingeToken();
+				}
+			}
+		});
+		builder.setCancelable(true);
+		builder.show();
+		
 	}
 	
 	private void resetUserInfo(){
@@ -431,7 +516,12 @@ public class MyFragment extends BaseFragment {
 				msgMessage.what = 101;
 				msgMessage.obj = templateInfo;
 				msgMessage.sendToTarget();
-			}
+			}else	if (action.equals(mCommonServiceAction)){
+					Message msg = mHandler.obtainMessage();
+					msg.what = 110;
+					msg.obj = templateInfo;
+					mHandler.sendMessage(msg);
+				}
 		}
 
 	}

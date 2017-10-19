@@ -463,6 +463,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				
 			});
 		}
+		if (mDetailType.equals("renter")) {
+			tvServiceFee.setVisibility(View.GONE);
+		}
 	}
 
 	/**
@@ -533,7 +536,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("取消订单");
 		builder.setMessage("您确认要取消该订单吗？");
-		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -570,7 +572,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("拒绝订单");
 		builder.setMessage("您确认要拒绝该订单吗？");
-		builder.setIcon(android.R.drawable.ic_dialog_info);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

@@ -41,7 +41,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		ActivityController.addActivity(RegisterUserStep2Activity.this);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("手机认证");
+		mTitleBar.setText("手机绑定");
 		//mUserName = getIntent().getStringExtra("username");
 		//mPassword = getIntent().getStringExtra("password");
 //		initHandler();
@@ -109,7 +109,14 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}else  if (mPassword.length() < 6){
-					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					GlobalUtil.shortToast(getApplication(), "密码小于6位，请重新输入", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}
+				if (mPasswordIndentify == null || mPasswordIndentify.equals("")){
+					GlobalUtil.shortToast(getApplication(), getString(R.string.pwd_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					return;
+				}else  if (mPasswordIndentify.length() < 6){
+					GlobalUtil.shortToast(getApplication(), "确认密码小于6位，请重新输入", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (mPasswordIndentify == null || mPasswordIndentify.equals("") || !mPassword.equals(mPasswordIndentify)){
@@ -193,7 +200,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 						json = new JSONObject((String)msg.obj);
 						String ret = json.optString("ret");
 						if (ret != null){
-							if (CommonUtil.version_test || ret.equals("0")){
+							if (CommonUtil.verify_code_test || ret.equals("0")){
 								Intent nextIntent = new Intent(RegisterUserStep2Activity.this, RegisterUserStep3Activity.class);
 								nextIntent.putExtra("phone", mPhone);
 								nextIntent.putExtra("user_name", mPhone);

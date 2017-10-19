@@ -5079,7 +5079,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
-    76:85:private void testHelloword()
+    78:87:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
@@ -5533,12 +5533,12 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
     public static final long TIME_STAMP_10_MINUTES
     23:23:public CommonUtil()
-    89:90:public static void setCanvas(android.graphics.Canvas)
-    153:156:public static void uninstallApk(android.content.Context,java.lang.String)
-    170:170:private static double Rad(double)
-    181:190:public static double GetDistance(double,double,double,double)
-    194:215:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    220:243:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    91:92:public static void setCanvas(android.graphics.Canvas)
+    155:158:public static void uninstallApk(android.content.Context,java.lang.String)
+    172:172:private static double Rad(double)
+    183:192:public static double GetDistance(double,double,double,double)
+    196:217:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    222:245:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)

@@ -102,7 +102,6 @@ public class AboutUsActivity extends BaseActivity {
 		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(AboutUsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle("检测到新版本，是否升级？");
-		  builder.setIcon(android.R.drawable.ic_dialog_info);
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 		         @Override  
 		  

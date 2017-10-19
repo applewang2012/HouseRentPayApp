@@ -101,12 +101,12 @@ public class RechargeActivity extends BaseActivity {
 					monkey200.setChecked(false);
 					moneyOther.setChecked(false);
 					monkey800.setTextColor(Color.parseColor("#ffffff"));
-					monkey500.setTextColor(Color.parseColor("#555555"));
-					monkey200.setTextColor(Color.parseColor("#555555"));
-					moneyOther.setTextColor(Color.parseColor("#555555"));
+					monkey500.setTextColor(Color.parseColor("#444444"));
+					monkey200.setTextColor(Color.parseColor("#444444"));
+					moneyOther.setTextColor(Color.parseColor("#444444"));
 					//input.clearFocus();
 				}else{
-					monkey800.setTextColor(Color.parseColor("#555555"));
+					monkey800.setTextColor(Color.parseColor("#444444"));
 				}
 			}
 		});
@@ -119,12 +119,12 @@ public class RechargeActivity extends BaseActivity {
 					monkey800.setChecked(false);
 					moneyOther.setChecked(false);
 					monkey200.setTextColor(Color.parseColor("#ffffff"));
-					monkey500.setTextColor(Color.parseColor("#555555"));
-					monkey800.setTextColor(Color.parseColor("#555555"));
-					moneyOther.setTextColor(Color.parseColor("#555555"));
+					monkey500.setTextColor(Color.parseColor("#444444"));
+					monkey800.setTextColor(Color.parseColor("#444444"));
+					moneyOther.setTextColor(Color.parseColor("#444444"));
 					//input.clearFocus();
 				}else{
-					monkey200.setTextColor(Color.parseColor("#555555"));
+					monkey200.setTextColor(Color.parseColor("#444444"));
 				}
 			}
 		});
@@ -137,12 +137,12 @@ public class RechargeActivity extends BaseActivity {
 					monkey200.setChecked(false);
 					moneyOther.setChecked(false);
 					monkey500.setTextColor(Color.parseColor("#ffffff"));
-					monkey800.setTextColor(Color.parseColor("#555555"));
-					monkey200.setTextColor(Color.parseColor("#555555"));
-					moneyOther.setTextColor(Color.parseColor("#555555"));
+					monkey800.setTextColor(Color.parseColor("#444444"));
+					monkey200.setTextColor(Color.parseColor("#444444"));
+					moneyOther.setTextColor(Color.parseColor("#444444"));
 					//input.clearFocus();
 				}else{
-					monkey500.setTextColor(Color.parseColor("#555555"));
+					monkey500.setTextColor(Color.parseColor("#444444"));
 				}
 			}
 		});
@@ -155,14 +155,14 @@ public class RechargeActivity extends BaseActivity {
 					monkey200.setChecked(false);
 					monkey500.setChecked(false);
 					moneyOther.setTextColor(Color.parseColor("#ffffff"));
-					monkey500.setTextColor(Color.parseColor("#555555"));
-					monkey800.setTextColor(Color.parseColor("#555555"));
-					monkey200.setTextColor(Color.parseColor("#555555"));
+					monkey500.setTextColor(Color.parseColor("#444444"));
+					monkey800.setTextColor(Color.parseColor("#444444"));
+					monkey200.setTextColor(Color.parseColor("#444444"));
 					input.setVisibility(View.VISIBLE);
 					input.setText("100");
 				}else{
 					input.setVisibility(View.INVISIBLE);
-					moneyOther.setTextColor(Color.parseColor("#555555"));
+					moneyOther.setTextColor(Color.parseColor("#444444"));
 				}
 			}
 		});
@@ -196,7 +196,12 @@ public class RechargeActivity extends BaseActivity {
 					//CommonUtil.ORDER_MONKEY = mChargePrice+"00"; //真实价格
 					ViewUtil.showLoadingView(RechargeActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(RechargeActivity.this, CommonUtil.APP_ID);
-					startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+					if (CommonUtil.version_test){
+						startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+					}else{
+						startPay(mChargePrice+"00", UtilTool.generateOrderNo(), "127.0.0.1");
+					}
+					
 				}else{
 					Toast.makeText(getApplicationContext(), "请选择充值金额！", Toast.LENGTH_SHORT).show();
 				}

@@ -44,7 +44,7 @@
 		         android:textSize="@dimen/base_dimen_30"
 		         android:layout_gravity="center_horizontal"
 		         android:gravity="center"
-		         android:background="@drawable/btn_pressed"
+		         android:background="@drawable/item_blue_button_corner_selector"
                 />
         </LinearLayout>
     </FrameLayout>

@@ -55,7 +55,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/base_dimen_14"
                     android:gravity="center"
-                    android:text="手机认证"
+                    android:text="手机绑定"
                     android:textColor="#337ffd"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
@@ -149,7 +149,7 @@
                     android:layout_marginTop="@dimen/base_dimen_14"
                     android:gravity="center"
                     android:text="注册完成"
-                    android:textColor="#cccccc"
+                    android:textColor="#b2b2b2"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -180,7 +180,7 @@
                 android:gravity="center_vertical"
                 android:hint="请输入真实姓名"
                 android:textColor="#000000"
-                android:textColorHint="#cccccc"
+                android:textColorHint="#b2b2b2"
                 android:textSize="@dimen/base_dimen_28" />
         </FrameLayout>
 
@@ -211,7 +211,7 @@
                 android:hint="请输入二代身份证号码"
                 android:maxLength="18"
                 android:textColor="#000000"
-                android:textColorHint="#cccccc"
+                android:textColorHint="#b2b2b2"
                 android:textSize="@dimen/base_dimen_28" />
         </FrameLayout>
 
@@ -221,7 +221,7 @@
             android:layout_height="@dimen/base_dimen_80"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/base_dimen_170"
-            android:background="@drawable/btn_pressed"
+            android:background="@drawable/item_blue_button_corner_selector"
             android:gravity="center"
             android:text="下一步"
             android:textColor="#ffffff"

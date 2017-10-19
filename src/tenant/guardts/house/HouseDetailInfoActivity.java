@@ -90,11 +90,23 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋详情");
+		Button fullScreen = (Button)findViewById(R.id.id_add_rent_house);
+		fullScreen.setVisibility(View.VISIBLE);
+		fullScreen.setBackgroundResource(R.drawable.title_bar_full_screen_icon);
+		fullScreen.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent loadIntent = new Intent(HouseDetailInfoActivity.this, LoadUrlTestActivity.class);
+				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+				loadIntent.putExtra("tab_name", "全景图");
+				startActivity(loadIntent);
+				
+			}
+		});
 		mRentNo = getIntent().getStringExtra("rentNo");
 		flag = getIntent().getStringExtra("flag");
 		initView();
-		// mRentNo = "888888888";
-		Log.e("mingguo", "rent no  " + mRentNo);
 		getHouseDetailInfoByHouseId(mRentNo);
 		initPopupWindow();
 		initEvent();
@@ -218,6 +230,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 							intent.putExtra("user_name", CommonUtil.mUserLoginName);
 							intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
 							intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
+							intent.putExtra("house_price", mHouseInfo.getHousePrice());
 							startActivity(intent);
 							finish();
 						} else {
@@ -391,7 +404,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
 	private TextView mZhulinType;
-	private TextView mRoomNum, mHousePrice;
+	private TextView  mHousePrice;
 	private Button mShowCommentButton;
 
 	private void initView() {
@@ -406,7 +419,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		mRentDirection = (TextView) findViewById(R.id.id_rent_house_direction);
 		mRentAddress = (TextView) findViewById(R.id.id_rent_house_address);
 		mZhulinType = (TextView) findViewById(R.id.id_rent_house_lease_type);
-		mRoomNum = (TextView) findViewById(R.id.id_rent_house_num);
 		mLocationPolice = (TextView) findViewById(R.id.id_rent_house_district);
 		mHousePrice = (TextView) findViewById(R.id.id_rent_house_price);
 		// mHouseInfoGridview = (GridView)
@@ -523,13 +535,14 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mRentDirection.setText(object.getString("RDirectionDesc"));
 					mRentAddress.setText(object.getString("RAddress"));
 					mZhulinType.setText(object.getString("RRentTypeDesc"));
-					mRoomNum.setText(object.getString("RDoor"));
+					//mRoomNum.setText(object.getString("RDoor"));
 					mLocationPolice.setText(object.getString("RPSName"));
 					mHousePrice.setText(object.getString("RLocationDescription") + " 元");
 
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));
+					mHouseInfo.setHousePrice(object.getString("RLocationDescription") + " 元");
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

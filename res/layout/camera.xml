@@ -15,15 +15,15 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:layout_width="@dimen/base_dimen_166"
-        android:layout_height="@dimen/base_dimen_161"
+        android:layout_width="@dimen/base_dimen_149"
+        android:layout_height="@dimen/base_dimen_170"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/base_dimen_83"
         android:background="@drawable/scan_qrcode_house_logo" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         android:layout_gravity="bottom|center_horizontal"
         android:orientation="vertical" >
 
@@ -36,13 +36,13 @@
             android:textSize="18sp" />
 
         <CheckBox
-            android:layout_marginTop="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_60"
             android:layout_gravity="center_horizontal"
             android:id="@+id/capture_flash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="打开手电筒"
-            android:textSize="@dimen/base_dimen_24" 
+            android:textSize="@dimen/base_dimen_30" 
             android:button="@null"
             android:drawableTop="@drawable/capture_flash_bg"
             android:textColor="@drawable/capture_flash_text_bg"
