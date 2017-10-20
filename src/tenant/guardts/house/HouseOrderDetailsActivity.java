@@ -253,12 +253,12 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button1.setText("确认订单");
 			button1.setVisibility(View.GONE);
 
-			button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			//button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			if (mDetailType != null) {
 				if (mDetailType.equals("owner")) {
 					button1.setVisibility(View.VISIBLE);
-					button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-					button1.setTextColor(Color.parseColor("#ffffff"));
+					//button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					//button1.setTextColor(Color.parseColor("#ffffff"));
 					button1.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -268,7 +268,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 						}
 					});
 					button2.setText("拒绝订单");
-					button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner);
+					//button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner);
 					button2.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -278,8 +278,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					});
 				} else if (mDetailType.equals("renter")) {
 					button2.setText("取消订单");
-					button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-					button2.setTextColor(Color.parseColor("#ffffff"));
+					//button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					//button2.setTextColor(Color.parseColor("#ffffff"));
 					button2.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -294,8 +294,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("待支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("立即付款");
-			button1.setTextColor(Color.parseColor("#ffffff"));
-			button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			//button1.setTextColor(Color.parseColor("#ffffff"));
+			//button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			button2.setText("取消订单");
 
 			if (mDetailType != null) {

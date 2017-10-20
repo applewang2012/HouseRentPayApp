@@ -34,6 +34,7 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,6 +63,9 @@ import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -108,6 +112,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	private String mUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private SwipeRefreshLayout mSwipeLayout;
 	//private FrameLayout mTitlebarContent;
+	private ViewFlow mViewFlow;
+	private CircleFlowIndicator mFlowIndicator;
 	
 
 	@Override
@@ -128,7 +134,28 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		initView();
 		initEvent();
 		// initData();
+		initBanner();
 		return mRootView;
+	}
+	
+	private void initBanner() {
+		List<Integer> localImage = new ArrayList<>();
+		localImage.add(R.drawable.home_fragment_bg2);
+		localImage.add(R.drawable.home_fragment_bg);
+		localImage.add(R.drawable.home_fragment_bg3);
+		mViewFlow = (ViewFlow) mRootView.findViewById(R.id.id_fragment_home_viewflow);
+		mFlowIndicator = (CircleFlowIndicator) mRootView.findViewById(R.id.id_fragment_home_indicator);
+		mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), localImage,
+				null, null).setInfiniteLoop(true));
+		mViewFlow.setmSideBuffer(localImage.size()); 
+		mFlowIndicator.setIndicatorCount(localImage.size());
+		
+		mViewFlow.setFlowIndicator(mFlowIndicator);
+		mViewFlow.setTimeSpan(2000);
+		mViewFlow.setSelection(localImage.size() * 1000); // 设置初始位置
+		mViewFlow.startAutoFlowTimer(); // 启动自动播放
+		mFlowIndicator.requestLayout();
+		mFlowIndicator.invalidate();
 	}
 
 	private void initEvent() {
@@ -441,8 +468,8 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				startGetLocationFromHouse();
 			}
 		});  
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,  
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);  
+		
+		mSwipeLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE); 
         
 		mListView = (HomeFragmentListView) mRootView.findViewById(R.id.id_home_house_fragment_listview);
 		// mListView.setAdapter(new );
@@ -567,7 +594,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mCurrentLatLng.latitude + "");
 		rpc.addProperty("lon", mCurrentLatLng.longitude + "");
-		rpc.addProperty("distance", "15000");
+		rpc.addProperty("distance", "10000");
 		mPresenter.readyPresentServiceParams(getActivity(), url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask(false);
 	}

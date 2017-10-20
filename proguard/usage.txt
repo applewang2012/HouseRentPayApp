@@ -4899,9 +4899,10 @@ tenant.guardts.house.AddHouseInfoActivity:
     private java.lang.String mRHouseP
     546:560:private void getHouseProperty()
 tenant.guardts.house.AddRentAttributeActivity:
-    773:804:private void startHttpService()
-    980:1003:private void getIndentifyInfo(java.lang.String)
-    1006:1032:private void getQueryStatusInfo(java.lang.String)
+    136:142:private void getPayRateDesc(java.lang.String)
+    774:805:private void startHttpService()
+    981:1004:private void getIndentifyInfo(java.lang.String)
+    1007:1033:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -4923,7 +4924,7 @@ tenant.guardts.house.ApplyForCheckoutActivity:
     private tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator
     private android.widget.Button mDel
     private java.lang.String flag
-    201:238:private void showPublicAttributeDialog()
+    201:237:private void showPublicAttributeDialog()
     428:433:private void setDeleteHouseInfo(java.lang.String)
     437:449:private void initDialog()
     458:468:private void showAlertDialog(android.widget.TextView,java.lang.String[])
@@ -4974,9 +4975,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     private java.lang.String mOwnerName
     private java.lang.String mOwnerIdcard
 tenant.guardts.house.HomeActivity:
-    598:609:private java.lang.String getUserIdNo(java.lang.String)
-    730:731:public void setSelectedCity(java.lang.String)
-    734:734:public java.lang.String getSelectedCity()
+    600:611:private java.lang.String getUserIdNo(java.lang.String)
+    732:733:public void setSelectedCity(java.lang.String)
+    736:736:public java.lang.String getSelectedCity()
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -4989,20 +4990,14 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-    336:341:private void setDeleteHouseInfo(java.lang.String)
-    345:357:private void initDialog()
-    366:376:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    469:474:private void getHouseDetailImageListByHouseId(java.lang.String)
+    349:354:private void setDeleteHouseInfo(java.lang.String)
+    358:370:private void initDialog()
+    379:389:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    481:486:private void getHouseDetailImageListByHouseId(java.lang.String)
     66:66:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
     66:66:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
-tenant.guardts.house.HouseDetailInfoActivity$14
 tenant.guardts.house.HouseDetailInfoActivity$15
-tenant.guardts.house.HouseHistoryActivity:
-    private android.widget.LinearLayout mContentLayout
-    private android.widget.TextView mNoContent
-    100:105:private void setDeleteHouseInfo(java.lang.String)
-    256:271:private void initDialog(android.view.View,int)
-tenant.guardts.house.HouseHistoryActivity$3
+tenant.guardts.house.HouseDetailInfoActivity$16
 tenant.guardts.house.LocationDemo:
     com.baidu.mapapi.map.BitmapDescriptor mCurrentMarker
     private static final int accuracyCircleFillColor
@@ -5010,9 +5005,9 @@ tenant.guardts.house.LocationDemo:
 tenant.guardts.house.LocationDemo$MyLocationListenner:
     303:303:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.LoginUserActivity:
-    private android.widget.TextView mTitleBar
-    250:250:private void showLoadingView()
-    256:256:private void dismissLoadingView()
+    228:240:private void commonServiceInterface()
+    253:253:private void showLoadingView()
+    259:259:private void dismissLoadingView()
 tenant.guardts.house.MapRentHouseActivity:
     private com.baidu.mapapi.map.MyLocationConfiguration$LocationMode mCurrentMode
     private boolean mShowInfoWindow
@@ -5020,13 +5015,19 @@ tenant.guardts.house.MapRentHouseActivity:
     android.widget.Button requestLocButton
     private android.widget.TextView mTitleBar
     private java.util.ArrayList suggest
-    540:545:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
-    549:558:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
-    674:677:public void setBackgroundAlpha(float)
+    550:555:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    559:568:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
+    698:701:public void setBackgroundAlpha(float)
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner:
-    775:775:public void onReceivePoi(com.baidu.location.BDLocation)
+    799:799:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.MapSuggestSearchActivity:
     134:137:protected boolean hasData(java.lang.String)
+tenant.guardts.house.MyHouseActivity:
+    private android.widget.LinearLayout mContentLayout
+    private android.widget.TextView mNoContent
+    100:105:private void setDeleteHouseInfo(java.lang.String)
+    256:271:private void initDialog(android.view.View,int)
+tenant.guardts.house.MyHouseActivity$3
 tenant.guardts.house.PaymentStatusActivity:
     114:124:private void updateWalletRequestInfo(java.lang.String,java.lang.String)
 tenant.guardts.house.R:
@@ -5070,7 +5071,7 @@ tenant.guardts.house.SelectShowCityActivity:
 tenant.guardts.house.SelectShowCityActivity$HitCityAdapter
 tenant.guardts.house.SelectShowCityActivity$MyLocationListener
 tenant.guardts.house.UserAgreementActivity$MyPageAdapter:
-    80:82:public void setListViews(java.util.ArrayList)
+    76:78:public void setListViews(java.util.ArrayList)
 tenant.guardts.house.WalletActivity:
     private java.lang.String balance
     private java.lang.String cardNo
@@ -5079,7 +5080,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
-    78:87:private void testHelloword()
+    94:103:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
@@ -5430,20 +5431,23 @@ tenant.guardts.house.model.HouseFragment:
     android.widget.RadioGroup$OnCheckedChangeListener radioButtonListener
     android.widget.Button requestLocButton
     private java.util.List mMarkList
-    196:211:private void startThreadfindLocation(java.lang.String)
-    214:217:public void searchButtonProcess()
-    546:549:public void searchNearbyProcess(java.lang.String)
-    552:557:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    223:238:private void startThreadfindLocation(java.lang.String)
+    241:244:public void searchButtonProcess()
+    573:576:public void searchNearbyProcess(java.lang.String)
+    579:584:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
 tenant.guardts.house.model.HouseFragment$4
 tenant.guardts.house.model.HouseFragment$MyLocationListenner:
-    700:700:public void onReceivePoi(com.baidu.location.BDLocation)
+    727:727:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.model.HouseImageInfo
 tenant.guardts.house.model.HouseInfoModel:
     56:56:public long getOrderCreatedDateStamp()
+tenant.guardts.house.model.MyFragment:
+    417:437:private void changeUserAreaDialog()
+tenant.guardts.house.model.MyFragment$12
+tenant.guardts.house.model.MyFragment$13
 tenant.guardts.house.model.OrderFangzhuFragment:
     private long mTimeTag
-    private android.support.v4.widget.SwipeRefreshLayout mSwipeLayout
-    225:230:private void rejectRentAttributeInfo(java.lang.String)
+    239:244:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
@@ -5506,10 +5510,11 @@ tenant.guardts.house.selectcity.PingYinUtil:
     13:13:public PingYinUtil()
     19:44:public static java.lang.String getPingYin(java.lang.String)
 tenant.guardts.house.util.BMapUtil:
-    23:23:public BMapUtil()
-    32:38:public static android.graphics.Bitmap getBitmapFromView(android.view.View)
-    169:172:public static android.graphics.Bitmap createQRImage(java.lang.String,android.widget.ImageView,int,int)
-    176:204:public static android.graphics.Bitmap createQRImage(java.lang.String,android.widget.ImageView)
+    26:26:public BMapUtil()
+    35:41:public static android.graphics.Bitmap getBitmapFromView(android.view.View)
+    172:175:public static android.graphics.Bitmap createQRImage(java.lang.String,android.widget.ImageView,int,int)
+    179:207:public static android.graphics.Bitmap createQRImage(java.lang.String,android.widget.ImageView)
+    242:266:private android.graphics.Bitmap createWatermark(android.graphics.Bitmap,java.lang.String)
 tenant.guardts.house.util.Bimp:
     14:14:public Bimp()
     52:63:public static android.graphics.Bitmap compressImage(android.graphics.Bitmap)

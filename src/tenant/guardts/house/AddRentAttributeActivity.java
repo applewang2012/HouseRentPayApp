@@ -437,7 +437,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentPhone.setText(CommonUtil.mUserLoginName);
 		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
 		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
-		mRentPrice.setText(mHousePrice);
+		mRentPrice.setText(mHousePrice+" 元");
 //		mRentPrice.addTextChangedListener(new TextWatcher() {
 //			
 //			@Override
@@ -679,7 +679,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
 			rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());  
 			rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());  
-			rpc.addProperty("RRentPrice", mRentPrice.getText().toString());     
+			rpc.addProperty("RRentPrice", mHousePrice);     
 			rpc.addProperty("RRAStartDate", mSetStartData);  
 			rpc.addProperty("RRAEndDate", mSetEndData); 
 			rpc.addProperty("RRADescription", "meiyou"); 

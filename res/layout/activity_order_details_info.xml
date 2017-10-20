@@ -31,7 +31,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/base_dimen_30"
                 android:text="天津市和平区瞰和平16号楼1-202"
-                android:textColor="#333333"
+                android:textColor="#000000"
                 android:textSize="@dimen/base_dimen_30" />
 
             <TextView
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="入住时间:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="2017-08-26"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="退房时间:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -103,7 +103,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="2017-08-30"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="房客姓名:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -128,7 +128,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="王安石"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="联系电话:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -153,7 +153,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="16789009809"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="门锁密码:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -179,23 +179,24 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="888999"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
             <LinearLayout
-               
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_dimen_20"
                 android:layout_marginLeft="@dimen/base_dimen_30"
-                android:layout_marginTop="@dimen/base_dimen_20" >
+                android:layout_marginTop="@dimen/base_dimen_20" 
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="证件开锁"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -233,7 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="房主姓名:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -243,7 +244,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="王安石"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
 
@@ -259,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="联系电话:"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
 
                 <TextView
@@ -269,7 +270,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/base_dimen_20"
                     android:text="16789009809"
-                    android:textColor="#777777"
+                    android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
         </LinearLayout>
@@ -294,7 +295,7 @@
                 android:layout_marginLeft="@dimen/base_dimen_30"
                 android:layout_marginTop="@dimen/base_dimen_28"
                 android:text="支付金额"
-                android:textColor="#333333"
+                android:textColor="#000000"
                 android:textSize="@dimen/base_dimen_32" />
 
             <TextView
@@ -339,10 +340,10 @@
                 android:layout_width="@dimen/base_dimen_180"
                 android:layout_height="@dimen/base_dimen_70"
                 android:layout_marginLeft="@dimen/base_dimen_130"
-                android:background="@drawable/order_detail_btn_normal"
+                android:background="@drawable/item_blue_button_no_corner_selector"
                 android:gravity="center"
                 android:text="电话联系"
-                android:textColor="@drawable/button_text_selector"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/base_dimen_30" />
 
             <Button
@@ -350,10 +351,10 @@
                 android:layout_width="@dimen/base_dimen_180"
                 android:layout_height="@dimen/base_dimen_70"
                 android:layout_marginLeft="@dimen/base_dimen_10"
-                android:background="@drawable/order_detail_btn_normal"
+                android:background="@drawable/item_blue_button_no_corner_selector"
                 android:gravity="center"
                 android:text="确认订单"
-                android:textColor="@drawable/button_text_selector"
+                android:textColor="#444444"
                 android:textSize="@dimen/base_dimen_30" />
 
             <Button
@@ -361,10 +362,10 @@
                 android:layout_width="@dimen/base_dimen_180"
                 android:layout_height="@dimen/base_dimen_70"
                 android:layout_marginLeft="@dimen/base_dimen_10"
-                android:background="@drawable/order_detail_btn_normal"
+                android:background="@drawable/item_gray_button_no_corner_selector"
                 android:gravity="center"
                 android:text="取消订单 "
-                android:textColor="@drawable/button_text_selector"
+                android:textColor="#444444"
                 android:textSize="@dimen/base_dimen_30" />
         </LinearLayout>
     </LinearLayout>

@@ -542,7 +542,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));
-					mHouseInfo.setHousePrice(object.getString("RLocationDescription") + " 元");
+					mHouseInfo.setHousePrice(object.getString("RLocationDescription"));
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

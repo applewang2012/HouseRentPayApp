@@ -21848,13 +21848,8 @@ tenant.guardts.house.HomeSearchActivity
 tenant.guardts.house.HomeSearchActivity: HomeSearchActivity()
 tenant.guardts.house.HouseDetailInfoActivity
 tenant.guardts.house.HouseDetailInfoActivity: HouseDetailInfoActivity()
-tenant.guardts.house.HouseHistoryActivity
-tenant.guardts.house.HouseHistoryActivity: HouseHistoryActivity()
-tenant.guardts.house.HouseHistoryActivity: void click(android.view.View)
 tenant.guardts.house.HouseOrderDetailsActivity
 tenant.guardts.house.HouseOrderDetailsActivity: HouseOrderDetailsActivity()
-tenant.guardts.house.HousingDetailsActivity
-tenant.guardts.house.HousingDetailsActivity: HousingDetailsActivity()
 tenant.guardts.house.LoadUrlTestActivity
 tenant.guardts.house.LoadUrlTestActivity: LoadUrlTestActivity()
 tenant.guardts.house.LocationDemo
@@ -21870,6 +21865,9 @@ tenant.guardts.house.MapSuggestSearchActivity: MapSuggestSearchActivity()
 tenant.guardts.house.ModifyPasswordActivity
 tenant.guardts.house.ModifyPasswordActivity: ModifyPasswordActivity()
 tenant.guardts.house.MoreSurroundActivity
+tenant.guardts.house.MyHouseActivity
+tenant.guardts.house.MyHouseActivity: MyHouseActivity()
+tenant.guardts.house.MyHouseActivity: void click(android.view.View)
 tenant.guardts.house.PaymentStatusActivity
 tenant.guardts.house.PaymentStatusActivity: PaymentStatusActivity()
 tenant.guardts.house.PersonalInfoActivity
@@ -22804,11 +22802,6 @@ tenant.guardts.house.R$dimen: int width_small
 tenant.guardts.house.R$dimen: R$dimen()
 tenant.guardts.house.R$drawable
 tenant.guardts.house.R$drawable: int about_icon
-tenant.guardts.house.R$drawable: int agreement
-tenant.guardts.house.R$drawable: int agreement_01
-tenant.guardts.house.R$drawable: int agreement_02
-tenant.guardts.house.R$drawable: int agreement_03
-tenant.guardts.house.R$drawable: int agreement_04
 tenant.guardts.house.R$drawable: int arrow_repeat
 tenant.guardts.house.R$drawable: int avator
 tenant.guardts.house.R$drawable: int back_icon
@@ -22886,6 +22879,8 @@ tenant.guardts.house.R$drawable: int home_button_rent_house_press
 tenant.guardts.house.R$drawable: int home_button_rent_house_selector
 tenant.guardts.house.R$drawable: int home_frag_radiobutton_text_bg
 tenant.guardts.house.R$drawable: int home_fragment_bg
+tenant.guardts.house.R$drawable: int home_fragment_bg2
+tenant.guardts.house.R$drawable: int home_fragment_bg3
 tenant.guardts.house.R$drawable: int home_icon
 tenant.guardts.house.R$drawable: int home_icon_default
 tenant.guardts.house.R$drawable: int home_radiobutton_bg
@@ -22949,10 +22944,25 @@ tenant.guardts.house.R$drawable: int icon_markh
 tenant.guardts.house.R$drawable: int icon_marki
 tenant.guardts.house.R$drawable: int icon_markj
 tenant.guardts.house.R$drawable: int icon_search
+tenant.guardts.house.R$drawable: int identify_level_green
+tenant.guardts.house.R$drawable: int identify_level_red
+tenant.guardts.house.R$drawable: int identify_level_yellow
 tenant.guardts.house.R$drawable: int input_btn_normal
 tenant.guardts.house.R$drawable: int input_btn_pressed
 tenant.guardts.house.R$drawable: int input_idcard_img
 tenant.guardts.house.R$drawable: int into_icon
+tenant.guardts.house.R$drawable: int item_blue_button_corner_selector
+tenant.guardts.house.R$drawable: int item_blue_button_no_corner_selector
+tenant.guardts.house.R$drawable: int item_blue_solid_corner_normal
+tenant.guardts.house.R$drawable: int item_blue_solid_corner_press
+tenant.guardts.house.R$drawable: int item_blue_solid_no_corner_normal
+tenant.guardts.house.R$drawable: int item_blue_solid_no_corner_press
+tenant.guardts.house.R$drawable: int item_gray_button_corner_selector
+tenant.guardts.house.R$drawable: int item_gray_button_no_corner_selector
+tenant.guardts.house.R$drawable: int item_gray_solid_corner_normal
+tenant.guardts.house.R$drawable: int item_gray_solid_corner_press
+tenant.guardts.house.R$drawable: int item_gray_solid_no_corner_normal
+tenant.guardts.house.R$drawable: int item_gray_solid_no_corner_press
 tenant.guardts.house.R$drawable: int item_shape_no_solid_corner
 tenant.guardts.house.R$drawable: int item_shape_no_solid_corner_press
 tenant.guardts.house.R$drawable: int item_shape_solid_corner_normal
@@ -22972,6 +22982,7 @@ tenant.guardts.house.R$drawable: int map_select_city_normal
 tenant.guardts.house.R$drawable: int map_select_city_press
 tenant.guardts.house.R$drawable: int more
 tenant.guardts.house.R$drawable: int more_content
+tenant.guardts.house.R$drawable: int more_house
 tenant.guardts.house.R$drawable: int my_frag_login_bg
 tenant.guardts.house.R$drawable: int my_fragment_button_bg
 tenant.guardts.house.R$drawable: int my_fragment_exchange_city
@@ -23117,6 +23128,7 @@ tenant.guardts.house.R$drawable: int rights
 tenant.guardts.house.R$drawable: int scan_house_qrcode_icon
 tenant.guardts.house.R$drawable: int scan_qrcode_house_logo
 tenant.guardts.house.R$drawable: int search
+tenant.guardts.house.R$drawable: int search_bar_icon
 tenant.guardts.house.R$drawable: int search_input_background
 tenant.guardts.house.R$drawable: int search_view_bg
 tenant.guardts.house.R$drawable: int select_city_item_selector
@@ -23139,6 +23151,7 @@ tenant.guardts.house.R$drawable: int tab_normal
 tenant.guardts.house.R$drawable: int tap_click_force_touch
 tenant.guardts.house.R$drawable: int tap_click_force_touch_press
 tenant.guardts.house.R$drawable: int title_bar_background
+tenant.guardts.house.R$drawable: int title_bar_full_screen_icon
 tenant.guardts.house.R$drawable: int traffic
 tenant.guardts.house.R$drawable: int view_banner
 tenant.guardts.house.R$drawable: int wallet_back
@@ -23309,16 +23322,15 @@ tenant.guardts.house.R$id: int id_button_finish_pay
 tenant.guardts.house.R$id: int id_button_pay_money_button
 tenant.guardts.house.R$id: int id_button_retry_pay
 tenant.guardts.house.R$id: int id_check_can_rent_house
-tenant.guardts.house.R$id: int id_commission
-tenant.guardts.house.R$id: int id_commission_content
 tenant.guardts.house.R$id: int id_common_title_bar
 tenant.guardts.house.R$id: int id_contact_owner_content
 tenant.guardts.house.R$id: int id_data_loading
 tenant.guardts.house.R$id: int id_door_password_content
 tenant.guardts.house.R$id: int id_download_button
-tenant.guardts.house.R$id: int id_explanation
-tenant.guardts.house.R$id: int id_explanation_content
+tenant.guardts.house.R$id: int id_fangzhu_pull_refresh
 tenant.guardts.house.R$id: int id_fragment_history_radiogrouop
+tenant.guardts.house.R$id: int id_fragment_home_indicator
+tenant.guardts.house.R$id: int id_fragment_home_viewflow
 tenant.guardts.house.R$id: int id_fragment_house_listview
 tenant.guardts.house.R$id: int id_fragment_surround_bank
 tenant.guardts.house.R$id: int id_fragment_surround_eat
@@ -23402,6 +23414,7 @@ tenant.guardts.house.R$id: int id_order_detail_pay_monkey
 tenant.guardts.house.R$id: int id_order_detail_start_name
 tenant.guardts.house.R$id: int id_order_detail_status
 tenant.guardts.house.R$id: int id_order_end_time
+tenant.guardts.house.R$id: int id_order_identify_level
 tenant.guardts.house.R$id: int id_order_monkey
 tenant.guardts.house.R$id: int id_order_monkey_input
 tenant.guardts.house.R$id: int id_order_time_down
@@ -23452,7 +23465,6 @@ tenant.guardts.house.R$id: int id_rent_house_get_verifycode
 tenant.guardts.house.R$id: int id_rent_house_idcard
 tenant.guardts.house.R$id: int id_rent_house_lease_type
 tenant.guardts.house.R$id: int id_rent_house_name
-tenant.guardts.house.R$id: int id_rent_house_num
 tenant.guardts.house.R$id: int id_rent_house_number
 tenant.guardts.house.R$id: int id_rent_house_order_id
 tenant.guardts.house.R$id: int id_rent_house_phone
@@ -23661,6 +23673,9 @@ tenant.guardts.house.R$id: int text_balance
 tenant.guardts.house.R$id: int textview_login
 tenant.guardts.house.R$id: int timeoutProgressbar
 tenant.guardts.house.R$id: int title
+tenant.guardts.house.R$id: int title1
+tenant.guardts.house.R$id: int title2
+tenant.guardts.house.R$id: int title3
 tenant.guardts.house.R$id: int toggle
 tenant.guardts.house.R$id: int toggle_button
 tenant.guardts.house.R$id: int transaction_detail_empty_layout
@@ -23759,6 +23774,7 @@ tenant.guardts.house.R$layout: int layout_qrcode_dialog
 tenant.guardts.house.R$layout: int load_url
 tenant.guardts.house.R$layout: int login_user
 tenant.guardts.house.R$layout: int map_marker_layout
+tenant.guardts.house.R$layout: int map_more_house_icon
 tenant.guardts.house.R$layout: int modify_user_password
 tenant.guardts.house.R$layout: int more_surround_life_layout
 tenant.guardts.house.R$layout: int oliveapp_activity_liveness_detection_main

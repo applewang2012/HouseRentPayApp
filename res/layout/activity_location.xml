@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:guardts="http://schemas.android.com/apk/res/tenant.guardts.house"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -97,12 +98,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+			<FrameLayout
+                android:id="@+id/id_viewflow_framelayout"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/base_dimen_250" >
+	            <tenant.guardts.house.bannerview.ViewFlow
+	                    android:id="@+id/id_fragment_home_viewflow"
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="@dimen/base_dimen_250"
+	                    />
 
-            <ImageView
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@color/transparent"
+                    android:gravity="center" >
+                    
+					<tenant.guardts.house.bannerview.CircleFlowIndicator
+                        android:id="@+id/id_fragment_home_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:padding="2dip"
+                        app:activeColor="#337ffd"
+                        app:activeType="fill"
+                        app:circleSeparation="20dip"
+                        app:inactiveColor="#ffffff"
+                        app:inactiveType="fill"
+                        app:radius="4dip" />
+                       
+                </FrameLayout>
+            </FrameLayout>
+            
+<!--             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_250"
                 android:src="@drawable/home_fragment_bg" >
-            </ImageView>
+            </ImageView> -->
 
             <View
                 android:layout_width="match_parent"
@@ -391,7 +424,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/surrounds"
                     android:gravity="center"
-                    android:text="周区商边"
+                    android:text="周边商区"
                     android:textColor="#464646"
                     android:textSize="@dimen/base_dimen_26" />
 

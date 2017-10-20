@@ -16,6 +16,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +57,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 	
 	private int mCurrentPosition = 0, mExpirePosition = -1, mCheckoutPosition = -1;
 	private long mTimeTag ;
+	private SwipeRefreshLayout mSwipeLayout;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,16 @@ public class OrderZhuHuFragment extends BaseFragment{
 				startActivity(intent);
 			}
 		});
+		mSwipeLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_fangzhu_pull_refresh);
+		mSwipeLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE); 
+		mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				Log.e("mingguo", "on Refresh  ");
+				getHouseHistoryData();
+			}
+		});  
 	}
 	
 	private Handler updateTimeHandler = new Handler(){
@@ -511,7 +524,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				TextView money = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				TextView timeDown = (TextView)holderView.findViewById(R.id.id_order_time_down);
 				addressText.setText(info.getHouseAddress());
-				endTime.setText(info.getHouseEndTime());
+				endTime.setText(UtilTool.stampToDateTime(info.getOrderCreatedDate().substring(6, info.getOrderCreatedDate().length() - 2)));
 				money.setText(info.getHousePrice());
 				timeDown.setText(info.getShowTimeDownTime());
 				updateOrderStatusView(holder, info);
@@ -555,7 +568,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		mPresent.readyPresentServiceParams(getActivity(), url, mRentHistoryAction, rpc);
-		mPresent.startPresentServiceTask(true);
+		mPresent.startPresentServiceTask(false);
 	}
 	
 	private void cancelRentAttributeInfo(String id){
@@ -580,6 +593,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
+				mSwipeLayout.setRefreshing(false);
 				parseUserHouseInfo((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无租房历史");

@@ -58,7 +58,7 @@ public class LoginUserActivity extends BaseActivity {
 		ActivityController.addActivity(LoginUserActivity.this);
 		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
-		commonServiceInterface();
+		//commonServiceInterface();
 	}
 
 	@Override

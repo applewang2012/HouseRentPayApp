@@ -22,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_gravity="center"
         android:layout_marginRight="40dip"
-        android:background="@drawable/select_city_text_selector"
+        android:background="@drawable/item_blue_button_no_corner_selector"
         android:clickable="true"
         android:focusable="false"
         android:gravity="center"

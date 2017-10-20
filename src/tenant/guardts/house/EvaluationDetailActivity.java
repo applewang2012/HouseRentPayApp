@@ -44,7 +44,7 @@ public class EvaluationDetailActivity extends BaseActivity {
 		setContentView(R.layout.activity_evaluation_detail);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
-		mTitleBar.setText("评价详情");
+		mTitleBar.setText("查看评价");
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, this);
 		initData();

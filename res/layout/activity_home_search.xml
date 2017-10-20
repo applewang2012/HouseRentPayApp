@@ -22,7 +22,7 @@
             android:layout_marginLeft="@dimen/base_dimen_30"
             android:gravity="center_vertical"
             android:text="租赁类型"
-            android:textColor="#333333"
+            android:textColor="#000000"
             android:textSize="@dimen/base_dimen_30" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_marginLeft="@dimen/base_dimen_20"
             android:gravity="center_vertical"
             android:text="请选择租赁类型"
-            android:textColor="#999999"
+            android:textColor="#444444"
             android:textSize="@dimen/base_dimen_30" />
 
         <ImageView
@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="入住时间"
-            android:textColor="#333333"
+            android:textColor="#000000"
             android:textSize="@dimen/base_dimen_30" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="退房时间"
-            android:textColor="#333333"
+            android:textColor="#000000"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="请选择入住时间"
-            android:textColor="#999999"
+            android:textColor="#444444"
             android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
 
@@ -98,7 +98,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="请选择退房时间"
-            android:textColor="#999999"
+            android:textColor="#444444"
             android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
@@ -110,6 +110,8 @@
         android:layout_marginTop="@dimen/base_dimen_10"
         android:background="#ffffff"
         android:hint="请输入房屋地址关键字"
+        android:textSize="@dimen/base_dimen_30"
+        android:textColorHint="#777777"
         android:paddingLeft="@dimen/base_dimen_70" >
     </EditText>
     <Button
@@ -119,7 +121,7 @@
         android:gravity="center"
         android:layout_height="@dimen/base_dimen_80"
         android:layout_marginTop="@dimen/base_dimen_40"
-        android:background="@drawable/wallet_btn_bg1"
+        android:background="@drawable/item_blue_button_no_corner_selector"
         android:text="立即搜索"
         android:textColor="#ffffff"
         android:textSize="@dimen/base_dimen_34" />

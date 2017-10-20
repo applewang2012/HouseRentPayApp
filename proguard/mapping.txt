@@ -27169,10 +27169,10 @@ tenant.guardts.house.AddHouseInfoActivity -> tenant.guardts.house.AddHouseInfoAc
     android.widget.TextView access$8(tenant.guardts.house.AddHouseInfoActivity) -> h
     android.widget.TextView access$9(tenant.guardts.house.AddHouseInfoActivity) -> i
     android.widget.TextView access$10(tenant.guardts.house.AddHouseInfoActivity) -> j
-    java.lang.String access$11(tenant.guardts.house.AddHouseInfoActivity) -> k
+    android.widget.TextView access$11(tenant.guardts.house.AddHouseInfoActivity) -> k
     android.widget.TextView access$12(tenant.guardts.house.AddHouseInfoActivity) -> l
-    android.widget.TextView access$13(tenant.guardts.house.AddHouseInfoActivity) -> m
-    void access$14(tenant.guardts.house.AddHouseInfoActivity,java.lang.String) -> a
+    void access$13(tenant.guardts.house.AddHouseInfoActivity,java.lang.String) -> a
+    void access$14(tenant.guardts.house.AddHouseInfoActivity) -> m
     void access$15(tenant.guardts.house.AddHouseInfoActivity) -> n
     void access$16(tenant.guardts.house.AddHouseInfoActivity) -> o
     void access$17(tenant.guardts.house.AddHouseInfoActivity) -> p
@@ -27180,9 +27180,8 @@ tenant.guardts.house.AddHouseInfoActivity -> tenant.guardts.house.AddHouseInfoAc
     void access$19(tenant.guardts.house.AddHouseInfoActivity) -> r
     void access$20(tenant.guardts.house.AddHouseInfoActivity) -> s
     void access$21(tenant.guardts.house.AddHouseInfoActivity) -> t
-    void access$22(tenant.guardts.house.AddHouseInfoActivity) -> u
-    boolean access$23(tenant.guardts.house.AddHouseInfoActivity) -> v
-    void access$24(tenant.guardts.house.AddHouseInfoActivity) -> w
+    boolean access$22(tenant.guardts.house.AddHouseInfoActivity) -> u
+    void access$23(tenant.guardts.house.AddHouseInfoActivity) -> v
 tenant.guardts.house.AddHouseInfoActivity$1 -> tenant.guardts.house.g:
     tenant.guardts.house.AddHouseInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -27244,56 +27243,49 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     long mSystemClockTime -> r
     java.lang.String mSetStartData -> s
     java.lang.String mSetEndData -> t
-    java.lang.String mOriginStartContent -> u
-    java.lang.String mOriginEndContent -> v
-    java.lang.String mIdentifyAction -> w
-    java.lang.String mSendVerifyCodeAction -> x
-    java.lang.String mCheckVerifyCodeAction -> y
-    java.lang.String mHouseNo -> z
-    java.lang.String mUsername -> A
-    java.lang.String[] mOwnerType -> B
-    java.lang.String mOriginTypeText -> C
-    java.lang.String mTypeIndex -> D
-    java.lang.String mOwnerName -> E
-    java.lang.String mOwnerIdcard -> F
-    java.lang.String mOrderId -> G
-    java.lang.String file -> H
-    com.gzt.faceid5sdk.DetectionAuthentic authentic -> I
-    java.lang.String mFaceCaptureString -> J
-    java.lang.String mCaptureString -> K
-    java.lang.String mRealName -> L
-    java.lang.String mIdCard -> M
-    android.os.HandlerThread myHandlerThread -> N
-    android.os.Handler mSubHandler -> O
-    android.widget.TextView commission -> P
-    android.widget.TextView explanation -> Q
-    android.widget.EditText password -> R
-    android.widget.LinearLayout mCommissionContent -> S
-    android.widget.LinearLayout mExplannationContent -> T
-    boolean mShowRentHouseDialog -> U
-    android.app.DatePickerDialog$OnDateSetListener startlistener -> V
-    android.app.TimePickerDialog$OnTimeSetListener starttimeListener -> W
-    android.app.DatePickerDialog$OnDateSetListener endlistener -> X
-    android.app.TimePickerDialog$OnTimeSetListener endtimeListener -> Y
-    android.widget.EditText mRentIDcard -> Z
-    android.widget.EditText mRentName -> aa
-    android.widget.EditText mRentPrice -> ab
-    android.widget.TextView mRentPhone -> ac
-    android.view.View mQrcodeView -> ad
-    android.widget.TextView mTypeTextView -> ae
-    int mTimeCount -> af
-    android.widget.TextView mGetVerifyCodeText -> ag
-    android.widget.EditText mVerifyCodeText -> ah
-    java.lang.String mVerifyCode -> ai
-    android.os.Handler mHandler -> aj
+    java.lang.String mIdentifyAction -> u
+    java.lang.String mSendVerifyCodeAction -> v
+    java.lang.String mCheckVerifyCodeAction -> w
+    java.lang.String mHouseNo -> x
+    java.lang.String mUsername -> y
+    java.lang.String[] mOwnerType -> z
+    java.lang.String mTypeIndex -> A
+    java.lang.String mOwnerName -> B
+    java.lang.String mOwnerIdcard -> C
+    java.lang.String mOrderId -> D
+    java.lang.String file -> E
+    com.gzt.faceid5sdk.DetectionAuthentic authentic -> F
+    java.lang.String mFaceCaptureString -> G
+    java.lang.String mCaptureString -> H
+    java.lang.String mRealName -> I
+    java.lang.String mIdCard -> J
+    android.os.HandlerThread myHandlerThread -> K
+    android.os.Handler mSubHandler -> L
+    android.widget.EditText password -> M
+    boolean mShowRentHouseDialog -> N
+    java.lang.String mHousePrice -> O
+    android.app.DatePickerDialog$OnDateSetListener startlistener -> P
+    android.app.TimePickerDialog$OnTimeSetListener starttimeListener -> Q
+    android.app.DatePickerDialog$OnDateSetListener endlistener -> R
+    android.app.TimePickerDialog$OnTimeSetListener endtimeListener -> S
+    android.widget.EditText mRentIDcard -> T
+    android.widget.EditText mRentName -> U
+    android.widget.TextView mRentPrice -> V
+    android.widget.TextView mRentPhone -> W
+    android.view.View mQrcodeView -> X
+    android.widget.TextView mTypeTextView -> Y
+    int mTimeCount -> Z
+    android.widget.TextView mGetVerifyCodeText -> aa
+    android.widget.EditText mVerifyCodeText -> ab
+    java.lang.String mVerifyCode -> ac
+    android.os.Handler mHandler -> ad
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
-    void getPayRateDesc(java.lang.String) -> a
-    void checkCanRentHouseTime(java.lang.String) -> b
-    void sendPhoneVerifyCode(java.lang.String) -> c
+    void checkCanRentHouseTime(java.lang.String) -> a
+    void sendPhoneVerifyCode(java.lang.String) -> b
     void checkPhoneVerifyCode(java.lang.String,java.lang.String) -> c
     void showAlertDialog(android.widget.TextView,java.lang.String[]) -> a
-    java.lang.String[] parseAlreadyRentHouseTime(java.lang.String) -> d
+    java.lang.String[] parseAlreadyRentHouseTime(java.lang.String) -> c
     void showAlreadyRentHouseTime(java.lang.String[]) -> a
     void getStartDateAndTime() -> a
     void getStartTime() -> b
@@ -27309,12 +27301,12 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     boolean checkInputTimeContent() -> l
     boolean checkInputContent() -> m
     void startAddRentInfo() -> n
-    void queryIdentifyStatus(java.lang.String) -> e
+    void queryIdentifyStatus(java.lang.String) -> d
     void sendMessageToFinish() -> o
     void startLiveIdentifyActivity() -> p
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     void identifyUserInfo(java.lang.String,java.lang.String) -> d
-    void parseQueryStatus(java.lang.String) -> f
+    void parseQueryStatus(java.lang.String) -> e
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onDestroy() -> onDestroy
@@ -27337,44 +27329,36 @@ tenant.guardts.house.AddRentAttributeActivity -> tenant.guardts.house.AddRentAtt
     long access$16(tenant.guardts.house.AddRentAttributeActivity) -> l
     java.lang.String access$17(tenant.guardts.house.AddRentAttributeActivity) -> m
     void access$18(tenant.guardts.house.AddRentAttributeActivity) -> n
-    android.widget.LinearLayout access$19(tenant.guardts.house.AddRentAttributeActivity) -> o
-    android.widget.LinearLayout access$20(tenant.guardts.house.AddRentAttributeActivity) -> p
+    void access$19(tenant.guardts.house.AddRentAttributeActivity) -> o
+    int access$20(tenant.guardts.house.AddRentAttributeActivity) -> p
     android.widget.TextView access$21(tenant.guardts.house.AddRentAttributeActivity) -> q
-    android.widget.TextView access$22(tenant.guardts.house.AddRentAttributeActivity) -> r
-    void access$23(tenant.guardts.house.AddRentAttributeActivity) -> s
-    int access$24(tenant.guardts.house.AddRentAttributeActivity) -> t
-    android.widget.TextView access$25(tenant.guardts.house.AddRentAttributeActivity) -> u
-    void access$26(tenant.guardts.house.AddRentAttributeActivity,int) -> a
-    android.os.Handler access$27(tenant.guardts.house.AddRentAttributeActivity) -> v
-    void access$28(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> c
-    java.lang.String access$29(tenant.guardts.house.AddRentAttributeActivity) -> w
-    void access$30(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> d
-    void access$31(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> e
-    android.widget.TextView access$32(tenant.guardts.house.AddRentAttributeActivity) -> x
-    java.lang.String access$33(tenant.guardts.house.AddRentAttributeActivity) -> y
-    java.lang.String access$34(tenant.guardts.house.AddRentAttributeActivity) -> z
-    android.widget.TextView access$35(tenant.guardts.house.AddRentAttributeActivity) -> A
-    java.lang.String access$36(tenant.guardts.house.AddRentAttributeActivity) -> B
-    java.lang.String access$37(tenant.guardts.house.AddRentAttributeActivity) -> C
-    android.widget.TextView access$38(tenant.guardts.house.AddRentAttributeActivity) -> D
-    java.lang.String[] access$39(tenant.guardts.house.AddRentAttributeActivity) -> E
-    void access$40(tenant.guardts.house.AddRentAttributeActivity,android.widget.TextView,java.lang.String[]) -> a
-    void access$41(tenant.guardts.house.AddRentAttributeActivity) -> F
-    void access$42(tenant.guardts.house.AddRentAttributeActivity) -> G
-    void access$43(tenant.guardts.house.AddRentAttributeActivity) -> H
-    void access$44(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> f
-    void access$45(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> g
-    boolean access$46(tenant.guardts.house.AddRentAttributeActivity) -> I
-    void access$47(tenant.guardts.house.AddRentAttributeActivity,boolean) -> a
-    java.lang.String access$48(tenant.guardts.house.AddRentAttributeActivity) -> J
-    void access$49(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> h
-    boolean access$50(tenant.guardts.house.AddRentAttributeActivity) -> K
-    java.lang.String access$51(tenant.guardts.house.AddRentAttributeActivity) -> L
-    void access$52(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> i
-    void access$53(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> j
-    java.lang.String access$54(tenant.guardts.house.AddRentAttributeActivity) -> M
-    java.lang.String access$55(tenant.guardts.house.AddRentAttributeActivity) -> N
-    void access$56(tenant.guardts.house.AddRentAttributeActivity,java.lang.String,java.lang.String) -> b
+    void access$22(tenant.guardts.house.AddRentAttributeActivity,int) -> a
+    android.os.Handler access$23(tenant.guardts.house.AddRentAttributeActivity) -> r
+    void access$24(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> c
+    void access$25(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> d
+    void access$26(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> e
+    android.widget.TextView access$27(tenant.guardts.house.AddRentAttributeActivity) -> s
+    java.lang.String access$28(tenant.guardts.house.AddRentAttributeActivity) -> t
+    android.widget.TextView access$29(tenant.guardts.house.AddRentAttributeActivity) -> u
+    java.lang.String access$30(tenant.guardts.house.AddRentAttributeActivity) -> v
+    android.widget.TextView access$31(tenant.guardts.house.AddRentAttributeActivity) -> w
+    java.lang.String[] access$32(tenant.guardts.house.AddRentAttributeActivity) -> x
+    void access$33(tenant.guardts.house.AddRentAttributeActivity,android.widget.TextView,java.lang.String[]) -> a
+    void access$34(tenant.guardts.house.AddRentAttributeActivity) -> y
+    void access$35(tenant.guardts.house.AddRentAttributeActivity) -> z
+    void access$36(tenant.guardts.house.AddRentAttributeActivity) -> A
+    void access$37(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> f
+    boolean access$38(tenant.guardts.house.AddRentAttributeActivity) -> B
+    void access$39(tenant.guardts.house.AddRentAttributeActivity,boolean) -> a
+    java.lang.String access$40(tenant.guardts.house.AddRentAttributeActivity) -> C
+    void access$41(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> g
+    boolean access$42(tenant.guardts.house.AddRentAttributeActivity) -> D
+    java.lang.String access$43(tenant.guardts.house.AddRentAttributeActivity) -> E
+    void access$44(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> h
+    void access$45(tenant.guardts.house.AddRentAttributeActivity,java.lang.String) -> i
+    java.lang.String access$46(tenant.guardts.house.AddRentAttributeActivity) -> F
+    java.lang.String access$47(tenant.guardts.house.AddRentAttributeActivity) -> G
+    void access$48(tenant.guardts.house.AddRentAttributeActivity,java.lang.String,java.lang.String) -> b
 tenant.guardts.house.AddRentAttributeActivity$1 -> tenant.guardts.house.t:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
@@ -27386,9 +27370,7 @@ tenant.guardts.house.AddRentAttributeActivity$11 -> tenant.guardts.house.v:
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.AddRentAttributeActivity$12 -> tenant.guardts.house.w:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
-    void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    void afterTextChanged(android.text.Editable) -> afterTextChanged
+    void onClick(android.view.View) -> onClick
 tenant.guardts.house.AddRentAttributeActivity$13 -> tenant.guardts.house.x:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -27397,39 +27379,36 @@ tenant.guardts.house.AddRentAttributeActivity$14 -> tenant.guardts.house.y:
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.AddRentAttributeActivity$15 -> tenant.guardts.house.z:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.AddRentAttributeActivity$16 -> tenant.guardts.house.aa:
-    tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.AddRentAttributeActivity$17 -> tenant.guardts.house.ab:
+tenant.guardts.house.AddRentAttributeActivity$16 -> tenant.guardts.house.aa:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-tenant.guardts.house.AddRentAttributeActivity$2 -> tenant.guardts.house.ac:
+tenant.guardts.house.AddRentAttributeActivity$2 -> tenant.guardts.house.ab:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.AddRentAttributeActivity$3 -> tenant.guardts.house.ad:
+tenant.guardts.house.AddRentAttributeActivity$3 -> tenant.guardts.house.ac:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.AddRentAttributeActivity$4 -> tenant.guardts.house.ae:
+tenant.guardts.house.AddRentAttributeActivity$4 -> tenant.guardts.house.ad:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.AddRentAttributeActivity$5 -> tenant.guardts.house.af:
+tenant.guardts.house.AddRentAttributeActivity$5 -> tenant.guardts.house.ae:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.AddRentAttributeActivity$6 -> tenant.guardts.house.ag:
+tenant.guardts.house.AddRentAttributeActivity$6 -> tenant.guardts.house.af:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     android.widget.TextView val$text -> b
     java.lang.String[] val$items -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.AddRentAttributeActivity$7 -> tenant.guardts.house.ah:
+tenant.guardts.house.AddRentAttributeActivity$7 -> tenant.guardts.house.ag:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.AddRentAttributeActivity$8 -> tenant.guardts.house.ai:
+tenant.guardts.house.AddRentAttributeActivity$8 -> tenant.guardts.house.ah:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.AddRentAttributeActivity$9 -> tenant.guardts.house.aj:
+tenant.guardts.house.AddRentAttributeActivity$9 -> tenant.guardts.house.ai:
     tenant.guardts.house.AddRentAttributeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.AlbumActivity -> tenant.guardts.house.AlbumActivity:
@@ -27458,10 +27437,10 @@ tenant.guardts.house.AlbumActivity -> tenant.guardts.house.AlbumActivity:
     java.util.ArrayList access$3(tenant.guardts.house.AlbumActivity) -> d
     boolean access$4(tenant.guardts.house.AlbumActivity,tenant.guardts.house.util.ImageItem) -> a
     android.widget.TextView access$5(tenant.guardts.house.AlbumActivity) -> e
-tenant.guardts.house.AlbumActivity$1 -> tenant.guardts.house.ak:
+tenant.guardts.house.AlbumActivity$1 -> tenant.guardts.house.aj:
     tenant.guardts.house.AlbumActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-tenant.guardts.house.AlbumActivity$2 -> tenant.guardts.house.al:
+tenant.guardts.house.AlbumActivity$2 -> tenant.guardts.house.ak:
     tenant.guardts.house.AlbumActivity this$0 -> a
     void onItemClick(android.widget.ToggleButton,int,boolean,android.widget.Button) -> a
 tenant.guardts.house.AlbumActivity$AlbumSendListener -> tenant.guardts.house.AlbumActivity$a:
@@ -27529,10 +27508,10 @@ tenant.guardts.house.ApplyForCheckoutActivity -> tenant.guardts.house.ApplyForCh
     java.lang.String access$8(tenant.guardts.house.ApplyForCheckoutActivity) -> f
     java.lang.String access$9(tenant.guardts.house.ApplyForCheckoutActivity) -> g
     void access$10(tenant.guardts.house.ApplyForCheckoutActivity,java.lang.String,java.lang.String,java.lang.String) -> a
-tenant.guardts.house.ApplyForCheckoutActivity$1 -> tenant.guardts.house.am:
+tenant.guardts.house.ApplyForCheckoutActivity$1 -> tenant.guardts.house.al:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.ApplyForCheckoutActivity$10 -> tenant.guardts.house.an:
+tenant.guardts.house.ApplyForCheckoutActivity$10 -> tenant.guardts.house.am:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     android.widget.ImageView val$reasonIcon1 -> b
     android.widget.ImageView val$reasonIcon2 -> c
@@ -27543,7 +27522,7 @@ tenant.guardts.house.ApplyForCheckoutActivity$10 -> tenant.guardts.house.an:
     android.widget.TextView val$reasonText3 -> h
     android.widget.TextView val$reasonText4 -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$11 -> tenant.guardts.house.ao:
+tenant.guardts.house.ApplyForCheckoutActivity$11 -> tenant.guardts.house.an:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     android.widget.ImageView val$reasonIcon1 -> b
     android.widget.ImageView val$reasonIcon2 -> c
@@ -27554,30 +27533,30 @@ tenant.guardts.house.ApplyForCheckoutActivity$11 -> tenant.guardts.house.ao:
     android.widget.TextView val$reasonText3 -> h
     android.widget.TextView val$reasonText4 -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$12 -> tenant.guardts.house.ap:
+tenant.guardts.house.ApplyForCheckoutActivity$12 -> tenant.guardts.house.ao:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$13 -> tenant.guardts.house.aq:
+tenant.guardts.house.ApplyForCheckoutActivity$13 -> tenant.guardts.house.ap:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$14 -> tenant.guardts.house.ar:
+tenant.guardts.house.ApplyForCheckoutActivity$14 -> tenant.guardts.house.aq:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void onDismiss() -> onDismiss
-tenant.guardts.house.ApplyForCheckoutActivity$2 -> tenant.guardts.house.as:
+tenant.guardts.house.ApplyForCheckoutActivity$2 -> tenant.guardts.house.ar:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$3 -> tenant.guardts.house.at:
+tenant.guardts.house.ApplyForCheckoutActivity$3 -> tenant.guardts.house.as:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$4 -> tenant.guardts.house.au:
+tenant.guardts.house.ApplyForCheckoutActivity$4 -> tenant.guardts.house.at:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     android.app.AlertDialog$Builder val$builder -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$5 -> tenant.guardts.house.av:
+tenant.guardts.house.ApplyForCheckoutActivity$5 -> tenant.guardts.house.au:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     java.lang.String val$reason -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$8 -> tenant.guardts.house.aw:
+tenant.guardts.house.ApplyForCheckoutActivity$8 -> tenant.guardts.house.av:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     android.widget.ImageView val$reasonIcon1 -> b
     android.widget.ImageView val$reasonIcon2 -> c
@@ -27588,7 +27567,7 @@ tenant.guardts.house.ApplyForCheckoutActivity$8 -> tenant.guardts.house.aw:
     android.widget.TextView val$reasonText3 -> h
     android.widget.TextView val$reasonText4 -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ApplyForCheckoutActivity$9 -> tenant.guardts.house.ax:
+tenant.guardts.house.ApplyForCheckoutActivity$9 -> tenant.guardts.house.aw:
     tenant.guardts.house.ApplyForCheckoutActivity this$0 -> a
     android.widget.ImageView val$reasonIcon1 -> b
     android.widget.ImageView val$reasonIcon2 -> c
@@ -27614,7 +27593,7 @@ tenant.guardts.house.BaseActivity -> tenant.guardts.house.BaseActivity:
     void dismissActivityLoadingView(android.view.View) -> a
     void access$0(tenant.guardts.house.BaseActivity,android.view.View) -> a
     void access$1(tenant.guardts.house.BaseActivity,android.content.Context,android.view.View) -> a
-tenant.guardts.house.BaseActivity$1 -> tenant.guardts.house.ay:
+tenant.guardts.house.BaseActivity$1 -> tenant.guardts.house.ax:
     tenant.guardts.house.BaseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.CaptureActivity -> tenant.guardts.house.CaptureActivity:
@@ -27653,17 +27632,17 @@ tenant.guardts.house.CaptureActivity -> tenant.guardts.house.CaptureActivity:
     android.widget.CheckBox access$4(tenant.guardts.house.CaptureActivity) -> c
     android.hardware.Camera$Parameters access$5(tenant.guardts.house.CaptureActivity) -> d
     void access$6(tenant.guardts.house.CaptureActivity,boolean) -> a
-tenant.guardts.house.CaptureActivity$1 -> tenant.guardts.house.az:
+tenant.guardts.house.CaptureActivity$1 -> tenant.guardts.house.ay:
     tenant.guardts.house.CaptureActivity this$0 -> a
     void onCompletion(android.media.MediaPlayer) -> onCompletion
-tenant.guardts.house.CaptureActivity$2 -> tenant.guardts.house.ba:
+tenant.guardts.house.CaptureActivity$2 -> tenant.guardts.house.az:
     tenant.guardts.house.CaptureActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.DemoApplication -> tenant.guardts.house.DemoApplication:
     tenant.guardts.house.DemoApplication mApp -> a
     void onCreate() -> onCreate
     boolean isMainProcess() -> a
-tenant.guardts.house.DemoApplication$1 -> tenant.guardts.house.bb:
+tenant.guardts.house.DemoApplication$1 -> tenant.guardts.house.ba:
     tenant.guardts.house.DemoApplication this$0 -> a
     void handleNotify(com.tencent.android.tpush.XGNotifaction) -> handleNotify
 tenant.guardts.house.DownloadAppActivity -> tenant.guardts.house.DownloadAppActivity:
@@ -27691,13 +27670,13 @@ tenant.guardts.house.DownloadAppActivity -> tenant.guardts.house.DownloadAppActi
     void onDestroy() -> onDestroy
     void access$0(tenant.guardts.house.DownloadAppActivity) -> a
     void access$1(tenant.guardts.house.DownloadAppActivity,int) -> a
-tenant.guardts.house.DownloadAppActivity$1 -> tenant.guardts.house.bc:
+tenant.guardts.house.DownloadAppActivity$1 -> tenant.guardts.house.bb:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.DownloadAppActivity$2 -> tenant.guardts.house.bd:
+tenant.guardts.house.DownloadAppActivity$2 -> tenant.guardts.house.bc:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.DownloadAppActivity$3 -> tenant.guardts.house.be:
+tenant.guardts.house.DownloadAppActivity$3 -> tenant.guardts.house.bd:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void downloadStatus(int) -> a
 tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver -> tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver:
@@ -27723,6 +27702,9 @@ tenant.guardts.house.EvaluationActivity -> tenant.guardts.house.EvaluationActivi
     android.os.Handler mHandler -> r
     java.lang.String type -> s
     tenant.guardts.house.model.HouseInfoModel info -> t
+    android.widget.TextView title1 -> u
+    android.widget.TextView title2 -> v
+    android.widget.TextView title3 -> w
     void onCreate(android.os.Bundle) -> onCreate
     void initData() -> a
     void initEvent() -> b
@@ -27741,10 +27723,10 @@ tenant.guardts.house.EvaluationActivity -> tenant.guardts.house.EvaluationActivi
     tenant.guardts.house.view.CustomRatingBar access$9(tenant.guardts.house.EvaluationActivity) -> j
     tenant.guardts.house.view.CustomRatingBar access$10(tenant.guardts.house.EvaluationActivity) -> k
     void access$11(tenant.guardts.house.EvaluationActivity,java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
-tenant.guardts.house.EvaluationActivity$1 -> tenant.guardts.house.bf:
+tenant.guardts.house.EvaluationActivity$1 -> tenant.guardts.house.be:
     tenant.guardts.house.EvaluationActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.EvaluationActivity$2 -> tenant.guardts.house.bg:
+tenant.guardts.house.EvaluationActivity$2 -> tenant.guardts.house.bf:
     tenant.guardts.house.EvaluationActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.EvaluationDetailActivity -> tenant.guardts.house.EvaluationDetailActivity:
@@ -27764,13 +27746,13 @@ tenant.guardts.house.EvaluationDetailActivity -> tenant.guardts.house.Evaluation
     void initView() -> c
     android.widget.ListView access$0(tenant.guardts.house.EvaluationDetailActivity) -> a
     int access$1(tenant.guardts.house.EvaluationDetailActivity,java.lang.String) -> a
-tenant.guardts.house.EvaluationDetailActivity$1 -> tenant.guardts.house.bh:
+tenant.guardts.house.EvaluationDetailActivity$1 -> tenant.guardts.house.bg:
     tenant.guardts.house.EvaluationDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
     tenant.guardts.house.EvaluationDetailActivity access$0(tenant.guardts.house.EvaluationDetailActivity$1) -> a
-tenant.guardts.house.EvaluationDetailActivity$1$1 -> tenant.guardts.house.bi:
+tenant.guardts.house.EvaluationDetailActivity$1$1 -> tenant.guardts.house.bh:
     tenant.guardts.house.EvaluationDetailActivity$1 this$1 -> a
-tenant.guardts.house.EvaluationDetailActivity$1$2 -> tenant.guardts.house.bj:
+tenant.guardts.house.EvaluationDetailActivity$1$2 -> tenant.guardts.house.bi:
     tenant.guardts.house.EvaluationDetailActivity$1 this$1 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.EvaluationItem) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
@@ -27794,12 +27776,12 @@ tenant.guardts.house.GalleryActivity -> tenant.guardts.house.GalleryActivity:
     android.widget.TextView access$1(tenant.guardts.house.GalleryActivity) -> a
     int access$2(tenant.guardts.house.GalleryActivity) -> b
     int access$3(tenant.guardts.house.GalleryActivity) -> c
-tenant.guardts.house.GalleryActivity$1 -> tenant.guardts.house.bk:
+tenant.guardts.house.GalleryActivity$1 -> tenant.guardts.house.bj:
     tenant.guardts.house.GalleryActivity this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
     void onPageScrollStateChanged(int) -> b
-tenant.guardts.house.GalleryActivity$2 -> tenant.guardts.house.bl:
+tenant.guardts.house.GalleryActivity$2 -> tenant.guardts.house.bk:
     tenant.guardts.house.GalleryActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.GalleryActivity$MyPageAdapter -> tenant.guardts.house.GalleryActivity$a:
@@ -27883,22 +27865,22 @@ tenant.guardts.house.GetRentAttributeActivity -> tenant.guardts.house.GetRentAtt
     java.lang.String access$12(tenant.guardts.house.GetRentAttributeActivity) -> g
     java.lang.String access$13(tenant.guardts.house.GetRentAttributeActivity) -> h
     void access$14(tenant.guardts.house.GetRentAttributeActivity,java.lang.String,java.lang.String) -> a
-tenant.guardts.house.GetRentAttributeActivity$1 -> tenant.guardts.house.bm:
+tenant.guardts.house.GetRentAttributeActivity$1 -> tenant.guardts.house.bl:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.GetRentAttributeActivity$2 -> tenant.guardts.house.bn:
+tenant.guardts.house.GetRentAttributeActivity$2 -> tenant.guardts.house.bm:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.GetRentAttributeActivity$3 -> tenant.guardts.house.bo:
+tenant.guardts.house.GetRentAttributeActivity$3 -> tenant.guardts.house.bn:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.GetRentAttributeActivity$4 -> tenant.guardts.house.bp:
+tenant.guardts.house.GetRentAttributeActivity$4 -> tenant.guardts.house.bo:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.GetRentAttributeActivity$5 -> tenant.guardts.house.bq:
+tenant.guardts.house.GetRentAttributeActivity$5 -> tenant.guardts.house.bp:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.GetRentAttributeActivity$6 -> tenant.guardts.house.br:
+tenant.guardts.house.GetRentAttributeActivity$6 -> tenant.guardts.house.bq:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
@@ -27980,35 +27962,21 @@ tenant.guardts.house.HomeActivity -> tenant.guardts.house.HomeActivity:
     void access$23(tenant.guardts.house.HomeActivity,java.lang.String,java.lang.String) -> a
     java.lang.String access$24(tenant.guardts.house.HomeActivity) -> n
     void access$25(tenant.guardts.house.HomeActivity,java.lang.String) -> f
-tenant.guardts.house.HomeActivity$1 -> tenant.guardts.house.bs:
+tenant.guardts.house.HomeActivity$1 -> tenant.guardts.house.br:
     tenant.guardts.house.HomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HomeActivity$10 -> tenant.guardts.house.bt:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeActivity$11 -> tenant.guardts.house.bu:
+tenant.guardts.house.HomeActivity$10 -> tenant.guardts.house.bs:
     tenant.guardts.house.HomeActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-tenant.guardts.house.HomeActivity$12 -> tenant.guardts.house.bv:
+tenant.guardts.house.HomeActivity$11 -> tenant.guardts.house.bt:
     tenant.guardts.house.HomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HomeActivity$2 -> tenant.guardts.house.bw:
+tenant.guardts.house.HomeActivity$2 -> tenant.guardts.house.bu:
     tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$3 -> tenant.guardts.house.bx:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    android.widget.ImageView val$houseIcon -> b
-    android.widget.TextView val$houseText -> c
-    android.widget.ImageView val$myIcon -> d
-    android.widget.TextView val$myText -> e
-    android.widget.ImageView val$surroundicon -> f
-    android.widget.TextView val$surroundtext -> g
-    android.widget.ImageView val$historyicon -> h
-    android.widget.TextView val$historytext -> i
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.by:
+tenant.guardts.house.HomeActivity$3 -> tenant.guardts.house.bv:
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28019,7 +27987,7 @@ tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.by:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.bz:
+tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.bw:
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28030,7 +27998,7 @@ tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.bz:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.ca:
+tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.bx:
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28041,15 +28009,26 @@ tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.ca:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$7 -> tenant.guardts.house.cb:
+tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.by:
+    tenant.guardts.house.HomeActivity this$0 -> a
+    android.widget.ImageView val$houseIcon -> b
+    android.widget.TextView val$houseText -> c
+    android.widget.ImageView val$myIcon -> d
+    android.widget.TextView val$myText -> e
+    android.widget.ImageView val$surroundicon -> f
+    android.widget.TextView val$surroundtext -> g
+    android.widget.ImageView val$historyicon -> h
+    android.widget.TextView val$historytext -> i
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HomeActivity$7 -> tenant.guardts.house.bz:
     tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeActivity$8 -> tenant.guardts.house.cc:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeActivity$9 -> tenant.guardts.house.cd:
+tenant.guardts.house.HomeActivity$8 -> tenant.guardts.house.ca:
     tenant.guardts.house.HomeActivity this$0 -> a
     java.lang.String val$lockId -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+tenant.guardts.house.HomeActivity$9 -> tenant.guardts.house.cb:
+    tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.HomeSearchActivity -> tenant.guardts.house.HomeSearchActivity:
     android.widget.TextView mTitleBar -> a
@@ -28092,34 +28071,34 @@ tenant.guardts.house.HomeSearchActivity -> tenant.guardts.house.HomeSearchActivi
     void access$13(tenant.guardts.house.HomeSearchActivity) -> j
     void access$14(tenant.guardts.house.HomeSearchActivity) -> k
     boolean access$15(tenant.guardts.house.HomeSearchActivity) -> l
-tenant.guardts.house.HomeSearchActivity$1 -> tenant.guardts.house.ce:
+tenant.guardts.house.HomeSearchActivity$1 -> tenant.guardts.house.cc:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$2 -> tenant.guardts.house.cf:
+tenant.guardts.house.HomeSearchActivity$2 -> tenant.guardts.house.cd:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$3 -> tenant.guardts.house.cg:
+tenant.guardts.house.HomeSearchActivity$3 -> tenant.guardts.house.ce:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$4 -> tenant.guardts.house.ch:
+tenant.guardts.house.HomeSearchActivity$4 -> tenant.guardts.house.cf:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$5 -> tenant.guardts.house.ci:
+tenant.guardts.house.HomeSearchActivity$5 -> tenant.guardts.house.cg:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.TextView val$text -> b
     java.lang.String[] val$items -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeSearchActivity$6 -> tenant.guardts.house.cj:
+tenant.guardts.house.HomeSearchActivity$6 -> tenant.guardts.house.ch:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.TextView val$showRentType -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$7 -> tenant.guardts.house.ck:
+tenant.guardts.house.HomeSearchActivity$7 -> tenant.guardts.house.ci:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$8 -> tenant.guardts.house.cl:
+tenant.guardts.house.HomeSearchActivity$8 -> tenant.guardts.house.cj:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$9 -> tenant.guardts.house.cm:
+tenant.guardts.house.HomeSearchActivity$9 -> tenant.guardts.house.ck:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.EditText val$keywordInput -> b
     void onClick(android.view.View) -> onClick
@@ -28155,12 +28134,11 @@ tenant.guardts.house.HouseDetailInfoActivity -> tenant.guardts.house.HouseDetail
     tenant.guardts.house.bannerview.ViewFlow mViewFlow -> D
     tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator -> E
     android.widget.TextView mZhulinType -> F
-    android.widget.TextView mRoomNum -> G
-    android.widget.TextView mHousePrice -> H
-    android.widget.Button mShowCommentButton -> I
-    android.os.Handler mHandler -> J
-    java.lang.String flag -> K
-    android.widget.TextView mInputIDCard -> L
+    android.widget.TextView mHousePrice -> G
+    android.widget.Button mShowCommentButton -> H
+    android.os.Handler mHandler -> I
+    java.lang.String flag -> J
+    android.widget.TextView mInputIDCard -> K
     void onCreate(android.os.Bundle) -> onCreate
     void initEvent() -> c
     void intputIDCard() -> a
@@ -28190,79 +28168,48 @@ tenant.guardts.house.HouseDetailInfoActivity -> tenant.guardts.house.HouseDetail
     void access$10(tenant.guardts.house.HouseDetailInfoActivity) -> g
     android.widget.PopupWindow access$11(tenant.guardts.house.HouseDetailInfoActivity) -> h
     tenant.guardts.house.model.HouseInfoModel access$12(tenant.guardts.house.HouseDetailInfoActivity) -> i
-tenant.guardts.house.HouseDetailInfoActivity$1 -> tenant.guardts.house.cn:
+tenant.guardts.house.HouseDetailInfoActivity$1 -> tenant.guardts.house.cl:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseDetailInfoActivity$10 -> tenant.guardts.house.co:
+tenant.guardts.house.HouseDetailInfoActivity$10 -> tenant.guardts.house.cm:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$11 -> tenant.guardts.house.cp:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$12 -> tenant.guardts.house.cq:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$13 -> tenant.guardts.house.cr:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.HouseDetailInfoActivity$2 -> tenant.guardts.house.cs:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$3 -> tenant.guardts.house.ct:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$4 -> tenant.guardts.house.cu:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$5 -> tenant.guardts.house.cv:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$6 -> tenant.guardts.house.cw:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$7 -> tenant.guardts.house.cx:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$8 -> tenant.guardts.house.cy:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.HouseDetailInfoActivity$9 -> tenant.guardts.house.cz:
+tenant.guardts.house.HouseDetailInfoActivity$11 -> tenant.guardts.house.cn:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseHistoryActivity -> tenant.guardts.house.HouseHistoryActivity:
-    android.content.Context mContext -> a
-    android.widget.ListView mlistView -> c
-    tenant.guardts.house.adapter.PublishedRecordAdapter mAdapter -> d
-    java.util.ArrayList mHouseInfoList -> e
-    tenant.guardts.house.presenter.HoursePresenter mPresent -> f
-    java.lang.String mUserName -> g
-    java.lang.String mRentListAction -> h
-    java.lang.String mDeleteHouseInfo -> i
-    java.lang.String mIdCard -> j
-    android.os.Handler mHandler -> k
-    void onCreate(android.os.Bundle) -> onCreate
-    void initEvent() -> a
-    void initView() -> b
-    void initData() -> c
-    void getHouseHistoryData(java.lang.String) -> a
-    void getAdapterListData(java.lang.String) -> b
-    void onResume() -> onResume
-    void onStatusSuccess(java.lang.String,java.lang.String) -> a
-    void onStatusError(java.lang.String,java.lang.String) -> b
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-    void click(android.view.View) -> click
-    void access$0(tenant.guardts.house.HouseHistoryActivity,java.lang.String) -> a
-    android.content.Context access$1(tenant.guardts.house.HouseHistoryActivity) -> a
-    java.util.ArrayList access$2(tenant.guardts.house.HouseHistoryActivity) -> b
-    void access$3(tenant.guardts.house.HouseHistoryActivity,tenant.guardts.house.adapter.PublishedRecordAdapter) -> a
-    android.widget.ListView access$4(tenant.guardts.house.HouseHistoryActivity) -> c
-    tenant.guardts.house.adapter.PublishedRecordAdapter access$5(tenant.guardts.house.HouseHistoryActivity) -> d
-tenant.guardts.house.HouseHistoryActivity$1 -> tenant.guardts.house.da:
-    tenant.guardts.house.HouseHistoryActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseHistoryActivity$2 -> tenant.guardts.house.db:
-    tenant.guardts.house.HouseHistoryActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+tenant.guardts.house.HouseDetailInfoActivity$12 -> tenant.guardts.house.co:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$13 -> tenant.guardts.house.cp:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$14 -> tenant.guardts.house.cq:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onDismiss() -> onDismiss
+tenant.guardts.house.HouseDetailInfoActivity$2 -> tenant.guardts.house.cr:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$3 -> tenant.guardts.house.cs:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$4 -> tenant.guardts.house.ct:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$5 -> tenant.guardts.house.cu:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$6 -> tenant.guardts.house.cv:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$7 -> tenant.guardts.house.cw:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$8 -> tenant.guardts.house.cx:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.HouseDetailInfoActivity$9 -> tenant.guardts.house.cy:
+    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
+    void onDismiss() -> onDismiss
 tenant.guardts.house.HouseOrderDetailsActivity -> tenant.guardts.house.HouseOrderDetailsActivity:
     tenant.guardts.house.model.HouseInfoModel mOrderDetail -> a
     java.lang.String mDetailType -> c
@@ -28331,96 +28278,94 @@ tenant.guardts.house.HouseOrderDetailsActivity -> tenant.guardts.house.HouseOrde
     void access$15(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> d
     void access$16(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> e
     void access$17(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> f
-tenant.guardts.house.HouseOrderDetailsActivity$1 -> tenant.guardts.house.dc:
+tenant.guardts.house.HouseOrderDetailsActivity$1 -> tenant.guardts.house.cz:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseOrderDetailsActivity$10 -> tenant.guardts.house.dd:
+tenant.guardts.house.HouseOrderDetailsActivity$10 -> tenant.guardts.house.da:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$11 -> tenant.guardts.house.de:
+tenant.guardts.house.HouseOrderDetailsActivity$11 -> tenant.guardts.house.db:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$12 -> tenant.guardts.house.df:
+tenant.guardts.house.HouseOrderDetailsActivity$12 -> tenant.guardts.house.dc:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$13 -> tenant.guardts.house.dg:
+tenant.guardts.house.HouseOrderDetailsActivity$13 -> tenant.guardts.house.dd:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$14 -> tenant.guardts.house.dh:
+tenant.guardts.house.HouseOrderDetailsActivity$14 -> tenant.guardts.house.de:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onDismiss() -> onDismiss
-tenant.guardts.house.HouseOrderDetailsActivity$15 -> tenant.guardts.house.di:
+tenant.guardts.house.HouseOrderDetailsActivity$15 -> tenant.guardts.house.df:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$16 -> tenant.guardts.house.dj:
+tenant.guardts.house.HouseOrderDetailsActivity$16 -> tenant.guardts.house.dg:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$17 -> tenant.guardts.house.dk:
+tenant.guardts.house.HouseOrderDetailsActivity$17 -> tenant.guardts.house.dh:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     java.lang.String val$houseId -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$18 -> tenant.guardts.house.dl:
+tenant.guardts.house.HouseOrderDetailsActivity$18 -> tenant.guardts.house.di:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$19 -> tenant.guardts.house.dm:
+tenant.guardts.house.HouseOrderDetailsActivity$19 -> tenant.guardts.house.dj:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     java.lang.String val$houseId -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$2 -> tenant.guardts.house.dn:
+tenant.guardts.house.HouseOrderDetailsActivity$2 -> tenant.guardts.house.dk:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseOrderDetailsActivity$20 -> tenant.guardts.house.do:
+tenant.guardts.house.HouseOrderDetailsActivity$20 -> tenant.guardts.house.dl:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$21 -> tenant.guardts.house.dp:
+tenant.guardts.house.HouseOrderDetailsActivity$21 -> tenant.guardts.house.dm:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     android.app.AlertDialog$Builder val$builder -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$22 -> tenant.guardts.house.dq:
+tenant.guardts.house.HouseOrderDetailsActivity$22 -> tenant.guardts.house.dn:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$23 -> tenant.guardts.house.dr:
+tenant.guardts.house.HouseOrderDetailsActivity$23 -> tenant.guardts.house.do:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$24 -> tenant.guardts.house.ds:
+tenant.guardts.house.HouseOrderDetailsActivity$24 -> tenant.guardts.house.dp:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$25 -> tenant.guardts.house.dt:
+tenant.guardts.house.HouseOrderDetailsActivity$25 -> tenant.guardts.house.dq:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onDismiss() -> onDismiss
-tenant.guardts.house.HouseOrderDetailsActivity$3 -> tenant.guardts.house.du:
+tenant.guardts.house.HouseOrderDetailsActivity$3 -> tenant.guardts.house.dr:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$4 -> tenant.guardts.house.dv:
+tenant.guardts.house.HouseOrderDetailsActivity$4 -> tenant.guardts.house.ds:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$5 -> tenant.guardts.house.dw:
+tenant.guardts.house.HouseOrderDetailsActivity$5 -> tenant.guardts.house.dt:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$6 -> tenant.guardts.house.dx:
+tenant.guardts.house.HouseOrderDetailsActivity$6 -> tenant.guardts.house.du:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$7 -> tenant.guardts.house.dy:
+tenant.guardts.house.HouseOrderDetailsActivity$7 -> tenant.guardts.house.dv:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$8 -> tenant.guardts.house.dz:
+tenant.guardts.house.HouseOrderDetailsActivity$8 -> tenant.guardts.house.dw:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$9 -> tenant.guardts.house.ea:
+tenant.guardts.house.HouseOrderDetailsActivity$9 -> tenant.guardts.house.dx:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.HousingDetailsActivity -> tenant.guardts.house.HousingDetailsActivity:
-    void onCreate(android.os.Bundle) -> onCreate
 tenant.guardts.house.LoadUrlTestActivity -> tenant.guardts.house.LoadUrlTestActivity:
     android.webkit.WebView webView -> a
     android.widget.ProgressBar progressBar -> c
     void onCreate(android.os.Bundle) -> onCreate
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-tenant.guardts.house.LoadUrlTestActivity$1 -> tenant.guardts.house.eb:
+tenant.guardts.house.LoadUrlTestActivity$1 -> tenant.guardts.house.dy:
     tenant.guardts.house.LoadUrlTestActivity this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-tenant.guardts.house.LoadUrlTestActivity$2 -> tenant.guardts.house.ec:
+tenant.guardts.house.LoadUrlTestActivity$2 -> tenant.guardts.house.dz:
     tenant.guardts.house.LoadUrlTestActivity this$0 -> a
     void onProgressChanged(android.webkit.WebView,int) -> onProgressChanged
 tenant.guardts.house.LocationDemo -> tenant.guardts.house.LocationDemo:
@@ -28465,16 +28410,16 @@ tenant.guardts.house.LocationDemo -> tenant.guardts.house.LocationDemo:
     java.util.ArrayList access$8(tenant.guardts.house.LocationDemo) -> e
     void access$9(tenant.guardts.house.LocationDemo,com.baidu.mapapi.map.InfoWindow) -> a
     com.baidu.mapapi.map.InfoWindow access$10(tenant.guardts.house.LocationDemo) -> f
-tenant.guardts.house.LocationDemo$1 -> tenant.guardts.house.ed:
+tenant.guardts.house.LocationDemo$1 -> tenant.guardts.house.ea:
     tenant.guardts.house.LocationDemo this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.LocationDemo$2 -> tenant.guardts.house.ee:
+tenant.guardts.house.LocationDemo$2 -> tenant.guardts.house.eb:
     tenant.guardts.house.LocationDemo this$0 -> a
     boolean onMarkerClick(com.baidu.mapapi.map.Marker) -> onMarkerClick
-tenant.guardts.house.LocationDemo$3 -> tenant.guardts.house.ef:
+tenant.guardts.house.LocationDemo$3 -> tenant.guardts.house.ec:
     tenant.guardts.house.LocationDemo this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LocationDemo$4 -> tenant.guardts.house.eg:
+tenant.guardts.house.LocationDemo$4 -> tenant.guardts.house.ed:
     tenant.guardts.house.LocationDemo this$0 -> a
     void onMarkerDrag(com.baidu.mapapi.map.Marker) -> onMarkerDrag
     void onMarkerDragEnd(com.baidu.mapapi.map.Marker) -> onMarkerDragEnd
@@ -28484,25 +28429,25 @@ tenant.guardts.house.LocationDemo$MyLocationListenner -> tenant.guardts.house.Lo
     void onReceiveLocation(com.baidu.location.BDLocation) -> onReceiveLocation
     void onConnectHotSpotMessage(java.lang.String,int) -> onConnectHotSpotMessage
 tenant.guardts.house.LoginUserActivity -> tenant.guardts.house.LoginUserActivity:
-    tenant.guardts.house.presenter.HoursePresenter mPresenter -> a
-    java.lang.String mLoginAction -> c
-    java.lang.String mCommonServiceAction -> d
-    java.lang.String mUserInfoAction -> e
-    java.lang.String mValidateLoginNameAction -> f
-    java.lang.String mUserName -> g
-    java.lang.String mPassword -> h
-    android.widget.EditText userNameEditText -> i
-    android.widget.EditText passwordEditText -> j
-    boolean mIntentStatus -> k
-    android.os.Handler mHandler -> l
-    android.widget.TextView userAgreement -> m
-    android.widget.TextView forgetPassword -> n
+    android.widget.TextView mTitleBar -> a
+    tenant.guardts.house.presenter.HoursePresenter mPresenter -> c
+    java.lang.String mLoginAction -> d
+    java.lang.String mCommonServiceAction -> e
+    java.lang.String mUserInfoAction -> f
+    java.lang.String mValidateLoginNameAction -> g
+    java.lang.String mUserName -> h
+    java.lang.String mPassword -> i
+    android.widget.EditText userNameEditText -> j
+    android.widget.EditText passwordEditText -> k
+    boolean mIntentStatus -> l
+    android.os.Handler mHandler -> m
+    android.widget.TextView userAgreement -> n
+    android.widget.TextView forgetPassword -> o
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void haveRegisted(java.lang.String) -> a
     void initView() -> a
     void loginUser() -> b
-    void commonServiceInterface() -> c
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     void showSelectAlertDialog(java.lang.String,java.util.List) -> a
     java.util.List parseCommonService(java.lang.String) -> b
@@ -28524,30 +28469,30 @@ tenant.guardts.house.LoginUserActivity -> tenant.guardts.house.LoginUserActivity
     android.widget.EditText access$11(tenant.guardts.house.LoginUserActivity) -> f
     void access$12(tenant.guardts.house.LoginUserActivity,java.lang.String) -> f
     void access$13(tenant.guardts.house.LoginUserActivity) -> g
-tenant.guardts.house.LoginUserActivity$1 -> tenant.guardts.house.eh:
+tenant.guardts.house.LoginUserActivity$1 -> tenant.guardts.house.ee:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.LoginUserActivity$2 -> tenant.guardts.house.ei:
+tenant.guardts.house.LoginUserActivity$2 -> tenant.guardts.house.ef:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-tenant.guardts.house.LoginUserActivity$3 -> tenant.guardts.house.ej:
+tenant.guardts.house.LoginUserActivity$3 -> tenant.guardts.house.eg:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$4 -> tenant.guardts.house.ek:
+tenant.guardts.house.LoginUserActivity$4 -> tenant.guardts.house.eh:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$5 -> tenant.guardts.house.el:
+tenant.guardts.house.LoginUserActivity$5 -> tenant.guardts.house.ei:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$6 -> tenant.guardts.house.em:
+tenant.guardts.house.LoginUserActivity$6 -> tenant.guardts.house.ej:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$7 -> tenant.guardts.house.en:
+tenant.guardts.house.LoginUserActivity$7 -> tenant.guardts.house.ek:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$8 -> tenant.guardts.house.eo:
+tenant.guardts.house.LoginUserActivity$8 -> tenant.guardts.house.el:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     java.util.List val$data -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -28557,26 +28502,25 @@ tenant.guardts.house.MapActivity -> tenant.guardts.house.MapActivity:
     void initView() -> a
     void onStart() -> onStart
 tenant.guardts.house.MapRentHouseActivity -> tenant.guardts.house.MapRentHouseActivity:
-    android.content.Context mContext -> j
+    android.content.Context mContext -> i
     com.baidu.location.LocationClient mLocClient -> a
     tenant.guardts.house.MapRentHouseActivity$MyLocationListenner myListener -> c
     com.baidu.mapapi.map.MapView mMapView -> d
     com.baidu.mapapi.map.BaiduMap mBaiduMap -> e
-    com.baidu.mapapi.map.InfoWindow mInfoWindow -> k
+    com.baidu.mapapi.map.InfoWindow mInfoWindow -> j
     boolean isFirstLoc -> f
-    tenant.guardts.house.presenter.HoursePresenter mPresenter -> l
-    java.util.ArrayList mHouserList -> m
-    java.util.HashMap mLocationMap -> n
-    com.baidu.mapapi.map.BitmapDescriptor icon_blue -> g
-    com.baidu.mapapi.map.BitmapDescriptor icon_red -> h
-    com.baidu.mapapi.map.BitmapDescriptor icon_yellow -> i
-    com.baidu.mapapi.model.LatLng mCurrentLatLng -> o
-    java.util.List mMarkList -> p
-    java.lang.String mLocationAction -> q
-    java.lang.String mCurrentLocationCity -> r
-    android.widget.Button mSelectCityText -> s
-    com.baidu.mapapi.search.poi.PoiSearch mPoiSearch -> t
-    android.os.Handler mHandler -> u
+    tenant.guardts.house.presenter.HoursePresenter mPresenter -> k
+    java.util.ArrayList mHouserList -> l
+    java.util.HashMap mLocationMap -> m
+    com.baidu.mapapi.map.BitmapDescriptor icon_red -> g
+    com.baidu.mapapi.map.BitmapDescriptor icon_yellow -> h
+    com.baidu.mapapi.model.LatLng mCurrentLatLng -> n
+    java.util.List mMarkList -> o
+    java.lang.String mLocationAction -> p
+    java.lang.String mCurrentLocationCity -> q
+    android.widget.Button mSelectCityText -> r
+    com.baidu.mapapi.search.poi.PoiSearch mPoiSearch -> s
+    android.os.Handler mHandler -> t
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onPause() -> onPause
@@ -28613,34 +28557,32 @@ tenant.guardts.house.MapRentHouseActivity -> tenant.guardts.house.MapRentHouseAc
     android.content.Context access$9(tenant.guardts.house.MapRentHouseActivity) -> g
     java.lang.String access$10(tenant.guardts.house.MapRentHouseActivity) -> h
     void access$11(tenant.guardts.house.MapRentHouseActivity,com.baidu.mapapi.map.Marker) -> a
-    void access$12(tenant.guardts.house.MapRentHouseActivity,com.baidu.mapapi.model.LatLng,java.util.Map) -> a
-tenant.guardts.house.MapRentHouseActivity$1 -> tenant.guardts.house.ep:
+tenant.guardts.house.MapRentHouseActivity$1 -> tenant.guardts.house.em:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.MapRentHouseActivity$2 -> tenant.guardts.house.eq:
+tenant.guardts.house.MapRentHouseActivity$2 -> tenant.guardts.house.en:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$3 -> tenant.guardts.house.er:
+tenant.guardts.house.MapRentHouseActivity$3 -> tenant.guardts.house.eo:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     boolean onMarkerClick(com.baidu.mapapi.map.Marker) -> onMarkerClick
-tenant.guardts.house.MapRentHouseActivity$4 -> tenant.guardts.house.es:
+tenant.guardts.house.MapRentHouseActivity$4 -> tenant.guardts.house.ep:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     boolean onMapPoiClick(com.baidu.mapapi.map.MapPoi) -> onMapPoiClick
     void onMapClick(com.baidu.mapapi.model.LatLng) -> onMapClick
-tenant.guardts.house.MapRentHouseActivity$5 -> tenant.guardts.house.et:
+tenant.guardts.house.MapRentHouseActivity$5 -> tenant.guardts.house.eq:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$6 -> tenant.guardts.house.eu:
+tenant.guardts.house.MapRentHouseActivity$6 -> tenant.guardts.house.er:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$7 -> tenant.guardts.house.ev:
+tenant.guardts.house.MapRentHouseActivity$7 -> tenant.guardts.house.es:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     java.util.Map val$itemMap -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$8 -> tenant.guardts.house.ew:
+tenant.guardts.house.MapRentHouseActivity$8 -> tenant.guardts.house.et:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    com.baidu.mapapi.model.LatLng val$ll -> b
-    java.util.ArrayList val$child -> c
+    java.util.ArrayList val$child -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner -> tenant.guardts.house.MapRentHouseActivity$a:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
@@ -28650,7 +28592,7 @@ tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay -> tenant.guardts.house.M
     com.baidu.mapapi.search.core.PoiInfo poi -> a
     tenant.guardts.house.MapRentHouseActivity this$0 -> b
     boolean onPoiClick(int) -> a
-tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay$1 -> tenant.guardts.house.ex:
+tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay$1 -> tenant.guardts.house.eu:
     tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.MapSuggestSearchActivity -> tenant.guardts.house.MapSuggestSearchActivity:
@@ -28679,21 +28621,21 @@ tenant.guardts.house.MapSuggestSearchActivity -> tenant.guardts.house.MapSuggest
     void access$2(tenant.guardts.house.MapSuggestSearchActivity,java.lang.String) -> a
     java.util.ArrayList access$3(tenant.guardts.house.MapSuggestSearchActivity) -> c
     android.widget.AutoCompleteTextView access$4(tenant.guardts.house.MapSuggestSearchActivity) -> d
-tenant.guardts.house.MapSuggestSearchActivity$1 -> tenant.guardts.house.ey:
+tenant.guardts.house.MapSuggestSearchActivity$1 -> tenant.guardts.house.ev:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-tenant.guardts.house.MapSuggestSearchActivity$2 -> tenant.guardts.house.ez:
+tenant.guardts.house.MapSuggestSearchActivity$2 -> tenant.guardts.house.ew:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapSuggestSearchActivity$3 -> tenant.guardts.house.fa:
+tenant.guardts.house.MapSuggestSearchActivity$3 -> tenant.guardts.house.ex:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$4 -> tenant.guardts.house.fb:
+tenant.guardts.house.MapSuggestSearchActivity$4 -> tenant.guardts.house.ey:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$5 -> tenant.guardts.house.fc:
+tenant.guardts.house.MapSuggestSearchActivity$5 -> tenant.guardts.house.ez:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.ModifyPasswordActivity -> tenant.guardts.house.ModifyPasswordActivity:
@@ -28718,10 +28660,10 @@ tenant.guardts.house.ModifyPasswordActivity -> tenant.guardts.house.ModifyPasswo
     java.lang.String access$5(tenant.guardts.house.ModifyPasswordActivity) -> c
     java.lang.String access$6(tenant.guardts.house.ModifyPasswordActivity) -> d
     void access$7(tenant.guardts.house.ModifyPasswordActivity) -> e
-tenant.guardts.house.ModifyPasswordActivity$1 -> tenant.guardts.house.fd:
+tenant.guardts.house.ModifyPasswordActivity$1 -> tenant.guardts.house.fa:
     tenant.guardts.house.ModifyPasswordActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.ModifyPasswordActivity$2 -> tenant.guardts.house.fe:
+tenant.guardts.house.ModifyPasswordActivity$2 -> tenant.guardts.house.fb:
     tenant.guardts.house.ModifyPasswordActivity this$0 -> a
     android.widget.EditText val$oldpassword -> b
     android.widget.EditText val$newpassword -> c
@@ -28729,6 +28671,40 @@ tenant.guardts.house.ModifyPasswordActivity$2 -> tenant.guardts.house.fe:
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.MoreSurroundActivity -> tenant.guardts.house.MoreSurroundActivity:
     void onCreate(android.os.Bundle) -> onCreate
+tenant.guardts.house.MyHouseActivity -> tenant.guardts.house.MyHouseActivity:
+    android.content.Context mContext -> a
+    android.widget.ListView mlistView -> c
+    tenant.guardts.house.adapter.PublishedRecordAdapter mAdapter -> d
+    java.util.ArrayList mHouseInfoList -> e
+    tenant.guardts.house.presenter.HoursePresenter mPresent -> f
+    java.lang.String mUserName -> g
+    java.lang.String mRentListAction -> h
+    java.lang.String mDeleteHouseInfo -> i
+    java.lang.String mIdCard -> j
+    android.os.Handler mHandler -> k
+    void onCreate(android.os.Bundle) -> onCreate
+    void initEvent() -> a
+    void initView() -> b
+    void initData() -> c
+    void getHouseHistoryData(java.lang.String) -> a
+    void getAdapterListData(java.lang.String) -> b
+    void onResume() -> onResume
+    void onStatusSuccess(java.lang.String,java.lang.String) -> a
+    void onStatusError(java.lang.String,java.lang.String) -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    void click(android.view.View) -> click
+    void access$0(tenant.guardts.house.MyHouseActivity,java.lang.String) -> a
+    android.content.Context access$1(tenant.guardts.house.MyHouseActivity) -> a
+    java.util.ArrayList access$2(tenant.guardts.house.MyHouseActivity) -> b
+    void access$3(tenant.guardts.house.MyHouseActivity,tenant.guardts.house.adapter.PublishedRecordAdapter) -> a
+    android.widget.ListView access$4(tenant.guardts.house.MyHouseActivity) -> c
+    tenant.guardts.house.adapter.PublishedRecordAdapter access$5(tenant.guardts.house.MyHouseActivity) -> d
+tenant.guardts.house.MyHouseActivity$1 -> tenant.guardts.house.fc:
+    tenant.guardts.house.MyHouseActivity this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+tenant.guardts.house.MyHouseActivity$2 -> tenant.guardts.house.fd:
+    tenant.guardts.house.MyHouseActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.PaymentStatusActivity -> tenant.guardts.house.PaymentStatusActivity:
     java.lang.String mAddBillLog -> c
     java.lang.String mCompleteRentAttribute -> d
@@ -28752,10 +28728,10 @@ tenant.guardts.house.PaymentStatusActivity -> tenant.guardts.house.PaymentStatus
     void access$1(tenant.guardts.house.PaymentStatusActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String access$2(tenant.guardts.house.PaymentStatusActivity) -> b
     void access$3(tenant.guardts.house.PaymentStatusActivity,java.lang.String) -> a
-tenant.guardts.house.PaymentStatusActivity$1 -> tenant.guardts.house.ff:
+tenant.guardts.house.PaymentStatusActivity$1 -> tenant.guardts.house.fe:
     tenant.guardts.house.PaymentStatusActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.PaymentStatusActivity$2 -> tenant.guardts.house.fg:
+tenant.guardts.house.PaymentStatusActivity$2 -> tenant.guardts.house.ff:
     tenant.guardts.house.PaymentStatusActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.PersonalInfoActivity -> tenant.guardts.house.PersonalInfoActivity:
@@ -28779,19 +28755,19 @@ tenant.guardts.house.PersonalInfoActivity -> tenant.guardts.house.PersonalInfoAc
     void access$0(tenant.guardts.house.PersonalInfoActivity) -> a
     void access$1(tenant.guardts.house.PersonalInfoActivity) -> b
     void access$2(tenant.guardts.house.PersonalInfoActivity,int) -> a
-tenant.guardts.house.PersonalInfoActivity$1 -> tenant.guardts.house.fh:
+tenant.guardts.house.PersonalInfoActivity$1 -> tenant.guardts.house.fg:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.PersonalInfoActivity$2 -> tenant.guardts.house.fi:
+tenant.guardts.house.PersonalInfoActivity$2 -> tenant.guardts.house.fh:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.PersonalInfoActivity$3 -> tenant.guardts.house.fj:
+tenant.guardts.house.PersonalInfoActivity$3 -> tenant.guardts.house.fi:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.PersonalInfoActivity$4 -> tenant.guardts.house.fk:
+tenant.guardts.house.PersonalInfoActivity$4 -> tenant.guardts.house.fj:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.PersonalInfoActivity$5 -> tenant.guardts.house.fl:
+tenant.guardts.house.PersonalInfoActivity$5 -> tenant.guardts.house.fk:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.R -> tenant.guardts.house.R:
@@ -29720,11 +29696,6 @@ tenant.guardts.house.R$dimen -> tenant.guardts.house.R$dimen:
     int width_small -> width_small
 tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int about_icon -> about_icon
-    int agreement -> agreement
-    int agreement_01 -> agreement_01
-    int agreement_02 -> agreement_02
-    int agreement_03 -> agreement_03
-    int agreement_04 -> agreement_04
     int arrow_repeat -> arrow_repeat
     int avator -> avator
     int back_icon -> back_icon
@@ -29802,6 +29773,8 @@ tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int home_button_rent_house_selector -> home_button_rent_house_selector
     int home_frag_radiobutton_text_bg -> home_frag_radiobutton_text_bg
     int home_fragment_bg -> home_fragment_bg
+    int home_fragment_bg2 -> home_fragment_bg2
+    int home_fragment_bg3 -> home_fragment_bg3
     int home_icon -> home_icon
     int home_icon_default -> home_icon_default
     int home_radiobutton_bg -> home_radiobutton_bg
@@ -29865,10 +29838,25 @@ tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int icon_marki -> icon_marki
     int icon_markj -> icon_markj
     int icon_search -> icon_search
+    int identify_level_green -> identify_level_green
+    int identify_level_red -> identify_level_red
+    int identify_level_yellow -> identify_level_yellow
     int input_btn_normal -> input_btn_normal
     int input_btn_pressed -> input_btn_pressed
     int input_idcard_img -> input_idcard_img
     int into_icon -> into_icon
+    int item_blue_button_corner_selector -> item_blue_button_corner_selector
+    int item_blue_button_no_corner_selector -> item_blue_button_no_corner_selector
+    int item_blue_solid_corner_normal -> item_blue_solid_corner_normal
+    int item_blue_solid_corner_press -> item_blue_solid_corner_press
+    int item_blue_solid_no_corner_normal -> item_blue_solid_no_corner_normal
+    int item_blue_solid_no_corner_press -> item_blue_solid_no_corner_press
+    int item_gray_button_corner_selector -> item_gray_button_corner_selector
+    int item_gray_button_no_corner_selector -> item_gray_button_no_corner_selector
+    int item_gray_solid_corner_normal -> item_gray_solid_corner_normal
+    int item_gray_solid_corner_press -> item_gray_solid_corner_press
+    int item_gray_solid_no_corner_normal -> item_gray_solid_no_corner_normal
+    int item_gray_solid_no_corner_press -> item_gray_solid_no_corner_press
     int item_shape_no_solid_corner -> item_shape_no_solid_corner
     int item_shape_no_solid_corner_press -> item_shape_no_solid_corner_press
     int item_shape_solid_corner_normal -> item_shape_solid_corner_normal
@@ -29888,6 +29876,7 @@ tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int map_select_city_press -> map_select_city_press
     int more -> more
     int more_content -> more_content
+    int more_house -> more_house
     int my_frag_login_bg -> my_frag_login_bg
     int my_fragment_button_bg -> my_fragment_button_bg
     int my_fragment_exchange_city -> my_fragment_exchange_city
@@ -30033,6 +30022,7 @@ tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int scan_house_qrcode_icon -> scan_house_qrcode_icon
     int scan_qrcode_house_logo -> scan_qrcode_house_logo
     int search -> search
+    int search_bar_icon -> search_bar_icon
     int search_input_background -> search_input_background
     int search_view_bg -> search_view_bg
     int select_city_item_selector -> select_city_item_selector
@@ -30055,6 +30045,7 @@ tenant.guardts.house.R$drawable -> tenant.guardts.house.R$drawable:
     int tap_click_force_touch -> tap_click_force_touch
     int tap_click_force_touch_press -> tap_click_force_touch_press
     int title_bar_background -> title_bar_background
+    int title_bar_full_screen_icon -> title_bar_full_screen_icon
     int traffic -> traffic
     int view_banner -> view_banner
     int wallet_back -> wallet_back
@@ -30224,16 +30215,15 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int id_button_pay_money_button -> id_button_pay_money_button
     int id_button_retry_pay -> id_button_retry_pay
     int id_check_can_rent_house -> id_check_can_rent_house
-    int id_commission -> id_commission
-    int id_commission_content -> id_commission_content
     int id_common_title_bar -> id_common_title_bar
     int id_contact_owner_content -> id_contact_owner_content
     int id_data_loading -> id_data_loading
     int id_door_password_content -> id_door_password_content
     int id_download_button -> id_download_button
-    int id_explanation -> id_explanation
-    int id_explanation_content -> id_explanation_content
+    int id_fangzhu_pull_refresh -> id_fangzhu_pull_refresh
     int id_fragment_history_radiogrouop -> id_fragment_history_radiogrouop
+    int id_fragment_home_indicator -> id_fragment_home_indicator
+    int id_fragment_home_viewflow -> id_fragment_home_viewflow
     int id_fragment_house_listview -> id_fragment_house_listview
     int id_fragment_surround_bank -> id_fragment_surround_bank
     int id_fragment_surround_eat -> id_fragment_surround_eat
@@ -30317,6 +30307,7 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int id_order_detail_start_name -> id_order_detail_start_name
     int id_order_detail_status -> id_order_detail_status
     int id_order_end_time -> id_order_end_time
+    int id_order_identify_level -> id_order_identify_level
     int id_order_monkey -> id_order_monkey
     int id_order_monkey_input -> id_order_monkey_input
     int id_order_time_down -> id_order_time_down
@@ -30367,7 +30358,6 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int id_rent_house_idcard -> id_rent_house_idcard
     int id_rent_house_lease_type -> id_rent_house_lease_type
     int id_rent_house_name -> id_rent_house_name
-    int id_rent_house_num -> id_rent_house_num
     int id_rent_house_number -> id_rent_house_number
     int id_rent_house_order_id -> id_rent_house_order_id
     int id_rent_house_phone -> id_rent_house_phone
@@ -30576,6 +30566,9 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int textview_login -> textview_login
     int timeoutProgressbar -> timeoutProgressbar
     int title -> title
+    int title1 -> title1
+    int title2 -> title2
+    int title3 -> title3
     int toggle -> toggle
     int toggle_button -> toggle_button
     int transaction_detail_empty_layout -> transaction_detail_empty_layout
@@ -30673,6 +30666,7 @@ tenant.guardts.house.R$layout -> tenant.guardts.house.R$layout:
     int load_url -> load_url
     int login_user -> login_user
     int map_marker_layout -> map_marker_layout
+    int map_more_house_icon -> map_more_house_icon
     int modify_user_password -> modify_user_password
     int more_surround_life_layout -> more_surround_life_layout
     int oliveapp_activity_liveness_detection_main -> oliveapp_activity_liveness_detection_main
@@ -31133,26 +31127,26 @@ tenant.guardts.house.RegisterUserActivity -> tenant.guardts.house.RegisterUserAc
     java.lang.String access$25(tenant.guardts.house.RegisterUserActivity) -> l
     void access$26(tenant.guardts.house.RegisterUserActivity,java.lang.String,java.lang.String) -> b
     void access$27(tenant.guardts.house.RegisterUserActivity,java.lang.String) -> n
-tenant.guardts.house.RegisterUserActivity$1 -> tenant.guardts.house.fm:
+tenant.guardts.house.RegisterUserActivity$1 -> tenant.guardts.house.fl:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserActivity$2 -> tenant.guardts.house.fn:
+tenant.guardts.house.RegisterUserActivity$2 -> tenant.guardts.house.fm:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
-tenant.guardts.house.RegisterUserActivity$3 -> tenant.guardts.house.fo:
+tenant.guardts.house.RegisterUserActivity$3 -> tenant.guardts.house.fn:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$userName -> b
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserActivity$4 -> tenant.guardts.house.fp:
+tenant.guardts.house.RegisterUserActivity$4 -> tenant.guardts.house.fo:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$phone -> b
     android.widget.EditText val$verifyCode -> c
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserActivity$5 -> tenant.guardts.house.fq:
+tenant.guardts.house.RegisterUserActivity$5 -> tenant.guardts.house.fp:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$phone -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fr:
+tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fq:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$userName -> b
     android.widget.EditText val$password -> c
@@ -31164,15 +31158,15 @@ tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fr:
     android.widget.EditText val$position -> i
     android.widget.EditText val$email -> j
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserActivity$7 -> tenant.guardts.house.fs:
+tenant.guardts.house.RegisterUserActivity$7 -> tenant.guardts.house.fr:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-tenant.guardts.house.RegisterUserActivity$8 -> tenant.guardts.house.ft:
+tenant.guardts.house.RegisterUserActivity$8 -> tenant.guardts.house.fs:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserActivity$9 -> tenant.guardts.house.fu:
+tenant.guardts.house.RegisterUserActivity$9 -> tenant.guardts.house.ft:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RegisterUserFinishActivity -> tenant.guardts.house.RegisterUserFinishActivity:
@@ -31185,7 +31179,7 @@ tenant.guardts.house.RegisterUserFinishActivity -> tenant.guardts.house.Register
     void initView() -> a
     java.lang.String access$0(tenant.guardts.house.RegisterUserFinishActivity) -> a
     java.lang.String access$1(tenant.guardts.house.RegisterUserFinishActivity) -> b
-tenant.guardts.house.RegisterUserFinishActivity$1 -> tenant.guardts.house.fv:
+tenant.guardts.house.RegisterUserFinishActivity$1 -> tenant.guardts.house.fu:
     tenant.guardts.house.RegisterUserFinishActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.RegisterUserStep1Activity -> tenant.guardts.house.RegisterUserStep1Activity:
@@ -31209,13 +31203,13 @@ tenant.guardts.house.RegisterUserStep1Activity -> tenant.guardts.house.RegisterU
     void access$4(tenant.guardts.house.RegisterUserStep1Activity,java.lang.String) -> c
     java.lang.String access$5(tenant.guardts.house.RegisterUserStep1Activity) -> c
     void access$6(tenant.guardts.house.RegisterUserStep1Activity,java.lang.String) -> d
-tenant.guardts.house.RegisterUserStep1Activity$1 -> tenant.guardts.house.fw:
+tenant.guardts.house.RegisterUserStep1Activity$1 -> tenant.guardts.house.fv:
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep1Activity$2 -> tenant.guardts.house.fx:
+tenant.guardts.house.RegisterUserStep1Activity$2 -> tenant.guardts.house.fw:
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserStep1Activity$3 -> tenant.guardts.house.fy:
+tenant.guardts.house.RegisterUserStep1Activity$3 -> tenant.guardts.house.fx:
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     android.widget.EditText val$userName -> b
     android.widget.EditText val$password -> c
@@ -31261,14 +31255,14 @@ tenant.guardts.house.RegisterUserStep2Activity -> tenant.guardts.house.RegisterU
     void access$14(tenant.guardts.house.RegisterUserStep2Activity,java.lang.String) -> f
     java.lang.String access$15(tenant.guardts.house.RegisterUserStep2Activity) -> h
     void access$16(tenant.guardts.house.RegisterUserStep2Activity,java.lang.String) -> g
-tenant.guardts.house.RegisterUserStep2Activity$1 -> tenant.guardts.house.fz:
+tenant.guardts.house.RegisterUserStep2Activity$1 -> tenant.guardts.house.fy:
     tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep2Activity$2 -> tenant.guardts.house.ga:
+tenant.guardts.house.RegisterUserStep2Activity$2 -> tenant.guardts.house.fz:
     tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
     android.widget.EditText val$inputPhone -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserStep2Activity$3 -> tenant.guardts.house.gb:
+tenant.guardts.house.RegisterUserStep2Activity$3 -> tenant.guardts.house.ga:
     tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
     android.widget.EditText val$inputPhone -> b
     android.widget.EditText val$inputVerify -> c
@@ -31321,23 +31315,23 @@ tenant.guardts.house.RegisterUserStep3Activity -> tenant.guardts.house.RegisterU
     java.lang.String access$13(tenant.guardts.house.RegisterUserStep3Activity) -> i
     void access$14(tenant.guardts.house.RegisterUserStep3Activity,java.lang.String,java.lang.String) -> a
     void access$15(tenant.guardts.house.RegisterUserStep3Activity,java.lang.String) -> f
-tenant.guardts.house.RegisterUserStep3Activity$1 -> tenant.guardts.house.gc:
+tenant.guardts.house.RegisterUserStep3Activity$1 -> tenant.guardts.house.gb:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep3Activity$2 -> tenant.guardts.house.gd:
+tenant.guardts.house.RegisterUserStep3Activity$2 -> tenant.guardts.house.gc:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
-tenant.guardts.house.RegisterUserStep3Activity$3 -> tenant.guardts.house.ge:
+tenant.guardts.house.RegisterUserStep3Activity$3 -> tenant.guardts.house.gd:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     android.widget.EditText val$realName -> b
     android.widget.EditText val$idCard -> c
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserStep3Activity$4 -> tenant.guardts.house.gf:
+tenant.guardts.house.RegisterUserStep3Activity$4 -> tenant.guardts.house.ge:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-tenant.guardts.house.RegisterUserStep3Activity$5 -> tenant.guardts.house.gg:
+tenant.guardts.house.RegisterUserStep3Activity$5 -> tenant.guardts.house.gf:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RentToHouseActivity -> tenant.guardts.house.RentToHouseActivity:
@@ -31378,21 +31372,21 @@ tenant.guardts.house.RentToHouseActivity -> tenant.guardts.house.RentToHouseActi
     int access$5(tenant.guardts.house.RentToHouseActivity) -> e
     android.content.Context access$6(tenant.guardts.house.RentToHouseActivity) -> f
     java.lang.String access$7(tenant.guardts.house.RentToHouseActivity) -> g
-tenant.guardts.house.RentToHouseActivity$1 -> tenant.guardts.house.gh:
+tenant.guardts.house.RentToHouseActivity$1 -> tenant.guardts.house.gg:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RentToHouseActivity$2 -> tenant.guardts.house.gi:
+tenant.guardts.house.RentToHouseActivity$2 -> tenant.guardts.house.gh:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.RentToHouseActivity$3 -> tenant.guardts.house.gj:
+tenant.guardts.house.RentToHouseActivity$3 -> tenant.guardts.house.gi:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.RentToHouseActivity$4 -> tenant.guardts.house.gk:
+tenant.guardts.house.RentToHouseActivity$4 -> tenant.guardts.house.gj:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     int val$position -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.RentToHouseActivity$5 -> tenant.guardts.house.gl:
+tenant.guardts.house.RentToHouseActivity$5 -> tenant.guardts.house.gk:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.RentalDetailActivity -> tenant.guardts.house.RentalDetailActivity:
@@ -31406,10 +31400,10 @@ tenant.guardts.house.RentalDetailActivity -> tenant.guardts.house.RentalDetailAc
     void initView() -> a
     void checkCanRentHouseTime(java.lang.String) -> a
     android.widget.ExpandableListView access$0(tenant.guardts.house.RentalDetailActivity) -> a
-tenant.guardts.house.RentalDetailActivity$1 -> tenant.guardts.house.gm:
+tenant.guardts.house.RentalDetailActivity$1 -> tenant.guardts.house.gl:
     tenant.guardts.house.RentalDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RentalDetailActivity$1$1 -> tenant.guardts.house.gn:
+tenant.guardts.house.RentalDetailActivity$1$1 -> tenant.guardts.house.gm:
     tenant.guardts.house.RentalDetailActivity$1 this$1 -> a
 tenant.guardts.house.ResetActivity -> tenant.guardts.house.ResetActivity:
     android.widget.TextView mTitleBar -> c
@@ -31452,16 +31446,16 @@ tenant.guardts.house.ResetActivity -> tenant.guardts.house.ResetActivity:
     boolean access$10(tenant.guardts.house.ResetActivity) -> f
     java.lang.String access$11(tenant.guardts.house.ResetActivity) -> g
     void access$12(tenant.guardts.house.ResetActivity,java.lang.String,java.lang.String) -> b
-tenant.guardts.house.ResetActivity$1 -> tenant.guardts.house.go:
+tenant.guardts.house.ResetActivity$1 -> tenant.guardts.house.gn:
     tenant.guardts.house.ResetActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.ResetActivity$2 -> tenant.guardts.house.gp:
+tenant.guardts.house.ResetActivity$2 -> tenant.guardts.house.go:
     tenant.guardts.house.ResetActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ResetActivity$3 -> tenant.guardts.house.gq:
+tenant.guardts.house.ResetActivity$3 -> tenant.guardts.house.gp:
     tenant.guardts.house.ResetActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.ScreenshotCameraManager -> tenant.guardts.house.gr:
+tenant.guardts.house.ScreenshotCameraManager -> tenant.guardts.house.gq:
     android.hardware.Camera mCamera -> a
     android.view.SurfaceHolder mHolder -> b
 tenant.guardts.house.SearchFilterActivity -> tenant.guardts.house.SearchFilterActivity:
@@ -31481,21 +31475,16 @@ tenant.guardts.house.SearchFilterActivity -> tenant.guardts.house.SearchFilterAc
     void deleteData() -> a
     void queryData(java.lang.String) -> c
     void initView() -> d
-    android.widget.AutoCompleteTextView access$0(tenant.guardts.house.SearchFilterActivity) -> a
-    void access$1(tenant.guardts.house.SearchFilterActivity,java.lang.String) -> a
+    void access$0(tenant.guardts.house.SearchFilterActivity,java.lang.String) -> a
+    android.widget.AutoCompleteTextView access$1(tenant.guardts.house.SearchFilterActivity) -> a
     java.util.ArrayList access$2(tenant.guardts.house.SearchFilterActivity) -> b
-tenant.guardts.house.SearchFilterActivity$1 -> tenant.guardts.house.gs:
-    tenant.guardts.house.SearchFilterActivity this$0 -> a
-    void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    void afterTextChanged(android.text.Editable) -> afterTextChanged
-tenant.guardts.house.SearchFilterActivity$2 -> tenant.guardts.house.gt:
+tenant.guardts.house.SearchFilterActivity$1 -> tenant.guardts.house.gr:
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$3 -> tenant.guardts.house.gu:
+tenant.guardts.house.SearchFilterActivity$2 -> tenant.guardts.house.gs:
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$4 -> tenant.guardts.house.gv:
+tenant.guardts.house.SearchFilterActivity$3 -> tenant.guardts.house.gt:
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SearchResultActivity -> tenant.guardts.house.SearchResultActivity:
@@ -31538,32 +31527,32 @@ tenant.guardts.house.SearchResultActivity -> tenant.guardts.house.SearchResultAc
     tenant.guardts.house.model.UniversalAdapter access$4(tenant.guardts.house.SearchResultActivity) -> d
     void access$5(tenant.guardts.house.SearchResultActivity,android.view.View,java.lang.String,int,int) -> a
     android.content.Context access$6(tenant.guardts.house.SearchResultActivity) -> e
-tenant.guardts.house.SearchResultActivity$1 -> tenant.guardts.house.gw:
+tenant.guardts.house.SearchResultActivity$1 -> tenant.guardts.house.gu:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SearchResultActivity$2 -> tenant.guardts.house.gx:
+tenant.guardts.house.SearchResultActivity$2 -> tenant.guardts.house.gv:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchResultActivity$3 -> tenant.guardts.house.gy:
+tenant.guardts.house.SearchResultActivity$3 -> tenant.guardts.house.gw:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     tenant.guardts.house.search.SingleListFilterView val$rentTypeFilter -> b
     void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$4 -> tenant.guardts.house.gz:
+tenant.guardts.house.SearchResultActivity$4 -> tenant.guardts.house.gx:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     tenant.guardts.house.search.SingleListFilterView val$typeFilter -> b
     void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$5 -> tenant.guardts.house.ha:
+tenant.guardts.house.SearchResultActivity$5 -> tenant.guardts.house.gy:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     tenant.guardts.house.search.SingleListFilterView val$showListFilter -> b
     void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$6 -> tenant.guardts.house.hb:
+tenant.guardts.house.SearchResultActivity$6 -> tenant.guardts.house.gz:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void onClick(int,boolean) -> a
-tenant.guardts.house.SearchResultActivity$7 -> tenant.guardts.house.hc:
+tenant.guardts.house.SearchResultActivity$7 -> tenant.guardts.house.ha:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.SearchResultActivity$8 -> tenant.guardts.house.hd:
+tenant.guardts.house.SearchResultActivity$8 -> tenant.guardts.house.hb:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectPhotoActivity -> tenant.guardts.house.SelectPhotoActivity:
@@ -31595,25 +31584,25 @@ tenant.guardts.house.SelectPhotoActivity -> tenant.guardts.house.SelectPhotoActi
     android.widget.PopupWindow access$4(tenant.guardts.house.SelectPhotoActivity) -> c
     android.widget.LinearLayout access$5(tenant.guardts.house.SelectPhotoActivity) -> d
     android.view.View access$6(tenant.guardts.house.SelectPhotoActivity) -> e
-tenant.guardts.house.SelectPhotoActivity$1 -> tenant.guardts.house.he:
+tenant.guardts.house.SelectPhotoActivity$1 -> tenant.guardts.house.hc:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SelectPhotoActivity$2 -> tenant.guardts.house.hf:
+tenant.guardts.house.SelectPhotoActivity$2 -> tenant.guardts.house.hd:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$3 -> tenant.guardts.house.hg:
+tenant.guardts.house.SelectPhotoActivity$3 -> tenant.guardts.house.he:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$4 -> tenant.guardts.house.hh:
+tenant.guardts.house.SelectPhotoActivity$4 -> tenant.guardts.house.hf:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$5 -> tenant.guardts.house.hi:
+tenant.guardts.house.SelectPhotoActivity$5 -> tenant.guardts.house.hg:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$6 -> tenant.guardts.house.hj:
+tenant.guardts.house.SelectPhotoActivity$6 -> tenant.guardts.house.hh:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.SelectPhotoActivity$7 -> tenant.guardts.house.hk:
+tenant.guardts.house.SelectPhotoActivity$7 -> tenant.guardts.house.hi:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.SelectPhotoActivity$GridAdapter -> tenant.guardts.house.SelectPhotoActivity$a:
@@ -31628,10 +31617,10 @@ tenant.guardts.house.SelectPhotoActivity$GridAdapter -> tenant.guardts.house.Sel
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void loading() -> b
     tenant.guardts.house.SelectPhotoActivity access$0(tenant.guardts.house.SelectPhotoActivity$GridAdapter) -> a
-tenant.guardts.house.SelectPhotoActivity$GridAdapter$1 -> tenant.guardts.house.hl:
+tenant.guardts.house.SelectPhotoActivity$GridAdapter$1 -> tenant.guardts.house.hj:
     tenant.guardts.house.SelectPhotoActivity$GridAdapter this$1 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SelectPhotoActivity$GridAdapter$2 -> tenant.guardts.house.hm:
+tenant.guardts.house.SelectPhotoActivity$GridAdapter$2 -> tenant.guardts.house.hk:
     tenant.guardts.house.SelectPhotoActivity$GridAdapter this$1 -> a
     void run() -> run
 tenant.guardts.house.SelectPhotoActivity$GridAdapter$ViewHolder -> tenant.guardts.house.SelectPhotoActivity$a$a:
@@ -31700,19 +31689,19 @@ tenant.guardts.house.SelectShowCityActivity -> tenant.guardts.house.SelectShowCi
     void access$21(tenant.guardts.house.SelectShowCityActivity,java.lang.String) -> c
     tenant.guardts.house.SelectShowCityActivity$ResultListAdapter access$22(tenant.guardts.house.SelectShowCityActivity) -> p
     java.util.ArrayList access$23(tenant.guardts.house.SelectShowCityActivity) -> q
-tenant.guardts.house.SelectShowCityActivity$1 -> tenant.guardts.house.hn:
+tenant.guardts.house.SelectShowCityActivity$1 -> tenant.guardts.house.hl:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     int compare(tenant.guardts.house.selectcity.City,tenant.guardts.house.selectcity.City) -> a
     int compare(java.lang.Object,java.lang.Object) -> compare
-tenant.guardts.house.SelectShowCityActivity$2 -> tenant.guardts.house.ho:
+tenant.guardts.house.SelectShowCityActivity$2 -> tenant.guardts.house.hm:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-tenant.guardts.house.SelectShowCityActivity$3 -> tenant.guardts.house.hp:
+tenant.guardts.house.SelectShowCityActivity$3 -> tenant.guardts.house.hn:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.SelectShowCityActivity$4 -> tenant.guardts.house.hq:
+tenant.guardts.house.SelectShowCityActivity$4 -> tenant.guardts.house.ho:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectShowCityActivity$HotCityAdapter -> tenant.guardts.house.SelectShowCityActivity$a:
@@ -31743,11 +31732,11 @@ tenant.guardts.house.SelectShowCityActivity$ListAdapter -> tenant.guardts.house.
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     tenant.guardts.house.SelectShowCityActivity access$0(tenant.guardts.house.SelectShowCityActivity$ListAdapter) -> a
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$1 -> tenant.guardts.house.hr:
+tenant.guardts.house.SelectShowCityActivity$ListAdapter$1 -> tenant.guardts.house.hp:
     tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
     android.widget.TextView val$city -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$2 -> tenant.guardts.house.hs:
+tenant.guardts.house.SelectShowCityActivity$ListAdapter$2 -> tenant.guardts.house.hq:
     tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectShowCityActivity$ListAdapter$ViewHolder -> tenant.guardts.house.SelectShowCityActivity$c$a:
@@ -31811,7 +31800,7 @@ tenant.guardts.house.SurfaceViewTestActivity -> tenant.guardts.house.SurfaceView
     void access$3(tenant.guardts.house.SurfaceViewTestActivity,android.media.MediaPlayer) -> a
     android.widget.TextView access$4(tenant.guardts.house.SurfaceViewTestActivity) -> d
     java.lang.String access$5(tenant.guardts.house.SurfaceViewTestActivity) -> e
-tenant.guardts.house.SurfaceViewTestActivity$1 -> tenant.guardts.house.ht:
+tenant.guardts.house.SurfaceViewTestActivity$1 -> tenant.guardts.house.hr:
     tenant.guardts.house.SurfaceViewTestActivity this$0 -> a
     void run() -> run
 tenant.guardts.house.SurfaceViewTestActivity$SeekBarChangeListener -> tenant.guardts.house.SurfaceViewTestActivity$a:
@@ -31841,7 +31830,7 @@ tenant.guardts.house.SurroundMoreActivity -> tenant.guardts.house.SurroundMoreAc
     int access$2(tenant.guardts.house.SurroundMoreActivity) -> c
     java.util.List access$3(tenant.guardts.house.SurroundMoreActivity) -> d
     java.util.Map access$4(tenant.guardts.house.SurroundMoreActivity) -> e
-tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hu:
+tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hs:
     int mCurrentHeader -> b
     tenant.guardts.house.SurroundMoreActivity this$0 -> a
     void unregisterDataSetObserver(android.database.DataSetObserver) -> unregisterDataSetObserver
@@ -31860,11 +31849,11 @@ tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hu:
     android.view.View getHeaderView(int,android.view.View,android.view.ViewGroup) -> a
     int getCountForHeader(int) -> a
     tenant.guardts.house.SurroundMoreActivity access$0(tenant.guardts.house.SurroundMoreActivity$1) -> a
-tenant.guardts.house.SurroundMoreActivity$1$1 -> tenant.guardts.house.hv:
+tenant.guardts.house.SurroundMoreActivity$1$1 -> tenant.guardts.house.ht:
     tenant.guardts.house.SurroundMoreActivity$1 this$1 -> a
     java.lang.String val$searchText -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.SurroundMoreActivity$2 -> tenant.guardts.house.hw:
+tenant.guardts.house.SurroundMoreActivity$2 -> tenant.guardts.house.hu:
     tenant.guardts.house.SurroundMoreActivity this$0 -> a
     android.widget.EditText val$inputSurround -> b
     void onClick(android.view.View) -> onClick
@@ -31888,7 +31877,7 @@ tenant.guardts.house.SurroundResultActivity -> tenant.guardts.house.SurroundResu
     void onGetPoiIndoorResult(com.baidu.mapapi.search.poi.PoiIndoorResult) -> onGetPoiIndoorResult
     void onGetPoiResult(com.baidu.mapapi.search.poi.PoiResult) -> onGetPoiResult
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.SurroundResultActivity$1 -> tenant.guardts.house.hx:
+tenant.guardts.house.SurroundResultActivity$1 -> tenant.guardts.house.hv:
     tenant.guardts.house.SurroundResultActivity this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.SurroundInfo) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
@@ -31905,10 +31894,10 @@ tenant.guardts.house.TransactionDetailActivity -> tenant.guardts.house.Transacti
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onStatusError(java.lang.String,java.lang.String) -> b
     android.widget.ListView access$0(tenant.guardts.house.TransactionDetailActivity) -> a
-tenant.guardts.house.TransactionDetailActivity$1 -> tenant.guardts.house.hy:
+tenant.guardts.house.TransactionDetailActivity$1 -> tenant.guardts.house.hw:
     tenant.guardts.house.TransactionDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.TransactionDetailActivity$1$1 -> tenant.guardts.house.hz:
+tenant.guardts.house.TransactionDetailActivity$1$1 -> tenant.guardts.house.hx:
     tenant.guardts.house.TransactionDetailActivity$1 this$1 -> a
 tenant.guardts.house.UserAgreementActivity -> tenant.guardts.house.UserAgreementActivity:
     tenant.guardts.house.UserAgreementActivity$MyPageAdapter adapter -> a
@@ -31916,7 +31905,7 @@ tenant.guardts.house.UserAgreementActivity -> tenant.guardts.house.UserAgreement
     tenant.guardts.house.bannerview.ViewPagerFixed pager -> d
     android.support.v4.view.ViewPager$OnPageChangeListener pageChangeListener -> e
     void onCreate(android.os.Bundle) -> onCreate
-tenant.guardts.house.UserAgreementActivity$1 -> tenant.guardts.house.ia:
+tenant.guardts.house.UserAgreementActivity$1 -> tenant.guardts.house.hy:
     tenant.guardts.house.UserAgreementActivity this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
@@ -31951,16 +31940,16 @@ tenant.guardts.house.WalletActivity -> tenant.guardts.house.WalletActivity:
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void access$0(tenant.guardts.house.WalletActivity,java.lang.String) -> a
     java.lang.String access$1(tenant.guardts.house.WalletActivity) -> a
-tenant.guardts.house.WalletActivity$1 -> tenant.guardts.house.ib:
+tenant.guardts.house.WalletActivity$1 -> tenant.guardts.house.hz:
     tenant.guardts.house.WalletActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WalletActivity$2 -> tenant.guardts.house.ic:
+tenant.guardts.house.WalletActivity$2 -> tenant.guardts.house.ia:
     tenant.guardts.house.WalletActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WalletActivity$3 -> tenant.guardts.house.id:
+tenant.guardts.house.WalletActivity$3 -> tenant.guardts.house.ib:
     tenant.guardts.house.WalletActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WalletActivity$4 -> tenant.guardts.house.ie:
+tenant.guardts.house.WalletActivity$4 -> tenant.guardts.house.ic:
     tenant.guardts.house.WalletActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WelcomeActivity -> tenant.guardts.house.WelcomeActivity:
@@ -31971,31 +31960,34 @@ tenant.guardts.house.WelcomeActivity -> tenant.guardts.house.WelcomeActivity:
     tenant.guardts.house.presenter.HoursePresenter mPresenter -> f
     java.lang.String mCommonServiceAction -> g
     java.lang.String mHelloWordAction -> h
-    android.os.Handler mHandler -> i
+    java.lang.String mUserInfoAction -> i
+    android.os.Handler mHandler -> j
     void onCreate(android.os.Bundle) -> onCreate
     void commonServiceInterface() -> a
+    void getUserInfo() -> b
     void onResume() -> onResume
-    void registerXinge() -> b
+    void registerXinge() -> c
     void showSelectAlertDialog(java.lang.String,java.util.List) -> a
     java.util.List parseCommonService(java.lang.String) -> a
-    void changeAlpha() -> c
+    void changeAlpha() -> d
+    void parseUserInfo(java.lang.String) -> b
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void access$0(tenant.guardts.house.WelcomeActivity) -> a
-    java.lang.String access$1(tenant.guardts.house.WelcomeActivity) -> b
-    java.lang.String access$2(tenant.guardts.house.WelcomeActivity) -> c
-    void access$3(tenant.guardts.house.WelcomeActivity) -> d
-    android.os.Handler access$4(tenant.guardts.house.WelcomeActivity) -> e
-    java.util.List access$5(tenant.guardts.house.WelcomeActivity,java.lang.String) -> a
-    void access$6(tenant.guardts.house.WelcomeActivity,java.lang.String,java.util.List) -> a
-    android.os.Message access$7(tenant.guardts.house.WelcomeActivity) -> f
-tenant.guardts.house.WelcomeActivity$1 -> tenant.guardts.house.if:
+    void access$1(tenant.guardts.house.WelcomeActivity) -> b
+    void access$2(tenant.guardts.house.WelcomeActivity) -> c
+    android.os.Handler access$3(tenant.guardts.house.WelcomeActivity) -> d
+    java.util.List access$4(tenant.guardts.house.WelcomeActivity,java.lang.String) -> a
+    void access$5(tenant.guardts.house.WelcomeActivity,java.lang.String,java.util.List) -> a
+    void access$6(tenant.guardts.house.WelcomeActivity,java.lang.String) -> b
+    android.os.Message access$7(tenant.guardts.house.WelcomeActivity) -> e
+tenant.guardts.house.WelcomeActivity$1 -> tenant.guardts.house.id:
     tenant.guardts.house.WelcomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WelcomeActivity$2 -> tenant.guardts.house.ig:
+tenant.guardts.house.WelcomeActivity$2 -> tenant.guardts.house.ie:
     tenant.guardts.house.WelcomeActivity this$0 -> a
     void onSuccess(java.lang.Object,int) -> onSuccess
     void onFail(java.lang.Object,int,java.lang.String) -> onFail
-tenant.guardts.house.WelcomeActivity$3 -> tenant.guardts.house.ih:
+tenant.guardts.house.WelcomeActivity$3 -> tenant.guardts.house.if:
     tenant.guardts.house.WelcomeActivity this$0 -> a
     java.util.List val$data -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -32034,25 +32026,25 @@ tenant.guardts.house.WithdrawActivity -> tenant.guardts.house.WithdrawActivity:
     void access$2(tenant.guardts.house.WithdrawActivity,java.lang.String) -> a
     android.widget.EditText access$3(tenant.guardts.house.WithdrawActivity) -> c
     void access$4(tenant.guardts.house.WithdrawActivity,java.lang.String,java.lang.String) -> a
-tenant.guardts.house.WithdrawActivity$1 -> tenant.guardts.house.ii:
+tenant.guardts.house.WithdrawActivity$1 -> tenant.guardts.house.ig:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WithdrawActivity$2 -> tenant.guardts.house.ij:
+tenant.guardts.house.WithdrawActivity$2 -> tenant.guardts.house.ih:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$3 -> tenant.guardts.house.ik:
+tenant.guardts.house.WithdrawActivity$3 -> tenant.guardts.house.ii:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$4 -> tenant.guardts.house.il:
+tenant.guardts.house.WithdrawActivity$4 -> tenant.guardts.house.ij:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onDismiss() -> onDismiss
-tenant.guardts.house.WithdrawActivity$5 -> tenant.guardts.house.im:
+tenant.guardts.house.WithdrawActivity$5 -> tenant.guardts.house.ik:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$6 -> tenant.guardts.house.in:
+tenant.guardts.house.WithdrawActivity$6 -> tenant.guardts.house.il:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$7 -> tenant.guardts.house.io:
+tenant.guardts.house.WithdrawActivity$7 -> tenant.guardts.house.im:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WithdrawDetailsActivity -> tenant.guardts.house.WithdrawDetailsActivity:
@@ -33249,29 +33241,32 @@ tenant.guardts.house.model.HouseFragment -> tenant.guardts.house.model.HouseFrag
     java.lang.String mUserName -> u
     java.lang.String mUserInfoAction -> v
     android.support.v4.widget.SwipeRefreshLayout mSwipeLayout -> w
-    android.os.Handler mHandler -> x
-    java.util.ArrayList suggest -> y
-    android.widget.RadioButton mRbShare -> z
-    android.widget.RadioButton mRbOwner -> A
-    android.widget.RadioGroup mRadioGroup -> B
-    tenant.guardts.house.view.HomeFragmentListView mListView -> C
-    tenant.guardts.house.model.UniversalAdapter mAdapter -> D
-    android.widget.TextView mLogin -> E
+    tenant.guardts.house.bannerview.ViewFlow mViewFlow -> x
+    tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator -> y
+    android.os.Handler mHandler -> z
+    java.util.ArrayList suggest -> A
+    android.widget.RadioButton mRbShare -> B
+    android.widget.RadioButton mRbOwner -> C
+    android.widget.RadioGroup mRadioGroup -> D
+    tenant.guardts.house.view.HomeFragmentListView mListView -> E
+    tenant.guardts.house.model.UniversalAdapter mAdapter -> F
+    android.widget.TextView mLogin -> G
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    void initEvent() -> a
+    void initBanner() -> a
+    void initEvent() -> b
     void onResume() -> onResume
-    void getUserInfo() -> b
+    void getUserInfo() -> c
     void onPause() -> onPause
     void onDestroy() -> onDestroy
-    void initView() -> c
-    void getLocationByCoordinates() -> d
-    void startGetLocationFromHouse() -> e
+    void initView() -> d
+    void getLocationByCoordinates() -> e
+    void startGetLocationFromHouse() -> f
     void parseUserInfo(java.lang.String) -> a
     void parseLocationInfo(java.lang.String) -> b
-    void initAdapter() -> f
-    void showSelectLocationMap() -> g
-    void updateLocationCity() -> h
+    void initAdapter() -> g
+    void showSelectLocationMap() -> h
+    void updateLocationCity() -> i
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
     void onGetPoiDetailResult(com.baidu.mapapi.search.poi.PoiDetailResult) -> onGetPoiDetailResult
@@ -33463,33 +33458,36 @@ tenant.guardts.house.model.MyFragment -> tenant.guardts.house.model.MyFragment:
     android.widget.FrameLayout mPublishHouse -> g
     java.lang.String mXingeTokenAction -> h
     java.lang.String mGetUserInfoAction -> i
-    android.widget.FrameLayout mAboutUs -> j
-    android.widget.FrameLayout mLogout -> k
-    android.widget.FrameLayout mChangeArea -> l
-    java.lang.String wallet -> m
-    java.lang.String realName -> n
-    java.lang.String phone -> o
-    java.lang.String idCard -> p
-    android.widget.FrameLayout mWalletFrameLayout -> q
-    java.lang.String mUserName -> r
-    android.widget.FrameLayout mHistory -> s
-    java.lang.String cardNo -> t
-    java.lang.String bankName -> u
-    android.os.Handler mHandler -> v
-    android.widget.ImageView mImageAvator -> w
-    android.widget.TextView mWallet -> x
-    android.widget.TextView mRegistAndLogin -> y
+    java.lang.String mCommonServiceAction -> j
+    android.widget.FrameLayout mAboutUs -> k
+    android.widget.FrameLayout mLogout -> l
+    android.widget.FrameLayout mChangeArea -> m
+    java.lang.String wallet -> n
+    java.lang.String realName -> o
+    java.lang.String phone -> p
+    java.lang.String idCard -> q
+    android.widget.FrameLayout mWalletFrameLayout -> r
+    java.lang.String mUserName -> s
+    android.widget.FrameLayout mHistory -> t
+    java.lang.String cardNo -> u
+    java.lang.String bankName -> v
+    android.os.Handler mHandler -> w
+    android.widget.ImageView mImageAvator -> x
+    android.widget.TextView mWallet -> y
+    android.widget.TextView mRegistAndLogin -> z
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void onResume() -> onResume
     void initView() -> a
     void initData() -> b
-    void getUserInfo() -> c
-    java.util.HashMap parseUserInfo(java.lang.String) -> a
+    void commonServiceInterface() -> c
+    void getUserInfo() -> d
+    java.util.List parseCommonService(java.lang.String) -> a
+    java.util.HashMap parseUserInfo(java.lang.String) -> b
     void logoutUserDialog(int) -> a
-    void uploadXingeToken() -> d
-    void changeUserAreaDialog() -> e
+    void uploadXingeToken() -> e
+    void showSelectAlertDialog(java.lang.String,java.util.List) -> a
     void resetUserInfo() -> f
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     java.util.HashMap access$0(tenant.guardts.house.model.MyFragment,java.lang.String) -> a
@@ -33507,9 +33505,12 @@ tenant.guardts.house.model.MyFragment -> tenant.guardts.house.model.MyFragment:
     android.widget.TextView access$12(tenant.guardts.house.model.MyFragment) -> f
     void access$13(tenant.guardts.house.model.MyFragment) -> g
     android.content.Context access$14(tenant.guardts.house.model.MyFragment) -> h
-    void access$15(tenant.guardts.house.model.MyFragment,int) -> a
-    void access$16(tenant.guardts.house.model.MyFragment) -> i
-    void access$17(tenant.guardts.house.model.MyFragment) -> j
+    java.util.List access$15(tenant.guardts.house.model.MyFragment,java.lang.String) -> h
+    void access$16(tenant.guardts.house.model.MyFragment,java.lang.String,java.util.List) -> a
+    void access$17(tenant.guardts.house.model.MyFragment,int) -> a
+    void access$18(tenant.guardts.house.model.MyFragment) -> i
+    void access$19(tenant.guardts.house.model.MyFragment) -> j
+    android.os.Handler access$20(tenant.guardts.house.model.MyFragment) -> k
 tenant.guardts.house.model.MyFragment$1 -> tenant.guardts.house.model.aa:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -33519,34 +33520,32 @@ tenant.guardts.house.model.MyFragment$10 -> tenant.guardts.house.model.ab:
 tenant.guardts.house.model.MyFragment$11 -> tenant.guardts.house.model.ac:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$12 -> tenant.guardts.house.model.ad:
+tenant.guardts.house.model.MyFragment$14 -> tenant.guardts.house.model.ad:
     tenant.guardts.house.model.MyFragment this$0 -> a
+    java.util.List val$data -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$13 -> tenant.guardts.house.model.ae:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$2 -> tenant.guardts.house.model.af:
+tenant.guardts.house.model.MyFragment$2 -> tenant.guardts.house.model.ae:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$3 -> tenant.guardts.house.model.ag:
+tenant.guardts.house.model.MyFragment$3 -> tenant.guardts.house.model.af:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$4 -> tenant.guardts.house.model.ah:
+tenant.guardts.house.model.MyFragment$4 -> tenant.guardts.house.model.ag:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$5 -> tenant.guardts.house.model.ai:
+tenant.guardts.house.model.MyFragment$5 -> tenant.guardts.house.model.ah:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$6 -> tenant.guardts.house.model.aj:
+tenant.guardts.house.model.MyFragment$6 -> tenant.guardts.house.model.ai:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$7 -> tenant.guardts.house.model.ak:
+tenant.guardts.house.model.MyFragment$7 -> tenant.guardts.house.model.aj:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$8 -> tenant.guardts.house.model.al:
+tenant.guardts.house.model.MyFragment$8 -> tenant.guardts.house.model.ak:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$9 -> tenant.guardts.house.model.am:
+tenant.guardts.house.model.MyFragment$9 -> tenant.guardts.house.model.al:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.OrderFangzhuFragment:
@@ -33566,8 +33565,9 @@ tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.Or
     int mCurrentPosition -> o
     int mExpirePosition -> p
     int mCheckoutPosition -> q
-    android.os.Handler mHandler -> r
-    android.os.Handler updateTimeHandler -> s
+    android.support.v4.widget.SwipeRefreshLayout mSwipeLayout -> r
+    android.os.Handler mHandler -> s
+    android.os.Handler updateTimeHandler -> t
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void initView() -> b
@@ -33578,7 +33578,7 @@ tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.Or
     void needUpdateTimeDownTime() -> d
     void showPositiveOrderDialog(int,java.lang.String) -> a
     void initData() -> e
-    void getHouseHistoryData() -> f
+    void getRentOwnerData() -> f
     void confirmRentAttributeInfo(java.lang.String) -> a
     void expireHouseRequest(java.lang.String) -> b
     void updateOrderStatusView(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
@@ -33589,73 +33589,80 @@ tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.Or
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onStatusError(java.lang.String,java.lang.String) -> b
     void onStatusStart(android.app.Activity) -> a
-    void access$0(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> a
-    java.util.List access$1(tenant.guardts.house.model.OrderFangzhuFragment) -> a
-    android.widget.TextView access$2(tenant.guardts.house.model.OrderFangzhuFragment) -> b
-    tenant.guardts.house.model.UniversalAdapter access$3(tenant.guardts.house.model.OrderFangzhuFragment) -> c
-    int access$4(tenant.guardts.house.model.OrderFangzhuFragment) -> d
-    android.content.Context access$5(tenant.guardts.house.model.OrderFangzhuFragment) -> e
-    int access$6(tenant.guardts.house.model.OrderFangzhuFragment) -> f
+    android.support.v4.widget.SwipeRefreshLayout access$0(tenant.guardts.house.model.OrderFangzhuFragment) -> a
+    void access$1(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> a
+    java.util.List access$2(tenant.guardts.house.model.OrderFangzhuFragment) -> b
+    android.widget.TextView access$3(tenant.guardts.house.model.OrderFangzhuFragment) -> c
+    tenant.guardts.house.model.UniversalAdapter access$4(tenant.guardts.house.model.OrderFangzhuFragment) -> d
+    int access$5(tenant.guardts.house.model.OrderFangzhuFragment) -> e
+    android.content.Context access$6(tenant.guardts.house.model.OrderFangzhuFragment) -> f
     int access$7(tenant.guardts.house.model.OrderFangzhuFragment) -> g
-    void access$8(tenant.guardts.house.model.OrderFangzhuFragment) -> h
-    android.os.Handler access$9(tenant.guardts.house.model.OrderFangzhuFragment) -> i
-    void access$10(tenant.guardts.house.model.OrderFangzhuFragment,tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void access$11(tenant.guardts.house.model.OrderFangzhuFragment,int) -> a
-    void access$12(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> b
-    void access$13(tenant.guardts.house.model.OrderFangzhuFragment,int,java.lang.String) -> a
-    void access$14(tenant.guardts.house.model.OrderFangzhuFragment,int) -> b
-    void access$15(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> c
-tenant.guardts.house.model.OrderFangzhuFragment$1 -> tenant.guardts.house.model.an:
+    int access$8(tenant.guardts.house.model.OrderFangzhuFragment) -> h
+    void access$9(tenant.guardts.house.model.OrderFangzhuFragment) -> i
+    android.os.Handler access$10(tenant.guardts.house.model.OrderFangzhuFragment) -> j
+    void access$11(tenant.guardts.house.model.OrderFangzhuFragment) -> k
+    void access$12(tenant.guardts.house.model.OrderFangzhuFragment,tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
+    void access$13(tenant.guardts.house.model.OrderFangzhuFragment,int) -> a
+    void access$14(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> b
+    void access$15(tenant.guardts.house.model.OrderFangzhuFragment,int,java.lang.String) -> a
+    void access$16(tenant.guardts.house.model.OrderFangzhuFragment,int) -> b
+    void access$17(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> c
+tenant.guardts.house.model.OrderFangzhuFragment$1 -> tenant.guardts.house.model.am:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$10 -> tenant.guardts.house.model.ao:
+tenant.guardts.house.model.OrderFangzhuFragment$10 -> tenant.guardts.house.model.an:
+    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
+    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
+    tenant.guardts.house.model.HouseInfoModel val$info -> c
+    void onClick(android.view.View) -> onClick
+tenant.guardts.house.model.OrderFangzhuFragment$11 -> tenant.guardts.house.model.ao:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$11 -> tenant.guardts.house.model.ap:
+tenant.guardts.house.model.OrderFangzhuFragment$12 -> tenant.guardts.house.model.ap:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$12 -> tenant.guardts.house.model.aq:
+tenant.guardts.house.model.OrderFangzhuFragment$13 -> tenant.guardts.house.model.aq:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$13 -> tenant.guardts.house.model.ar:
+tenant.guardts.house.model.OrderFangzhuFragment$14 -> tenant.guardts.house.model.ar:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$14 -> tenant.guardts.house.model.as:
+tenant.guardts.house.model.OrderFangzhuFragment$15 -> tenant.guardts.house.model.as:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$15 -> tenant.guardts.house.model.at:
+tenant.guardts.house.model.OrderFangzhuFragment$16 -> tenant.guardts.house.model.at:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$16 -> tenant.guardts.house.model.au:
+tenant.guardts.house.model.OrderFangzhuFragment$17 -> tenant.guardts.house.model.au:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$17 -> tenant.guardts.house.model.av:
+tenant.guardts.house.model.OrderFangzhuFragment$18 -> tenant.guardts.house.model.av:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$18 -> tenant.guardts.house.model.aw:
+tenant.guardts.house.model.OrderFangzhuFragment$19 -> tenant.guardts.house.model.aw:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$19 -> tenant.guardts.house.model.ax:
+tenant.guardts.house.model.OrderFangzhuFragment$2 -> tenant.guardts.house.model.ax:
+    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+tenant.guardts.house.model.OrderFangzhuFragment$20 -> tenant.guardts.house.model.ay:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$2 -> tenant.guardts.house.model.ay:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$20 -> tenant.guardts.house.model.az:
+tenant.guardts.house.model.OrderFangzhuFragment$21 -> tenant.guardts.house.model.az:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     android.app.AlertDialog$Builder val$builder -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$21 -> tenant.guardts.house.model.ba:
+tenant.guardts.house.model.OrderFangzhuFragment$22 -> tenant.guardts.house.model.ba:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     int val$position -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -33664,24 +33671,22 @@ tenant.guardts.house.model.OrderFangzhuFragment$3 -> tenant.guardts.house.model.
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.model.OrderFangzhuFragment$4 -> tenant.guardts.house.model.bc:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
+    void onRefresh() -> a
+tenant.guardts.house.model.OrderFangzhuFragment$5 -> tenant.guardts.house.model.bd:
+    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.OrderFangzhuFragment$5 -> tenant.guardts.house.model.bd:
+tenant.guardts.house.model.OrderFangzhuFragment$6 -> tenant.guardts.house.model.be:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     int val$id -> b
     java.lang.String val$houseId -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$6 -> tenant.guardts.house.model.be:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment$7 -> tenant.guardts.house.model.bf:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
+    void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment$8 -> tenant.guardts.house.model.bg:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
-    tenant.guardts.house.model.HouseInfoModel val$info -> c
+    tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment$9 -> tenant.guardts.house.model.bh:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
@@ -33728,8 +33733,9 @@ tenant.guardts.house.model.OrderZhuHuFragment -> tenant.guardts.house.model.Orde
     int mCurrentPosition -> n
     int mExpirePosition -> o
     int mCheckoutPosition -> p
-    android.os.Handler updateTimeHandler -> q
-    android.os.Handler mHandler -> r
+    android.support.v4.widget.SwipeRefreshLayout mSwipeLayout -> q
+    android.os.Handler updateTimeHandler -> r
+    android.os.Handler mHandler -> s
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void refreshData() -> a
@@ -33754,22 +33760,23 @@ tenant.guardts.house.model.OrderZhuHuFragment -> tenant.guardts.house.model.Orde
     void access$2(tenant.guardts.house.model.OrderZhuHuFragment) -> b
     android.os.Handler access$3(tenant.guardts.house.model.OrderZhuHuFragment) -> c
     tenant.guardts.house.model.UniversalAdapter access$4(tenant.guardts.house.model.OrderZhuHuFragment) -> d
-    void access$5(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> a
-    android.widget.TextView access$6(tenant.guardts.house.model.OrderZhuHuFragment) -> e
-    int access$7(tenant.guardts.house.model.OrderZhuHuFragment) -> f
-    android.content.Context access$8(tenant.guardts.house.model.OrderZhuHuFragment) -> g
-    int access$9(tenant.guardts.house.model.OrderZhuHuFragment) -> h
-    void access$10(tenant.guardts.house.model.OrderZhuHuFragment,int,java.lang.String) -> a
-    void access$11(tenant.guardts.house.model.OrderZhuHuFragment,int) -> a
-    void access$12(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> b
-    void access$13(tenant.guardts.house.model.OrderZhuHuFragment,tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void access$14(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> c
+    android.support.v4.widget.SwipeRefreshLayout access$5(tenant.guardts.house.model.OrderZhuHuFragment) -> e
+    void access$6(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> a
+    android.widget.TextView access$7(tenant.guardts.house.model.OrderZhuHuFragment) -> f
+    int access$8(tenant.guardts.house.model.OrderZhuHuFragment) -> g
+    android.content.Context access$9(tenant.guardts.house.model.OrderZhuHuFragment) -> h
+    int access$10(tenant.guardts.house.model.OrderZhuHuFragment) -> i
+    void access$11(tenant.guardts.house.model.OrderZhuHuFragment) -> j
+    void access$12(tenant.guardts.house.model.OrderZhuHuFragment,int,java.lang.String) -> a
+    void access$13(tenant.guardts.house.model.OrderZhuHuFragment,int) -> a
+    void access$14(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> b
+    void access$15(tenant.guardts.house.model.OrderZhuHuFragment,tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
+    void access$16(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> c
 tenant.guardts.house.model.OrderZhuHuFragment$1 -> tenant.guardts.house.model.bj:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.model.OrderZhuHuFragment$10 -> tenant.guardts.house.model.bk:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$11 -> tenant.guardts.house.model.bl:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
@@ -33797,60 +33804,64 @@ tenant.guardts.house.model.OrderZhuHuFragment$16 -> tenant.guardts.house.model.b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$17 -> tenant.guardts.house.model.br:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
+    tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$18 -> tenant.guardts.house.model.bs:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
+    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$19 -> tenant.guardts.house.model.bt:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    android.app.AlertDialog$Builder val$builder -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
+    tenant.guardts.house.model.HouseInfoModel val$info -> b
+    void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$2 -> tenant.guardts.house.model.bu:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.model.OrderZhuHuFragment$20 -> tenant.guardts.house.model.bv:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    int val$position -> b
+    android.app.AlertDialog$Builder val$builder -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$21 -> tenant.guardts.house.model.bw:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
+    int val$position -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+tenant.guardts.house.model.OrderZhuHuFragment$22 -> tenant.guardts.house.model.bx:
+    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.OrderZhuHuFragment$22 -> tenant.guardts.house.model.bx:
+tenant.guardts.house.model.OrderZhuHuFragment$23 -> tenant.guardts.house.model.by:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     java.lang.String val$houseId -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$23 -> tenant.guardts.house.model.by:
+tenant.guardts.house.model.OrderZhuHuFragment$24 -> tenant.guardts.house.model.bz:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$3 -> tenant.guardts.house.model.bz:
+tenant.guardts.house.model.OrderZhuHuFragment$3 -> tenant.guardts.house.model.ca:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.model.OrderZhuHuFragment$4 -> tenant.guardts.house.model.ca:
+tenant.guardts.house.model.OrderZhuHuFragment$4 -> tenant.guardts.house.model.cb:
+    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
+    void onRefresh() -> a
+tenant.guardts.house.model.OrderZhuHuFragment$5 -> tenant.guardts.house.model.cc:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$5 -> tenant.guardts.house.model.cb:
+tenant.guardts.house.model.OrderZhuHuFragment$6 -> tenant.guardts.house.model.cd:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     tenant.guardts.house.model.HouseInfoModel val$info -> c
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$6 -> tenant.guardts.house.model.cc:
+tenant.guardts.house.model.OrderZhuHuFragment$7 -> tenant.guardts.house.model.ce:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$7 -> tenant.guardts.house.model.cd:
+tenant.guardts.house.model.OrderZhuHuFragment$8 -> tenant.guardts.house.model.cf:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$8 -> tenant.guardts.house.model.ce:
+tenant.guardts.house.model.OrderZhuHuFragment$9 -> tenant.guardts.house.model.cg:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$9 -> tenant.guardts.house.model.cf:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.RentRecord -> tenant.guardts.house.model.RentRecord:
     java.lang.String RRAStartDate -> RRAStartDate
@@ -33902,38 +33913,38 @@ tenant.guardts.house.model.SurroundFragment -> tenant.guardts.house.model.Surrou
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
     void onStatusStart(android.app.Activity) -> a
     android.content.Context access$0(tenant.guardts.house.model.SurroundFragment) -> a
-tenant.guardts.house.model.SurroundFragment$1 -> tenant.guardts.house.model.cg:
+tenant.guardts.house.model.SurroundFragment$1 -> tenant.guardts.house.model.ch:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.SurroundFragment$10 -> tenant.guardts.house.model.ch:
+tenant.guardts.house.model.SurroundFragment$10 -> tenant.guardts.house.model.ci:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.SurroundInfo) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.SurroundFragment$2 -> tenant.guardts.house.model.ci:
+tenant.guardts.house.model.SurroundFragment$2 -> tenant.guardts.house.model.cj:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$3 -> tenant.guardts.house.model.cj:
+tenant.guardts.house.model.SurroundFragment$3 -> tenant.guardts.house.model.ck:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$4 -> tenant.guardts.house.model.ck:
+tenant.guardts.house.model.SurroundFragment$4 -> tenant.guardts.house.model.cl:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$5 -> tenant.guardts.house.model.cl:
+tenant.guardts.house.model.SurroundFragment$5 -> tenant.guardts.house.model.cm:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$6 -> tenant.guardts.house.model.cm:
+tenant.guardts.house.model.SurroundFragment$6 -> tenant.guardts.house.model.cn:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$7 -> tenant.guardts.house.model.cn:
+tenant.guardts.house.model.SurroundFragment$7 -> tenant.guardts.house.model.co:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$8 -> tenant.guardts.house.model.co:
+tenant.guardts.house.model.SurroundFragment$8 -> tenant.guardts.house.model.cp:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$9 -> tenant.guardts.house.model.cp:
+tenant.guardts.house.model.SurroundFragment$9 -> tenant.guardts.house.model.cq:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cq:
+tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cr:
     java.lang.String name -> a
     java.lang.String address -> b
     java.lang.String uid -> c
@@ -33949,7 +33960,7 @@ tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cq:
     void setNearPhone(java.lang.String) -> d
     java.lang.String getNearDetailUrl() -> e
     void setNearDetailUrl(java.lang.String) -> e
-tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cr:
+tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cs:
     int mLayoutResId -> a
     java.util.List mDatas -> b
     android.view.LayoutInflater mLayoutInflater -> c
@@ -33958,7 +33969,7 @@ tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cr:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.UniversalViewHolder -> tenant.guardts.house.model.cs:
+tenant.guardts.house.model.UniversalViewHolder -> tenant.guardts.house.model.ct:
     android.util.SparseArray mViewMap -> a
     int mPosition -> b
     android.view.LayoutInflater mLayoutInflater -> c

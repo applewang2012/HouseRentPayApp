@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,17 +99,17 @@ public class OrderFangzhuFragment extends BaseFragment{
 			}
 		});
 		
-//		mSwipeLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_fangzhu_pull_refresh);
-//		mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
-//			
-//			@Override
-//			public void onRefresh() {
-//				Log.e("mingguo", "on Refresh  "+mSwipeLayout);
-//				getHouseHistoryData();
-//			}
-//		});  
-//        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,  
-//                android.R.color.holo_orange_light, android.R.color.holo_red_light);  
+		mSwipeLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.id_fangzhu_pull_refresh);
+		mSwipeLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE);
+		mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				Log.e("mingguo", "on Refresh  ");
+				getRentOwnerData();
+			}
+		});  
+        
 	}
 	
 	public void refreshData(){
@@ -141,10 +142,24 @@ public class OrderFangzhuFragment extends BaseFragment{
 				TextView endTime = (TextView)holderView.findViewById(R.id.id_order_end_time);
 				TextView money = (TextView)holderView.findViewById(R.id.id_order_monkey_input);
 				TextView timeDown = (TextView)holderView.findViewById(R.id.id_order_time_down);
+				ImageView identfyLevel = (ImageView)holderView.findViewById(R.id.id_order_identify_level);
 				addressText.setText(info.getHouseAddress());
-				endTime.setText(info.getHouseEndTime());
+				endTime.setText(UtilTool.stampToDateTime(info.getOrderCreatedDate().substring(6, info.getOrderCreatedDate().length() - 2)));
 				money.setText(info.getHousePrice());
 				timeDown.setText(info.getShowTimeDownTime());
+				if (info.getShowTimeDownTime() == null || info.getShowTimeDownTime().equals("")){
+					timeDown.setText("预警信息：");
+					if (holder.getPosition() % 7 == 0){
+						identfyLevel.setBackgroundResource(R.drawable.identify_level_red);
+					}else if (holder.getPosition() % 3 == 0){
+						identfyLevel.setBackgroundResource(R.drawable.identify_level_yellow);
+					}else {
+						identfyLevel.setBackgroundResource(R.drawable.identify_level_green);
+					}
+					identfyLevel.setVisibility(View.VISIBLE);
+				}else{
+					identfyLevel.setVisibility(View.GONE);
+				}
 				updateOrderStatusView(holder, info);
 			}
 		};
@@ -193,15 +208,15 @@ public class OrderFangzhuFragment extends BaseFragment{
 	}
 	
 	private void initData(){
-		getHouseHistoryData();
+		getRentOwnerData();
 	}
 	
-	private void getHouseHistoryData(){
+	private void getRentOwnerData(){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentOwnerHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
 		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
 		mPresent.readyPresentServiceParams(getActivity(), url, mRentHistoryAction, rpc);
-		mPresent.startPresentServiceTask(true);
+		mPresent.startPresentServiceTask(false);
 	}
 	
 	private void confirmRentAttributeInfo(String id){
@@ -234,7 +249,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
-				//mSwipeLayout.setRefreshing(false);
+				mSwipeLayout.setRefreshing(false);
 				parseUserHouseInfo((String)msg.obj);
 				if (mHouseInfoList.size() == 0){
 					mNoContent.setText("暂无出租历史");
@@ -366,8 +381,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 					startActivity(intent);
 				}
 			});
-			button3.setTextColor(Color.parseColor("#337ffd"));
-			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			//button3.setTextColor(Color.parseColor("#337ffd"));
+			//button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 			button2.setText("确认订单");
 			button3.setText("确认订单");
 			button3.setOnClickListener(new OnClickListener() {

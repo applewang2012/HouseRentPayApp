@@ -32,7 +32,7 @@
                 android:maxEms="16"
                 android:singleLine="true"
                 android:text="天津市和平区瞰和平16号楼1-202"
-                android:textColor="#444444"
+                android:textColor="#000000"
                 android:textSize="15dp" />
 
             <LinearLayout
@@ -49,7 +49,7 @@
                     android:gravity="left|center_vertical"
                     android:singleLine="true"
                     android:text="两室"
-                    android:textColor="#666666"
+                    android:textColor="#444444"
                     android:textSize="14dp" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="东西向"
-                    android:textColor="#666666"
+                    android:textColor="#444444"
                     android:textSize="14dp" />
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:gravity="right|center_vertical"
                     android:singleLine="true"
                     android:text="18/30层"
-                    android:textColor="#666666"
+                    android:textColor="#444444"
                     android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>
@@ -105,6 +105,7 @@
     		android:background="@drawable/btn_published_bg"
     		android:gravity="center"
     		android:text="删除房屋"
+    		android:visibility="invisible"
     		android:textSize="@dimen/base_dimen_28"
     		android:layout_gravity="center_vertical"
 	        />
@@ -113,8 +114,8 @@
 	        android:layout_width="@dimen/base_dimen_150" 
     		android:layout_height="@dimen/base_dimen_56"
     		android:layout_marginLeft="@dimen/base_dimen_10"
-    		android:textColor="@drawable/btn_text_selector"
-    		android:background="@drawable/btn_published_bg"
+    		android:textColor="#ffffff"
+    		android:background="@drawable/item_blue_button_no_corner_selector"
     		android:gravity="center"
     		android:text="房客历史"
     		android:textSize="@dimen/base_dimen_28"
@@ -125,8 +126,8 @@
 	        android:layout_width="@dimen/base_dimen_150" 
     		android:layout_height="@dimen/base_dimen_56"
     		android:layout_marginLeft="@dimen/base_dimen_10"
-    		android:textColor="@drawable/btn_text_selector"
-    		android:background="@drawable/btn_published_bg"
+    		android:textColor="#444444"
+    		android:background="@drawable/item_gray_button_no_corner_selector"
     		android:gravity="center"
     		android:text="房屋详情"
     		android:textSize="@dimen/base_dimen_28"

@@ -34,10 +34,6 @@ public class UserAgreementActivity extends BaseActivity {
         imgView2.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imgView3.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imgView4.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imgView1.setImageResource(R.drawable.agreement_01);  
-        imgView2.setImageResource(R.drawable.agreement_02);  
-        imgView3.setImageResource(R.drawable.agreement_03);  
-        imgView4.setImageResource(R.drawable.agreement_04);  
 		listViews.add(imgView1);
 		listViews.add(imgView2);
 		listViews.add(imgView3);

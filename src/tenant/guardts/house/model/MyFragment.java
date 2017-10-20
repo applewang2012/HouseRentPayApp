@@ -16,7 +16,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AboutUsActivity;
 import tenant.guardts.house.AddHouseInfoActivity;
-import tenant.guardts.house.HomeActivity;
-import tenant.guardts.house.HouseHistoryActivity;
 import tenant.guardts.house.LoginUserActivity;
-import tenant.guardts.house.ModifyPasswordActivity;
+import tenant.guardts.house.MyHouseActivity;
 import tenant.guardts.house.PersonalInfoActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.WalletActivity;
-import tenant.guardts.house.WelcomeActivity;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 
@@ -156,7 +152,7 @@ public class MyFragment extends BaseFragment {
 					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
 					startActivity(new Intent(mContext, LoginUserActivity.class));
 				} else {
-						Intent intent = new Intent(mContext, HouseHistoryActivity.class);
+						Intent intent = new Intent(mContext, MyHouseActivity.class);
 						intent.putExtra("IDCard", CommonUtil.mRegisterIdcard);
 						startActivity(intent);
 				}
@@ -243,6 +239,7 @@ public class MyFragment extends BaseFragment {
 			mRegistAndLogin.setVisibility(View.VISIBLE);
 			mUserNickname.setVisibility(View.GONE);
 			mUserAddress.setVisibility(View.GONE);
+			mWallet.setText("¥ 0.0");
 			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 			mUserName = sharedata.getString("user_name", "");
 			getUserInfo();
@@ -488,7 +485,7 @@ public class MyFragment extends BaseFragment {
 		editor.putString("user_password", "");
 		editor.putString("user_realname", "");
 		editor.putString("user_idcard", "");
-		editor.putString("user_host", "");
+		//editor.putString("user_host", "");
 		editor.commit();
 		mUserAddress.setVisibility(View.GONE);
 		mUserNickname.setVisibility(View.GONE);
@@ -498,7 +495,7 @@ public class MyFragment extends BaseFragment {
 		CommonUtil.mUserWallet = "";
 		CommonUtil.mBankName = "";
 		CommonUtil.mCardNo = "";
-		CommonUtil.mUserHost = "";
+		//CommonUtil.mUserHost = "";
 	}
 
 	@Override

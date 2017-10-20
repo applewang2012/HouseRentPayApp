@@ -276,7 +276,7 @@ public class SearchResultActivity extends BaseActivity {
 		//mContentLayout = (LinearLayout)findViewById(R.id.id_frament_house_cotent);
 		mNoContent = (TextView)findViewById(R.id.id_frament_house_no_cotent);
 		
-		mNoContent.setVisibility(View.VISIBLE);
+		mNoContent.setVisibility(View.INVISIBLE);
 		//mContentLayout.setVisibility(View.INVISIBLE);
 		expandTabView = (ExpandMenuView) findViewById(R.id.expandTabView);
 		mSearchViewList = (ListView) findViewById(R.id.listView);

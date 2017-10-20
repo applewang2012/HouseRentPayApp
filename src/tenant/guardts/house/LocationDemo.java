@@ -203,7 +203,7 @@ public class LocationDemo extends BaseActivity {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mLati+""); 
 		rpc.addProperty("lon", mLongi+""); 
-		rpc.addProperty("distance", "15000"); 
+		rpc.addProperty("distance", "10000"); 
 		mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}

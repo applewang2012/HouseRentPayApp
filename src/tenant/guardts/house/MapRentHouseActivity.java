@@ -94,8 +94,7 @@ public class MapRentHouseActivity extends BaseActivity
 	private ArrayList<Map<String, String>> mHouserList;
 	private HashMap <String,ArrayList<Map<String, String>>> mLocationMap;
 	// 初始化全局 bitmap 信息，不用时及时 recycle
-	BitmapDescriptor icon_blue = BitmapDescriptorFactory.fromResource(R.drawable.blue);
-	BitmapDescriptor icon_red = BitmapDescriptorFactory.fromResource(R.drawable.red);
+	BitmapDescriptor icon_red = BitmapDescriptorFactory.fromResource(R.drawable.blue);
 	BitmapDescriptor icon_yellow = null;
 
 	// private double mLati, mLongi;
@@ -157,7 +156,6 @@ public class MapRentHouseActivity extends BaseActivity
 		// mSuggestionSearch.destroy();
 		super.onDestroy();
 		// 回收 bitmap 资源
-		icon_blue.recycle();
 		icon_red.recycle();
 		icon_yellow.recycle();
 
@@ -461,11 +459,11 @@ public class MapRentHouseActivity extends BaseActivity
 					String ownerName = child.get(i).get("ROwner");
 					if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
 						if (phone.length() > 5) {
-							showInfo = "门牌号：" +  "101**" +  " 房主：" + ownerName.substring(0, 1) + "**";
+							showInfo = "楼层：" +  child.get(i).get("rFloor") + "/" + child.get(i).get("rtotalfloor") + "层"+ " 房主：" + ownerName.substring(0, 1) + "**";
 						}
 						
 					}else{
-						showInfo = "门牌号：" +  "101**" +  " 房主：" + ownerName;
+						showInfo = "楼层：" +  child.get(i).get("rFloor") + "/" + child.get(i).get("rtotalfloor") + "层" +  " 房主：" + ownerName;
 //						showInfo = "房主：" + ownerName  + " 电话：" + phone;////////////////////
 					}
 					listItem[i] = showInfo; 
@@ -487,9 +485,19 @@ public class MapRentHouseActivity extends BaseActivity
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//showMarkerDetail(ll, child.get(which));
-				Intent detailIntent = new Intent(MapRentHouseActivity.this, HouseDetailInfoActivity.class);
-				detailIntent.putExtra("rentNo", child.get(which).get("rentno"));
-				startActivity(detailIntent);
+				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+					Intent loginIntent = new Intent(mContext, LoginUserActivity.class);
+					loginIntent.putExtra("intent_status", true);
+					startActivity(loginIntent);
+				} else {
+					if (child.get(which).get("rentno") != null
+							&& !child.get(which).get("rentno").equals("")) {
+						Intent detailIntent = new Intent(mContext, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", child.get(which).get("rentno"));
+						startActivity(detailIntent);
+					}
+				}
 			}
 		});
 		builder.show();
@@ -624,7 +632,7 @@ public class MapRentHouseActivity extends BaseActivity
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mCurrentLatLng.latitude + "");
 		rpc.addProperty("lon", mCurrentLatLng.longitude + "");
-		rpc.addProperty("distance", "15000");
+		rpc.addProperty("distance", "10000");
 		mPresenter.readyPresentServiceParams(this, url, mLocationAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
