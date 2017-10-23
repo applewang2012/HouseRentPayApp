@@ -154,8 +154,8 @@
             android:name=".CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
             android:name=".ApplyForCheckoutActivity"
@@ -357,7 +357,7 @@
         <activity
             android:name=".MapSuggestSearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme2"
+            android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
@@ -392,6 +392,10 @@
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".DoorNumberLockActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity

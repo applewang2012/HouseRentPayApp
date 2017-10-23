@@ -3,10 +3,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+ <include
+	   android:id="@+id/id_scan_code_titlebar"
+	   layout="@layout/titlebar"
+	       /> 
+    
+         
     <SurfaceView
         android:id="@+id/preview_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_90"
         android:layout_gravity="center" />
 
     <tenant.guardts.house.zxingview.ViewfinderView
@@ -18,7 +25,7 @@
         android:layout_width="@dimen/base_dimen_149"
         android:layout_height="@dimen/base_dimen_170"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/base_dimen_83"
+        android:layout_marginTop="@dimen/base_dimen_173"
         android:background="@drawable/scan_qrcode_house_logo" />
 
     <LinearLayout
@@ -35,38 +42,38 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-        <CheckBox
+        <FrameLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/base_dimen_60"
-            android:layout_gravity="center_horizontal"
+            >
+           <CheckBox
+            android:layout_gravity="left"
+            android:id="@+id/id_open_lock_number_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编码开锁"
+            android:textSize="@dimen/base_dimen_30" 
+            android:layout_marginLeft="@dimen/base_dimen_182"
+            android:button="@null"
+            android:drawableTop="@drawable/lock_number_button"
+            android:textColor="#ffffff"
+            />
+           <CheckBox
+            
+            android:layout_gravity="right"
             android:id="@+id/capture_flash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="打开手电筒"
             android:textSize="@dimen/base_dimen_30" 
+            android:layout_marginRight="@dimen/base_dimen_182"
             android:button="@null"
             android:drawableTop="@drawable/capture_flash_bg"
             android:textColor="@drawable/capture_flash_text_bg"
             />
-
-        <!--
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:gravity="center"
-                android:text="@string/scan_prompt_info"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        -->
-
+            
+        </FrameLayout>
     </LinearLayout>
-
 </FrameLayout>

@@ -206,5 +206,9 @@
             android:layout_marginLeft="@dimen/base_dimen_498"
             android:src="@drawable/more" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#cccccc" />
 
 </LinearLayout>

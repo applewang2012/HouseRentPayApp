@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/open_lock_loading_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+		<include
+	   android:id="@+id/id_scan_code_titlebar"
+	   layout="@layout/titlebar"
+	       />
+        <ImageView
+            android:layout_width="@dimen/base_dimen_149"
+            android:layout_height="@dimen/base_dimen_170"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_383"
+            android:background="@drawable/scan_qrcode_house_logo" />
+
+        <EditText
+            android:id="@+id/id_input_lock_number"
+            android:layout_width="@dimen/base_dimen_500"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_128"
+            android:background="@drawable/item_gray_solid_no_corner_press"
+            android:gravity="center"
+            android:hint="请输入正确的门锁编码"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="#ffffff"
+            android:maxLength="24"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <Button
+            android:id="@+id/id_open_number_lock_button"
+            android:layout_width="@dimen/base_dimen_500"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_dimen_40"
+            android:background="@drawable/item_blue_button_no_corner_selector"
+            android:gravity="center"
+            android:text="立即开锁"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_30" />
+        
+        <CheckBox
+            android:id="@+id/capture_flash"
+            android:layout_gravity="center_horizontal"
+            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开手电筒"
+            android:textSize="@dimen/base_dimen_30" 
+            android:layout_marginTop="@dimen/base_dimen_180"
+            android:button="@null"
+            android:drawableTop="@drawable/capture_flash_bg"
+            android:textColor="@drawable/capture_flash_text_bg"
+            />
+    </LinearLayout>
+
+</ScrollView>

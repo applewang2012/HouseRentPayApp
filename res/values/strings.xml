@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="demo_name_overlay">覆盖物功能</string>
     <string name="edit_input">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="edit_lock_number_input">0123456789 </string>
     <string name="edit_idcard_input">0123456789xX</string>
     <string name="download_unknown_title">"&amp;lt;未命名&amp;gt;"</string>
     <string name="notification_need_wifi_for_size" msgid="5973127997598540499">"此大小的文件需要通过 Wi-Fi 下载"</string>

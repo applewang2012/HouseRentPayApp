@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -18,19 +19,18 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.SurfaceHolder;
-import android.view.SurfaceHolder.Callback;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
+import tenant.guardts.house.model.ActionOperationInterface;
+import tenant.guardts.house.model.ScanQrCodeFragment;
+import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 
@@ -39,10 +39,10 @@ import tenant.guardts.house.zxingview.ViewfinderView;
  * 
  * @author Ryan.Tang
  */
-public class CaptureActivity extends BaseActivity implements Callback {
+public class CaptureActivity extends BaseActivity {
 
 	private CaptureActivityHandler handler;
-	private ViewfinderView viewfinderView;
+	//private ViewfinderView viewfinderView;
 	private boolean hasSurface;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
@@ -53,45 +53,101 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	private boolean vibrate;
 	private Button cancelScanButton;
 	private boolean isLighting = true;
+	private ScanQrCodeFragment mQrFragment;
+	private DoorNumberLockFragment mOpenLockNumber;
+	
+//	private ActionOperationInterface mAction;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.camera);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
-		titlebar.setText("扫一扫开锁");
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.activity_scan_open_door);
+		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
+//		TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
+//		titlebar.setText("扫一扫开锁");
+		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+		if (mQrFragment == null) {
+			mQrFragment = new ScanQrCodeFragment();
+			fragmentTransaction.add(R.id.id_scan_qrcode_content, mQrFragment);
+			fragmentTransaction.commitAllowingStateLoss();
+			mQrFragment.setFragmentActionListener(new ActionOperationInterface() {
+				
+				
+
+				@Override
+				public void onPreFragment() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onNextFragment() {
+					FragmentTransaction newTransaction = getFragmentManager().beginTransaction();
+					hideAllFragments(newTransaction);
+					if (mOpenLockNumber == null) {
+						mOpenLockNumber = new DoorNumberLockFragment();
+						newTransaction.add(R.id.id_scan_qrcode_content, mOpenLockNumber);
+						newTransaction.commitAllowingStateLoss();
+					}else{
+						newTransaction.show(mOpenLockNumber);
+						newTransaction.commitAllowingStateLoss();
+					}
+				}
+			});
+		} else {
+			fragmentTransaction.show(mQrFragment);
+			fragmentTransaction.commitAllowingStateLoss();
+		}
+		
 		// ViewUtil.addTopView(getApplicationContext(), this,
 		// R.string.scan_card);
-		CameraManager.init(getApplication());
-		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-		hasSurface = false;
-		inactivityTimer = new InactivityTimer(this);
-		lighting = (CheckBox) findViewById(R.id.capture_flash);
+//		CameraManager.init(getApplication());
+//		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+//		hasSurface = false;
+//		inactivityTimer = new InactivityTimer(this);
+//		lighting = (CheckBox) findViewById(R.id.capture_flash);
+//		mNumberButton = (CheckBox)findViewById(R.id.id_open_lock_number_button);
+//		lighting.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				mCamera = CameraManager.getCamera();
+//	            mParameters = mCamera.getParameters();
+//	           
+//	            if (isLighting) {
+//	            	lighting.setText("关闭手电筒");
+//	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+//	                mCamera.setParameters(mParameters);
+//	                isLighting = false;
+//	            } else { 
+//	            	lighting.setText("打开手电筒");
+//	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//	            	mCamera.setParameters(mParameters);
+//	                isLighting = true;
+//	            }
+//			}
+//		});
+//		
+//		mNumberButton.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				startActivityForResult(new Intent(CaptureActivity.this, DoorNumberLockActivity.class), CommonUtil.mLockNumberRequestCode);
+//			}
+//		});
+	}
+	
+	private void hideAllFragments(FragmentTransaction transaction) {
+		if (mQrFragment != null && !mQrFragment.isHidden()) {
+			transaction.hide(mQrFragment);
+		}
+		if (mOpenLockNumber != null && !mOpenLockNumber.isHidden()) {
+			transaction.hide(mOpenLockNumber);
+		}
 		
-		lighting.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				mCamera = CameraManager.getCamera();
-	            mParameters = mCamera.getParameters();
-	           
-	            if (isLighting) {
-	            	lighting.setText("关闭手电筒");
-	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-	                mCamera.setParameters(mParameters);
-	                isLighting = false;
-	            } else { 
-	            	lighting.setText("打开手电筒");
-	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-	            	mCamera.setParameters(mParameters);
-	                isLighting = true;
-	            }
-			}
-		});
 	}
 
 	private boolean checkFlashlight() {
@@ -107,24 +163,24 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-		SurfaceHolder surfaceHolder = surfaceView.getHolder();
-		if (hasSurface) {
-			initCamera(surfaceHolder);
-		} else {
-			surfaceHolder.addCallback(this);
-			surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-		}
-		decodeFormats = null;
-		characterSet = null;
-
-		playBeep = true;
-		AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
-		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-			playBeep = false;
-		}
-		initBeepSound();
-		vibrate = true;
+//		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+//		SurfaceHolder surfaceHolder = surfaceView.getHolder();
+//		if (hasSurface) {
+//			initCamera(surfaceHolder);
+//		} else {
+//			surfaceHolder.addCallback(this);
+//			surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+//		}
+//		decodeFormats = null;
+//		characterSet = null;
+//
+//		playBeep = true;
+//		AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
+//		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+//			playBeep = false;
+//		}
+//		initBeepSound();
+//		vibrate = true;
 
 	
 	}
@@ -132,19 +188,16 @@ public class CaptureActivity extends BaseActivity implements Callback {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (handler != null) {
-			handler.quitSynchronously();
-			handler = null;
-		}
-		CameraManager.get().closeDriver();
+//		if (handler != null) {
+//			handler.quitSynchronously();
+//			handler = null;
+//		}
+//		CameraManager.get().closeDriver();
 	}
 
 	@Override
 	protected void onDestroy() {
-		inactivityTimer.shutdown();
-//		if (camera != null) {
-//			camera.release();
-//		}
+//		inactivityTimer.shutdown();
 
 		super.onDestroy();
 	}
@@ -186,39 +239,61 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
 		}
 	}
+	
+	
 
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		if (!hasSurface) {
-			hasSurface = true;
-			initCamera(holder);
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK && requestCode == CommonUtil.mLockNumberRequestCode) {
+			if (data != null)
+//			Bundle bundle = data.getExtras();
+//			String scanResult = bundle.getString("result");
+			Log.e("mingguo", "capture activity  scan  result  " + data);
+			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
+			
+//			Intent resultIntent = new Intent();
+//			Bundle activityBundel = new Bundle();
+//			activityBundel.putString("result", scanResult);
+//			resultIntent.putExtras(resultIntent);
+			this.setResult(RESULT_OK, data);
+			CaptureActivity.this.finish();
 		}
-
 	}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		hasSurface = false;
-		if (mCamera != null) {
-            CameraManager.stopPreview();
-        }
-	}
+//	@Override
+//	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+//
+//	}
+//
+//	@Override
+//	public void surfaceCreated(SurfaceHolder holder) {
+//		if (!hasSurface) {
+//			hasSurface = true;
+//			initCamera(holder);
+//		}
+//
+//	}
+//
+//	@Override
+//	public void surfaceDestroyed(SurfaceHolder holder) {
+//		hasSurface = false;
+//		if (mCamera != null) {
+//            CameraManager.stopPreview();
+//        }
+//	}
 
 	public ViewfinderView getViewfinderView() {
-		return viewfinderView;
+		return mQrFragment.getViewfinderView();
 	}
 
 	public Handler getHandler() {
-		return handler;
+		return mQrFragment.getHandler();
 	}
 
 	public void drawViewfinder() {
-		viewfinderView.drawViewfinder();
+		mQrFragment.getViewfinderView().drawViewfinder();
 
 	}
 
@@ -264,7 +339,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 			mediaPlayer.seekTo(0);
 		}
 	};
-	private CheckBox lighting;
+	private CheckBox mNumberButton, lighting;
 	private Camera mCamera;
 	private Parameters mParameters;
 

@@ -31,6 +31,7 @@ import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +51,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -139,7 +141,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 	
 	private void initBanner() {
-		List<Integer> localImage = new ArrayList<>();
+		final List<Integer> localImage = new ArrayList<>();
 		localImage.add(R.drawable.home_fragment_bg2);
 		localImage.add(R.drawable.home_fragment_bg);
 		localImage.add(R.drawable.home_fragment_bg3);
@@ -147,6 +149,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		mFlowIndicator = (CircleFlowIndicator) mRootView.findViewById(R.id.id_fragment_home_indicator);
 		mViewFlow.setAdapter(new ImagePagerAdapter(getActivity(), localImage,
 				null, null).setInfiniteLoop(true));
+//		UniversalAdapter<Integer> adapter = new UniversalAdapter<Integer>(getActivity(), R.layout.house_fragment_banner_item_view, localImage) {
+//			
+//			@Override
+//			public void convert(UniversalViewHolder holder, Integer info) {
+//				View itemview = holder.getConvertView();
+//				ImageView image = (ImageView)itemview.findViewById(R.id.banner_image);
+//				image.setBackgroundResource(localImage.get(holder.getPosition()));
+//			}
+//		};
+//		mViewFlow.setAdapter(adapter);
 		mViewFlow.setmSideBuffer(localImage.size()); 
 		mFlowIndicator.setIndicatorCount(localImage.size());
 		

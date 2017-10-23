@@ -30,7 +30,7 @@ import tenant.guardts.house.adapter.HistoryRecordsAdapter;
 import tenant.guardts.house.helper.MapRecordSQLiteHelper;
 import tenant.guardts.house.util.ViewUtil;
 
-public class MapSuggestSearchActivity extends Activity implements OnGetSuggestionResultListener{
+public class MapSuggestSearchActivity extends BaseActivity implements OnGetSuggestionResultListener{
 
 	private AutoCompleteTextView mSearchText;
 	private MapRecordSQLiteHelper helper;

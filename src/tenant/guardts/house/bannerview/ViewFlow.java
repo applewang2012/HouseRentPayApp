@@ -164,7 +164,7 @@ public class ViewFlow extends AdapterView<Adapter> {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		heightMeasureSpec = MeasureSpec.makeMeasureSpec(dip2px(getContext(), 230), MeasureSpec.EXACTLY); 
+		//heightMeasureSpec = MeasureSpec.makeMeasureSpec(dip2px(getContext(), 230), MeasureSpec.EXACTLY); 
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		
 		final int width = MeasureSpec.getSize(widthMeasureSpec);

@@ -107,7 +107,6 @@ public class HomeActivity extends BaseActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
 	}
 
 	//解决重叠
@@ -644,7 +643,7 @@ public class HomeActivity extends BaseActivity {
 			Bundle bundle = data.getExtras();
 			String scanResult = bundle.getString("result");
 			Log.e("mingguo", "scan  result  " + scanResult);
-			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
+			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
 			int pos = scanResult.lastIndexOf("=");
 			mLockNumber = scanResult.substring(pos + 1);
 			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);

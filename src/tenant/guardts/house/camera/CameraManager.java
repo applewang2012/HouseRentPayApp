@@ -138,6 +138,10 @@ public final class CameraManager {
     }
   }
   
+  public static void enableFlashlight() throws IOException{
+	  FlashlightManager.enableFlashlight();
+  }
+  
   public static Camera getCamera(){
       return camera;
   }

@@ -46,6 +46,7 @@ public class CommonUtil {
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
+    public static int mLockNumberRequestCode = 5;
     public static int mIndentifyUserRequestCode = 10;
     public static final int SELECT_CITY_REQEUST_CODE = 2;
     public static final int MAP_SUGGEST_REQEUST_CODE = 3;
