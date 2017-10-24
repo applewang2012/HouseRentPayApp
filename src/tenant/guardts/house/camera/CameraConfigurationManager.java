@@ -19,13 +19,13 @@ package tenant.guardts.house.camera;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.os.Build;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -55,11 +55,11 @@ final class CameraConfigurationManager {
     Camera.Parameters parameters = camera.getParameters();
     previewFormat = parameters.getPreviewFormat();
     previewFormatString = parameters.get("preview-format");
-    Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
+    LogUtil.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
     WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     Display display = manager.getDefaultDisplay();
     screenResolution = new Point(display.getWidth(), display.getHeight());
-    Log.d(TAG, "Screen resolution: " + screenResolution);
+    LogUtil.d(TAG, "Screen resolution: " + screenResolution);
     Point screenResolutionForCamera = new Point();  
     screenResolutionForCamera.x = screenResolution.x;  
     screenResolutionForCamera.y = screenResolution.y;  
@@ -70,7 +70,7 @@ final class CameraConfigurationManager {
     }  
 
     cameraResolution = getCameraResolution(parameters, screenResolutionForCamera);
-    Log.d(TAG, "Camera resolution: " + screenResolution);
+    LogUtil.d(TAG, "Camera resolution: " + screenResolution);
   }
 
   /**
@@ -91,7 +91,7 @@ final class CameraConfigurationManager {
 
 	    int width = supportedPreviewSizes.get(position).width;
 	    int height = supportedPreviewSizes.get(position).height;
-	    Log.d(TAG, "Setting preview size: " + cameraResolution);
+	    LogUtil.d(TAG, "Setting preview size: " + cameraResolution);
 	    camera.setDisplayOrientation(90);
 	    cameraResolution.x=width;
 	    cameraResolution.y=height;
@@ -129,7 +129,7 @@ final class CameraConfigurationManager {
 //    Point cameraResolution = null;
 //
 //    if (previewSizeValueString != null) {
-//      Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
+//      LogUtil.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
 //      cameraResolution = findBestPreviewSizeValue(previewSizeValueString, screenResolution);
 //    }
 //
@@ -165,7 +165,7 @@ final class CameraConfigurationManager {
       previewSize = previewSize.trim();
       int dimPosition = previewSize.indexOf('x');
       if (dimPosition < 0) {
-        Log.w(TAG, "Bad preview-size: " + previewSize);
+        LogUtil.w(TAG, "Bad preview-size: " + previewSize);
         continue;
       }
 
@@ -175,7 +175,7 @@ final class CameraConfigurationManager {
         newX = Integer.parseInt(previewSize.substring(0, dimPosition));
         newY = Integer.parseInt(previewSize.substring(dimPosition + 1));
       } catch (NumberFormatException nfe) {
-        Log.w(TAG, "Bad preview-size: " + previewSize);
+        LogUtil.w(TAG, "Bad preview-size: " + previewSize);
         continue;
       }
 
@@ -230,7 +230,7 @@ final class CameraConfigurationManager {
 			}
 
 			if (previewSizeValueString != null) {
-				Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
+				LogUtil.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
 				return findBestPreviewSizeValue(previewSizeValueString, screenResolution);
 			} else {
 				return null;
@@ -290,7 +290,7 @@ final class CameraConfigurationManager {
           tenDesiredZoom = tenMaxZoom;
         }
       } catch (NumberFormatException nfe) {
-        Log.w(TAG, "Bad max-zoom: " + maxZoomString);
+        LogUtil.w(TAG, "Bad max-zoom: " + maxZoomString);
       }
     }
 
@@ -302,7 +302,7 @@ final class CameraConfigurationManager {
           tenDesiredZoom = tenMaxZoom;
         }
       } catch (NumberFormatException nfe) {
-        Log.w(TAG, "Bad taking-picture-zoom-max: " + takingPictureZoomMaxString);
+        LogUtil.w(TAG, "Bad taking-picture-zoom-max: " + takingPictureZoomMaxString);
       }
     }
 

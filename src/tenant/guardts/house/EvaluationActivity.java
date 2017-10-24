@@ -2,12 +2,11 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-
 import tenant.guardts.house.model.Evaluation;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.view.CustomRatingBar;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -24,6 +22,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 /**
  * 评价
@@ -237,7 +237,7 @@ public class EvaluationActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mAddEvaluationAction)) {
 				Message msg = mHandler.obtainMessage();

@@ -3,6 +3,24 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
+import tenant.guardts.house.model.SurroundInfo;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -14,24 +32,6 @@ import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import tenant.guardts.house.model.SurroundInfo;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse
@@ -89,7 +89,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	
 
 	public void  searchNearbyProcess(String text ) {
-		Log.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
+		LogUtil.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
         		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
                 .radius(2000).pageCapacity(20);
@@ -139,7 +139,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult arg0) {
 		// TODO Auto-generated method stub
-		Log.w("mingguo", " detail result  "+arg0.name);
+		LogUtil.w("mingguo", " detail result  "+arg0.name);
 		for (int i = 0; i < mDataList.size(); i++){
 			if (arg0.getUid() != null && arg0.getUid().equalsIgnoreCase(mDataList.get(i).getNearUid())){
 				mDataList.get(i).setNearDetailUrl(arg0.getDetailUrl());
@@ -161,7 +161,7 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
                     .show();
             return;
         }
-        Log.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
+        LogUtil.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
        for (int index = 0; index < result.getAllPoi().size(); index++){
     	   PoiInfo info = result.getAllPoi().get(index);
     	   SurroundInfo surroundInfo = new SurroundInfo();

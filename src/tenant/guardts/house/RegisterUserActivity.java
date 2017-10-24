@@ -6,10 +6,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -24,7 +26,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,11 +36,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
+
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
 public class RegisterUserActivity extends BaseActivity{
 
@@ -89,7 +89,7 @@ public class RegisterUserActivity extends BaseActivity{
 //		
 //		ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
 //		if (bmp != null){
-//			Log.w("mingguo", " bmp  width  "+bmp.getWidth()+"  height  "+bmp.getHeight());
+//			LogUtil.w("mingguo", " bmp  width  "+bmp.getWidth()+"  height  "+bmp.getHeight());
 //			shot.setImageBitmap(bmp);
 //		}
 		
@@ -173,7 +173,7 @@ public class RegisterUserActivity extends BaseActivity{
 				mAddress = address.getEditableText().toString();
 				mPosition = position.getEditableText().toString();
 				mEmail = email.getEditableText().toString();
-				Log.w("mingguo", "user name  "+mUserName);
+				LogUtil.w("mingguo", "user name  "+mUserName);
 				if (mUserName == null || mUserName.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -263,16 +263,16 @@ public class RegisterUserActivity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
 		if (resultCode == RESULT_OK && requestCode == 1) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
 			 startLiveIdentifyActivity();
 			 
 			 //			   if(data != null){
 //			    if(data.hasExtra("data")){
 //			     Bitmap thunbnail = data.getParcelableExtra("data");
-//			     Log.w("mingguo", "activity result  width  "+thunbnail.getWidth()+"  height  "+thunbnail.getHeight());
+//			     LogUtil.w("mingguo", "activity result  width  "+thunbnail.getWidth()+"  height  "+thunbnail.getHeight());
 //			     ImageView shot = (ImageView)findViewById(R.id.id_user_shot);
 //					shot.setImageBitmap(thunbnail);
 //			    }
@@ -283,7 +283,7 @@ public class RegisterUserActivity extends BaseActivity{
 //			shot.setImageBitmap(newBitmap);
 //			int scale = 0;
 //				scale = getZoomScale(imageFile);//寰楀埌缂╂斁鍊嶆暟
-//				Log.w(TAG, "scale = "+scale);
+//				LogUtil.w(TAG, "scale = "+scale);
 //				BitmapFactory.Options options = new BitmapFactory.Options();
 //				options.inSampleSize = scale;
 //				photoImageView.setImageBitmap(BitmapFactory.decodeFile(strImgPath,options));//鎸夋寚瀹歰ptions鏄剧ず鍥剧墖闃叉OOM
@@ -305,7 +305,7 @@ public class RegisterUserActivity extends BaseActivity{
 
 			@Override
 			public void handleMessage(Message msg) {
-				Log.w("mingguo", "handler message  ");
+				LogUtil.w("mingguo", "handler message  ");
 				//takeFrontPhoto();
 			}
         	
@@ -317,9 +317,9 @@ public class RegisterUserActivity extends BaseActivity{
                 super.handleMessage(msg);
                 int degree = BMapUtil.readPictureDegree(file);
                 Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
-   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
    			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
                 
             }
@@ -335,7 +335,7 @@ public class RegisterUserActivity extends BaseActivity{
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.w("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		LogUtil.w("mingguo", "mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -517,10 +517,10 @@ public class RegisterUserActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
-				Log.w("mingguo", "on success  action valid ");
+				LogUtil.w("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
 					mUsernameValid = false;

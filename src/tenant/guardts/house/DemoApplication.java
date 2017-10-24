@@ -2,18 +2,18 @@ package tenant.guardts.house;
 
 import java.util.List;
 
-import com.baidu.mapapi.SDKInitializer;
-import com.tencent.android.tpush.XGNotifaction;
-import com.tencent.android.tpush.XGPushManager;
-import com.tencent.android.tpush.XGPushNotifactionCallback;
-
+import tenant.guardts.house.util.LogUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.tencent.android.tpush.XGNotifaction;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.XGPushNotifactionCallback;
 
 public class DemoApplication extends Application {
 	private static DemoApplication mApp;  
@@ -34,7 +34,7 @@ public class DemoApplication extends Application {
 
      						@Override
      						public void handleNotify(XGNotifaction xGNotifaction) {
-     							Log.w("test", "处理信鸽通知：" + xGNotifaction);
+     							LogUtil.w("test", "处理信鸽通知：" + xGNotifaction);
      							// 获取标签、内容、自定义内容
      							String title = xGNotifaction.getTitle();
      							String content = xGNotifaction.getContent();
@@ -54,39 +54,39 @@ public class DemoApplication extends Application {
 //        this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {  
 //            @Override  
 //            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {  
-//                Log.d("mingguo",activity+"onActivityCreated");  
+//                LogUtil.d("mingguo",activity+"onActivityCreated");  
 //            }  
 //  
 //            @Override  
 //            public void onActivityStarted(Activity activity) {  
-//                Log.d("mingguo",activity+"onActivityStarted");  
+//                LogUtil.d("mingguo",activity+"onActivityStarted");  
 //                sActivity=activity;  
 //  
 //            }  
 //  
 //            @Override  
 //            public void onActivityResumed(Activity activity) {  
-//            	Log.d("mingguo",activity+"onActivityResumed");  
+//            	LogUtil.d("mingguo",activity+"onActivityResumed");  
 //            }  
 //  
 //            @Override  
 //            public void onActivityPaused(Activity activity) {  
-//            	Log.d("mingguo",activity+"onActivityPaused");  
+//            	LogUtil.d("mingguo",activity+"onActivityPaused");  
 //            }  
 //  
 //            @Override  
 //            public void onActivityStopped(Activity activity) {  
-//            	Log.d("mingguo",activity+"onActivityStopped");  
+//            	LogUtil.d("mingguo",activity+"onActivityStopped");  
 //            }  
 //  
 //            @Override  
 //            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {  
-//            	Log.d("mingguo",activity+"onActivitySaveInstanceState");  
+//            	LogUtil.d("mingguo",activity+"onActivitySaveInstanceState");  
 //            }  
 //  
 //            @Override  
 //            public void onActivityDestroyed(Activity activity) {  
-//            	Log.d("mingguo",activity+"onActivityDestroyed");  
+//            	LogUtil.d("mingguo",activity+"onActivityDestroyed");  
 //            }  
 //        });  
     }  

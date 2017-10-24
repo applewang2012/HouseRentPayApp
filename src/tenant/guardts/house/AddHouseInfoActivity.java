@@ -5,17 +5,19 @@ import java.util.Map;
 
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-
+import tenant.guardts.house.model.HouseSelectorModel;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.JsonObjectParse;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,11 +28,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.HouseSelectorModel;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.JsonObjectParse;
+
+import com.google.gson.Gson;
 
 public class AddHouseInfoActivity extends BaseActivity{
 
@@ -688,7 +687,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void startAddHouseInfo(){
-		Log.w("mingguo", "add house info mRentNo "+mRentNo+" mRDName "+mRDName+" mRSName "+mRSName+" mRRName "+mRRName+" mRPSName "+mRPSName
+		LogUtil.w("mingguo", "add house info mRentNo "+mRentNo+" mRDName "+mRDName+" mRSName "+mRSName+" mRRName "+mRRName+" mRPSName "+mRPSName
 				+" mRAddress "+mRAddress+" mRDoor "+"default null"+" mRTotalDoor "+"default null"+" mRRoomType "+mRRoomType +" mRDirection "+mRDirection+
 				" mRStructure "+"default null "+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
@@ -869,7 +868,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			}else if (msg.what == 888){
 				String value = (String)msg.obj;
 				if (value != null && value.equals("true")){
-					Log.e("mingguo", "add rent info success ");
+					LogUtil.e("mingguo", "add rent info success ");
 					Toast.makeText(getApplicationContext(), "登记房屋成功", Toast.LENGTH_SHORT).show();
 //					Intent photoIntent = new Intent(AddHouseInfoActivity.this, SelectPhotoActivity.class);
 //					photoIntent.putExtra("rentNo", mRentNo);
@@ -888,7 +887,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 //				}
 			}else if(msg.what==818){
 				String value = (String)msg.obj;
-				Log.e("", value+"----------");
+				LogUtil.e("", value+"----------");
 				//显示服务费信息
 				///////////////////////////////////////////////////////////////////////////////
 				Gson gson=new Gson();
@@ -922,7 +921,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mPropertyAction)){
 				Message msg = mHandler.obtainMessage();

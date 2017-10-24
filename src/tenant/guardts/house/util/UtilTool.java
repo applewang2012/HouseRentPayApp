@@ -119,7 +119,7 @@ public class UtilTool {
 
             return xml;
         } catch (Exception e) {
-            Log.e("Simon","----"+e.toString());
+            LogUtil.e("Simon","----"+e.toString());
         }
         return null;
 

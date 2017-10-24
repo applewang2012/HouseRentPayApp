@@ -8,7 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import android.R.integer;
+import tenant.guardts.house.EvaluationActivity;
+import tenant.guardts.house.EvaluationDetailActivity;
+import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,7 +29,6 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,15 +39,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import tenant.guardts.house.EvaluationActivity;
-import tenant.guardts.house.EvaluationDetailActivity;
-import tenant.guardts.house.HouseOrderDetailsActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.UtilTool;
 
 public class OrderFangzhuFragment extends BaseFragment{
 	
@@ -75,7 +73,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.w("fragmenttest", "homefragment onCreateView ");
+		LogUtil.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_zufang_fragment, container, false);
 		initView();
 		//initData();
@@ -105,7 +103,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 			
 			@Override
 			public void onRefresh() {
-				Log.e("mingguo", "on Refresh  ");
+				LogUtil.e("mingguo", "on Refresh  ");
 				getRentOwnerData();
 			}
 		});  
@@ -199,7 +197,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	  
 	         public void onClick(DialogInterface dialog, int which) {
 	  
-	             Log.w("alertdialog"," �뱣�����ݣ�");  
+	             LogUtil.w("alertdialog"," �뱣�����ݣ�");  
 	  
 	         }
 		});
@@ -257,7 +255,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				}else{
 					//mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("mingguo", "house list  "+mHouseInfoList.size());
+					LogUtil.w("mingguo", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 101){
@@ -285,7 +283,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				}else{
 					//mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("mingguo", "house list  "+mHouseInfoList.size());
+					LogUtil.w("mingguo", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 103){
@@ -339,7 +337,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 			for (int i = 0; i < mHouseInfoList.size(); i++){
 				if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
 					mHouseInfoList.get(i).setCurrentDate(mHouseInfoList.get(i).getCurrentdDate() + 1000L);
-					Log.w("mingguo", "current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
+					LogUtil.w("mingguo", "current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
 					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDate(),
 							mHouseInfoList.get(i).getHouseOrderId(), i));
 					isUpdate = true;
@@ -675,7 +673,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.w("mingguo", "parse house info "+array.length());
+				LogUtil.w("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel houseModel = new HouseInfoModel();
@@ -723,7 +721,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		LogUtil.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentHistoryAction)){

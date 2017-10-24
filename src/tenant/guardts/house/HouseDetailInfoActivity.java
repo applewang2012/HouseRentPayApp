@@ -8,8 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.HouseImageInfo;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +27,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -37,14 +43,8 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.HouseImageInfo;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
+
+import com.gzt.faceid5sdk.DetectionAuthentic;
 
 public class HouseDetailInfoActivity extends BaseActivity {
 	private Button mButtonCall;// 联系房主
@@ -244,7 +244,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
 
-								Log.w("alertdialog", " �뱣�����ݣ�");
+								LogUtil.w("alertdialog", " �뱣�����ݣ�");
 
 							}
 
@@ -500,7 +500,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			} else if (msg.what == 200) {
 
 				jsonHouseImageListData((String) msg.obj);
-				Log.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
+				LogUtil.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
 				initBanner(imageUrlList);
 			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
@@ -559,7 +559,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				if (object != null) {
 					String imageCount = object.optString("count");
 					int count = Integer.parseInt(imageCount);
-					Log.w("mingguo", "countt  " + count);
+					LogUtil.w("mingguo", "countt  " + count);
 					if (count > 0) {
 						if (count == 1) {
 							String imageUrl1 = object.optString("Image0");
@@ -630,7 +630,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mHouseDetailAction)) {
 				Message msg = mHandler.obtainMessage();

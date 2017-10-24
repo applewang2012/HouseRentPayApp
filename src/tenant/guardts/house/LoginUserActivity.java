@@ -7,6 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ViewUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +23,6 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,11 +31,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ViewUtil;
 
 public class LoginUserActivity extends BaseActivity {
 
@@ -227,7 +227,7 @@ public class LoginUserActivity extends BaseActivity {
 	private void commonServiceInterface() {
 		SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
 		String host = sharedata.getString("user_host", "");
-		Log.w("mingguo", "common service preference host  " + host);
+		LogUtil.w("mingguo", "common service preference host  " + host);
 		if (host == null || host.equals("")) {
 			String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCommonServiceAction));
@@ -266,7 +266,7 @@ public class LoginUserActivity extends BaseActivity {
 			if (data != null) {
 				mPassword = data.getStringExtra("new_password");
 				passwordEditText.setText(mPassword);
-				Log.w("mingguo", "login activity  onActivityResult password  " + mPassword);
+				LogUtil.w("mingguo", "login activity  onActivityResult password  " + mPassword);
 			}
 		}
 	}
@@ -296,7 +296,7 @@ public class LoginUserActivity extends BaseActivity {
 				editor.commit();
 				CommonUtil.mUserArea = data.get(0)[which];
 				CommonUtil.mUserHost = data.get(1)[which];
-				Log.w("mingguo", "CommonUtil.mUserArea  " + CommonUtil.mUserArea + "  CommonUtil.mUserHost  "
+				LogUtil.w("mingguo", "CommonUtil.mUserArea  " + CommonUtil.mUserArea + "  CommonUtil.mUserHost  "
 						+ CommonUtil.mUserHost);
 			}
 		});
@@ -334,7 +334,7 @@ public class LoginUserActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 
@@ -365,7 +365,7 @@ public class LoginUserActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100) {
-				Log.w("mingguo", "loginUserActivity  username   " + mUserName + "  password  " + mPassword);
+				LogUtil.w("mingguo", "loginUserActivity  username   " + mUserName + "  password  " + mPassword);
 				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success),
 						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 				getUserInfo(mUserName);
@@ -428,7 +428,7 @@ public class LoginUserActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mLoginAction)) {

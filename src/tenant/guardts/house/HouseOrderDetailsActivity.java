@@ -4,8 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-
+import tenant.guardts.house.model.ConfirmCheckout;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,7 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,15 +29,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
-import tenant.guardts.house.model.ConfirmCheckout;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 public class HouseOrderDetailsActivity extends BaseActivity {
 	private HouseInfoModel mOrderDetail;
@@ -313,7 +313,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 							payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
 							payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
 							payIntent.putExtra("renter_idcard", mOrderDetail.getRenterIdcard());
-							Log.e("", mOrderDetail.getRenterIdcard() + "kkk");
+							LogUtil.e("", mOrderDetail.getRenterIdcard() + "kkk");
 							payIntent.putExtra("orderID", mOrderDetail.getHouseOrderId());
 							payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
 							payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
@@ -550,7 +550,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				Log.w("alertdialog", " �뱣�����ݣ�");
+				LogUtil.w("alertdialog", " �뱣�����ݣ�");
 
 			}
 		});
@@ -586,7 +586,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				Log.w("alertdialog", " �뱣�����ݣ�");
+				LogUtil.w("alertdialog", " �뱣�����ݣ�");
 
 			}
 		});
@@ -741,7 +741,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mRejectRentAction)) {
 				Message msg = mHandler.obtainMessage();

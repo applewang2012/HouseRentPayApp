@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -35,7 +36,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.BaseColumns;
-import android.util.Log;
 import android.util.Pair;
 
 /**
@@ -849,8 +849,8 @@ public class DownloadManager {
 	public long enqueue(Request request) {
 		ContentValues values = request.toContentValues(mPackageName);
 		// add for appstore
-		Log.w("mingguo", "DownloadManager   enqueue   packagename    "+mPackageName);
-		Log.w("mingguo", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
+		LogUtil.w("mingguo", "DownloadManager   enqueue   packagename    "+mPackageName);
+		LogUtil.w("mingguo", "DownloadManager   enqueue   column  packagename    "+request.mRequestPackageName);
 		//values.put(Downloads.COLUMN_FILE_NAME_HINT, (String) request.mTitle);
 		values.put(Downloads.COLUMN_PACKAGE_NAME, request.mRequestPackageName);
 		//values.put(Downloads.COLUMN_NOTIFICATION_CLASS, HomeTabActivity.class.getName());
@@ -958,7 +958,7 @@ public class DownloadManager {
 					.moveToNext()) {
 				int status = cursor
 						.getInt(cursor.getColumnIndex(COLUMN_STATUS));
-				Log.w("download", "DownloadManager   pause download  status   "+status);
+				LogUtil.w("download", "DownloadManager   pause download  status   "+status);
 				if (status != STATUS_RUNNING && status != STATUS_PENDING) {
 					throw new IllegalArgumentException(
 							"Can only pause a running download: "
@@ -1004,7 +1004,7 @@ public class DownloadManager {
 					.moveToNext()) {
 				int status = cursor
 						.getInt(cursor.getColumnIndex(COLUMN_STATUS));
-				Log.w("download", "DownloadManager   resume download  status   "+status);
+				LogUtil.w("download", "DownloadManager   resume download  status   "+status);
 				if (status != STATUS_PAUSED) {
 					throw new IllegalArgumentException(
 							"Cann only resume a paused download: "

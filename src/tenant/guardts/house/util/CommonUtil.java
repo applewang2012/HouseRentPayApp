@@ -120,7 +120,7 @@ public class CommonUtil {
             // 不存在获取内部存
             return null;
         }
-        Log.w("mingguo", "common util get default download path  "+path);
+        LogUtil.w("mingguo", "common util get default download path  "+path);
        return path;
     }
     
@@ -181,7 +181,7 @@ public class CommonUtil {
     /// <param >第二个坐标经度</param>
     /// <returns>两个坐标间的距离</returns>
     public static double GetDistance(double dLngPre, double dLatPre, double dLngNext, double dLatNext){
-    	Log.e("mingguo", "lng "+dLngPre+"  "+ dLatPre+"  "+dLngNext+"  "+dLatNext);
+    	LogUtil.e("mingguo", "lng "+dLngPre+"  "+ dLatPre+"  "+dLngNext+"  "+dLatNext);
         double dRadLatPre = Rad(dLatPre);
         double dRadLatNext = Rad(dLatNext);
         double a = dRadLatPre - dRadLatNext;
@@ -189,7 +189,7 @@ public class CommonUtil {
         double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(dRadLatPre) * Math.cos(dRadLatNext) * Math.pow(Math.sin(b / 2), 2)));
         s = s * dEARTH_RADIUS;
         s = Math.round(s * 10000) / 10000;
-        Log.w("mingguo", "ss "+s);
+        LogUtil.w("mingguo", "ss "+s);
         return s;
 	}
     
@@ -205,13 +205,13 @@ public class CommonUtil {
 		      //计算经纬度
 		      double Latitude=address_temp.getLatitude();
 		      double Longitude=address_temp.getLongitude();
-		      Log.w("mingguo", "经度："+Latitude);
-		      Log.w("mingguo", "纬度："+Longitude);
+		      LogUtil.w("mingguo", "经度："+Latitude);
+		      LogUtil.w("mingguo", "纬度："+Longitude);
 		      //生产GeoPoint
 		      gpGeoPoint = new GeoPoint((int)Latitude, (int)Longitude);
 		    }
 		    } catch (Exception e) {
-		    	Log.e("mingguo", "get getPoint By str  "+e);
+		    	LogUtil.e("mingguo", "get getPoint By str  "+e);
 		      e.printStackTrace();
 		    }
 		  }
@@ -233,13 +233,13 @@ public class CommonUtil {
 					      //计算经纬度
 					       Latitude = address_temp.getLatitude();
 					       Longitude = address_temp.getLongitude();
-					      Log.w("mingguo", "经度："+Latitude);
-					      Log.w("mingguo", "纬度："+Longitude);
+					      LogUtil.w("mingguo", "经度："+Latitude);
+					      LogUtil.w("mingguo", "纬度："+Longitude);
 					      //生产GeoPoint
 					    }
 		        	}
 		    } catch (Exception e) {
-		    	Log.e("mingguo", "get getPoint By str  "+e);
+		    	LogUtil.e("mingguo", "get getPoint By str  "+e);
 		      e.printStackTrace();
 		    }
 		  }

@@ -8,10 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClientOption;
-
+import tenant.guardts.house.selectcity.City;
+import tenant.guardts.house.selectcity.DBHelper;
+import tenant.guardts.house.selectcity.DatabaseHelper;
+import tenant.guardts.house.selectcity.MyLetterListView;
+import tenant.guardts.house.selectcity.MyLetterListView.OnTouchingLetterChangedListener;
+import tenant.guardts.house.selectcity.PingYinUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +24,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,12 +42,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.selectcity.City;
-import tenant.guardts.house.selectcity.DBHelper;
-import tenant.guardts.house.selectcity.DatabaseHelper;
-import tenant.guardts.house.selectcity.MyLetterListView;
-import tenant.guardts.house.selectcity.MyLetterListView.OnTouchingLetterChangedListener;
-import tenant.guardts.house.selectcity.PingYinUtil;
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClientOption;
 
 public class SelectShowCityActivity extends BaseActivity implements OnScrollListener {
 	private BaseAdapter adapter;
@@ -327,7 +327,7 @@ public class SelectShowCityActivity extends BaseActivity implements OnScrollList
 					"select * from city where name like \"%" + keyword
 							+ "%\" or pinyin like \"%" + keyword + "%\"", null);
 			City city;
-			Log.e("info", "length = " + cursor.getCount());
+			LogUtil.e("info", "length = " + cursor.getCount());
 			while (cursor.moveToNext()) {
 				city = new City(cursor.getString(1), cursor.getString(2));
 				city_result.add(city);
@@ -371,7 +371,7 @@ public class SelectShowCityActivity extends BaseActivity implements OnScrollList
 
 		@Override
 		public void onReceiveLocation(BDLocation arg0) {
-			Log.e("info", "city = " + arg0.getCity());
+			LogUtil.e("info", "city = " + arg0.getCity());
 //			if (!isNeedFresh) {
 //				return;
 //			}

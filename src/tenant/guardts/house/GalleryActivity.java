@@ -3,8 +3,9 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
+import tenant.guardts.house.bannerview.ViewPagerFixed;
+import tenant.guardts.house.util.Bimp;
+import tenant.guardts.house.util.LogUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -20,8 +20,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import tenant.guardts.house.bannerview.ViewPagerFixed;
-import tenant.guardts.house.util.Bimp;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 这个是用于进行图片浏览时的界面
@@ -80,7 +80,7 @@ public class GalleryActivity extends Activity {
 		if (mImageStringList != null){
 			mTotalNum = mImageStringList.size();
 			for (int i = 0; i < mImageStringList.size(); i++){
-				Log.w("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
+				LogUtil.w("mingguo", "mImageStringList.get(i) "+mImageStringList.get(i));
 				initListViewsByMemoryBitmap(i);
 			}
 		}

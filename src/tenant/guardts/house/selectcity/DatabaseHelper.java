@@ -1,9 +1,9 @@
 package tenant.guardts.house.selectcity;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	// ��û��ʵ��,�ǲ����������๹�����Ĳ���,��������Ϊ��̬
@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.e("info", "create table");
+		LogUtil.e("info", "create table");
 		db.execSQL("CREATE TABLE IF NOT EXISTS recentcity (id integer primary key autoincrement, name varchar(40), date INTEGER)");
 	}
 

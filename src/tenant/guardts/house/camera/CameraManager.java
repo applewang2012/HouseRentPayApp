@@ -18,13 +18,13 @@ package tenant.guardts.house.camera;
 
 import java.io.IOException;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Handler;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
@@ -210,7 +210,7 @@ public final class CameraManager {
   public void requestAutoFocus(Handler handler, int message) {
     if (camera != null && previewing) {
       autoFocusCallback.setHandler(handler, message);
-      //Log.d(TAG, "Requesting auto-focus callback");
+      //LogUtil.d(TAG, "Requesting auto-focus callback");
       camera.autoFocus(autoFocusCallback);
     }
   }
@@ -248,7 +248,7 @@ public final class CameraManager {
       int leftOffset = (screenResolution.x - width) / 2;
       int topOffset = (screenResolution.y - height) / 3;
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
-      Log.d(TAG, "Calculated framing rect: " + framingRect);
+      LogUtil.d(TAG, "Calculated framing rect: " + framingRect);
     }
     return framingRect;
   }

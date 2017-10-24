@@ -16,10 +16,10 @@
 
 package tenant.guardts.house.camera;
 
+import tenant.guardts.house.util.LogUtil;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 final class AutoFocusCallback implements Camera.AutoFocusCallback {
 
@@ -41,7 +41,7 @@ final class AutoFocusCallback implements Camera.AutoFocusCallback {
       autoFocusHandler.sendMessageDelayed(message, AUTOFOCUS_INTERVAL_MS);
       autoFocusHandler = null;
     } else {
-      Log.d(TAG, "Got auto-focus callback, but no handler for it");
+      LogUtil.d(TAG, "Got auto-focus callback, but no handler for it");
     }
   }
 

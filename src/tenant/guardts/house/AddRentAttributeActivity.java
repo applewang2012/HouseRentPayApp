@@ -10,11 +10,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
+import tenant.guardts.house.util.UtilTool;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,9 +37,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,19 +46,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
-import tenant.guardts.house.util.UtilTool;
+
+import com.google.gson.Gson;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
 public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
 
@@ -142,7 +139,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void checkCanRentHouseTime(String houseno){
-		Log.w("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
+		LogUtil.w("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=CanRentTheHouse";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCanRentHouseListAction));
 		rpc.addProperty("rentNo", houseno); 
@@ -188,10 +185,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	
 	private String[] parseAlreadyRentHouseTime(String value){
 		String [] list = null;
-		Log.w("mingguo", " list item json  value  "+value);
+		LogUtil.w("mingguo", " list item json  value  "+value);
 		try {
 			JSONArray array = new JSONArray(value);
-			Log.w("mingguo", " list item json  array  "+array);
+			LogUtil.w("mingguo", " list item json  array  "+array);
 			if (array != null) {
 				list = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
@@ -201,7 +198,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					String newStartTime = UtilTool.stampToDateTime(startTime.substring(6,startTime.length()-2));
 					String newEndTime = UtilTool.stampToDateTime(endTime.substring(6,endTime.length()-2));
 					list[item] = newStartTime +"至"+newEndTime;
-					Log.w("mingguo", " list item  "+list[item]);
+					LogUtil.w("mingguo", " list item  "+list[item]);
 				}
 			}
 		} catch (Exception e) {
@@ -371,7 +368,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mSetEndData = df.format(cal.getTime());
 		mEndTime.setText(df.format(cal.getTime())); 
 		mEndTimeClipse = cal.getTimeInMillis();
-		Log.w("mingguo", "update end time data  "+mEndTimeClipse);
+		LogUtil.w("mingguo", "update end time data  "+mEndTimeClipse);
 	}
 	
 	private void initView(){
@@ -547,9 +544,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
                 super.handleMessage(msg);
                 int degree = BMapUtil.readPictureDegree(file);
                 Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
-   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
    			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
                 
             }
@@ -594,7 +591,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		if (!checkInputTimeContent()){
 			return false;
 		}
-		//Log.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
+		//LogUtil.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
 		if (mEndTimeClipse + 60000L < mSystemClockTime){
 			Toast.makeText(getApplicationContext(), "租房结束时间需要在当前时间之后！", Toast.LENGTH_SHORT).show();
 			return false;
@@ -671,7 +668,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void startAddRentInfo(){
-			Log.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
+			LogUtil.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
 					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
 			String url = CommonUtil.mUserHost+"services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
@@ -741,9 +738,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
+		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
 		if (resultCode == RESULT_OK && requestCode == 1) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
 			 startLiveIdentifyActivity();
 		}else{
@@ -756,8 +753,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
-		Log.w("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		LogUtil.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		LogUtil.w("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -854,12 +851,12 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				finish();
 			}else if (msg.what == 105){
 				try {
-					Log.e("mingguo", "msg .obj   "+(String)msg.obj);
+					LogUtil.e("mingguo", "msg .obj   "+(String)msg.obj);
 					JSONObject object = new JSONObject((String)msg.obj);
 					if (object != null){
 						String ret = object.optString("ret");
 						if (ret != null){
-							Log.e("mingguo", "ret  "+ret);
+							LogUtil.e("mingguo", "ret  "+ret);
 							if (ret.equals("0")){
 								if (mShowRentHouseDialog){
 									Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT).show();
@@ -879,7 +876,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}
 			}else if (msg.what ==106){
 				mSystemClockTime = UtilTool.DateTimeToStamp((String)msg.obj);
-				Log.w("mingguo", "date to string  system clock  "+mSystemClockTime);
+				LogUtil.w("mingguo", "date to string  system clock  "+mSystemClockTime);
 			}else if (msg.what == 110){
 				
 				try {
@@ -907,7 +904,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}
 			}else if(msg.what==818){
 				String value = (String)msg.obj;
-				Log.e("", value+"----------");
+				LogUtil.e("", value+"----------");
 				//显示服务费信息
 				///////////////////////////////////////////////////////////////////////////////
 				Gson gson=new Gson();
@@ -987,7 +984,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					if (mOrderId != null && !mOrderId.equals("")){
 						mQrcodeView.setVisibility(View.VISIBLE);
 						ImageView qrImageView = (ImageView) mQrcodeView.findViewById(R.id.id_qrcode_view);
-						Log.e("mingguo", "  ret == 0  "+qrImageView.getWidth()+"  height  "+qrImageView.getWidth());
+						LogUtil.e("mingguo", "  ret == 0  "+qrImageView.getWidth()+"  height  "+qrImageView.getWidth());
 						Bitmap qrBitmap = BMapUtil.createQRImage(mOrderId, qrImageView, qrImageView.getWidth(), qrImageView.getHeight());
 						qrImageView.setImageBitmap(qrBitmap);
 						queryIdentifyStatus(mOrderId);
@@ -1069,13 +1066,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //			IdentifyModel model = new IdentifyModel();
 //			try{
 //				JSONObject object = new JSONObject(value);
-//				Log.e("house", "  object  ");
+//				LogUtil.e("house", "  object  ");
 //				if (object != null){
 //						String ret = object.optString("ret");
 //						String desc = object.optString("desc");
 //						model.setIdentifyStatus(ret);
 //						model.setIdentifyInfo(desc);
-//						Log.e("house", "  ret  "+ret+" desc "+desc);
+//						LogUtil.e("house", "  ret  "+ret+" desc "+desc);
 //				}
 //				return model;
 //			} catch (Exception e) {
@@ -1089,7 +1086,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
 		
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddRentAction)){
 				Message msg = mHandler.obtainMessage();
@@ -1097,7 +1094,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}else if (action.equals(mIdentifyUrl)){
-				Log.e("mingguo", "identify url "+mIdentifyUrl);
+				LogUtil.e("mingguo", "identify url "+mIdentifyUrl);
 //				Message msg = mHandler.obtainMessage();
 //				msg.what = 101;
 //				msg.obj = templateInfo;

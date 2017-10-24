@@ -34,7 +34,7 @@ public class BitmapCache extends Activity {
 	public void displayBmp(final ImageView iv, final String thumbPath,
 			final String sourcePath, final ImageCallback callback) {
 		if (TextUtils.isEmpty(thumbPath) && TextUtils.isEmpty(sourcePath)) {
-			Log.e(TAG, "no paths pass in");
+			LogUtil.e(TAG, "no paths pass in");
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class BitmapCache extends Activity {
 					callback.imageLoad(iv, bmp, sourcePath);
 				}
 				iv.setImageBitmap(bmp);
-				Log.d(TAG, "hit cache");
+				LogUtil.d(TAG, "hit cache");
 				return;
 			}
 		}
@@ -85,7 +85,7 @@ public class BitmapCache extends Activity {
 				if (thumb == null) {
 					thumb = SelectPhotoActivity.mAddImageBitmap;
 				}
-				Log.e(TAG, "-------thumb------"+thumb);
+				LogUtil.e(TAG, "-------thumb------"+thumb);
 				put(path, thumb);
 
 				if (callback != null) {

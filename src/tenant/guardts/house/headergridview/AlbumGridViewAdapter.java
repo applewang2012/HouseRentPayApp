@@ -2,11 +2,15 @@ package tenant.guardts.house.headergridview;
 
 import java.util.ArrayList;
 
+import tenant.guardts.house.R;
+import tenant.guardts.house.util.BitmapCache;
+import tenant.guardts.house.util.BitmapCache.ImageCallback;
+import tenant.guardts.house.util.ImageItem;
+import tenant.guardts.house.util.LogUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,10 +20,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import tenant.guardts.house.R;
-import tenant.guardts.house.util.BitmapCache;
-import tenant.guardts.house.util.BitmapCache.ImageCallback;
-import tenant.guardts.house.util.ImageItem;
 
 /**
  * 这个是显示一个文件夹里面的所有图片时用的适配器
@@ -67,10 +67,10 @@ public class AlbumGridViewAdapter extends BaseAdapter{
 				if (url != null && url.equals((String) imageView.getTag())) {
 					((ImageView) imageView).setImageBitmap(bitmap);
 				} else {
-					Log.e(TAG, "callback, bmp not match");
+					LogUtil.e(TAG, "callback, bmp not match");
 				}
 			} else {
-				Log.e(TAG, "callback, bmp null");
+				LogUtil.e(TAG, "callback, bmp null");
 			}
 		}
 	};

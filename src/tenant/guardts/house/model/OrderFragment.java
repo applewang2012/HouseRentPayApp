@@ -1,10 +1,12 @@
 package tenant.guardts.house.model;
 
+import tenant.guardts.house.R;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.LogUtil;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,6 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import tenant.guardts.house.R;
-import tenant.guardts.house.presenter.HoursePresenter;
 
 public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	
@@ -52,7 +52,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.w("fragmenttest", "homefragment onCreateView ");
+		LogUtil.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_layout, container, false);
 		initTitleBar();
 		initView();
@@ -201,7 +201,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 //				}else{
 //					//mContentLayout.setVisibility(View.VISIBLE);
 //					mNoContent.setVisibility(View.INVISIBLE);
-//					Log.w("housefragment", "house list  "+mHouseInfoList.size());
+//					LogUtil.w("housefragment", "house list  "+mHouseInfoList.size());
 //					mAdapter.notifyDataSetChanged();
 //				}
 //			}
@@ -217,7 +217,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 //		try {
 //			array = new JSONArray(value);
 //			if (array != null){
-//				Log.w("house", "parse house info "+array.length());
+//				LogUtil.w("house", "parse house info "+array.length());
 //				for (int item = 0; item < array.length(); item++){
 //					JSONObject itemJsonObject = array.optJSONObject(item);
 //					HouseInfoModel infoModel = new HouseInfoModel();
@@ -242,7 +242,7 @@ public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "success "+templateInfo);
+		LogUtil.e("mingguo", "success "+templateInfo);
 //		if (action.equals(mRentHistoryAction)){
 //			Message msg = mHandler.obtainMessage();
 //			msg.what = 100;

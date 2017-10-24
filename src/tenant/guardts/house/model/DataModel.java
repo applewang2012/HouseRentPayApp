@@ -37,18 +37,16 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.kxml2.kdom.Element;
 import org.kxml2.kdom.Node;
 
-import com.tencent.android.tpush.horse.Tools;
-
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.Log;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.UtilTool;
 
 public class DataModel {
 
@@ -143,7 +141,7 @@ public class DataModel {
 				String resultString = valueObject.getProperty(0).toString();
 				if (resultString != null && resultString.contains("headerError")){
 					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error from header !");
-					Log.e("mingguo", "exception  action   "+mSoapAction+" error from header !");
+					LogUtil.e("mingguo", "exception  action   "+mSoapAction+" error from header !");
 					return null;
 				}
 				Activity activity = (Activity) mContext;
@@ -155,7 +153,7 @@ public class DataModel {
 				
 			} catch (Exception e) {
 				mPresenter.notifyDataRequestError(mSoapAction, "error from exception ");
-				Log.e("mingguo", "exception  action   "+mSoapAction+"  e  "+e);
+				LogUtil.e("mingguo", "exception  action   "+mSoapAction+"  e  "+e);
 			}
 			
 			return null;
@@ -176,7 +174,7 @@ public class DataModel {
 				}
 	    		InputStream ins = null;
 //	    		copyAssetFileToFiles(mContext, "nid.crt");
-//	    		Log.e("house", " file exsits "+new File(mContext.getFilesDir() + "/"+"nid.crt").exists());
+//	    		LogUtil.e("house", " file exsits "+new File(mContext.getFilesDir() + "/"+"nid.crt").exists());
 //	    		ins = new  FileInputStream(new File(mContext.getFilesDir() + "/"+"nid.crt"));
 	    		ins = mContext.getAssets().open("nid.crt");
 	    		CertificateFactory cerFactory = CertificateFactory
@@ -197,16 +195,16 @@ public class DataModel {
 	            if (mPostData == null){
 	            	HttpGet httpGet = new HttpGet(mUrl);
 	            	response = client.execute(httpGet);	
-	            	Log.e("house"," get  data  url  "+mUrl);
+	            	LogUtil.e("house"," get  data  url  "+mUrl);
 	            }else{
-	            	Log.e("house"," post  data  url  "+mUrl);
+	            	LogUtil.e("house"," post  data  url  "+mUrl);
 	            	HttpPost httpPost = new HttpPost(mUrl);
 					// ������������    
 		            List<NameValuePair> urlList = new ArrayList<NameValuePair>(); 
 		            //���ز���
 		            for(Map.Entry<String, String> entry:mPostData.entrySet()){    
 		            	urlList.add(new BasicNameValuePair(entry.getKey(), entry.getValue())); 
-		            	Log.w("house", "entry.getKey()  "+entry.getKey()+"  entry.getValue()  "+entry.getValue());
+		            	LogUtil.w("house", "entry.getKey()  "+entry.getKey()+"  entry.getValue()  "+entry.getValue());
 		            }   
 		            
 		            HttpEntity entity = new UrlEncodedFormEntity(urlList, HTTP.UTF_8);
@@ -215,7 +213,7 @@ public class DataModel {
 	            }
 				
 				int StatusCode = response.getStatusLine().getStatusCode(); 
-				Log.e("house"," get  data  status   "+StatusCode);
+				LogUtil.e("house"," get  data  status   "+StatusCode);
 				if(StatusCode == HttpStatus.SC_OK) 
 				{
 					HttpEntity resRet = response.getEntity();  

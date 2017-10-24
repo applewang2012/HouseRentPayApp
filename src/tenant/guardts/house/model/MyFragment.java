@@ -8,23 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.AboutUsActivity;
 import tenant.guardts.house.AddHouseInfoActivity;
 import tenant.guardts.house.LoginUserActivity;
@@ -34,6 +17,23 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.WalletActivity;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyFragment extends BaseFragment {
 
@@ -75,7 +75,7 @@ public class MyFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Log.w("fragmenttest", "homefragment onCreateView ");
+		LogUtil.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.home_my_fragment, container, false);
 		initView();
 
@@ -221,7 +221,7 @@ public class MyFragment extends BaseFragment {
 	}
 
 	private void initData() {
-		Log.w("mingguo", "my fragment  onresume  login name  " + CommonUtil.mUserLoginName+"  wallet  "+CommonUtil.mUserWallet);
+		LogUtil.w("mingguo", "my fragment  onresume  login name  " + CommonUtil.mUserLoginName+"  wallet  "+CommonUtil.mUserWallet);
 		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
 			mRegistAndLogin.setVisibility(View.GONE);
 			mUserNickname.setText(CommonUtil.mRegisterRealName);
@@ -351,7 +351,7 @@ public class MyFragment extends BaseFragment {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 
 				JSONObject itemJsonObject = array.optJSONObject(0);
@@ -397,7 +397,7 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
-						Log.w("alertdialog", " dialog interface ");
+						LogUtil.w("alertdialog", " dialog interface ");
 					}
 
 				}).show();
@@ -430,7 +430,7 @@ public class MyFragment extends BaseFragment {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
-						Log.w("alertdialog", " �뱣�����ݣ�");
+						LogUtil.w("alertdialog", " �뱣�����ݣ�");
 					}
 
 				}).show();
@@ -500,7 +500,7 @@ public class MyFragment extends BaseFragment {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.e("mingguo", "on status success-----  "+getClass().getName()+action+ "  success " + templateInfo);
+		LogUtil.e("mingguo", "on status success-----  "+getClass().getName()+action+ "  success " + templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (templateInfo != null){
 			if (action.equals(mGetUserInfoAction)){

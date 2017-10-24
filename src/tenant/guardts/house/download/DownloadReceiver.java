@@ -18,6 +18,7 @@ package tenant.guardts.house.download;
 
 import java.io.File;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ContentUris;
@@ -69,11 +70,11 @@ public class DownloadReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         if (DownloadConstants.LOGVV) {
             if (action.equals(DownloadConstants.ACTION_OPEN)) {
-                Log.v(DownloadConstants.TAG, "Receiver open for " + uri);
+                LogUtil.v(DownloadConstants.TAG, "Receiver open for " + uri);
             } else if (action.equals(DownloadConstants.ACTION_LIST)) {
-                Log.v(DownloadConstants.TAG, "Receiver list for " + uri);
+                LogUtil.v(DownloadConstants.TAG, "Receiver list for " + uri);
             } else { // ACTION_HIDE
-                Log.v(DownloadConstants.TAG, "Receiver hide for " + uri);
+                LogUtil.v(DownloadConstants.TAG, "Receiver hide for " + uri);
             }
         }
 
@@ -141,7 +142,7 @@ public class DownloadReceiver extends BroadcastReceiver {
         try {
             context.startActivity(activityIntent);
         } catch (ActivityNotFoundException ex) {
-            Log.d(DownloadConstants.TAG, "no activity for " + mimetype, ex);
+            LogUtil.w(DownloadConstants.TAG, "no activity for " + mimetype, ex);
         }
     }
 

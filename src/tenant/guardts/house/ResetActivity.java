@@ -5,9 +5,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-
-import android.app.Activity;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.ResetStatus;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ViewUtil;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,7 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -23,13 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.ResetStatus;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ViewUtil;
+
+import com.google.gson.Gson;
 
 public class ResetActivity extends BaseActivity implements DataStatusInterface {
 
@@ -127,7 +126,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				
@@ -166,7 +165,7 @@ public class ResetActivity extends BaseActivity implements DataStatusInterface {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("", action + "-------" + templateInfo);
+		LogUtil.e("", action + "-------" + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mSendVerifyCodeAction)) {
 

@@ -108,7 +108,7 @@ public class ScreenShotUtil {
 			file.mkdir();
 		}
 		String filename = file.getPath()+"/"+"guardtsuser"+".jpg";
-		Log.w("mingguo", "generate  file name   "+filename);
+		LogUtil.w("mingguo", "generate  file name   "+filename);
 		return filename;
 	}
 	
@@ -121,7 +121,7 @@ public class ScreenShotUtil {
     		 	File file = files[i];
     		 	if (file != null && file.exists()){
     		 		if (file.delete()){
-    		 			Log.w("mingguo", "delete file success "+file.getPath());
+    		 			LogUtil.w("mingguo", "delete file success "+file.getPath());
     		 		}
     		 	}
     	  }
@@ -281,7 +281,7 @@ public class ScreenShotUtil {
             } else {
                 retriever.setDataSource(url);
             }
-            Log.w("mingguo", "video thumbnail  position   "+position);
+            LogUtil.w("mingguo", "video thumbnail  position   "+position);
             Bitmap originBitmap = retriever.getFrameAtTime(position*1000); //΢��
             bitmap = Bitmap.createScaledBitmap(originBitmap, width, height, true);
         } catch (IllegalArgumentException ex) {
@@ -340,7 +340,7 @@ public class ScreenShotUtil {
 
 
 		        if(runningTaskInfos != null){
-		        	Log.w("mingguo"  ,"package name  "+ packageName+"  activity  "+topActivity.toString()) ;
+		        	LogUtil.w("mingguo"  ,"package name  "+ packageName+"  activity  "+topActivity.toString()) ;
 		        }
 
 		        	
@@ -360,9 +360,9 @@ public class ScreenShotUtil {
 		int deepth = localPixelFormat1.bytesPerPixel;//位深
 			    
 		File mydir= new File("/dev/graphics/"); 
-		Log.w("mingguo", "mdydir    "+mydir.exists());
+		LogUtil.w("mingguo", "mdydir    "+mydir.exists());
 		File fbfile = new File(mydir, "fb0");  
-		Log.w("mingguo", "fbfile     "+fbfile.exists());
+		LogUtil.w("mingguo", "fbfile     "+fbfile.exists());
 		FileInputStream inStream = new FileInputStream(fbfile);
 		
 		byte[] piex = new byte[height * width * deepth];
@@ -380,7 +380,7 @@ public class ScreenShotUtil {
 				}
 			}
 			Bitmap bitmap = Bitmap.createBitmap(colors, width, height, Bitmap.Config.ARGB_8888);
-			Log.w("mingguo", "bitmap   "+bitmap);
+			LogUtil.w("mingguo", "bitmap   "+bitmap);
 			Date nowDate = new Date();
 			
 			FileOutputStream out;
@@ -405,7 +405,7 @@ public class ScreenShotUtil {
 				//vibrator.cancel();
 				//vibrator.cancel();
 			} catch (Exception e) {
-				Log.w("mingguo", "exception    "+e);
+				LogUtil.w("mingguo", "exception    "+e);
 				e.printStackTrace();
 			}
 		}

@@ -4,23 +4,22 @@ import java.util.ArrayList;
 
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Window;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.adapter.TransactionDetailAdapter;
 import tenant.guardts.house.bean.Detail;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.Window;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class TransactionDetailActivity extends BaseActivity implements DataStatusInterface {
 
@@ -80,7 +79,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 			
 			if (msg.what == 818) {
 				String value = (String) msg.obj;
-				Log.e("", value+"---交易明细---");
+				LogUtil.e("", value+"---交易明细---");
 				Gson gson = new Gson();
 				ArrayList<Detail> result = gson.fromJson(value, new TypeToken<ArrayList<Detail>>() {
 				}.getType());
@@ -97,7 +96,7 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mGetBillLog)) {
 				Message msg = mHandler.obtainMessage();

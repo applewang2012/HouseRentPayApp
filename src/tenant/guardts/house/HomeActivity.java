@@ -8,17 +8,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-import com.tencent.android.tpush.XGPushClickedResult;
-import com.tencent.android.tpush.XGPushManager;
-
+import tenant.guardts.house.download.Downloads;
+import tenant.guardts.house.model.HouseFragment;
+import tenant.guardts.house.model.MyFragment;
+import tenant.guardts.house.model.OrderFragment;
+import tenant.guardts.house.model.SurroundFragment;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,7 +35,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,17 +44,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.download.Downloads;
-import tenant.guardts.house.model.HouseFragment;
-import tenant.guardts.house.model.MyFragment;
-import tenant.guardts.house.model.OrderFragment;
-import tenant.guardts.house.model.SurroundFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
-import tenant.guardts.house.util.ViewUtil;
+
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+import com.tencent.android.tpush.XGPushClickedResult;
+import com.tencent.android.tpush.XGPushManager;
 
 public class HomeActivity extends BaseActivity {
 
@@ -271,7 +269,7 @@ public class HomeActivity extends BaseActivity {
 		surroundlayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e("mingguo", "surround   onclick  ");
+				LogUtil.e("mingguo", "surround   onclick  ");
 				houseIcon.setBackgroundResource(R.drawable.home_icon_default);
 				houseText.setTextColor(Color.parseColor("#b2b2b2"));
 				myIcon.setBackgroundResource(R.drawable.my_icon_default);
@@ -470,7 +468,7 @@ public class HomeActivity extends BaseActivity {
 			
 			return;
 		}
-		Log.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile()+" delete database "
+		LogUtil.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile()+" delete database "
 				+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
 			
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
@@ -539,7 +537,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
-				Log.w("alertdialog", " �뱣�����ݣ�");
+				LogUtil.w("alertdialog", " �뱣�����ݣ�");
 			}
 		});
 		builder.setCancelable(false);
@@ -550,7 +548,7 @@ public class HomeActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 
 				JSONObject itemJsonObject = array.optJSONObject(0);
@@ -600,7 +598,7 @@ public class HomeActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				return itemJsonObject.optString("IDCard");
 			}
@@ -635,24 +633,29 @@ public class HomeActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "HomeActivity  onActivityResult result code  " + resultCode + "   requestcode  " + requestCode
+		LogUtil.w("mingguo", "HomeActivity  onActivityResult result code  " + resultCode + "   requestcode  " + requestCode
 				+ " data  " + data);
 		// 处理扫描结果（在界面上显示）
 		if (resultCode == RESULT_OK && requestCode == CommonUtil.mScanCodeRequestCode) {
 			// getOpenDoorRequest("0201002200100002");
 			Bundle bundle = data.getExtras();
 			String scanResult = bundle.getString("result");
-			Log.e("mingguo", "scan  result  " + scanResult);
+
+			LogUtil.e("mingguo", "scan  result  " + scanResult);
 			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
+
+			LogUtil.e("mingguo", "scan  result  " + scanResult);
+			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
+
 			int pos = scanResult.lastIndexOf("=");
 			mLockNumber = scanResult.substring(pos + 1);
-			Log.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);
+			LogUtil.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);
 			if (mLockNumber != null && mLockNumber.length() > 2) {
 				canOpenDoorRequest(mLockNumber, CommonUtil.mRegisterIdcard);
 				//showOpenDoorAlertDialog(mLockNumber + "");
 			}
 		}else if (resultCode == RESULT_OK && requestCode == CommonUtil.mIndentifyUserRequestCode) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
 			 startLiveIdentifyActivity();
 		}
@@ -693,8 +696,8 @@ public class HomeActivity extends BaseActivity {
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
-		Log.w("mingguo", "register interface  CommonUtil.mRegisterIdcard  "+CommonUtil.mRegisterIdcard+"  CommonUtil.mRegisterRealName  "+CommonUtil.mRegisterRealName);
+		LogUtil.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
+		LogUtil.w("mingguo", "register interface  CommonUtil.mRegisterIdcard  "+CommonUtil.mRegisterIdcard+"  CommonUtil.mRegisterRealName  "+CommonUtil.mRegisterRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", CommonUtil.mRegisterIdcard);
@@ -717,9 +720,9 @@ public class HomeActivity extends BaseActivity {
                 super.handleMessage(msg);
                 int degree = BMapUtil.readPictureDegree(file);
                 Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
-   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
    			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
                 
             }
@@ -747,7 +750,7 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mUpdateAction)) {
 				Message message = mHandler.obtainMessage();

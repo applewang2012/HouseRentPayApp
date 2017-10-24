@@ -8,6 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.EvaluationActivity;
+import tenant.guardts.house.EvaluationDetailActivity;
+import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,7 +28,6 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,15 +37,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import tenant.guardts.house.ApplyForCheckoutActivity;
-import tenant.guardts.house.EvaluationActivity;
-import tenant.guardts.house.EvaluationDetailActivity;
-import tenant.guardts.house.HouseOrderDetailsActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.UtilTool;
 
 public class OrderZhuHuFragment extends BaseFragment{
 	
@@ -70,7 +69,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.w("fragmenttest", "homefragment onCreateView ");
+		LogUtil.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_history_zufang_fragment, container, false);
 		initView();
 		//initData();
@@ -108,7 +107,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "renter");
-				Log.w("mingguo", "password  "+mHouseInfoList.get(position).getDoorPassword());
+				LogUtil.w("mingguo", "password  "+mHouseInfoList.get(position).getDoorPassword());
 				startActivity(intent);
 			}
 		});
@@ -118,7 +117,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 			
 			@Override
 			public void onRefresh() {
-				Log.e("mingguo", "on Refresh  ");
+				LogUtil.e("mingguo", "on Refresh  ");
 				getHouseHistoryData();
 			}
 		});  
@@ -611,7 +610,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				}else{
 					//mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("housefragment", "house list  "+mHouseInfoList.size());
+					LogUtil.w("housefragment", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 103){
@@ -660,7 +659,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.w("mingguo", "parse house info "+array.length());
+				LogUtil.w("mingguo", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -715,7 +714,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 	
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		LogUtil.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentHistoryAction)){

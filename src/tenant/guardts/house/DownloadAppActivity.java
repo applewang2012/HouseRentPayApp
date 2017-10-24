@@ -3,6 +3,13 @@ package tenant.guardts.house;
 
 import java.io.File;
 
+import tenant.guardts.house.download.DownloadManager;
+import tenant.guardts.house.download.DownloadManager.Request;
+import tenant.guardts.house.downloadui.DownloadAdapter;
+import tenant.guardts.house.downloadui.DownloadSelectListener;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +18,6 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -22,12 +28,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.download.DownloadManager;
-import tenant.guardts.house.download.DownloadManager.Request;
-import tenant.guardts.house.downloadui.DownloadAdapter;
-import tenant.guardts.house.downloadui.DownloadSelectListener;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 public class DownloadAppActivity extends BaseActivity{
 
@@ -141,11 +141,11 @@ public class DownloadAppActivity extends BaseActivity{
         		.moveToNext()) {
 			String databasepath = mSizeSortedCursor.getString(mLocalUriColumnId);
 			String downloadUrl = mSizeSortedCursor.getString(mDownloadUrlColumnId);
-			Log.w("mingguo", "database  download path  "+databasepath+"  download url  "+downloadUrl);
+			LogUtil.w("mingguo", "database  download path  "+databasepath+"  download url  "+downloadUrl);
 			if (downloadUrl != null && downloadUrl.equalsIgnoreCase(CommonUtil.DOWLOAD_URL)){
 				int downloadId =  mSizeSortedCursor.getInt(mIdColumnId);
 				if (downloadpath == null){
-					Log.e("mingguo", "download path null  remove download id "+downloadId);
+					LogUtil.e("mingguo", "download path null  remove download id "+downloadId);
 					mDownloadManager.remove(downloadId);
 				}
 				//if (databasepath.equalsIgnoreCase("file://"+downloadpath)){
@@ -158,7 +158,7 @@ public class DownloadAppActivity extends BaseActivity{
 			
 		}
 		if (downloadpath != null && new File(downloadpath).exists()){
-			Log.e("mingguo", "download database null delete download file ");
+			LogUtil.e("mingguo", "download database null delete download file ");
 			new File(downloadpath).delete();
 		}
 		return -1;
@@ -221,10 +221,10 @@ public class DownloadAppActivity extends BaseActivity{
         @Override
         public void onReceive(Context context, Intent intent) {
         	//PackageManager manager = context.getPackageManager();
-        	Log.e("mingguo", "onReceiver  ");
+        	LogUtil.e("mingguo", "onReceiver  ");
 //        	if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED) || intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)){
 //        		String packageName = intent.getData().getSchemeSpecificPart();
-//        		Log.e("mingguo", "package name "+packageName);
+//        		LogUtil.e("mingguo", "package name "+packageName);
 //        		if (packageName != null && packageName.equals(GlobalUtil.getPackageName(getApplicationContext()))){
 //        			mDownloadManager.remove(mCurrentDownloadId);
 //        			new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL)).delete();

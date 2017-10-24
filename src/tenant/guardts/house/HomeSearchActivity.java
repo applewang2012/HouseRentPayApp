@@ -3,6 +3,7 @@ package tenant.guardts.house;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import tenant.guardts.house.model.ActivityController;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -20,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import tenant.guardts.house.model.ActivityController;
 
 public class HomeSearchActivity extends BaseActivity {
 

@@ -18,9 +18,11 @@ package tenant.guardts.house.decoding;
 
 import java.util.Vector;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-
+import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.zxingview.ViewfinderResultPointCallback;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,11 +30,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import tenant.guardts.house.CaptureActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.zxingview.ViewfinderResultPointCallback;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -66,17 +66,17 @@ public final class CaptureActivityHandler extends Handler {
 	@Override
 	public void handleMessage(Message message) {
 		if (message.what == R.id.auto_focus) {
-			//Log.d(TAG, "Got auto-focus message");
+			//LogUtil.d(TAG, "Got auto-focus message");
 			// When one auto focus pass finishes, start another. This is the closest thing to
 			// continuous AF. It does seem to hunt a bit, but I'm not sure what else to do.
 			if (state == State.PREVIEW) {
 				CameraManager.get().requestAutoFocus(this, R.id.auto_focus);
 			}
 		}else if (message.what == R.id.restart_preview) {
-			Log.d(TAG, "Got restart preview message");
+			LogUtil.d(TAG, "Got restart preview message");
 			restartPreviewAndDecode();
 		}else if (message.what == R.id.decode_succeeded) {
-			Log.d(TAG, "Got decode succeeded message");
+			LogUtil.d(TAG, "Got decode succeeded message");
 			state = State.SUCCESS;
 			Bundle bundle = message.getData();
 
@@ -91,11 +91,11 @@ public final class CaptureActivityHandler extends Handler {
 			state = State.PREVIEW;
 			CameraManager.get().requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
 		}else if (message.what == R.id.return_scan_result) {
-			Log.d(TAG, "Got return scan result message");
+			LogUtil.d(TAG, "Got return scan result message");
 			activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
 			activity.finish();
 		}else if (message.what == R.id.launch_product_query) {
-			Log.d(TAG, "Got product query message");
+			LogUtil.d(TAG, "Got product query message");
 			String url = (String) message.obj;
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);

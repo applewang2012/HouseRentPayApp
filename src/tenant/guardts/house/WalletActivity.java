@@ -6,21 +6,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.wxapi.RechargeActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.MyFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.wxapi.RechargeActivity;
 
 public class WalletActivity extends BaseActivity {
 
@@ -85,7 +83,7 @@ public class WalletActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// 跳转提现
-					Log.e("",CommonUtil.mUserWallet+"---");
+					LogUtil.e("",CommonUtil.mUserWallet+"---");
 				if (CommonUtil.mUserWallet == null || CommonUtil.mUserWallet.equals("")
 						|| CommonUtil.mUserWallet.equalsIgnoreCase("null")||CommonUtil.mUserWallet.equals("0.0")) {
 					Toast.makeText(WalletActivity.this, "您的钱包余额为0，暂不能使用提现功能", Toast.LENGTH_SHORT).show();
@@ -123,7 +121,7 @@ public class WalletActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");

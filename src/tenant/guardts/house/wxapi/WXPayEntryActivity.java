@@ -9,23 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
@@ -33,6 +16,23 @@ import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.tencent.mm.sdk.constants.ConstantsAPI;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler, DataStatusInterface{
 	
@@ -56,7 +56,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
-        Log.w("mingguo", "wxpay entry activity  oncreate  ");
+        LogUtil.w("mingguo", "wxpay entry activity  oncreate  ");
     	api = WXAPIFactory.createWXAPI(this, CommonUtil.APP_ID);
         api.handleIntent(getIntent(), this);
         
@@ -75,7 +75,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         mOrderNo.setText(CommonUtil.ORDER_NO);
         mOrderMonkey.setText(CommonUtil.ORDER_MONKEY+"　元");
         mFinishPay = (Button)v.findViewById(R.id.id_button_finish_pay);
-        Log.w("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
+        LogUtil.w("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
         		" CommonUtil.ORDER_NO "+CommonUtil.ORDER_NO+" CommonUtil.ORDER_MONKEY "+CommonUtil.ORDER_MONKEY);
         Toast.makeText(getApplicationContext(), "请点击完成，刷新订单信息", Toast.LENGTH_LONG).show();
         mFinishPay.setOnClickListener(new OnClickListener() {
@@ -190,8 +190,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Log.w(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
-		Log.w("mingguo", "wxpay entry activity  wallet  "+CommonUtil.ORDER_MONKEY+"  payHouse Order ID  "+CommonUtil.mPayHouseOrderId);
+		LogUtil.w(TAG, "onPayFinish, errCode = " + resp.errCode+" yuanyin  "+resp.errStr);
+		LogUtil.w("mingguo", "wxpay entry activity  wallet  "+CommonUtil.ORDER_MONKEY+"  payHouse Order ID  "+CommonUtil.mPayHouseOrderId);
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			if (resp.errCode == 0){
 				ActivityController.finishAll();
@@ -330,13 +330,13 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
-		Log.w("mingguo", "on error  action "+action+"  error  "+error);
+		LogUtil.w("mingguo", "on error  action "+action+"  error  "+error);
 	}
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		LogUtil.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCompleteRentAttribute)){

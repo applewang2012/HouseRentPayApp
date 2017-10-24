@@ -3,10 +3,18 @@ package tenant.guardts.house;
 import java.io.IOException;
 import java.util.Vector;
 
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import android.app.FragmentTransaction;
+
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.decoding.CaptureActivityHandler;
+import tenant.guardts.house.decoding.InactivityTimer;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.zxingview.ViewfinderView;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -25,6 +33,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
@@ -33,6 +42,11 @@ import tenant.guardts.house.model.ScanQrCodeFragment;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
+
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+
 
 /**
  * Initial the camera

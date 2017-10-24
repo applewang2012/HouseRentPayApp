@@ -2,11 +2,10 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 
-import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
-import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.baidu.mapapi.search.sug.SuggestionSearch;
-import com.baidu.mapapi.search.sug.SuggestionSearchOption;
-
+import tenant.guardts.house.adapter.HistoryRecordsAdapter;
+import tenant.guardts.house.helper.MapRecordSQLiteHelper;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ViewUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,7 +14,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,9 +24,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import tenant.guardts.house.adapter.HistoryRecordsAdapter;
-import tenant.guardts.house.helper.MapRecordSQLiteHelper;
-import tenant.guardts.house.util.ViewUtil;
+
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 
 public class MapSuggestSearchActivity extends BaseActivity implements OnGetSuggestionResultListener{
 
@@ -246,7 +246,7 @@ public class MapSuggestSearchActivity extends BaseActivity implements OnGetSugge
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ViewUtil.forceCloseSoftKeyborad(MapSuggestSearchActivity.this);
-				Log.w("mingguo", "map search suggest item click  "+mSearchText.getText().toString());
+				LogUtil.w("mingguo", "map search suggest item click  "+mSearchText.getText().toString());
 				insertData(mSearchText.getText().toString().trim());
 				Intent resultIntent = new Intent();
 				Bundle bundle = new Bundle();

@@ -2,11 +2,15 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -14,10 +18,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 public class RegisterUserStep1Activity extends BaseActivity{
 
@@ -83,7 +83,7 @@ public class RegisterUserStep1Activity extends BaseActivity{
 				mPassword = password.getEditableText().toString();
 				mPasswordIndentify = passowrdInditfy.getEditableText().toString();
 				
-				Log.w("mingguo", "user name  "+mUserName);
+				LogUtil.w("mingguo", "user name  "+mUserName);
 				if (mUserName == null || mUserName.equals("")){
 					GlobalUtil.shortToast(getApplication(), getString(R.string.user_name_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
@@ -121,9 +121,9 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
+		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
 		if (resultCode == RESULT_OK && requestCode == 1) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 		}
 	}
 
@@ -169,10 +169,10 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mValidAction)){
-				Log.w("mingguo", "on success  action valid ");
+				LogUtil.w("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
 					

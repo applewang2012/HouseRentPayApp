@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -37,7 +38,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Process;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 /**
  * Performs the background downloads requested by applications that use the
@@ -89,7 +89,7 @@ public class DownloadService extends Service {
 	@Override
 	public void onChange(final boolean selfChange) {
 	    if (DownloadConstants.LOGVV) {
-		Log.v(DownloadConstants.TAG,
+		LogUtil.v(DownloadConstants.TAG,
 			"Service ContentObserver received notification");
 	    }
 	    updateFromProvider();
@@ -116,7 +116,7 @@ public class DownloadService extends Service {
 	public void onCreate() {
 	super.onCreate();
 	if (DownloadConstants.LOGVV) {
-	    Log.v(DownloadConstants.TAG, "Service onCreate");
+	    LogUtil.v(DownloadConstants.TAG, "Service onCreate");
 	}
 
 	if (mSystemFacade == null) {
@@ -137,7 +137,7 @@ public class DownloadService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 	int returnValue = super.onStartCommand(intent, flags, startId);
 	if (DownloadConstants.LOGVV) {
-	    Log.v(DownloadConstants.TAG, "Service onStart");
+	    LogUtil.v(DownloadConstants.TAG, "Service onStart");
 	}
 	updateFromProvider();
 	return returnValue;
@@ -150,7 +150,7 @@ public class DownloadService extends Service {
 	public void onDestroy() {
 	getContentResolver().unregisterContentObserver(mObserver);
 	if (DownloadConstants.LOGVV) {
-	    Log.v(DownloadConstants.TAG, "Service onDestroy");
+	    LogUtil.v(DownloadConstants.TAG, "Service onDestroy");
 	}
 	super.onDestroy();
     }
@@ -275,12 +275,12 @@ public class DownloadService extends Service {
 	private void scheduleAlarm(long wakeUp) {
 	    AlarmManager alarms = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 	    if (alarms == null) {
-		Log.e(DownloadConstants.TAG, "couldn't get alarm manager");
+		LogUtil.e(DownloadConstants.TAG, "couldn't get alarm manager");
 		return;
 	    }
 
 	    if (DownloadConstants.LOGV) {
-		Log.v(DownloadConstants.TAG, "scheduling retry in " + wakeUp + "ms");
+		LogUtil.v(DownloadConstants.TAG, "scheduling retry in " + wakeUp + "ms");
 	    }
 
 	    Intent intent = new Intent(DownloadConstants.ACTION_RETRY);
@@ -330,7 +330,7 @@ public class DownloadService extends Service {
 	while (iterator.hasNext()) {
 	    String filename = iterator.next();
 	    if (DownloadConstants.LOGV) {
-		Log.v(DownloadConstants.TAG, "deleting spurious file " + filename);
+		LogUtil.v(DownloadConstants.TAG, "deleting spurious file " + filename);
 	    }
 	    new File(filename).delete();
 	}
@@ -348,7 +348,7 @@ public class DownloadService extends Service {
 	if (cursor == null) {
 	    // This isn't good - if we can't do basic queries in our database,
 	    // nothing's gonna work
-	    Log.e(DownloadConstants.TAG, "null cursor in trimDatabase");
+	    LogUtil.e(DownloadConstants.TAG, "null cursor in trimDatabase");
 	    return;
 	}
 	if (cursor.moveToFirst()) {

@@ -19,16 +19,16 @@ package tenant.guardts.house.download;
 import java.util.Collection;
 import java.util.HashMap;
 
+import tenant.guardts.house.R;
+import tenant.guardts.house.util.LogUtil;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
-import tenant.guardts.house.R;
 
 /**
  * This class handles the updating of the Notification Manager for the
@@ -201,7 +201,7 @@ class DownloadNotification {
             intent.putExtra("multiple", item.mTitleCount > 1);
 
             n.contentIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
-            Log.w("mingguo", "DownloadNotification   intent download receiver  progresss  "+getDownloadingText(item.mTotalTotal, item.mTotalCurrent));
+            LogUtil.w("mingguo", "DownloadNotification   intent download receiver  progresss  "+getDownloadingText(item.mTotalTotal, item.mTotalCurrent));
             mSystemFacade.postNotification(item.mId, n);
 
         }

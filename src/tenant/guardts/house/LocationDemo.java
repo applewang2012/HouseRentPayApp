@@ -9,6 +9,22 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -28,22 +44,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
 
 /**
  * 此demo用来展示如何结合定位SDK实现定位，并使用MyLocationOverlay绘制定位位置 同时展示如何使用自定义图标绘制并点击时弹出泡泡
@@ -110,7 +110,7 @@ public class LocationDemo extends BaseActivity {
                 button.setTextColor(Color.parseColor("#000000"));
                 OnInfoWindowClickListener listener = null;
                 int index = getCurrentMarkerIndex(marker);
-                Log.w("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
+                LogUtil.w("mingguo", "index  "+index+"  owner  "+mHouserList.get(index).get("ROwner"));
                 button.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
                 "电话："+mHouserList.get(index).get("ROwnerTel"));
                 LatLng ll = marker.getPosition();
@@ -198,7 +198,7 @@ public class LocationDemo extends BaseActivity {
     }
     
     private void getLocationByCoordinates(){
-    	Log.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
+    	LogUtil.w("mingguo", "location by coordates lati  "+mLati+"  longti  "+mLongi);
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentsByCoodinates";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
 		rpc.addProperty("lat", mLati+""); 
@@ -242,7 +242,7 @@ public class LocationDemo extends BaseActivity {
 			}
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.w("mingguo", "house  location  num   "+array.length());
+				LogUtil.w("mingguo", "house  location  num   "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -319,7 +319,7 @@ public class LocationDemo extends BaseActivity {
 				if (resultCode == RESULT_OK) {
 					Bundle bundle = data.getExtras();
 					String scanResult = bundle.getString("result");
-					Log.e("mingguo", "scan  result  "+scanResult);
+					LogUtil.e("mingguo", "scan  result  "+scanResult);
 					if (!TextUtils.isEmpty(scanResult)){
 						Intent attributeIntent = new Intent(LocationDemo.this, GetRentAttributeActivity.class);
 						attributeIntent.putExtra("order_id", scanResult);
@@ -358,7 +358,7 @@ public class LocationDemo extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		LogUtil.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		
 		if (action != null){

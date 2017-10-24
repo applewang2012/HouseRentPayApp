@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tenant.guardts.house.headergridview.StickyGridHeadersBaseAdapter;
+import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
+import tenant.guardts.house.model.SurroundInfo;
+import tenant.guardts.house.util.GlobalUtil;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -18,10 +22,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import tenant.guardts.house.headergridview.StickyGridHeadersBaseAdapter;
-import tenant.guardts.house.headergridview.StickyGridHeadersGridView;
-import tenant.guardts.house.model.SurroundInfo;
-import tenant.guardts.house.util.GlobalUtil;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse

@@ -4,22 +4,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 public class RegisterUserStep2Activity extends BaseActivity{
 
@@ -69,7 +69,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				Log.w("mingguo", "register step 2  phone  "+mPhone);
+				LogUtil.w("mingguo", "register step 2  phone  "+mPhone);
 				if (mTimeCount < 0){
 					mTimeCount = 60;
 					sendPhoneVerifyCode(mPhone);
@@ -152,9 +152,9 @@ public class RegisterUserStep2Activity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
+		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  ");
 		if (resultCode == RESULT_OK && requestCode == 1) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 		}
 			
 	}
@@ -261,7 +261,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCheckVerifyCodeAction)){
 				Message message = mHandler.obtainMessage();
@@ -271,7 +271,7 @@ public class RegisterUserStep2Activity extends BaseActivity{
 			}else if (action.equals(mSendVerifyCodeAction)){
 				
 			}else if (action.equals(mValidAction)){
-				Log.w("mingguo", "on success  action valid ");
+				LogUtil.w("mingguo", "on success  action valid ");
 				if (templateInfo.equals("false")){
 					mHandler.sendEmptyMessage(100);
 				}else{

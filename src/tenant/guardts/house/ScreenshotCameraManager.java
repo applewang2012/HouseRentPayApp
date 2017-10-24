@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import tenant.guardts.house.util.LogUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
-import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class ScreenshotCameraManager {
@@ -143,14 +143,14 @@ public class ScreenshotCameraManager {
 			}
 			File pictureFile = new File(PHOTO_PATH, getPhotoFileName());
 			try {
-				Log.w("mingguo", " bmp  width  "+bitmap.getWidth()+"  height  "+bitmap.getHeight());
+				LogUtil.w("mingguo", " bmp  width  "+bitmap.getWidth()+"  height  "+bitmap.getHeight());
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
 				bitmap.recycle();
 				fos.close();
-				Log.w(TAG, "拍摄成功！");
+				LogUtil.w(TAG, "拍摄成功！");
 			} catch (Exception error) {
-				Log.e(TAG, "拍摄失败");
+				LogUtil.e(TAG, "拍摄失败");
 				error.printStackTrace();
 			} finally {
 				mCamera.stopPreview();

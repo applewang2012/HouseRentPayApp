@@ -2,29 +2,26 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.Window;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.adapter.RentalDetailAdapter;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.RentRecord;
 import tenant.guardts.house.model.RentalDetail;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Window;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class RentalDetailActivity extends BaseActivity implements DataStatusInterface{
 	private String mCanRentHouseListAction = "http://tempuri.org/CanRentTheHouse";
@@ -56,7 +53,7 @@ public class RentalDetailActivity extends BaseActivity implements DataStatusInte
 								Gson gson=new Gson();
 								RentalDetail detail = gson.fromJson(value, RentalDetail.class);
 								ArrayList<RentRecord> list=gson.fromJson(detail.rentRecord,new TypeToken<ArrayList<RentRecord>>(){}.getType());
-								Log.e("", list.size()+"==");
+								LogUtil.e("", list.size()+"==");
 								
 								RentalDetailAdapter adapter = new RentalDetailAdapter(RentalDetailActivity.this, list);
 								mListView.setAdapter(adapter);
@@ -75,7 +72,7 @@ public class RentalDetailActivity extends BaseActivity implements DataStatusInte
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCanRentHouseListAction)){
 				Message message = mHandler.obtainMessage();

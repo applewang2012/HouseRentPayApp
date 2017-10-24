@@ -1,13 +1,10 @@
 package tenant.guardts.house;
 
-import android.content.Intent;
+import tenant.guardts.house.util.CommonUtil;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import tenant.guardts.house.util.CommonUtil;
 
 public class BankActivity extends BaseActivity {
 

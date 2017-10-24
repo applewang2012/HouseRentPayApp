@@ -7,6 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.adapter.PublishedRecordAdapter;
+import tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -24,12 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.adapter.PublishedRecordAdapter;
-import tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.view.CityInterface;
 
 public class MyHouseActivity extends BaseActivity
 		implements OnItemClickListener, CallBack{
@@ -113,7 +112,7 @@ public class MyHouseActivity extends BaseActivity
 		try {
 			array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				for (int item = 0; item < array.length(); item++) {
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					HouseInfoModel infoModel = new HouseInfoModel();
@@ -187,7 +186,7 @@ public class MyHouseActivity extends BaseActivity
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mRentListAction)) {
 				Message msg = mHandler.obtainMessage();

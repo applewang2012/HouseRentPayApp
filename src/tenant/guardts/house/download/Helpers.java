@@ -22,6 +22,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,7 +38,6 @@ import android.text.TextUtils;
 import android.util.Config;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-import tenant.guardts.house.util.CommonUtil;
 
 /**
  * Some helper functions for the download manager
@@ -103,7 +104,7 @@ public class Helpers {
 //	else if (destination == Downloads.DESTINATION_CACHE_PARTITION){          //add for appstore store file for cache dir
 //		File base = getCachePartitionFileName(context, hint, mimeType, destination,
 //				contentLength);
-//			Log.w("welcome", "Helpers  chooseFullPath   "+base.getPath());
+//			LogUtil.w("welcome", "Helpers  chooseFullPath   "+base.getPath());
 //		return base.getPath();
 //	}
 	else {
@@ -126,7 +127,7 @@ public class Helpers {
 	    path = generateFilePath(basePath, url, hint, contentDisposition,
 		    contentLocation, mimeType, destination, contentLength);
 	} else if (new File(path).exists()) {
-	    Log.d(DownloadConstants.TAG, "File already exists: " + path);
+	    LogUtil.d(DownloadConstants.TAG, "File already exists: " + path);
 	    throw new GenerateSaveFileError(
 		    Downloads.STATUS_FILE_ALREADY_EXISTS_ERROR,
 		    "requested destination file already exists");
@@ -180,7 +181,7 @@ public class Helpers {
 	filename = basePath + File.separator + filename;
 
 	if (DownloadConstants.LOGVV) {
-	    Log.v(DownloadConstants.TAG, "target file: " + filename + extension);
+	    LogUtil.v(DownloadConstants.TAG, "target file: " + filename + extension);
 	}
 
 	return chooseUniqueFilename(destination, filename, extension,
@@ -193,8 +194,8 @@ public class Helpers {
 	    throws GenerateSaveFileError {
 	File base = locateDestinationDirectory(context, mimeType, destination,
 		contentLength);
-	Log.w("welcome", "Helpers  chooseFullPath  file base  "+base.getPath());
-	Log.w("welcome", "Helpers  chooseFullPath  hint   "+hint);
+	LogUtil.w("welcome", "Helpers  chooseFullPath  file base  "+base.getPath());
+	LogUtil.w("welcome", "Helpers  chooseFullPath  hint   "+hint);
 	return generateFilePath(base.getPath(), url, hint, contentDisposition,
 		contentLocation, mimeType, destination, contentLength);
     }
@@ -231,7 +232,7 @@ public class Helpers {
 
 	    if (ri == null) {
 		if (DownloadConstants.LOGV) {
-		    Log.v(DownloadConstants.TAG, "no handler found for type "
+		    LogUtil.v(DownloadConstants.TAG, "no handler found for type "
 			    + mimeType);
 		}
 		throw new GenerateSaveFileError(
@@ -266,7 +267,7 @@ public class Helpers {
     	//add for appstore
     	//File cacheDirFile = new File(context.getCacheDir(), "/");
     	File cacheDirFile = new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL), "/");
-    	Log.w("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
+    	LogUtil.w("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
     	if (!cacheDirFile.isDirectory() && !cacheDirFile.mkdir()) {
     	    // Can't create download directory, e.g. because a file called
     	    // "download"
@@ -289,7 +290,7 @@ public class Helpers {
 	File root = Environment.getExternalStorageDirectory();
 	if (getAvailableBytes(root) < contentLength) {
 	    // Insufficient space.
-	    Log.d(DownloadConstants.TAG, "download aborted - not enough free space");
+	    LogUtil.d(DownloadConstants.TAG, "download aborted - not enough free space");
 	    throw new GenerateSaveFileError(
 		    Downloads.STATUS_INSUFFICIENT_SPACE_ERROR,
 		    "insufficient space on external media");
@@ -314,7 +315,7 @@ public class Helpers {
 	if (!Environment.getExternalStorageState().equals(
 		Environment.MEDIA_MOUNTED)) {
 	    // No SD card found.
-	    Log.d(DownloadConstants.TAG, "no external storage");
+	    LogUtil.d(DownloadConstants.TAG, "no external storage");
 	    return false;
 	}
 	return true;
@@ -339,7 +340,7 @@ public class Helpers {
 	// First, try to use the hint from the application, if there's one
 	if (filename == null && hint != null && !hint.endsWith("/")) {
 	    if (DownloadConstants.LOGVV) {
-		Log.v(DownloadConstants.TAG, "getting filename from hint");
+		LogUtil.v(DownloadConstants.TAG, "getting filename from hint");
 	    }
 	    int index = hint.lastIndexOf('/') + 1;
 	    if (index > 0) {
@@ -355,7 +356,7 @@ public class Helpers {
 	    filename = parseContentDisposition(contentDisposition);
 	    if (filename != null) {
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG,
+		    LogUtil.v(DownloadConstants.TAG,
 			    "getting filename from content-disposition");
 		}
 		int index = filename.lastIndexOf('/') + 1;
@@ -372,7 +373,7 @@ public class Helpers {
 		    && !decodedContentLocation.endsWith("/")
 		    && decodedContentLocation.indexOf('?') < 0) {
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG,
+		    LogUtil.v(DownloadConstants.TAG,
 			    "getting filename from content-location");
 		}
 		int index = decodedContentLocation.lastIndexOf('/') + 1;
@@ -392,7 +393,7 @@ public class Helpers {
 		int index = decodedUrl.lastIndexOf('/') + 1;
 		if (index > 0) {
 		    if (DownloadConstants.LOGVV) {
-			Log.v(DownloadConstants.TAG, "getting filename from uri");
+			LogUtil.v(DownloadConstants.TAG, "getting filename from uri");
 		    }
 		    filename = decodedUrl.substring(index);
 		}
@@ -402,7 +403,7 @@ public class Helpers {
 	// Finally, if couldn't get filename from URI, get a generic filename
 	if (filename == null) {
 	    if (DownloadConstants.LOGVV) {
-		Log.v(DownloadConstants.TAG, "using default filename");
+		LogUtil.v(DownloadConstants.TAG, "using default filename");
 	    }
 	    filename = DownloadConstants.DEFAULT_DL_FILENAME;
 	}
@@ -420,12 +421,12 @@ public class Helpers {
 		    mimeType);
 	    if (extension != null) {
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG, "adding extension from type");
+		    LogUtil.v(DownloadConstants.TAG, "adding extension from type");
 		}
 		extension = "." + extension;
 	    } else {
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG, "couldn't find extension for "
+		    LogUtil.v(DownloadConstants.TAG, "couldn't find extension for "
 			    + mimeType);
 		}
 	    }
@@ -434,18 +435,18 @@ public class Helpers {
 	    if (mimeType != null && mimeType.toLowerCase().startsWith("text/")) {
 		if (mimeType.equalsIgnoreCase("text/html")) {
 		    if (DownloadConstants.LOGVV) {
-			Log.v(DownloadConstants.TAG, "adding default html extension");
+			LogUtil.v(DownloadConstants.TAG, "adding default html extension");
 		    }
 		    extension = DownloadConstants.DEFAULT_DL_HTML_EXTENSION;
 		} else if (useDefaults) {
 		    if (DownloadConstants.LOGVV) {
-			Log.v(DownloadConstants.TAG, "adding default text extension");
+			LogUtil.v(DownloadConstants.TAG, "adding default text extension");
 		    }
 		    extension = DownloadConstants.DEFAULT_DL_TEXT_EXTENSION;
 		}
 	    } else if (useDefaults) {
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG, "adding default binary extension");
+		    LogUtil.v(DownloadConstants.TAG, "adding default binary extension");
 		}
 		extension = DownloadConstants.DEFAULT_DL_BINARY_EXTENSION;
 	    }
@@ -467,11 +468,11 @@ public class Helpers {
 		extension = chooseExtensionFromMimeType(mimeType, false);
 		if (extension != null) {
 		    if (DownloadConstants.LOGVV) {
-			Log.v(DownloadConstants.TAG, "substituting extension from type");
+			LogUtil.v(DownloadConstants.TAG, "substituting extension from type");
 		    }
 		} else {
 		    if (DownloadConstants.LOGVV) {
-			Log.v(DownloadConstants.TAG, "couldn't find extension for "
+			LogUtil.v(DownloadConstants.TAG, "couldn't find extension for "
 				+ mimeType);
 		    }
 		}
@@ -479,7 +480,7 @@ public class Helpers {
 	}
 	if (extension == null) {
 	    if (DownloadConstants.LOGVV) {
-		Log.v(DownloadConstants.TAG, "keeping extension");
+		LogUtil.v(DownloadConstants.TAG, "keeping extension");
 	    }
 	    extension = filename.substring(dotIndex);
 	}
@@ -490,7 +491,7 @@ public class Helpers {
 	    String filename, String extension, boolean recoveryDir)
 	    throws GenerateSaveFileError {
 	String fullFilename = filename + extension;
-	Log.w("welcome", "Helpers  chooseUniqueFilename     "+fullFilename);
+	LogUtil.w("welcome", "Helpers  chooseUniqueFilename     "+fullFilename);
 	if (!new File(fullFilename).exists() && !recoveryDir) {
 	    return fullFilename;
 	}
@@ -514,7 +515,7 @@ public class Helpers {
 		    return fullFilename;
 		}
 		if (DownloadConstants.LOGVV) {
-		    Log.v(DownloadConstants.TAG, "file with sequence number "
+		    LogUtil.v(DownloadConstants.TAG, "file with sequence number "
 			    + sequence + " exists");
 		}
 		sequence += sRandom.nextInt(magnitude) + 1;
@@ -559,10 +560,10 @@ public class Helpers {
 	    }
 	} catch (RuntimeException ex) {
 	    if (DownloadConstants.LOGV) {
-		Log.d(DownloadConstants.TAG, "invalid selection [" + selection
+		LogUtil.d(DownloadConstants.TAG, "invalid selection [" + selection
 			+ "] triggered " + ex);
 	    } else if (Config.LOGD) {
-		Log.d(DownloadConstants.TAG, "invalid selection triggered " + ex);
+		LogUtil.d(DownloadConstants.TAG, "invalid selection triggered " + ex);
 	    }
 	    throw ex;
 	}
@@ -827,7 +828,7 @@ public class Helpers {
 	    File file = new File(path);
 	    file.delete();
 	} catch (Exception e) {
-	    Log.w(DownloadConstants.TAG, "file: '" + path + "' couldn't be deleted", e);
+	    LogUtil.w(DownloadConstants.TAG, "file: '" + path + "' couldn't be deleted", e);
 	}
 	resolver.delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, BaseColumns._ID
 		+ " = ? ", new String[] { String.valueOf(id) });

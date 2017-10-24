@@ -1,5 +1,6 @@
 package tenant.guardts.house.download;
 
+import tenant.guardts.house.util.LogUtil;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 class RealSystemFacade implements SystemFacade {
     private Context mContext;
@@ -33,14 +33,14 @@ class RealSystemFacade implements SystemFacade {
 	ConnectivityManager connectivity = (ConnectivityManager) mContext
 		.getSystemService(Context.CONNECTIVITY_SERVICE);
 	if (connectivity == null) {
-	    Log.w(DownloadConstants.TAG, "couldn't get connectivity manager");
+	    LogUtil.w(DownloadConstants.TAG, "couldn't get connectivity manager");
 	    return null;
 	}
 
 	NetworkInfo activeInfo = connectivity.getActiveNetworkInfo();
 	if (activeInfo == null) {
 	    if (DownloadConstants.LOGVV) {
-		Log.v(DownloadConstants.TAG, "network is not available");
+		LogUtil.v(DownloadConstants.TAG, "network is not available");
 	    }
 	    return null;
 	}
@@ -52,7 +52,7 @@ class RealSystemFacade implements SystemFacade {
 	ConnectivityManager connectivity = (ConnectivityManager) mContext
 		.getSystemService(Context.CONNECTIVITY_SERVICE);
 	if (connectivity == null) {
-	    Log.w(DownloadConstants.TAG, "couldn't get connectivity manager");
+	    LogUtil.w(DownloadConstants.TAG, "couldn't get connectivity manager");
 	    return false;
 	}
 
@@ -62,7 +62,7 @@ class RealSystemFacade implements SystemFacade {
 		.getSystemService(Context.TELEPHONY_SERVICE);
 	boolean isRoaming = isMobile && mgr.isNetworkRoaming();
 	if (DownloadConstants.LOGVV && isRoaming) {
-	    Log.v(DownloadConstants.TAG, "network is roaming");
+	    LogUtil.v(DownloadConstants.TAG, "network is roaming");
 	}
 	return isRoaming;
     }

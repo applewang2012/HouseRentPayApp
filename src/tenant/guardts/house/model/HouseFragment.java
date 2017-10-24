@@ -32,6 +32,23 @@ import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 
 import android.R.integer;
+
+import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.HomeSearchActivity;
+import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.LoadUrlTestActivity;
+import tenant.guardts.house.LoginUserActivity;
+import tenant.guardts.house.MapRentHouseActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.view.HomeFragmentListView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +59,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,20 +74,30 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.AddHouseInfoActivity;
-import tenant.guardts.house.HomeSearchActivity;
-import tenant.guardts.house.HouseDetailInfoActivity;
-import tenant.guardts.house.LoadUrlTestActivity;
-import tenant.guardts.house.LoginUserActivity;
-import tenant.guardts.house.MapRentHouseActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.view.HomeFragmentListView;
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
 
 public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultListener,
 		OnGetSuggestionResultListener, OnItemClickListener {
@@ -206,14 +232,14 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	@Override
 	public void onResume() {
 		super.onResume();
-		Log.w("mingguo", "house fragment  on resume  login name   "+CommonUtil.mUserLoginName);
+		LogUtil.w("mingguo", "house fragment  on resume  login name   "+CommonUtil.mUserLoginName);
 		if (CommonUtil.mUserLoginName != null && !CommonUtil.mUserLoginName.equals("")){
 			mLogin.setVisibility(View.GONE);
 		}else{
 			mLogin.setVisibility(View.VISIBLE);
 			SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
 			mUserName = sharedata.getString("user_name", "");
-			Log.w("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
+			LogUtil.w("mingguo", "HouseFragment  username   "+mUserName+"  password  ");
 			mHandler.sendEmptyMessageDelayed(6000, 5);
 		}
 	}
@@ -561,7 +587,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		// /**
 		// * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		// */
-		// Log.w("mingguo", "house fragment onTextChanged " +
+		// LogUtil.w("mingguo", "house fragment onTextChanged " +
 		// mCurrentLocationCity);
 		// mSuggestionSearch.requestSuggestion(
 		// (new
@@ -600,7 +626,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		if (mCurrentLatLng == null){
 			return;
 		}
-		Log.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
+		LogUtil.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
 				+ mCurrentLatLng.longitude);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentsByCoodinates";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
@@ -619,7 +645,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				
@@ -697,7 +723,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 					mHouseInfoList.add(houseModel);
 				}
 			}
-			Log.w("mingguo", "search  result  mHouseInfoList  " + mHouseInfoList.size());
+			LogUtil.w("mingguo", "search  result  mHouseInfoList  " + mHouseInfoList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -726,7 +752,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 				mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 				MapStatus.Builder builder = new MapStatus.Builder();
 				builder.target(mCurrentLatLng).zoom(18.0f);
-				Log.w("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
+				LogUtil.w("mingguo", "loaction current city  " + mCurrentLocationCity + "  CommonUtil.mCurrentLati  "
 						+ CommonUtil.mCurrentLati + "  CommonUtil.mCurrentLongi  " + CommonUtil.mCurrentLongi);
 			}
 			
@@ -766,7 +792,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 	}
 
 	private void showSelectLocationMap() {
-		Log.w("mingguo",
+		LogUtil.w("mingguo",
 				"select location site  lati  " + mCurrentLatLng.latitude + "  longi  " + mCurrentLatLng.longitude);
 		MyLocationData locData = new MyLocationData.Builder().accuracy(0)
 				// 此处设置开发者获取到的方向信息，顺时针0-360
@@ -782,7 +808,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		Log.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		LogUtil.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equalsIgnoreCase(mLocationAction)) {
@@ -840,7 +866,7 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
 			return;
 		}
-		Log.e("mingguo", "House fragment  onGetPoiResult  " + result.error);
+		LogUtil.e("mingguo", "House fragment  onGetPoiResult  " + result.error);
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
 			if (result.getAllPoi().size() > 0) {
 				mCurrentLatLng = result.getAllPoi().get(0).location;

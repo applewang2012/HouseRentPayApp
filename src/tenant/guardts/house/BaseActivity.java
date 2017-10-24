@@ -1,5 +1,8 @@
 package tenant.guardts.house;
 
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.ViewUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
@@ -8,9 +11,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ViewUtil;
 
 public class BaseActivity extends Activity implements DataStatusInterface{
 	View mBaseLoadingView ;

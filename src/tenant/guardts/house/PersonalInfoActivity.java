@@ -1,9 +1,10 @@
 package tenant.guardts.house;
 
-import java.util.HashMap;
-
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,16 +12,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.model.MyFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
 
 /**个人信息
  * 
@@ -83,7 +80,7 @@ public class PersonalInfoActivity extends BaseActivity {
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {// ��Ӧ�¼�
-						Log.w("alertdialog", " dialog interface ");
+						LogUtil.w("alertdialog", " dialog interface ");
 					}
 
 				}).show();

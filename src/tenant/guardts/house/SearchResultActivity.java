@@ -7,22 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.UniversalAdapter;
@@ -35,6 +19,22 @@ import tenant.guardts.house.search.Item;
 import tenant.guardts.house.search.Province;
 import tenant.guardts.house.search.SingleListFilterView;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse
@@ -201,7 +201,7 @@ public class SearchResultActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(int selectPosition, boolean isChecked) {
-				Log.w("mingguo", "select position  "+selectPosition +"  isChecked   "+isChecked);
+				LogUtil.w("mingguo", "select position  "+selectPosition +"  isChecked   "+isChecked);
 			}
 		});
 	}
@@ -215,7 +215,7 @@ public class SearchResultActivity extends BaseActivity {
 		if (requestCode == 1 && resultCode == Activity.RESULT_OK){
 			Bundle bundle = data.getExtras();
 			mSearch_tag = bundle.getString("search_tag");
-			Log.e("mingguo", "scan  result  "+mSearch_tag);
+			LogUtil.e("mingguo", "scan  result  "+mSearch_tag);
 			TextView showSearch = (TextView)findViewById(R.id.button_search);
 			
 			if (mSearch_tag == null || mSearch_tag.equals("")){
@@ -246,7 +246,7 @@ public class SearchResultActivity extends BaseActivity {
 		rpc.addProperty("endate", mEndTime);
 		mPresent.readyPresentServiceParams(this, url, mSearchAction, rpc);
 		mPresent.startPresentServiceTask(true);
-		Log.w("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
+		LogUtil.w("mingguo", "start search house "+mPageCount+"  type  "+mHouseType+" rent type  "+mRentType);
 	}
 	
 	
@@ -351,7 +351,7 @@ public class SearchResultActivity extends BaseActivity {
 //			}
 //			HouseInfo grad2 = grads2.get(pos);
 //			gradId2 = grad2.getId();
-			Log.w("mingguo", "postion  == 0  pos  "+pos);
+			LogUtil.w("mingguo", "postion  == 0  pos  "+pos);
 			if (pos == 0){
 				mHouseType = "";
 			}else if (pos == 1){
@@ -369,7 +369,7 @@ public class SearchResultActivity extends BaseActivity {
 //			}
 //			HouseInfo grad = grads.get(pos);
 //			gradId = grad.getId();
-			Log.w("mingguo", "postion  == 1  pos  "+pos);
+			LogUtil.w("mingguo", "postion  == 1  pos  "+pos);
 			if (pos == 0){
 				mRentType = "";
 			}else if (pos == 1){
@@ -380,7 +380,7 @@ public class SearchResultActivity extends BaseActivity {
 			break;
 		case 2:// 排序
 			sort = pos;
-			Log.w("mingguo", "postion  == 2  pos  "+pos);
+			LogUtil.w("mingguo", "postion  == 2  pos  "+pos);
 			if (pos == 0){
 				mPageCount = 999;
 			}else if (pos == 1){
@@ -426,7 +426,7 @@ public class SearchResultActivity extends BaseActivity {
 					}else{
 						mSearchViewList.setVisibility(View.VISIBLE);
 						mNoContent.setVisibility(View.INVISIBLE);
-						Log.w("housefragment", "house list  "+mHouseInfoList.size());
+						LogUtil.w("housefragment", "house list  "+mHouseInfoList.size());
 						mAdapter.notifyDataSetChanged();
 					}
 				}
@@ -439,7 +439,7 @@ public class SearchResultActivity extends BaseActivity {
 			try{
 				JSONArray array = new JSONArray(obj);
 				if (array != null){
-					Log.w("mingguo", "parse house info "+array.length());
+					LogUtil.w("mingguo", "parse house info "+array.length());
 					mHouseInfoList.clear();
 					for (int item = 0; item < array.length(); item++){
 						
@@ -459,7 +459,7 @@ public class SearchResultActivity extends BaseActivity {
 						mHouseInfoList.add(houseModel);
 					}
 				}
-				Log.w("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
+				LogUtil.w("mingguo", "search  result  mHouseInfoList  "+mHouseInfoList.size());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -469,7 +469,7 @@ public class SearchResultActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mSearchAction)){
 				Message msgMessage = mHandler.obtainMessage();
@@ -484,7 +484,7 @@ public class SearchResultActivity extends BaseActivity {
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
-		Log.w("mingguo", "on status error  action  "+error);
+		LogUtil.w("mingguo", "on status error  action  "+error);
 	}
 	
 	

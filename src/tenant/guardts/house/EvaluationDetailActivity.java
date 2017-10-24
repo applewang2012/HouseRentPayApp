@@ -2,7 +2,6 @@ package tenant.guardts.house;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -12,14 +11,13 @@ import tenant.guardts.house.model.UniversalAdapter;
 import tenant.guardts.house.model.UniversalViewHolder;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.view.CustomRatingBar2;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
@@ -111,7 +109,7 @@ public class EvaluationDetailActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.e("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mGetEvaluationListAction)) {
 				Message msg = mHandler.obtainMessage();

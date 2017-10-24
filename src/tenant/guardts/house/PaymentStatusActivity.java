@@ -4,25 +4,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.tencent.android.tpush.service.channel.exception.CommandMappingException;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.CompleteStatus;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.util.UtilTool;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 public class PaymentStatusActivity extends BaseActivity implements DataStatusInterface {
 	private String mAddBillLog="http://tempuri.org/AddBillLog";
@@ -44,7 +43,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		price=getIntent().getStringExtra("pay_price");
 		boolean successful = getIntent().getBooleanExtra("flag", false);
 		orderID = getIntent().getStringExtra("orderID");
-		Log.e("", orderID+"===============");
+		LogUtil.e("", orderID+"===============");
 		if (successful) {
 			setContentView(R.layout.activity_successful_payment);
 		} else {
@@ -196,16 +195,16 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mCompleteRentAttribute)) {
-				Log.e("", action + "======" + templateInfo);
+				LogUtil.e("", action + "======" + templateInfo);
 				Message msg = mHandler.obtainMessage();
 				msg.what = 818;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}else if(action.equals(mAddBillLog)){
-				Log.e("", action + "======" + templateInfo);
+				LogUtil.e("", action + "======" + templateInfo);
 				Message msg = mHandler.obtainMessage();
 				msg.what = 100;
 				msg.obj = templateInfo;

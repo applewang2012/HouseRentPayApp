@@ -6,16 +6,16 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tenant.guardts.house.HomeActivity;
+import tenant.guardts.house.util.LogUtil;
+import android.content.Context;
+import android.content.Intent;
+
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushRegisterResult;
 import com.tencent.android.tpush.XGPushShowedResult;
 import com.tencent.android.tpush.XGPushTextMessage;
-
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import tenant.guardts.house.HomeActivity;
 
 public class MessageReceiver extends XGPushBaseReceiver {
 	private Intent intent = new Intent("com.qq.xgdemo.activity.UPDATE_LISTVIEW");
@@ -46,7 +46,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //		NotificationService.getInstance(context).save(notific);
 //		context.sendBroadcast(intent);
 //		show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
-		Log.e(LogTag, "收到通知-- "+notifiShowedRlt.toString());
+		LogUtil.e(LogTag, "收到通知-- "+notifiShowedRlt.toString());
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		} else {
 			text = "反注册失败" + errorCode;
 		}
-		Log.d(LogTag, text);
+		LogUtil.d(LogTag, text);
 		show(context, text);
 
 	}
@@ -76,7 +76,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		} else {
 			text = "\"" + tagName + "\"设置失败,错误码：" + errorCode;
 		}
-		Log.d(LogTag, text);
+		LogUtil.d(LogTag, text);
 		show(context, text);
 
 	}
@@ -92,7 +92,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		} else {
 			text = "\"" + tagName + "\"删除失败,错误码：" + errorCode;
 		}
-		Log.d(LogTag, text);
+		LogUtil.d(LogTag, text);
 		show(context, text);
 
 	}
@@ -119,7 +119,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //				Toast.LENGTH_SHORT).show();
 //		// 获取自定义key-value
 		String customContent = message.getCustomContent();
-		Log.w("mingguo", "xinge click notification   "+message.toString());
+		LogUtil.w("mingguo", "xinge click notification   "+message.toString());
 		if (customContent != null && customContent.length() != 0) {
 			Intent intent = new Intent(context, HomeActivity.class);
 	        //intent.putExtra("data", id.intValue());
@@ -130,7 +130,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //				// key1为前台配置的key
 //				if (!obj.isNull("key")) {
 //					String value = obj.getString("key");
-//					Log.d(LogTag, "get custom value:" + value);
+//					LogUtil.d(LogTag, "get custom value:" + value);
 //				}
 //				// ...
 //			} catch (JSONException e) {
@@ -138,7 +138,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //			}
 		}
 		// APP自主处理的过程。。。
-//		Log.w(LogTag, text);
+//		LogUtil.w(LogTag, text);
 //		show(context, text);
 		//打开通知 by wangmingguo
 	}
@@ -158,7 +158,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		} else {
 			text = message + "注册失败，错误码：" + errorCode;
 		}
-		Log.d(LogTag, text);
+		LogUtil.d(LogTag, text);
 		show(context, text);
 	}
 
@@ -175,7 +175,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 				// key1为前台配置的key
 				if (!obj.isNull("key")) {
 					String value = obj.getString("key");
-					Log.d(LogTag, "get custom value:" + value);
+					LogUtil.d(LogTag, "get custom value:" + value);
 				}
 				// ...
 			} catch (JSONException e) {
@@ -183,7 +183,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
 			}
 		}
 		// APP自主处理消息的过程...
-		Log.d(LogTag, text);
+		LogUtil.d(LogTag, text);
 		show(context, text);
 	}
 

@@ -8,37 +8,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
-import com.baidu.mapapi.search.poi.PoiIndoorResult;
-import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
-import com.baidu.mapapi.search.poi.PoiSortType;
-
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.LoadUrlTestActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.SurroundMoreActivity;
@@ -51,7 +20,37 @@ import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.view.HomeFragmentListView;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
 
 public class SurroundFragment extends BaseFragment implements DataStatusInterface, OnGetPoiSearchResultListener, OnItemClickListener{
 	
@@ -84,7 +83,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.w("fragmenttest", "homefragment onCreateView ");
+		LogUtil.w("fragmenttest", "homefragment onCreateView ");
 		mRootView = inflater.inflate(R.layout.house_surround_fragment, container, false);
 		initTitleBar();
 		initAdapter();
@@ -218,7 +217,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 	}
 	
 	public void  searchNearbyProcess(String text ) {
-		Log.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
+		LogUtil.w("mingguo", " search near by  lati  "+CommonUtil.mCurrentLati+"  longi  "+CommonUtil.mCurrentLongi+"  text  "+text);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(text)
         		.sortType(PoiSortType.distance_from_near_to_far).location(new LatLng(CommonUtil.mCurrentLati, CommonUtil.mCurrentLongi))
                 .radius(2000).pageCapacity(20);
@@ -335,7 +334,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.w("house", "parse house info "+array.length());
+				LogUtil.w("house", "parse house info "+array.length());
 				//for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(0);
@@ -359,7 +358,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		Log.e("mingguo", "success "+templateInfo);
+		LogUtil.e("mingguo", "success "+templateInfo);
 		Message msgMessage = mHandler.obtainMessage();
 		msgMessage.obj = templateInfo;
 		msgMessage.sendToTarget();
@@ -374,7 +373,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
-		Log.w("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
+		LogUtil.w("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
 		
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(mContext, "抱歉，未找到结果", Toast.LENGTH_SHORT)
@@ -402,7 +401,7 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
                     .show();
             return;
         }
-        Log.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
+        LogUtil.w("mingguo", "poi  result  all  poi   "+result.getAllPoi().size()+"  address size  ");
         for (int index = 0; index < result.getAllPoi().size(); index++){
      	   PoiInfo info = result.getAllPoi().get(index);
      	   SurroundInfo surroundInfo = new SurroundInfo();

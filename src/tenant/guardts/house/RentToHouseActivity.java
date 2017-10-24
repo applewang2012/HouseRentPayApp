@@ -7,6 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,16 +36,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 public class RentToHouseActivity extends BaseActivity implements DataStatusInterface, OnItemClickListener, OnItemLongClickListener{
 	
@@ -186,7 +186,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	  
 	             // TODO Auto-generated method stub  
 	  
-	             Log.w("alertdialog"," �뱣�����ݣ�");  
+	             LogUtil.w("alertdialog"," �뱣�����ݣ�");  
 	  
 	         }  
 	  
@@ -209,7 +209,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 //	     }).setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {//��ӷ��ذ�ť  
 //	         @Override  
 //	         public void onClick(DialogInterface dialog, int which) {//��Ӧ�¼�  
-//	             Log.w("alertdialog"," �뱣�����ݣ�");  
+//	             LogUtil.w("alertdialog"," �뱣�����ݣ�");  
 //	         }  
 //	     }).show();
 //	}
@@ -245,14 +245,14 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 				}else{
 					mContentLayout.setVisibility(View.VISIBLE);
 					mNoContent.setVisibility(View.INVISIBLE);
-					Log.w("housefragment", "house list  "+mHouseInfoList.size());
+					LogUtil.w("housefragment", "house list  "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}
 			}else if (msg.what == 101){
 				
 				if ("true".equals((String)msg.obj)){
 					mHouseInfoList.remove(mDeleteIndex);
-					Log.w("housefragment", "delete house   "+mHouseInfoList.size());
+					LogUtil.w("housefragment", "delete house   "+mHouseInfoList.size());
 					mAdapter.notifyDataSetChanged();
 				}else{
 					Toast.makeText(mContext, "删除", Toast.LENGTH_SHORT).show();
@@ -266,7 +266,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 		try{
 			JSONArray array = new JSONArray(value);
 			if (array != null){
-				Log.w("house", "parse house info "+array.length());
+				LogUtil.w("house", "parse house info "+array.length());
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -284,7 +284,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 					list.add(houseModel);
 				}
 			}
-			Log.w("house", "for item  "+list.size());
+			LogUtil.w("house", "for item  "+list.size());
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -318,7 +318,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mGetHouseInfoAction)){
 				Message msgMessage = mHandler.obtainMessage();
@@ -338,12 +338,12 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
-		Log.e("housefragment", "error   "+error);
+		LogUtil.e("housefragment", "error   "+error);
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Log.e("housefragment", "item click position    "+position+"  list  "+mHouseInfoList.get(position).getHouseAvailable());
+		LogUtil.e("housefragment", "item click position    "+position+"  list  "+mHouseInfoList.get(position).getHouseAvailable());
 		if (mHouseInfoList.get(position).getHouseAvailable()){
 			GlobalUtil.shortToast(getApplicationContext(), "该房屋已出租", getResources().getDrawable(R.drawable.ic_dialog_no));
 		}else{
@@ -355,7 +355,7 @@ public class RentToHouseActivity extends BaseActivity implements DataStatusInter
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		Log.e("housefragment", "item long click position    "+position+"  list  "+mHouseInfoList.get(position).getHouseAvailable());
+		LogUtil.e("housefragment", "item long click position    "+position+"  list  "+mHouseInfoList.get(position).getHouseAvailable());
 //		if (mHouseInfoList.get(position).getHouseAvailable()){
 //			Toast.makeText(mContext, "已出租，无法删除", Toast.LENGTH_SHORT).show();
 //		}else{

@@ -2,7 +2,6 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +11,34 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.map.PoiOverlay;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.a.k;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
@@ -44,34 +66,6 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
-
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.map.PoiOverlay;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 public class MapRentHouseActivity extends BaseActivity
 		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
@@ -228,7 +222,7 @@ public class MapRentHouseActivity extends BaseActivity
 		// /**
 		// * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		// */
-		// Log.w("mingguo", "house fragment onTextChanged
+		// LogUtil.w("mingguo", "house fragment onTextChanged
 		// "+mCurrentLocationCity);
 		// mSuggestionSearch
 		// .requestSuggestion((new SuggestionSearchOption())
@@ -281,7 +275,7 @@ public class MapRentHouseActivity extends BaseActivity
 //				// mHouserList.get(index).get("RPropertyDesc") +" |
 //				// "+mHouserList.get(index).get("rdirectiondesc"));
 //				// location.setText("地址:"+mHouserList.get(index).get("RAddress"));
-//				// Log.w("mingguo", "index "+index+" owner
+//				// LogUtil.w("mingguo", "index "+index+" owner
 //				// "+mHouserList.get(index).get("ROwner"));
 //				// contact.setText("房主："+mHouserList.get(index).get("ROwner")+"\n"+
 //				// "电话："+mHouserList.get(index).get("ROwnerTel"));
@@ -444,11 +438,11 @@ public class MapRentHouseActivity extends BaseActivity
 		LatLng ll = marker.getPosition();
 		
 		String key = ll.latitude + "-" + ll.longitude;
-		Log.w("mingguo", "show click marker view  "+key);
+		LogUtil.w("mingguo", "show click marker view  "+key);
 		ArrayList<Map<String, String>> child = mLocationMap.get(key);
 		
 		if (child != null){
-			Log.w("mingguo", "show click marker view  "+child.size());
+			LogUtil.w("mingguo", "show click marker view  "+child.size());
 			if (child.size() == 1){
 				showMarkerDetail(ll, child.get(0));
 			}else if (child.size() > 1){
@@ -506,26 +500,26 @@ public class MapRentHouseActivity extends BaseActivity
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.w("mingguo", "Map rent activity  onActivityResult   " + resultCode + "  resquestCode   " + requestCode);
+		LogUtil.w("mingguo", "Map rent activity  onActivityResult   " + resultCode + "  resquestCode   " + requestCode);
 		if (resultCode == RESULT_OK) {
 			if (requestCode == CommonUtil.SELECT_CITY_REQEUST_CODE) {
 				Bundle bundle = data.getExtras();
 				if (bundle != null) {
 					String selectedCity = bundle.getString("city");
-					Log.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
+					LogUtil.e("mingguo", "homeActivity  onActivity  selected city  " + selectedCity);
 					if (!TextUtils.isEmpty(selectedCity)) {
 						if (selectedCity != null && selectedCity.equalsIgnoreCase(mCurrentLocationCity)) {
 							return;
 						}
 						mCurrentLocationCity = selectedCity;
-						Log.w("mingguo", "house fragment on resume change currentCity " + mCurrentLocationCity);
+						LogUtil.w("mingguo", "house fragment on resume change currentCity " + mCurrentLocationCity);
 						mSelectCityText.setText(mCurrentLocationCity);
 						searchButtonProcess();
 					}
 				}
 			} else if (requestCode == CommonUtil.MAP_SUGGEST_REQEUST_CODE) {
 				Bundle searchBundle = data.getExtras();
-				Log.w("mingguo", "Map rent onActivity Result  " + searchBundle.getString("search_tag"));
+				LogUtil.w("mingguo", "Map rent onActivity Result  " + searchBundle.getString("search_tag"));
 				searchNearbyProcess(searchBundle.getString("search_tag"));
 			}
 
@@ -592,7 +586,7 @@ public class MapRentHouseActivity extends BaseActivity
 			Map.Entry entry = (Map.Entry) iterator.next();
 			//获得key
 			String key=(String) entry.getKey();
-			Log.e("mingguo", "key  "+key);
+			LogUtil.e("mingguo", "key  "+key);
 			String[] split = key.split("-");
 			LatLng llA = new LatLng(Double.parseDouble(split[0]),
 					Double.parseDouble(split[1]));
@@ -613,7 +607,7 @@ public class MapRentHouseActivity extends BaseActivity
 			
 			mMarkList.add((Marker) (mBaiduMap.addOverlay(options)));
 		}
-		Log.e("mingguo", "list size  "+mHouserList.size()+"  market size  "+mMarkList.size()+"  locationmap size   "+mLocationMap.size());
+		LogUtil.e("mingguo", "list size  "+mHouserList.size()+"  market size  "+mMarkList.size()+"  locationmap size   "+mLocationMap.size());
 
 		if (mHouserList.size() == 0) {
 			GlobalUtil.shortToast(mContext, "抱歉，该位置周边未搜索到任何房源！", getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -626,7 +620,7 @@ public class MapRentHouseActivity extends BaseActivity
 	}
 
 	private void getLocationByCoordinates() {
-		Log.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
+		LogUtil.w("mingguo", "house  fragment  location by coordates lati  " + mCurrentLatLng.latitude + "  longti  "
 				+ mCurrentLatLng.longitude);
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentsByCoodinates";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mLocationAction));
@@ -734,7 +728,7 @@ public class MapRentHouseActivity extends BaseActivity
 			}
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("mingguo", "house  location  num   " + array.length());
+				LogUtil.w("mingguo", "house  location  num   " + array.length());
 				for (int item = 0; item < array.length(); item++) {
 					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
@@ -806,7 +800,7 @@ public class MapRentHouseActivity extends BaseActivity
 	}
 
 	private void showSelectLocationMap() {
-		Log.w("mingguo",
+		LogUtil.w("mingguo",
 				"select location site  lati  " + mCurrentLatLng.latitude + "  longi  " + mCurrentLatLng.longitude);
 		MyLocationData locData = new MyLocationData.Builder().accuracy(0)
 				// 此处设置开发者获取到的方向信息，顺时针0-360
@@ -825,7 +819,7 @@ public class MapRentHouseActivity extends BaseActivity
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equalsIgnoreCase(mLocationAction)) {
 				Message message = mHandler.obtainMessage();
@@ -839,7 +833,7 @@ public class MapRentHouseActivity extends BaseActivity
 	@Override
 	public void onStatusError(String action, String error) {
 		// TODO Auto-generated method stub
-		Log.e("housefragment", "error   " + error);
+		LogUtil.e("housefragment", "error   " + error);
 	}
 
 	@Override
@@ -864,7 +858,7 @@ public class MapRentHouseActivity extends BaseActivity
 		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
 			return;
 		}
-		Log.e("mingguo", "House fragment  onGetPoiResult  " + result.error);
+		LogUtil.e("mingguo", "House fragment  onGetPoiResult  " + result.error);
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
 			if (result.getAllPoi().size() > 0) {
 				mCurrentLatLng = result.getAllPoi().get(0).location;

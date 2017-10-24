@@ -3,22 +3,22 @@ package tenant.guardts.house;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
 
 public class AboutUsActivity extends BaseActivity {
 
@@ -95,7 +95,7 @@ public class AboutUsActivity extends BaseActivity {
 	
 	private void showUpdateVersionAlertDialog() {
 		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")){
-			Log.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile());
+			LogUtil.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile());
 			Toast.makeText(AboutUsActivity.this, "当前版本已经最新", Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -134,7 +134,7 @@ public class AboutUsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
+		LogUtil.w("mingguo", "on success  action "+action+"  msg  "+templateInfo);
 		if (action.equals(mUpdateAction)){
 			Message message = mHandler.obtainMessage();
 			message.what = 200;

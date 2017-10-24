@@ -16,6 +16,7 @@
 
 package tenant.guardts.house.download;
 
+import tenant.guardts.house.util.LogUtil;
 import android.util.Config;
 import android.util.Log;
 

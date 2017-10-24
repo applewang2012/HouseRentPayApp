@@ -9,28 +9,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 import tenant.guardts.house.BaseActivity;
 import tenant.guardts.house.PaymentStatusActivity;
 import tenant.guardts.house.R;
@@ -39,9 +17,31 @@ import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.model.WalletPayment;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.util.UtilTool;
 import tenant.guardts.house.util.ViewUtil;
 import tenant.guardts.house.wxpay.WeiXinPay;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class HousePayActivity extends BaseActivity implements DataStatusInterface {
 
@@ -101,7 +101,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				return;
 			}
 
-			Log.w("mingguo", "pay activity  price int   " + realPrice);
+			LogUtil.w("mingguo", "pay activity  price int   " + realPrice);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,7 +150,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					@Override
 
 					public void onClick(DialogInterface dialog, int which) {
-						Log.w("alertdialog", " dialog interface ");
+						LogUtil.w("alertdialog", " dialog interface ");
 					}
 
 				}).show();
@@ -231,7 +231,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 			protected void onPostExecute(Void result) {
 				try {
 					PayReq req = new PayReq();
-					Log.e("mingguo", "onPostExecute  " + weiXinReturn);
+					LogUtil.e("mingguo", "onPostExecute  " + weiXinReturn);
 					Map<String, String> backMap = UtilTool.decodeXml(weiXinReturn);
 					req.appId = CommonUtil.APP_ID;
 					req.partnerId = CommonUtil.WX_PARTNER_ID;
@@ -258,10 +258,10 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					}
 					String signA = sb.toString(); // 根据签名格式组装数据，详见微信支付api
 					String stringSignTemp = signA + "key=" + CommonUtil.SIGN_KEY; // 根据签名格式组装数据，详见微信支付api
-					Log.w("mingguo", "signA  " + signA);
-					Log.w("mingguo", "stringSignTemp  " + stringSignTemp);
+					LogUtil.w("mingguo", "signA  " + signA);
+					LogUtil.w("mingguo", "stringSignTemp  " + stringSignTemp);
 					String sign = UtilTool.MD5Encode(stringSignTemp).toUpperCase();
-					Log.w("mingguo", "sign=" + sign);
+					LogUtil.w("mingguo", "sign=" + sign);
 					nvps.add(new BasicNameValuePair("sign", sign));
 					req.sign = sign;
 					api.sendReq(req);
@@ -321,10 +321,10 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mPayUseWallet)) {
-				Log.e("", action + "======" + templateInfo);
+				LogUtil.e("", action + "======" + templateInfo);
 				Message msg = mHandler.obtainMessage();
 				msg.what = 818;
 				msg.obj = templateInfo;

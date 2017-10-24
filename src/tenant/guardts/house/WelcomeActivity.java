@@ -9,11 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.tencent.android.tpush.XGIOperateCallback;
-import com.tencent.android.tpush.XGPushClickedResult;
-import com.tencent.android.tpush.XGPushConfig;
-import com.tencent.android.tpush.XGPushManager;
-
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,16 +19,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
+
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushClickedResult;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
 
 public class WelcomeActivity extends BaseActivity {
 	private LinearLayout mLoading_data;
@@ -120,7 +118,7 @@ public class WelcomeActivity extends BaseActivity {
 				new XGIOperateCallback() {
 					@Override
 					public void onSuccess(Object data, int flag) {
-						Log.w("mingguo",
+						LogUtil.w("mingguo",
 								"+++ register push sucess. token:" + data);
 						m.obj = "+++ register push sucess. token:" + data;
 						m.sendToTarget();
@@ -128,7 +126,7 @@ public class WelcomeActivity extends BaseActivity {
 
 					@Override
 					public void onFail(Object data, int errCode, String msg) {
-						Log.w("mingguo",
+						LogUtil.w("mingguo",
 								"+++ register push fail. token:" + data
 										+ ", errCode:" + errCode + ",msg:"
 										+ msg);
@@ -149,7 +147,7 @@ public class WelcomeActivity extends BaseActivity {
 			editor.commit();
 			CommonUtil.mUserArea = data.get(0)[0];
 			CommonUtil.mUserHost = data.get(1)[0];
-			Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
+			LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
 //			Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
 //			intent.putExtra("user_name", mUsername);
 //			intent.putExtra("user_password", mPassword);
@@ -173,7 +171,7 @@ public class WelcomeActivity extends BaseActivity {
 			    editor.commit();
 			    CommonUtil.mUserArea = data.get(0)[which];
 			    CommonUtil.mUserHost = data.get(1)[which];
-			    Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
+			    LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
 			    getUserInfo();
 //			    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
 //				intent.putExtra("user_name", mUsername);
@@ -205,7 +203,7 @@ public class WelcomeActivity extends BaseActivity {
 //				TextView textView = (TextView) theActivity
 //						.findViewById(R.id.deviceToken);
 //				textView.setText(XGPushConfig.getToken(theActivity));
-				Log.w("mingguo",  "信鸽注册结果 "+XGPushConfig.getToken(theActivity));
+				LogUtil.w("mingguo",  "信鸽注册结果 "+XGPushConfig.getToken(theActivity));
 				CommonUtil.XINGE_TOKEN = XGPushConfig.getToken(theActivity);
 			}
 			
@@ -253,7 +251,7 @@ public class WelcomeActivity extends BaseActivity {
 		try {
 			JSONArray array = new JSONArray(value);
 			if (array != null) {
-				Log.w("house", "parse house info " + array.length());
+				LogUtil.w("house", "parse house info " + array.length());
 				// for (int item = 0; item < array.length(); item++){
 				JSONObject itemJsonObject = array.optJSONObject(0);
 				CommonUtil.mUserLoginName = itemJsonObject.optString("LoginName");
@@ -285,7 +283,7 @@ public class WelcomeActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
-				Log.e("mingguo", "user host  "+CommonUtil.mUserHost);
+				LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
 				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")){
 			    	commonServiceInterface();
 			    }else{
@@ -316,7 +314,7 @@ public class WelcomeActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "onstatus sucess  "+action+" info "+templateInfo);
+		LogUtil.w("mingguo", "onstatus sucess  "+action+" info "+templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mCommonServiceAction)){
 				Message msg = mHandler.obtainMessage();

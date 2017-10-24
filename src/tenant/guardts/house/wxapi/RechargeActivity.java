@@ -8,14 +8,17 @@ import java.util.UUID;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
+import tenant.guardts.house.BaseActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.util.ViewUtil;
+import tenant.guardts.house.wxpay.WeiXinPay;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,13 +29,10 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.BaseActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.UtilTool;
-import tenant.guardts.house.util.ViewUtil;
-import tenant.guardts.house.wxpay.WeiXinPay;
+
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class RechargeActivity extends BaseActivity {
 
@@ -95,7 +95,7 @@ public class RechargeActivity extends BaseActivity {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				Log.w("mingguo", "oncheck changed listen  "+isChecked);
+				LogUtil.w("mingguo", "oncheck changed listen  "+isChecked);
 				if (isChecked){
 					monkey500.setChecked(false);
 					monkey200.setChecked(false);
@@ -235,7 +235,7 @@ public class RechargeActivity extends BaseActivity {
 			protected void onPostExecute(Void result) {
 				try {
 					PayReq req = new PayReq();
-					Log.e("mingguo", "onPostExecute  " + weiXinReturn);
+					LogUtil.e("mingguo", "onPostExecute  " + weiXinReturn);
 					Map<String, String> backMap = UtilTool.decodeXml(weiXinReturn);
 					req.appId = CommonUtil.APP_ID;
 					req.partnerId = CommonUtil.WX_PARTNER_ID;
@@ -262,10 +262,10 @@ public class RechargeActivity extends BaseActivity {
 					}
 					String signA = sb.toString(); // 根据签名格式组装数据，详见微信支付api
 					String stringSignTemp = signA + "key=" + CommonUtil.SIGN_KEY; // 根据签名格式组装数据，详见微信支付api
-					Log.w("mingguo", "signA  " + signA);
-					Log.w("mingguo", "stringSignTemp  " + stringSignTemp);
+					LogUtil.w("mingguo", "signA  " + signA);
+					LogUtil.w("mingguo", "stringSignTemp  " + stringSignTemp);
 					String sign = UtilTool.MD5Encode(stringSignTemp).toUpperCase();
-					Log.w("mingguo", "sign=" + sign);
+					LogUtil.w("mingguo", "sign=" + sign);
 					nvps.add(new BasicNameValuePair("sign", sign));
 					req.sign = sign;
 					api.sendReq(req);

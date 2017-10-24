@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -31,7 +32,6 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
 import android.util.Pair;
 
 /**
@@ -477,7 +477,7 @@ public class DownloadInfo {
         }
 
         if (DownloadConstants.LOGV) {
-            Log.v(DownloadConstants.TAG, "Service spawning thread to handle download " + mId);
+            LogUtil.v(DownloadConstants.TAG, "Service spawning thread to handle download " + mId);
         }
         if (mHasActiveThread) {
             throw new IllegalStateException("Multiple threads on same download");
@@ -504,29 +504,29 @@ public class DownloadInfo {
 
 
     public void logVerboseInfo() {
-        Log.v(DownloadConstants.TAG, "Service adding new entry");
-        Log.v(DownloadConstants.TAG, "ID      : " + mId);
-        Log.v(DownloadConstants.TAG, "URI     : " + ((mUri != null) ? "yes" : "no"));
-        Log.v(DownloadConstants.TAG, "NO_INTEG: " + mNoIntegrity);
-        Log.v(DownloadConstants.TAG, "HINT    : " + mHint);
-        Log.v(DownloadConstants.TAG, "FILENAME: " + mFileName);
-        Log.v(DownloadConstants.TAG, "MIMETYPE: " + mMimeType);
-        Log.v(DownloadConstants.TAG, "DESTINAT: " + mDestination);
-        Log.v(DownloadConstants.TAG, "VISIBILI: " + mVisibility);
-        Log.v(DownloadConstants.TAG, "CONTROL : " + mControl);
-        Log.v(DownloadConstants.TAG, "STATUS  : " + mStatus);
-        Log.v(DownloadConstants.TAG, "FAILED_C: " + mNumFailed);
-        Log.v(DownloadConstants.TAG, "RETRY_AF: " + mRetryAfter);
-        Log.v(DownloadConstants.TAG, "LAST_MOD: " + mLastMod);
-        Log.v(DownloadConstants.TAG, "PACKAGE : " + mPackage);
-        Log.v(DownloadConstants.TAG, "CLASS   : " + mClass);
-        Log.v(DownloadConstants.TAG, "COOKIES : " + ((mCookies != null) ? "yes" : "no"));
-        Log.v(DownloadConstants.TAG, "AGENT   : " + mUserAgent);
-        Log.v(DownloadConstants.TAG, "REFERER : " + ((mReferer != null) ? "yes" : "no"));
-        Log.v(DownloadConstants.TAG, "TOTAL   : " + mTotalBytes);
-        Log.v(DownloadConstants.TAG, "CURRENT : " + mCurrentBytes);
-        Log.v(DownloadConstants.TAG, "ETAG    : " + mETag);
-        Log.v(DownloadConstants.TAG, "DELETED : " + mDeleted);
+        LogUtil.v(DownloadConstants.TAG, "Service adding new entry");
+        LogUtil.v(DownloadConstants.TAG, "ID      : " + mId);
+        LogUtil.v(DownloadConstants.TAG, "URI     : " + ((mUri != null) ? "yes" : "no"));
+        LogUtil.v(DownloadConstants.TAG, "NO_INTEG: " + mNoIntegrity);
+        LogUtil.v(DownloadConstants.TAG, "HINT    : " + mHint);
+        LogUtil.v(DownloadConstants.TAG, "FILENAME: " + mFileName);
+        LogUtil.v(DownloadConstants.TAG, "MIMETYPE: " + mMimeType);
+        LogUtil.v(DownloadConstants.TAG, "DESTINAT: " + mDestination);
+        LogUtil.v(DownloadConstants.TAG, "VISIBILI: " + mVisibility);
+        LogUtil.v(DownloadConstants.TAG, "CONTROL : " + mControl);
+        LogUtil.v(DownloadConstants.TAG, "STATUS  : " + mStatus);
+        LogUtil.v(DownloadConstants.TAG, "FAILED_C: " + mNumFailed);
+        LogUtil.v(DownloadConstants.TAG, "RETRY_AF: " + mRetryAfter);
+        LogUtil.v(DownloadConstants.TAG, "LAST_MOD: " + mLastMod);
+        LogUtil.v(DownloadConstants.TAG, "PACKAGE : " + mPackage);
+        LogUtil.v(DownloadConstants.TAG, "CLASS   : " + mClass);
+        LogUtil.v(DownloadConstants.TAG, "COOKIES : " + ((mCookies != null) ? "yes" : "no"));
+        LogUtil.v(DownloadConstants.TAG, "AGENT   : " + mUserAgent);
+        LogUtil.v(DownloadConstants.TAG, "REFERER : " + ((mReferer != null) ? "yes" : "no"));
+        LogUtil.v(DownloadConstants.TAG, "TOTAL   : " + mTotalBytes);
+        LogUtil.v(DownloadConstants.TAG, "CURRENT : " + mCurrentBytes);
+        LogUtil.v(DownloadConstants.TAG, "ETAG    : " + mETag);
+        LogUtil.v(DownloadConstants.TAG, "DELETED : " + mDeleted);
     }
 
     /**

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -14,7 +16,6 @@ import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -26,7 +27,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.util.CommonUtil;
 
 public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, OnBufferingUpdateListener,
@@ -202,7 +202,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
             mediaPlayer.prepareAsync();
             
         } catch (IOException e) {
-           Log.e("mingguo", "exception  -- "+ e+"  path string  "+pathString);
+           LogUtil.e("mingguo", "exception  -- "+ e+"  path string  "+pathString);
             Toast.makeText(this, "加载视频错误�?", Toast.LENGTH_LONG).show();
         }
         
@@ -228,7 +228,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
         seekBar.setMax(mediaPlayer.getDuration());
         // 设置播放时间
         videoTimeLong = mediaPlayer.getDuration();
-        Log.e("mingguo", "video time length   "+videoTimeLong);
+        LogUtil.e("mingguo", "video time length   "+videoTimeLong);
         videoTimeString = getShowTime(videoTimeLong);
         vedioTiemTextView.setText("00:00:00/" + videoTimeString);
         
@@ -292,7 +292,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
     private class SeekBarChangeListener implements OnSeekBarChangeListener {
 
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            Log.w("mingguo", "on progress changed  "+progress);
+            LogUtil.w("mingguo", "on progress changed  "+progress);
             if (progress >= 0) {
                 // 如果是用户手动拖动控件，则设置视频跳转�??
                 if (fromUser) {
@@ -402,7 +402,7 @@ public class SurfaceViewTestActivity extends Activity implements MediaPlayer.OnC
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
         // TODO Auto-generated method stub
         // percent 表示缓存加载进度�?0为没�?始，100表示加载完成，在加载完成以后也会�?直调用该方法
-        Log.e("text", "onBufferingUpdate-->" + percent);
+        LogUtil.e("text", "onBufferingUpdate-->" + percent);
         // 可以根据大小的变化来
     }
 

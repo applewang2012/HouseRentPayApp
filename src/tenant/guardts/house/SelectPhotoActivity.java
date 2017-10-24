@@ -4,6 +4,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.Bimp;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.FileUpLoadUtils;
+import tenant.guardts.house.util.ImageItem;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.PublicWay;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +24,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -35,13 +42,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.Bimp;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.FileUpLoadUtils;
-import tenant.guardts.house.util.ImageItem;
-import tenant.guardts.house.util.PublicWay;
 
 
 /**
@@ -143,7 +143,7 @@ public class SelectPhotoActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				if (arg2 == Bimp.tempSelectBitmap.size()) {
-					Log.w("ddddddd", "----------");
+					LogUtil.w("ddddddd", "----------");
 					ll_popup.startAnimation(AnimationUtils.loadAnimation(SelectPhotoActivity.this,R.anim.activity_translate_in));
 					pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
 				} else {
@@ -167,17 +167,17 @@ public class SelectPhotoActivity extends BaseActivity {
 	
 	private void startAddRentHouseImage(int num){
 		if (Bimp.tempSelectBitmap.size() < 1){
-			Log.w("mingguo", "onclick  bitmap size  "+Bimp.tempSelectBitmap.size());
+			LogUtil.w("mingguo", "onclick  bitmap size  "+Bimp.tempSelectBitmap.size());
 			Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
 		}else{
 			
 			addRentHouseImageRequest(num);
 			//}
 			//for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++){
-				Log.w("mingguo", "path  "+Bimp.tempSelectBitmap.get(num-1).getImagePath());
-				Log.w("mingguo", "id  "+Bimp.tempSelectBitmap.get(num-1).getImageId());
-				Log.w("mingguo", "size  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getByteCount());
-				Log.w("mingguo", "width  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getWidth()+"  height  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getHeight());
+				LogUtil.w("mingguo", "path  "+Bimp.tempSelectBitmap.get(num-1).getImagePath());
+				LogUtil.w("mingguo", "id  "+Bimp.tempSelectBitmap.get(num-1).getImageId());
+				LogUtil.w("mingguo", "size  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getByteCount());
+				LogUtil.w("mingguo", "width  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getWidth()+"  height  "+Bimp.tempSelectBitmap.get(num-1).getBitmap().getHeight());
 			//}
 		}
 	}
@@ -367,11 +367,11 @@ public class SelectPhotoActivity extends BaseActivity {
 						String ret = object.optString("ret");
 						if (ret != null && ret.equals("0")){
 							mUploadNum++;
-							Log.e("mingguo", "  upload num  "+mUploadNum);
+							LogUtil.e("mingguo", "  upload num  "+mUploadNum);
 							if (mUploadNum <= Bimp.tempSelectBitmap.size()){
 								startAddRentHouseImage(mUploadNum);
 							}else if (mUploadNum > Bimp.tempSelectBitmap.size()){
-								Log.e("mingguo", "  upload Bimp.tempSelectBitmap.size()  "+Bimp.tempSelectBitmap.size());
+								LogUtil.e("mingguo", "  upload Bimp.tempSelectBitmap.size()  "+Bimp.tempSelectBitmap.size());
 								Toast.makeText(getApplicationContext(), "上传图片完成！", Toast.LENGTH_SHORT).show();
 								SelectPhotoActivity.this.finish();
 							}
@@ -391,7 +391,7 @@ public class SelectPhotoActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mAddImageAction)){
 				Message message = mHandler.obtainMessage();

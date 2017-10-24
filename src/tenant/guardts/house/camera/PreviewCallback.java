@@ -16,11 +16,11 @@
 
 package tenant.guardts.house.camera;
 
+import tenant.guardts.house.util.LogUtil;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 final class PreviewCallback implements Camera.PreviewCallback {
 
@@ -52,7 +52,7 @@ final class PreviewCallback implements Camera.PreviewCallback {
       message.sendToTarget();
       previewHandler = null;
     } else {
-      Log.d(TAG, "Got preview callback, but no handler for it");
+      LogUtil.d(TAG, "Got preview callback, but no handler for it");
     }
   }
 

@@ -4,14 +4,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.WithdrawStatus;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,18 +27,15 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.WithdrawStatus;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
+
+import com.google.gson.Gson;
 
 public class WithdrawActivity extends BaseActivity implements DataStatusInterface {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.e("", action + "-------" + templateInfo);
+		LogUtil.e("", action + "-------" + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mSendVerifyCodeAction)) {
 

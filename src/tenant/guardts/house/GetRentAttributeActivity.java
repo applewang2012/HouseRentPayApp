@@ -8,10 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -23,7 +25,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,11 +33,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
+
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
 
 public class GetRentAttributeActivity extends BaseActivity{
 
@@ -175,7 +175,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 //				confirmRentAttributeInfo(mOrderId);
 				
 				if (CommonUtil.mRegisterIdcard != null && !CommonUtil.mRegisterIdcard.equals("")){
-					Log.w("mingguo", "register id card  "+CommonUtil.mRegisterIdcard);
+					LogUtil.w("mingguo", "register id card  "+CommonUtil.mRegisterIdcard);
 					//if (CommonUtil.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
 						Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 						mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
@@ -206,9 +206,9 @@ public class GetRentAttributeActivity extends BaseActivity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+mfilePath);
+		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+mfilePath);
 		if (resultCode == RESULT_OK && requestCode == 1) {
-			 Log.w("mingguo", "activity result  width data   "+data);
+			 LogUtil.w("mingguo", "activity result  width data   "+data);
 			 mSubHandler.sendEmptyMessage(1000);
 			 startLiveIdentifyActivity();
 			 
@@ -230,9 +230,9 @@ public class GetRentAttributeActivity extends BaseActivity{
                 //这个方法是运行在 handler-thread 线程中的 ，可以执行耗时操作
                 int degree = BMapUtil.readPictureDegree(mfilePath);
                 Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(mfilePath, null));
-   			 	Log.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
    			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
-   			 	Log.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
+   			 	LogUtil.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
    			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
 
             }
@@ -281,7 +281,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		Log.w("mingguo", "mRealNamem  "+mRentName.getText().toString()+"  IdCard  "+mRentIDcard.getText().toString());
+		LogUtil.w("mingguo", "mRealNamem  "+mRentName.getText().toString()+"  IdCard  "+mRentIDcard.getText().toString());
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mRentIDcard.getText().toString());
@@ -416,7 +416,7 @@ public class GetRentAttributeActivity extends BaseActivity{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentAttributeAction)){
 				Message msg = mHandler.obtainMessage();

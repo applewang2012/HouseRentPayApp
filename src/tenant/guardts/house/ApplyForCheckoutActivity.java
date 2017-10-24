@@ -16,6 +16,7 @@ import tenant.guardts.house.model.HouseImageInfo;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +28,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -109,7 +109,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		// flag = getIntent().getStringExtra("flag");
 		initView();
 		// // mRentNo = "888888888";
-		// Log.e("mingguo", "rent no  " + mRentNo);
+		// LogUtil.e("mingguo", "rent no  " + mRentNo);
 		// getHouseDetailInfoByHouseId(mRentNo);
 		initPopupWindow();
 		initEvent();
@@ -518,7 +518,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 			} else if (msg.what == 200) {
 
 				jsonHouseImageListData((String) msg.obj);
-				Log.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
+				LogUtil.w("mingguo", "handle message   image url list size  " + imageUrlList.size());
 			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
 				if (value != null) {
@@ -593,7 +593,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				if (object != null) {
 					String imageCount = object.optString("count");
 					int count = Integer.parseInt(imageCount);
-					Log.w("mingguo", "countt  " + count);
+					LogUtil.w("mingguo", "countt  " + count);
 					if (count > 0) {
 						if (count == 1) {
 							String imageUrl1 = object.optString("Image0");
@@ -664,7 +664,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		Log.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mHouseDetailAction)) {
 				Message msg = mHandler.obtainMessage();
