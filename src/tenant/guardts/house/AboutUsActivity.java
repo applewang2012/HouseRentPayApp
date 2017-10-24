@@ -6,6 +6,7 @@ import org.ksoap2.serialization.SoapObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -52,10 +53,16 @@ public class AboutUsActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent loadIntent = new Intent(AboutUsActivity.this, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
-				loadIntent.putExtra("tab_name", "用户服务协议");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(AboutUsActivity.this, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
+//				loadIntent.putExtra("tab_name", "用户服务协议");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");   
+				intent.setData(content_url);  
+				startActivity(intent);
 				
 			}
 		});

@@ -97,11 +97,16 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent loadIntent = new Intent(HouseDetailInfoActivity.this, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
-				loadIntent.putExtra("tab_name", "全景图");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(HouseDetailInfoActivity.this, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+//				loadIntent.putExtra("tab_name", "全景图");
+//				startActivity(loadIntent);
 				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		mRentNo = getIntent().getStringExtra("rentNo");

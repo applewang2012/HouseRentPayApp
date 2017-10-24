@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.Window;
 import android.widget.Button;
@@ -55,6 +56,7 @@ public class CaptureActivity extends BaseActivity {
 	private boolean isLighting = true;
 	private ScanQrCodeFragment mQrFragment;
 	private DoorNumberLockFragment mOpenLockNumber;
+	private boolean mFlashLightOn = false;
 	
 //	private ActionOperationInterface mAction;
 
@@ -72,13 +74,12 @@ public class CaptureActivity extends BaseActivity {
 			mQrFragment = new ScanQrCodeFragment();
 			fragmentTransaction.add(R.id.id_scan_qrcode_content, mQrFragment);
 			fragmentTransaction.commitAllowingStateLoss();
+			mQrFragment.setFlashLightStatus(mFlashLightOn);
 			mQrFragment.setFragmentActionListener(new ActionOperationInterface() {
-				
-				
 
 				@Override
 				public void onPreFragment() {
-					// TODO Auto-generated method stub
+					
 					
 				}
 				
@@ -90,54 +91,41 @@ public class CaptureActivity extends BaseActivity {
 						mOpenLockNumber = new DoorNumberLockFragment();
 						newTransaction.add(R.id.id_scan_qrcode_content, mOpenLockNumber);
 						newTransaction.commitAllowingStateLoss();
+						mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
+						mOpenLockNumber.setFragmentActionListener(new ActionOperationInterface() {
+							
+							@Override
+							public void onPreFragment() {
+								// TODO Auto-generated method stub
+								FragmentTransaction backPreTransction = getFragmentManager().beginTransaction();
+								hideAllFragments(backPreTransction);
+								if (mQrFragment != null){
+									backPreTransction.show(mQrFragment);
+									backPreTransction.commitAllowingStateLoss();
+									mQrFragment.setFlashLightStatus(mFlashLightOn);
+								}
+							}
+							
+							@Override
+							public void onNextFragment() {
+								// TODO Auto-generated method stub
+								
+							}
+						});
 					}else{
 						newTransaction.show(mOpenLockNumber);
 						newTransaction.commitAllowingStateLoss();
+						mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
 					}
 				}
 			});
 		} else {
 			fragmentTransaction.show(mQrFragment);
 			fragmentTransaction.commitAllowingStateLoss();
+			mQrFragment.setFlashLightStatus(mFlashLightOn);
 		}
 		
-		// ViewUtil.addTopView(getApplicationContext(), this,
-		// R.string.scan_card);
-//		CameraManager.init(getApplication());
-//		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-//		hasSurface = false;
-//		inactivityTimer = new InactivityTimer(this);
-//		lighting = (CheckBox) findViewById(R.id.capture_flash);
-//		mNumberButton = (CheckBox)findViewById(R.id.id_open_lock_number_button);
-//		lighting.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//				mCamera = CameraManager.getCamera();
-//	            mParameters = mCamera.getParameters();
-//	           
-//	            if (isLighting) {
-//	            	lighting.setText("关闭手电筒");
-//	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-//	                mCamera.setParameters(mParameters);
-//	                isLighting = false;
-//	            } else { 
-//	            	lighting.setText("打开手电筒");
-//	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-//	            	mCamera.setParameters(mParameters);
-//	                isLighting = true;
-//	            }
-//			}
-//		});
-//		
-//		mNumberButton.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				startActivityForResult(new Intent(CaptureActivity.this, DoorNumberLockActivity.class), CommonUtil.mLockNumberRequestCode);
-//			}
-//		});
+		
 	}
 	
 	private void hideAllFragments(FragmentTransaction transaction) {
@@ -148,6 +136,16 @@ public class CaptureActivity extends BaseActivity {
 			transaction.hide(mOpenLockNumber);
 		}
 		
+	}
+	
+	public boolean setFlashLightOn(){
+		mQrFragment.openOrCloseFlashLight();
+		mFlashLightOn = !mFlashLightOn;
+		return mFlashLightOn;
+	}
+	
+	public boolean getFlashLightStatus(){
+		return mFlashLightOn;
 	}
 
 	private boolean checkFlashlight() {
@@ -209,22 +207,23 @@ public class CaptureActivity extends BaseActivity {
 	 * @param barcode
 	 */
 	public void handleDecode(Result result, Bitmap barcode) {
-		inactivityTimer.onActivity();
-		playBeepSoundAndVibrate();
-		String resultString = result.getText();
-		// FIXME
-		if (resultString.equals("")) {
-			GlobalUtil.shortToast(getApplication(), "Scan failed  !",
-					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-		} else {
-			// System.out.println("Result:"+resultString);
-			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
-			bundle.putString("result", resultString);
-			resultIntent.putExtras(bundle);
-			this.setResult(RESULT_OK, resultIntent);
-		}
-		CaptureActivity.this.finish();
+		mQrFragment.handleDecode(result, barcode);
+//		inactivityTimer.onActivity();
+//		playBeepSoundAndVibrate();
+//		String resultString = result.getText();
+//		// FIXME
+//		if (resultString.equals("")) {
+//			GlobalUtil.shortToast(getApplication(), "Scan failed  !",
+//					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//		} else {
+//			// System.out.println("Result:"+resultString);
+//			Intent resultIntent = new Intent();
+//			Bundle bundle = new Bundle();
+//			bundle.putString("result", resultString);
+//			resultIntent.putExtras(bundle);
+//			this.setResult(RESULT_OK, resultIntent);
+//		}
+//		CaptureActivity.this.finish();
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
@@ -242,25 +241,24 @@ public class CaptureActivity extends BaseActivity {
 	
 	
 
+	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_OK && requestCode == CommonUtil.mLockNumberRequestCode) {
-			if (data != null)
-//			Bundle bundle = data.getExtras();
-//			String scanResult = bundle.getString("result");
-			Log.e("mingguo", "capture activity  scan  result  " + data);
-			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
-			
-//			Intent resultIntent = new Intent();
-//			Bundle activityBundel = new Bundle();
-//			activityBundel.putString("result", scanResult);
-//			resultIntent.putExtras(resultIntent);
-			this.setResult(RESULT_OK, data);
-			CaptureActivity.this.finish();
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (mOpenLockNumber != null && mOpenLockNumber.isVisible()){
+				FragmentTransaction backTransaction = getFragmentManager().beginTransaction();
+				hideAllFragments(backTransaction);
+				if (mQrFragment != null){
+					backTransaction.show(mQrFragment);
+					backTransaction.commitAllowingStateLoss();
+					mQrFragment.setFlashLightStatus(mFlashLightOn);
+					return false;
+				}
+			}
 		}
+		return super.onKeyDown(keyCode, event);
 	}
+
 
 //	@Override
 //	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {

@@ -2,22 +2,51 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/open_lock_loading_bg"
+    android:background="@drawable/input_number_open_lock_loading_bg"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-		<include
-	   android:id="@+id/id_scan_code_titlebar"
-	   layout="@layout/titlebar"
-	       />
+		<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_90" 
+        android:background="#273032"
+        >
+
+        <FrameLayout
+           android:id="@+id/id_titlebar_back"
+	        android:layout_width="@dimen/base_dimen_150"
+	        android:layout_height="@dimen/base_dimen_90" 
+	        android:clickable="true"
+	        >
+	        <ImageView
+	            android:layout_width="@dimen/base_dimen_44"
+	            android:layout_height="@dimen/base_dimen_44"
+	            android:layout_gravity="center_vertical"
+	            android:layout_marginLeft="@dimen/base_dimen_20"
+	            android:background="@drawable/short_lease_back"
+	             />
+	        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="编码开锁"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/base_dimen_38"
+            android:textStyle="bold" />
+        
+    </FrameLayout>
+    
         <ImageView
             android:layout_width="@dimen/base_dimen_149"
             android:layout_height="@dimen/base_dimen_170"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/base_dimen_383"
+            android:layout_marginTop="@dimen/base_dimen_293"
             android:background="@drawable/scan_qrcode_house_logo" />
 
         <EditText
@@ -31,8 +60,8 @@
             android:hint="请输入正确的门锁编码"
             android:inputType="number"
             android:textColor="#000000"
-            android:textColorHint="#ffffff"
-            android:maxLength="24"
+            android:textColorHint="#777777"
+            android:maxLength="16"
             android:textSize="@dimen/base_dimen_30" />
 
         <Button
@@ -47,19 +76,34 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_30" />
         
-        <CheckBox
-            android:id="@+id/capture_flash"
+        <LinearLayout 
+            android:id="@+id/capture_flash_button"
             android:layout_gravity="center_horizontal"
-            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="打开手电筒"
-            android:textSize="@dimen/base_dimen_30" 
-            android:layout_marginTop="@dimen/base_dimen_180"
-            android:button="@null"
-            android:drawableTop="@drawable/capture_flash_bg"
-            android:textColor="@drawable/capture_flash_text_bg"
-            />
+            android:clickable="true"
+            android:orientation="vertical" 
+            android:layout_marginTop="@dimen/base_dimen_150"
+            >
+            <ImageView 
+                android:id="@+id/capture_flash_icon"
+	            android:layout_gravity="center_horizontal"
+	            android:layout_width="@dimen/base_dimen_44"
+	            android:layout_height="@dimen/base_dimen_72"
+	            android:background="@drawable/flash_normal"
+	            android:gravity="center_horizontal"
+	            />
+            <TextView 
+                android:id="@+id/capture_flash_text"
+                android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffff"
+	            android:textSize="@dimen/base_dimen_30" 
+	            android:text="打开手电筒"
+                />
+        </LinearLayout>
+        
+        
     </LinearLayout>
 
 </ScrollView>

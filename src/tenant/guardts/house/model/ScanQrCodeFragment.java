@@ -6,10 +6,13 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
@@ -18,6 +21,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -26,6 +30,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import tenant.guardts.house.CaptureActivity;
 import tenant.guardts.house.R;
@@ -43,10 +49,11 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	private ViewfinderView viewfinderView;
 	private boolean hasSurface;
 	private InactivityTimer inactivityTimer;
-	private CheckBox lighting;
 	private CheckBox mNumberButton;
 	private CaptureActivityHandler handler;
 	private ActionOperationInterface mAction;
+	private ImageView mFlashIcon;
+	private TextView mFlashText;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,25 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		return mRootView;
 	}
 	
+	public void setFlashLightStatus(final boolean status){
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (status){
+					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
+					mFlashText.setText("关闭手电筒");
+					mFlashText.setTextColor(Color.parseColor("#337ffd"));
+				}else{
+					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+					mFlashText.setText("打开手电筒");
+					mFlashText.setTextColor(Color.parseColor("#ffffff"));
+				}
+			}
+		}, 200);
+		
+	}
+	
 	public  void setFragmentActionListener(ActionOperationInterface action) {
 		mAction = action;
 	}
@@ -77,33 +103,27 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		viewfinderView = (ViewfinderView) mRootView.findViewById(R.id.viewfinder_view);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(getActivity());
-		lighting = (CheckBox) mRootView.findViewById(R.id.capture_flash);
 		mNumberButton = (CheckBox)mRootView.findViewById(R.id.id_open_lock_number_button);
-		lighting.setOnClickListener(new OnClickListener() {
+		LinearLayout flashButton = (LinearLayout)mRootView.findViewById(R.id.capture_flash_button);
+		mFlashIcon = (ImageView)mRootView.findViewById(R.id.capture_flash_icon);
+		mFlashText = (TextView)mRootView.findViewById(R.id.capture_flash_text);
+		flashButton.setOnClickListener(new OnClickListener() {
 
-			private Camera mCamera;
-			private Parameters mParameters;
-			private boolean isLighting;
 
 			@Override
 			public void onClick(View v) {
-
-				mCamera = CameraManager.getCamera();
-	            mParameters = mCamera.getParameters();
-	           
-	            if (isLighting) {
-	            	lighting.setText("关闭手电筒");
-	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-	                mCamera.setParameters(mParameters);
-	                isLighting = false;
-	            } else { 
-	            	lighting.setText("打开手电筒");
-	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-	            	mCamera.setParameters(mParameters);
-	                isLighting = true;
-	            }
+				if (((CaptureActivity) getActivity()).setFlashLightOn()){
+					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
+					mFlashText.setTextColor(Color.parseColor("#337ffd"));
+					mFlashText.setText("关闭手电筒");
+				}else{
+					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+					mFlashText.setTextColor(Color.parseColor("#ffffff"));
+					mFlashText.setText("打开手电筒");
+				}
 			}
 		});
+		
 		
 		mNumberButton.setOnClickListener(new OnClickListener() {
 			
@@ -145,15 +165,54 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		}
 		initBeepSound();
 		vibrate = true;
+		
+	}
+	
+	public boolean openOrCloseFlashLight(){
+		mCamera = CameraManager.getCamera();
+        mParameters = mCamera.getParameters();
+       
+        if (mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
+            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(mParameters);
+            return true;
+        } else { 
+        	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        	mCamera.setParameters(mParameters);
+        	
+        	return false;
+        }
+	}
+	
+	public boolean getFlashLightStatus(){
+		mCamera = CameraManager.getCamera();
+		if (mCamera != null){
+			mParameters = mCamera.getParameters();
+		       
+	        if (mParameters != null && mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
+	        	return false;
+	        }else{
+	        	return true;
+	        }
+		}
+        return false;
 	}
 	
 	
 	
 	
 	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+		Log.e("mingguo", "scan qr code  onAttach ");
+	}
+
+	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		Log.w("mingguo", "scan qr code  onPause  ");
 		if (handler != null) {
 			handler.quitSynchronously();
 			handler = null;

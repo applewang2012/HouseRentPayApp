@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -151,10 +152,16 @@ public class LoginUserActivity extends BaseActivity {
 			public void onClick(View v) {
 				// startActivity(new Intent(LoginUserActivity.this,
 				// UserAgreementActivity.class));
-				Intent loadIntent = new Intent(LoginUserActivity.this, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
-				loadIntent.putExtra("tab_name", "用户服务协议");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(LoginUserActivity.this, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
+//				loadIntent.putExtra("tab_name", "用户服务协议");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		Button login = (Button) findViewById(R.id.id_login_user_button);

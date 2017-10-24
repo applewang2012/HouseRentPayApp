@@ -17,6 +17,7 @@ import com.baidu.mapapi.search.poi.PoiSortType;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -187,10 +188,16 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 			GlobalUtil.shortToast(getApplication(), "抱歉，未获取到详细信息！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			return;
 		}else{
-			Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-			loadIntent.putExtra("url", mDataList.get(position).getNearDetailUrl());
-			loadIntent.putExtra("tab_name", mDataList.get(position).getNearName());
-			startActivity(loadIntent);
+//			Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//			loadIntent.putExtra("url", mDataList.get(position).getNearDetailUrl());
+//			loadIntent.putExtra("tab_name", mDataList.get(position).getNearName());
+//			startActivity(loadIntent);
+			
+			Intent intent = new Intent();        
+			intent.setAction("android.intent.action.VIEW");    
+			Uri content_url = Uri.parse(mDataList.get(position).getNearDetailUrl());   
+			intent.setData(content_url);  
+			startActivity(intent);
 		}
 	}
 	

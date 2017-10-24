@@ -7,23 +7,24 @@
 	   android:id="@+id/id_scan_code_titlebar"
 	   layout="@layout/titlebar"
 	       /> 
-    
          
     <SurfaceView
         android:id="@+id/preview_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base_dimen_90"
+        android:layout_marginTop="@dimen/base_dimen_60"
         android:layout_gravity="center" />
 
     <tenant.guardts.house.zxingview.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="@dimen/base_dimen_90"
+        />
 
     <ImageView
-        android:layout_width="@dimen/base_dimen_149"
-        android:layout_height="@dimen/base_dimen_170"
+        android:layout_width="@dimen/base_dimen_165"
+        android:layout_height="@dimen/base_dimen_171"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/base_dimen_173"
         android:background="@drawable/scan_qrcode_house_logo" />
@@ -60,7 +61,7 @@
             android:drawableTop="@drawable/lock_number_button"
             android:textColor="#ffffff"
             />
-           <CheckBox
+           <!-- <CheckBox
             
             android:layout_gravity="right"
             android:id="@+id/capture_flash"
@@ -72,7 +73,33 @@
             android:button="@null"
             android:drawableTop="@drawable/capture_flash_bg"
             android:textColor="@drawable/capture_flash_text_bg"
-            />
+            /> -->
+           <LinearLayout 
+            android:id="@+id/capture_flash_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical" 
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/base_dimen_182"
+            >
+            <ImageView 
+                android:id="@+id/capture_flash_icon"
+	            android:layout_gravity="center_horizontal"
+	            android:layout_width="@dimen/base_dimen_44"
+	            android:layout_height="@dimen/base_dimen_72"
+	            android:background="@drawable/flash_normal"
+	            android:gravity="center_horizontal"
+	            />
+            <TextView 
+                android:id="@+id/capture_flash_text"
+                android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textColor="#ffffff"
+	            android:textSize="@dimen/base_dimen_30" 
+	            android:text="打开手电筒"
+                />
+        </LinearLayout>
             
         </FrameLayout>
     </LinearLayout>

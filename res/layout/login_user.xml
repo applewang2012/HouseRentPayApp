@@ -21,7 +21,7 @@
                 android:background="@drawable/login_logo" />
 
             <ImageView
-                android:layout_width="@dimen/base_dimen_131"
+                android:layout_width="@dimen/base_dimen_146"
                 android:layout_height="@dimen/base_dimen_35"
                 android:layout_marginTop="@dimen/base_dimen_30"
                 android:background="@drawable/login_icon_text" />

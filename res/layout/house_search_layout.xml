@@ -50,7 +50,7 @@
 		        android:layout_marginLeft="@dimen/base_dimen_65"
 		        android:layout_gravity="center_vertical"
 		        android:background="#00000000"
-		        android:text="想租房？来链心锁！"
+		        android:text="想租房？来连心锁！"
 		        android:textSize="@dimen/base_dimen_28"
 		        android:textColorHint="#b2b2b2"
 		        android:textColor="#eeeeee"
