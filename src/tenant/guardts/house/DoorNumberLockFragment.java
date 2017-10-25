@@ -1,13 +1,15 @@
 package tenant.guardts.house;
 
-import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.model.ActionOperationInterface;
 import tenant.guardts.house.model.BaseFragment;
 import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.util.ViewUtil;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.Camera;
-import android.hardware.Camera.Parameters;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,8 +17,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DoorNumberLockFragment extends BaseFragment {
@@ -27,26 +32,10 @@ public class DoorNumberLockFragment extends BaseFragment {
 	private String mVersinName;
 	private Camera camera;
 	private View mRootView;
-	
-	
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-//		setContentView(R.layout.activity_lock_number_layout);
-//		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-//		FrameLayout titlebarBg = (FrameLayout)findViewById(R.id.id_titlebar_bg);
-//		titlebarBg.setBackgroundColor(Color.parseColor("#273032"));
-//		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-//		mTitleBar.setText("编码开锁");
-//		try {
-//			CameraManager.enableFlashlight();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-//	}
+	private FrameLayout mOpenFlashButton;
+	private ImageView mFlashIcon;
+	private TextView mFlashText;
+	private ActionOperationInterface mAction;
 	
 	
 	
@@ -60,28 +49,21 @@ public class DoorNumberLockFragment extends BaseFragment {
 		return mRootView;
 	}
 
-
-
-
-
-
-	
-
-//	private void initCamera(SurfaceHolder surfaceHolder) {
-//		try {
-//			CameraManager.get().openDriver(surfaceHolder);
-//		} catch (IOException ioe) {
-//			return;
-//		} catch (RuntimeException e) {
-//			return;
-//		}
-//		if (handler == null) {
-//			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
-//		}
-//	}
 	
 
 	private void initView(){
+		FrameLayout backButton = (FrameLayout)mRootView.findViewById(R.id.id_titlebar_back);
+		backButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (mAction != null){
+					mAction.onPreFragment();
+				}
+			}
+		});
+		
 		final EditText inputNumber = (EditText)mRootView.findViewById(R.id.id_input_lock_number);
 		inputNumber.addTextChangedListener(new TextWatcher() {
 			
@@ -120,46 +102,80 @@ public class DoorNumberLockFragment extends BaseFragment {
 					return;
 				}
 				ViewUtil.forceCloseSoftKeyborad(getActivity());
-				String realContent = "http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d="+text.replace(" ", "");
+				String realContent = "http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d="+text;
 				Intent resultIntent = new Intent();
 				Bundle activityBundel = new Bundle();
 				activityBundel.putString("result", realContent);
 				resultIntent.putExtras(activityBundel);
-//				setResult(getActivity().RESULT_OK, resultIntent);
-//				DoorNumberLockActivity.this.finish();
+				getActivity().setResult(getActivity().RESULT_OK, resultIntent);
+				getActivity().finish();
 			}
 		});
 		
-		final CheckBox openFlash = (CheckBox)mRootView.findViewById(R.id.capture_flash);
-		openFlash.setOnClickListener(new OnClickListener() {
-
-//			private Camera mCamera;
-//			private Parameters mParameters;
-
-			private Camera mCamera;
-			private Parameters mParameters;
+		LinearLayout flashButton = (LinearLayout)mRootView.findViewById(R.id.capture_flash_button);
+		mFlashIcon = (ImageView)mRootView.findViewById(R.id.capture_flash_icon);
+		mFlashText = (TextView)mRootView.findViewById(R.id.capture_flash_text);
+		flashButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				mCamera = CameraManager.getCamera();
-	            mParameters = mCamera.getParameters();
-	           
-	            if (isLighting) {
-	            	openFlash.setText("关闭手电筒");
-	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-	                mCamera.setParameters(mParameters);
-	                isLighting = false;
-	            } else { 
-	            	openFlash.setText("打开手电筒");
-	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-	            	mCamera.setParameters(mParameters);
-	                isLighting = true;
-	            }
+				if (((CaptureActivity) getActivity()).setFlashLightOn()){
+					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
+					mFlashText.setTextColor(Color.parseColor("#337ffd"));
+					mFlashText.setText("关闭手电筒");
+				}else{
+					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+					mFlashText.setTextColor(Color.parseColor("#ffffff"));
+					mFlashText.setText("打开手电筒");
+				}
+//				mCamera = CameraManager.getCamera();
+//	            mParameters = mCamera.getParameters();
+//	           
+//	            if (isLighting) {
+//	            	mOpenFlashButton.setText("关闭手电筒");
+//	                mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+//	                mCamera.setParameters(mParameters);
+//	                isLighting = false;
+//	            } else { 
+//	            	mOpenFlashButton.setText("打开手电筒");
+//	            	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+//	            	mCamera.setParameters(mParameters);
+//	                isLighting = true;
+//	            }
 			}
 		});
 	}
 	
-	private boolean isLighting = true;
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+	}
+	
+	public void setFlashLightStatus(final boolean status){
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				LogUtil.w("mingguo", "door number flash state  "+status);
+				if (status){
+					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
+					mFlashText.setText("关闭手电筒");
+					mFlashText.setTextColor(Color.parseColor("#337ffd"));
+				}else{
+					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+					mFlashText.setText("打开手电筒");
+					mFlashText.setTextColor(Color.parseColor("#ffffff"));
+				}
+			}
+		}, 200);
+		
+	}
+
+	public  void setFragmentActionListener(ActionOperationInterface action) {
+		mAction = action;
+	}
 
 
 //	private void Openshoudian() {

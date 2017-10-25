@@ -66,6 +66,35 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.map.PoiOverlay;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+
 
 public class MapRentHouseActivity extends BaseActivity
 		implements DataStatusInterface, OnGetPoiSearchResultListener, OnGetSuggestionResultListener {
@@ -405,10 +434,16 @@ public class MapRentHouseActivity extends BaseActivity
 
 			@Override
 			public void onClick(View v) {
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
-				loadIntent.putExtra("tab_name", "全景图");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
+//				loadIntent.putExtra("tab_name", "全景图");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		Button houseSearch = (Button) detailView.findViewById(R.id.id_house_detail_search);

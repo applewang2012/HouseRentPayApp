@@ -219,7 +219,7 @@ public class SearchResultActivity extends BaseActivity {
 			TextView showSearch = (TextView)findViewById(R.id.button_search);
 			
 			if (mSearch_tag == null || mSearch_tag.equals("")){
-				showSearch.setText("想租房？来链心锁！");
+				showSearch.setText("想租房？来连心锁！");
 				showSearch.setTextColor(Color.parseColor("#cccccc"));
 				
 			}else{

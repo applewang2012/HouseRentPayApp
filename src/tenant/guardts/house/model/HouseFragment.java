@@ -302,10 +302,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_ZHENGFU_FUWU);
-				loadIntent.putExtra("tab_name", "政府服务");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_ZHENGFU_FUWU);
+//				loadIntent.putExtra("tab_name", "政府服务");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_ZHENGFU_FUWU);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		mHeXiPower.setOnClickListener(new OnClickListener() {
@@ -332,10 +338,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_WEIQUAN_CHANGSHI);
-				loadIntent.putExtra("tab_name", "维权常识");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_WEIQUAN_CHANGSHI);
+//				loadIntent.putExtra("tab_name", "维权常识");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_WEIQUAN_CHANGSHI);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		mMedicalInsurance.setOnClickListener(new OnClickListener() {
@@ -343,10 +355,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_YILIAO_BAOXIAN);
-				loadIntent.putExtra("tab_name", "医疗保险");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_YILIAO_BAOXIAN);
+//				loadIntent.putExtra("tab_name", "医疗保险");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_YILIAO_BAOXIAN);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		mUseFulNumber.setOnClickListener(new OnClickListener() {
@@ -354,10 +372,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_COMMON_PHONE);
-				loadIntent.putExtra("tab_name", "常用电话");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_COMMON_PHONE);
+//				loadIntent.putExtra("tab_name", "常用电话");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_COMMON_PHONE);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		
@@ -365,10 +389,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 
 			@Override
 			public void onClick(View v) {
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_JIAOTONG_CHUXING);
-				loadIntent.putExtra("tab_name", "交通出行");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_JIAOTONG_CHUXING);
+//				loadIntent.putExtra("tab_name", "交通出行");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_JIAOTONG_CHUXING);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		
@@ -377,10 +407,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_ZHOUBIAN_SHANGQU);
-				loadIntent.putExtra("tab_name", "周边商区");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_ZHOUBIAN_SHANGQU);
+//				loadIntent.putExtra("tab_name", "周边商区");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_ZHOUBIAN_SHANGQU);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 		
@@ -389,10 +425,16 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 			@Override
 			public void onClick(View v) {
 
-				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
-				loadIntent.putExtra("url", CommonUtil.URL_MORE_CONTENT);
-				loadIntent.putExtra("tab_name", "更多");
-				startActivity(loadIntent);
+//				Intent loadIntent = new Intent(mContext, LoadUrlTestActivity.class);
+//				loadIntent.putExtra("url", CommonUtil.URL_MORE_CONTENT);
+//				loadIntent.putExtra("tab_name", "更多");
+//				startActivity(loadIntent);
+				
+				Intent intent = new Intent();        
+				intent.setAction("android.intent.action.VIEW");    
+				Uri content_url = Uri.parse(CommonUtil.URL_MORE_CONTENT);   
+				intent.setData(content_url);  
+				startActivity(intent);
 			}
 		});
 
