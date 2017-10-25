@@ -167,6 +167,9 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		initBeepSound();
 		vibrate = true;
 		
+		mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+		mFlashText.setText("打开手电筒");
+		mFlashText.setTextColor(Color.parseColor("#ffffff"));
 	}
 	
 	public boolean openOrCloseFlashLight(){

@@ -4897,12 +4897,12 @@ tenant.guardts.house.AddHouseInfoActivity:
     private android.widget.TextView mStrictTextView
     private android.widget.TextView mHouseTypeTextView
     private java.lang.String mRHouseP
-    546:560:private void getHouseProperty()
+    545:559:private void getHouseProperty()
 tenant.guardts.house.AddRentAttributeActivity:
-    136:142:private void getPayRateDesc(java.lang.String)
-    774:805:private void startHttpService()
-    981:1004:private void getIndentifyInfo(java.lang.String)
-    1007:1033:private void getQueryStatusInfo(java.lang.String)
+    133:139:private void getPayRateDesc(java.lang.String)
+    771:802:private void startHttpService()
+    978:1001:private void getIndentifyInfo(java.lang.String)
+    1004:1030:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -4944,13 +4944,35 @@ tenant.guardts.house.BankActivity:
     private android.widget.Button btnAdd
 tenant.guardts.house.BuildConfig
 tenant.guardts.house.CaptureActivity:
+    private tenant.guardts.house.decoding.CaptureActivityHandler handler
+    private boolean hasSurface
+    private java.util.Vector decodeFormats
+    private java.lang.String characterSet
+    private tenant.guardts.house.decoding.InactivityTimer inactivityTimer
+    private android.media.MediaPlayer mediaPlayer
+    private boolean playBeep
     private static final float BEEP_VOLUME
+    private boolean vibrate
     private android.widget.Button cancelScanButton
     private static final long VIBRATE_DURATION
-    98:102:private boolean checkFlashlight()
+    private android.widget.CheckBox mNumberButton
+    private android.widget.CheckBox lighting
+    private android.hardware.Camera mCamera
+    private android.hardware.Camera$Parameters mParameters
+    150:150:public boolean getFlashLightStatus()
+    154:158:private boolean checkFlashlight()
+    234:243:private void initCamera(android.view.SurfaceHolder)
+    322:341:private void initBeepSound()
+    346:353:private void playBeepSoundAndVibrate()
 tenant.guardts.house.City
 tenant.guardts.house.DemoApplication:
     private static android.app.Activity sActivity
+tenant.guardts.house.DoorNumberLockFragment:
+    private tenant.guardts.house.presenter.HoursePresenter mPresenter
+    private int mVersionCode
+    private java.lang.String mVersinName
+    private android.hardware.Camera camera
+    private android.widget.FrameLayout mOpenFlashButton
 tenant.guardts.house.DownloadAppActivity:
     private long mQueuedDownloadId
     private android.app.AlertDialog mQueuedDialog
@@ -4975,9 +4997,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     private java.lang.String mOwnerName
     private java.lang.String mOwnerIdcard
 tenant.guardts.house.HomeActivity:
-    600:611:private java.lang.String getUserIdNo(java.lang.String)
-    732:733:public void setSelectedCity(java.lang.String)
-    736:736:public java.lang.String getSelectedCity()
+    597:608:private java.lang.String getUserIdNo(java.lang.String)
+    734:735:public void setSelectedCity(java.lang.String)
+    738:738:public java.lang.String getSelectedCity()
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -4990,10 +5012,10 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-    349:354:private void setDeleteHouseInfo(java.lang.String)
-    358:370:private void initDialog()
-    379:389:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    481:486:private void getHouseDetailImageListByHouseId(java.lang.String)
+    354:359:private void setDeleteHouseInfo(java.lang.String)
+    363:375:private void initDialog()
+    384:394:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    486:491:private void getHouseDetailImageListByHouseId(java.lang.String)
     66:66:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
     66:66:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
 tenant.guardts.house.HouseDetailInfoActivity$15
@@ -5005,9 +5027,9 @@ tenant.guardts.house.LocationDemo:
 tenant.guardts.house.LocationDemo$MyLocationListenner:
     303:303:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.LoginUserActivity:
-    228:240:private void commonServiceInterface()
-    253:253:private void showLoadingView()
-    259:259:private void dismissLoadingView()
+    235:247:private void commonServiceInterface()
+    260:260:private void showLoadingView()
+    266:266:private void dismissLoadingView()
 tenant.guardts.house.MapRentHouseActivity:
     private com.baidu.mapapi.map.MyLocationConfiguration$LocationMode mCurrentMode
     private boolean mShowInfoWindow
@@ -5015,21 +5037,21 @@ tenant.guardts.house.MapRentHouseActivity:
     android.widget.Button requestLocButton
     private android.widget.TextView mTitleBar
     private java.util.ArrayList suggest
-    550:555:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
-    559:568:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
-    698:701:public void setBackgroundAlpha(float)
+    579:584:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    588:597:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
+    727:730:public void setBackgroundAlpha(float)
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner:
-    799:799:public void onReceivePoi(com.baidu.location.BDLocation)
+    828:828:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.MapSuggestSearchActivity:
     134:137:protected boolean hasData(java.lang.String)
 tenant.guardts.house.MyHouseActivity:
     private android.widget.LinearLayout mContentLayout
     private android.widget.TextView mNoContent
-    100:105:private void setDeleteHouseInfo(java.lang.String)
-    256:271:private void initDialog(android.view.View,int)
+    99:104:private void setDeleteHouseInfo(java.lang.String)
+    255:270:private void initDialog(android.view.View,int)
 tenant.guardts.house.MyHouseActivity$3
 tenant.guardts.house.PaymentStatusActivity:
-    114:124:private void updateWalletRequestInfo(java.lang.String,java.lang.String)
+    113:123:private void updateWalletRequestInfo(java.lang.String,java.lang.String)
 tenant.guardts.house.R:
     10:10:public R()
 tenant.guardts.house.RegisterUserActivity:
@@ -5080,7 +5102,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
-    94:103:private void testHelloword()
+    92:101:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
@@ -5101,6 +5123,7 @@ tenant.guardts.house.bannerview.ViewFlow:
     private static final int TOUCH_STATE_REST
     private static final int TOUCH_STATE_SCROLLING
     149:152:public void stopAutoFlowTimer()
+    200:201:private static int dip2px(android.content.Context,float)
 tenant.guardts.house.camera.AutoFocusCallback:
     private static final long AUTOFOCUS_INTERVAL_MS
 tenant.guardts.house.camera.CameraConfigurationManager:
@@ -5112,7 +5135,8 @@ tenant.guardts.house.camera.CameraManager:
     private static final int MIN_FRAME_HEIGHT
     private static final int MAX_FRAME_WIDTH
     private static final int MAX_FRAME_HEIGHT
-    333:333:public android.content.Context getContext()
+    142:143:public static void enableFlashlight()
+    337:337:public android.content.Context getContext()
 tenant.guardts.house.camera.PlanarYUVLuminanceSource:
     106:106:public int getDataWidth()
     110:110:public int getDataHeight()
@@ -5165,7 +5189,7 @@ tenant.guardts.house.download.DownloadConstants:
     static final boolean LOGX
     private static final boolean LOCAL_LOGV
     private static final boolean LOCAL_LOGVV
-    26:26:public DownloadConstants()
+    27:27:public DownloadConstants()
 tenant.guardts.house.download.DownloadInfo:
     public static final int NETWORK_OK
     public static final int NETWORK_NO_CONNECTION
@@ -5343,8 +5367,8 @@ tenant.guardts.house.download.Downloads$RequestHeaders
 tenant.guardts.house.download.FileUtils
 tenant.guardts.house.download.FileUtils$FileStatus
 tenant.guardts.house.download.Helpers:
-    52:53:private Helpers()
-    258:263:private static java.io.File getCachePartitionFileName(android.content.Context,java.lang.String,java.lang.String,int,long)
+    53:54:private Helpers()
+    259:264:private static java.io.File getCachePartitionFileName(android.content.Context,java.lang.String,java.lang.String,int,long)
 tenant.guardts.house.download.Helpers$Lexer:
     public static final int TOKEN_START
     public static final int TOKEN_OPEN_PAREN
@@ -5412,13 +5436,13 @@ tenant.guardts.house.model.DataModel:
     private java.lang.String[] mDistrictID
     private java.lang.String[] mStreetID
     private java.util.HashMap mPostData
-    77:80:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
-    93:98:public void startHttpRequestTask()
-    267:277:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
-    339:350:private void jsonStreetData(java.lang.String)
-    353:357:public java.lang.String getSoapName(java.lang.String)
-    362:376:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
-    62:62:static synthetic java.util.HashMap access$5(tenant.guardts.house.model.DataModel)
+    75:78:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
+    91:96:public void startHttpRequestTask()
+    265:275:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
+    337:348:private void jsonStreetData(java.lang.String)
+    351:355:public java.lang.String getSoapName(java.lang.String)
+    360:374:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
+    60:60:static synthetic java.util.HashMap access$5(tenant.guardts.house.model.DataModel)
 tenant.guardts.house.model.DataModel$HttpAsyncTask
 tenant.guardts.house.model.DataModel$RelationServiceAsyncTask
 tenant.guardts.house.model.EvaluationItem:
@@ -5431,13 +5455,13 @@ tenant.guardts.house.model.HouseFragment:
     android.widget.RadioGroup$OnCheckedChangeListener radioButtonListener
     android.widget.Button requestLocButton
     private java.util.List mMarkList
-    223:238:private void startThreadfindLocation(java.lang.String)
-    241:244:public void searchButtonProcess()
-    573:576:public void searchNearbyProcess(java.lang.String)
-    579:584:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    233:248:private void startThreadfindLocation(java.lang.String)
+    251:254:public void searchButtonProcess()
+    625:628:public void searchNearbyProcess(java.lang.String)
+    631:636:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
 tenant.guardts.house.model.HouseFragment$4
 tenant.guardts.house.model.HouseFragment$MyLocationListenner:
-    727:727:public void onReceivePoi(com.baidu.location.BDLocation)
+    779:779:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.model.HouseImageInfo
 tenant.guardts.house.model.HouseInfoModel:
     56:56:public long getOrderCreatedDateStamp()
@@ -5447,12 +5471,17 @@ tenant.guardts.house.model.MyFragment$12
 tenant.guardts.house.model.MyFragment$13
 tenant.guardts.house.model.OrderFangzhuFragment:
     private long mTimeTag
-    239:244:private void rejectRentAttributeInfo(java.lang.String)
+    237:242:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
 tenant.guardts.house.model.OrderZhuHuFragment:
     private long mTimeTag
+tenant.guardts.house.model.ScanQrCodeFragment:
+    private static final long VIBRATE_DURATION
+    private static final float BEEP_VOLUME
+    192:202:public boolean getFlashLightStatus()
+    281:283:public void drawViewfinder()
 tenant.guardts.house.model.SurroundFragment:
     private tenant.guardts.house.headergridview.StickyGridHeadersGridView mHeadersGridView
     290:295:private int getContentCount()
@@ -5538,12 +5567,12 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
     public static final long TIME_STAMP_10_MINUTES
     23:23:public CommonUtil()
-    91:92:public static void setCanvas(android.graphics.Canvas)
-    155:158:public static void uninstallApk(android.content.Context,java.lang.String)
-    172:172:private static double Rad(double)
-    183:192:public static double GetDistance(double,double,double,double)
-    196:217:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    222:245:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    92:93:public static void setCanvas(android.graphics.Canvas)
+    156:159:public static void uninstallApk(android.content.Context,java.lang.String)
+    173:173:private static double Rad(double)
+    184:193:public static double GetDistance(double,double,double,double)
+    197:218:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    223:246:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)
@@ -5584,6 +5613,16 @@ tenant.guardts.house.util.JsonObjectParse:
     280:295:public static java.lang.String[] parseHouseOwnType(java.lang.String)
     322:340:public static java.util.HashMap parseVersionUpdateInfo(java.lang.String)
     346:378:public static java.util.HashMap parseAdvertismentInfo(java.lang.String)
+tenant.guardts.house.util.LogUtil:
+    public static final int VERBOSE
+    public static final int DEBUG
+    public static final int INFO
+    public static final int WARN
+    public static final int ERROR
+    public static final int NOTHING
+    public static final int LEVEL
+    5:5:public LogUtil()
+    44:44:public static void i(java.lang.String,java.lang.String)
 tenant.guardts.house.util.NewToast
 tenant.guardts.house.util.NewToast$1
 tenant.guardts.house.util.NewToast$OnDismissListener

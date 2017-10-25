@@ -150,7 +150,9 @@ public class DoorNumberLockFragment extends BaseFragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+		mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
+		mFlashText.setText("打开手电筒");
+		mFlashText.setTextColor(Color.parseColor("#ffffff"));
 	}
 	
 	public void setFlashLightStatus(final boolean status){

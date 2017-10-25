@@ -193,6 +193,7 @@ public class CaptureActivity extends BaseActivity {
 //			handler = null;
 //		}
 //		CameraManager.get().closeDriver();
+		mFlashLightOn = false;
 	}
 
 	@Override
