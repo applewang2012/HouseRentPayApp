@@ -1,30 +1,23 @@
 package tenant.guardts.house;
 
-import java.io.IOException;
-
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.model.BaseFragment;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.ViewUtil;
 import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.model.BaseFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.ViewUtil;
 
 public class DoorNumberLockFragment extends BaseFragment {
 
@@ -172,10 +165,10 @@ public class DoorNumberLockFragment extends BaseFragment {
 //	private void Openshoudian() {
 //        //异常处理一定要加，否则Camera打开失败的话程序会崩溃
 //        try {
-//            Log.d("smile","camera打开");
+//            LogUtil.d("smile","camera打开");
 //            camera = CameraManager.getCamera();
 //        } catch (Exception e) {
-//            Log.d("smile","Camera打开有问题");
+//            LogUtil.d("smile","Camera打开有问题");
 //            Toast.makeText(getApplicationContext(), "Camera被占用，请先关闭", Toast.LENGTH_SHORT).show();
 //        }
 //
@@ -186,7 +179,7 @@ public class DoorNumberLockFragment extends BaseFragment {
 //            Camera.Parameters parameter = camera.getParameters();
 //            parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 //            camera.setParameters(parameter);
-//            Log.d("smile","闪光灯打开");
+//            LogUtil.d("smile","闪光灯打开");
 //
 //
 //        }
@@ -197,7 +190,7 @@ public class DoorNumberLockFragment extends BaseFragment {
 //        if (camera != null)
 //        {
 //            //关闭闪光灯
-//            Log.d("smile", "closeCamera()");
+//            LogUtil.d("smile", "closeCamera()");
 //            camera.getParameters().setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 //            camera.setParameters(camera.getParameters());
 //            camera.stopPreview();

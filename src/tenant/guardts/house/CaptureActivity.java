@@ -3,18 +3,16 @@ package tenant.guardts.house;
 import java.io.IOException;
 import java.util.Vector;
 
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-
-import android.app.FragmentTransaction;
-
 import tenant.guardts.house.camera.CameraManager;
 import tenant.guardts.house.decoding.CaptureActivityHandler;
 import tenant.guardts.house.decoding.InactivityTimer;
+import tenant.guardts.house.model.ActionOperationInterface;
+import tenant.guardts.house.model.ScanQrCodeFragment;
+import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
-
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -27,22 +25,11 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.decoding.CaptureActivityHandler;
-import tenant.guardts.house.decoding.InactivityTimer;
-import tenant.guardts.house.model.ActionOperationInterface;
-import tenant.guardts.house.model.ScanQrCodeFragment;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.zxingview.ViewfinderView;
-
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -264,7 +251,7 @@ public class CaptureActivity extends BaseActivity {
 			if (data != null)
 //			Bundle bundle = data.getExtras();
 //			String scanResult = bundle.getString("result");
-			Log.e("mingguo", "capture activity  scan  result  " + data);
+			LogUtil.e("mingguo", "capture activity  scan  result  " + data);
 			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
 			
 //			Intent resultIntent = new Intent();
