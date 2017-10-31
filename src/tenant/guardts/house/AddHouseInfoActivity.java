@@ -17,7 +17,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.zxing.common.StringUtils;
 
 public class AddHouseInfoActivity extends BaseActivity{
 
@@ -68,9 +71,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private TextView mHouseTypeTextView;
 	//private TextView mOwnerTypeTextView;
 	private String mRentNo;
-	private String mRDName;
-	private String mRSName;
-	private String mRRName;
+	private String mRDName = "01";
+	private String mRSName = "02";
+	private String mRRName = "";
 	private String mRPSName;
 	private String mRAddress;
 	private String mRDoor;
@@ -248,8 +251,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				if (mSelectorInfo.get("police") != null && mSelectorInfo.get("police").getHouseSelectId() != null){
-					Toast.makeText(AddHouseInfoActivity.this,  mSelectorInfo.get("police").getHouseSelectId()+"==="+mSelectorInfo.get("fenju").getHouseSelectId(), Toast.LENGTH_LONG).show();
+				if (mSelectorInfo.get("police") != null && mSelectorInfo.get("police").getHouseSelectId() != null &&
+						!mSelectorInfo.get("police").getHouseSelectId().equals("")){
+					//Toast.makeText(AddHouseInfoActivity.this,  mSelectorInfo.get("police").getHouseSelectId()+"==="+mSelectorInfo.get("fenju").getHouseSelectId(), Toast.LENGTH_LONG).show();
 					getHouseRoad();
 				}else{
 					Toast.makeText(getApplicationContext(), "请先选择派出所", Toast.LENGTH_SHORT).show();
@@ -274,7 +278,8 @@ public class AddHouseInfoActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View v) {
-				if (mSelectorInfo.get("fenju") != null && mSelectorInfo.get("fenju").getHouseSelectId() != null){
+				if (mSelectorInfo.get("fenju") != null && mSelectorInfo.get("fenju").getHouseSelectId() != null &&
+						!mSelectorInfo.get("fenju").getHouseSelectId().equals("")){
 					getHousePolice();	
 				}else{
 					Toast.makeText(getApplicationContext(), "请先选择分局", Toast.LENGTH_SHORT).show();
@@ -693,7 +698,9 @@ public class AddHouseInfoActivity extends BaseActivity{
 				" mRStructure "+"default null "+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
 				CommonUtil.mUserLoginName+" mrentType "+mrentType+" mowntype "+"default null"+"  RBuildingType "+"defautl null "+"  RLocationDescription "+" desp ");
-		
+		Log.e("mingguo", "link address  "+(mSelectorInfo.get("fenju").getHouseAllLinkName()[mSelectorInfo.get("fenju").getHouseSelectPosition()]+
+				mSelectorInfo.get("police").getHouseAllLinkName()[mSelectorInfo.get("police").getHouseSelectPosition()]
+				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress+mRDoor));
 		String url = CommonUtil.mUserHost+"services.asmx?op=AddRentInfo";
 		
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddHouseAction));
@@ -702,7 +709,8 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RSName", mRSName);  
 		rpc.addProperty("RRName", mRRName);      
 		rpc.addProperty("RPSName", mRPSName);  
-		rpc.addProperty("RAddress", mSelectorInfo.get("district").getHouseSelectValue()+mSelectorInfo.get("street").getHouseSelectValue()
+		rpc.addProperty("RAddress", mSelectorInfo.get("fenju").getHouseAllLinkName()[mSelectorInfo.get("fenju").getHouseSelectPosition()]+
+				mSelectorInfo.get("police").getHouseAllLinkName()[mSelectorInfo.get("police").getHouseSelectPosition()]
 				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress+mRDoor);   
 		rpc.addProperty("RDoor", mRDoor);    
 		rpc.addProperty("RTotalDoor", "6"); 
@@ -751,10 +759,16 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private void getHouseFenju(){
 		if (mSelectorInfo.containsKey("police")){
 			mPoliceTextView.setText(mSelectorInfo.get("police").getHouseOrginText());
+			mSelectorInfo.get("police").setHouseSelectId("");
+			
+		}
+		if (mSelectorInfo.containsKey("road")){
+			mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
+			mSelectorInfo.get("road").setHouseSelectId("");
+			mSelectorInfo.get("road").setHouseSelectValue("");
 		}
 		
 		if (!mSelectorInfo.containsKey("fenju")){
-			
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mFenjuTextView.getText());
 			mSelectorInfo.put("fenju", direction);
@@ -771,6 +785,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 		
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mPoliceTextView.getText());
+			if (mSelectorInfo.containsKey("road")){
+				mRoadTextView.setText(mSelectorInfo.get("road").getHouseOrginText());
+				mSelectorInfo.get("road").setHouseSelectId("");
+				mSelectorInfo.get("road").setHouseSelectValue("");
+			}
 			mSelectorInfo.put("police", direction);
 			String url = CommonUtil.mUserHost+"services.asmx?op=GetLocalPoliceStationList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mPoliceAction));
@@ -789,6 +808,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					mSelectorInfo.get(tag).setHouseSelectValue(items[which]);
+					mSelectorInfo.get(tag).setHouseSelectPosition(which);
 					if (mSelectorInfo.get(tag).getHouseAllId() != null && mSelectorInfo.get(tag).getHouseAllId().length > 0){
 						mSelectorInfo.get(tag).setHouseSelectId(mSelectorInfo.get(tag).getHouseAllId()[which]);
 					}
@@ -844,11 +864,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 				
 				mSelectorInfo.get("fenju").setHouseAllContent(JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 				mSelectorInfo.get("fenju").setHouseAllId(JsonObjectParse.parseHouseFenju((String)msg.obj).get(0));
+				mSelectorInfo.get("fenju").setHouseAllLinkName(JsonObjectParse.parseHouseFenju((String)msg.obj).get(2));
 				showAlertDialog(mFenjuTextView, "fenju", JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 			}else if (msg.what == 108){
 				
 				mSelectorInfo.get("police").setHouseAllContent(JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 				mSelectorInfo.get("police").setHouseAllId(JsonObjectParse.parseHouseFenju((String)msg.obj).get(0));
+				mSelectorInfo.get("police").setHouseAllLinkName(JsonObjectParse.parseHouseFenju((String)msg.obj).get(2));
 				showAlertDialog(mPoliceTextView, "police", JsonObjectParse.parseHouseFenju((String)msg.obj).get(1));
 			}else if (msg.what == 109){
 				

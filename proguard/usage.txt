@@ -4897,17 +4897,9 @@ tenant.guardts.house.AddHouseInfoActivity:
     private android.widget.TextView mStrictTextView
     private android.widget.TextView mHouseTypeTextView
     private java.lang.String mRHouseP
-<<<<<<< Updated upstream
-    545:559:private void getHouseProperty()
-=======
-<<<<<<< HEAD
-    546:560:private void getHouseProperty()
-    655:673:private void getHouseDistrict()
-    734:749:private void getHouseStreet()
-=======
-    545:559:private void getHouseProperty()
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
+    551:565:private void getHouseProperty()
+    660:678:private void getHouseDistrict()
+    742:757:private void getHouseStreet()
 tenant.guardts.house.AddRentAttributeActivity:
     133:139:private void getPayRateDesc(java.lang.String)
     771:802:private void startHttpService()
@@ -4971,21 +4963,9 @@ tenant.guardts.house.CaptureActivity:
     private android.hardware.Camera$Parameters mParameters
     150:150:public boolean getFlashLightStatus()
     154:158:private boolean checkFlashlight()
-<<<<<<< Updated upstream
     234:243:private void initCamera(android.view.SurfaceHolder)
     322:341:private void initBeepSound()
     346:353:private void playBeepSoundAndVibrate()
-=======
-<<<<<<< HEAD
-    233:242:private void initCamera(android.view.SurfaceHolder)
-    321:340:private void initBeepSound()
-    345:352:private void playBeepSoundAndVibrate()
-=======
-    234:243:private void initCamera(android.view.SurfaceHolder)
-    322:341:private void initBeepSound()
-    346:353:private void playBeepSoundAndVibrate()
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
 tenant.guardts.house.City
 tenant.guardts.house.DemoApplication:
     private static android.app.Activity sActivity
@@ -5034,24 +5014,11 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
     358:363:private void setDeleteHouseInfo(java.lang.String)
     367:379:private void initDialog()
     388:398:private void showAlertDialog(android.widget.TextView,java.lang.String[])
     490:495:private void getHouseDetailImageListByHouseId(java.lang.String)
     72:72:static synthetic java.lang.String access$12(tenant.guardts.house.HouseDetailInfoActivity)
-=======
->>>>>>> Stashed changes
-    354:359:private void setDeleteHouseInfo(java.lang.String)
-    363:375:private void initDialog()
-    384:394:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    486:491:private void getHouseDetailImageListByHouseId(java.lang.String)
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     66:66:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
     66:66:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
 tenant.guardts.house.HouseDetailInfoActivity$15
@@ -5512,18 +5479,8 @@ tenant.guardts.house.model.OrderZhuHuFragment:
 tenant.guardts.house.model.ScanQrCodeFragment:
     private static final long VIBRATE_DURATION
     private static final float BEEP_VOLUME
-<<<<<<< Updated upstream
     192:202:public boolean getFlashLightStatus()
     281:283:public void drawViewfinder()
-=======
-<<<<<<< HEAD
-    189:199:public boolean getFlashLightStatus()
-    278:280:public void drawViewfinder()
-=======
-    192:202:public boolean getFlashLightStatus()
-    281:283:public void drawViewfinder()
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
 tenant.guardts.house.model.SurroundFragment:
     private tenant.guardts.house.headergridview.StickyGridHeadersGridView mHeadersGridView
     290:295:private int getContentCount()
@@ -5650,11 +5607,11 @@ tenant.guardts.house.util.JsonObjectParse:
     16:42:public static java.util.List parseUserHouseInfo(java.lang.String)
     95:111:public static java.lang.String[] parseHouseType(java.lang.String)
     194:209:public static java.lang.String[] parseHouseId(java.lang.String)
-    240:255:public static java.lang.String[] parseHousePolice(java.lang.String)
-    260:275:public static java.lang.String[] parseHouseRentType(java.lang.String)
-    280:295:public static java.lang.String[] parseHouseOwnType(java.lang.String)
-    322:340:public static java.util.HashMap parseVersionUpdateInfo(java.lang.String)
-    346:378:public static java.util.HashMap parseAdvertismentInfo(java.lang.String)
+    244:259:public static java.lang.String[] parseHousePolice(java.lang.String)
+    264:279:public static java.lang.String[] parseHouseRentType(java.lang.String)
+    284:299:public static java.lang.String[] parseHouseOwnType(java.lang.String)
+    326:344:public static java.util.HashMap parseVersionUpdateInfo(java.lang.String)
+    350:382:public static java.util.HashMap parseAdvertismentInfo(java.lang.String)
 tenant.guardts.house.util.LogUtil:
     public static final int VERBOSE
     public static final int DEBUG
@@ -5664,15 +5621,7 @@ tenant.guardts.house.util.LogUtil:
     public static final int NOTHING
     public static final int LEVEL
     5:5:public LogUtil()
-<<<<<<< Updated upstream
-    44:44:public static void i(java.lang.String,java.lang.String)
-=======
-<<<<<<< HEAD
     42:44:public static void i(java.lang.String,java.lang.String)
-=======
-    44:44:public static void i(java.lang.String,java.lang.String)
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
 tenant.guardts.house.util.NewToast
 tenant.guardts.house.util.NewToast$1
 tenant.guardts.house.util.NewToast$OnDismissListener

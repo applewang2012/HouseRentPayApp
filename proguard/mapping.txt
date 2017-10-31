@@ -27609,14 +27609,7 @@ tenant.guardts.house.CaptureActivity -> tenant.guardts.house.CaptureActivity:
     void access$2(tenant.guardts.house.CaptureActivity,tenant.guardts.house.DoorNumberLockFragment) -> a
     boolean access$3(tenant.guardts.house.CaptureActivity) -> b
     tenant.guardts.house.model.ScanQrCodeFragment access$4(tenant.guardts.house.CaptureActivity) -> c
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.CaptureActivity$1 -> tenant.guardts.house.aw:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.CaptureActivity$1 -> tenant.guardts.house.ay:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
     tenant.guardts.house.CaptureActivity this$0 -> a
     void onCompletion(android.media.MediaPlayer) -> onCompletion
 tenant.guardts.house.CaptureActivity$2 -> tenant.guardts.house.ax:
@@ -27624,15 +27617,7 @@ tenant.guardts.house.CaptureActivity$2 -> tenant.guardts.house.ax:
     void onPreFragment() -> a
     void onNextFragment() -> b
     tenant.guardts.house.CaptureActivity access$0(tenant.guardts.house.CaptureActivity$2) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.CaptureActivity$2$1 -> tenant.guardts.house.ba:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.CaptureActivity$2$1 -> tenant.guardts.house.ay:
-=======
-tenant.guardts.house.CaptureActivity$2$1 -> tenant.guardts.house.ba:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.CaptureActivity$2 this$1 -> a
     void onPreFragment() -> a
     void onNextFragment() -> b
@@ -27640,15 +27625,7 @@ tenant.guardts.house.DemoApplication -> tenant.guardts.house.DemoApplication:
     tenant.guardts.house.DemoApplication mApp -> a
     void onCreate() -> onCreate
     boolean isMainProcess() -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.DemoApplication$1 -> tenant.guardts.house.bb:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.DemoApplication$1 -> tenant.guardts.house.az:
-=======
-tenant.guardts.house.DemoApplication$1 -> tenant.guardts.house.bb:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.DemoApplication this$0 -> a
     void handleNotify(com.tencent.android.tpush.XGNotifaction) -> handleNotify
 tenant.guardts.house.DoorNumberLockFragment -> tenant.guardts.house.DoorNumberLockFragment:
@@ -27665,30 +27642,14 @@ tenant.guardts.house.DoorNumberLockFragment -> tenant.guardts.house.DoorNumberLo
     tenant.guardts.house.model.ActionOperationInterface access$0(tenant.guardts.house.DoorNumberLockFragment) -> a
     android.widget.ImageView access$1(tenant.guardts.house.DoorNumberLockFragment) -> b
     android.widget.TextView access$2(tenant.guardts.house.DoorNumberLockFragment) -> c
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.DoorNumberLockFragment$1 -> tenant.guardts.house.ba:
     tenant.guardts.house.DoorNumberLockFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.DoorNumberLockFragment$2 -> tenant.guardts.house.bb:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.DoorNumberLockFragment$1 -> tenant.guardts.house.bc:
-    tenant.guardts.house.DoorNumberLockFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.DoorNumberLockFragment$2 -> tenant.guardts.house.bd:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.DoorNumberLockFragment this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.DoorNumberLockFragment$3 -> tenant.guardts.house.bc:
     tenant.guardts.house.DoorNumberLockFragment this$0 -> a
     android.widget.EditText val$inputNumber -> b
@@ -27697,20 +27658,6 @@ tenant.guardts.house.DoorNumberLockFragment$4 -> tenant.guardts.house.bd:
     tenant.guardts.house.DoorNumberLockFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.DoorNumberLockFragment$5 -> tenant.guardts.house.be:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.DoorNumberLockFragment$3 -> tenant.guardts.house.be:
-    tenant.guardts.house.DoorNumberLockFragment this$0 -> a
-    android.widget.EditText val$inputNumber -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.DoorNumberLockFragment$4 -> tenant.guardts.house.bf:
-    tenant.guardts.house.DoorNumberLockFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.DoorNumberLockFragment$5 -> tenant.guardts.house.bg:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.DoorNumberLockFragment this$0 -> a
     boolean val$status -> b
     void run() -> run
@@ -27739,9 +27686,6 @@ tenant.guardts.house.DownloadAppActivity -> tenant.guardts.house.DownloadAppActi
     void onDestroy() -> onDestroy
     void access$0(tenant.guardts.house.DownloadAppActivity) -> a
     void access$1(tenant.guardts.house.DownloadAppActivity,int) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.DownloadAppActivity$1 -> tenant.guardts.house.bf:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -27749,19 +27693,6 @@ tenant.guardts.house.DownloadAppActivity$2 -> tenant.guardts.house.bg:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.DownloadAppActivity$3 -> tenant.guardts.house.bh:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.DownloadAppActivity$1 -> tenant.guardts.house.bh:
-    tenant.guardts.house.DownloadAppActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.DownloadAppActivity$2 -> tenant.guardts.house.bi:
-    tenant.guardts.house.DownloadAppActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.DownloadAppActivity$3 -> tenant.guardts.house.bj:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void downloadStatus(int) -> a
 tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver -> tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver:
@@ -27808,23 +27739,10 @@ tenant.guardts.house.EvaluationActivity -> tenant.guardts.house.EvaluationActivi
     tenant.guardts.house.view.CustomRatingBar access$9(tenant.guardts.house.EvaluationActivity) -> j
     tenant.guardts.house.view.CustomRatingBar access$10(tenant.guardts.house.EvaluationActivity) -> k
     void access$11(tenant.guardts.house.EvaluationActivity,java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.EvaluationActivity$1 -> tenant.guardts.house.bi:
     tenant.guardts.house.EvaluationActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.EvaluationActivity$2 -> tenant.guardts.house.bj:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.EvaluationActivity$1 -> tenant.guardts.house.bk:
-    tenant.guardts.house.EvaluationActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.EvaluationActivity$2 -> tenant.guardts.house.bl:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.EvaluationActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.EvaluationDetailActivity -> tenant.guardts.house.EvaluationDetailActivity:
@@ -27841,7 +27759,6 @@ tenant.guardts.house.EvaluationDetailActivity -> tenant.guardts.house.Evaluation
     int convert2Integer(java.lang.String) -> a
     void getEvaluationList(java.lang.String) -> b
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
-<<<<<<< HEAD
     void initEvent() -> a
     void initView() -> b
     android.view.View access$0(tenant.guardts.house.EvaluationDetailActivity) -> a
@@ -27856,23 +27773,6 @@ tenant.guardts.house.EvaluationDetailActivity$1 -> tenant.guardts.house.bk:
 tenant.guardts.house.EvaluationDetailActivity$1$1 -> tenant.guardts.house.bl:
     tenant.guardts.house.EvaluationDetailActivity$1 this$1 -> a
 tenant.guardts.house.EvaluationDetailActivity$1$2 -> tenant.guardts.house.bm:
-=======
-    void initData() -> a
-    void initEvent() -> b
-    void initView() -> c
-    android.widget.ListView access$0(tenant.guardts.house.EvaluationDetailActivity) -> a
-    int access$1(tenant.guardts.house.EvaluationDetailActivity,java.lang.String) -> a
-tenant.guardts.house.EvaluationDetailActivity$1 -> tenant.guardts.house.bm:
-    tenant.guardts.house.EvaluationDetailActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-    tenant.guardts.house.EvaluationDetailActivity access$0(tenant.guardts.house.EvaluationDetailActivity$1) -> a
-tenant.guardts.house.EvaluationDetailActivity$1$1 -> tenant.guardts.house.bn:
-    tenant.guardts.house.EvaluationDetailActivity$1 this$1 -> a
-tenant.guardts.house.EvaluationDetailActivity$1$2 -> tenant.guardts.house.bo:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.EvaluationDetailActivity$1 this$1 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.EvaluationItem) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
@@ -27896,28 +27796,12 @@ tenant.guardts.house.GalleryActivity -> tenant.guardts.house.GalleryActivity:
     android.widget.TextView access$1(tenant.guardts.house.GalleryActivity) -> a
     int access$2(tenant.guardts.house.GalleryActivity) -> b
     int access$3(tenant.guardts.house.GalleryActivity) -> c
-<<<<<<< Updated upstream
-tenant.guardts.house.GalleryActivity$1 -> tenant.guardts.house.bp:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.GalleryActivity$1 -> tenant.guardts.house.bn:
-=======
-tenant.guardts.house.GalleryActivity$1 -> tenant.guardts.house.bp:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.GalleryActivity this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
     void onPageScrollStateChanged(int) -> b
-<<<<<<< Updated upstream
-tenant.guardts.house.GalleryActivity$2 -> tenant.guardts.house.bq:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.GalleryActivity$2 -> tenant.guardts.house.bo:
-=======
-tenant.guardts.house.GalleryActivity$2 -> tenant.guardts.house.bq:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.GalleryActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.GalleryActivity$MyPageAdapter -> tenant.guardts.house.GalleryActivity$a:
@@ -28001,9 +27885,6 @@ tenant.guardts.house.GetRentAttributeActivity -> tenant.guardts.house.GetRentAtt
     java.lang.String access$12(tenant.guardts.house.GetRentAttributeActivity) -> g
     java.lang.String access$13(tenant.guardts.house.GetRentAttributeActivity) -> h
     void access$14(tenant.guardts.house.GetRentAttributeActivity,java.lang.String,java.lang.String) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.GetRentAttributeActivity$1 -> tenant.guardts.house.bp:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
@@ -28020,28 +27901,6 @@ tenant.guardts.house.GetRentAttributeActivity$5 -> tenant.guardts.house.bt:
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.GetRentAttributeActivity$6 -> tenant.guardts.house.bu:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.GetRentAttributeActivity$1 -> tenant.guardts.house.br:
-    tenant.guardts.house.GetRentAttributeActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.GetRentAttributeActivity$2 -> tenant.guardts.house.bs:
-    tenant.guardts.house.GetRentAttributeActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.GetRentAttributeActivity$3 -> tenant.guardts.house.bt:
-    tenant.guardts.house.GetRentAttributeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.GetRentAttributeActivity$4 -> tenant.guardts.house.bu:
-    tenant.guardts.house.GetRentAttributeActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.GetRentAttributeActivity$5 -> tenant.guardts.house.bv:
-    tenant.guardts.house.GetRentAttributeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.GetRentAttributeActivity$6 -> tenant.guardts.house.bw:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.GetRentAttributeActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
@@ -28123,30 +27982,14 @@ tenant.guardts.house.HomeActivity -> tenant.guardts.house.HomeActivity:
     void access$23(tenant.guardts.house.HomeActivity,java.lang.String,java.lang.String) -> a
     java.lang.String access$24(tenant.guardts.house.HomeActivity) -> n
     void access$25(tenant.guardts.house.HomeActivity,java.lang.String) -> f
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$1 -> tenant.guardts.house.bv:
     tenant.guardts.house.HomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.HomeActivity$10 -> tenant.guardts.house.bw:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.HomeActivity$1 -> tenant.guardts.house.bx:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HomeActivity$10 -> tenant.guardts.house.by:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$11 -> tenant.guardts.house.bx:
     tenant.guardts.house.HomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -28154,19 +27997,6 @@ tenant.guardts.house.HomeActivity$2 -> tenant.guardts.house.by:
     tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.HomeActivity$3 -> tenant.guardts.house.bz:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.HomeActivity$11 -> tenant.guardts.house.bz:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HomeActivity$2 -> tenant.guardts.house.ca:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeActivity$3 -> tenant.guardts.house.cb:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28177,15 +28007,7 @@ tenant.guardts.house.HomeActivity$3 -> tenant.guardts.house.cb:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.cc:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.ca:
-=======
-tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.cc:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28196,15 +28018,7 @@ tenant.guardts.house.HomeActivity$4 -> tenant.guardts.house.cc:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.cd:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.cb:
-=======
-tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.cd:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28215,15 +28029,7 @@ tenant.guardts.house.HomeActivity$5 -> tenant.guardts.house.cd:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.ce:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.cc:
-=======
-tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.ce:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     android.widget.ImageView val$houseIcon -> b
     android.widget.TextView val$houseText -> c
@@ -28234,9 +28040,6 @@ tenant.guardts.house.HomeActivity$6 -> tenant.guardts.house.ce:
     android.widget.ImageView val$historyicon -> h
     android.widget.TextView val$historytext -> i
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeActivity$7 -> tenant.guardts.house.cd:
     tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -28245,20 +28048,6 @@ tenant.guardts.house.HomeActivity$8 -> tenant.guardts.house.ce:
     java.lang.String val$lockId -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.HomeActivity$9 -> tenant.guardts.house.cf:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.HomeActivity$7 -> tenant.guardts.house.cf:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeActivity$8 -> tenant.guardts.house.cg:
-    tenant.guardts.house.HomeActivity this$0 -> a
-    java.lang.String val$lockId -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HomeActivity$9 -> tenant.guardts.house.ch:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.HomeSearchActivity -> tenant.guardts.house.HomeSearchActivity:
@@ -28302,22 +28091,6 @@ tenant.guardts.house.HomeSearchActivity -> tenant.guardts.house.HomeSearchActivi
     void access$13(tenant.guardts.house.HomeSearchActivity) -> j
     void access$14(tenant.guardts.house.HomeSearchActivity) -> k
     boolean access$15(tenant.guardts.house.HomeSearchActivity) -> l
-<<<<<<< Updated upstream
-tenant.guardts.house.HomeSearchActivity$1 -> tenant.guardts.house.ci:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$2 -> tenant.guardts.house.cj:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$3 -> tenant.guardts.house.ck:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$4 -> tenant.guardts.house.cl:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$5 -> tenant.guardts.house.cm:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeSearchActivity$1 -> tenant.guardts.house.cg:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
@@ -28331,29 +28104,10 @@ tenant.guardts.house.HomeSearchActivity$4 -> tenant.guardts.house.cj:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
 tenant.guardts.house.HomeSearchActivity$5 -> tenant.guardts.house.ck:
-=======
-tenant.guardts.house.HomeSearchActivity$1 -> tenant.guardts.house.ci:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$2 -> tenant.guardts.house.cj:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$3 -> tenant.guardts.house.ck:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-tenant.guardts.house.HomeSearchActivity$4 -> tenant.guardts.house.cl:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-tenant.guardts.house.HomeSearchActivity$5 -> tenant.guardts.house.cm:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.TextView val$text -> b
     java.lang.String[] val$items -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HomeSearchActivity$6 -> tenant.guardts.house.cl:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.TextView val$showRentType -> b
@@ -28365,23 +28119,6 @@ tenant.guardts.house.HomeSearchActivity$8 -> tenant.guardts.house.cn:
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.HomeSearchActivity$9 -> tenant.guardts.house.co:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.HomeSearchActivity$6 -> tenant.guardts.house.cn:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    android.widget.TextView val$showRentType -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$7 -> tenant.guardts.house.co:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$8 -> tenant.guardts.house.cp:
-    tenant.guardts.house.HomeSearchActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HomeSearchActivity$9 -> tenant.guardts.house.cq:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HomeSearchActivity this$0 -> a
     android.widget.EditText val$keywordInput -> b
     void onClick(android.view.View) -> onClick
@@ -28450,7 +28187,6 @@ tenant.guardts.house.HouseDetailInfoActivity -> tenant.guardts.house.HouseDetail
     tenant.guardts.house.model.HouseInfoModel access$9(tenant.guardts.house.HouseDetailInfoActivity) -> f
     void access$10(tenant.guardts.house.HouseDetailInfoActivity) -> g
     android.widget.PopupWindow access$11(tenant.guardts.house.HouseDetailInfoActivity) -> h
-<<<<<<< HEAD
 tenant.guardts.house.HouseDetailInfoActivity$1 -> tenant.guardts.house.cp:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -28491,52 +28227,6 @@ tenant.guardts.house.HouseDetailInfoActivity$8 -> tenant.guardts.house.db:
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.HouseDetailInfoActivity$9 -> tenant.guardts.house.dc:
-=======
-    tenant.guardts.house.model.HouseInfoModel access$12(tenant.guardts.house.HouseDetailInfoActivity) -> i
-tenant.guardts.house.HouseDetailInfoActivity$1 -> tenant.guardts.house.cr:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseDetailInfoActivity$10 -> tenant.guardts.house.cs:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$11 -> tenant.guardts.house.ct:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$12 -> tenant.guardts.house.cu:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$13 -> tenant.guardts.house.cv:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$14 -> tenant.guardts.house.cw:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.HouseDetailInfoActivity$2 -> tenant.guardts.house.cx:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$3 -> tenant.guardts.house.cy:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$4 -> tenant.guardts.house.cz:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$5 -> tenant.guardts.house.da:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$6 -> tenant.guardts.house.db:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$7 -> tenant.guardts.house.dc:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$8 -> tenant.guardts.house.dd:
-    tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseDetailInfoActivity$9 -> tenant.guardts.house.de:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HouseDetailInfoActivity this$0 -> a
     void onDismiss() -> onDismiss
 tenant.guardts.house.HouseOrderDetailsActivity -> tenant.guardts.house.HouseOrderDetailsActivity:
@@ -28607,9 +28297,6 @@ tenant.guardts.house.HouseOrderDetailsActivity -> tenant.guardts.house.HouseOrde
     void access$15(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> d
     void access$16(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> e
     void access$17(tenant.guardts.house.HouseOrderDetailsActivity,java.lang.String) -> f
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.HouseOrderDetailsActivity$1 -> tenant.guardts.house.dd:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -28686,88 +28373,6 @@ tenant.guardts.house.HouseOrderDetailsActivity$8 -> tenant.guardts.house.ea:
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.HouseOrderDetailsActivity$9 -> tenant.guardts.house.eb:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.HouseOrderDetailsActivity$1 -> tenant.guardts.house.df:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseOrderDetailsActivity$10 -> tenant.guardts.house.dg:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$11 -> tenant.guardts.house.dh:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$12 -> tenant.guardts.house.di:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$13 -> tenant.guardts.house.dj:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$14 -> tenant.guardts.house.dk:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.HouseOrderDetailsActivity$15 -> tenant.guardts.house.dl:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$16 -> tenant.guardts.house.dm:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$17 -> tenant.guardts.house.dn:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    java.lang.String val$houseId -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$18 -> tenant.guardts.house.do:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$19 -> tenant.guardts.house.dp:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    java.lang.String val$houseId -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$2 -> tenant.guardts.house.dq:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.HouseOrderDetailsActivity$20 -> tenant.guardts.house.dr:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$21 -> tenant.guardts.house.ds:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    android.app.AlertDialog$Builder val$builder -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$22 -> tenant.guardts.house.dt:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$23 -> tenant.guardts.house.du:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$24 -> tenant.guardts.house.dv:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$25 -> tenant.guardts.house.dw:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.HouseOrderDetailsActivity$3 -> tenant.guardts.house.dx:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$4 -> tenant.guardts.house.dy:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$5 -> tenant.guardts.house.dz:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$6 -> tenant.guardts.house.ea:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$7 -> tenant.guardts.house.eb:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$8 -> tenant.guardts.house.ec:
-    tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.HouseOrderDetailsActivity$9 -> tenant.guardts.house.ed:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.HouseOrderDetailsActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.LoadUrlTestActivity -> tenant.guardts.house.LoadUrlTestActivity:
@@ -28776,24 +28381,10 @@ tenant.guardts.house.LoadUrlTestActivity -> tenant.guardts.house.LoadUrlTestActi
     void onCreate(android.os.Bundle) -> onCreate
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-<<<<<<< Updated upstream
-tenant.guardts.house.LoadUrlTestActivity$1 -> tenant.guardts.house.ee:
-    tenant.guardts.house.LoadUrlTestActivity this$0 -> a
-    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-tenant.guardts.house.LoadUrlTestActivity$2 -> tenant.guardts.house.ef:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.LoadUrlTestActivity$1 -> tenant.guardts.house.ec:
     tenant.guardts.house.LoadUrlTestActivity this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
 tenant.guardts.house.LoadUrlTestActivity$2 -> tenant.guardts.house.ed:
-=======
-tenant.guardts.house.LoadUrlTestActivity$1 -> tenant.guardts.house.ee:
-    tenant.guardts.house.LoadUrlTestActivity this$0 -> a
-    boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-tenant.guardts.house.LoadUrlTestActivity$2 -> tenant.guardts.house.ef:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.LoadUrlTestActivity this$0 -> a
     void onProgressChanged(android.webkit.WebView,int) -> onProgressChanged
 tenant.guardts.house.LocationDemo -> tenant.guardts.house.LocationDemo:
@@ -28838,9 +28429,6 @@ tenant.guardts.house.LocationDemo -> tenant.guardts.house.LocationDemo:
     java.util.ArrayList access$8(tenant.guardts.house.LocationDemo) -> e
     void access$9(tenant.guardts.house.LocationDemo,com.baidu.mapapi.map.InfoWindow) -> a
     com.baidu.mapapi.map.InfoWindow access$10(tenant.guardts.house.LocationDemo) -> f
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.LocationDemo$1 -> tenant.guardts.house.ee:
     tenant.guardts.house.LocationDemo this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -28851,22 +28439,6 @@ tenant.guardts.house.LocationDemo$3 -> tenant.guardts.house.eg:
     tenant.guardts.house.LocationDemo this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.LocationDemo$4 -> tenant.guardts.house.eh:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.LocationDemo$1 -> tenant.guardts.house.eg:
-    tenant.guardts.house.LocationDemo this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.LocationDemo$2 -> tenant.guardts.house.eh:
-    tenant.guardts.house.LocationDemo this$0 -> a
-    boolean onMarkerClick(com.baidu.mapapi.map.Marker) -> onMarkerClick
-tenant.guardts.house.LocationDemo$3 -> tenant.guardts.house.ei:
-    tenant.guardts.house.LocationDemo this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LocationDemo$4 -> tenant.guardts.house.ej:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.LocationDemo this$0 -> a
     void onMarkerDrag(com.baidu.mapapi.map.Marker) -> onMarkerDrag
     void onMarkerDragEnd(com.baidu.mapapi.map.Marker) -> onMarkerDragEnd
@@ -28916,47 +28488,14 @@ tenant.guardts.house.LoginUserActivity -> tenant.guardts.house.LoginUserActivity
     android.widget.EditText access$11(tenant.guardts.house.LoginUserActivity) -> f
     void access$12(tenant.guardts.house.LoginUserActivity,java.lang.String) -> f
     void access$13(tenant.guardts.house.LoginUserActivity) -> g
-<<<<<<< Updated upstream
-tenant.guardts.house.LoginUserActivity$1 -> tenant.guardts.house.ek:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.LoginUserActivity$2 -> tenant.guardts.house.el:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.LoginUserActivity$1 -> tenant.guardts.house.ei:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.LoginUserActivity$2 -> tenant.guardts.house.ej:
-=======
-tenant.guardts.house.LoginUserActivity$1 -> tenant.guardts.house.ek:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.LoginUserActivity$2 -> tenant.guardts.house.el:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-<<<<<<< Updated upstream
-tenant.guardts.house.LoginUserActivity$3 -> tenant.guardts.house.em:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$4 -> tenant.guardts.house.en:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$5 -> tenant.guardts.house.eo:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$6 -> tenant.guardts.house.ep:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$7 -> tenant.guardts.house.eq:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$8 -> tenant.guardts.house.er:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.LoginUserActivity$3 -> tenant.guardts.house.ek:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -28973,25 +28512,6 @@ tenant.guardts.house.LoginUserActivity$7 -> tenant.guardts.house.eo:
     tenant.guardts.house.LoginUserActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.LoginUserActivity$8 -> tenant.guardts.house.ep:
-=======
-tenant.guardts.house.LoginUserActivity$3 -> tenant.guardts.house.em:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$4 -> tenant.guardts.house.en:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$5 -> tenant.guardts.house.eo:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$6 -> tenant.guardts.house.ep:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$7 -> tenant.guardts.house.eq:
-    tenant.guardts.house.LoginUserActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.LoginUserActivity$8 -> tenant.guardts.house.er:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.LoginUserActivity this$0 -> a
     java.util.List val$data -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -29056,9 +28576,6 @@ tenant.guardts.house.MapRentHouseActivity -> tenant.guardts.house.MapRentHouseAc
     android.content.Context access$9(tenant.guardts.house.MapRentHouseActivity) -> g
     java.lang.String access$10(tenant.guardts.house.MapRentHouseActivity) -> h
     void access$11(tenant.guardts.house.MapRentHouseActivity,com.baidu.mapapi.map.Marker) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.MapRentHouseActivity$1 -> tenant.guardts.house.eq:
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -29083,36 +28600,6 @@ tenant.guardts.house.MapRentHouseActivity$7 -> tenant.guardts.house.ew:
     java.util.Map val$itemMap -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.MapRentHouseActivity$8 -> tenant.guardts.house.ex:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.MapRentHouseActivity$1 -> tenant.guardts.house.es:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.MapRentHouseActivity$2 -> tenant.guardts.house.et:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$3 -> tenant.guardts.house.eu:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    boolean onMarkerClick(com.baidu.mapapi.map.Marker) -> onMarkerClick
-tenant.guardts.house.MapRentHouseActivity$4 -> tenant.guardts.house.ev:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    boolean onMapPoiClick(com.baidu.mapapi.map.MapPoi) -> onMapPoiClick
-    void onMapClick(com.baidu.mapapi.model.LatLng) -> onMapClick
-tenant.guardts.house.MapRentHouseActivity$5 -> tenant.guardts.house.ew:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$6 -> tenant.guardts.house.ex:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$7 -> tenant.guardts.house.ey:
-    tenant.guardts.house.MapRentHouseActivity this$0 -> a
-    java.util.Map val$itemMap -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapRentHouseActivity$8 -> tenant.guardts.house.ez:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.MapRentHouseActivity this$0 -> a
     java.util.ArrayList val$child -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -29124,15 +28611,7 @@ tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay -> tenant.guardts.house.M
     com.baidu.mapapi.search.core.PoiInfo poi -> a
     tenant.guardts.house.MapRentHouseActivity this$0 -> b
     boolean onPoiClick(int) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay$1 -> tenant.guardts.house.fa:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay$1 -> tenant.guardts.house.ey:
-=======
-tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay$1 -> tenant.guardts.house.fa:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.MapRentHouseActivity$MyPoiOverlay this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.MapSuggestSearchActivity -> tenant.guardts.house.MapSuggestSearchActivity:
@@ -29161,32 +28640,11 @@ tenant.guardts.house.MapSuggestSearchActivity -> tenant.guardts.house.MapSuggest
     void access$2(tenant.guardts.house.MapSuggestSearchActivity,java.lang.String) -> a
     java.util.ArrayList access$3(tenant.guardts.house.MapSuggestSearchActivity) -> c
     android.widget.AutoCompleteTextView access$4(tenant.guardts.house.MapSuggestSearchActivity) -> d
-<<<<<<< Updated upstream
-tenant.guardts.house.MapSuggestSearchActivity$1 -> tenant.guardts.house.fb:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.MapSuggestSearchActivity$1 -> tenant.guardts.house.ez:
-=======
-tenant.guardts.house.MapSuggestSearchActivity$1 -> tenant.guardts.house.fb:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-<<<<<<< Updated upstream
-tenant.guardts.house.MapSuggestSearchActivity$2 -> tenant.guardts.house.fc:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapSuggestSearchActivity$3 -> tenant.guardts.house.fd:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$4 -> tenant.guardts.house.fe:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$5 -> tenant.guardts.house.ff:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.MapSuggestSearchActivity$2 -> tenant.guardts.house.fa:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -29197,19 +28655,6 @@ tenant.guardts.house.MapSuggestSearchActivity$4 -> tenant.guardts.house.fc:
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.MapSuggestSearchActivity$5 -> tenant.guardts.house.fd:
-=======
-tenant.guardts.house.MapSuggestSearchActivity$2 -> tenant.guardts.house.fc:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.MapSuggestSearchActivity$3 -> tenant.guardts.house.fd:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$4 -> tenant.guardts.house.fe:
-    tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.MapSuggestSearchActivity$5 -> tenant.guardts.house.ff:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.MapSuggestSearchActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.ModifyPasswordActivity -> tenant.guardts.house.ModifyPasswordActivity:
@@ -29234,23 +28679,10 @@ tenant.guardts.house.ModifyPasswordActivity -> tenant.guardts.house.ModifyPasswo
     java.lang.String access$5(tenant.guardts.house.ModifyPasswordActivity) -> c
     java.lang.String access$6(tenant.guardts.house.ModifyPasswordActivity) -> d
     void access$7(tenant.guardts.house.ModifyPasswordActivity) -> e
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.ModifyPasswordActivity$1 -> tenant.guardts.house.fe:
     tenant.guardts.house.ModifyPasswordActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.ModifyPasswordActivity$2 -> tenant.guardts.house.ff:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.ModifyPasswordActivity$1 -> tenant.guardts.house.fg:
-    tenant.guardts.house.ModifyPasswordActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.ModifyPasswordActivity$2 -> tenant.guardts.house.fh:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.ModifyPasswordActivity this$0 -> a
     android.widget.EditText val$oldpassword -> b
     android.widget.EditText val$newpassword -> c
@@ -29286,24 +28718,10 @@ tenant.guardts.house.MyHouseActivity -> tenant.guardts.house.MyHouseActivity:
     void access$3(tenant.guardts.house.MyHouseActivity,tenant.guardts.house.adapter.PublishedRecordAdapter) -> a
     android.widget.ListView access$4(tenant.guardts.house.MyHouseActivity) -> c
     tenant.guardts.house.adapter.PublishedRecordAdapter access$5(tenant.guardts.house.MyHouseActivity) -> d
-<<<<<<< Updated upstream
-tenant.guardts.house.MyHouseActivity$1 -> tenant.guardts.house.fi:
-    tenant.guardts.house.MyHouseActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.MyHouseActivity$2 -> tenant.guardts.house.fj:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.MyHouseActivity$1 -> tenant.guardts.house.fg:
     tenant.guardts.house.MyHouseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.MyHouseActivity$2 -> tenant.guardts.house.fh:
-=======
-tenant.guardts.house.MyHouseActivity$1 -> tenant.guardts.house.fi:
-    tenant.guardts.house.MyHouseActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.MyHouseActivity$2 -> tenant.guardts.house.fj:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.MyHouseActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.PaymentStatusActivity -> tenant.guardts.house.PaymentStatusActivity:
@@ -29329,23 +28747,10 @@ tenant.guardts.house.PaymentStatusActivity -> tenant.guardts.house.PaymentStatus
     void access$1(tenant.guardts.house.PaymentStatusActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
     java.lang.String access$2(tenant.guardts.house.PaymentStatusActivity) -> b
     void access$3(tenant.guardts.house.PaymentStatusActivity,java.lang.String) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.PaymentStatusActivity$1 -> tenant.guardts.house.fi:
     tenant.guardts.house.PaymentStatusActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.PaymentStatusActivity$2 -> tenant.guardts.house.fj:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.PaymentStatusActivity$1 -> tenant.guardts.house.fk:
-    tenant.guardts.house.PaymentStatusActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.PaymentStatusActivity$2 -> tenant.guardts.house.fl:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.PaymentStatusActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.PersonalInfoActivity -> tenant.guardts.house.PersonalInfoActivity:
@@ -29369,9 +28774,6 @@ tenant.guardts.house.PersonalInfoActivity -> tenant.guardts.house.PersonalInfoAc
     void access$0(tenant.guardts.house.PersonalInfoActivity) -> a
     void access$1(tenant.guardts.house.PersonalInfoActivity) -> b
     void access$2(tenant.guardts.house.PersonalInfoActivity,int) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.PersonalInfoActivity$1 -> tenant.guardts.house.fk:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -29385,25 +28787,6 @@ tenant.guardts.house.PersonalInfoActivity$4 -> tenant.guardts.house.fn:
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.PersonalInfoActivity$5 -> tenant.guardts.house.fo:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.PersonalInfoActivity$1 -> tenant.guardts.house.fm:
-    tenant.guardts.house.PersonalInfoActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.PersonalInfoActivity$2 -> tenant.guardts.house.fn:
-    tenant.guardts.house.PersonalInfoActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.PersonalInfoActivity$3 -> tenant.guardts.house.fo:
-    tenant.guardts.house.PersonalInfoActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.PersonalInfoActivity$4 -> tenant.guardts.house.fp:
-    tenant.guardts.house.PersonalInfoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.PersonalInfoActivity$5 -> tenant.guardts.house.fq:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.PersonalInfoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.R -> tenant.guardts.house.R:
@@ -31781,9 +31164,6 @@ tenant.guardts.house.RegisterUserActivity -> tenant.guardts.house.RegisterUserAc
     java.lang.String access$25(tenant.guardts.house.RegisterUserActivity) -> l
     void access$26(tenant.guardts.house.RegisterUserActivity,java.lang.String,java.lang.String) -> b
     void access$27(tenant.guardts.house.RegisterUserActivity,java.lang.String) -> n
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserActivity$1 -> tenant.guardts.house.fp:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -31795,46 +31175,15 @@ tenant.guardts.house.RegisterUserActivity$3 -> tenant.guardts.house.fr:
     android.widget.EditText val$userName -> b
     void onFocusChange(android.view.View,boolean) -> onFocusChange
 tenant.guardts.house.RegisterUserActivity$4 -> tenant.guardts.house.fs:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RegisterUserActivity$1 -> tenant.guardts.house.fr:
-    tenant.guardts.house.RegisterUserActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserActivity$2 -> tenant.guardts.house.fs:
-    tenant.guardts.house.RegisterUserActivity this$0 -> a
-    void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
-tenant.guardts.house.RegisterUserActivity$3 -> tenant.guardts.house.ft:
-    tenant.guardts.house.RegisterUserActivity this$0 -> a
-    android.widget.EditText val$userName -> b
-    void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserActivity$4 -> tenant.guardts.house.fu:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$phone -> b
     android.widget.EditText val$verifyCode -> c
     void onFocusChange(android.view.View,boolean) -> onFocusChange
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserActivity$5 -> tenant.guardts.house.ft:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$phone -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fu:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RegisterUserActivity$5 -> tenant.guardts.house.fv:
-    tenant.guardts.house.RegisterUserActivity this$0 -> a
-    android.widget.EditText val$phone -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fw:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     android.widget.EditText val$userName -> b
     android.widget.EditText val$password -> c
@@ -31846,36 +31195,15 @@ tenant.guardts.house.RegisterUserActivity$6 -> tenant.guardts.house.fw:
     android.widget.EditText val$position -> i
     android.widget.EditText val$email -> j
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.RegisterUserActivity$7 -> tenant.guardts.house.fx:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserActivity$7 -> tenant.guardts.house.fv:
-=======
-tenant.guardts.house.RegisterUserActivity$7 -> tenant.guardts.house.fx:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserActivity$8 -> tenant.guardts.house.fw:
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RegisterUserActivity$9 -> tenant.guardts.house.fx:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RegisterUserActivity$8 -> tenant.guardts.house.fy:
-    tenant.guardts.house.RegisterUserActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserActivity$9 -> tenant.guardts.house.fz:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RegisterUserFinishActivity -> tenant.guardts.house.RegisterUserFinishActivity:
@@ -31888,15 +31216,7 @@ tenant.guardts.house.RegisterUserFinishActivity -> tenant.guardts.house.Register
     void initView() -> a
     java.lang.String access$0(tenant.guardts.house.RegisterUserFinishActivity) -> a
     java.lang.String access$1(tenant.guardts.house.RegisterUserFinishActivity) -> b
-<<<<<<< Updated upstream
-tenant.guardts.house.RegisterUserFinishActivity$1 -> tenant.guardts.house.ga:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserFinishActivity$1 -> tenant.guardts.house.fy:
-=======
-tenant.guardts.house.RegisterUserFinishActivity$1 -> tenant.guardts.house.ga:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserFinishActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.RegisterUserStep1Activity -> tenant.guardts.house.RegisterUserStep1Activity:
@@ -31920,16 +31240,6 @@ tenant.guardts.house.RegisterUserStep1Activity -> tenant.guardts.house.RegisterU
     void access$4(tenant.guardts.house.RegisterUserStep1Activity,java.lang.String) -> c
     java.lang.String access$5(tenant.guardts.house.RegisterUserStep1Activity) -> c
     void access$6(tenant.guardts.house.RegisterUserStep1Activity,java.lang.String) -> d
-<<<<<<< Updated upstream
-tenant.guardts.house.RegisterUserStep1Activity$1 -> tenant.guardts.house.gb:
-    tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep1Activity$2 -> tenant.guardts.house.gc:
-    tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
-    void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserStep1Activity$3 -> tenant.guardts.house.gd:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserStep1Activity$1 -> tenant.guardts.house.fz:
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -31937,16 +31247,6 @@ tenant.guardts.house.RegisterUserStep1Activity$2 -> tenant.guardts.house.ga:
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     void onFocusChange(android.view.View,boolean) -> onFocusChange
 tenant.guardts.house.RegisterUserStep1Activity$3 -> tenant.guardts.house.gb:
-=======
-tenant.guardts.house.RegisterUserStep1Activity$1 -> tenant.guardts.house.gb:
-    tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep1Activity$2 -> tenant.guardts.house.gc:
-    tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
-    void onFocusChange(android.view.View,boolean) -> onFocusChange
-tenant.guardts.house.RegisterUserStep1Activity$3 -> tenant.guardts.house.gd:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserStep1Activity this$0 -> a
     android.widget.EditText val$userName -> b
     android.widget.EditText val$password -> c
@@ -31992,9 +31292,6 @@ tenant.guardts.house.RegisterUserStep2Activity -> tenant.guardts.house.RegisterU
     void access$14(tenant.guardts.house.RegisterUserStep2Activity,java.lang.String) -> f
     java.lang.String access$15(tenant.guardts.house.RegisterUserStep2Activity) -> h
     void access$16(tenant.guardts.house.RegisterUserStep2Activity,java.lang.String) -> g
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserStep2Activity$1 -> tenant.guardts.house.gc:
     tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32003,20 +31300,6 @@ tenant.guardts.house.RegisterUserStep2Activity$2 -> tenant.guardts.house.gd:
     android.widget.EditText val$inputPhone -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.RegisterUserStep2Activity$3 -> tenant.guardts.house.ge:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RegisterUserStep2Activity$1 -> tenant.guardts.house.ge:
-    tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep2Activity$2 -> tenant.guardts.house.gf:
-    tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
-    android.widget.EditText val$inputPhone -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.RegisterUserStep2Activity$3 -> tenant.guardts.house.gg:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserStep2Activity this$0 -> a
     android.widget.EditText val$inputPhone -> b
     android.widget.EditText val$inputVerify -> c
@@ -32069,9 +31352,6 @@ tenant.guardts.house.RegisterUserStep3Activity -> tenant.guardts.house.RegisterU
     java.lang.String access$13(tenant.guardts.house.RegisterUserStep3Activity) -> i
     void access$14(tenant.guardts.house.RegisterUserStep3Activity,java.lang.String,java.lang.String) -> a
     void access$15(tenant.guardts.house.RegisterUserStep3Activity,java.lang.String) -> f
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserStep3Activity$1 -> tenant.guardts.house.gf:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32079,45 +31359,16 @@ tenant.guardts.house.RegisterUserStep3Activity$2 -> tenant.guardts.house.gg:
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
 tenant.guardts.house.RegisterUserStep3Activity$3 -> tenant.guardts.house.gh:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RegisterUserStep3Activity$1 -> tenant.guardts.house.gh:
-    tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RegisterUserStep3Activity$2 -> tenant.guardts.house.gi:
-    tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
-    void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
-tenant.guardts.house.RegisterUserStep3Activity$3 -> tenant.guardts.house.gj:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     android.widget.EditText val$realName -> b
     android.widget.EditText val$idCard -> c
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.RegisterUserStep3Activity$4 -> tenant.guardts.house.gk:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserStep3Activity$4 -> tenant.guardts.house.gi:
-=======
-tenant.guardts.house.RegisterUserStep3Activity$4 -> tenant.guardts.house.gk:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void onSDKUsingFail(java.lang.String,java.lang.String) -> a
     void onIDCardImageCaptured(byte[],com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect) -> a
     void onFaceImageCaptured(byte[]) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.RegisterUserStep3Activity$5 -> tenant.guardts.house.gl:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RegisterUserStep3Activity$5 -> tenant.guardts.house.gj:
-=======
-tenant.guardts.house.RegisterUserStep3Activity$5 -> tenant.guardts.house.gl:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RegisterUserStep3Activity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RentToHouseActivity -> tenant.guardts.house.RentToHouseActivity:
@@ -32158,9 +31409,6 @@ tenant.guardts.house.RentToHouseActivity -> tenant.guardts.house.RentToHouseActi
     int access$5(tenant.guardts.house.RentToHouseActivity) -> e
     android.content.Context access$6(tenant.guardts.house.RentToHouseActivity) -> f
     java.lang.String access$7(tenant.guardts.house.RentToHouseActivity) -> g
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RentToHouseActivity$1 -> tenant.guardts.house.gk:
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32176,27 +31424,6 @@ tenant.guardts.house.RentToHouseActivity$4 -> tenant.guardts.house.gn:
     int val$position -> b
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.RentToHouseActivity$5 -> tenant.guardts.house.go:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RentToHouseActivity$1 -> tenant.guardts.house.gm:
-    tenant.guardts.house.RentToHouseActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RentToHouseActivity$2 -> tenant.guardts.house.gn:
-    tenant.guardts.house.RentToHouseActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.RentToHouseActivity$3 -> tenant.guardts.house.go:
-    tenant.guardts.house.RentToHouseActivity this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.RentToHouseActivity$4 -> tenant.guardts.house.gp:
-    tenant.guardts.house.RentToHouseActivity this$0 -> a
-    int val$position -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.RentToHouseActivity$5 -> tenant.guardts.house.gq:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RentToHouseActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 tenant.guardts.house.RentalDetailActivity -> tenant.guardts.house.RentalDetailActivity:
@@ -32210,23 +31437,10 @@ tenant.guardts.house.RentalDetailActivity -> tenant.guardts.house.RentalDetailAc
     void initView() -> a
     void checkCanRentHouseTime(java.lang.String) -> a
     android.widget.ExpandableListView access$0(tenant.guardts.house.RentalDetailActivity) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.RentalDetailActivity$1 -> tenant.guardts.house.gp:
     tenant.guardts.house.RentalDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.RentalDetailActivity$1$1 -> tenant.guardts.house.gq:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.RentalDetailActivity$1 -> tenant.guardts.house.gr:
-    tenant.guardts.house.RentalDetailActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.RentalDetailActivity$1$1 -> tenant.guardts.house.gs:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.RentalDetailActivity$1 this$1 -> a
 tenant.guardts.house.ResetActivity -> tenant.guardts.house.ResetActivity:
     android.widget.TextView mTitleBar -> c
@@ -32269,9 +31483,6 @@ tenant.guardts.house.ResetActivity -> tenant.guardts.house.ResetActivity:
     boolean access$10(tenant.guardts.house.ResetActivity) -> f
     java.lang.String access$11(tenant.guardts.house.ResetActivity) -> g
     void access$12(tenant.guardts.house.ResetActivity,java.lang.String,java.lang.String) -> b
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.ResetActivity$1 -> tenant.guardts.house.gr:
     tenant.guardts.house.ResetActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32282,22 +31493,6 @@ tenant.guardts.house.ResetActivity$3 -> tenant.guardts.house.gt:
     tenant.guardts.house.ResetActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.ScreenshotCameraManager -> tenant.guardts.house.gu:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.ResetActivity$1 -> tenant.guardts.house.gt:
-    tenant.guardts.house.ResetActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.ResetActivity$2 -> tenant.guardts.house.gu:
-    tenant.guardts.house.ResetActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.ResetActivity$3 -> tenant.guardts.house.gv:
-    tenant.guardts.house.ResetActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.ScreenshotCameraManager -> tenant.guardts.house.gw:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     android.hardware.Camera mCamera -> a
     android.view.SurfaceHolder mHolder -> b
 tenant.guardts.house.SearchFilterActivity -> tenant.guardts.house.SearchFilterActivity:
@@ -32320,16 +31515,6 @@ tenant.guardts.house.SearchFilterActivity -> tenant.guardts.house.SearchFilterAc
     void access$0(tenant.guardts.house.SearchFilterActivity,java.lang.String) -> a
     android.widget.AutoCompleteTextView access$1(tenant.guardts.house.SearchFilterActivity) -> a
     java.util.ArrayList access$2(tenant.guardts.house.SearchFilterActivity) -> b
-<<<<<<< Updated upstream
-tenant.guardts.house.SearchFilterActivity$1 -> tenant.guardts.house.gx:
-    tenant.guardts.house.SearchFilterActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$2 -> tenant.guardts.house.gy:
-    tenant.guardts.house.SearchFilterActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$3 -> tenant.guardts.house.gz:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SearchFilterActivity$1 -> tenant.guardts.house.gv:
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -32337,16 +31522,6 @@ tenant.guardts.house.SearchFilterActivity$2 -> tenant.guardts.house.gw:
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.SearchFilterActivity$3 -> tenant.guardts.house.gx:
-=======
-tenant.guardts.house.SearchFilterActivity$1 -> tenant.guardts.house.gx:
->>>>>>> Stashed changes
-    tenant.guardts.house.SearchFilterActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$2 -> tenant.guardts.house.gy:
-    tenant.guardts.house.SearchFilterActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchFilterActivity$3 -> tenant.guardts.house.gz:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
     tenant.guardts.house.SearchFilterActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SearchResultActivity -> tenant.guardts.house.SearchResultActivity:
@@ -32389,35 +31564,6 @@ tenant.guardts.house.SearchResultActivity -> tenant.guardts.house.SearchResultAc
     tenant.guardts.house.model.UniversalAdapter access$4(tenant.guardts.house.SearchResultActivity) -> d
     void access$5(tenant.guardts.house.SearchResultActivity,android.view.View,java.lang.String,int,int) -> a
     android.content.Context access$6(tenant.guardts.house.SearchResultActivity) -> e
-<<<<<<< Updated upstream
-tenant.guardts.house.SearchResultActivity$1 -> tenant.guardts.house.ha:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SearchResultActivity$2 -> tenant.guardts.house.hb:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchResultActivity$3 -> tenant.guardts.house.hc:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$rentTypeFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$4 -> tenant.guardts.house.hd:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$typeFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$5 -> tenant.guardts.house.he:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$showListFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$6 -> tenant.guardts.house.hf:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void onClick(int,boolean) -> a
-tenant.guardts.house.SearchResultActivity$7 -> tenant.guardts.house.hg:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.SearchResultActivity$8 -> tenant.guardts.house.hh:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SearchResultActivity$1 -> tenant.guardts.house.gy:
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32444,35 +31590,6 @@ tenant.guardts.house.SearchResultActivity$7 -> tenant.guardts.house.he:
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
 tenant.guardts.house.SearchResultActivity$8 -> tenant.guardts.house.hf:
-=======
-tenant.guardts.house.SearchResultActivity$1 -> tenant.guardts.house.ha:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SearchResultActivity$2 -> tenant.guardts.house.hb:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SearchResultActivity$3 -> tenant.guardts.house.hc:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$rentTypeFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$4 -> tenant.guardts.house.hd:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$typeFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$5 -> tenant.guardts.house.he:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    tenant.guardts.house.search.SingleListFilterView val$showListFilter -> b
-    void getValue(java.lang.String,int) -> a
-tenant.guardts.house.SearchResultActivity$6 -> tenant.guardts.house.hf:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void onClick(int,boolean) -> a
-tenant.guardts.house.SearchResultActivity$7 -> tenant.guardts.house.hg:
-    tenant.guardts.house.SearchResultActivity this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.SearchResultActivity$8 -> tenant.guardts.house.hh:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SearchResultActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectPhotoActivity -> tenant.guardts.house.SelectPhotoActivity:
@@ -32504,9 +31621,6 @@ tenant.guardts.house.SelectPhotoActivity -> tenant.guardts.house.SelectPhotoActi
     android.widget.PopupWindow access$4(tenant.guardts.house.SelectPhotoActivity) -> c
     android.widget.LinearLayout access$5(tenant.guardts.house.SelectPhotoActivity) -> d
     android.view.View access$6(tenant.guardts.house.SelectPhotoActivity) -> e
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SelectPhotoActivity$1 -> tenant.guardts.house.hg:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -32526,31 +31640,6 @@ tenant.guardts.house.SelectPhotoActivity$6 -> tenant.guardts.house.hl:
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectPhotoActivity$7 -> tenant.guardts.house.hm:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.SelectPhotoActivity$1 -> tenant.guardts.house.hi:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SelectPhotoActivity$2 -> tenant.guardts.house.hj:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$3 -> tenant.guardts.house.hk:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$4 -> tenant.guardts.house.hl:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$5 -> tenant.guardts.house.hm:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectPhotoActivity$6 -> tenant.guardts.house.hn:
-    tenant.guardts.house.SelectPhotoActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.SelectPhotoActivity$7 -> tenant.guardts.house.ho:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SelectPhotoActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.SelectPhotoActivity$GridAdapter -> tenant.guardts.house.SelectPhotoActivity$a:
@@ -32565,23 +31654,10 @@ tenant.guardts.house.SelectPhotoActivity$GridAdapter -> tenant.guardts.house.Sel
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void loading() -> b
     tenant.guardts.house.SelectPhotoActivity access$0(tenant.guardts.house.SelectPhotoActivity$GridAdapter) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SelectPhotoActivity$GridAdapter$1 -> tenant.guardts.house.hn:
     tenant.guardts.house.SelectPhotoActivity$GridAdapter this$1 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.SelectPhotoActivity$GridAdapter$2 -> tenant.guardts.house.ho:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.SelectPhotoActivity$GridAdapter$1 -> tenant.guardts.house.hp:
-    tenant.guardts.house.SelectPhotoActivity$GridAdapter this$1 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.SelectPhotoActivity$GridAdapter$2 -> tenant.guardts.house.hq:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SelectPhotoActivity$GridAdapter this$1 -> a
     void run() -> run
 tenant.guardts.house.SelectPhotoActivity$GridAdapter$ViewHolder -> tenant.guardts.house.SelectPhotoActivity$a$a:
@@ -32650,48 +31726,19 @@ tenant.guardts.house.SelectShowCityActivity -> tenant.guardts.house.SelectShowCi
     void access$21(tenant.guardts.house.SelectShowCityActivity,java.lang.String) -> c
     tenant.guardts.house.SelectShowCityActivity$ResultListAdapter access$22(tenant.guardts.house.SelectShowCityActivity) -> p
     java.util.ArrayList access$23(tenant.guardts.house.SelectShowCityActivity) -> q
-<<<<<<< Updated upstream
-tenant.guardts.house.SelectShowCityActivity$1 -> tenant.guardts.house.hr:
-    tenant.guardts.house.SelectShowCityActivity this$0 -> a
-    int compare(tenant.guardts.house.selectcity.City,tenant.guardts.house.selectcity.City) -> a
-    int compare(java.lang.Object,java.lang.Object) -> compare
-tenant.guardts.house.SelectShowCityActivity$2 -> tenant.guardts.house.hs:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SelectShowCityActivity$1 -> tenant.guardts.house.hp:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     int compare(tenant.guardts.house.selectcity.City,tenant.guardts.house.selectcity.City) -> a
     int compare(java.lang.Object,java.lang.Object) -> compare
 tenant.guardts.house.SelectShowCityActivity$2 -> tenant.guardts.house.hq:
-=======
-tenant.guardts.house.SelectShowCityActivity$1 -> tenant.guardts.house.hr:
-    tenant.guardts.house.SelectShowCityActivity this$0 -> a
-    int compare(tenant.guardts.house.selectcity.City,tenant.guardts.house.selectcity.City) -> a
-    int compare(java.lang.Object,java.lang.Object) -> compare
-tenant.guardts.house.SelectShowCityActivity$2 -> tenant.guardts.house.hs:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SelectShowCityActivity$3 -> tenant.guardts.house.hr:
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectShowCityActivity$4 -> tenant.guardts.house.hs:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.SelectShowCityActivity$3 -> tenant.guardts.house.ht:
-    tenant.guardts.house.SelectShowCityActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.SelectShowCityActivity$4 -> tenant.guardts.house.hu:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SelectShowCityActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectShowCityActivity$HotCityAdapter -> tenant.guardts.house.SelectShowCityActivity$a:
@@ -32722,27 +31769,11 @@ tenant.guardts.house.SelectShowCityActivity$ListAdapter -> tenant.guardts.house.
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     tenant.guardts.house.SelectShowCityActivity access$0(tenant.guardts.house.SelectShowCityActivity$ListAdapter) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$1 -> tenant.guardts.house.hv:
-    tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
-    android.widget.TextView val$city -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$2 -> tenant.guardts.house.hw:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SelectShowCityActivity$ListAdapter$1 -> tenant.guardts.house.ht:
     tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
     android.widget.TextView val$city -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.SelectShowCityActivity$ListAdapter$2 -> tenant.guardts.house.hu:
-=======
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$1 -> tenant.guardts.house.hv:
-    tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
-    android.widget.TextView val$city -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SelectShowCityActivity$ListAdapter$2 -> tenant.guardts.house.hw:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SelectShowCityActivity$ListAdapter this$1 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 tenant.guardts.house.SelectShowCityActivity$ListAdapter$ViewHolder -> tenant.guardts.house.SelectShowCityActivity$c$a:
@@ -32806,15 +31837,7 @@ tenant.guardts.house.SurfaceViewTestActivity -> tenant.guardts.house.SurfaceView
     void access$3(tenant.guardts.house.SurfaceViewTestActivity,android.media.MediaPlayer) -> a
     android.widget.TextView access$4(tenant.guardts.house.SurfaceViewTestActivity) -> d
     java.lang.String access$5(tenant.guardts.house.SurfaceViewTestActivity) -> e
-<<<<<<< Updated upstream
-tenant.guardts.house.SurfaceViewTestActivity$1 -> tenant.guardts.house.hx:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SurfaceViewTestActivity$1 -> tenant.guardts.house.hv:
-=======
-tenant.guardts.house.SurfaceViewTestActivity$1 -> tenant.guardts.house.hx:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SurfaceViewTestActivity this$0 -> a
     void run() -> run
 tenant.guardts.house.SurfaceViewTestActivity$SeekBarChangeListener -> tenant.guardts.house.SurfaceViewTestActivity$a:
@@ -32844,15 +31867,7 @@ tenant.guardts.house.SurroundMoreActivity -> tenant.guardts.house.SurroundMoreAc
     int access$2(tenant.guardts.house.SurroundMoreActivity) -> c
     java.util.List access$3(tenant.guardts.house.SurroundMoreActivity) -> d
     java.util.Map access$4(tenant.guardts.house.SurroundMoreActivity) -> e
-<<<<<<< Updated upstream
-tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hy:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hw:
-=======
-tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hy:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     int mCurrentHeader -> b
     tenant.guardts.house.SurroundMoreActivity this$0 -> a
     void unregisterDataSetObserver(android.database.DataSetObserver) -> unregisterDataSetObserver
@@ -32871,27 +31886,11 @@ tenant.guardts.house.SurroundMoreActivity$1 -> tenant.guardts.house.hy:
     android.view.View getHeaderView(int,android.view.View,android.view.ViewGroup) -> a
     int getCountForHeader(int) -> a
     tenant.guardts.house.SurroundMoreActivity access$0(tenant.guardts.house.SurroundMoreActivity$1) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.SurroundMoreActivity$1$1 -> tenant.guardts.house.hz:
-    tenant.guardts.house.SurroundMoreActivity$1 this$1 -> a
-    java.lang.String val$searchText -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SurroundMoreActivity$2 -> tenant.guardts.house.ia:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SurroundMoreActivity$1$1 -> tenant.guardts.house.hx:
     tenant.guardts.house.SurroundMoreActivity$1 this$1 -> a
     java.lang.String val$searchText -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.SurroundMoreActivity$2 -> tenant.guardts.house.hy:
-=======
-tenant.guardts.house.SurroundMoreActivity$1$1 -> tenant.guardts.house.hz:
-    tenant.guardts.house.SurroundMoreActivity$1 this$1 -> a
-    java.lang.String val$searchText -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.SurroundMoreActivity$2 -> tenant.guardts.house.ia:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SurroundMoreActivity this$0 -> a
     android.widget.EditText val$inputSurround -> b
     void onClick(android.view.View) -> onClick
@@ -32915,15 +31914,7 @@ tenant.guardts.house.SurroundResultActivity -> tenant.guardts.house.SurroundResu
     void onGetPoiIndoorResult(com.baidu.mapapi.search.poi.PoiIndoorResult) -> onGetPoiIndoorResult
     void onGetPoiResult(com.baidu.mapapi.search.poi.PoiResult) -> onGetPoiResult
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-<<<<<<< Updated upstream
-tenant.guardts.house.SurroundResultActivity$1 -> tenant.guardts.house.ib:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.SurroundResultActivity$1 -> tenant.guardts.house.hz:
-=======
-tenant.guardts.house.SurroundResultActivity$1 -> tenant.guardts.house.ib:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.SurroundResultActivity this$0 -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.SurroundInfo) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
@@ -32940,23 +31931,10 @@ tenant.guardts.house.TransactionDetailActivity -> tenant.guardts.house.Transacti
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void onStatusError(java.lang.String,java.lang.String) -> b
     android.widget.ListView access$0(tenant.guardts.house.TransactionDetailActivity) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.TransactionDetailActivity$1 -> tenant.guardts.house.ia:
     tenant.guardts.house.TransactionDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.TransactionDetailActivity$1$1 -> tenant.guardts.house.ib:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.TransactionDetailActivity$1 -> tenant.guardts.house.ic:
-    tenant.guardts.house.TransactionDetailActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.TransactionDetailActivity$1$1 -> tenant.guardts.house.id:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.TransactionDetailActivity$1 this$1 -> a
 tenant.guardts.house.UserAgreementActivity -> tenant.guardts.house.UserAgreementActivity:
     tenant.guardts.house.UserAgreementActivity$MyPageAdapter adapter -> a
@@ -32964,15 +31942,7 @@ tenant.guardts.house.UserAgreementActivity -> tenant.guardts.house.UserAgreement
     tenant.guardts.house.bannerview.ViewPagerFixed pager -> d
     android.support.v4.view.ViewPager$OnPageChangeListener pageChangeListener -> e
     void onCreate(android.os.Bundle) -> onCreate
-<<<<<<< Updated upstream
-tenant.guardts.house.UserAgreementActivity$1 -> tenant.guardts.house.ie:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.UserAgreementActivity$1 -> tenant.guardts.house.ic:
-=======
-tenant.guardts.house.UserAgreementActivity$1 -> tenant.guardts.house.ie:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.UserAgreementActivity this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
@@ -33007,9 +31977,6 @@ tenant.guardts.house.WalletActivity -> tenant.guardts.house.WalletActivity:
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     void access$0(tenant.guardts.house.WalletActivity,java.lang.String) -> a
     java.lang.String access$1(tenant.guardts.house.WalletActivity) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.WalletActivity$1 -> tenant.guardts.house.id:
     tenant.guardts.house.WalletActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -33020,22 +31987,6 @@ tenant.guardts.house.WalletActivity$3 -> tenant.guardts.house.if:
     tenant.guardts.house.WalletActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WalletActivity$4 -> tenant.guardts.house.ig:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.WalletActivity$1 -> tenant.guardts.house.if:
-    tenant.guardts.house.WalletActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WalletActivity$2 -> tenant.guardts.house.ig:
-    tenant.guardts.house.WalletActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WalletActivity$3 -> tenant.guardts.house.ih:
-    tenant.guardts.house.WalletActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WalletActivity$4 -> tenant.guardts.house.ii:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.WalletActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WelcomeActivity -> tenant.guardts.house.WelcomeActivity:
@@ -33066,17 +32017,6 @@ tenant.guardts.house.WelcomeActivity -> tenant.guardts.house.WelcomeActivity:
     void access$5(tenant.guardts.house.WelcomeActivity,java.lang.String,java.util.List) -> a
     void access$6(tenant.guardts.house.WelcomeActivity,java.lang.String) -> b
     android.os.Message access$7(tenant.guardts.house.WelcomeActivity) -> e
-<<<<<<< Updated upstream
-tenant.guardts.house.WelcomeActivity$1 -> tenant.guardts.house.ij:
-    tenant.guardts.house.WelcomeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WelcomeActivity$2 -> tenant.guardts.house.ik:
-    tenant.guardts.house.WelcomeActivity this$0 -> a
-    void onSuccess(java.lang.Object,int) -> onSuccess
-    void onFail(java.lang.Object,int,java.lang.String) -> onFail
-tenant.guardts.house.WelcomeActivity$3 -> tenant.guardts.house.il:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.WelcomeActivity$1 -> tenant.guardts.house.ih:
     tenant.guardts.house.WelcomeActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -33085,17 +32025,6 @@ tenant.guardts.house.WelcomeActivity$2 -> tenant.guardts.house.ii:
     void onSuccess(java.lang.Object,int) -> onSuccess
     void onFail(java.lang.Object,int,java.lang.String) -> onFail
 tenant.guardts.house.WelcomeActivity$3 -> tenant.guardts.house.ij:
-=======
-tenant.guardts.house.WelcomeActivity$1 -> tenant.guardts.house.ij:
-    tenant.guardts.house.WelcomeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WelcomeActivity$2 -> tenant.guardts.house.ik:
-    tenant.guardts.house.WelcomeActivity this$0 -> a
-    void onSuccess(java.lang.Object,int) -> onSuccess
-    void onFail(java.lang.Object,int,java.lang.String) -> onFail
-tenant.guardts.house.WelcomeActivity$3 -> tenant.guardts.house.il:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.WelcomeActivity this$0 -> a
     java.util.List val$data -> b
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -33134,9 +32063,6 @@ tenant.guardts.house.WithdrawActivity -> tenant.guardts.house.WithdrawActivity:
     void access$2(tenant.guardts.house.WithdrawActivity,java.lang.String) -> a
     android.widget.EditText access$3(tenant.guardts.house.WithdrawActivity) -> c
     void access$4(tenant.guardts.house.WithdrawActivity,java.lang.String,java.lang.String) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.WithdrawActivity$1 -> tenant.guardts.house.ik:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -33156,31 +32082,6 @@ tenant.guardts.house.WithdrawActivity$6 -> tenant.guardts.house.ip:
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WithdrawActivity$7 -> tenant.guardts.house.iq:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.WithdrawActivity$1 -> tenant.guardts.house.im:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.WithdrawActivity$2 -> tenant.guardts.house.in:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$3 -> tenant.guardts.house.io:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$4 -> tenant.guardts.house.ip:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void onDismiss() -> onDismiss
-tenant.guardts.house.WithdrawActivity$5 -> tenant.guardts.house.iq:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$6 -> tenant.guardts.house.ir:
-    tenant.guardts.house.WithdrawActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.WithdrawActivity$7 -> tenant.guardts.house.is:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.WithdrawActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.WithdrawDetailsActivity -> tenant.guardts.house.WithdrawDetailsActivity:
@@ -34348,9 +33249,6 @@ tenant.guardts.house.model.DataModel$ServiceAsyncTask -> tenant.guardts.house.mo
 tenant.guardts.house.model.Evaluation -> tenant.guardts.house.model.Evaluation:
     java.lang.String ret -> ret
     java.lang.String msg -> msg
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.EvaluationItem -> tenant.guardts.house.model.EvaluationItem:
     java.lang.String EvaluatePerson -> EvaluatePerson
     java.lang.String EvaluateItem0 -> EvaluateItem0
@@ -34364,17 +33262,6 @@ tenant.guardts.house.model.EvaluationItem -> tenant.guardts.house.model.Evaluati
 tenant.guardts.house.model.EvaluationResult -> tenant.guardts.house.model.EvaluationResult:
     java.lang.String ret -> ret
     java.lang.String msg -> msg
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.model.EvaluationItem -> tenant.guardts.house.model.e:
-    java.lang.String EvaluatePerson -> a
-    java.lang.String EvaluateItem0 -> b
-    java.lang.String EvaluateItem1 -> c
-    java.lang.String EvaluateItem2 -> d
-    java.lang.String EvaluateDate -> e
-tenant.guardts.house.model.EvaluationResult -> tenant.guardts.house.model.f:
-    java.lang.String msg -> a
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
 tenant.guardts.house.model.HouseFragment -> tenant.guardts.house.model.HouseFragment:
     android.content.Context mContext -> h
     android.view.View mRootView -> i
@@ -34446,68 +33333,6 @@ tenant.guardts.house.model.HouseFragment -> tenant.guardts.house.model.HouseFrag
     android.content.Context access$13(tenant.guardts.house.model.HouseFragment) -> j
     android.widget.LinearLayout access$14(tenant.guardts.house.model.HouseFragment) -> k
     android.widget.LinearLayout access$15(tenant.guardts.house.model.HouseFragment) -> l
-<<<<<<< Updated upstream
-tenant.guardts.house.model.HouseFragment$1 -> tenant.guardts.house.model.g:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.HouseFragment$10 -> tenant.guardts.house.model.h:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$11 -> tenant.guardts.house.model.i:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$12 -> tenant.guardts.house.model.j:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$13 -> tenant.guardts.house.model.k:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$14 -> tenant.guardts.house.model.l:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$15 -> tenant.guardts.house.model.m:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$16 -> tenant.guardts.house.model.n:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$17 -> tenant.guardts.house.model.o:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$18 -> tenant.guardts.house.model.p:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onRefresh() -> a
-tenant.guardts.house.model.HouseFragment$19 -> tenant.guardts.house.model.q:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$2 -> tenant.guardts.house.model.r:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$20 -> tenant.guardts.house.model.s:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$21 -> tenant.guardts.house.model.t:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.HouseFragment$3 -> tenant.guardts.house.model.u:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-tenant.guardts.house.model.HouseFragment$5 -> tenant.guardts.house.model.v:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$6 -> tenant.guardts.house.model.w:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$7 -> tenant.guardts.house.model.x:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$8 -> tenant.guardts.house.model.y:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$9 -> tenant.guardts.house.model.z:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.HouseFragment$1 -> tenant.guardts.house.model.e:
     tenant.guardts.house.model.HouseFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -34567,68 +33392,6 @@ tenant.guardts.house.model.HouseFragment$8 -> tenant.guardts.house.model.w:
     tenant.guardts.house.model.HouseFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.HouseFragment$9 -> tenant.guardts.house.model.x:
-=======
-tenant.guardts.house.model.HouseFragment$1 -> tenant.guardts.house.model.g:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.HouseFragment$10 -> tenant.guardts.house.model.h:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$11 -> tenant.guardts.house.model.i:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$12 -> tenant.guardts.house.model.j:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$13 -> tenant.guardts.house.model.k:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$14 -> tenant.guardts.house.model.l:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$15 -> tenant.guardts.house.model.m:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$16 -> tenant.guardts.house.model.n:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$17 -> tenant.guardts.house.model.o:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$18 -> tenant.guardts.house.model.p:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onRefresh() -> a
-tenant.guardts.house.model.HouseFragment$19 -> tenant.guardts.house.model.q:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$2 -> tenant.guardts.house.model.r:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$20 -> tenant.guardts.house.model.s:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$21 -> tenant.guardts.house.model.t:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.HouseFragment$3 -> tenant.guardts.house.model.u:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-tenant.guardts.house.model.HouseFragment$5 -> tenant.guardts.house.model.v:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$6 -> tenant.guardts.house.model.w:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$7 -> tenant.guardts.house.model.x:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$8 -> tenant.guardts.house.model.y:
-    tenant.guardts.house.model.HouseFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.HouseFragment$9 -> tenant.guardts.house.model.z:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.HouseFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.HouseFragment$MyLocationListenner -> tenant.guardts.house.model.HouseFragment$a:
@@ -34714,30 +33477,28 @@ tenant.guardts.house.model.HouseInfoModel -> tenant.guardts.house.model.HouseInf
     void setHouseStatus(java.lang.String) -> u
     java.lang.String getDoorPassword() -> y
     void setDoorPassword(java.lang.String) -> v
-<<<<<<< Updated upstream
-tenant.guardts.house.model.HouseSelectorModel -> tenant.guardts.house.model.aa:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.HouseSelectorModel -> tenant.guardts.house.model.y:
-=======
-tenant.guardts.house.model.HouseSelectorModel -> tenant.guardts.house.model.aa:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     java.lang.String[] allValue -> a
     java.lang.String selectValue -> b
     java.lang.String orginText -> c
     java.lang.String[] allValueId -> d
-    java.lang.String selectId -> e
+    java.lang.String[] allLinkName -> e
+    java.lang.String selectId -> f
+    int position -> g
     java.lang.String getHouseSelectValue() -> a
     void setHouseSelectValue(java.lang.String) -> a
     java.lang.String getHouseSelectId() -> b
     void setHouseSelectId(java.lang.String) -> b
-    java.lang.String getHouseOrginText() -> c
+    int getHouseSelectPosition() -> c
+    void setHouseSelectPosition(int) -> a
+    java.lang.String getHouseOrginText() -> d
     void setHouseOrginText(java.lang.String) -> c
-    java.lang.String[] getHouseAllContent() -> d
+    java.lang.String[] getHouseAllContent() -> e
     void setHouseAllContent(java.lang.String[]) -> a
-    java.lang.String[] getHouseAllId() -> e
+    java.lang.String[] getHouseAllId() -> f
     void setHouseAllId(java.lang.String[]) -> b
+    java.lang.String[] getHouseAllLinkName() -> g
+    void setHouseAllLinkName(java.lang.String[]) -> c
 tenant.guardts.house.model.MyFragment -> tenant.guardts.house.model.MyFragment:
     android.content.Context mContext -> b
     android.view.View mRootView -> c
@@ -34800,9 +33561,6 @@ tenant.guardts.house.model.MyFragment -> tenant.guardts.house.model.MyFragment:
     void access$18(tenant.guardts.house.model.MyFragment) -> i
     void access$19(tenant.guardts.house.model.MyFragment) -> j
     android.os.Handler access$20(tenant.guardts.house.model.MyFragment) -> k
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.MyFragment$1 -> tenant.guardts.house.model.z:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -34838,47 +33596,6 @@ tenant.guardts.house.model.MyFragment$8 -> tenant.guardts.house.model.aj:
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.MyFragment$9 -> tenant.guardts.house.model.ak:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.model.MyFragment$1 -> tenant.guardts.house.model.ab:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.MyFragment$10 -> tenant.guardts.house.model.ac:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$11 -> tenant.guardts.house.model.ad:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$14 -> tenant.guardts.house.model.ae:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    java.util.List val$data -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.MyFragment$2 -> tenant.guardts.house.model.af:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$3 -> tenant.guardts.house.model.ag:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$4 -> tenant.guardts.house.model.ah:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$5 -> tenant.guardts.house.model.ai:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$6 -> tenant.guardts.house.model.aj:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$7 -> tenant.guardts.house.model.ak:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$8 -> tenant.guardts.house.model.al:
-    tenant.guardts.house.model.MyFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.MyFragment$9 -> tenant.guardts.house.model.am:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.MyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.OrderFangzhuFragment:
@@ -34940,93 +33657,14 @@ tenant.guardts.house.model.OrderFangzhuFragment -> tenant.guardts.house.model.Or
     void access$15(tenant.guardts.house.model.OrderFangzhuFragment,int,java.lang.String) -> a
     void access$16(tenant.guardts.house.model.OrderFangzhuFragment,int) -> b
     void access$17(tenant.guardts.house.model.OrderFangzhuFragment,java.lang.String) -> c
-<<<<<<< Updated upstream
-tenant.guardts.house.model.OrderFangzhuFragment$1 -> tenant.guardts.house.model.an:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$10 -> tenant.guardts.house.model.ao:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderFangzhuFragment$1 -> tenant.guardts.house.model.al:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.model.OrderFangzhuFragment$10 -> tenant.guardts.house.model.am:
-=======
-tenant.guardts.house.model.OrderFangzhuFragment$1 -> tenant.guardts.house.model.an:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$10 -> tenant.guardts.house.model.ao:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     tenant.guardts.house.model.HouseInfoModel val$info -> c
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.model.OrderFangzhuFragment$11 -> tenant.guardts.house.model.ap:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$12 -> tenant.guardts.house.model.aq:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$13 -> tenant.guardts.house.model.ar:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$14 -> tenant.guardts.house.model.as:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$15 -> tenant.guardts.house.model.at:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$16 -> tenant.guardts.house.model.au:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$17 -> tenant.guardts.house.model.av:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$18 -> tenant.guardts.house.model.aw:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$19 -> tenant.guardts.house.model.ax:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$2 -> tenant.guardts.house.model.ay:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$20 -> tenant.guardts.house.model.az:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$21 -> tenant.guardts.house.model.ba:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    android.app.AlertDialog$Builder val$builder -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$22 -> tenant.guardts.house.model.bb:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    int val$position -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$3 -> tenant.guardts.house.model.bc:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.model.OrderFangzhuFragment$4 -> tenant.guardts.house.model.bd:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onRefresh() -> a
-tenant.guardts.house.model.OrderFangzhuFragment$5 -> tenant.guardts.house.model.be:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.OrderFangzhuFragment$6 -> tenant.guardts.house.model.bf:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderFangzhuFragment$11 -> tenant.guardts.house.model.an:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
@@ -35089,86 +33727,10 @@ tenant.guardts.house.model.OrderFangzhuFragment$5 -> tenant.guardts.house.model.
     void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
 tenant.guardts.house.model.OrderFangzhuFragment$6 -> tenant.guardts.house.model.bd:
-=======
-tenant.guardts.house.model.OrderFangzhuFragment$11 -> tenant.guardts.house.model.ap:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$12 -> tenant.guardts.house.model.aq:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$13 -> tenant.guardts.house.model.ar:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$14 -> tenant.guardts.house.model.as:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$15 -> tenant.guardts.house.model.at:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$16 -> tenant.guardts.house.model.au:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$17 -> tenant.guardts.house.model.av:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$18 -> tenant.guardts.house.model.aw:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$19 -> tenant.guardts.house.model.ax:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$2 -> tenant.guardts.house.model.ay:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderFangzhuFragment$20 -> tenant.guardts.house.model.az:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$21 -> tenant.guardts.house.model.ba:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    android.app.AlertDialog$Builder val$builder -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$22 -> tenant.guardts.house.model.bb:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    int val$position -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$3 -> tenant.guardts.house.model.bc:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.model.OrderFangzhuFragment$4 -> tenant.guardts.house.model.bd:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onRefresh() -> a
-tenant.guardts.house.model.OrderFangzhuFragment$5 -> tenant.guardts.house.model.be:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.OrderFangzhuFragment$6 -> tenant.guardts.house.model.bf:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     int val$id -> b
     java.lang.String val$houseId -> c
     void onClick(android.content.DialogInterface,int) -> onClick
-<<<<<<< Updated upstream
-tenant.guardts.house.model.OrderFangzhuFragment$7 -> tenant.guardts.house.model.bg:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$8 -> tenant.guardts.house.model.bh:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$9 -> tenant.guardts.house.model.bi:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderFangzhuFragment$7 -> tenant.guardts.house.model.be:
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -35177,17 +33739,6 @@ tenant.guardts.house.model.OrderFangzhuFragment$8 -> tenant.guardts.house.model.
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderFangzhuFragment$9 -> tenant.guardts.house.model.bg:
-=======
-tenant.guardts.house.model.OrderFangzhuFragment$7 -> tenant.guardts.house.model.bg:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$8 -> tenant.guardts.house.model.bh:
-    tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderFangzhuFragment$9 -> tenant.guardts.house.model.bi:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderFangzhuFragment this$0 -> a
     tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     tenant.guardts.house.model.HouseInfoModel val$info -> c
@@ -35213,15 +33764,7 @@ tenant.guardts.house.model.OrderFragment -> tenant.guardts.house.model.OrderFrag
     void access$2(tenant.guardts.house.model.OrderFragment,tenant.guardts.house.model.OrderZhuHuFragment) -> a
     tenant.guardts.house.model.OrderFangzhuFragment access$3(tenant.guardts.house.model.OrderFragment) -> b
     void access$4(tenant.guardts.house.model.OrderFragment,tenant.guardts.house.model.OrderFangzhuFragment) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.model.OrderFragment$1 -> tenant.guardts.house.model.bj:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderFragment$1 -> tenant.guardts.house.model.bh:
-=======
-tenant.guardts.house.model.OrderFragment$1 -> tenant.guardts.house.model.bj:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderFragment this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
 tenant.guardts.house.model.OrderZhuHuFragment -> tenant.guardts.house.model.OrderZhuHuFragment:
@@ -35279,12 +33822,6 @@ tenant.guardts.house.model.OrderZhuHuFragment -> tenant.guardts.house.model.Orde
     void access$14(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> b
     void access$15(tenant.guardts.house.model.OrderZhuHuFragment,tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
     void access$16(tenant.guardts.house.model.OrderZhuHuFragment,java.lang.String) -> c
-<<<<<<< Updated upstream
-tenant.guardts.house.model.OrderZhuHuFragment$1 -> tenant.guardts.house.model.bk:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderZhuHuFragment$1 -> tenant.guardts.house.model.bi:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -35360,94 +33897,10 @@ tenant.guardts.house.model.OrderZhuHuFragment$5 -> tenant.guardts.house.model.cb
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$6 -> tenant.guardts.house.model.cc:
-=======
-tenant.guardts.house.model.OrderZhuHuFragment$1 -> tenant.guardts.house.model.bk:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
->>>>>>> Stashed changes
-tenant.guardts.house.model.OrderZhuHuFragment$10 -> tenant.guardts.house.model.bl:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$11 -> tenant.guardts.house.model.bm:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$12 -> tenant.guardts.house.model.bn:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$13 -> tenant.guardts.house.model.bo:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$14 -> tenant.guardts.house.model.bp:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$15 -> tenant.guardts.house.model.bq:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$16 -> tenant.guardts.house.model.br:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$17 -> tenant.guardts.house.model.bs:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$18 -> tenant.guardts.house.model.bt:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.UniversalViewHolder val$holder -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$19 -> tenant.guardts.house.model.bu:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$2 -> tenant.guardts.house.model.bv:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.OrderZhuHuFragment$20 -> tenant.guardts.house.model.bw:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    android.app.AlertDialog$Builder val$builder -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$21 -> tenant.guardts.house.model.bx:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    int val$position -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$22 -> tenant.guardts.house.model.by:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.HouseInfoModel) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.OrderZhuHuFragment$23 -> tenant.guardts.house.model.bz:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    java.lang.String val$houseId -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$24 -> tenant.guardts.house.model.ca:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$3 -> tenant.guardts.house.model.cb:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-tenant.guardts.house.model.OrderZhuHuFragment$4 -> tenant.guardts.house.model.cc:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    void onRefresh() -> a
-tenant.guardts.house.model.OrderZhuHuFragment$5 -> tenant.guardts.house.model.cd:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$6 -> tenant.guardts.house.model.ce:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.UniversalViewHolder val$holder -> b
     tenant.guardts.house.model.HouseInfoModel val$info -> c
     void onClick(android.view.View) -> onClick
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.OrderZhuHuFragment$7 -> tenant.guardts.house.model.cd:
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
@@ -35457,21 +33910,6 @@ tenant.guardts.house.model.OrderZhuHuFragment$8 -> tenant.guardts.house.model.ce
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.OrderZhuHuFragment$9 -> tenant.guardts.house.model.cf:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.model.OrderZhuHuFragment$7 -> tenant.guardts.house.model.cf:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$8 -> tenant.guardts.house.model.cg:
-    tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
-    tenant.guardts.house.model.HouseInfoModel val$info -> b
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.OrderZhuHuFragment$9 -> tenant.guardts.house.model.ch:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.OrderZhuHuFragment this$0 -> a
     tenant.guardts.house.model.HouseInfoModel val$info -> b
     void onClick(android.view.View) -> onClick
@@ -35529,9 +33967,6 @@ tenant.guardts.house.model.ScanQrCodeFragment -> tenant.guardts.house.model.Scan
     android.widget.ImageView access$0(tenant.guardts.house.model.ScanQrCodeFragment) -> a
     android.widget.TextView access$1(tenant.guardts.house.model.ScanQrCodeFragment) -> b
     tenant.guardts.house.model.ActionOperationInterface access$2(tenant.guardts.house.model.ScanQrCodeFragment) -> c
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.ScanQrCodeFragment$1 -> tenant.guardts.house.model.cg:
     tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
     void onCompletion(android.media.MediaPlayer) -> onCompletion
@@ -35543,23 +33978,6 @@ tenant.guardts.house.model.ScanQrCodeFragment$3 -> tenant.guardts.house.model.ci
     tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.ScanQrCodeFragment$4 -> tenant.guardts.house.model.cj:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.model.ScanQrCodeFragment$1 -> tenant.guardts.house.model.ci:
-    tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
-    void onCompletion(android.media.MediaPlayer) -> onCompletion
-tenant.guardts.house.model.ScanQrCodeFragment$2 -> tenant.guardts.house.model.cj:
-    tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
-    boolean val$status -> b
-    void run() -> run
-tenant.guardts.house.model.ScanQrCodeFragment$3 -> tenant.guardts.house.model.ck:
-    tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.ScanQrCodeFragment$4 -> tenant.guardts.house.model.cl:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     tenant.guardts.house.model.ScanQrCodeFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.ServiceCharge -> tenant.guardts.house.model.ServiceCharge:
@@ -35600,9 +34018,6 @@ tenant.guardts.house.model.SurroundFragment -> tenant.guardts.house.model.Surrou
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
     void onStatusStart(android.app.Activity) -> a
     android.content.Context access$0(tenant.guardts.house.model.SurroundFragment) -> a
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.SurroundFragment$1 -> tenant.guardts.house.model.ck:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -35635,44 +34050,6 @@ tenant.guardts.house.model.SurroundFragment$9 -> tenant.guardts.house.model.ct:
     tenant.guardts.house.model.SurroundFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cu:
-=======
->>>>>>> Stashed changes
-tenant.guardts.house.model.SurroundFragment$1 -> tenant.guardts.house.model.cm:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
-tenant.guardts.house.model.SurroundFragment$10 -> tenant.guardts.house.model.cn:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,tenant.guardts.house.model.SurroundInfo) -> a
-    void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-tenant.guardts.house.model.SurroundFragment$2 -> tenant.guardts.house.model.co:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$3 -> tenant.guardts.house.model.cp:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$4 -> tenant.guardts.house.model.cq:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$5 -> tenant.guardts.house.model.cr:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$6 -> tenant.guardts.house.model.cs:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$7 -> tenant.guardts.house.model.ct:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$8 -> tenant.guardts.house.model.cu:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundFragment$9 -> tenant.guardts.house.model.cv:
-    tenant.guardts.house.model.SurroundFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
-tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cw:
-<<<<<<< Updated upstream
-=======
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     java.lang.String name -> a
     java.lang.String address -> b
     java.lang.String uid -> c
@@ -35688,15 +34065,7 @@ tenant.guardts.house.model.SurroundInfo -> tenant.guardts.house.model.cw:
     void setNearPhone(java.lang.String) -> d
     java.lang.String getNearDetailUrl() -> e
     void setNearDetailUrl(java.lang.String) -> e
-<<<<<<< Updated upstream
-tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cx:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cv:
-=======
-tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cx:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     int mLayoutResId -> a
     java.util.List mDatas -> b
     android.view.LayoutInflater mLayoutInflater -> c
@@ -35705,15 +34074,7 @@ tenant.guardts.house.model.UniversalAdapter -> tenant.guardts.house.model.cx:
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     void convert(tenant.guardts.house.model.UniversalViewHolder,java.lang.Object) -> a
-<<<<<<< Updated upstream
-tenant.guardts.house.model.UniversalViewHolder -> tenant.guardts.house.model.cy:
-=======
-<<<<<<< HEAD
 tenant.guardts.house.model.UniversalViewHolder -> tenant.guardts.house.model.cw:
-=======
-tenant.guardts.house.model.UniversalViewHolder -> tenant.guardts.house.model.cy:
->>>>>>> c7c100647c1c093cd5e3d9cae10ea026ebd878d1
->>>>>>> Stashed changes
     android.util.SparseArray mViewMap -> a
     int mPosition -> b
     android.view.LayoutInflater mLayoutInflater -> c

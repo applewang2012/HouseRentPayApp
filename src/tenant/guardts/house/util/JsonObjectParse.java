@@ -213,6 +213,7 @@ public class JsonObjectParse {
 	public static List<String[]> parseHouseFenju(String value) {
 		String [] name;
 		String [] nameId;
+		String [] descName;
 		List<String[]> list = new ArrayList<>();
 		try{
 			JSONArray array = new JSONArray(value);
@@ -220,14 +221,17 @@ public class JsonObjectParse {
 				LogUtil.w("house", "parse house info "+array.length());
 				name = new String[array.length()];
 				nameId = new String[array.length()];
+				descName = new String[array.length()];
 				for (int item = 0; item < array.length(); item++){
 					
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					name[item] = itemJsonObject.optString("PSName");
 					nameId[item] = itemJsonObject.optString("PSID");
+					descName[item] = itemJsonObject.optString("PSDescription");
 				}
 				list.add(nameId);
 				list.add(name);
+				list.add(descName);
 			}
 			return list;
 		} catch (Exception e) {

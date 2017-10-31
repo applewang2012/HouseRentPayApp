@@ -6,7 +6,9 @@ public class HouseSelectorModel {
 	private String selectValue;
 	private String orginText;
 	private String[] allValueId;
+	private String[] allLinkName;
 	private String selectId;
+	private int position;
 
 	public String getHouseSelectValue() {
 		return selectValue;
@@ -22,6 +24,14 @@ public class HouseSelectorModel {
 
 	public void setHouseSelectId(String id) {
 		this.selectId = id;
+	}
+	
+	public int getHouseSelectPosition() {
+		return position;
+	}
+
+	public void setHouseSelectPosition(int position) {
+		this.position = position;
 	}
 
 	public String getHouseOrginText() {
@@ -46,6 +56,14 @@ public class HouseSelectorModel {
 
 	public void setHouseAllId(String [] value) {
 		this.allValueId = value;
+	}
+	
+	public String [] getHouseAllLinkName() {
+		return allLinkName;
+	}
+
+	public void setHouseAllLinkName(String [] value) {
+		this.allLinkName = value;
 	}
 	
 }
