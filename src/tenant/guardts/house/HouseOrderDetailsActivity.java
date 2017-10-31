@@ -229,10 +229,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private void updateShowTimeDown(String timeContent) {
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			if (mDetailType.equals("owner")) {
+				button1.setTextColor(Color.WHITE);
 				button1.setText("确认 " + timeContent);
+				
 			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
 			if (mDetailType.equals("renter")) {
+				button1.setTextColor(Color.WHITE);
 				button1.setText("支付 " + timeContent);
 			}
 		}
