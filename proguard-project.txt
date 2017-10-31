@@ -39,6 +39,9 @@
 -keep class tenant.guardts.house.model.HouseInfoModel
 -keep class tenant.guardts.house.model.ApplyForCheckOut
 -keep class tenant.guardts.house.model.ConfirmCheckout
+-keep class tenant.guardts.house.model.Evaluation
+-keep class tenant.guardts.house.model.EvaluationItem
+-keep class tenant.guardts.house.model.EvaluationResult
 -keep class tenant.guardts.house.bean.Detail
 -keep class com.google.** { *; }
  -keep class com.tencent.** { *;}  

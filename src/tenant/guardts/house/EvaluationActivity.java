@@ -125,7 +125,7 @@ public class EvaluationActivity extends BaseActivity {
 							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
 						} else {
 							
-							addEvaluation(info.getHouseId(), "1", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+							addEvaluation(info.getHouseOrderId(), "1", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
 									CommonUtil.mUserLoginName);
 
 						}
@@ -212,7 +212,7 @@ public class EvaluationActivity extends BaseActivity {
 						if (!TextUtils.isEmpty(type) && info != null) {
 							if (type.equals("renter")) {
 								Intent intent = new Intent(EvaluationActivity.this, EvaluationDetailActivity.class);
-								intent.putExtra("rraid", info.getHouseOrderId());
+								intent.putExtra("rraid", info.getHouseId());
 								startActivity(intent);
 							}
 							finish();

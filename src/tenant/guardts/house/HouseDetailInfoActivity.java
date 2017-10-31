@@ -90,26 +90,29 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋详情");
-		Button fullScreen = (Button)findViewById(R.id.id_add_rent_house);
+		Button fullScreen = (Button) findViewById(R.id.id_add_rent_house);
 		fullScreen.setVisibility(View.VISIBLE);
 		fullScreen.setBackgroundResource(R.drawable.title_bar_full_screen_icon);
 		fullScreen.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-//				Intent loadIntent = new Intent(HouseDetailInfoActivity.this, LoadUrlTestActivity.class);
-//				loadIntent.putExtra("url", "http://www.guardts.com/output/html5.html");
-//				loadIntent.putExtra("tab_name", "全景图");
-//				startActivity(loadIntent);
-				
-				Intent intent = new Intent();        
-				intent.setAction("android.intent.action.VIEW");    
-				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");   
-				intent.setData(content_url);  
+				// Intent loadIntent = new Intent(HouseDetailInfoActivity.this,
+				// LoadUrlTestActivity.class);
+				// loadIntent.putExtra("url",
+				// "http://www.guardts.com/output/html5.html");
+				// loadIntent.putExtra("tab_name", "全景图");
+				// startActivity(loadIntent);
+
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");
+				intent.setData(content_url);
 				startActivity(intent);
 			}
 		});
 		mRentNo = getIntent().getStringExtra("rentNo");
+//		Toast.makeText(HouseDetailInfoActivity.this, mRentNo, Toast.LENGTH_LONG).show();
 		flag = getIntent().getStringExtra("flag");
 		initView();
 		getHouseDetailInfoByHouseId(mRentNo);
@@ -134,17 +137,19 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				phone.setText(mRentPhone.getText());
 			}
 		});
-		
+
 		mShowCommentButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(HouseDetailInfoActivity.this, EvaluationDetailActivity.class);
-				intent.putExtra("rraid", mRentNo);
-				startActivity(intent);
-				
+				if (mHouseInfo != null) {
+					intent.putExtra("rraid", mHouseInfo.getHouseId());
+				    startActivity(intent);
+				}
+
 			}
-		});
+		}); 
 
 		mButtonApply.setOnClickListener(new OnClickListener() {
 
@@ -170,26 +175,26 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	 */
 	protected void intputIDCard() {
 		setBackgroundAlpha(0.3f);
-		View parent=View.inflate(this, R.layout.house_detail_info_layout, null);
+		View parent = View.inflate(this, R.layout.house_detail_info_layout, null);
 		View view = View.inflate(this, R.layout.popupwindow_input_identity_info, null);
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
-		Button btnConfirm=(Button) view.findViewById(R.id.btn_input_idcard_confirm);
-		Button btnCancel=(Button) view.findViewById(R.id.btn_input_idcard_cancel);
+		Button btnConfirm = (Button) view.findViewById(R.id.btn_input_idcard_confirm);
+		Button btnCancel = (Button) view.findViewById(R.id.btn_input_idcard_cancel);
 		btnConfirm.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		btnCancel.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				popupWindow.dismiss();
-				
+
 			}
 		});
 		popupWindow.setOnDismissListener(new OnDismissListener() {
@@ -212,7 +217,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		params.alpha = alpha;
 		getWindow().setAttributes(params);
 	}
-
 
 	private void showPublicAttributeDialog() {
 		new AlertDialog.Builder(HouseDetailInfoActivity.this, AlertDialog.THEME_HOLO_LIGHT)
@@ -409,7 +413,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	private ViewFlow mViewFlow;
 	private CircleFlowIndicator mFlowIndicator;
 	private TextView mZhulinType;
-	private TextView  mHousePrice;
+	private TextView mHousePrice;
 	private Button mShowCommentButton;
 
 	private void initView() {
@@ -540,10 +544,10 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mRentDirection.setText(object.getString("RDirectionDesc"));
 					mRentAddress.setText(object.getString("RAddress"));
 					mZhulinType.setText(object.getString("RRentTypeDesc"));
-					//mRoomNum.setText(object.getString("RDoor"));
+					// mRoomNum.setText(object.getString("RDoor"));
 					mLocationPolice.setText(object.getString("RPSName"));
 					mHousePrice.setText(object.getString("RLocationDescription") + " 元");
-
+					
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));

@@ -217,46 +217,47 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			}
 //		});
 		
-		FrameLayout quyuFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_quyu);
-		mDistrictTextView = (TextView)findViewById(R.id.id_add_house_quyu_text);
-		quyuFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				getHouseDistrict();
-			}
-		});
+//		FrameLayout quyuFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_quyu);
+//		mDistrictTextView = (TextView)findViewById(R.id.id_add_house_quyu_text);
+//		quyuFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				getHouseDistrict();
+//			}
+//		});
 		
-		FrameLayout streetFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_street);
-		mStreetTextView = (TextView)findViewById(R.id.id_add_house_street_text);
-		streetFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if (mSelectorInfo.get("district") != null && mSelectorInfo.get("district").getHouseSelectId() != null){
-					getHouseStreet();
-				}else{
-					Toast.makeText(getApplicationContext(), "请先选择区域", Toast.LENGTH_SHORT).show();
-				}
-				
-			}
-		});
-		
+//		FrameLayout streetFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_street);
+//		mStreetTextView = (TextView)findViewById(R.id.id_add_house_street_text);
+//		streetFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				if (mSelectorInfo.get("district") != null && mSelectorInfo.get("district").getHouseSelectId() != null){
+//					getHouseStreet();
+//				}else{
+//					Toast.makeText(getApplicationContext(), "请先选择区域", Toast.LENGTH_SHORT).show();
+//				}
+//				
+//			}
+//		});
+		//小区
 		FrameLayout roadFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_road);
 		mRoadTextView = (TextView)findViewById(R.id.id_add_house_road_text);
 		roadFrameLayout.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if (mSelectorInfo.get("street") != null && mSelectorInfo.get("street").getHouseSelectId() != null){
+				if (mSelectorInfo.get("police") != null && mSelectorInfo.get("police").getHouseSelectId() != null){
+					Toast.makeText(AddHouseInfoActivity.this,  mSelectorInfo.get("police").getHouseSelectId()+"==="+mSelectorInfo.get("fenju").getHouseSelectId(), Toast.LENGTH_LONG).show();
 					getHouseRoad();
 				}else{
-					Toast.makeText(getApplicationContext(), "请先选择街道", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "请先选择派出所", Toast.LENGTH_SHORT).show();
 				}
 				
 			}
 		});
-		
+		//分局
 		FrameLayout fenjuFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_police_fenju);
 		mFenjuTextView = (TextView)findViewById(R.id.id_add_house_police_fenju_text);
 		fenjuFrameLayout.setOnClickListener(new OnClickListener() {
@@ -266,7 +267,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				getHouseFenju();
 			}
 		});
-		
+		//派出所
 		FrameLayout policeFrameLayout = (FrameLayout)findViewById(R.id.id_add_house_police);
 		mPoliceTextView = (TextView)findViewById(R.id.id_add_house_police_text);
 		policeFrameLayout.setOnClickListener(new OnClickListener() {
@@ -375,19 +376,19 @@ public class AddHouseInfoActivity extends BaseActivity{
 //			mRBuildingType = mSelectorInfo.get("buildingstructure").getHouseSelectId();
 //		}
 		
-		if (mSelectorInfo.get("district") == null || mSelectorInfo.get("district").getHouseSelectId() == null){
-			Toast.makeText(getApplicationContext(), "请选择区域", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mRDName = mSelectorInfo.get("district").getHouseSelectId();
-		}
-		
-		if (mSelectorInfo.get("street") == null || mSelectorInfo.get("street").getHouseSelectId() == null){
-			Toast.makeText(getApplicationContext(), "请选择街道", Toast.LENGTH_SHORT).show();
-			return false;
-		}else{
-			mRSName = mSelectorInfo.get("street").getHouseSelectId();
-		}
+//		if (mSelectorInfo.get("district") == null || mSelectorInfo.get("district").getHouseSelectId() == null){
+//			Toast.makeText(getApplicationContext(), "请选择区域", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mRDName = mSelectorInfo.get("district").getHouseSelectId();
+//		}
+//		
+//		if (mSelectorInfo.get("street") == null || mSelectorInfo.get("street").getHouseSelectId() == null){
+//			Toast.makeText(getApplicationContext(), "请选择街道", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}else{
+//			mRSName = mSelectorInfo.get("street").getHouseSelectId();
+//		}
 		
 		if (mSelectorInfo.get("police") == null || mSelectorInfo.get("police").getHouseSelectId() == null){
 			Toast.makeText(getApplicationContext(), "请选择派出所", Toast.LENGTH_SHORT).show();
@@ -672,15 +673,15 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void getHouseRoad(){
-		
+		///////////////////////////////////////////////////////////////////////////////////////////
 			HouseSelectorModel direction = new HouseSelectorModel();
 			direction.setHouseOrginText((String) mRoadTextView.getText());
 			mSelectorInfo.put("road", direction);
 			String url = CommonUtil.mUserHost+"services.asmx?op=GetRoadList";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRoadAction));
-			if (mSelectorInfo.get("street").getHouseSelectId() != null && !mSelectorInfo.get("street").getHouseSelectId().equals("")){
-				rpc.addProperty("district", mSelectorInfo.get("district").getHouseSelectId());
-				rpc.addProperty("street", mSelectorInfo.get("street").getHouseSelectId());
+			if (mSelectorInfo.get("police").getHouseSelectId() != null && !mSelectorInfo.get("police").getHouseSelectId().equals("")){
+//				rpc.addProperty("street", mSelectorInfo.get("fenju").getHouseSelectId());
+				rpc.addProperty("district", mSelectorInfo.get("police").getHouseSelectId());
 				mPresenter.readyPresentServiceParams(AddHouseInfoActivity.this, url, mRoadAction, rpc);
 				mPresenter.startPresentServiceTask(true);
 			}

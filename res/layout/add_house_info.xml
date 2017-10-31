@@ -276,6 +276,7 @@
             </LinearLayout>
 
             <ImageView
+               
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="#0c000000" />
@@ -357,6 +358,7 @@
                 android:layout_height="1dp"
                 android:background="#0c000000" />
 			<FrameLayout
+			    android:visibility="gone"
                 android:id="@+id/id_add_house_quyu"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_90"
@@ -391,11 +393,13 @@
             </FrameLayout>
 
             <ImageView
+                  android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#0c000000" />
 
             <FrameLayout
+                  android:visibility="gone"
                 android:id="@+id/id_add_house_street"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base_dimen_90"
@@ -431,6 +435,7 @@
             </FrameLayout>
 
             <ImageView
+                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#0c000000" />
