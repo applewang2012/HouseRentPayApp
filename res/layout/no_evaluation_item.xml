@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="#cccccc"
+        android:textColor="#272727"
+        android:textSize="18sp"
         android:text="暂无任何评论" />
 
 </RelativeLayout>

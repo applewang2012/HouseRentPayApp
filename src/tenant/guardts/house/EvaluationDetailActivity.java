@@ -67,13 +67,14 @@ public class EvaluationDetailActivity extends BaseActivity {
 				Type type = new TypeToken<ArrayList<EvaluationItem>>() {
 				}.getType();
 				list = gson.fromJson(result.msg, type);
+				View emptyView = View.inflate(mContext, R.layout.no_evaluation_item, null);
 				if (list == null || list.size() == 0) {
 					view.setVisibility(View.GONE);
 					mAll.setVisibility(View.GONE);
-					View emptyView = View.inflate(mContext, R.layout.no_evaluation_item, null);
 					addContentView(emptyView, new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)); 
 					mListView.setEmptyView(emptyView);
 				} else {
+					emptyView.setVisibility(View.GONE);
 					mAll.setVisibility(View.VISIBLE);
 					view.setVisibility(View.VISIBLE);
 					Collections.sort(list);
