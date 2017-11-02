@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -125,15 +126,14 @@ public class EvaluationActivity extends BaseActivity {
 							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
 						} else {
 							
-							addEvaluation(info.getHouseOrderId(), "1", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
-									CommonUtil.mUserLoginName);
-
+							addEvaluation(info.getHouseOrderId(),info.getHouseOrderId(), "1", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+									CommonUtil.mUserLoginName); 
 						}
 					} else if (type.equals("owner")) {
 						if (service == 0 || enviroment == 0 || cost == 0) {
 							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
 						} else {
-							addEvaluation(info.getRenterIdcard(), "0", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+							addEvaluation(info.getHouseOrderId(),info.getRenterIdcard(), "0", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
 									CommonUtil.mUserLoginName);
 						}
 					}
@@ -145,7 +145,8 @@ public class EvaluationActivity extends BaseActivity {
 
 	/**
 	 * 添加评价
-	 * 
+	 * @param orderId
+	 * 			    房屋订单编号
 	 * @param evaObject
 	 *            评价对象的id 房屋id，IDCard：房客身份证
 	 * @param evaType
@@ -161,10 +162,11 @@ public class EvaluationActivity extends BaseActivity {
 	 * @param evaPerson
 	 *            评价人用户名（手机号）
 	 */
-	private void addEvaluation(String evaObject, String evaType, int service, int enviroment, int cost, String desc,
+	private void addEvaluation(String orderId,String evaObject, String evaType, int service, int enviroment, int cost, String desc,
 			String evaPerson) {
-		String url = CommonUtil.mUserHost + "Services.asmx?op=GetRentList";
+		String url = CommonUtil.mUserHost + "Services.asmx?op=AddEvaluation";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddEvaluationAction));
+		rpc.addProperty("orderId", orderId);
 		rpc.addProperty("evaObject", evaObject);
 		rpc.addProperty("evaType", evaType);
 		rpc.addProperty("service", service);
