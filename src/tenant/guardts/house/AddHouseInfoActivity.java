@@ -114,18 +114,13 @@ public class AddHouseInfoActivity extends BaseActivity{
 		
 		initView();
 	}
-	
-	
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		mUserName = getIntent().getStringExtra("user_name");
 	}
-
-
-
 	private void initView(){
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mOwnerName = (TextView)findViewById(R.id.id_add_house_owner_name);
@@ -144,13 +139,11 @@ public class AddHouseInfoActivity extends BaseActivity{
 				// TODO Auto-generated method stub
 				
 			}
-			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 				// TODO Auto-generated method stub
 				
 			}
-			
 			@Override
 			public void afterTextChanged(Editable s) {
 				if(s.length()>0){
@@ -160,7 +153,6 @@ public class AddHouseInfoActivity extends BaseActivity{
 					commission.setText("");
 					explanation.setText("");
 				}
-				
 			}
 		});
 //		mHouseNo = (EditText)findViewById(R.id.id_add_house_id_number);

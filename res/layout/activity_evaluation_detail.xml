@@ -10,7 +10,7 @@
     
     android:orientation="vertical" >
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:id="@+id/all"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -40,12 +40,13 @@
         android:layout_height="@dimen/base_dimen_10"
         android:layout_marginTop="@dimen/base_dimen_24"
         android:background="#f1f2f3" />
-
+ -->
     <ListView
         android:id="@+id/evaluation_detail_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="#f1f2f3"
+        android:listSelector="@color/transparent"
         android:dividerHeight="@dimen/base_dimen_10" >
     </ListView>
 

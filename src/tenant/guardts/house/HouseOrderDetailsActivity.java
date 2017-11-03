@@ -105,6 +105,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		TextView password = (TextView) findViewById(R.id.door_password);
 
 		TextView address = (TextView) findViewById(R.id.id_order_detail_address);
+		address.setSelected(true);
 		TextView contactName = (TextView) findViewById(R.id.id_order_detail_contacn_name);
 		contactPhone = (TextView) findViewById(R.id.id_order_detail_contacn_phone);
 		TextView startTime = (TextView) findViewById(R.id.id_order_detail_start_name);
@@ -460,7 +461,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(HouseOrderDetailsActivity.this,EvaluationDetailActivity.class);
-					intent.putExtra("rraid", mOrderDetail.getHouseId());
+					if (mDetailType.equals("renter")) {
+						intent.putExtra("rraid", mOrderDetail.getHouseId());
+						intent.putExtra("detail_type", "renter");
+					}else if(mDetailType.equals("owner")){
+						intent.putExtra("rraid", mOrderDetail.getRenterIdcard());
+						intent.putExtra("detail_type", "owner");
+					}
 					startActivity(intent);
 				}
 				

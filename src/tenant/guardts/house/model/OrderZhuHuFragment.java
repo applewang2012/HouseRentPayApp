@@ -436,7 +436,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 						
 						@Override
 						public void onClick(View v) {
-							// TODO Auto-generated method stub
 							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
 							intent.putExtra("order_detail", info);
 							intent.putExtra("detail_type", "renter");
@@ -471,6 +470,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), EvaluationDetailActivity.class);
 					intent.putExtra("rraid", info.getHouseId());
+					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
 				}
 			});

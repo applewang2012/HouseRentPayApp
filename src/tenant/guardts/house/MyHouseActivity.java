@@ -71,6 +71,7 @@ public class MyHouseActivity extends BaseActivity
 				Intent intent = new Intent(MyHouseActivity.this, HouseDetailInfoActivity.class);
 				intent.putExtra("flag", "0");// 表示从当前页跳入，详情页按钮会发生改变
 				intent.putExtra("rentNo", mHouseInfoList.get(arg2).getHouseId());
+				intent.putExtra("detail_type", "renter");
 				startActivity(intent);
 			}
 		});

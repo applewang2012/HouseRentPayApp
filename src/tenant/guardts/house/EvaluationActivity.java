@@ -10,6 +10,7 @@ import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.view.CustomRatingBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +39,7 @@ import com.google.gson.Gson;
 public class EvaluationActivity extends BaseActivity {
 
 	private TextView mHouseLocation;// 房屋所在地
-	private CustomRatingBar mOverallRating;// 综合评价
+//	private CustomRatingBar mOverallRating;// 综合评价
 	private CustomRatingBar mServiceRating;// 服务评价
 	private CustomRatingBar mEnvironmentalRating;// 环境评价
 	private CustomRatingBar mPriceRating;// 价格评价
@@ -68,8 +72,11 @@ public class EvaluationActivity extends BaseActivity {
 	private void initData() {
 		type = getIntent().getStringExtra("detail_type");
 		info = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
+		mHouseLocation.setTextColor(Color.parseColor("#333333"));;
 		mHouseLocation.setText(info.getHouseAddress());
+		
 		if (type.equals("renter")) {
+			ll.setVisibility(View.VISIBLE);
 			title1.setText("服务评分");
 			title2.setText("环境评分");
 			title3.setText("价格评分");
@@ -80,8 +87,10 @@ public class EvaluationActivity extends BaseActivity {
 			box5.setText("价格公道");
 			box6.setText("环境较差");
 		} else if (type.equals("owner")) {
-			title1.setText("环境评分");
-			title2.setText("信誉评分");
+			mHouseLocation.setText("请对房客"+info.getHouseContactName()+"进行评价");
+			mHouseLocation.setTextColor(Color.parseColor("#337ffd"));
+			ll.setVisibility(View.GONE);
+		    title2.setText("信誉评分");
 			title3.setText("态度评分");
 			box1.setText("诚实守信");
 			box2.setText("环境整洁");
@@ -130,10 +139,10 @@ public class EvaluationActivity extends BaseActivity {
 									CommonUtil.mUserLoginName); 
 						}
 					} else if (type.equals("owner")) {
-						if (service == 0 || enviroment == 0 || cost == 0) {
+						if ( enviroment == 0 || cost == 0) {
 							Toast.makeText(EvaluationActivity.this, "分数不能为空，请评分", Toast.LENGTH_SHORT).show();
 						} else {
-							addEvaluation(info.getHouseOrderId(),info.getRenterIdcard(), "0", service, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
+							addEvaluation(info.getHouseOrderId(),info.getRenterIdcard(), "0",0, enviroment, cost, desc.toString().substring(0,desc.toString().length()-1),
 									CommonUtil.mUserLoginName);
 						}
 					}
@@ -182,10 +191,11 @@ public class EvaluationActivity extends BaseActivity {
 		mContext = getApplicationContext();
 		mPresent = new HoursePresenter(mContext, EvaluationActivity.this);
 		mHouseLocation = (TextView) findViewById(R.id.evaluation_textview_house_location);
-		mOverallRating = (CustomRatingBar) findViewById(R.id.evaluation_overall_rating);
+//		mOverallRating = (CustomRatingBar) findViewById(R.id.evaluation_overall_rating);
 		mServiceRating = (CustomRatingBar) findViewById(R.id.evaluation_service_rating);// 服务评分
 		mEnvironmentalRating = (CustomRatingBar) findViewById(R.id.evaluation_environmental_rating);// 环境评分
 		mPriceRating = (CustomRatingBar) findViewById(R.id.evaluation_price_rating);// 价格评分
+		img = (ImageView) findViewById(R.id.img);
 		box1 = (CheckBox) findViewById(R.id.eval_checkbox1);
 		box2 = (CheckBox) findViewById(R.id.eval_checkbox2);
 		box3 = (CheckBox) findViewById(R.id.eval_checkbox3);
@@ -199,6 +209,7 @@ public class EvaluationActivity extends BaseActivity {
 		box2.setChecked(true);
 		box3.setChecked(true);
 		mBtnSubmit = (Button) findViewById(R.id.evaluation_btn_submit);
+		ll = (LinearLayout) findViewById(R.id.ll);
 		
 	}
 
@@ -215,6 +226,12 @@ public class EvaluationActivity extends BaseActivity {
 							if (type.equals("renter")) {
 								Intent intent = new Intent(EvaluationActivity.this, EvaluationDetailActivity.class);
 								intent.putExtra("rraid", info.getHouseId());
+								intent.putExtra("detail_type", "renter");
+								startActivity(intent);
+							}else if (type.equals("owner")) {
+								Intent intent = new Intent(EvaluationActivity.this, EvaluationDetailActivity.class);
+								intent.putExtra("rraid", info.getRenterIdcard());
+								intent.putExtra("detail_type", "owner");
 								startActivity(intent);
 							}
 							finish();
@@ -227,7 +244,6 @@ public class EvaluationActivity extends BaseActivity {
 					}
 				}
 			}
-
 		};
 	};
 	private String type;
@@ -235,6 +251,8 @@ public class EvaluationActivity extends BaseActivity {
 	private TextView title1;
 	private TextView title2;
 	private TextView title3;
+	private ImageView img;
+	private LinearLayout ll;
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {

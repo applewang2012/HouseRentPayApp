@@ -583,7 +583,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(), EvaluationDetailActivity.class);
-					intent.putExtra("rraid", info.getHouseId());
+					intent.putExtra("rraid", info.getRenterIdcard());
+					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
 				}
 			});

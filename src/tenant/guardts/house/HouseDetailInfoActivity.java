@@ -145,6 +145,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				Intent intent = new Intent(HouseDetailInfoActivity.this, EvaluationDetailActivity.class);
 				if (mHouseInfo != null) {
 					intent.putExtra("rraid", mHouseInfo.getHouseId());
+					intent.putExtra("detail_type","renter");
 				    startActivity(intent);
 				}
 
