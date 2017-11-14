@@ -140,7 +140,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity
+       <activity
             android:name=".DownloadAppActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
@@ -227,7 +227,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -306,11 +306,11 @@
             android:theme="@style/AppTheme" >
         </activity>
 
-        <provider
+<!--         <provider
             android:name=".download.DownloadProvider"
             android:authorities="tenant.guardts.house.download" />
 
-        <service android:name=".download.DownloadService" />
+        <service android:name=".download.DownloadService" /> -->
 
         <receiver
             android:name=".download.DownloadReceiver"
@@ -343,6 +343,12 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar" >
+           <intent-filter>
+		        <action android:name="android.intent.action.VIEW"/>
+		        <category android:name="android.intent.category.DEFAULT"/>
+		        <data android:scheme="wxae25cb3fefdc75ae"/>
+   		  </intent-filter>
+
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
         </activity>

@@ -103,16 +103,16 @@ public class CommonUtil {
             	base.mkdir();
             }
         	
-        	File[] files = base.listFiles();
-        	for (int i = 0; i < files.length; i++) {
-        			String filename = files[i].getName();
-        			if (filename != null && downloadUrl != null){
-        				if (downloadUrl.endsWith(filename)){
-        					path = base.getPath()+File.separator+filename;
-        					break;
-        				}
-        			}
-        	}
+//        	File[] files = base.listFiles();
+//        	for (int i = 0; i < files.length; i++) {
+//        			String filename = files[i].getName();
+//        			if (filename != null && downloadUrl != null){
+//        				if (downloadUrl.endsWith(filename)){
+//        					path = base.getPath()+File.separator+filename;
+//        					break;
+//        				}
+//        			}
+//        	}
         	if (path == null){
         		path = base.getPath();
         	}
@@ -122,6 +122,21 @@ public class CommonUtil {
         }
         LogUtil.w("mingguo", "common util get default download path  "+path);
        return path;
+    }
+    
+    
+    public static String getDownloadFilename(String url){
+    	if (url != null){
+    		int lastIndex = url.lastIndexOf("/");
+    		if (lastIndex > 0){
+    			return url.substring(lastIndex);
+    		}
+    	}
+    	return "defaultName.apk";
+    }
+    
+    public static String getDownloadPathWithName(String downloadUrl){
+    	return (getDefaultDownloadPath(downloadUrl) + "/" + getDownloadFilename(downloadUrl));
     }
     
     public static boolean deleteInstalledApkFile(){
@@ -134,7 +149,7 @@ public class CommonUtil {
      	File[] files = base.listFiles();
      	for (int i = 0; i < files.length; i++) {
 			String filename = files[i].getName();
-			if (filename.endsWith(".apk")){
+			if (filename.endsWith(".apk")||filename.endsWith(".APK")){
 				return new File(base.getPath()+File.separator+filename).delete();
 			}
      	}

@@ -4897,9 +4897,9 @@ tenant.guardts.house.AddHouseInfoActivity:
     private android.widget.TextView mStrictTextView
     private android.widget.TextView mHouseTypeTextView
     private java.lang.String mRHouseP
-    551:565:private void getHouseProperty()
-    660:678:private void getHouseDistrict()
-    742:757:private void getHouseStreet()
+    543:557:private void getHouseProperty()
+    652:670:private void getHouseDistrict()
+    734:749:private void getHouseStreet()
 tenant.guardts.house.AddRentAttributeActivity:
     133:139:private void getPayRateDesc(java.lang.String)
     771:802:private void startHttpService()
@@ -4976,12 +4976,32 @@ tenant.guardts.house.DoorNumberLockFragment:
     private android.hardware.Camera camera
     private android.widget.FrameLayout mOpenFlashButton
 tenant.guardts.house.DownloadAppActivity:
+    private tenant.guardts.house.download.DownloadManager mDownloadManager
+    private tenant.guardts.house.downloadui.DownloadAdapter mSizeSortedAdapter
+    private android.widget.ListView mSizeOrderedListView
+    private android.database.Cursor mSizeSortedCursor
+    private int mIdColumnId
+    private int mStatusColumnId
     private long mQueuedDownloadId
     private android.app.AlertDialog mQueuedDialog
+    private int mLocalUriColumnId
+    private int mMediaTypeColumnId
+    private int mReasonColumndId
     private android.widget.Button donwloadButton
-tenant.guardts.house.DownloadAppActivity$3:
-    121:121:public void onDownloadSelectionChanged(long,boolean)
-    126:126:public boolean isDownloadSelected(long)
+    private int mDownloadUrlColumnId
+    private int mCurrentDownloadId
+    219:226:private void checkDownloadFile2()
+    230:238:private void checkDownloadFile()
+    241:295:private void initDownloadAdapter()
+    299:323:private int queryDownloadStatus(java.lang.String)
+    327:344:private void updateDownloadStatus(int)
+    378:385:private void registerReceiverData()
+    388:389:private void unregisterReceiver()
+    326:326:static synthetic void access$4(tenant.guardts.house.DownloadAppActivity,int)
+tenant.guardts.house.DownloadAppActivity$4
+tenant.guardts.house.DownloadAppActivity$5
+tenant.guardts.house.DownloadAppActivity$6
+tenant.guardts.house.DownloadAppActivity$7
 tenant.guardts.house.EvaluationActivity:
     private android.widget.EditText mExplanation
 tenant.guardts.house.GalleryActivity:
@@ -5014,10 +5034,10 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-    358:363:private void setDeleteHouseInfo(java.lang.String)
-    367:379:private void initDialog()
-    388:398:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    490:495:private void getHouseDetailImageListByHouseId(java.lang.String)
+    359:364:private void setDeleteHouseInfo(java.lang.String)
+    368:380:private void initDialog()
+    389:399:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    491:496:private void getHouseDetailImageListByHouseId(java.lang.String)
     72:72:static synthetic java.lang.String access$12(tenant.guardts.house.HouseDetailInfoActivity)
     66:66:static synthetic void access$13(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
     66:66:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
@@ -5040,18 +5060,18 @@ tenant.guardts.house.MapRentHouseActivity:
     android.widget.Button requestLocButton
     private android.widget.TextView mTitleBar
     private java.util.ArrayList suggest
-    579:584:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
-    588:597:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
-    727:730:public void setBackgroundAlpha(float)
+    584:589:private int getCurrentMarkerIndex(com.baidu.mapapi.map.Marker)
+    593:602:private int getSameLocationHouseSize(com.baidu.mapapi.map.Marker)
+    732:735:public void setBackgroundAlpha(float)
 tenant.guardts.house.MapRentHouseActivity$MyLocationListenner:
-    828:828:public void onReceivePoi(com.baidu.location.BDLocation)
+    833:833:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.MapSuggestSearchActivity:
     134:137:protected boolean hasData(java.lang.String)
 tenant.guardts.house.MyHouseActivity:
     private android.widget.LinearLayout mContentLayout
     private android.widget.TextView mNoContent
-    99:104:private void setDeleteHouseInfo(java.lang.String)
-    255:270:private void initDialog(android.view.View,int)
+    100:105:private void setDeleteHouseInfo(java.lang.String)
+    256:271:private void initDialog(android.view.View,int)
 tenant.guardts.house.MyHouseActivity$3
 tenant.guardts.house.PaymentStatusActivity:
     113:123:private void updateWalletRequestInfo(java.lang.String,java.lang.String)
@@ -5158,6 +5178,7 @@ tenant.guardts.house.decoding.Intents$Scan
 tenant.guardts.house.decoding.Intents$SearchBookContents
 tenant.guardts.house.decoding.Intents$Share
 tenant.guardts.house.decoding.Intents$WifiConnect
+tenant.guardts.house.download.AppFileDownloadUtils
 tenant.guardts.house.download.DownloadConstants:
     public static final java.lang.String TAG
     public static final java.lang.String RETRY_AFTER_X_REDIRECT_COUNT
@@ -5206,70 +5227,10 @@ tenant.guardts.house.download.DownloadInfo:
     public int mProgressNumber
     public int mProgressLevel
     public java.lang.String mAppName
-tenant.guardts.house.download.DownloadManager:
-    private static final java.lang.String TAG
-    public static final java.lang.String COLUMN_ID
-    public static final java.lang.String COLUMN_TITLE
-    public static final java.lang.String COLUMN_DESCRIPTION
-    public static final java.lang.String COLUMN_URI
-    public static final java.lang.String COLUMN_MEDIA_TYPE
-    public static final java.lang.String COLUMN_TOTAL_SIZE_BYTES
-    public static final java.lang.String COLUMN_LOCAL_URI
-    public static final java.lang.String COLUMN_STATUS
-    public static final java.lang.String COLUMN_REASON
-    public static final java.lang.String COLUMN_BYTES_DOWNLOADED_SO_FAR
-    public static final java.lang.String COLUMN_LAST_MODIFIED_TIMESTAMP
-    public static final int STATUS_PENDING
-    public static final int STATUS_RUNNING
-    public static final int STATUS_PAUSED
-    public static final int STATUS_SUCCESSFUL
-    public static final int STATUS_FAILED
-    public static final int ERROR_UNKNOWN
-    public static final int ERROR_FILE_ERROR
-    public static final int ERROR_UNHANDLED_HTTP_CODE
-    public static final int ERROR_HTTP_DATA_ERROR
-    public static final int ERROR_TOO_MANY_REDIRECTS
-    public static final int ERROR_INSUFFICIENT_SPACE
-    public static final int ERROR_DEVICE_NOT_FOUND
-    public static final int ERROR_CANNOT_RESUME
-    public static final int ERROR_FILE_ALREADY_EXISTS
-    public static final int PAUSED_WAITING_TO_RETRY
-    public static final int PAUSED_WAITING_FOR_NETWORK
-    public static final int PAUSED_QUEUED_FOR_WIFI
-    public static final int PAUSED_UNKNOWN
-    public static final java.lang.String ACTION_DOWNLOAD_COMPLETE
-    public static final java.lang.String ACTION_NOTIFICATION_CLICKED
-    public static final java.lang.String ACTION_VIEW_DOWNLOADS
-    public static final java.lang.String EXTRA_DOWNLOAD_ID
-    884:891:public varargs int markRowDeleted(long[])
-    943:943:public android.os.ParcelFileDescriptor openDownloadedFile(long)
-    981:988:public varargs int cancelDownload(long[])
-    1036:1060:public varargs void restartDownload(long[])
-    1066:1066:android.net.Uri getDownloadUri(long)
-    1353:1353:public static boolean isStatusRunning(int)
-    1358:1358:public static boolean isStatusInformational(int)
-    1365:1365:public static boolean isStatusPending(int)
-tenant.guardts.house.download.DownloadManager$Query:
-    public static final int ORDER_ASCENDING
-    public static final int ORDER_DESCENDING
-    682:683:public tenant.guardts.house.download.DownloadManager$Query setFilterByStatus(int)
-tenant.guardts.house.download.DownloadManager$Request:
-    public static final int NETWORK_MOBILE
-    public static final int NETWORK_WIFI
-    private int mSourceType
-    370:371:public tenant.guardts.house.download.DownloadManager$Request setDestinationUri(android.net.Uri)
-    381:382:public tenant.guardts.house.download.DownloadManager$Request setIconUrl(java.lang.String)
-    386:387:public tenant.guardts.house.download.DownloadManager$Request setMD5(java.lang.String)
-    391:392:public tenant.guardts.house.download.DownloadManager$Request setDestination(int)
-    396:397:public tenant.guardts.house.download.DownloadManager$Request setSourceType(int)
-    419:421:public tenant.guardts.house.download.DownloadManager$Request setDestinationInExternalFilesDir(android.content.Context,java.lang.String,java.lang.String)
-    440:443:public tenant.guardts.house.download.DownloadManager$Request setDestinationInExternalPublicDir(java.lang.String,java.lang.String)
-    447:451:private void setDestinationFromBase(java.io.File,java.lang.String)
-    467:477:public tenant.guardts.house.download.DownloadManager$Request addRequestHeader(java.lang.String,java.lang.String)
-    499:500:public tenant.guardts.house.download.DownloadManager$Request setDescription(java.lang.CharSequence)
-    546:547:public tenant.guardts.house.download.DownloadManager$Request setAllowedNetworkTypes(int)
-    559:560:public tenant.guardts.house.download.DownloadManager$Request setAllowedOverRoaming(boolean)
-    572:573:public tenant.guardts.house.download.DownloadManager$Request setVisibleInDownloadsUi(boolean)
+tenant.guardts.house.download.DownloadManager
+tenant.guardts.house.download.DownloadManager$CursorTranslator
+tenant.guardts.house.download.DownloadManager$Query
+tenant.guardts.house.download.DownloadManager$Request
 tenant.guardts.house.download.DownloadNotification:
     static final java.lang.String LOGTAG
     static final java.lang.String WHERE_RUNNING
@@ -5386,9 +5347,11 @@ tenant.guardts.house.download.Helpers$Lexer:
 tenant.guardts.house.download.RealSystemFacade:
     private static final long DOWNLOAD_MAX_BYTES_OVER_MOBILE
     private static final long DOWNLOAD_RECOMMENDED_MAX_BYTES_OVER_MOBILE
+tenant.guardts.house.downloadui.DownloadAdapter
 tenant.guardts.house.downloadui.DownloadSelectListener:
     public abstract void onDownloadSelectionChanged(long,boolean)
     public abstract boolean isDownloadSelected(long)
+    public abstract void downloadStatus(int)
 tenant.guardts.house.encoding.EncodingHandler
 tenant.guardts.house.headergridview.AlbumGridViewAdapter:
     135:135:public int dipToPx(int)
@@ -5567,11 +5530,11 @@ tenant.guardts.house.util.CommonUtil:
     public static final long TIME_STAMP_10_MINUTES
     23:23:public CommonUtil()
     92:93:public static void setCanvas(android.graphics.Canvas)
-    156:159:public static void uninstallApk(android.content.Context,java.lang.String)
-    173:173:private static double Rad(double)
-    184:193:public static double GetDistance(double,double,double,double)
-    197:218:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    223:246:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    171:174:public static void uninstallApk(android.content.Context,java.lang.String)
+    188:188:private static double Rad(double)
+    199:208:public static double GetDistance(double,double,double,double)
+    212:233:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    238:261:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)
@@ -5581,6 +5544,7 @@ tenant.guardts.house.util.GlobalUtil:
     31:32:private GlobalUtil()
     70:76:public static int getVersionCode(android.content.Context,java.lang.String)
     110:118:public static java.lang.String getVersionName(android.content.Context,java.lang.String)
+    122:132:public static java.lang.String getApplicationName(android.content.Context)
     140:143:public static void startActivity(android.content.Context,java.lang.Class)
     146:150:public static void startActivity(android.content.Context,java.lang.Class,int)
     154:158:public static void startActivity(android.content.Context,java.lang.Class,android.os.Bundle)
@@ -5650,9 +5614,10 @@ tenant.guardts.house.util.ScreenShotUtil:
     310:327:public static android.graphics.Bitmap myShot(android.app.Activity)
     333:412:public static void ScreenCapture(android.content.Context,java.lang.String)
 tenant.guardts.house.util.UtilTool:
-    23:23:private UtilTool()
-    26:41:public static final java.lang.String getMessageDigest(byte[])
-    179:192:public static java.lang.String getStringToUtf8(java.lang.String)
+    24:24:private UtilTool()
+    27:42:public static final java.lang.String getMessageDigest(byte[])
+    180:202:public static java.lang.String getPrintSize(long)
+    209:222:public static java.lang.String getStringToUtf8(java.lang.String)
 tenant.guardts.house.util.ViewUtil:
     12:12:public ViewUtil()
 tenant.guardts.house.view.AddressSelector$Line:

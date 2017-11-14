@@ -2,7 +2,15 @@ package tenant.guardts.house;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import tenant.guardts.house.download.AppFileDownloadUtils;
 import tenant.guardts.house.download.DownloadManager;
 import tenant.guardts.house.download.DownloadManager.Request;
 import tenant.guardts.house.downloadui.DownloadAdapter;
@@ -16,8 +24,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -25,7 +38,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +63,9 @@ public class DownloadAppActivity extends BaseActivity{
 	private int mDownloadUrlColumnId;
 	private int mCurrentDownloadId;
 	private PackageInstallerReceiver mInstallerReceiver = new PackageInstallerReceiver();
+	private static int mUpdateDownloadProgress = 0;
+	private ProgressBar mProgressBar;
+	private TextView mShowProgress;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +77,154 @@ public class DownloadAppActivity extends BaseActivity{
 		titlebar.setText("下载更新");
 		FrameLayout backButton = (FrameLayout) findViewById(R.id.id_titlebar_back);
 		backButton.setVisibility(View.INVISIBLE);
-		registerReceiverData();
-		initDownloadAdapter();
-		
-		checkDownloadFile();
-		changeDownloadStatus();
-		
+		mProgressBar = (ProgressBar) findViewById(R.id.download_progress);
+		mShowProgress = (TextView)findViewById(R.id.status_text);
+		ImageView iconView = (ImageView)findViewById(R.id.download_icon);
+		iconView.setImageResource(R.drawable.icon_house);
+		mDownloadButton = (Button)findViewById(R.id.id_download_button);
+		mDownloadButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				changeDownloadStatus();
+			}
+		});
+//		registerReceiverData();
+//		initDownloadAdapter();
+//		
+//		checkDownloadFile();
+//		changeDownloadStatus();
+		startDownloadFileTask();
+		mUpdateHandler.sendEmptyMessage(100);
 	}
+	
+	private void startDownloadFileTask(){
+		new AsyncTask<Void, Void, Integer>() {
+
+			@Override
+			protected Integer doInBackground(Void... params) {
+				downloadFile(CommonUtil.DOWLOAD_URL, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL));
+				//publishProgress();
+				return null;
+			}
+			
+			
+
+			@Override
+			protected void onProgressUpdate(Void... values) {
+				// TODO Auto-generated method stub
+				super.onProgressUpdate(values);
+				
+			}
+
+
+
+			@Override
+			protected void onPostExecute(Integer result) {
+				// TODO Auto-generated method stub
+				super.onPostExecute(result);
+			}
+			
+		}.execute();
+	}
+	
+	private Handler mUpdateHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			Log.i("mingguo", "update handler  "+mUpdateDownloadProgress);
+			if (mUpdateDownloadProgress < 100){
+				mProgressBar.setProgress(mUpdateDownloadProgress);
+				mUpdateHandler.sendEmptyMessageDelayed(100, 800);
+			}else{
+				mProgressBar.setProgress(100);
+				mUpdateHandler.removeCallbacksAndMessages(null);
+			}
+			changeDownloadStatus();
+		}
+		
+	};
+	
+	public static boolean downloadFile(String downloadUrl, String saveFilePath) {  
+        int fileSize = -1;  
+        int downFileSize = 0;  
+        boolean result = false;  
+        int progress = 0;  
+        InputStream inputStream = null;
+    	FileOutputStream fos = null;
+        try {  
+        	
+            URL url = new URL(downloadUrl);  
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();  
+            if (null == connection) {  
+                return false;  
+            }  
+            connection.setConnectTimeout(8000);
+			connection.setInstanceFollowRedirects(true);
+			connection.setDoInput(true);
+			connection.connect();
+			
+			inputStream = connection.getInputStream();
+			if (inputStream == null) {
+				return false;
+			}
+			
+			fos = new FileOutputStream(saveFilePath);
+			
+			byte[] buffer = new byte[4096];
+			int read_size = 0;
+			fileSize = connection.getContentLength();  
+			while((read_size = inputStream.read(buffer, 0, 4096)) >= 0) {
+				//Log.d("mingguo", "start download  size  "+read_size+"  file size  "+fileSize);
+				downFileSize = downFileSize + read_size;  
+				progress = (int) (downFileSize * 100.0 / fileSize);  
+				fos.write(buffer, 0, read_size);
+				if (downFileSize == fileSize) {  
+                    // 下载完成  
+                    mUpdateDownloadProgress = 100;
+                } else{  
+                    
+                    mUpdateDownloadProgress = progress;
+                }  
+			}
+			
+        } catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+
+				if (inputStream != null) {
+					inputStream.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+        return result;  
+    }  
+	
+	private void checkDownloadFile2(){
+		
+		mDownloadButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				changeDownloadStatus();
+			}
+		});
+	}
+	
 	
 	private void checkDownloadFile(){
 		mDownloadButton = (Button)findViewById(R.id.id_download_button);
@@ -83,7 +242,7 @@ public class DownloadAppActivity extends BaseActivity{
 			mDownloadManager = new DownloadManager(
 					getApplicationContext().getContentResolver(), getApplicationContext().getPackageName());
 		}
-		mSizeOrderedListView = (ListView) findViewById(R.id.size_ordered_list);
+		//mSizeOrderedListView = (ListView) findViewById(R.id.size_ordered_list);
 		mSizeOrderedListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -185,35 +344,16 @@ public class DownloadAppActivity extends BaseActivity{
 	}
 	
 	private void changeDownloadStatus(){
-		String downloadfile = CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL);
-		switch (queryDownloadStatus(downloadfile)) {
-		case DownloadManager.STATUS_PENDING:
-		case DownloadManager.STATUS_RUNNING:
-			mDownloadButton.setText("下载中，点击暂停下载");
-			mDownloadManager.pauseDownload(mCurrentDownloadId);
-			break;
-		case DownloadManager.STATUS_PAUSED:
-			mDownloadButton.setText("已暂停，点击继续下载");
-			mDownloadManager.resumeDownload(mCurrentDownloadId);
-			break;
-		case DownloadManager.STATUS_SUCCESSFUL:
+		
+		if (mUpdateDownloadProgress < 100){
+			mDownloadButton.setText("下载中，请稍后");
+			mShowProgress.setText("下载中："+mUpdateDownloadProgress+"%");
+		}else if (mUpdateDownloadProgress == 100){
 			mDownloadButton.setText("下载完成，点击安装");
-			CommonUtil.installApk(DownloadAppActivity.this, downloadfile);
-			break;
-		case -1:
-			mDownloadButton.setText("未下载，点击下载");
-			Toast.makeText(getApplicationContext(), "文件未找到,开始下载！", Toast.LENGTH_SHORT).show();
-			Request request = new Request(Uri.parse(CommonUtil.DOWLOAD_URL));
-			request.setPackageName(GlobalUtil.getPackageName(getApplicationContext()));
-			request.setShowRunningNotification(false);
-			request.setTitle(GlobalUtil.getApplicationName(getApplicationContext()));
-			
-			request.setMimeType("application/vnd.android.package-archive");
-			long id = mDownloadManager.enqueue(request);
-			break;
-		default:
-			break;
+			mShowProgress.setText("下载完成");
+			CommonUtil.installApk(DownloadAppActivity.this, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL));
 		}
+		
 	}
 	
 	public class PackageInstallerReceiver extends BroadcastReceiver {
@@ -250,7 +390,8 @@ public class DownloadAppActivity extends BaseActivity{
 
 	@Override
 	protected void onDestroy() {
-		unregisterReceiver();
+		mUpdateHandler.removeCallbacksAndMessages(null);
+		//unregisterReceiver();
 		super.onDestroy();
 	}
 	

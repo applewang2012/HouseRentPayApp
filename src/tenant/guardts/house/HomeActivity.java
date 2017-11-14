@@ -468,8 +468,8 @@ public class HomeActivity extends BaseActivity {
 			
 			return;
 		}
-		LogUtil.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile()+" delete database "
-				+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
+		LogUtil.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile());
+		//+" delete database "+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
 			
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("检测到新版本，是否升级？");

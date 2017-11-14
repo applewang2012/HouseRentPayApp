@@ -7,20 +7,102 @@
     
      >
 
-    <ListView android:id="@+id/size_ordered_list"
+    <!-- <ListView android:id="@+id/size_ordered_list"
                   android:layout_width="fill_parent"
                   android:layout_marginTop="@dimen/base_dimen_80"
-                  android:layout_height="200dp"/>
+                  android:layout_height="200dp"/> -->
+                  
+<FrameLayout
+    android:layout_height="@dimen/base_dimen_150"
+    android:layout_marginTop="@dimen/base_dimen_80"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="@dimen/base_dimen_20"
+    android:layout_marginRight="@dimen/base_dimen_20"
+     >
+
+    <!-- Clicks are handled directly by DownloadItem -->
+
+<!--     <CheckBox
+        android:id="@+id/download_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:paddingLeft="8dip"
+        android:scaleType="fitCenter" /> -->
+
+    <ImageView
+        android:id="@+id/download_icon"
+        android:layout_width="@dimen/base_dimen_120"
+        android:layout_height="@dimen/base_dimen_120"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/download_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_132"
+        android:layout_marginTop="@dimen/base_dimen_20"
+        android:maxLines="1"
+        android:textColor="#000000"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="连心锁"
+        android:textSize="@dimen/base_dimen_34"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/download_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_50"
+        android:layout_marginLeft="@dimen/base_dimen_130"
+        android:layout_marginTop="@dimen/base_dimen_80"
+        android:max="100" />
+
+
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_dimen_40"
+        android:layout_marginRight="@dimen/base_dimen_10"
+        android:gravity="right"
+        android:textColor="#333333"
+        android:text="下载中"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/size_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/download_progress"
+        android:layout_toRightOf="@id/status_text"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:textColor="#333333"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</FrameLayout>
     
+<ImageView 
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/base_dimen_1"
+    android:background="#999999"
+    android:layout_marginTop="@dimen/base_dimen_20"
+    />
+
     <Button
         android:id="@+id/id_download_button"
     	android:text="下载"
     	android:layout_width="@dimen/base_dimen_520"
 		android:layout_height="@dimen/base_dimen_80"
-		android:layout_marginTop="@dimen/base_dimen_60"
+		android:layout_marginTop="@dimen/base_dimen_700"
 		android:textColor="#ffffff"
 		android:textSize="@dimen/base_dimen_30"
-		android:layout_gravity="center_horizontal"
+		android:layout_gravity="bottom|center_horizontal"
 		android:gravity="center"
 		android:background="@drawable/house_button_press"
         />

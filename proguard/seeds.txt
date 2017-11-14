@@ -23181,7 +23181,6 @@ tenant.guardts.house.R$id: int active_state
 tenant.guardts.house.R$id: int add_bank_card_btn_next
 tenant.guardts.house.R$id: int address
 tenant.guardts.house.R$id: int agreenment_gallery
-tenant.guardts.house.R$id: int all
 tenant.guardts.house.R$id: int alpha
 tenant.guardts.house.R$id: int appIcon
 tenant.guardts.house.R$id: int auto_focus
@@ -23244,6 +23243,7 @@ tenant.guardts.house.R$id: int detail_button_call
 tenant.guardts.house.R$id: int detail_button_comment
 tenant.guardts.house.R$id: int detail_date
 tenant.guardts.house.R$id: int detail_desp
+tenant.guardts.house.R$id: int detail_ll
 tenant.guardts.house.R$id: int detail_sum
 tenant.guardts.house.R$id: int detail_type
 tenant.guardts.house.R$id: int detail_user
@@ -23264,7 +23264,6 @@ tenant.guardts.house.R$id: int eval_checkbox6
 tenant.guardts.house.R$id: int evaluation_btn_submit
 tenant.guardts.house.R$id: int evaluation_detail_listview
 tenant.guardts.house.R$id: int evaluation_environmental_rating
-tenant.guardts.house.R$id: int evaluation_overall_rating
 tenant.guardts.house.R$id: int evaluation_price_rating
 tenant.guardts.house.R$id: int evaluation_service_rating
 tenant.guardts.house.R$id: int evaluation_textview_house_location
@@ -23559,6 +23558,7 @@ tenant.guardts.house.R$id: int listView
 tenant.guardts.house.R$id: int listView_list
 tenant.guardts.house.R$id: int list_view
 tenant.guardts.house.R$id: int listview
+tenant.guardts.house.R$id: int ll
 tenant.guardts.house.R$id: int ll_item
 tenant.guardts.house.R$id: int ll_popup
 tenant.guardts.house.R$id: int lng_city
@@ -23672,7 +23672,6 @@ tenant.guardts.house.R$id: int search_result
 tenant.guardts.house.R$id: int seekbar
 tenant.guardts.house.R$id: int sgv
 tenant.guardts.house.R$id: int sh
-tenant.guardts.house.R$id: int size_ordered_list
 tenant.guardts.house.R$id: int size_text
 tenant.guardts.house.R$id: int splash_loading
 tenant.guardts.house.R$id: int start
@@ -23707,7 +23706,6 @@ tenant.guardts.house.R$id: int tv_surrounds
 tenant.guardts.house.R$id: int tv_triffic
 tenant.guardts.house.R$id: int tv_user_agreement
 tenant.guardts.house.R$id: int verify_num
-tenant.guardts.house.R$id: int view
 tenant.guardts.house.R$id: int view_listView_child
 tenant.guardts.house.R$id: int view_listView_main
 tenant.guardts.house.R$id: int view_toggle_button
@@ -24270,11 +24268,9 @@ tenant.guardts.house.decoding.CaptureActivityHandler$State
 tenant.guardts.house.decoding.CaptureActivityHandler$State: tenant.guardts.house.decoding.CaptureActivityHandler$State[] values()
 tenant.guardts.house.decoding.CaptureActivityHandler$State: tenant.guardts.house.decoding.CaptureActivityHandler$State valueOf(java.lang.String)
 tenant.guardts.house.download.DownloadProvider
-tenant.guardts.house.download.DownloadProvider: DownloadProvider()
 tenant.guardts.house.download.DownloadReceiver
 tenant.guardts.house.download.DownloadReceiver: DownloadReceiver()
 tenant.guardts.house.download.DownloadService
-tenant.guardts.house.download.DownloadService: DownloadService()
 tenant.guardts.house.download.DownloadThread$RetryDownload
 tenant.guardts.house.download.DownloadThread$RetryDownload: long serialVersionUID
 tenant.guardts.house.download.DownloadThread$RetryDownload: tenant.guardts.house.download.DownloadThread this$0

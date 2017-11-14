@@ -8,12 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -33,10 +31,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 
 public class GetRentAttributeActivity extends BaseActivity{
 

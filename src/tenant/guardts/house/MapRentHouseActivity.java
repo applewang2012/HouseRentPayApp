@@ -176,11 +176,16 @@ public class MapRentHouseActivity extends BaseActivity
 		mMapView.onDestroy();
 		mMapView = null;
 		mPoiSearch.destroy();
+		if (icon_red != null){
+			icon_red.recycle();
+		}
+		if (icon_yellow != null){
+			icon_yellow.recycle();
+		}
 		// mSuggestionSearch.destroy();
 		super.onDestroy();
 		// 回收 bitmap 资源
-		icon_red.recycle();
-		icon_yellow.recycle();
+		
 
 	}
 

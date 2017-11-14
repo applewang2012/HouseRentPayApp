@@ -27662,69 +27662,66 @@ tenant.guardts.house.DoorNumberLockFragment$5 -> tenant.guardts.house.be:
     boolean val$status -> b
     void run() -> run
 tenant.guardts.house.DownloadAppActivity -> tenant.guardts.house.DownloadAppActivity:
-    tenant.guardts.house.download.DownloadManager mDownloadManager -> a
-    tenant.guardts.house.downloadui.DownloadAdapter mSizeSortedAdapter -> c
-    android.widget.ListView mSizeOrderedListView -> d
-    android.database.Cursor mSizeSortedCursor -> e
-    int mIdColumnId -> f
-    int mStatusColumnId -> g
-    int mLocalUriColumnId -> h
-    int mMediaTypeColumnId -> i
-    int mReasonColumndId -> j
-    android.widget.Button mDownloadButton -> k
-    int mDownloadUrlColumnId -> l
-    int mCurrentDownloadId -> m
-    tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver mInstallerReceiver -> n
+    android.widget.Button mDownloadButton -> a
+    tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver mInstallerReceiver -> c
+    int mUpdateDownloadProgress -> d
+    android.widget.ProgressBar mProgressBar -> e
+    android.widget.TextView mShowProgress -> f
+    android.os.Handler mUpdateHandler -> g
     void onCreate(android.os.Bundle) -> onCreate
-    void checkDownloadFile() -> a
-    void initDownloadAdapter() -> b
-    int queryDownloadStatus(java.lang.String) -> a
-    void updateDownloadStatus(int) -> a
+    void startDownloadFileTask() -> b
+    boolean downloadFile(java.lang.String,java.lang.String) -> c
     void changeDownloadStatus() -> c
-    void registerReceiverData() -> d
-    void unregisterReceiver() -> e
     void onDestroy() -> onDestroy
-    void access$0(tenant.guardts.house.DownloadAppActivity) -> a
-    void access$1(tenant.guardts.house.DownloadAppActivity,int) -> a
+    int access$0() -> a
+    android.widget.ProgressBar access$1(tenant.guardts.house.DownloadAppActivity) -> a
+    android.os.Handler access$2(tenant.guardts.house.DownloadAppActivity) -> b
+    void access$3(tenant.guardts.house.DownloadAppActivity) -> c
 tenant.guardts.house.DownloadAppActivity$1 -> tenant.guardts.house.bf:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
+    void handleMessage(android.os.Message) -> handleMessage
 tenant.guardts.house.DownloadAppActivity$2 -> tenant.guardts.house.bg:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    void onClick(android.view.View) -> onClick
 tenant.guardts.house.DownloadAppActivity$3 -> tenant.guardts.house.bh:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
-    void downloadStatus(int) -> a
+    java.lang.Integer doInBackground(java.lang.Void[]) -> a
+    void onProgressUpdate(java.lang.Void[]) -> b
+    void onPostExecute(java.lang.Integer) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
 tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver -> tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver:
     tenant.guardts.house.DownloadAppActivity this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
 tenant.guardts.house.EvaluationActivity -> tenant.guardts.house.EvaluationActivity:
     android.widget.TextView mHouseLocation -> a
-    tenant.guardts.house.view.CustomRatingBar mOverallRating -> c
-    tenant.guardts.house.view.CustomRatingBar mServiceRating -> d
-    tenant.guardts.house.view.CustomRatingBar mEnvironmentalRating -> e
-    tenant.guardts.house.view.CustomRatingBar mPriceRating -> f
-    android.widget.Button mBtnSubmit -> g
-    android.widget.TextView mTitleBar -> h
-    java.lang.String mAddEvaluationAction -> i
-    tenant.guardts.house.presenter.HoursePresenter mPresent -> j
-    android.content.Context mContext -> k
-    android.widget.CheckBox box1 -> l
-    android.widget.CheckBox box2 -> m
-    android.widget.CheckBox box3 -> n
-    android.widget.CheckBox box4 -> o
-    android.widget.CheckBox box5 -> p
-    android.widget.CheckBox box6 -> q
-    android.os.Handler mHandler -> r
-    java.lang.String type -> s
-    tenant.guardts.house.model.HouseInfoModel info -> t
-    android.widget.TextView title1 -> u
-    android.widget.TextView title2 -> v
-    android.widget.TextView title3 -> w
+    tenant.guardts.house.view.CustomRatingBar mServiceRating -> c
+    tenant.guardts.house.view.CustomRatingBar mEnvironmentalRating -> d
+    tenant.guardts.house.view.CustomRatingBar mPriceRating -> e
+    android.widget.Button mBtnSubmit -> f
+    android.widget.TextView mTitleBar -> g
+    java.lang.String mAddEvaluationAction -> h
+    tenant.guardts.house.presenter.HoursePresenter mPresent -> i
+    android.content.Context mContext -> j
+    android.widget.CheckBox box1 -> k
+    android.widget.CheckBox box2 -> l
+    android.widget.CheckBox box3 -> m
+    android.widget.CheckBox box4 -> n
+    android.widget.CheckBox box5 -> o
+    android.widget.CheckBox box6 -> p
+    android.os.Handler mHandler -> q
+    java.lang.String type -> r
+    tenant.guardts.house.model.HouseInfoModel info -> s
+    android.widget.TextView title1 -> t
+    android.widget.TextView title2 -> u
+    android.widget.TextView title3 -> v
+    android.widget.ImageView img -> w
+    android.widget.LinearLayout ll -> x
     void onCreate(android.os.Bundle) -> onCreate
     void initData() -> a
     void initEvent() -> b
-    void addEvaluation(java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
+    void addEvaluation(java.lang.String,java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
     void initView() -> c
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
     java.lang.String access$0(tenant.guardts.house.EvaluationActivity) -> a
@@ -27738,7 +27735,7 @@ tenant.guardts.house.EvaluationActivity -> tenant.guardts.house.EvaluationActivi
     tenant.guardts.house.view.CustomRatingBar access$8(tenant.guardts.house.EvaluationActivity) -> i
     tenant.guardts.house.view.CustomRatingBar access$9(tenant.guardts.house.EvaluationActivity) -> j
     tenant.guardts.house.view.CustomRatingBar access$10(tenant.guardts.house.EvaluationActivity) -> k
-    void access$11(tenant.guardts.house.EvaluationActivity,java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
+    void access$11(tenant.guardts.house.EvaluationActivity,java.lang.String,java.lang.String,java.lang.String,int,int,int,java.lang.String,java.lang.String) -> a
 tenant.guardts.house.EvaluationActivity$1 -> tenant.guardts.house.bi:
     tenant.guardts.house.EvaluationActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -27749,23 +27746,24 @@ tenant.guardts.house.EvaluationDetailActivity -> tenant.guardts.house.Evaluation
     android.widget.TextView mTitleBar -> d
     android.widget.ListView mListView -> e
     java.lang.String mGetEvaluationListAction -> f
-    android.content.Context mContext -> g
-    tenant.guardts.house.presenter.HoursePresenter mPresent -> h
+    java.lang.String mGetEvaluationPersonListAction -> g
+    android.content.Context mContext -> h
+    tenant.guardts.house.presenter.HoursePresenter mPresent -> i
     java.util.ArrayList list -> a
+    java.lang.String type -> j
     android.os.Handler mHandler -> c
-    android.widget.LinearLayout mAll -> i
-    android.view.View view -> j
+    java.lang.String rraid -> k
     void onCreate(android.os.Bundle) -> onCreate
+    void initData() -> a
     int convert2Integer(java.lang.String) -> a
     void getEvaluationList(java.lang.String) -> b
+    void getEvaluationPersonList(java.lang.String) -> c
     void onStatusSuccess(java.lang.String,java.lang.String) -> a
-    void initEvent() -> a
-    void initView() -> b
-    android.view.View access$0(tenant.guardts.house.EvaluationDetailActivity) -> a
-    android.widget.LinearLayout access$1(tenant.guardts.house.EvaluationDetailActivity) -> b
-    android.content.Context access$2(tenant.guardts.house.EvaluationDetailActivity) -> c
-    android.widget.ListView access$3(tenant.guardts.house.EvaluationDetailActivity) -> d
-    int access$4(tenant.guardts.house.EvaluationDetailActivity,java.lang.String) -> a
+    void initEvent() -> b
+    void initView() -> c
+    android.content.Context access$0(tenant.guardts.house.EvaluationDetailActivity) -> a
+    android.widget.ListView access$1(tenant.guardts.house.EvaluationDetailActivity) -> b
+    int access$2(tenant.guardts.house.EvaluationDetailActivity,java.lang.String) -> a
 tenant.guardts.house.EvaluationDetailActivity$1 -> tenant.guardts.house.bk:
     tenant.guardts.house.EvaluationDetailActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
@@ -30092,7 +30090,6 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int add_bank_card_btn_next -> add_bank_card_btn_next
     int address -> address
     int agreenment_gallery -> agreenment_gallery
-    int all -> all
     int alpha -> alpha
     int appIcon -> appIcon
     int auto_focus -> auto_focus
@@ -30155,6 +30152,7 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int detail_button_comment -> detail_button_comment
     int detail_date -> detail_date
     int detail_desp -> detail_desp
+    int detail_ll -> detail_ll
     int detail_sum -> detail_sum
     int detail_type -> detail_type
     int detail_user -> detail_user
@@ -30175,7 +30173,6 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int evaluation_btn_submit -> evaluation_btn_submit
     int evaluation_detail_listview -> evaluation_detail_listview
     int evaluation_environmental_rating -> evaluation_environmental_rating
-    int evaluation_overall_rating -> evaluation_overall_rating
     int evaluation_price_rating -> evaluation_price_rating
     int evaluation_service_rating -> evaluation_service_rating
     int evaluation_textview_house_location -> evaluation_textview_house_location
@@ -30470,6 +30467,7 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int listView_list -> listView_list
     int list_view -> list_view
     int listview -> listview
+    int ll -> ll
     int ll_item -> ll_item
     int ll_popup -> ll_popup
     int lng_city -> lng_city
@@ -30583,7 +30581,6 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int seekbar -> seekbar
     int sgv -> sgv
     int sh -> sh
-    int size_ordered_list -> size_ordered_list
     int size_text -> size_text
     int splash_loading -> splash_loading
     int start -> start
@@ -30618,7 +30615,6 @@ tenant.guardts.house.R$id -> tenant.guardts.house.R$id:
     int tv_triffic -> tv_triffic
     int tv_user_agreement -> tv_user_agreement
     int verify_num -> verify_num
-    int view -> view
     int view_listView_child -> view_listView_child
     int view_listView_main -> view_listView_main
     int view_toggle_button -> view_toggle_button
@@ -32508,87 +32504,7 @@ tenant.guardts.house.download.DownloadInfo$Reader -> tenant.guardts.house.downlo
     java.lang.String getString(java.lang.String,java.lang.String) -> a
     java.lang.Integer getInt(java.lang.String) -> a
     java.lang.Long getLong(java.lang.String) -> b
-tenant.guardts.house.download.DownloadManager -> tenant.guardts.house.download.c:
-    java.lang.String[] COLUMNS -> a
-    java.lang.String[] UNDERLYING_COLUMNS -> b
-    java.util.Set LONG_COLUMNS -> c
-    android.content.ContentResolver mResolver -> d
-    java.lang.String mPackageName -> e
-    android.net.Uri mBaseUri -> f
-    void setAccessAllDownloads(boolean) -> a
-    long enqueue(tenant.guardts.house.download.DownloadManager$Request) -> a
-    int remove(long[]) -> a
-    android.database.Cursor query(tenant.guardts.house.download.DownloadManager$Query) -> a
-    void pauseDownload(long[]) -> b
-    void resumeDownload(long[]) -> c
-    java.lang.String getWhereClauseForIds(long[]) -> d
-    java.lang.String[] getWhereArgsForIds(long[]) -> e
-    java.lang.String[] access$0() -> a
-    java.util.Set access$1() -> b
-tenant.guardts.house.download.DownloadManager$CursorTranslator -> tenant.guardts.house.download.c$a:
-    boolean $assertionsDisabled -> a
-    int getColumnIndex(java.lang.String) -> getColumnIndex
-    int getColumnIndexOrThrow(java.lang.String) -> getColumnIndexOrThrow
-    java.lang.String getColumnName(int) -> getColumnName
-    java.lang.String[] getColumnNames() -> getColumnNames
-    int getColumnCount() -> getColumnCount
-    byte[] getBlob(int) -> getBlob
-    double getDouble(int) -> getDouble
-    boolean isLongColumn(java.lang.String) -> a
-    float getFloat(int) -> getFloat
-    int getInt(int) -> getInt
-    long getLong(int) -> getLong
-    short getShort(int) -> getShort
-    java.lang.String getString(int) -> getString
-    java.lang.String translateString(java.lang.String) -> b
-    java.lang.String getLocalUri() -> a
-    long translateLong(java.lang.String) -> c
-    long getReason(int) -> a
-    long getPausedReason(int) -> b
-    long getErrorCode(int) -> c
-    long getUnderlyingLong(java.lang.String) -> d
-    java.lang.String getUnderlyingString(java.lang.String) -> e
-    int translateStatus(int) -> d
-tenant.guardts.house.download.DownloadManager$Query -> tenant.guardts.house.download.c$b:
-    long[] mIds -> a
-    java.lang.Integer mStatusFlags -> b
-    java.lang.String mOrderByColumn -> c
-    int mOrderDirection -> d
-    boolean mOnlyIncludeVisibleInDownloadsUi -> e
-    tenant.guardts.house.download.DownloadManager$Query setFilterById(long[]) -> a
-    tenant.guardts.house.download.DownloadManager$Query setOnlyIncludeVisibleInDownloadsUi(boolean) -> a
-    tenant.guardts.house.download.DownloadManager$Query orderBy(java.lang.String,int) -> a
-    android.database.Cursor runQuery(android.content.ContentResolver,java.lang.String[],android.net.Uri) -> a
-    java.lang.String joinStrings(java.lang.String,java.lang.Iterable) -> a
-    java.lang.String statusClause(java.lang.String,int) -> b
-tenant.guardts.house.download.DownloadManager$Request -> tenant.guardts.house.download.c$c:
-    android.net.Uri mUri -> b
-    android.net.Uri mDestinationUri -> c
-    java.util.List mRequestHeaders -> d
-    java.lang.CharSequence mTitle -> e
-    java.lang.CharSequence mDescription -> f
-    boolean mShowNotification -> g
-    java.lang.String mMimeType -> h
-    boolean mRoamingAllowed -> i
-    int mAllowedNetworkTypes -> j
-    boolean mIsVisibleInDownloadsUi -> k
-    java.lang.String mRequestPackageName -> l
-    java.lang.String mRequestMD5 -> m
-    java.lang.String mRequestMimeType -> n
-    int mRequestDestination -> o
-    java.lang.String mRequestIconUrl -> p
-    boolean $assertionsDisabled -> a
-    tenant.guardts.house.download.DownloadManager$Request setPackageName(java.lang.String) -> a
-    tenant.guardts.house.download.DownloadManager$Request setTitle(java.lang.CharSequence) -> a
-    tenant.guardts.house.download.DownloadManager$Request setMimeType(java.lang.String) -> b
-    tenant.guardts.house.download.DownloadManager$Request setShowRunningNotification(boolean) -> a
-    android.content.ContentValues toContentValues(java.lang.String) -> c
-    void encodeHttpHeaders(android.content.ContentValues) -> a
-    void putIfNonNull(android.content.ContentValues,java.lang.String,java.lang.Object) -> a
-    java.lang.String access$0(tenant.guardts.house.download.DownloadManager$Request) -> a
-    java.lang.String access$1(tenant.guardts.house.download.DownloadManager$Request) -> b
-    int access$2(tenant.guardts.house.download.DownloadManager$Request) -> c
-tenant.guardts.house.download.DownloadNotification -> tenant.guardts.house.download.d:
+tenant.guardts.house.download.DownloadNotification -> tenant.guardts.house.download.c:
     android.content.Context mContext -> a
     java.util.HashMap mNotifications -> b
     tenant.guardts.house.download.SystemFacade mSystemFacade -> c
@@ -32598,7 +32514,7 @@ tenant.guardts.house.download.DownloadNotification -> tenant.guardts.house.downl
     boolean isActiveAndVisible(tenant.guardts.house.download.DownloadInfo) -> a
     boolean isCompleteAndVisible(tenant.guardts.house.download.DownloadInfo) -> b
     java.lang.String getDownloadingText(long,long) -> a
-tenant.guardts.house.download.DownloadNotification$NotificationItem -> tenant.guardts.house.download.d$a:
+tenant.guardts.house.download.DownloadNotification$NotificationItem -> tenant.guardts.house.download.c$a:
     int mId -> a
     long mTotalCurrent -> b
     long mTotalTotal -> c
@@ -32764,7 +32680,7 @@ tenant.guardts.house.download.DownloadThread$StopRequest -> tenant.guardts.house
     long serialVersionUID -> serialVersionUID
     int mFinalStatus -> mFinalStatus
     tenant.guardts.house.download.DownloadThread this$0 -> this$0
-tenant.guardts.house.download.Downloads -> tenant.guardts.house.download.e:
+tenant.guardts.house.download.Downloads -> tenant.guardts.house.download.d:
     android.net.Uri CONTENT_URI -> a
     android.net.Uri ALL_DOWNLOADS_CONTENT_URI -> b
     boolean isStatusError(int) -> a
@@ -32808,7 +32724,7 @@ tenant.guardts.house.download.Helpers$Lexer -> tenant.guardts.house.download.Hel
     void advance() -> b
     boolean isIdentifierStart(char) -> a
     boolean isIdentifierChar(char) -> b
-tenant.guardts.house.download.RealSystemFacade -> tenant.guardts.house.download.f:
+tenant.guardts.house.download.RealSystemFacade -> tenant.guardts.house.download.e:
     android.content.Context mContext -> a
     android.app.NotificationManager mNotificationManager -> b
     long currentTimeMillis() -> a
@@ -32834,7 +32750,7 @@ tenant.guardts.house.download.SizeLimitActivity -> tenant.guardts.house.download
     void onCancel(android.content.DialogInterface) -> onCancel
     void dialogClosed() -> b
     void onClick(android.content.DialogInterface,int) -> onClick
-tenant.guardts.house.download.SystemFacade -> tenant.guardts.house.download.g:
+tenant.guardts.house.download.SystemFacade -> tenant.guardts.house.download.f:
     long currentTimeMillis() -> a
     java.lang.Integer getActiveNetworkType() -> b
     boolean isNetworkRoaming() -> c
@@ -32846,34 +32762,7 @@ tenant.guardts.house.download.SystemFacade -> tenant.guardts.house.download.g:
     void cancelNotification(long) -> a
     void cancelAllNotifications() -> f
     void startThread(java.lang.Thread) -> a
-tenant.guardts.house.downloadui.DownloadAdapter -> tenant.guardts.house.downloadui.a:
-    android.content.Context mContext -> a
-    android.database.Cursor mCursor -> b
-    android.content.res.Resources mResources -> c
-    java.text.DateFormat mDateFormat -> d
-    java.text.DateFormat mTimeFormat -> e
-    int mTitleColumnId -> f
-    int mStatusColumnId -> g
-    int mReasonColumnId -> h
-    int mTotalBytesColumnId -> i
-    int mCurrentBytesColumnId -> j
-    int mMediaTypeColumnId -> k
-    int mDateColumnId -> l
-    int mIdColumnId -> m
-    tenant.guardts.house.downloadui.DownloadSelectListener mDownloadSelectionListener -> n
-    android.view.View newView() -> a
-    void bindView(android.view.View) -> a
-    java.lang.String getDateString() -> b
-    java.util.Date getStartOfToday() -> c
-    int getProgressValue(long,long) -> a
-    java.lang.String getSizeText(long) -> a
-    int getStatusStringId(int) -> a
-    void retrieveAndSetIcon(android.view.View) -> b
-    void setTextForView(android.view.View,int,java.lang.String) -> a
-    android.view.View newView(android.content.Context,android.database.Cursor,android.view.ViewGroup) -> newView
-    void bindView(android.view.View,android.content.Context,android.database.Cursor) -> bindView
-tenant.guardts.house.downloadui.DownloadSelectListener -> tenant.guardts.house.downloadui.b:
-    void downloadStatus(int) -> a
+tenant.guardts.house.downloadui.DownloadSelectListener -> tenant.guardts.house.downloadui.a:
 tenant.guardts.house.downloadui.DownloadStartItem -> tenant.guardts.house.downloadui.DownloadStartItem:
     float CHECKMARK_AREA -> a
     boolean mIsInDownEvent -> b
@@ -34290,9 +34179,11 @@ tenant.guardts.house.util.CommonUtil -> tenant.guardts.house.util.e:
     java.lang.String ORDER_STATUS_COMPLETE -> K
     double dEARTH_RADIUS -> L
     java.lang.String getDefaultDownloadPath(java.lang.String) -> a
+    java.lang.String getDownloadFilename(java.lang.String) -> b
+    java.lang.String getDownloadPathWithName(java.lang.String) -> c
     boolean deleteInstalledApkFile() -> a
     void installApk(android.content.Context,java.lang.String) -> a
-    java.lang.String getSoapName(java.lang.String) -> b
+    java.lang.String getSoapName(java.lang.String) -> d
 tenant.guardts.house.util.FileUpLoadUtils -> tenant.guardts.house.util.f:
     java.lang.String SDPATH -> a
     void saveBitmap(android.graphics.Bitmap,java.lang.String) -> a
@@ -34301,8 +34192,7 @@ tenant.guardts.house.util.FileUpLoadUtils -> tenant.guardts.house.util.f:
 tenant.guardts.house.util.GlobalUtil -> tenant.guardts.house.util.g:
     int getVersionCode(android.content.Context) -> a
     java.lang.String getVersionName(android.content.Context) -> b
-    java.lang.String getApplicationName(android.content.Context) -> c
-    java.lang.String getPackageName(android.content.Context) -> d
+    java.lang.String getPackageName(android.content.Context) -> c
     void shortToast(android.content.Context,java.lang.CharSequence,android.graphics.drawable.Drawable) -> a
     void longToast(android.content.Context,java.lang.CharSequence) -> a
     void launcherAppWithPackageName(android.content.Context,java.lang.String) -> a
