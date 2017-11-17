@@ -44,6 +44,7 @@
             android:textSize="18sp" />
 
         <FrameLayout 
+             android:id="@+id/fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -75,6 +76,7 @@
             android:textColor="@drawable/capture_flash_text_bg"
             /> -->
            <LinearLayout 
+          
             android:id="@+id/capture_flash_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

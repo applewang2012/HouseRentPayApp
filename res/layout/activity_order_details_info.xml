@@ -192,7 +192,7 @@
                 android:layout_marginBottom="@dimen/base_dimen_20"
                 android:layout_marginLeft="@dimen/base_dimen_30"
                 android:layout_marginTop="@dimen/base_dimen_20" 
-                android:visibility="gone"
+               
                 >
 
                 <TextView

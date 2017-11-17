@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import tenant.guardts.house.model.AddIDCardResult;
 import tenant.guardts.house.model.ConfirmCheckout;
 import tenant.guardts.house.model.HouseInfoModel;
 import tenant.guardts.house.model.ServiceCharge;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,6 +50,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private TextView contactPhone;// 房客电话
 	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";// 扣费提醒
 	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
+	private String mAddIDCardToDevice="http://tempuri.org/AddIDCardToDevice";
 	private long mEnterTimeStamp;
 
 	@Override
@@ -157,9 +160,53 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				intputIDCard();
+				initScanPupopWindow();
 			}
 		});
+	}
+
+	
+	protected void initScanPupopWindow() {
+		setBackgroundAlpha(0.2f);
+
+		View scanView = View.inflate(this, R.layout.scan_popupwindow, null);
+		popupWindow = new PopupWindow(scanView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+		Button scan=(Button)scanView. findViewById(R.id.btn_scan);
+		Button  cancel=(Button)scanView. findViewById(R.id.btn_cancel);
+		
+		
+		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+		popupWindow.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				setBackgroundAlpha(1f);
+
+			}
+		});
+		scan.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HouseOrderDetailsActivity.this, CaptureActivity.class);
+				intent.putExtra("flag", "0");//是否显示扫描页面下边图标，0，不显示
+				
+				startActivityForResult(intent,CommonUtil.mScanCodeRequestCode);
+				popupWindow.dismiss();
+				
+			}
+		});
+		cancel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				popupWindow.dismiss();
+				setBackgroundAlpha(1f);
+
+			}
+		});
+		
 	}
 
 	private void expireHouseRequest(String id) {
@@ -722,6 +769,18 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 						button2.setVisibility(View.GONE);
 					}
 				}
+			}else if(msg.what==300){
+				String value = (String) msg.obj;
+				Gson gson = new Gson();
+				AddIDCardResult result = gson.fromJson(value, AddIDCardResult.class);
+				if(result.ret!=null){
+					if(result.ret.equals("0")){
+						Toast.makeText(HouseOrderDetailsActivity.this, "信息绑定成功", Toast.LENGTH_LONG).show();
+					}else{
+						Toast.makeText(HouseOrderDetailsActivity.this, result.msg, Toast.LENGTH_LONG).show();
+					}
+				}
+				
 			}
 		}
 	};
@@ -737,6 +796,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private TextView status;
 	private Button button1;
 	private Button button2;
+	private String deviceID;
 
 	@Override
 	protected void onResume() {
@@ -783,6 +843,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				msg.what = 200;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
+			}else if(action.equals(mAddIDCardToDevice)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 300;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
 			}
 		}
 	}
@@ -792,7 +857,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 */
 	protected void intputIDCard() {
 		setBackgroundAlpha(0.3f);
-		View parent = View.inflate(this, R.layout.activity_order_details_info, null);
+		
 		View view = View.inflate(this, R.layout.popupwindow_input_identity_info, null);
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
@@ -802,7 +867,11 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				String renterIdcard = mOrderDetail.getRenterIdcard();
+				if(!TextUtils.isEmpty(renterIdcard)&&!TextUtils.isEmpty(deviceID)){
+					
+					addIDCardToDevice(renterIdcard, deviceID);
+				}
 
 			}
 		});
@@ -823,6 +892,22 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	/**录入身份证
+	 * @param idcard 身份证
+	 * @param deviceId 锁设备id
+	 */
+	private void addIDCardToDevice(String idcard,String deviceId) {
+		//
+		String url = CommonUtil.mUserHost + "Services.asmx?op=AddIDCardToDevice";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddIDCardToDevice));
+		rpc.addProperty("idcard", idcard);
+		rpc.addProperty("deviceId", deviceId);
+		mPresent.readyPresentServiceParams(this, url, mAddIDCardToDevice, rpc);
+		mPresent.startPresentServiceTask(true);
+
+	}
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -836,6 +921,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					button1.setVisibility(View.GONE);
 					button2.setVisibility(View.GONE);
 				}
+			}
+			if(requestCode==CommonUtil.mScanCodeRequestCode){
+				String result = data.getStringExtra("result");
+				Log.e("mingguo", result);
+				String[] split = result.split("=");
+				deviceID = split[3];
+				if(!TextUtils.isEmpty(deviceID)){
+					intputIDCard();
+				}
+				
+				
 			}
 		}
 	}

@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ import tenant.guardts.house.zxingview.ViewfinderView;
 
 public class ScanQrCodeFragment extends BaseFragment implements Callback{
 
-
+	private Activity mActivity;
 	private Context mContext;
 	private View mRootView;
 	private ViewfinderView viewfinderView;
@@ -63,6 +64,8 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 //		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.window_titlebar_home);
 //		mTitlebarContent  = (FrameLayout) getActivity().getWindow().findViewById(R.id.id_title_bar_home_content);
 		CameraManager.init(getActivity().getApplicationContext());
+		
+		
 	}
 
 	@Override
@@ -98,6 +101,16 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	}
 	
 	private void initView(){
+		FrameLayout fl=(FrameLayout) mRootView.findViewById(R.id.fl);
+		
+		String flag = mActivity.getIntent().getStringExtra("flag");
+		if(flag!=null){
+			if(flag.equals("0")){
+				fl.setVisibility(View.GONE);
+			}
+		}else{
+			fl.setVisibility(View.VISIBLE);
+		}
 		TextView titlebar = (TextView) mRootView.findViewById(R.id.id_titlebar);
 		titlebar.setText("扫一扫开锁");
 		
@@ -209,6 +222,8 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
+		mActivity=activity;
+		
 		LogUtil.e("mingguo", "scan qr code  onAttach ");
 	}
 
