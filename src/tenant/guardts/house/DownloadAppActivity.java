@@ -10,22 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import tenant.guardts.house.download.AppFileDownloadUtils;
-import tenant.guardts.house.download.DownloadManager;
-import tenant.guardts.house.download.DownloadManager.Request;
-import tenant.guardts.house.downloadui.DownloadAdapter;
-import tenant.guardts.house.downloadui.DownloadSelectListener;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.media.Image;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,7 +32,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import tenant.guardts.house.download.DownloadManager;
+import tenant.guardts.house.downloadui.DownloadAdapter;
+import tenant.guardts.house.downloadui.DownloadSelectListener;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class DownloadAppActivity extends BaseActivity{
 
@@ -288,7 +282,6 @@ public class DownloadAppActivity extends BaseActivity{
 			@Override
 			public void downloadStatus(int status) {
 				updateDownloadStatus(status);
-				
 			}
 		});
 		mSizeOrderedListView.setAdapter(mSizeSortedAdapter);

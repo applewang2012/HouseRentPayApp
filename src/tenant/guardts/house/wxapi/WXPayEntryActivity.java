@@ -116,17 +116,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 		mPresenter.startPresentServiceTask(true);
 	}
     
-    private void depositWalletRequestInfo(String fee){
-    	if (fee == null || fee.equals("")){
-    		return;
-    	}
-		String url = CommonUtil.mUserHost+"Services.asmx?op=DepositWallet";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mDepositWalletAction));
-		rpc.addProperty("idCard", CommonUtil.mRegisterIdcard);
-		rpc.addProperty("fee", fee);
-		mPresenter.readyPresentServiceParams(this, url, mDepositWalletAction, rpc);
-		mPresenter.startPresentServiceTask(true);
-	}
+    
     
     private void addBillLogRequestInfo(String renterId, String ownerId, String fee, String type){
     	if (fee == null || fee.equals("")){

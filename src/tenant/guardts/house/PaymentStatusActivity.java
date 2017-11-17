@@ -109,18 +109,18 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		mPresenter.startPresentServiceTask(true);
 	}
 	
-	private void updateWalletRequestInfo(String idcard, String fee){
-    	if (fee == null || fee.equals("")){
-    		return;
-    	}
-		String url = CommonUtil.mUserHost+"Services.asmx?op=UpdateUserWallet";
-		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateWalletction));
-		rpc.addProperty("idCard", idcard);
-		rpc.addProperty("fee", fee);
-		rpc.addProperty("type", "0");  //0增加，1减少
-		mPresenter.readyPresentServiceParams(this, url, mUpdateWalletction, rpc);
-		mPresenter.startPresentServiceTask(true);
-	}
+//	private void updateWalletRequestInfo(String idcard, String fee){
+//    	if (fee == null || fee.equals("")){
+//    		return;
+//    	}
+//		String url = CommonUtil.mUserHost+"Services.asmx?op=UpdateUserWallet";
+//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mUpdateWalletction));
+//		rpc.addProperty("idCard", idcard);
+//		rpc.addProperty("fee", fee);
+//		rpc.addProperty("type", "0");  //0增加，1减少
+//		mPresenter.readyPresentServiceParams(this, url, mUpdateWalletction, rpc);
+//		mPresenter.startPresentServiceTask(true);
+//	}
 	
 
 	/**

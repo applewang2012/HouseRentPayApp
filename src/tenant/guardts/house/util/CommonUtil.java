@@ -41,8 +41,8 @@ public class CommonUtil {
     public static String mUserWallet = null;
     public static String mBankName = null;
     public static String mCardNo = null;
-    //public static String mUserHost = ""; //"http://219.150.56.178:8082/";
-    public static String mUserHost = ""; //"http://qxw2332340157.my3w.com/Services.asmx/";
+    public static String mUserHost = "http://219.150.56.178:8082/";
+    //public static String mUserHost = ""; //"http://qxw2332340157.my3w.com/Services.asmx/";
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;

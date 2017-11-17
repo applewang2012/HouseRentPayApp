@@ -68,7 +68,7 @@
     <string name="id_card_not_null">身份证号码不能为空</string>
     <string name="id_card_input_error">身份证号码输入有误</string>
     <string name="phone_not_null">手机号不能为空</string>
-    <string name="phone_input_error">手机号码输入 有误</string>
+    <string name="phone_input_error">手机号码输入有误</string>
     <string name="verify_not_null">验证码不能为空</string>
     <string name="nickname_not_null">昵称不能为空</string>
     <string name="username_register_again">该手机号已被注册"</string>
@@ -97,7 +97,11 @@
     <string name="add_house_direction_text">朝	向</string>
     <string name="add_house_lease_type_text">租赁类型</string>
     <string name="rent_house_title">您确认要租赁该房屋吗</string>
+    <string name="delete_house_title">您确认要删除该房屋吗</string>
     <string name="rent_house_content">租赁该房屋需要填写个人真实信息</string>
+    <string name="modify_house_title">修改房屋信息</string>
+    <string name="modify_house_content">请确认修改信息是否正确？</string>
+     <string name="delete_house_content">删除后将无法继续出租该房屋</string>
     <string name="identify_success_title">实名认证成功</string>
     <string name="identify_success_content">请您等待房主确认,并及时关注个人订单</string>
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>

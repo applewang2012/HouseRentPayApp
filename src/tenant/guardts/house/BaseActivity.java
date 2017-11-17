@@ -58,7 +58,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 	}
 	
 	public void backFinish(View view){
-		ViewUtil.forceCloseSoftKeyborad(BaseActivity.this);
+		//ViewUtil.forceCloseSoftKeyborad(BaseActivity.this);
 		finish();
 	}
 	
@@ -77,5 +77,14 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 			loadingView.setVisibility(View.INVISIBLE);
 		}
 	}
+
+	@Override
+	protected void onDestroy() {
+		ViewUtil.forceCloseSoftKeyborad(BaseActivity.this);
+		super.onDestroy();
+		
+	}
+	
+	
 
 }

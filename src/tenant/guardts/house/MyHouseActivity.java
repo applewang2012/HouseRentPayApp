@@ -146,9 +146,9 @@ public class MyHouseActivity extends BaseActivity
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mIdCard = getIntent().getStringExtra("IDCard");
-		if(mIdCard!=null)
-		getHouseHistoryData(mIdCard);
+//		mIdCard = getIntent().getStringExtra("IDCard");
+//		if(mIdCard!=null)
+//		getHouseHistoryData(mIdCard);
 		// mHouseNo = getIntent().getStringExtra("house_id");
 		// mUsername = getIntent().getStringExtra("user_name");
 		// mOwnerName = getIntent().getStringExtra("owner_name");

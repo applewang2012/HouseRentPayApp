@@ -178,6 +178,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         <activity
+            android:name=".EditHouseInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+        </activity>
+        <activity
             android:name=".AddRentAttributeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
