@@ -53,13 +53,13 @@ public class LoginUserActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.login_user);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("登 录");
-		
+
 		ActivityController.addActivity(LoginUserActivity.this);
 		mIntentStatus = getIntent().getBooleanExtra("intent_status", false);
 		initView();
-		//commonServiceInterface();
+		// commonServiceInterface();
 	}
 
 	@Override
@@ -96,32 +96,8 @@ public class LoginUserActivity extends BaseActivity {
 		// if (mPassword != null && !mPassword.equals("")){
 		// passwordEditText.setText(mPassword);
 		// }
-		userNameEditText.addTextChangedListener(new TextWatcher() {
-			
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				if(!TextUtils.isEmpty(s)){
-					if(s.length()==11){
-						haveRegisted(s.toString());
-					}
-				}
-				
-			}
-		});
 		
-		
+
 		// 忘记密码
 		forgetPassword.setOnClickListener(new OnClickListener() {
 
@@ -131,18 +107,13 @@ public class LoginUserActivity extends BaseActivity {
 				mUserName = userNameEditText.getEditableText().toString();
 				if (mUserName == null || mUserName.equals("")) {
 					Toast.makeText(getApplicationContext(), "请输入手机号码", Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if (mUserName.length() < 11) {
-					Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
-					return;
-				}
 
-				ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
-				Intent resetIntent = new Intent(LoginUserActivity.this, ResetActivity.class);
-				resetIntent.putExtra("user_name", mUserName);
-				resetIntent.putExtra("intent_status", mIntentStatus);
-				startActivity(resetIntent);
+				} else if (mUserName.length() < 11) {
+					Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
+
+				} else if (mUserName.length() == 11) {
+					haveRegisted(mUserName);
+				}
 			}
 		});
 
@@ -152,15 +123,16 @@ public class LoginUserActivity extends BaseActivity {
 			public void onClick(View v) {
 				// startActivity(new Intent(LoginUserActivity.this,
 				// UserAgreementActivity.class));
-//				Intent loadIntent = new Intent(LoginUserActivity.this, LoadUrlTestActivity.class);
-//				loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
-//				loadIntent.putExtra("tab_name", "用户服务协议");
-//				startActivity(loadIntent);
-				
-				Intent intent = new Intent();        
-				intent.setAction("android.intent.action.VIEW");    
-				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");   
-				intent.setData(content_url);  
+				// Intent loadIntent = new Intent(LoginUserActivity.this,
+				// LoadUrlTestActivity.class);
+				// loadIntent.putExtra("url", "http://mg.weiyuzhu.cn/");
+				// loadIntent.putExtra("tab_name", "用户服务协议");
+				// startActivity(loadIntent);
+
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");
+				intent.setData(content_url);
 				startActivity(intent);
 			}
 		});
@@ -172,19 +144,19 @@ public class LoginUserActivity extends BaseActivity {
 				mUserName = userNameEditText.getEditableText().toString();
 				mPassword = passwordEditText.getEditableText().toString();
 				if (mUserName == null || mUserName.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "请输入手机号码",
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-					
+					GlobalUtil.shortToast(getApplication(), "请输入手机号码", getApplicationContext().getResources()
+							.getDrawable(R.drawable.ic_dialog_no));
+
 					return;
 				}
 				if (mPassword == null || mPassword.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "请输入密码",
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					GlobalUtil.shortToast(getApplication(), "请输入密码", getApplicationContext().getResources()
+							.getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域",
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources()
+							.getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
@@ -199,8 +171,8 @@ public class LoginUserActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域",
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources()
+							.getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 
@@ -212,8 +184,8 @@ public class LoginUserActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域",
-							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources()
+							.getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
 				startActivityForResult(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class), 1);
@@ -279,7 +251,7 @@ public class LoginUserActivity extends BaseActivity {
 	}
 
 	private void showSelectAlertDialog(final String title, final List<String[]> data) {
-		if (data != null && data.size() == 1){
+		if (data != null && data.size() == 1) {
 			SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
 			SharedPreferences.Editor editor = sharedata.edit();
 			editor.putString("area", data.get(0)[0]);
@@ -291,7 +263,7 @@ public class LoginUserActivity extends BaseActivity {
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(LoginUserActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle(title);
-		//ic_);
+		// ic_);
 		builder.setItems(data.get(0), new DialogInterface.OnClickListener() {
 
 			@Override
@@ -373,13 +345,13 @@ public class LoginUserActivity extends BaseActivity {
 			super.handleMessage(msg);
 			if (msg.what == 100) {
 				LogUtil.w("mingguo", "loginUserActivity  username   " + mUserName + "  password  " + mPassword);
-				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success),
-						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+				GlobalUtil.shortToast(getApplication(), getString(R.string.login_success), getApplicationContext()
+						.getResources().getDrawable(R.drawable.ic_dialog_yes));
 				getUserInfo(mUserName);
 			} else if (msg.what == 101) {
 
-				GlobalUtil.shortToast(getApplication(), getString(R.string.login_failed),
-						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				GlobalUtil.shortToast(getApplication(), getString(R.string.login_failed), getApplicationContext()
+						.getResources().getDrawable(R.drawable.ic_dialog_no));
 			} else if (msg.what == 110) {
 				showSelectAlertDialog("请选择所在区域", parseCommonService((String) msg.obj));
 			} else if (msg.what == 200) {
@@ -397,9 +369,12 @@ public class LoginUserActivity extends BaseActivity {
 				if (!TextUtils.isEmpty(value)) {
 					if (value.equals("true")) {
 						Toast.makeText(LoginUserActivity.this, "检测到您尚未注册，请先注册！", Toast.LENGTH_LONG).show();
-						forgetPassword.setClickable(false);
 					} else if (value.equals("false")) {
-						forgetPassword.setClickable(true);
+						ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
+						Intent resetIntent = new Intent(LoginUserActivity.this, ResetActivity.class);
+						resetIntent.putExtra("user_name", mUserName);
+						resetIntent.putExtra("intent_status", mIntentStatus);
+						startActivity(resetIntent);
 					}
 				}
 			}
