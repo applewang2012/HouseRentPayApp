@@ -102,7 +102,7 @@ public class AboutUsActivity extends BaseActivity {
 	
 	private void showUpdateVersionAlertDialog() {
 		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")){
-			LogUtil.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile());
+			LogUtil.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile(this));
 			Toast.makeText(AboutUsActivity.this, "当前版本已经最新", Toast.LENGTH_LONG).show();
 			return;
 		}

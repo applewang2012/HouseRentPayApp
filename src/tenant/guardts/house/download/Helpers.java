@@ -266,7 +266,7 @@ public class Helpers {
     private static File getCacheDestination(Context context) throws GenerateSaveFileError {
     	//add for appstore
     	//File cacheDirFile = new File(context.getCacheDir(), "/");
-    	File cacheDirFile = new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL), "/");
+    	File cacheDirFile = new File(CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL,context), "/");
     	LogUtil.w("mingguo", "get cache destination  file   "+cacheDirFile.getPath());
     	if (!cacheDirFile.isDirectory() && !cacheDirFile.mkdir()) {
     	    // Can't create download directory, e.g. because a file called

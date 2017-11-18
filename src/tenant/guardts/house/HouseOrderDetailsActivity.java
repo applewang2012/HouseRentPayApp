@@ -775,7 +775,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				AddIDCardResult result = gson.fromJson(value, AddIDCardResult.class);
 				if(result.ret!=null){
 					if(result.ret.equals("0")){
-						Toast.makeText(HouseOrderDetailsActivity.this, "信息绑定成功", Toast.LENGTH_LONG).show();
+						Toast.makeText(HouseOrderDetailsActivity.this, "请在滴声后按图示完成身份证绑定", Toast.LENGTH_LONG).show();
 					}else{
 						Toast.makeText(HouseOrderDetailsActivity.this, result.msg, Toast.LENGTH_LONG).show();
 					}

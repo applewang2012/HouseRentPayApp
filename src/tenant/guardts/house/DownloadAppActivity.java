@@ -97,7 +97,7 @@ public class DownloadAppActivity extends BaseActivity{
 
 			@Override
 			protected Integer doInBackground(Void... params) {
-				downloadFile(CommonUtil.DOWLOAD_URL, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL));
+				downloadFile(CommonUtil.DOWLOAD_URL, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL,DownloadAppActivity.this));
 				//publishProgress();
 				return null;
 			}
@@ -327,7 +327,7 @@ public class DownloadAppActivity extends BaseActivity{
 			break;
 		case DownloadManager.STATUS_SUCCESSFUL:
 			mDownloadButton.setText("下载完成，点击安装");
-			String downloadfile = CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL);
+			String downloadfile = CommonUtil.getDefaultDownloadPath(CommonUtil.DOWLOAD_URL,this);
 			CommonUtil.installApk(DownloadAppActivity.this, downloadfile);
 			break;
 		default:
@@ -344,7 +344,7 @@ public class DownloadAppActivity extends BaseActivity{
 		}else if (mUpdateDownloadProgress == 100){
 			mDownloadButton.setText("下载完成，点击安装");
 			mShowProgress.setText("下载完成");
-			CommonUtil.installApk(DownloadAppActivity.this, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL));
+			CommonUtil.installApk(DownloadAppActivity.this, CommonUtil.getDownloadPathWithName(CommonUtil.DOWLOAD_URL,this));
 		}
 		
 	}
