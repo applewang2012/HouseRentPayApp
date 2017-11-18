@@ -7,12 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.adapter.PublishedRecordAdapter;
-import tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.adapter.PublishedRecordAdapter;
+import tenant.guardts.house.adapter.PublishedRecordAdapter.CallBack;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class MyHouseActivity extends BaseActivity
 		implements OnItemClickListener, CallBack{

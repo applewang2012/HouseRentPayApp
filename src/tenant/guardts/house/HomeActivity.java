@@ -8,17 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.download.Downloads;
-import tenant.guardts.house.model.HouseFragment;
-import tenant.guardts.house.model.MyFragment;
-import tenant.guardts.house.model.OrderFragment;
-import tenant.guardts.house.model.SurroundFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+import com.tencent.android.tpush.XGPushClickedResult;
+import com.tencent.android.tpush.XGPushManager;
+
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -44,12 +39,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-import com.tencent.android.tpush.XGPushClickedResult;
-import com.tencent.android.tpush.XGPushManager;
+import tenant.guardts.house.model.HouseFragment;
+import tenant.guardts.house.model.MyFragment;
+import tenant.guardts.house.model.OrderFragment;
+import tenant.guardts.house.model.SurroundFragment;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
 
 public class HomeActivity extends BaseActivity {
 

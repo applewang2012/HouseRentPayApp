@@ -2,8 +2,6 @@ package tenant.guardts.house.adapter;
 
 import java.util.ArrayList;
 
-import com.google.zxing.common.StringUtils;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;

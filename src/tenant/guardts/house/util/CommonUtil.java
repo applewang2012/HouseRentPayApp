@@ -16,81 +16,78 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-
 /**
  * @author shenxiaolei
  *
  */
 public class CommonUtil {
-
-	/**
-	 * 记录播放位置
-	 */
-	public static int playPosition = -1;
-
-	private static Canvas canvas;
-
-	public static String DOWLOAD_URL = null; // "http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
-	public static String GURADTS_DOWNLOAD_DIR = "guardtsdownload";
-	public static final String NAMESPACE = "http://tempuri.org/";
-
-	public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
-
-	public static String mRegisterRealName = null;
-	public static String mRegisterIdcard = null;
-	public static String mUserLoginName = null;
-	public static String mUserWallet = null;
-	public static String mBankName = null;
-	public static String mCardNo = null;
-	public static String mUserHost = "http://219.150.56.178:8082/";
-	// public static String mUserHost = "";
-	// //"http://qxw2332340157.my3w.com/Services.asmx/";
-	public static String mUserArea;
-	public static double mCurrentLati, mCurrentLongi;
-	public static int mScanCodeRequestCode = 1;
-	public static int mLockNumberRequestCode = 5;
-	public static int mIndentifyUserRequestCode = 10;
-	public static final int SELECT_CITY_REQEUST_CODE = 2;
-	public static final int MAP_SUGGEST_REQEUST_CODE = 3;
-	public static String mPayHouseOrderId = null;
-	// weixin
-	public static final String APP_ID = "wxae25cb3fefdc75ae";
-	public static final String WX_PARTNER_ID = "1481965242";
-	public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; // api
-																				// key和商户签名为同一个
-	public static String XINGE_TOKEN = null;
-	public static final String APP_SECRET = "989e87b179368c9fbc0bff841b75941e";
-
-	public static final String URL_ZHENGFU_FUWU = "http://www.tjgaj.gov.cn/site/default.aspx";
-	public static final String URL_WEIQUAN_CHANGSHI = "http://ms.enorth.com.cn/xfwq/";
-	public static final String URL_YILIAO_BAOXIAN = "http://m.haodf.com/touch/hospital/DE4roiYGYZwmj5uuYe-Bqregr.htm?from=alading";
-	public static final String URL_COMMON_PHONE = "http://www.jihaoba.com/changyongdianhua/tianjin.htm";
-	public static final String URL_JIAOTONG_CHUXING = "http://tianjin.gongjiao.com/";
-	public static final String URL_ZHOUBIAN_SHANGQU = "http://m.dianping.com/tianjin?from=city_hot";
-	public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
-	public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
-
-	public static boolean version_test = false;
-	public static boolean verify_code_test = false;
-	public static boolean mIsForceIdentifyUser = false;
-	public static boolean mIsFreshWallet = false;
-
-	public static String ORDER_TIME = null;
-	public static String ORDER_NO = null;
-	public static String ORDER_MONKEY = null;
-	public static String ORDER_PREPAY_ID = null;
-	public static String OWNER_IDCARD = null;
-	public static final long TIME_STAMP_10_MINUTES = 600000L;
-	public static String ORDER_STATUS_NEED_EVALUATION = "3";// 待评价
-	public static String ORDER_STATUS_SUBMITT = "0"; // 待确认
-	public static String ORDER_STATUS_NEED_PAY = "1"; // 待支付
-	public static String ORDER_STATUS_HAS_PAYED = "2"; // 已支付
-	public static String ORDER_STATUS_REJECTED = "9"; // 已拒绝
-	public static String ORDER_STATUS_CANCELED = "8"; // 已取消
-	public static String ORDER_STATUS_NEED_CHECKOUT = "6"; // 退房待确认
-	public static String ORDER_STATUS_EXPIRED = "7"; // 已过期
-	public static String ORDER_STATUS_CHECKOUTED = "5"; // 已退房
-	public static String ORDER_STATUS_COMPLETE = "11"; // 已完成
+    /**
+     * 记录播放位置
+     */
+    public static int playPosition=-1;
+    
+    private static  Canvas canvas;
+    
+    public static String DOWLOAD_URL = null; //"http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
+    public static String GURADTS_DOWNLOAD_DIR = "guardtsdownload";
+    public static final String NAMESPACE = "http://tempuri.org/";
+    
+    public static final String UPDATE_VERSION_HOST = "http://www.guardts.com/";
+    
+    public static String mRegisterRealName = null;
+    public static String mRegisterIdcard = null;
+    public static String mUserLoginName = null;
+    public static String mUserWallet = null;
+    public static String mBankName = null;
+    public static String mCardNo = null;
+    //public static String mUserHost = "http://219.150.56.178:8082/";
+    public static String mUserHost = ""; //"http://qxw2332340157.my3w.com/Services.asmx/";
+    public static String mUserArea;
+    public static double mCurrentLati, mCurrentLongi;
+    public static int mScanCodeRequestCode = 1;
+    public static int mLockNumberRequestCode = 5;
+    public static int mIndentifyUserRequestCode = 10;
+    public static final int SELECT_CITY_REQEUST_CODE = 2;
+    public static final int MAP_SUGGEST_REQEUST_CODE = 3;
+    public static String mPayHouseOrderId = null;
+    //weixin
+    public static final String APP_ID = "wxae25cb3fefdc75ae";
+    public static final String WX_PARTNER_ID = "1481965242";
+    public static final String SIGN_KEY = "413ac6a2651c14455ec7a0cd498ab6d8"; //api key和商户签名为同一个
+    public static String XINGE_TOKEN = null;
+    public static final String APP_SECRET = "989e87b179368c9fbc0bff841b75941e";
+    
+    public static final String URL_ZHENGFU_FUWU = "http://www.tjgaj.gov.cn/site/default.aspx";
+    public static final String URL_WEIQUAN_CHANGSHI = "http://ms.enorth.com.cn/xfwq/";
+    public static final String URL_YILIAO_BAOXIAN = "http://m.haodf.com/touch/hospital/DE4roiYGYZwmj5uuYe-Bqregr.htm?from=alading";
+    public static final String URL_COMMON_PHONE = "http://www.jihaoba.com/changyongdianhua/tianjin.htm";
+    public static final String URL_JIAOTONG_CHUXING = "http://tianjin.gongjiao.com/";
+    public static final String URL_ZHOUBIAN_SHANGQU = "http://m.dianping.com/tianjin?from=city_hot";
+    public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
+    public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
+    
+    public static boolean version_test = false; //测试版本支付一分钱改成true
+    public static boolean verify_code_test = false; //测试版本支付一分钱改成true
+    public static boolean mIsForceIdentifyUser = false;
+    public static boolean mIsCancelRentIdentifyTest = false; //测试版本取消实名该成true
+    
+    public static  String ORDER_TIME = null;
+    public static  String ORDER_NO = null;
+    public static  String ORDER_MONKEY = null;
+    public static String ORDER_PREPAY_ID = null;
+    public static String OWNER_IDCARD = null;
+    public static final long TIME_STAMP_10_MINUTES = 600000L;
+    public static String ORDER_STATUS_NEED_EVALUATION="3";//待评价
+    public static String ORDER_STATUS_SUBMITT = "0";    //待确认
+    public static String ORDER_STATUS_NEED_PAY = "1";   //待支付
+    public static String ORDER_STATUS_HAS_PAYED = "2";  //已支付
+    public static String ORDER_STATUS_REJECTED = "9";  //已拒绝
+    public static String ORDER_STATUS_CANCELED = "8"; //已取消
+    public static String ORDER_STATUS_NEED_CHECKOUT = "6"; //退房待确认
+    public static String ORDER_STATUS_EXPIRED = "7"; //已过期
+    public static String ORDER_STATUS_CHECKOUTED = "5"; //已退房
+    public static String ORDER_STATUS_COMPLETE = "11"; //已完成
+    
 
 	public static void setCanvas(Canvas canvas) {
 		CommonUtil.canvas = canvas;

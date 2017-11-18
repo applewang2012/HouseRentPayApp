@@ -6,16 +6,16 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import tenant.guardts.house.HomeActivity;
-import tenant.guardts.house.util.LogUtil;
-import android.content.Context;
-import android.content.Intent;
-
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
 import com.tencent.android.tpush.XGPushRegisterResult;
 import com.tencent.android.tpush.XGPushShowedResult;
 import com.tencent.android.tpush.XGPushTextMessage;
+
+import android.content.Context;
+import android.content.Intent;
+import tenant.guardts.house.HomeActivity;
+import tenant.guardts.house.util.LogUtil;
 
 public class MessageReceiver extends XGPushBaseReceiver {
 	private Intent intent = new Intent("com.qq.xgdemo.activity.UPDATE_LISTVIEW");

@@ -3,15 +3,9 @@ package tenant.guardts.house;
 import java.io.IOException;
 import java.util.Vector;
 
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.decoding.CaptureActivityHandler;
-import tenant.guardts.house.decoding.InactivityTimer;
-import tenant.guardts.house.model.ActionOperationInterface;
-import tenant.guardts.house.model.ScanQrCodeFragment;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.zxingview.ViewfinderView;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,16 +19,20 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.decoding.CaptureActivityHandler;
+import tenant.guardts.house.decoding.InactivityTimer;
+import tenant.guardts.house.model.ActionOperationInterface;
+import tenant.guardts.house.model.ScanQrCodeFragment;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.zxingview.ViewfinderView;
 
 
 /**

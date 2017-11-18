@@ -285,10 +285,11 @@
             android:background="#f1f1f1" >
         </View>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/order_detail_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            
             android:background="#ffffff" >
 
             <TextView
@@ -306,15 +307,25 @@
                 android:id="@+id/id_order_detail_pay_monkey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/base_dimen_28"
-                android:layout_marginLeft="@dimen/base_dimen_400"
-                android:layout_marginTop="@dimen/base_dimen_28"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/base_dimen_180"
                 android:text="500"
                 android:textColor="#337ffd"
                 android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
-        </LinearLayout>
+            
+            <Button
+                android:id="@+id/id_order_detail_modify_button"
+                android:layout_width="@dimen/base_dimen_140"
+                android:layout_height="@dimen/base_dimen_60"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/base_dimen_20"
+                android:background="@drawable/item_blue_button_no_corner_selector"
+                android:text="修改价格"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/base_dimen_30"
+                 />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/order_service_fee"
@@ -323,7 +334,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:paddingLeft="@dimen/base_dimen_30"
+            android:paddingLeft="@dimen/base_dimen_30"
             android:layout_marginTop="@dimen/base_dimen_1"
             android:paddingTop="@dimen/base_dimen_20"
             android:paddingBottom="@dimen/base_dimen_20"

@@ -2,11 +2,6 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 
-import tenant.guardts.house.adapter.HistoryRecordsAdapter;
-import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.util.ViewUtil;
-import tenant.guardts.house.view.HistoryRecordsView;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,6 +15,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import tenant.guardts.house.adapter.HistoryRecordsAdapter;
+import tenant.guardts.house.helper.RecordSQLiteOpenHelper;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.util.ViewUtil;
+import tenant.guardts.house.view.HistoryRecordsView;
 
 public class SearchFilterActivity extends Activity {
 

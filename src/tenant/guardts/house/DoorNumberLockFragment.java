@@ -1,10 +1,5 @@
 package tenant.guardts.house;
 
-import tenant.guardts.house.model.ActionOperationInterface;
-import tenant.guardts.house.model.BaseFragment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ViewUtil;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Camera;
@@ -23,6 +18,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.model.ActionOperationInterface;
+import tenant.guardts.house.model.BaseFragment;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class DoorNumberLockFragment extends BaseFragment {
 

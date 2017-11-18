@@ -19,9 +19,8 @@ package tenant.guardts.house.camera;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import tenant.guardts.house.util.LogUtil;
 import android.os.IBinder;
-import android.util.Log;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * This class is used to activate the weak light on some camera phones (not flash)

@@ -2,9 +2,6 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,10 +11,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 /**个人信息
  * 
@@ -97,6 +98,18 @@ public class PersonalInfoActivity extends BaseActivity {
 	}
 
 	private void initEvent() {
+		TextView avaText = (TextView)findViewById(R.id.id_title_button);
+		avaText.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				CommonUtil.verify_code_test = !CommonUtil.verify_code_test;
+				Toast.makeText(getApplicationContext(), ""+CommonUtil.verify_code_test, Toast.LENGTH_SHORT).show();
+				
+				return false;
+			}
+		});
+		
 		mModifyPassword.setOnClickListener(new OnClickListener() {
 			
 			@Override

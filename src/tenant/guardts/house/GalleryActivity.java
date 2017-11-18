@@ -3,9 +3,8 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
-import tenant.guardts.house.bannerview.ViewPagerFixed;
-import tenant.guardts.house.util.Bimp;
-import tenant.guardts.house.util.LogUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
+import tenant.guardts.house.bannerview.ViewPagerFixed;
+import tenant.guardts.house.util.Bimp;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * 这个是用于进行图片浏览时的界面

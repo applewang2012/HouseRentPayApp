@@ -18,7 +18,6 @@ package tenant.guardts.house.camera;
 
 import java.io.IOException;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -26,6 +25,7 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Handler;
 import android.view.SurfaceHolder;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * This object wraps the Camera service object and expects to be the only one talking to it. The

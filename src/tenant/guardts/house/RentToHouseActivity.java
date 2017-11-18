@@ -7,17 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +25,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
 //��Ӱ�ʱ���import android.support.v4.app.Fragment; 
 public class RentToHouseActivity extends BaseActivity implements DataStatusInterface, OnItemClickListener, OnItemLongClickListener{
 	

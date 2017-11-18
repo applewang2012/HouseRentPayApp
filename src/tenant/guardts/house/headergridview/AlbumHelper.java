@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import tenant.guardts.house.util.ImageItem;
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Images.Media;
 import android.provider.MediaStore.Images.Thumbnails;
+import tenant.guardts.house.util.ImageItem;
+import tenant.guardts.house.util.LogUtil;
 
 public class AlbumHelper {
 	final String TAG = getClass().getSimpleName();

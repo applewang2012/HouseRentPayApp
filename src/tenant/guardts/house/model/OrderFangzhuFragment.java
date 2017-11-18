@@ -8,15 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.EvaluationActivity;
-import tenant.guardts.house.EvaluationDetailActivity;
-import tenant.guardts.house.HouseOrderDetailsActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.UtilTool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -39,6 +30,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import tenant.guardts.house.EvaluationActivity;
+import tenant.guardts.house.EvaluationDetailActivity;
+import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
 
 public class OrderFangzhuFragment extends BaseFragment{
 	
@@ -147,13 +147,13 @@ public class OrderFangzhuFragment extends BaseFragment{
 				timeDown.setText(info.getShowTimeDownTime());
 				if (info.getShowTimeDownTime() == null || info.getShowTimeDownTime().equals("")){
 					timeDown.setText("预警信息：");
-					if (holder.getPosition() % 7 == 0){
-						identfyLevel.setBackgroundResource(R.drawable.identify_level_red);
-					}else if (holder.getPosition() % 3 == 0){
-						identfyLevel.setBackgroundResource(R.drawable.identify_level_yellow);
-					}else {
+//					if (holder.getPosition() % 7 == 0){
+//						identfyLevel.setBackgroundResource(R.drawable.identify_level_red);
+//					}else if (holder.getPosition() % 3 == 0){
+//						identfyLevel.setBackgroundResource(R.drawable.identify_level_yellow);
+//					}else {
 						identfyLevel.setBackgroundResource(R.drawable.identify_level_green);
-					}
+//					}
 					identfyLevel.setVisibility(View.VISIBLE);
 				}else{
 					identfyLevel.setVisibility(View.GONE);
@@ -176,18 +176,18 @@ public class OrderFangzhuFragment extends BaseFragment{
 		}
 	}
 	
-	private void showPositiveOrderDialog(final int id, final String houseId) {  
+	private void showPositiveOrderDialog(final int id, final String orderPrice, final String renter,  final String houseId) {  
 		
 		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
 		  builder.setTitle("确认订单");
-		  builder.setMessage("您确认信息无误，确认该订单吗？");
+		  builder.setMessage("订单价格:￥"+orderPrice+"\n房客:"+renter+"\n温馨提示:您可以在详情页修改订单价格");
 		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 		         @Override  
 		  
 		         public void onClick(DialogInterface dialog, int which) {
 		        	 mCurrentPosition = id;
 					//rejectRentAttributeInfo(houseId);
-					confirmRentAttributeInfo(houseId);
+					confirmRentAttributeInfo(houseId, orderPrice);
 		         }  
 			
 		});
@@ -217,10 +217,11 @@ public class OrderFangzhuFragment extends BaseFragment{
 		mPresent.startPresentServiceTask(false);
 	}
 	
-	private void confirmRentAttributeInfo(String id){
+	private void confirmRentAttributeInfo(String id, String fee){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
+		rpc.addProperty("fee", fee);
 		mPresent.readyPresentServiceParams(getActivity(), url, mConfirmRentAttribute, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
@@ -369,6 +370,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 			button1.setText("查看详情");
 			button1.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
+			button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
+			button3.setTextColor(Color.parseColor("#337ffd"));
 			button1.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -383,20 +386,13 @@ public class OrderFangzhuFragment extends BaseFragment{
 			//button3.setBackgroundResource(R.drawable.item_shape_no_solid_corner_press);
 			button2.setText("确认订单");
 			button3.setText("确认订单");
-			button3.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					mCurrentPosition = holder.getPosition();
-					confirmRentAttributeInfo(info.getHouseOrderId());
-				}
-			});
+			
 			button3.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					//mCurrentPosition = holder.getPosition();
-					showPositiveOrderDialog(holder.getPosition(), info.getHouseOrderId());
+					showPositiveOrderDialog(holder.getPosition(), info.getHousePrice(), info.getHouseContactName(), info.getHouseOrderId());
 				}
 			});
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){

@@ -1,8 +1,5 @@
 package tenant.guardts.house.model;
 
-import tenant.guardts.house.R;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.LogUtil;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -17,6 +14,9 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import tenant.guardts.house.R;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.LogUtil;
 
 public class OrderFragment extends BaseFragment implements OnItemClickListener{
 	

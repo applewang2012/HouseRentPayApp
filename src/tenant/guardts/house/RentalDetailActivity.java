@@ -6,6 +6,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Window;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
 import tenant.guardts.house.adapter.RentalDetailAdapter;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.model.RentRecord;
@@ -13,15 +22,6 @@ import tenant.guardts.house.model.RentalDetail;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.LogUtil;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Window;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class RentalDetailActivity extends BaseActivity implements DataStatusInterface{
 	private String mCanRentHouseListAction = "http://tempuri.org/CanRentTheHouse";

@@ -18,11 +18,9 @@ package tenant.guardts.house.decoding;
 
 import java.util.Vector;
 
-import tenant.guardts.house.CaptureActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.zxingview.ViewfinderResultPointCallback;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,9 +28,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
+import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.zxingview.ViewfinderResultPointCallback;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.

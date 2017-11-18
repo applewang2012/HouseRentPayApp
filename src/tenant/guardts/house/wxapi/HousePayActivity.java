@@ -9,18 +9,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.BaseActivity;
-import tenant.guardts.house.PaymentStatusActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.WalletPayment;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.UtilTool;
-import tenant.guardts.house.util.ViewUtil;
-import tenant.guardts.house.wxpay.WeiXinPay;
+import com.google.gson.Gson;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,11 +30,18 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import tenant.guardts.house.BaseActivity;
+import tenant.guardts.house.PaymentStatusActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.WalletPayment;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.util.ViewUtil;
+import tenant.guardts.house.wxpay.WeiXinPay;
 
 public class HousePayActivity extends BaseActivity implements DataStatusInterface {
 

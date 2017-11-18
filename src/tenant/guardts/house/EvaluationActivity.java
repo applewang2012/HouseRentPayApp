@@ -2,12 +2,8 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.model.Evaluation;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.view.CustomRatingBar;
+import com.google.gson.Gson;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -24,11 +19,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
+import tenant.guardts.house.model.Evaluation;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.view.CustomRatingBar;
 
 /**
  * 评价

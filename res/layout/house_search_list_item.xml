@@ -4,7 +4,7 @@
     android:layout_width="fill_parent" 
     android:layout_height="70dp"
     android:orientation="vertical"
-    android:paddingRight="@dimen/base_dimen_30"
+    android:paddingRight="@dimen/base_dimen_40"
     android:paddingBottom="5dp"
     android:textColor="#ffffff"
     android:paddingLeft="@dimen/base_dimen_30">
@@ -15,7 +15,6 @@
         android:layout_width="fill_parent" 
     	android:layout_height="wrap_content"
     	android:layout_marginTop="10dp"
-    	android:singleLine="true"
     	android:textColor="#444444"
     	android:textSize="15dp"
     	android:drawableLeft="@drawable/house_list_location_icon"

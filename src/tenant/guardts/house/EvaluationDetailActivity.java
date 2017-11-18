@@ -6,15 +6,9 @@ import java.util.Collections;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.model.EvaluationItem;
-import tenant.guardts.house.model.EvaluationResult;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.UtilTool;
-import tenant.guardts.house.view.CustomRatingBar2;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,10 +19,15 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import tenant.guardts.house.model.EvaluationItem;
+import tenant.guardts.house.model.EvaluationResult;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.view.CustomRatingBar2;
 
 public class EvaluationDetailActivity extends BaseActivity {
 

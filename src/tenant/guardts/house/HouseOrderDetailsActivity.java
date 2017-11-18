@@ -4,15 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.model.AddIDCardResult;
-import tenant.guardts.house.model.ConfirmCheckout;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.google.gson.Gson;
+
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,19 +18,28 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
+import tenant.guardts.house.model.AddIDCardResult;
+import tenant.guardts.house.model.ConfirmCheckout;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.view.PriceEditText;
 
 public class HouseOrderDetailsActivity extends BaseActivity {
 	private HouseInfoModel mOrderDetail;
@@ -52,6 +56,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
 	private String mAddIDCardToDevice="http://tempuri.org/AddIDCardToDevice";
 	private long mEnterTimeStamp;
+	private TextView mOrderPriceTextView;
+	private String mOrderModifyPrice;
+	private Button mModifyPriceButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +102,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 	private void initView() {
 		// 取消和拒绝，隐藏
-		priceLinearLayout = (LinearLayout) findViewById(R.id.order_detail_ll);
+		priceLinearLayout = (FrameLayout) findViewById(R.id.order_detail_ll);
 		// 取消和拒绝，隐藏
 		tvServiceFee = (TextView) findViewById(R.id.order_service_fee);
 		parent = View.inflate(this, R.layout.activity_order_details_info, null);
@@ -116,7 +123,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		status = (TextView) findViewById(R.id.id_order_detail_status);
 		TextView ownerName = (TextView) findViewById(R.id.id_order_detail_owner_name);
 		ownerPhone = (TextView) findViewById(R.id.id_order_detail_owner_phone);
-		TextView money = (TextView) findViewById(R.id.id_order_detail_pay_monkey);
+		mOrderPriceTextView = (TextView) findViewById(R.id.id_order_detail_pay_monkey);
 		address.setText(mOrderDetail.getHouseAddress());
 		contactName.setText(mOrderDetail.getHouseContactName());
 		contactPhone.setText(mOrderDetail.getHouseContactPhone());
@@ -125,7 +132,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		status.setText(mOrderDetail.getHouseStatus());
 		ownerName.setText(mOrderDetail.getHouseOwnerName());
 		ownerPhone.setText(mOrderDetail.getHouseOwnerPhone());
-		money.setText("¥ " + mOrderDetail.getHousePrice());
+		mOrderPriceTextView.setText("¥ " + mOrderDetail.getHousePrice());
+		mOrderModifyPrice = mOrderDetail.getHousePrice();
+		mModifyPriceButton = (Button)findViewById(R.id.id_order_detail_modify_button);
+		mModifyPriceButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showModifyPriceDialog();
+				
+			}
+		});
 		button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		button2 = (Button) findViewById(R.id.id_order_detail_button2);
 		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
@@ -163,6 +180,40 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				initScanPupopWindow();
 			}
 		});
+	}
+	
+	private void showModifyPriceDialog(){
+		AlertDialog.Builder builder = new Builder(HouseOrderDetailsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("修改订单价格"); // 设置对话框标题
+		builder.setMessage("输入订单价格(单位:元)"); // 设置对话框标题前的图标
+//		final EditText edit = new EditText(getApplicationContext());
+		View editView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.order_input_price_editview, null);
+		final PriceEditText edit = (PriceEditText)editView.findViewById(R.id.id_input_price);
+//		edit.setHint("请输入与房客商定订单价格(单位元)");
+//		edit.setTextColor(Color.parseColor("#337ffd"));
+//		edit.setHintTextColor(Color.parseColor("#777777"));
+//		edit.setInputType(InputType.TYPE_CLASS_NUMBER);
+		builder.setView(editView);
+		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (edit.getText() != null && edit.getText().length() > 0){
+					mOrderModifyPrice = edit.getText().toString();
+					mOrderPriceTextView.setText("¥ " + edit.getText().toString());
+				}
+				//Toast.makeText(getApplicationContext(), "你输入的是: " + edit.getText().toString(), Toast.LENGTH_SHORT).show();
+			}
+		});
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//Toast.makeText(getApplicationContext(), "你点了取消", Toast.LENGTH_SHORT).show();
+			}
+		});
+		builder.setCancelable(true); // 设置按钮是否可以按返回键取消,false则不可以取消
+		AlertDialog dialog = builder.create(); // 创建对话框
+		dialog.setCanceledOnTouchOutside(true); // 设置弹出框失去焦点是否隐藏,即点击屏蔽其它地方是否隐藏
+		dialog.show();
 	}
 
 	
@@ -298,24 +349,25 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 * @param button2
 	 */
 	public void updateStatus(TextView status, Button button1, Button button2) {
+		mModifyPriceButton.setVisibility(View.GONE);
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("确认订单");
 			button1.setVisibility(View.GONE);
-
+			
 			//button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			if (mDetailType != null) {
 				if (mDetailType.equals("owner")) {
 					button1.setVisibility(View.VISIBLE);
+					mModifyPriceButton.setVisibility(View.VISIBLE);
 					//button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 					//button1.setTextColor(Color.parseColor("#ffffff"));
 					button1.setOnClickListener(new OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
-
-							confirmRentAttributeInfo(mOrderDetail.getHouseOrderId());
+							showConfirmOrderDialog(mOrderModifyPrice, mOrderDetail.getHouseContactName(), mOrderDetail.getHouseOrderId());
 						}
 					});
 					button2.setText("拒绝订单");
@@ -614,11 +666,40 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		builder.setCancelable(false);
 		builder.show();
 	}
+	
+	private void showConfirmOrderDialog(final String orderPrice, final String renter,  final String houseId) {  
+		
+		  AlertDialog.Builder builder =new AlertDialog.Builder(HouseOrderDetailsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setTitle("确认订单");
+		  builder.setMessage("订单价格:￥"+orderPrice+"\n房客:"+renter);
+		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+		         @Override  
+		  
+		         public void onClick(DialogInterface dialog, int which) {
+					//rejectRentAttributeInfo(houseId);
+					confirmRentAttributeInfo(houseId, orderPrice);
+		         }  
+			
+		});
+		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
+			  
+	         @Override  
+	  
+	         public void onClick(DialogInterface dialog, int which) {
+	  
+	             LogUtil.w("alertdialog"," �뱣�����ݣ�");  
+	  
+	         }
+		});
+		builder.setCancelable(false);
+		builder.show();
+	}
 
-	private void confirmRentAttributeInfo(String id) {
+	private void confirmRentAttributeInfo(String id, String fee) {
 		String url = CommonUtil.mUserHost + "Services.asmx?op=ConfirmRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
 		rpc.addProperty("id", id);
+		rpc.addProperty("fee", fee);
 		mPresent.readyPresentServiceParams(HouseOrderDetailsActivity.this, url, mConfirmRentAttribute, rpc);
 		mPresent.startPresentServiceTask(true);
 	}
@@ -792,7 +873,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private View view;
 	private Button btnContact;
 	private TextView tvServiceFee;
-	private LinearLayout priceLinearLayout;
+	private FrameLayout priceLinearLayout;
 	private TextView status;
 	private Button button1;
 	private Button button2;

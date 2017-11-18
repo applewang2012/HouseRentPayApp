@@ -33,6 +33,7 @@ import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.JsonObjectParse;
 import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.view.PriceEditText;
 
 public class EditHouseInfoActivity extends BaseActivity{
 
@@ -89,8 +90,9 @@ public class EditHouseInfoActivity extends BaseActivity{
 	
 	private String mHouseDetailAction = "http://tempuri.org/GetHouseDetailInfo";
 	private HashMap<String, List<String>> mDetailMap = new HashMap<>(); //key 类型，list 0 id， list 1 value
-	private EditText mHouseAreaEditText, mTotalFloorEditText, mCurrentFloorEditText, mCurrentDoorEditText,
+	private EditText mTotalFloorEditText, mCurrentFloorEditText, mCurrentDoorEditText,
 			mLouHaoEditText, mMenHaoEditText;
+	private PriceEditText mHouseAreaEditText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +136,7 @@ public class EditHouseInfoActivity extends BaseActivity{
 		mOwnerIdCard.setText(CommonUtil.mRegisterIdcard);
 		commission = (TextView) findViewById(R.id.commission);//手续费
 		explanation = (TextView) findViewById(R.id.explanation);//手续费描述
-		mPriceEditText = (EditText)findViewById(R.id.id_add_house_price);
+		mPriceEditText = (PriceEditText)findViewById(R.id.id_add_house_price);
 		mPriceEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -269,7 +271,7 @@ public class EditHouseInfoActivity extends BaseActivity{
 			}
 		});
 		
-		mHouseAreaEditText = (EditText)findViewById(R.id.id_add_house_area);
+		mHouseAreaEditText = (PriceEditText)findViewById(R.id.id_add_house_area);
 		mTotalFloorEditText = (EditText)findViewById(R.id.id_add_house_total_floor);
 		mCurrentFloorEditText = (EditText)findViewById(R.id.id_add_house_current_floor);
 		mCurrentDoorEditText = (EditText)findViewById(R.id.id_add_house_current_num);
@@ -339,6 +341,10 @@ public class EditHouseInfoActivity extends BaseActivity{
 		mPoliceTextView.setText(mDetailMap.get("police").get(1));
 		mRoadTextView.setText(mDetailMap.get("road").get(1));
 		
+		
+		mLouHaoEditText.setText(mDetailMap.get("louhao").get(0));
+		mMenHaoEditText.setText(mDetailMap.get("menhao").get(0));
+		
 		mPriceEditText.setText(mDetailMap.get("RLocationDescription").get(0));
 		mOwnerName.setText(mDetailMap.get("ROwner").get(0));
 		mOwnerPhone.setText(mDetailMap.get("ROwnerTel").get(0));
@@ -358,7 +364,6 @@ public class EditHouseInfoActivity extends BaseActivity{
 				priceList.set(0, mPriceEditText.getText().toString());
 			}
 		}
-		
 		
 		if (mHouseAreaEditText.getText().toString() == null || mHouseAreaEditText.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋面积", Toast.LENGTH_SHORT).show();
@@ -406,17 +411,21 @@ public class EditHouseInfoActivity extends BaseActivity{
 			Toast.makeText(getApplicationContext(), "请输入楼栋号", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			
+			List<String> louhaoList = mDetailMap.get("louhao");
+			if (louhaoList != null){
+				louhaoList.set(0, mLouHaoEditText.getText().toString());
+			}
 		}
 		
 		if (mMenHaoEditText.getText().toString() == null || mMenHaoEditText.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入楼门号", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			
+			List<String> menList = mDetailMap.get("menhao");
+			if (menList != null){
+				menList.set(0, mMenHaoEditText.getText().toString());
+			}
 		}
-		
-
 		
 		if (mOwnerName.getText().toString() == null || mOwnerName.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房主姓名", Toast.LENGTH_SHORT).show();
@@ -560,7 +569,7 @@ public class EditHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RPSName", mDetailMap.get("police").get(0));   //派出所
 		rpc.addProperty("RAddress", address);   
 		rpc.addProperty("RDoor", mDetailMap.get("currentDoor").get(0));    
-		rpc.addProperty("RTotalDoor", "6"); 
+		rpc.addProperty("RTotalDoor", mDetailMap.get("menhao").get(0)); 
 		
 		rpc.addProperty("RRoomType", mDetailMap.get("roomType").get(0)); 
 		rpc.addProperty("RDirection", mDetailMap.get("direction").get(0));   
@@ -568,7 +577,7 @@ public class EditHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RBuildingType", "02"); 
 		rpc.addProperty("RFloor", mDetailMap.get("currentFloor").get(0));     
 		rpc.addProperty("RTotalFloor", mDetailMap.get("totalFloor").get(0));   
-		rpc.addProperty("RHouseAge", "15");  
+		rpc.addProperty("RHouseAge", mDetailMap.get("louhao").get(0));  
 		rpc.addProperty("RRentArea", mDetailMap.get("area").get(0));     
 		
 		rpc.addProperty("RProperty", "fangchanxingzhi");  
@@ -716,6 +725,14 @@ public class EditHouseInfoActivity extends BaseActivity{
 					List<String> currentFloorList = new ArrayList<>();
 					currentFloorList.add(object.optString("RFloor"));
 					mDetailMap.put("currentFloor", currentFloorList);
+					
+					List<String> loudongList = new ArrayList<>();
+					loudongList.add(object.optString("RHouseAge"));
+					mDetailMap.put("louhao", currentFloorList);
+					
+					List<String> loumenList = new ArrayList<>();
+					loumenList.add(object.optString("RTotalDoor"));
+					mDetailMap.put("menhao", loumenList);
 					
 					List<String> totalFloorList = new ArrayList<>();
 					totalFloorList.add(object.optString("RTotalFloor"));
@@ -869,7 +886,7 @@ public class EditHouseInfoActivity extends BaseActivity{
 		}
 		
 	};
-	private EditText mPriceEditText;
+	private PriceEditText mPriceEditText;
 	
 
 	 @Override

@@ -14,7 +14,6 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ImageView;
 import tenant.guardts.house.SelectPhotoActivity;
 

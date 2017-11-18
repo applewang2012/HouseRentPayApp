@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -33,6 +32,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Pair;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Stores information about an individual download.

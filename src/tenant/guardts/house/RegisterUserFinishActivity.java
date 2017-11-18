@@ -1,6 +1,5 @@
 package tenant.guardts.house;
 
-import tenant.guardts.house.presenter.HoursePresenter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import tenant.guardts.house.presenter.HoursePresenter;
 
 public class RegisterUserFinishActivity extends BaseActivity{
 

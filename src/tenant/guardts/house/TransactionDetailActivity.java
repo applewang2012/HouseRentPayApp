@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.adapter.TransactionDetailAdapter;
-import tenant.guardts.house.bean.Detail;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,9 +14,12 @@ import android.text.TextUtils;
 import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import tenant.guardts.house.adapter.TransactionDetailAdapter;
+import tenant.guardts.house.bean.Detail;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class TransactionDetailActivity extends BaseActivity implements DataStatusInterface {
 

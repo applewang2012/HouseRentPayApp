@@ -8,14 +8,10 @@ import java.util.UUID;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import tenant.guardts.house.BaseActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.UtilTool;
-import tenant.guardts.house.util.ViewUtil;
-import tenant.guardts.house.wxpay.WeiXinPay;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,10 +25,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.tencent.mm.sdk.modelpay.PayReq;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import tenant.guardts.house.BaseActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.UtilTool;
+import tenant.guardts.house.util.ViewUtil;
+import tenant.guardts.house.wxpay.WeiXinPay;
 
 public class RechargeActivity extends BaseActivity {
 

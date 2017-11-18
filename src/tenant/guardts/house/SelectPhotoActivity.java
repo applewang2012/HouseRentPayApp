@@ -4,14 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.Bimp;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.FileUpLoadUtils;
-import tenant.guardts.house.util.ImageItem;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.PublicWay;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +34,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.Bimp;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.FileUpLoadUtils;
+import tenant.guardts.house.util.ImageItem;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.PublicWay;
 
 
 /**

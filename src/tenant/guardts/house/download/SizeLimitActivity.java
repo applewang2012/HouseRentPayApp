@@ -19,8 +19,6 @@ package tenant.guardts.house.download;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import tenant.guardts.house.R;
-import tenant.guardts.house.util.LogUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -30,6 +28,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.format.Formatter;
+import tenant.guardts.house.R;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Activity to show dialogs to the user when a download exceeds a limit on download sizes for

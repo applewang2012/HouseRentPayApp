@@ -57,12 +57,12 @@
                             android:textSize="@dimen/base_dimen_30" />
                     </LinearLayout>
 
-                    <ImageView
+                    <!-- <ImageView
                         android:layout_width="8dp"
                         android:layout_height="12dp"
                         android:layout_gravity="right|center_vertical"
                         android:layout_marginRight="@dimen/base_dimen_35"
-                        android:background="@drawable/into_icon" />
+                        android:background="@drawable/into_icon" /> -->
                 </FrameLayout>
             
 
@@ -199,13 +199,11 @@
 
                     <TextView
                         android:id="@+id/id_rent_house_price"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="#00000000"
                         android:gravity="center_vertical"
                         android:hint="请输入和房主约定房屋价格"
-                        android:inputType="number"
-                        android:maxLength="6"
                         android:layout_marginLeft="@dimen/base_dimen_50"
                         android:textColor="#444444"
                         android:textColorHint="#b2b2b2"

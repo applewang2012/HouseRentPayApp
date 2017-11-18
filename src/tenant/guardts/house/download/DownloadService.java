@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import tenant.guardts.house.util.LogUtil;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -38,6 +37,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Process;
 import android.provider.BaseColumns;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Performs the background downloads requested by applications that use the

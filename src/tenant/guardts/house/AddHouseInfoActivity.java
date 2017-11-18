@@ -5,19 +5,14 @@ import java.util.Map;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.model.HouseSelectorModel;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.JsonObjectParse;
-import tenant.guardts.house.util.LogUtil;
+import com.google.gson.Gson;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,9 +25,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.zxing.common.StringUtils;
+import tenant.guardts.house.model.HouseSelectorModel;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.JsonObjectParse;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.view.PriceEditText;
 
 public class AddHouseInfoActivity extends BaseActivity{
 
@@ -71,7 +70,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private TextView mHouseTypeTextView;
 	//private TextView mOwnerTypeTextView;
 	private String mRentNo;
-	private String mRDName = "01";
+	//private String mRDName = "01";
 	private String mRSName = "02";
 	private String mRRName = "";
 	private String mRPSName;
@@ -102,6 +101,8 @@ public class AddHouseInfoActivity extends BaseActivity{
 	private TextView mOwnerName;
 	private TextView mOwnerPhone;
 	private TextView mOwnerIdCard;
+	private EditText mLoudongEditText;
+	private EditText mLoumenEditText;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,7 +132,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		mOwnerIdCard.setText(CommonUtil.mRegisterIdcard);
 		commission = (TextView) findViewById(R.id.commission);//手续费
 		explanation = (TextView) findViewById(R.id.explanation);//手续费描述
-		age = (EditText)findViewById(R.id.id_add_house_price);
+		age = (PriceEditText)findViewById(R.id.id_add_house_price);
 		age.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -435,7 +436,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 			
 		}
 		
-		EditText area = (EditText)findViewById(R.id.id_add_house_area);
+		PriceEditText area = (PriceEditText)findViewById(R.id.id_add_house_area);
 		if (area.getText().toString() == null || area.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入房屋面积", Toast.LENGTH_SHORT).show();
 			return false;
@@ -470,23 +471,23 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}else{
 			mRDoor = current_num.getText().toString();
 		}
-		EditText louhao = (EditText)findViewById(R.id.id_add_house_loudong_number);
-		EditText menhao = (EditText)findViewById(R.id.id_add_house_loumen_hao);
-		if (louhao.getText().toString() == null || louhao.getText().toString().equals("")){
+		mLoudongEditText = (EditText)findViewById(R.id.id_add_house_loudong_number);
+		mLoumenEditText = (EditText)findViewById(R.id.id_add_house_loumen_hao);
+		if (mLoudongEditText.getText().toString() == null || mLoudongEditText.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入楼栋号", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
 			
 		}
 		
-		if (menhao.getText().toString() == null || menhao.getText().toString().equals("")){
+		if (mLoumenEditText.getText().toString() == null || mLoumenEditText.getText().toString().equals("")){
 			Toast.makeText(getApplicationContext(), "请输入楼门号", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
 			
 		}
 		
-		mRAddress = louhao.getText().toString()+"号楼"+menhao.getText().toString()+"门";
+		mRAddress = mLoudongEditText.getText().toString()+"号楼"+mLoumenEditText.getText().toString()+"门";
 		
 //		if (mHouseNo.getText().toString() == null || mHouseNo.getText().toString().equals("")){
 //			Toast.makeText(getApplicationContext(), "请输入房产证编号", Toast.LENGTH_SHORT).show();
@@ -685,7 +686,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 	}
 	
 	private void startAddHouseInfo(){
-		LogUtil.w("mingguo", "add house info mRentNo "+mRentNo+" mRDName "+mRDName+" mRSName "+mRSName+" mRRName "+mRRName+" mRPSName "+mRPSName
+		LogUtil.w("mingguo", "add house info mRentNo "+mRentNo+" mRDName "+"01"+" mRSName "+mRSName+" mRRName "+mRRName+" mRPSName "+mRPSName
 				+" mRAddress "+mRAddress+" mRDoor "+"default null"+" mRTotalDoor "+"default null"+" mRRoomType "+mRRoomType +" mRDirection "+mRDirection+
 				" mRStructure "+"default null "+" mRFloor "+mRFloor+" mRTotalFloor "+mRTotalFloor+" mRHousePrice "+mRHousePrice+" mRRentArea "+mRRentArea+
 				" mRProperty "+"progper"+" mROwner "+mROwner+" mROwnerTel "+mROwnerTel+" mRIDCard "+mRIDCard+" mRPSParentName "+mRPSParentName+" createdBy "+
@@ -697,7 +698,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddHouseAction));
 		rpc.addProperty("RentNo", mRentNo);   
-		rpc.addProperty("RDName", mRDName);      
+		rpc.addProperty("RDName", "01");      
 		rpc.addProperty("RSName", mRSName);  
 		rpc.addProperty("RRName", mRRName);      
 		rpc.addProperty("RPSName", mRPSName);  
@@ -705,7 +706,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 				mSelectorInfo.get("police").getHouseAllLinkName()[mSelectorInfo.get("police").getHouseSelectPosition()]
 				+mSelectorInfo.get("road").getHouseSelectValue()+mRAddress+mRDoor);   
 		rpc.addProperty("RDoor", mRDoor);    
-		rpc.addProperty("RTotalDoor", "6"); 
+		rpc.addProperty("RTotalDoor", mLoumenEditText.getText().toString()); 
 		
 		rpc.addProperty("RRoomType", mRRoomType); 
 		rpc.addProperty("RDirection", mRDirection);   
@@ -713,7 +714,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		rpc.addProperty("RBuildingType", "02"); 
 		rpc.addProperty("RFloor", mRFloor);     
 		rpc.addProperty("RTotalFloor", mRTotalFloor);   
-		rpc.addProperty("RHouseAge", "15");  
+		rpc.addProperty("RHouseAge", mLoumenEditText.getText().toString());  
 		rpc.addProperty("RRentArea", mRRentArea);     
 		
 		rpc.addProperty("RProperty", "fangchanxingzhi");  
@@ -918,7 +919,7 @@ public class AddHouseInfoActivity extends BaseActivity{
 		}
 		
 	};
-	private EditText age;
+	private PriceEditText age;
 	
 
 	 @Override

@@ -3,12 +3,6 @@ package tenant.guardts.house;
 import java.util.ArrayList;
 import java.util.List;
 
-import tenant.guardts.house.headergridview.AlbumGridViewAdapter;
-import tenant.guardts.house.headergridview.AlbumHelper;
-import tenant.guardts.house.headergridview.ImageBucket;
-import tenant.guardts.house.util.Bimp;
-import tenant.guardts.house.util.ImageItem;
-import tenant.guardts.house.util.PublicWay;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,6 +18,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import tenant.guardts.house.headergridview.AlbumGridViewAdapter;
+import tenant.guardts.house.headergridview.AlbumHelper;
+import tenant.guardts.house.headergridview.ImageBucket;
+import tenant.guardts.house.util.Bimp;
+import tenant.guardts.house.util.ImageItem;
+import tenant.guardts.house.util.PublicWay;
 
 /**
  * 这个是进入相册显示所有图片的界面

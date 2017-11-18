@@ -18,7 +18,6 @@ package tenant.guardts.house.download;
 
 import java.io.File;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ContentUris;
@@ -30,7 +29,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Receives system broadcasts (boot, network connectivity)

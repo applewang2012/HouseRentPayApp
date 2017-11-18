@@ -7,19 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.UniversalAdapter;
-import tenant.guardts.house.model.UniversalViewHolder;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.search.ExpandMenuView;
-import tenant.guardts.house.search.ExpandMenuView.OnButtonClickListener;
-import tenant.guardts.house.search.HouseInfo;
-import tenant.guardts.house.search.Item;
-import tenant.guardts.house.search.Province;
-import tenant.guardts.house.search.SingleListFilterView;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +22,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.model.UniversalAdapter;
+import tenant.guardts.house.model.UniversalViewHolder;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.search.ExpandMenuView;
+import tenant.guardts.house.search.ExpandMenuView.OnButtonClickListener;
+import tenant.guardts.house.search.HouseInfo;
+import tenant.guardts.house.search.Item;
+import tenant.guardts.house.search.Province;
+import tenant.guardts.house.search.SingleListFilterView;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * 	Copyright	2016	CoderDream's Eclipse

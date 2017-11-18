@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -37,6 +36,7 @@ import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.BaseColumns;
 import android.util.Pair;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * The download manager is a system service that handles long-running HTTP

@@ -2,18 +2,18 @@ package tenant.guardts.house;
 
 import java.util.List;
 
-import tenant.guardts.house.util.LogUtil;
+import com.baidu.mapapi.SDKInitializer;
+import com.tencent.android.tpush.XGNotifaction;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.XGPushNotifactionCallback;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
-
-import com.baidu.mapapi.SDKInitializer;
-import com.tencent.android.tpush.XGNotifaction;
-import com.tencent.android.tpush.XGPushManager;
-import com.tencent.android.tpush.XGPushNotifactionCallback;
+import tenant.guardts.house.util.LogUtil;
 
 public class DemoApplication extends Application {
 	private static DemoApplication mApp;  

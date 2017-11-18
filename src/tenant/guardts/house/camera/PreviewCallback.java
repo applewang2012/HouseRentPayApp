@@ -16,11 +16,11 @@
 
 package tenant.guardts.house.camera;
 
-import tenant.guardts.house.util.LogUtil;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Message;
+import tenant.guardts.house.util.LogUtil;
 
 final class PreviewCallback implements Camera.PreviewCallback {
 

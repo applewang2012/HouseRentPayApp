@@ -21835,6 +21835,8 @@ tenant.guardts.house.DoorNumberLockFragment
 tenant.guardts.house.DownloadAppActivity
 tenant.guardts.house.DownloadAppActivity: DownloadAppActivity()
 tenant.guardts.house.DownloadAppActivity$PackageInstallerReceiver
+tenant.guardts.house.EditHouseInfoActivity
+tenant.guardts.house.EditHouseInfoActivity: EditHouseInfoActivity()
 tenant.guardts.house.EvaluationActivity
 tenant.guardts.house.EvaluationActivity: EvaluationActivity()
 tenant.guardts.house.EvaluationDetailActivity
@@ -23513,6 +23515,7 @@ tenant.guardts.house.R$id: int id_surround_search_button
 tenant.guardts.house.R$id: int id_surround_search_input
 tenant.guardts.house.R$id: int id_swipe_ly
 tenant.guardts.house.R$id: int id_title_bar_home_content
+tenant.guardts.house.R$id: int id_title_button
 tenant.guardts.house.R$id: int id_titlebar
 tenant.guardts.house.R$id: int id_titlebar_back
 tenant.guardts.house.R$id: int id_titlebar_bg
@@ -23724,6 +23727,7 @@ tenant.guardts.house.R$layout: int activity_about_us
 tenant.guardts.house.R$layout: int activity_add_bank_card
 tenant.guardts.house.R$layout: int activity_apply_checkout_layout
 tenant.guardts.house.R$layout: int activity_bank
+tenant.guardts.house.R$layout: int activity_edit_house_info
 tenant.guardts.house.R$layout: int activity_evaluation
 tenant.guardts.house.R$layout: int activity_evaluation_detail
 tenant.guardts.house.R$layout: int activity_home_search
@@ -23891,6 +23895,8 @@ tenant.guardts.house.R$string: int button_start_now
 tenant.guardts.house.R$string: int button_udpate
 tenant.guardts.house.R$string: int cancel_running_download
 tenant.guardts.house.R$string: int delete_download
+tenant.guardts.house.R$string: int delete_house_content
+tenant.guardts.house.R$string: int delete_house_title
 tenant.guardts.house.R$string: int demo_name_overlay
 tenant.guardts.house.R$string: int deselect_all
 tenant.guardts.house.R$string: int dialog_cannot_resume
@@ -23935,6 +23941,8 @@ tenant.guardts.house.R$string: int livenessButtonText
 tenant.guardts.house.R$string: int login_failed
 tenant.guardts.house.R$string: int login_success
 tenant.guardts.house.R$string: int missing_title
+tenant.guardts.house.R$string: int modify_house_content
+tenant.guardts.house.R$string: int modify_house_title
 tenant.guardts.house.R$string: int modify_password
 tenant.guardts.house.R$string: int modify_pwd_failed
 tenant.guardts.house.R$string: int modify_pwd_success

@@ -17,22 +17,22 @@
 package tenant.guardts.house.decoding;
 import java.util.Hashtable;
 
-import tenant.guardts.house.CaptureActivity;
-import tenant.guardts.house.R;
-import tenant.guardts.house.camera.CameraManager;
-import tenant.guardts.house.camera.PlanarYUVLuminanceSource;
-import tenant.guardts.house.util.LogUtil;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import tenant.guardts.house.CaptureActivity;
+import tenant.guardts.house.R;
+import tenant.guardts.house.camera.CameraManager;
+import tenant.guardts.house.camera.PlanarYUVLuminanceSource;
+import tenant.guardts.house.util.LogUtil;
 
 final class DecodeHandler extends Handler {
 

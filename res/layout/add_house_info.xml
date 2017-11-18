@@ -159,7 +159,7 @@
                         android:textColor="#333333"
                         android:textSize="@dimen/base_dimen_30" />
 
-                    <EditText
+                    <tenant.guardts.house.view.PriceEditText
                         android:id="@+id/id_add_house_price"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
@@ -167,12 +167,12 @@
                         android:background="#00000000"
                         android:gravity="center_vertical"
                         android:hint="请输入价格"
-                        android:inputType="number"
-                        android:maxLength="5"
+                        android:digits="@string/edit_input_price_area"
                         android:paddingLeft="5dp"
                         android:textColor="#777777"
                         android:textColorHint="#b2b2b2"
-                        android:textSize="@dimen/base_dimen_28" />
+                        android:textSize="@dimen/base_dimen_28" >
+                     </tenant.guardts.house.view.PriceEditText>
                 </LinearLayout>
 
                 <LinearLayout
@@ -190,7 +190,7 @@
                         android:textColor="#333333"
                         android:textSize="@dimen/base_dimen_30" />
 
-                    <EditText
+                    <tenant.guardts.house.view.PriceEditText
                         android:id="@+id/id_add_house_area"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
@@ -198,12 +198,12 @@
                         android:background="#00000000"
                         android:gravity="center_vertical"
                         android:hint="请输入面积"
-                        android:inputType="number"
-                        android:maxLength="9"
+                        android:digits="@string/edit_input_price_area"
                         android:paddingLeft="5dp"
                         android:textColor="#777777"
                         android:textColorHint="#b2b2b2"
-                        android:textSize="@dimen/base_dimen_28" />
+                        android:textSize="@dimen/base_dimen_28" >
+                     </tenant.guardts.house.view.PriceEditText>
                 </LinearLayout>
 
             </LinearLayout>
@@ -510,7 +510,7 @@
                         android:gravity="center_vertical"
                         android:hint="请输入几号楼"
                         android:inputType="number"
-                        android:maxLength="4"
+                        android:maxLength="8"
                         android:paddingLeft="5dp"
                         android:textColor="#777777"
                         android:textColorHint="#b2b2b2"
@@ -541,7 +541,7 @@
                         android:gravity="center_vertical"
                         android:hint="请输入几门"
                         android:inputType="number"
-                        android:maxLength="2"
+                        android:maxLength="8"
                         android:paddingLeft="5dp"
                         android:textColor="#777777"
                         android:textColorHint="#b2b2b2"
@@ -586,7 +586,7 @@
                     android:gravity="center_vertical"
                     android:hint="请输入总楼层"
                     android:inputType="number"
-                    android:maxLength="3"
+                    android:maxLength="8"
                     android:paddingLeft="5dp"
                     android:textColor="#777777"
                     android:textColorHint="#b2b2b2"
@@ -615,7 +615,7 @@
 	                    android:gravity="center_vertical"
 	                    android:hint="请输入所在楼层"
 	                    android:inputType="number"
-	                    android:maxLength="3"
+	                    android:maxLength="8"
 	                    android:paddingLeft="5dp"
 	                    android:textColor="#777777"
 	                    android:textColorHint="#b2b2b2"
@@ -688,7 +688,7 @@
                     android:background="#00000000"
                     android:gravity="center_vertical"
                     android:hint="请输入当前门牌号"
-                    android:maxLength="20"
+                    android:maxLength="8"
                     android:paddingLeft="5dp"
                     android:textColor="#777777"
                     android:textColorHint="#b2b2b2"

@@ -1,10 +1,10 @@
 package tenant.guardts.house;
 
+import com.baidu.location.LocationClient;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Window;
-
-import com.baidu.location.LocationClient;
 
 public class MapActivity extends Activity {
 	public LocationClient mLocationClient = null;

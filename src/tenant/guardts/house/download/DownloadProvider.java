@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -45,6 +44,7 @@ import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.provider.BaseColumns;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Allows application to interact with the download manager.

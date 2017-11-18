@@ -30,15 +30,14 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.http.AndroidHttpClient;
 import android.os.PowerManager;
 import android.os.Process;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Pair;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Runs an actual download

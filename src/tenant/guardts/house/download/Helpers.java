@@ -22,8 +22,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,8 +34,9 @@ import android.os.SystemClock;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Config;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 /**
  * Some helper functions for the download manager

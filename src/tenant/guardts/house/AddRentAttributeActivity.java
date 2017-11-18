@@ -10,16 +10,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
-import tenant.guardts.house.util.UtilTool;
+import com.google.gson.Gson;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,6 +32,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,11 +45,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
+import tenant.guardts.house.util.UtilTool;
 
 public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
 
@@ -81,7 +82,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mHouseNo;
 	private String mUsername;
-	private String [] mOwnerType = new String[3];
+	//private String [] mOwnerType = new String[3];
 	private String  mTypeIndex = null;
 	private String mOwnerName;
 	private String mOwnerIdcard;
@@ -98,7 +99,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	//private LinearLayout mCommissionContent, mExplannationContent;
 	private boolean mShowRentHouseDialog = false;
 
-	private String mHousePrice;
+	private String mHousePrice, mRealPrice;
+
+	private String mRentType;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,17 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mOwnerName = getIntent().getStringExtra("owner_name");
 		mOwnerIdcard = getIntent().getStringExtra("owner_id");
 		mHousePrice = getIntent().getStringExtra("house_price");
+		mRentType = getIntent().getStringExtra("rent_type");
+		if (mRentType != null){
+			if (mRentType.equals("02")){  //日租
+				mTypeIndex = "1";
+			}else if (mRentType.equals("01")){ //月租
+				mTypeIndex = "2";  //月租2，时租 0   日租 1
+			}else{
+				mTypeIndex = "0";  //时租
+			}
+		}
+		
 		initView();
 		initHandler();
 		
@@ -167,25 +181,24 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 
 	
-	private void showAlertDialog(final TextView text,final String[] items) {  
-		  AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setItems(items, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mTypeIndex = which+"";
-				text.setText(items[which]);
-				mSetStartData = "";
-				mSetEndData = "";
-				mStartTime.setText(mSetStartData);
-				mEndTime.setText(mSetEndData);
-			}
-		});
-		builder.show();
-	}
+//	private void showAlertDialog(final TextView text,final String[] items) {  
+//		  AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+//		  builder.setItems(items, new DialogInterface.OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				mTypeIndex = which+"";
+//				text.setText(items[which]);
+//				mSetStartData = "";
+//				mSetEndData = "";
+//				mStartTime.setText(mSetStartData);
+//				mEndTime.setText(mSetEndData);
+//			}
+//		});
+//		builder.show();
+//	}
 	
 	private String[] parseAlreadyRentHouseTime(String value){
 		String [] list = null;
-		LogUtil.w("mingguo", " list item json  value  "+value);
 		try {
 			JSONArray array = new JSONArray(value);
 			LogUtil.w("mingguo", " list item json  array  "+array);
@@ -281,15 +294,16 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		cal .set(Calendar. MONTH , arg2); 
 		cal .set(Calendar. DAY_OF_MONTH , arg3);
 		
-		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+//			cal.set(Calendar.HOUR_OF_DAY, 00);
+//			cal.set(Calendar.MINUTE, 00);
+//			updateStartDate();
+//			
+//		}else{
 			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
 			cal.set(Calendar.MINUTE, 00);
 			getStartTime();
-		}else{
-			cal.set(Calendar.HOUR_OF_DAY, 00);
-			cal.set(Calendar.MINUTE, 00);
-			updateStartDate();
-			}
+//			}
 		} 
 	};
 	
@@ -314,13 +328,15 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		cal .set(Calendar. MONTH , arg2); 
 		cal .set(Calendar. DAY_OF_MONTH , arg3);
 		
-		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
-			getEndTime();
-		}else{
-			cal.set(Calendar.HOUR_OF_DAY, 00);
+//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //月租{
+//			cal.set(Calendar.HOUR_OF_DAY, 00);
+//			cal.set(Calendar.MINUTE, 00);
+//			updateEndDate();
+//		}else{
+			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
 			cal.set(Calendar.MINUTE, 00);
-			updateEndDate();
-			}
+			getEndTime();
+//			}
 		 
 		} 
 	};
@@ -361,6 +377,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mSetStartData = df.format(cal.getTime());
 		mStartTime.setText(df.format(cal.getTime())); 
 		mStartTimeClipse = cal.getTimeInMillis();
+		setHousePriceByRentTime();
 	}
 	
 	private void updateEndDate(){ 
@@ -368,7 +385,36 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mSetEndData = df.format(cal.getTime());
 		mEndTime.setText(df.format(cal.getTime())); 
 		mEndTimeClipse = cal.getTimeInMillis();
-		LogUtil.w("mingguo", "update end time data  "+mEndTimeClipse);
+		setHousePriceByRentTime();
+	}
+	
+	private void setHousePriceByRentTime(){
+		if (mEndTimeClipse > mStartTimeClipse){
+			try {
+				long hoursCount = UtilTool.formatDuringToHour(mEndTimeClipse-mStartTimeClipse);
+				float price = Float.parseFloat(mHousePrice);
+				Log.w("mingguo", "time  clipse  "+hoursCount+"  end  - start  "+(mEndTimeClipse-mStartTimeClipse));
+				if (mTypeIndex.equals("0")){
+					mRealPrice = price * hoursCount+"";
+					mRentPrice.setText(mHousePrice+" 元/小时"+"		应付房费: "+mRealPrice+" 元");
+				}else if (mTypeIndex.equals("1")){
+					float hourPrice = 0;
+					hourPrice = price / 24;
+					mRealPrice = (int)(hourPrice * hoursCount + 0.99f)+"";
+					
+					mRentPrice.setText(mHousePrice+" 元/天"+"			应付房费: "+mRealPrice+" 元");
+				}else{
+					float hourPrice = 0;
+					hourPrice = price / (30 * 24);
+					
+					mRealPrice = (int)(hourPrice * hoursCount  + 0.99f)+"";
+					mRentPrice.setText(mHousePrice+" 元/月"+"			应付房费: "+mRealPrice+" 元");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	private void initView(){
@@ -382,19 +428,21 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
 		mQrcodeView.setVisibility(View.INVISIBLE);
-		mOwnerType[0] = "日租房";
-		mOwnerType[1] = "月租房";
-		mOwnerType[2] = "时租房";
+//		mOwnerType[0] = "日租房";
+//		mOwnerType[1] = "月租房";
+//		mOwnerType[2] = "时租房";
 		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_rent_house_type);
 		mTypeTextView = (TextView)findViewById(R.id.id_rent_house_type_text);
 		//mOriginTypeText = mTypeTextView.getText().toString();
-		typeFrameLayout.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				showAlertDialog(mTypeTextView, mOwnerType);
-			}
-		});
+//		typeFrameLayout.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				showAlertDialog(mTypeTextView, mOwnerType);
+//			}
+//		});
+		mTypeTextView.setText(mRentType);
+		typeFrameLayout.setVisibility(View.GONE);
 		
 		FrameLayout startTime = (FrameLayout)findViewById(R.id.id_rent_house_start_date);
 		mStartTime = (TextView)findViewById(R.id.id_rent_house_start_date_text);
@@ -402,10 +450,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
-				if (mTypeIndex == null || mTypeIndex.equals("")){
-					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-					return;
-				}
+//				if (mTypeIndex == null || mTypeIndex.equals("")){
+//					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+//					return;
+//				}
 				getStartDateAndTime();
 				 
 			}
@@ -417,10 +465,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			
 			@Override
 			public void onClick(View v) {
-				if (mTypeIndex == null || mTypeIndex.equals("")){
-					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-					return;
-				}
+//				if (mTypeIndex == null || mTypeIndex.equals("")){
+//					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+//					return;
+//				}
 				getEndDateAndTime();
 				getSystemClock();
 			}
@@ -434,7 +482,13 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentPhone.setText(CommonUtil.mUserLoginName);
 		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
 		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
-		mRentPrice.setText(mHousePrice+" 元");
+		if (mTypeIndex.equals("0")){
+			mRentPrice.setText(mHousePrice+" 元/小时");
+		}else if (mTypeIndex.equals("1")){
+			mRentPrice.setText(mHousePrice+" 元/天");
+		}else{
+			mRentPrice.setText(mHousePrice+" 元/月");
+		}
 //		mRentPrice.addTextChangedListener(new TextWatcher() {
 //			
 //			@Override
@@ -564,10 +618,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	
 	private boolean checkInputTimeContent(){
 		
-		if (mTypeIndex == null || mTypeIndex.equals("")){
-			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-			return false;
-		}
+//		if (mTypeIndex == null || mTypeIndex.equals("")){
+//			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+//			return false;
+//		}
 		
 		if (mSetStartData == null || mSetStartData.equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入租房开始时间", Toast.LENGTH_SHORT).show();
@@ -639,10 +693,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		}
 		 String string = mRentPrice.getText().toString();
 		 
-		if(string.substring(0, 1).contains("0")){
-			Toast.makeText(getApplicationContext(), "价格第一位不能为0", Toast.LENGTH_SHORT).show();
-			return false;
-		}
 		if (mRentPrice.getText().toString().equals("0")){
 			Toast.makeText(getApplicationContext(), "租金不能为0", Toast.LENGTH_SHORT).show();
 			return false;
@@ -668,7 +718,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	}
 	
 	private void startAddRentInfo(){
-			LogUtil.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRentPrice.getText()+
+			LogUtil.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRealPrice+
 					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
 			String url = CommonUtil.mUserHost+"services.asmx?op=AddRentRecord";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
@@ -676,7 +726,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
 			rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());  
 			rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());  
-			rpc.addProperty("RRentPrice", mHousePrice);     
+			rpc.addProperty("RRentPrice", mRealPrice);     
 			rpc.addProperty("RRAStartDate", mSetStartData);  
 			rpc.addProperty("RRAEndDate", mSetEndData); 
 			rpc.addProperty("RRADescription", "meiyou"); 
@@ -753,7 +803,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		if (faceStr == null || screenshotStr == null){
 			return;
 		}
-		LogUtil.w("mingguo", "register interface  faceStr  "+faceStr.length()+"  screenshot   "+screenshotStr.length());
 		LogUtil.w("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
@@ -779,7 +828,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			obj.put("LesseeID", mRentIDcard.getText().toString());
 			obj.put("LesseeName", mRentName.getText().toString());
 			obj.put("Rent", mRentPrice.getText().toString());
-			obj.put("RentType", mTypeIndex);  //0，日租，1，月租，2，时租
+//			obj.put("RentType", mTypeIndex);  //0，日租，1，月租，2，时租
 			obj.put("StartTime",mSetStartData);
 			obj.put("EndTime", mSetEndData);
 			
@@ -926,7 +975,12 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						String ret = json.optString("ret");
 						if (ret != null){
 							if (CommonUtil.verify_code_test || ret.equals("0")){
-								startIndentifyProcess();
+								if (CommonUtil.mIsCancelRentIdentifyTest){
+									startAddRentInfo();
+								}else{
+									startIndentifyProcess();
+								}
+								
 							}else{
 								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 							}

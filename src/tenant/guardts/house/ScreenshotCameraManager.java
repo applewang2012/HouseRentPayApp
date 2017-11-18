@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import tenant.guardts.house.util.LogUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.view.SurfaceHolder;
+import tenant.guardts.house.util.LogUtil;
 
 public class ScreenshotCameraManager {
 

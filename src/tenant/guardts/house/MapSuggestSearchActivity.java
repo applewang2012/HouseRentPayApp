@@ -2,11 +2,11 @@ package tenant.guardts.house;
 
 import java.util.ArrayList;
 
-import tenant.guardts.house.adapter.HistoryRecordsAdapter;
-import tenant.guardts.house.helper.MapRecordSQLiteHelper;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ViewUtil;
-import android.app.Activity;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,11 +24,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
-import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.baidu.mapapi.search.sug.SuggestionSearch;
-import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import tenant.guardts.house.adapter.HistoryRecordsAdapter;
+import tenant.guardts.house.helper.MapRecordSQLiteHelper;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ViewUtil;
 
 public class MapSuggestSearchActivity extends BaseActivity implements OnGetSuggestionResultListener{
 

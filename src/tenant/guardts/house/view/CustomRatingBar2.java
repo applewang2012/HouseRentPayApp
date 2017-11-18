@@ -1,14 +1,12 @@
 package tenant.guardts.house.view;
 
-import tenant.guardts.house.R;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import tenant.guardts.house.R;
 
 public class CustomRatingBar2 extends LinearLayout {
 

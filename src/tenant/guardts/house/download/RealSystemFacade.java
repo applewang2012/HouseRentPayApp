@@ -1,6 +1,5 @@
 package tenant.guardts.house.download;
 
-import tenant.guardts.house.util.LogUtil;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -9,6 +8,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import tenant.guardts.house.util.LogUtil;
 
 class RealSystemFacade implements SystemFacade {
     private Context mContext;

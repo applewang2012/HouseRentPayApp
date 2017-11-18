@@ -37,6 +37,7 @@
         android:layout_height="@dimen/base_dimen_130" >
 
         <TextView
+            android:id="@+id/id_title_button"
             android:layout_width="@dimen/base_dimen_68"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

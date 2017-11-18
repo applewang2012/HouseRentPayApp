@@ -1,9 +1,9 @@
 package tenant.guardts.house.selectcity;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import tenant.guardts.house.util.LogUtil;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	// ��û��ʵ��,�ǲ����������๹�����Ĳ���,��������Ϊ��̬

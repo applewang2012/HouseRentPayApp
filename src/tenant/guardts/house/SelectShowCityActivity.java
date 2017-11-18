@@ -8,13 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import tenant.guardts.house.selectcity.City;
-import tenant.guardts.house.selectcity.DBHelper;
-import tenant.guardts.house.selectcity.DatabaseHelper;
-import tenant.guardts.house.selectcity.MyLetterListView;
-import tenant.guardts.house.selectcity.MyLetterListView.OnTouchingLetterChangedListener;
-import tenant.guardts.house.selectcity.PingYinUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClientOption;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -42,10 +39,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClientOption;
+import tenant.guardts.house.selectcity.City;
+import tenant.guardts.house.selectcity.DBHelper;
+import tenant.guardts.house.selectcity.DatabaseHelper;
+import tenant.guardts.house.selectcity.MyLetterListView;
+import tenant.guardts.house.selectcity.MyLetterListView.OnTouchingLetterChangedListener;
+import tenant.guardts.house.selectcity.PingYinUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class SelectShowCityActivity extends BaseActivity implements OnScrollListener {
 	private BaseAdapter adapter;

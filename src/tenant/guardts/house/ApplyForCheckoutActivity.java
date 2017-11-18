@@ -8,15 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.ApplyForCheckOut;
-import tenant.guardts.house.model.HouseImageInfo;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.google.gson.Gson;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,9 +37,15 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.gzt.faceid5sdk.DetectionAuthentic;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.ApplyForCheckOut;
+import tenant.guardts.house.model.HouseImageInfo;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class ApplyForCheckoutActivity extends BaseActivity {
 	private Button mButtonCall;// 联系房主

@@ -19,7 +19,6 @@ package tenant.guardts.house.camera;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import tenant.guardts.house.util.LogUtil;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -28,6 +27,7 @@ import android.hardware.Camera.Size;
 import android.os.Build;
 import android.view.Display;
 import android.view.WindowManager;
+import tenant.guardts.house.util.LogUtil;
 
 final class CameraConfigurationManager {
 

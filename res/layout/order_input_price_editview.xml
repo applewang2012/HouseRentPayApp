@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <tenant.guardts.house.view.PriceEditText
+        android:id="@+id/id_input_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:digits="@string/edit_input_price_area"
+        android:textColor="#337ffd"
+        android:textColorHint ="#666666"
+        >
+     </tenant.guardts.house.view.PriceEditText>
+
+</FrameLayout>

@@ -2,11 +2,8 @@ package tenant.guardts.house;
 
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.AddCardStatus;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.google.gson.Gson;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,8 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.AddCardStatus;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class AddBankCardActivity extends BaseActivity implements DataStatusInterface {
 

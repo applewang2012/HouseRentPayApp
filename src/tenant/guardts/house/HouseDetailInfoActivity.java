@@ -8,15 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import tenant.guardts.house.bannerview.CircleFlowIndicator;
-import tenant.guardts.house.bannerview.ImagePagerAdapter;
-import tenant.guardts.house.bannerview.ViewFlow;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.HouseImageInfo;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.LogUtil;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,8 +36,15 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.gzt.faceid5sdk.DetectionAuthentic;
+import tenant.guardts.house.bannerview.CircleFlowIndicator;
+import tenant.guardts.house.bannerview.ImagePagerAdapter;
+import tenant.guardts.house.bannerview.ViewFlow;
+import tenant.guardts.house.model.ActivityController;
+import tenant.guardts.house.model.HouseImageInfo;
+import tenant.guardts.house.model.HouseInfoModel;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.LogUtil;
 
 public class HouseDetailInfoActivity extends BaseActivity {
 	private Button mButtonCall;// 联系房主
@@ -90,32 +90,9 @@ public class HouseDetailInfoActivity extends BaseActivity {
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房屋详情");
-		Button fullScreen = (Button) findViewById(R.id.id_add_rent_house);
-		fullScreen.setVisibility(View.VISIBLE);
-		fullScreen.setBackgroundResource(R.drawable.title_bar_full_screen_icon);
-		fullScreen.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Intent loadIntent = new Intent(HouseDetailInfoActivity.this,
-				// LoadUrlTestActivity.class);
-				// loadIntent.putExtra("url",
-				// "http://www.guardts.com/output/html5.html");
-				// loadIntent.putExtra("tab_name", "全景图");
-				// startActivity(loadIntent);
-
-				Intent intent = new Intent();
-				intent.setAction("android.intent.action.VIEW");
-				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");
-				intent.setData(content_url);
-				startActivity(intent);
-			}
-		});
-		mRentNo = getIntent().getStringExtra("rentNo");
 //		Toast.makeText(HouseDetailInfoActivity.this, mRentNo, Toast.LENGTH_LONG).show();
 		//flag = getIntent().getStringExtra("flag");
 		initView();
-		
 		initPopupWindow();
 		initEvent();
 	}
@@ -124,6 +101,11 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		mRentNo = getIntent().getStringExtra("rentNo");
+		if (mRentNo == null || mRentNo.equals("") || mRentNo.equalsIgnoreCase("null")){
+			Toast.makeText(HouseDetailInfoActivity.this, "该房屋已下架！", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		mEditHouseflag = getIntent().getStringExtra("flag");
 		if (!TextUtils.isEmpty(mEditHouseflag)) {
 			if (mEditHouseflag.equals("0")) {
@@ -227,6 +209,28 @@ public class HouseDetailInfoActivity extends BaseActivity {
 
 			}
 		});
+		
+		Button fullScreen = (Button) findViewById(R.id.id_add_rent_house);
+		fullScreen.setVisibility(View.VISIBLE);
+		fullScreen.setBackgroundResource(R.drawable.title_bar_full_screen_icon);
+		fullScreen.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Intent loadIntent = new Intent(HouseDetailInfoActivity.this,
+				// LoadUrlTestActivity.class);
+				// loadIntent.putExtra("url",
+				// "http://www.guardts.com/output/html5.html");
+				// loadIntent.putExtra("tab_name", "全景图");
+				// startActivity(loadIntent);
+
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse("http://www.guardts.com/output/html5.html");
+				intent.setData(content_url);
+				startActivity(intent);
+			}
+		});
 
 	}
 
@@ -327,6 +331,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 							intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
 							intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
 							intent.putExtra("house_price", mHouseInfo.getHousePrice());
+							intent.putExtra("rent_type", mHouseInfo.getHouseType());
 							startActivity(intent);
 							finish();
 						} else {
@@ -619,7 +624,12 @@ public class HouseDetailInfoActivity extends BaseActivity {
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));
 					mHouseInfo.setHousePrice(object.getString("RLocationDescription"));
+					mHouseInfo.setHouseType(object.getString("RRentType"));
+				}else{
+					Toast.makeText(HouseDetailInfoActivity.this, "该房屋已下架！", Toast.LENGTH_LONG).show();
+					finish();
 				}
+				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

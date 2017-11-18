@@ -2,9 +2,7 @@ package tenant.guardts.house.util;
 
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.security.MessageDigest;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +11,6 @@ import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import android.util.Log;
 import android.util.Xml;
 
 public class UtilTool {
@@ -42,6 +39,21 @@ public class UtilTool {
 			return null;
 		}
 	}
+	
+	public static String formatDuring(long mss) {  
+	    long days = mss / (1000 * 60 * 60 * 24);  
+	    long hours = (mss % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);  
+	    long minutes = (mss % (1000 * 60 * 60)) / (1000 * 60);  
+	    long seconds = (mss % (1000 * 60)) / 1000;  
+	    return days + " days " + hours + " hours " + minutes + " minutes "  
+	            + seconds + " seconds ";  
+	}  
+	
+	public static long formatDuringToHour(long mss){
+		long hours = mss / (1000 * 60 * 60);
+		return hours;
+	}
+	
 	
 	/** 
      * ת���ֽ�����Ϊ16�����ִ� 
