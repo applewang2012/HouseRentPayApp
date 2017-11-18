@@ -31,6 +31,7 @@
 	        </FrameLayout>
 
         <TextView
+            android:id="@+id/id_input_number_open_lock_tile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"

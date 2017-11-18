@@ -871,11 +871,16 @@ public class MapRentHouseActivity extends BaseActivity
 		if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND || result.getAllPoi() == null) {
 			return;
 		}
-		LogUtil.e("mingguo", "House fragment  onGetPoiResult  " + result.error);
+		LogUtil.e("mingguo", "House fragment  onGetPoiResult  " + result.error+" poi size  "+result.getAllPoi().size());
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			if (result.getAllPoi().get(0).location == null){
+				Toast.makeText(MapRentHouseActivity.this, "抱歉，未搜索到相关信息", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (result.getAllPoi().size() > 0) {
 				mCurrentLatLng = result.getAllPoi().get(0).location;
 			}
+			
 			mBaiduMap.clear();
 			startGetLocationFromHouse();
 			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);

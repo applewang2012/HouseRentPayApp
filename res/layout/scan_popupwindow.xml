@@ -34,7 +34,7 @@
             android:layout_height="@dimen/base_dimen_70"
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@drawable/input_btn_pressed"
+            android:background="@drawable/item_blue_button_no_corner_selector"
             android:text="立即扫描"
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_32" />
@@ -46,9 +46,9 @@
             android:layout_gravity="right"
             android:layout_marginLeft="@dimen/base_dimen_10"
             android:layout_marginRight="@dimen/base_dimen_20"
-            android:background="@drawable/popup_input_idcard_btn_bg"
+            android:background="@drawable/item_gray_button_no_corner_selector"
             android:text="取消"
-            android:textColor="@drawable/btn_text_selector" />
+            android:textColor="#337ffd" />
     </FrameLayout>
 
 </LinearLayout>

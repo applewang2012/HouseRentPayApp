@@ -639,16 +639,9 @@ public class HomeActivity extends BaseActivity {
 			// getOpenDoorRequest("0201002200100002");
 			Bundle bundle = data.getExtras();
 			String scanResult = bundle.getString("result");
-			
 			Toast.makeText(this, scanResult, Toast.LENGTH_LONG).show();
-		
-
 			LogUtil.e("mingguo", "scan  result  " + scanResult);
 			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
-
-			LogUtil.e("mingguo", "scan  result  " + scanResult);
-			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=0201002200100003
-
 			int pos = scanResult.lastIndexOf("=");
 			mLockNumber = scanResult.substring(pos + 1);
 			LogUtil.e("mingguo", "scan  result pos " + pos + " lockNo  " + mLockNumber);

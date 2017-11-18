@@ -39,6 +39,7 @@ import org.kxml2.kdom.Node;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -100,6 +101,13 @@ public class DataModel {
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
+				//修复static被回收的bug
+				if (mUrl != null && !mUrl.startsWith("http")){
+					SharedPreferences sharedata = mContext.getSharedPreferences("user_info", 0);
+					CommonUtil.mUserHost = sharedata.getString("user_host", "");
+					mUrl = CommonUtil.mUserHost +mUrl;
+				}
+				
 				 Element[] header = new Element[1]; 
 	                header[0] = new Element().createElement(CommonUtil.NAMESPACE, "Authentication"); 
 	                
@@ -141,7 +149,6 @@ public class DataModel {
 				String resultString = valueObject.getProperty(0).toString();
 				if (resultString != null && resultString.contains("headerError")){
 					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error from header !");
-					LogUtil.e("mingguo", "exception  action   "+mSoapAction+" error from header !");
 					return null;
 				}
 				Activity activity = (Activity) mContext;
@@ -375,7 +382,7 @@ public class DataModel {
 	}
 	
 	
-	public static boolean isNetworkAvailable(Context context) {  
+	public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);  
         if (connectivity != null) {  
             NetworkInfo info = connectivity.getActiveNetworkInfo();  

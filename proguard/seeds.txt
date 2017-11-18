@@ -23131,6 +23131,7 @@ tenant.guardts.house.R$drawable: int register_user_password
 tenant.guardts.house.R$drawable: int register_user_password_identify
 tenant.guardts.house.R$drawable: int rights
 tenant.guardts.house.R$drawable: int scan_house_qrcode_icon
+tenant.guardts.house.R$drawable: int scan_pupopwindow_bg
 tenant.guardts.house.R$drawable: int scan_qrcode_house_logo
 tenant.guardts.house.R$drawable: int search
 tenant.guardts.house.R$drawable: int search_bar_icon
@@ -23199,6 +23200,7 @@ tenant.guardts.house.R$id: int btn_detail
 tenant.guardts.house.R$id: int btn_history
 tenant.guardts.house.R$id: int btn_input_idcard_cancel
 tenant.guardts.house.R$id: int btn_input_idcard_confirm
+tenant.guardts.house.R$id: int btn_scan
 tenant.guardts.house.R$id: int btn_withdraw
 tenant.guardts.house.R$id: int button_play
 tenant.guardts.house.R$id: int button_replay
@@ -23276,6 +23278,7 @@ tenant.guardts.house.R$id: int fee
 tenant.guardts.house.R$id: int fill
 tenant.guardts.house.R$id: int fixHeight
 tenant.guardts.house.R$id: int fixWidth
+tenant.guardts.house.R$id: int fl
 tenant.guardts.house.R$id: int forget_password
 tenant.guardts.house.R$id: int front_surfaceview
 tenant.guardts.house.R$id: int gallery01
@@ -23395,7 +23398,10 @@ tenant.guardts.house.R$id: int id_house_owner
 tenant.guardts.house.R$id: int id_house_owner_content
 tenant.guardts.house.R$id: int id_house_status
 tenant.guardts.house.R$id: int id_house_type
+tenant.guardts.house.R$id: int id_idcard_input_content
 tenant.guardts.house.R$id: int id_input_lock_number
+tenant.guardts.house.R$id: int id_input_number_open_lock_tile
+tenant.guardts.house.R$id: int id_input_price
 tenant.guardts.house.R$id: int id_input_verify_code
 tenant.guardts.house.R$id: int id_login_password
 tenant.guardts.house.R$id: int id_login_user_button
@@ -23419,6 +23425,7 @@ tenant.guardts.house.R$id: int id_order_detail_contacn_name
 tenant.guardts.house.R$id: int id_order_detail_contacn_phone
 tenant.guardts.house.R$id: int id_order_detail_contact
 tenant.guardts.house.R$id: int id_order_detail_end_name
+tenant.guardts.house.R$id: int id_order_detail_modify_button
 tenant.guardts.house.R$id: int id_order_detail_owner_name
 tenant.guardts.house.R$id: int id_order_detail_owner_phone
 tenant.guardts.house.R$id: int id_order_detail_pay_monkey
@@ -23813,6 +23820,7 @@ tenant.guardts.house.R$layout: int oliveapp_database_image_fanpai
 tenant.guardts.house.R$layout: int oliveapp_database_image_leiizhengjianzhao
 tenant.guardts.house.R$layout: int open_lock_loading_layout
 tenant.guardts.house.R$layout: int open_lock_loading_layout2
+tenant.guardts.house.R$layout: int order_input_price_editview
 tenant.guardts.house.R$layout: int pay_result
 tenant.guardts.house.R$layout: int plugin_camera_album
 tenant.guardts.house.R$layout: int plugin_camera_gallery
@@ -23828,6 +23836,7 @@ tenant.guardts.house.R$layout: int register_user_step2_layout
 tenant.guardts.house.R$layout: int register_user_step3_layout
 tenant.guardts.house.R$layout: int register_username
 tenant.guardts.house.R$layout: int rent_to_house_list_item_layout
+tenant.guardts.house.R$layout: int scan_popupwindow
 tenant.guardts.house.R$layout: int select_city_frist_list_item
 tenant.guardts.house.R$layout: int select_city_item_city
 tenant.guardts.house.R$layout: int select_city_list_item
@@ -23921,6 +23930,7 @@ tenant.guardts.house.R$string: int download_title
 tenant.guardts.house.R$string: int download_unknown_title
 tenant.guardts.house.R$string: int edit_idcard_input
 tenant.guardts.house.R$string: int edit_input
+tenant.guardts.house.R$string: int edit_input_price_area
 tenant.guardts.house.R$string: int edit_lock_number_input
 tenant.guardts.house.R$string: int finish
 tenant.guardts.house.R$string: int hello_world
@@ -24117,6 +24127,7 @@ tenant.guardts.house.R$string: int wifi_recommended_body
 tenant.guardts.house.R$string: int wifi_recommended_title
 tenant.guardts.house.R$string: int wifi_required_body
 tenant.guardts.house.R$string: int wifi_required_title
+tenant.guardts.house.R$string: int write_idcard_to_lock_text
 tenant.guardts.house.R$string: R$string()
 tenant.guardts.house.R$style
 tenant.guardts.house.R$style: int AlertDialog
@@ -24335,6 +24346,7 @@ tenant.guardts.house.headergridview.StickyGridHeadersGridView$SavedState: androi
 tenant.guardts.house.model.AddCardStatus
 tenant.guardts.house.model.AddCardStatus: java.lang.String ret
 tenant.guardts.house.model.AddCardStatus: java.lang.String msg
+tenant.guardts.house.model.AddIDCardResult
 tenant.guardts.house.model.ApplyForCheckOut
 tenant.guardts.house.model.ApplyForCheckOut: java.lang.String ret
 tenant.guardts.house.model.ApplyForCheckOut: java.lang.String msg
@@ -24479,6 +24491,16 @@ tenant.guardts.house.view.HomeFragmentListView
 tenant.guardts.house.view.HomeFragmentListView: HomeFragmentListView(android.content.Context,android.util.AttributeSet,int)
 tenant.guardts.house.view.HomeFragmentListView: HomeFragmentListView(android.content.Context,android.util.AttributeSet)
 tenant.guardts.house.view.HomeFragmentListView: HomeFragmentListView(android.content.Context)
+tenant.guardts.house.view.PriceEditText
+tenant.guardts.house.view.PriceEditText: PriceEditText(android.content.Context)
+tenant.guardts.house.view.PriceEditText: PriceEditText(android.content.Context,android.util.AttributeSet)
+tenant.guardts.house.view.PriceEditText: PriceEditText(android.content.Context,android.util.AttributeSet,int)
+tenant.guardts.house.view.PriceEditText: double getDoublePrice()
+tenant.guardts.house.view.PriceEditText: java.lang.String getStringPrice()
+tenant.guardts.house.view.PriceEditText: java.lang.String getStringYuan()
+tenant.guardts.house.view.PriceEditText: void setPrice(java.lang.String)
+tenant.guardts.house.view.PriceEditText: void setPrice(java.lang.Double)
+tenant.guardts.house.view.PriceEditText: void setPrice(long)
 tenant.guardts.house.wxapi.HousePayActivity
 tenant.guardts.house.wxapi.HousePayActivity: HousePayActivity()
 tenant.guardts.house.wxapi.RechargeActivity

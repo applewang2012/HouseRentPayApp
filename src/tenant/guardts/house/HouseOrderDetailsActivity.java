@@ -59,6 +59,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private TextView mOrderPriceTextView;
 	private String mOrderModifyPrice;
 	private Button mModifyPriceButton;
+	private LinearLayout mIdcardContent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		phone = (TextView) view.findViewById(R.id.id_button_contact_owner_show_phone);
 		contact = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
 		cancel = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
+		mIdcardContent = (LinearLayout)findViewById(R.id.id_idcard_input_content);
+		
 		LinearLayout passwordContent = (LinearLayout) findViewById(R.id.id_door_password_content);
 		TextView password = (TextView) findViewById(R.id.door_password);
 
@@ -140,7 +143,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				showModifyPriceDialog();
-				
 			}
 		});
 		button1 = (Button) findViewById(R.id.id_order_detail_button1);
@@ -200,7 +202,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				if (edit.getText() != null && edit.getText().length() > 0){
 					mOrderModifyPrice = edit.getText().toString();
 					mOrderPriceTextView.setText("¥ " + edit.getText().toString());
+					getPayRateDesc(edit.getText().toString());
 				}
+				
 				//Toast.makeText(getApplicationContext(), "你输入的是: " + edit.getText().toString(), Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -220,12 +224,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	protected void initScanPupopWindow() {
 		setBackgroundAlpha(0.2f);
 
-		View scanView = View.inflate(this, R.layout.scan_popupwindow, null);
+		View scanView = getLayoutInflater().inflate(R.layout.scan_popupwindow, null);
 		popupWindow = new PopupWindow(scanView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
+		
+		
 		Button scan=(Button)scanView. findViewById(R.id.btn_scan);
 		Button  cancel=(Button)scanView. findViewById(R.id.btn_cancel);
-		
 		
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
 		popupWindow.setOnDismissListener(new OnDismissListener() {
@@ -242,7 +247,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(HouseOrderDetailsActivity.this, CaptureActivity.class);
 				intent.putExtra("flag", "0");//是否显示扫描页面下边图标，0，不显示
-				
 				startActivityForResult(intent,CommonUtil.mScanCodeRequestCode);
 				popupWindow.dismiss();
 				
@@ -350,6 +354,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 */
 	public void updateStatus(TextView status, Button button1, Button button2) {
 		mModifyPriceButton.setVisibility(View.GONE);
+		mIdcardContent.setVisibility(View.GONE);
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			status.setText("待确认");
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -463,6 +468,10 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 				}
 			});
+			if (mDetailType.equals("renter")){
+				mIdcardContent.setVisibility(View.VISIBLE);
+			}
+			
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_EVALUATION)) {
 			status.setText("待评价");
 			status.setTextColor(Color.parseColor("#8be487"));
@@ -950,7 +959,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			public void onClick(View v) {
 				String renterIdcard = mOrderDetail.getRenterIdcard();
 				if(!TextUtils.isEmpty(renterIdcard)&&!TextUtils.isEmpty(deviceID)){
-					
 					addIDCardToDevice(renterIdcard, deviceID);
 				}
 
@@ -1004,13 +1012,23 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				}
 			}
 			if(requestCode==CommonUtil.mScanCodeRequestCode){
-				String result = data.getStringExtra("result");
-				Log.e("mingguo", result);
-				String[] split = result.split("=");
-				deviceID = split[3];
-				if(!TextUtils.isEmpty(deviceID)){
+				Bundle bundle = data.getExtras();
+				String scanResult = bundle.getString("result");
+				LogUtil.e("mingguo", "scan  result  " + scanResult);
+				// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
+				int pos = scanResult.lastIndexOf("=");
+				deviceID = scanResult.substring(pos + 1);
+				LogUtil.e("mingguo", "scan  result pos " + pos + " lockNo  " + deviceID);
+				if (deviceID != null && deviceID.length() > 2) {
 					intputIDCard();
 				}
+				
+//				String result = data.getStringExtra("result");
+//				String[] split = result.split("=");
+//				deviceID = split[3];
+//				if(!TextUtils.isEmpty(deviceID)){
+//					intputIDCard();
+//				}
 				
 				
 			}

@@ -137,19 +137,19 @@ public class SearchResultActivity extends BaseActivity {
 	private void initData() {
 		
 		List<String> typeItem = new ArrayList<String>();
-		typeItem.add("全部");
+		typeItem.add("房型");
 		typeItem.add("一室");
 		typeItem.add("两室");
 		typeItem.add("三室");
 
 				List<String> rentItem = new ArrayList<String>();
-				rentItem.add("全部");
+				rentItem.add("租赁类型");
 				rentItem.add("日租");
 				rentItem.add("月租");
 //				for (int i = 0; i < grads2.size(); i++) {
 //					gradItems2.add(grads2.get(i).getGradName());
 //				}
-		final SingleListFilterView rentTypeFilter = new SingleListFilterView(this, rentItem, "全部");
+		final SingleListFilterView rentTypeFilter = new SingleListFilterView(this, rentItem, "租赁类型");
 		rentTypeFilter.setOnSelectListener(new SingleListFilterView.OnSelectListener() {
 
 			@Override
@@ -158,7 +158,7 @@ public class SearchResultActivity extends BaseActivity {
 			}
 		});
 		
-		final SingleListFilterView typeFilter = new SingleListFilterView(this, typeItem, "全部");
+		final SingleListFilterView typeFilter = new SingleListFilterView(this, typeItem, "房型");
 		typeFilter.setOnSelectListener(new SingleListFilterView.OnSelectListener() {
 
 			@Override

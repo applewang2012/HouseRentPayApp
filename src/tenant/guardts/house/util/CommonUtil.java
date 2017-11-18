@@ -26,8 +26,6 @@ public class CommonUtil {
      */
     public static int playPosition=-1;
     
-    private static  Canvas canvas;
-    
     public static String DOWLOAD_URL = null; //"http://acj2.pc6.com/pc6_soure/2017-6/com.dybag_25.apk";
     public static String GURADTS_DOWNLOAD_DIR = "guardtsdownload";
     public static final String NAMESPACE = "http://tempuri.org/";
@@ -88,11 +86,6 @@ public class CommonUtil {
     public static String ORDER_STATUS_CHECKOUTED = "5"; //已退房
     public static String ORDER_STATUS_COMPLETE = "11"; //已完成
     
-
-	public static void setCanvas(Canvas canvas) {
-		CommonUtil.canvas = canvas;
-	}
-
 	public static String getDefaultDownloadPath(String downloadUrl,Context context) {
 		String path = null;
 

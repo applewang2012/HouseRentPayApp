@@ -1,5 +1,7 @@
 package tenant.guardts.house;
 
+import com.baidu.mapapi.map.Text;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Camera;
@@ -36,9 +38,6 @@ public class DoorNumberLockFragment extends BaseFragment {
 	private ImageView mFlashIcon;
 	private TextView mFlashText;
 	private ActionOperationInterface mAction;
-	
-	
-	
 	
 	
 	
@@ -111,6 +110,13 @@ public class DoorNumberLockFragment extends BaseFragment {
 				getActivity().finish();
 			}
 		});
+		TextView title = (TextView)mRootView.findViewById(R.id.id_input_number_open_lock_tile);
+		
+		String flag = getActivity().getIntent().getStringExtra("flag");
+		if (flag != null && flag.equals("0")){
+			openButton.setText("立即录入");
+			title.setText("输入编码");
+		}
 		
 		LinearLayout flashButton = (LinearLayout)mRootView.findViewById(R.id.capture_flash_button);
 		mFlashIcon = (ImageView)mRootView.findViewById(R.id.capture_flash_icon);

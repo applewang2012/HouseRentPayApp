@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/base_dimen_590"
-    android:layout_height="@dimen/base_dimen_460"
+    android:layout_height="wrap_content"
     android:background="@drawable/popup_input_idcard_bg"
     android:orientation="vertical" >
 
@@ -21,16 +21,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_dimen_20"
-        android:gravity="center"
-        android:lineSpacingExtra="@dimen/base_dimen_16"
-        android:lines="2"
-        
-        android:text="请将您的身份证至于门锁中间滴声后即成功录入"
-        android:layout_marginLeft="@dimen/base_dimen_85"
-        android:layout_marginRight="@dimen/base_dimen_85"
-        
+        android:lineSpacingExtra="@dimen/base_dimen_10"
+        android:text="@string/write_idcard_to_lock_text"
+        android:layout_marginLeft="@dimen/base_dimen_45"
+        android:layout_marginRight="@dimen/base_dimen_45"
         android:textColor="#333333"
         android:textSize="@dimen/base_dimen_30" />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:layout_marginTop="@dimen/base_dimen_20"
+        android:background="#a0a0a0" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -45,8 +47,8 @@
             android:layout_height="@dimen/base_dimen_70"
             android:layout_gravity="left"
             android:layout_marginLeft="@dimen/base_dimen_20"
-            android:background="@drawable/input_btn_pressed"
-            android:text="确认"
+            android:background="@drawable/item_blue_button_no_corner_selector"
+            android:text="录入"
             android:textColor="#ffffff"
             android:textSize="@dimen/base_dimen_32" />
 
@@ -57,9 +59,9 @@
             android:layout_gravity="right"
             android:layout_marginLeft="@dimen/base_dimen_10"
             android:layout_marginRight="@dimen/base_dimen_20"
-            android:background="@drawable/popup_input_idcard_btn_bg"
+            android:background="@drawable/item_gray_button_no_corner_selector"
             android:text="取消"
-            android:textColor="@drawable/btn_text_selector" />
+            android:textColor="#337ffd" />
     </FrameLayout>
 
 </LinearLayout>

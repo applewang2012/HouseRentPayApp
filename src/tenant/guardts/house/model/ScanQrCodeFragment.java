@@ -100,22 +100,24 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	
 	private void initView(){
 		FrameLayout fl=(FrameLayout) mRootView.findViewById(R.id.fl);
-		
+		TextView titlebar = (TextView) mRootView.findViewById(R.id.id_titlebar);
+		titlebar.setText("扫一扫开锁");
 		String flag = mActivity.getIntent().getStringExtra("flag");
+		mNumberButton = (CheckBox)mRootView.findViewById(R.id.id_open_lock_number_button);
 		if(flag!=null){
 			if(flag.equals("0")){
-				fl.setVisibility(View.GONE);
+				//fl.setVisibility(View.GONE);
+				titlebar.setText("录入身份证");
+				mNumberButton.setText("输入编码");
 			}
 		}else{
 			fl.setVisibility(View.VISIBLE);
 		}
-		TextView titlebar = (TextView) mRootView.findViewById(R.id.id_titlebar);
-		titlebar.setText("扫一扫开锁");
 		
 		viewfinderView = (ViewfinderView) mRootView.findViewById(R.id.viewfinder_view);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(getActivity());
-		mNumberButton = (CheckBox)mRootView.findViewById(R.id.id_open_lock_number_button);
+		
 		LinearLayout flashButton = (LinearLayout)mRootView.findViewById(R.id.capture_flash_button);
 		mFlashIcon = (ImageView)mRootView.findViewById(R.id.capture_flash_icon);
 		mFlashText = (TextView)mRootView.findViewById(R.id.capture_flash_text);

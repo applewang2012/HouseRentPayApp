@@ -187,12 +187,12 @@
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/id_idcard_input_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_dimen_20"
                 android:layout_marginLeft="@dimen/base_dimen_30"
                 android:layout_marginTop="@dimen/base_dimen_20" 
-               
                 >
 
                 <TextView
