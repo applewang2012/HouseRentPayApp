@@ -23394,6 +23394,8 @@ tenant.guardts.house.R$id: int id_house_detail_show
 tenant.guardts.house.R$id: int id_house_direction
 tenant.guardts.house.R$id: int id_house_floor
 tenant.guardts.house.R$id: int id_house_location
+tenant.guardts.house.R$id: int id_house_mode_content
+tenant.guardts.house.R$id: int id_house_mode_show
 tenant.guardts.house.R$id: int id_house_owner
 tenant.guardts.house.R$id: int id_house_owner_content
 tenant.guardts.house.R$id: int id_house_status
