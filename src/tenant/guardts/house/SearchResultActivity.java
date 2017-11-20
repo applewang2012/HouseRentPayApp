@@ -240,7 +240,6 @@ public class SearchResultActivity extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 			Bundle bundle = data.getExtras();
@@ -446,7 +445,6 @@ public class SearchResultActivity extends BaseActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
 			super.handleMessage(msg);
 			if (msg.what == 100) {
 				if (msg.obj != null) {
@@ -501,7 +499,6 @@ public class SearchResultActivity extends BaseActivity {
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
-		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
 		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
@@ -516,7 +513,6 @@ public class SearchResultActivity extends BaseActivity {
 
 	@Override
 	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
 		super.onStatusError(action, error);
 		LogUtil.w("mingguo", "on status error  action  " + error);
 	}
