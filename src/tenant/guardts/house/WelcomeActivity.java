@@ -54,8 +54,8 @@ public class WelcomeActivity extends BaseActivity {
 		SharedPreferences sharedata = getApplicationContext().getSharedPreferences("user_info", 0);
 		mUsername = sharedata.getString("user_name", "");
 		mPassword = sharedata.getString("user_password", "");
-		//CommonUtil.mUserHost = sharedata.getString("user_host", "");
-		CommonUtil.mUserHost = "http://qxw2332340157.my3w.com/Services.asmx/";
+		CommonUtil.mUserHost = sharedata.getString("user_host", "");
+		//CommonUtil.mUserHost = "http://qxw2332340157.my3w.com/Services.asmx/";
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 	    XGPushConfig.enableDebug(this, true);
 	    registerXinge();
