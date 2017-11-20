@@ -82,27 +82,27 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		TextView priceText = (TextView) findViewById(R.id.id_pay_price_show);
 
 		if (price == null || price.equals("null")) {
-
 			priceText.setText("0.0元");
 		} else {
-
 			priceText.setText(price + "元");
 		}
-		
 		CommonUtil.ORDER_MONKEY = price;
 		CommonUtil.OWNER_IDCARD = ownerId;
 		try {
-			int dotInex = price.indexOf(".");
-			if (dotInex >= 0) {
-				String priceInt = price.substring(0, dotInex);
-				realPrice = priceInt + "00";
-			} else {
-				Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
-				return;
-			}
+			Float priceFloat = Float.valueOf(price);
+			realPrice = (int)(priceFloat * 100)+"";
+//			int dotInex = price.indexOf(".");
+//			if (dotInex >= 0) {
+//				String priceInt = price.substring(0, dotInex);
+//				realPrice = priceInt + "00";
+//			} else {
+//				Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
+//				return;
+//			}
 
 			LogUtil.w("mingguo", "pay activity  price int   " + realPrice);
 		} catch (Exception e) {
+			Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 		final View loadingView = (View)findViewById(R.id.id_data_loading);

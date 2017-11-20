@@ -5029,6 +5029,8 @@ tenant.guardts.house.HomeActivity:
     596:607:private java.lang.String getUserIdNo(java.lang.String)
     729:730:public void setSelectedCity(java.lang.String)
     733:733:public java.lang.String getSelectedCity()
+tenant.guardts.house.HomeSearchActivity:
+    private java.lang.String mModeIndex
 tenant.guardts.house.HouseDetailInfoActivity:
     private java.lang.String mHouseNo
     private java.lang.String mUsername
@@ -5129,7 +5131,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
-    92:101:private void testHelloword()
+    93:102:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
