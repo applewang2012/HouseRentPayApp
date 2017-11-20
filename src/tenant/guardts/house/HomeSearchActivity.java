@@ -10,6 +10,7 @@ import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -26,7 +27,10 @@ public class HomeSearchActivity extends BaseActivity {
 
 	private TextView mTitleBar;
 	private String [] mOwnerType = new String[3];
-	private String mTypeIndex;
+	private String [] mHouseMode = new String[3];
+	private String mTypeIndex;//租赁类型
+	private String mModeIndex;//房型
+	
 	private Calendar cal = Calendar.getInstance();
 	private SimpleDateFormat df;
 	private long mStartTimeClipse, mEndTimeClipse;
@@ -53,6 +57,9 @@ public class HomeSearchActivity extends BaseActivity {
 		mOwnerType[0] = "日租房";
 		mOwnerType[1] = "月租房";
 		mOwnerType[2] = "时租房";
+		mHouseMode[0]="一室";
+		mHouseMode[1]="两室";
+		mHouseMode[2]="三室";
 	}
 	
 	private void showRentTypeAlertDialog(final TextView text,final String[] items) {  
@@ -63,7 +70,7 @@ public class HomeSearchActivity extends BaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mTypeIndex = which+"";
-				text.setText("   "+items[which]);
+				text.setText(items[which]);
 				mStartTimeText.setText("请选择入住时间");
 				mStartTimeClipse = 0;
 				mEndTimeText.setText("请选择退房时间");
@@ -72,6 +79,21 @@ public class HomeSearchActivity extends BaseActivity {
 		});
 		builder.show();
 	}
+	private void showHouseModeAlertDialog(final TextView text,final String[] items) {  
+		  AlertDialog.Builder builder =new AlertDialog.Builder(HomeSearchActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+		  builder.setItems(items, new DialogInterface.OnClickListener() {
+			
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				
+					text.setText(items[which]);
+			}
+		});
+		builder.show();
+	}
+	
 	
 	private void initView(){
 		LinearLayout selectRentType = (LinearLayout)findViewById(R.id.id_home_seach_type_content);
@@ -81,6 +103,15 @@ public class HomeSearchActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				showRentTypeAlertDialog(showRentType , mOwnerType);
+			}
+		});
+		LinearLayout selectHouseMode = (LinearLayout)findViewById(R.id.id_house_mode_content);
+		showHouseMode = (TextView)findViewById(R.id.id_house_mode_show);
+		selectHouseMode.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showHouseModeAlertDialog(showHouseMode , mHouseMode);
 			}
 		});
 		mStartTimeText = (TextView)findViewById(R.id.id_home_seach_start_time);
@@ -112,6 +143,8 @@ public class HomeSearchActivity extends BaseActivity {
 					intent.putExtra("search_tag", keywordInput.getEditableText().toString());
 					intent.putExtra("start_time", mStartTimeText.getText());
 					intent.putExtra("end_time", mEndTimeText.getText());
+					intent.putExtra("rent_type",showRentType.getText().toString());//租赁类型
+					intent.putExtra("house_mode", showHouseMode.getText().toString());//房型
 					startActivity(intent);
 				}
 			}
@@ -221,11 +254,16 @@ public class HomeSearchActivity extends BaseActivity {
 			updateEndDate();
 		}
 	};
+	private TextView showHouseMode;
 	
 	private boolean checkInputContent(){
 		
 		if (mTypeIndex == null || mTypeIndex.equals("")){
 			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		if ("请选择房型".equals(showHouseMode.getText().toString())){
+			Toast.makeText(getApplicationContext(), "请选择房类型", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		

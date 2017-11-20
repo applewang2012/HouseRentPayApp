@@ -6,42 +6,95 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-
-
     <LinearLayout
         android:id="@+id/id_home_seach_type_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_110"
         android:layout_marginTop="@dimen/base_dimen_10"
-        android:background="#ffffff" >
+        android:background="#ffffff"
+         android:orientation="horizontal"
+        android:paddingLeft="@dimen/base_dimen_10" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_30"
-            android:gravity="center_vertical"
+            android:layout_weight="3"
+            android:gravity="center_vertical|left"
             android:text="租赁类型"
             android:textColor="#000000"
             android:textSize="@dimen/base_dimen_30" />
 
         <TextView
             android:id="@+id/id_home_seach_type_show"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/base_dimen_20"
-            android:gravity="center_vertical"
+            android:layout_weight="4"
+            android:gravity="left|center_vertical"
             android:text="请选择租赁类型"
             android:textColor="#444444"
             android:textSize="@dimen/base_dimen_30" />
 
-        <ImageView
-            android:layout_width="@dimen/base_dimen_20"
-            android:layout_height="@dimen/base_dimen_34"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginLeft="@dimen/base_dimen_300"
-            android:background="@drawable/house_list_more_icon" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_20"
+                android:layout_height="@dimen/base_dimen_34"
+                 android:layout_gravity="center"
+                android:background="@drawable/house_list_more_icon" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_house_mode_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_110"
+        android:layout_marginTop="@dimen/base_dimen_10"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/base_dimen_10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:layout_weight="3"
+            android:gravity="center_vertical|left"
+            android:text="房    型"
+            android:textColor="#000000"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <TextView
+            android:id="@+id/id_house_mode_show"                                     
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_20"
+            android:layout_weight="4"
+            android:gravity="left|center_vertical"
+            android:text="请选择房型"
+            android:textColor="#444444"
+            android:textSize="@dimen/base_dimen_30" />
+        
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="@dimen/base_dimen_20"
+                android:layout_height="@dimen/base_dimen_34"
+                android:layout_gravity="center"
+                android:background="@drawable/house_list_more_icon" />
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -80,10 +133,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:text="请选择入住时间"
             android:textColor="#444444"
-            android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
 
         <View
@@ -96,10 +149,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:text="请选择退房时间"
             android:textColor="#444444"
-            android:clickable="true"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
@@ -110,19 +163,21 @@
         android:layout_marginTop="@dimen/base_dimen_10"
         android:background="#ffffff"
         android:hint="请输入房屋地址关键字"
-        android:textSize="@dimen/base_dimen_30"
+        android:paddingLeft="@dimen/base_dimen_70"
         android:textColorHint="#777777"
-        android:paddingLeft="@dimen/base_dimen_70" >
+        android:textSize="@dimen/base_dimen_30" >
     </EditText>
+
     <Button
         android:id="@+id/id_home_start_seach_button"
         android:layout_width="@dimen/base_dimen_680"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:layout_height="@dimen/base_dimen_80"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/base_dimen_40"
         android:background="@drawable/item_blue_button_no_corner_selector"
+        android:gravity="center"
         android:text="立即搜索"
         android:textColor="#ffffff"
         android:textSize="@dimen/base_dimen_34" />
+
 </LinearLayout>
