@@ -136,7 +136,7 @@
     
        <include
 	        android:id="@+id/id_data_loading"
-	        android:visibility="invisible"
+	        android:visibility="visible"
 	        layout="@layout/layout_loading_dialog"
        		/> 
 

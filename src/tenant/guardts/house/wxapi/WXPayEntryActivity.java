@@ -77,16 +77,11 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         mFinishPay = (Button)v.findViewById(R.id.id_button_finish_pay);
         LogUtil.w("mingguo", "CommonUtil.mPayHouseOrderId  "+CommonUtil.mPayHouseOrderId+" CommonUtil.ORDER_TIME "+CommonUtil.ORDER_TIME+
         		" CommonUtil.ORDER_NO "+CommonUtil.ORDER_NO+" CommonUtil.ORDER_MONKEY "+CommonUtil.ORDER_MONKEY);
-        Toast.makeText(getApplicationContext(), "请点击完成，刷新订单信息", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "请点击完成", Toast.LENGTH_LONG).show();
         mFinishPay.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
-					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
-				}else{
-					//depositWalletRequestInfo(CommonUtil.ORDER_MONKEY);
-					updateWalletRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.ORDER_MONKEY);
-				}
+				finish();
 			}
 		});
     }
@@ -190,6 +185,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
 					setContentView(v);
 					initSuccessView(v);
+					//请求更新数据信息
+					mHandler.sendEmptyMessageDelayed(300, 1500);
 //					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 //				}else{
 //					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
@@ -257,7 +254,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 								if (walletValue != null && !walletValue.equals("")){
 									CommonUtil.mUserWallet = walletValue;
 									Toast.makeText(getApplicationContext(), "恭喜您充值成功", Toast.LENGTH_SHORT).show();
-									finish();
+									//finish();
 								}
 							}else{
 								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -298,7 +295,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 //								if (walletValue != null && !walletValue.equals("")){
 //									CommonUtil.mUserWallet = walletValue;
 									Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
-									finish();
+									//finish();
 //								}
 							}else{
 								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -309,6 +306,12 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					e.printStackTrace();
 				}
 				
+			}else if (msg.what == 300){
+				if (CommonUtil.mPayHouseOrderId != null && !CommonUtil.mPayHouseOrderId.equals("")){
+					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
+				}else{
+					updateWalletRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.ORDER_MONKEY);
+				}
 			}
 		}
 	};

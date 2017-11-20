@@ -65,7 +65,7 @@ public class CommonUtil {
     public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
     public static boolean version_test = false; //测试版本支付一分钱改成true
-    public static boolean verify_code_test = false; //测试版本支付一分钱改成true
+    public static boolean verify_code_test = false; //测试版本验证码改成true
     public static boolean mIsForceIdentifyUser = false;
     public static boolean mIsCancelRentIdentifyTest = false; //测试版本取消实名该成true
     
