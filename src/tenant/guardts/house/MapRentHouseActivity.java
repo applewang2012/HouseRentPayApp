@@ -743,8 +743,16 @@ public class MapRentHouseActivity extends BaseActivity
 			if (array != null) {
 				LogUtil.w("mingguo", "house  location  num   " + array.length());
 				for (int item = 0; item < array.length(); item++) {
-					Map<String, String> itemHouse = new HashMap<>();
 					JSONObject itemJsonObject = array.optJSONObject(item);
+					String lati = itemJsonObject.optString("Latitude");
+					String longi = itemJsonObject.optString("Longitude");
+					if (lati == null || lati.equals("") || lati.equalsIgnoreCase("null")){
+						continue;
+					}
+					if (longi == null || longi.equals("") || longi.equalsIgnoreCase("null")){
+						continue;
+					} 
+					Map<String, String> itemHouse = new HashMap<>();
 					itemHouse.put("ROwnerTel", itemJsonObject.optString("ROwnerTel"));
 					itemHouse.put("Latitude", Double.parseDouble(itemJsonObject.optString("Latitude"))+"");
 					itemHouse.put("Longitude", Double.parseDouble(itemJsonObject.optString("Longitude"))+"");

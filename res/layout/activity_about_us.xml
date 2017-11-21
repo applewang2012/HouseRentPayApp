@@ -11,10 +11,12 @@
         tools:context="${relativePackage}.${activityClass}" >
 
         <ImageView
+             android:id="@+id/id_about_us_check_test_icon"
             android:layout_width="@dimen/base_dimen_144"
             android:layout_height="@dimen/base_dimen_144"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/base_dimen_130"
+            android:clickable="true"
             android:src="@drawable/about_icon" />
 
         <TextView

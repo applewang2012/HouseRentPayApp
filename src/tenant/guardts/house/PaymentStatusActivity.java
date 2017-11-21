@@ -52,6 +52,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		mPresenter = new HoursePresenter(PaymentStatusActivity.this, this);
 		initView();
 		initEvent();
+		mHandler.sendEmptyMessageDelayed(300, 1500);
 	}
 
 	private void initEvent() {
@@ -60,8 +61,8 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 			@Override
 			public void onClick(View v) {
 				if (orderID != null)
-					
-				completeHouseRentAttributeInfo(orderID);
+					finish();
+				
 			}
 		});
 
@@ -141,48 +142,55 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 	}
 
 	Handler mHandler = new Handler() {
+
 		public void handleMessage(Message msg) {
 			if (msg.what == 818) {
-				
+
 				String value = (String) msg.obj;
 				Gson gson = new Gson();
 				CompleteStatus completeStatus = gson.fromJson(value, CompleteStatus.class);
 				try {
 					int ret = Integer.parseInt(completeStatus.ret);
 					if (ret == 0) {
-						if(!TextUtils.isEmpty(CommonUtil.OWNER_IDCARD)&&!TextUtils.isEmpty(CommonUtil.mRegisterIdcard)&&!TextUtils.isEmpty(price))
-						//updateWalletRequestInfo(CommonUtil.OWNER_IDCARD, CommonUtil.ORDER_MONKEY);
-						addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price, "1");
+						if (!TextUtils.isEmpty(CommonUtil.OWNER_IDCARD)
+								&& !TextUtils.isEmpty(CommonUtil.mRegisterIdcard) && !TextUtils.isEmpty(price))
+							// updateWalletRequestInfo(CommonUtil.OWNER_IDCARD,
+							// CommonUtil.ORDER_MONKEY);
+							addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price, "1");
 					} else {
 						Toast.makeText(PaymentStatusActivity.this, "订单提交失败", Toast.LENGTH_LONG).show();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-			}else if (msg.what == 819){
+
+			} else if (msg.what == 819) {
 				addBillLogRequestInfo(CommonUtil.mRegisterIdcard, CommonUtil.OWNER_IDCARD, price, "1");
-		}else if(msg.what == 100){
+			} else if (msg.what == 100) {
 				try {
-					JSONObject object = new JSONObject((String)msg.obj);
-					if (object != null){
+					JSONObject object = new JSONObject((String) msg.obj);
+					if (object != null) {
 						String ret = object.optString("ret");
-						if (ret != null){
-							if (ret.equals("0")){
-//								String walletValue = object.optString("fee");
-//								if (walletValue != null && !walletValue.equals("")){
-//									CommonUtil.mUserWallet = walletValue;
-									Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
-									finish();
-//								}
-							}else{
-								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						if (ret != null) {
+							if (ret.equals("0")) {
+								// String walletValue = object.optString("fee");
+								// if (walletValue != null &&
+								// !walletValue.equals("")){
+								// CommonUtil.mUserWallet = walletValue;
+								Toast.makeText(getApplicationContext(), "恭喜您订单更新成功", Toast.LENGTH_SHORT).show();
+								
+								// }
+							} else {
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！",
+										getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}
 						}
 					}
-				}catch (JSONException e) {
+				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+			}else if (msg.what == 300){
+				completeHouseRentAttributeInfo(orderID);
 			}
 		};
 	};

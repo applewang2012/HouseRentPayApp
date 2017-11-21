@@ -91,15 +91,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 		try {
 			Float priceFloat = Float.valueOf(price);
 			realPrice = (int)(priceFloat * 100)+"";
-//			int dotInex = price.indexOf(".");
-//			if (dotInex >= 0) {
-//				String priceInt = price.substring(0, dotInex);
-//				realPrice = priceInt + "00";
-//			} else {
-//				Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
-//				return;
-//			}
-
 			LogUtil.w("mingguo", "pay activity  price int   " + realPrice);
 		} catch (Exception e) {
 			Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
@@ -115,8 +106,11 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
 					ViewUtil.showLoadingView(HousePayActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-					if (CommonUtil.version_test){
-						startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
+					if (CommonUtil.version_pay_test){
+						if (realPrice != null && realPrice.length() > 0){
+							//测试支付，取钱的第一位
+							startPay(realPrice.subSequence(0, 1)+"", UtilTool.generateOrderNo(), "127.0.0.1");
+						}
 					}else{
 						startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
 					}

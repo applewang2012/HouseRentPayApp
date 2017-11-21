@@ -467,10 +467,7 @@ public class HomeActivity extends BaseActivity {
 			
 			return;
 		}
-		if (CommonUtil.verify_code_test || CommonUtil.version_test){
-			Toast.makeText(HomeActivity.this, "测试版本，暂不升级！", Toast.LENGTH_SHORT).show();
-			return;
-		}
+		
 		LogUtil.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile(this));
 		//+" delete database "+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
 			

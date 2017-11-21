@@ -495,7 +495,8 @@ public class MyFragment extends BaseFragment {
 		CommonUtil.mUserWallet = "";
 		CommonUtil.mBankName = "";
 		CommonUtil.mCardNo = "";
-		//CommonUtil.mUserHost = "";
+		CommonUtil.verify_code_test = false;
+		CommonUtil.version_pay_test = false;
 	}
 
 	@Override

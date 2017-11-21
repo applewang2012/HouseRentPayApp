@@ -196,7 +196,7 @@ public class RechargeActivity extends BaseActivity {
 					//CommonUtil.ORDER_MONKEY = mChargePrice+"00"; //真实价格
 					ViewUtil.showLoadingView(RechargeActivity.this, loadingView);
 					api = WXAPIFactory.createWXAPI(RechargeActivity.this, CommonUtil.APP_ID);
-					if (CommonUtil.version_test){
+					if (CommonUtil.version_pay_test){
 						startPay("1", UtilTool.generateOrderNo(), "127.0.0.1");
 					}else{
 						startPay(mChargePrice+"00", UtilTool.generateOrderNo(), "127.0.0.1");

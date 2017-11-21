@@ -23294,6 +23294,7 @@ tenant.guardts.house.R$id: int home_radiogrouop
 tenant.guardts.house.R$id: int home_search_container
 tenant.guardts.house.R$id: int house_history
 tenant.guardts.house.R$id: int icon_image
+tenant.guardts.house.R$id: int id_about_us_check_test_icon
 tenant.guardts.house.R$id: int id_about_us_check_version
 tenant.guardts.house.R$id: int id_about_us_current_version
 tenant.guardts.house.R$id: int id_about_us_service_content
