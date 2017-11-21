@@ -153,6 +153,10 @@ public class SearchResultActivity extends BaseActivity {
 		rentItem.add("月租");
 		rentItem.add("时租");
 
+		// for (int i = 0; i < grads2.size(); i++) {
+		// gradItems2.add(grads2.get(i).getGradName());
+		// }
+
 		final SingleListFilterView rentTypeFilter = new SingleListFilterView(this, rentItem, "全部");
 
 		rentTypeFilter.setOnSelectListener(new SingleListFilterView.OnSelectListener() {
