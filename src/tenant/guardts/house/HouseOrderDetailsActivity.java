@@ -442,7 +442,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_HAS_PAYED)) {
 			status.setText("已支付");
 			status.setTextColor(Color.parseColor("#de6262"));
-			button1.setText("查看详情");
+			button1.setText("一键续租");
 			button1.setVisibility(View.GONE);
 			button2.setText("申请退房");
 			button2.setVisibility(View.VISIBLE);
@@ -470,7 +470,19 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			});
 			if (mDetailType.equals("renter")){
 				mIdcardContent.setVisibility(View.VISIBLE);
+				button1.setVisibility(View.VISIBLE);
+				button1.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
 			}
+			
 			
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_EVALUATION)) {
 			status.setText("待评价");
@@ -479,9 +491,20 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
-			// button3.setText("立即评价");
-			// button3.setTextColor(Color.parseColor("#ffffff"));
-			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			if (mDetailType.equals("renter")){
+				button2.setVisibility(View.VISIBLE);
+				button2.setText("一键续租");
+				button2.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CANCELED)) {
 			status.setText("已取消");// ///////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -491,9 +514,20 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setVisibility(View.GONE);
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
-			// button3.setText("查看详情");
-			// button3.setTextColor(Color.parseColor("#ffffff"));
-			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			if (mDetailType.equals("renter")){
+				button2.setVisibility(View.VISIBLE);
+				button2.setText("一键续租");
+				button2.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_REJECTED)) {
 			status.setText("已拒绝");// ///////////////////////////////////////////////////////////////////////////////////
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -502,9 +536,20 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setVisibility(View.GONE);
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
-			// button3.setText("查看详情");
-			// button3.setTextColor(Color.parseColor("#ffffff"));
-			// button3.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			if (mDetailType.equals("renter")){
+				button2.setVisibility(View.VISIBLE);
+				button2.setText("一键续租");
+				button2.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)) {
 			status.setText("待退房");
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -524,6 +569,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 						}
 					});
 				}
+			}
+			if (mDetailType.equals("renter")){
+				mIdcardContent.setVisibility(View.VISIBLE);
 			}
 
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CHECKOUTED)) {
@@ -553,11 +601,39 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					startActivity(intent);
 				}
 			});
+			if (mDetailType.equals("renter")){
+				button1.setVisibility(View.VISIBLE);
+				button1.setText("一键续租");
+				button1.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)) {
 			status.setText("已过期");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
+			if (mDetailType.equals("renter")){
+				button2.setVisibility(View.VISIBLE);
+				button2.setText("一键续租");
+				button2.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)){
 			status.setText("已完成");
 			status.setTextColor(Color.parseColor("#de6262"));
@@ -580,6 +656,20 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				}
 				
 			});
+			if (mDetailType.equals("renter")){
+				button1.setVisibility(View.VISIBLE);
+				button1.setText("一键续租");
+				button1.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
+						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
+						startActivity(detailIntent);
+						
+					}
+				});
+			}
 		}
 		if (mDetailType.equals("renter")) {
 			tvServiceFee.setVisibility(View.GONE);

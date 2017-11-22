@@ -366,7 +366,7 @@
                 android:layout_width="@dimen/base_dimen_180"
                 android:layout_height="@dimen/base_dimen_70"
                 android:layout_marginLeft="@dimen/base_dimen_10"
-                android:background="@drawable/item_blue_button_no_corner_selector"
+                android:background="@drawable/item_gray_button_no_corner_selector"
                 android:gravity="center"
                 android:text="确认订单"
                 android:textColor="#444444"

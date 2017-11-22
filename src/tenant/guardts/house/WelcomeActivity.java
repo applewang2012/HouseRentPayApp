@@ -148,12 +148,11 @@ public class WelcomeActivity extends BaseActivity {
 			editor.commit();
 			CommonUtil.mUserArea = data.get(0)[0];
 			CommonUtil.mUserHost = data.get(1)[0];
-			LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
-//			Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-//			intent.putExtra("user_name", mUsername);
-//			intent.putExtra("user_password", mPassword);
-//			startActivity(intent);
-//			finish();
+			LogUtil.e("mingguo", "user host slect area = 1  "+CommonUtil.mUserHost);
+			if (CommonUtil.mIsHostTest){
+				CommonUtil.mUserHost = CommonUtil.mTestHost;
+				LogUtil.e("mingguo", "welcome activity  user test host  "+CommonUtil.mUserHost);
+			}
 			getUserInfo();
 			return;
 		}
@@ -172,7 +171,11 @@ public class WelcomeActivity extends BaseActivity {
 			    editor.commit();
 			    CommonUtil.mUserArea = data.get(0)[which];
 			    CommonUtil.mUserHost = data.get(1)[which];
-			    LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
+			    LogUtil.e("mingguo", "user host select area  > 1  "+CommonUtil.mUserHost);
+			    if (CommonUtil.mIsHostTest){
+					CommonUtil.mUserHost = CommonUtil.mTestHost;
+					LogUtil.e("mingguo", "welcome activity user test host "+CommonUtil.mUserHost);
+				}
 			    getUserInfo();
 //			    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
 //				intent.putExtra("user_name", mUsername);

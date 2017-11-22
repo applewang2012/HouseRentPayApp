@@ -38,8 +38,7 @@ public class CommonUtil {
     public static String mUserWallet = null;
     public static String mBankName = null;
     public static String mCardNo = null;
-    //public static String mUserHost = "http://219.150.56.178:8082/";
-    public static String mUserHost = ""; //"http://qxw2332340157.my3w.com/Services.asmx/";
+    
     public static String mUserArea;
     public static double mCurrentLati, mCurrentLongi;
     public static int mScanCodeRequestCode = 1;
@@ -64,10 +63,14 @@ public class CommonUtil {
     public static final String URL_MORE_CONTENT = "http://4g.enorth.com.cn/";
     public static final String HEXI_POWER_PACKAGE_NAME = "com.esint.pahx.messenger";
     
+    public static String mUserHost = ""; //"http://219.150.56.178:8082/";
+    public static String mTestHost = "http://qxw2332340157.my3w.com/";
+    
     public static boolean version_pay_test = false; //测试版本支付一分钱改成true
     public static boolean verify_code_test = false; //测试版本验证码改成true
     public static boolean mIsForceIdentifyUser = false;
     public static boolean mIsCancelRentIdentifyTest = false; //测试版本取消实名该成true
+    public static boolean mIsHostTest = false;  //是否使用测试host
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;
