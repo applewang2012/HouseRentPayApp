@@ -54,9 +54,9 @@ public class HomeSearchActivity extends BaseActivity {
 	}
 	
 	private void initData(){
-		mOwnerType[0] = "日租房";
-		mOwnerType[1] = "月租房";
-		mOwnerType[2] = "时租房";
+		mOwnerType[0] = "日租";
+		mOwnerType[1] = "月租";
+		mOwnerType[2] = "时租";
 		mHouseMode[0]="一室";
 		mHouseMode[1]="两室";
 		mHouseMode[2]="三室";

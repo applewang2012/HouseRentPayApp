@@ -162,12 +162,15 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				
 				if (!TextUtils.isEmpty(mRRAID)) {
-					// Toast.makeText(ApplyForCheckoutActivity.this,
-					// "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason,
-					// Toast.LENGTH_SHORT).show();
+//					 Toast.makeText(ApplyForCheckoutActivity.this,
+//					 "RRAID"+mRRAID+"applyer"+CommonUtil.mUserLoginName+"reason"+reason,
+//					 Toast.LENGTH_SHORT).show();
 
-					ApplyCheckOut(mRRAID, CommonUtil.mUserLoginName, reason);
+					applyCheckOut(mRRAID, CommonUtil.mUserLoginName, reason);
+					
+					
 				}
 
 			}
@@ -186,7 +189,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	 * @param reason
 	 *            退房原因
 	 */
-	private void ApplyCheckOut(String rraid, String applyer, String reason) {
+	private void applyCheckOut(String rraid, String applyer, String reason) {
 
 		String url = CommonUtil.mUserHost + "Services.asmx?op=ApplyCheckOut";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mApplyCheckOutActioin));

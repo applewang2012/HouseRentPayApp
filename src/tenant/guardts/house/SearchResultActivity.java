@@ -218,7 +218,8 @@ public class SearchResultActivity extends BaseActivity {
 			} else if ("月租".equals(rentType)) {
 				mRentType="01";
 			} else if ("时租".equals(rentType)) {
-				mRentType="";
+				mRentType="0";
+				
 			}
 		} else {
 
@@ -411,6 +412,8 @@ public class SearchResultActivity extends BaseActivity {
 				mRentType = "02";
 			} else if (pos == 2) {
 				mRentType = "01";
+			}else if(pos==3){
+				mRentType = "0";
 			}
 			break;
 		case 2:// 排序

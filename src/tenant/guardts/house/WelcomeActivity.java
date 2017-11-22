@@ -164,19 +164,39 @@ public class WelcomeActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
+//				SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
+//				SharedPreferences.Editor editor = sharedata.edit();
+//			    editor.putString("area", data.get(0)[which]);
+//			    editor.putString("user_host", data.get(1)[which]);
+//			    editor.commit();
+//			    CommonUtil.mUserArea = data.get(0)[which];
+//			    CommonUtil.mUserHost = data.get(1)[which];
+//			    LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
+//			    getUserInfo();
+			    /////测试用、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、、
+			    SharedPreferences sharedata = getApplication().getSharedPreferences("user_info", 0);
 				SharedPreferences.Editor editor = sharedata.edit();
+				CommonUtil.mUserHost = "http://qxw2332340157.my3w.com/";
 			    editor.putString("area", data.get(0)[which]);
-			    editor.putString("user_host", data.get(1)[which]);
+			    editor.putString("user_host", CommonUtil.mUserHost);
 			    editor.commit();
 			    CommonUtil.mUserArea = data.get(0)[which];
+
 			    CommonUtil.mUserHost = data.get(1)[which];
 			    LogUtil.e("mingguo", "user host select area  > 1  "+CommonUtil.mUserHost);
 			    if (CommonUtil.mIsHostTest){
 					CommonUtil.mUserHost = CommonUtil.mTestHost;
 					LogUtil.e("mingguo", "welcome activity user test host "+CommonUtil.mUserHost);
 				}
+
+			    //CommonUtil.mUserHost = data.get(1)[which];
+			    LogUtil.e("mingguo", "user host  "+CommonUtil.mUserHost);
+
 			    getUserInfo();
+
+			    
+			    
+			    
 //			    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
 //				intent.putExtra("user_name", mUsername);
 //				intent.putExtra("user_password", mPassword);

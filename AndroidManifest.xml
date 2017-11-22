@@ -96,7 +96,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -111,7 +111,7 @@
                     android:host="tenant.guardts.house"
                     android:pathPrefix="/launcher"
                     android:scheme="guardtsapp" />
-            </intent-filter>  
+            </intent-filter>   
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -163,7 +163,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
-           
+          
         </activity>
         <activity
             android:name=".HouseDetailInfoActivity"
