@@ -587,12 +587,20 @@ public class HouseDetailInfoActivity extends BaseActivity {
 			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
 				if (value != null) {
-					if (value.equals("true")) {
-						Toast.makeText(HouseDetailInfoActivity.this, "删除成功！", Toast.LENGTH_SHORT).show();
-						finish();
-					} else {
-						Toast.makeText(HouseDetailInfoActivity.this, "删除失败！", Toast.LENGTH_SHORT).show();
+					
+					try {
+						JSONObject object = new JSONObject(value);
+						if (object != null){
+							String msgObj = object.optString("msg");
+							Toast.makeText(HouseDetailInfoActivity.this, msgObj+" !!", Toast.LENGTH_SHORT).show();
+						}else{
+							Toast.makeText(HouseDetailInfoActivity.this, "房屋删除失败 !!", Toast.LENGTH_SHORT).show();
+						}
+					} catch (JSONException e) {
+						Toast.makeText(HouseDetailInfoActivity.this, "房屋删除失败 !!", Toast.LENGTH_SHORT).show();
+						e.printStackTrace();
 					}
+
 				}
 			}
 		}

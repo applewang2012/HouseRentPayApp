@@ -23129,6 +23129,12 @@ tenant.guardts.house.R$drawable: int register_user_icno
 tenant.guardts.house.R$drawable: int register_user_input_bg
 tenant.guardts.house.R$drawable: int register_user_password
 tenant.guardts.house.R$drawable: int register_user_password_identify
+tenant.guardts.house.R$drawable: int rent_house_care
+tenant.guardts.house.R$drawable: int rent_house_care2
+tenant.guardts.house.R$drawable: int rent_house_care3
+tenant.guardts.house.R$drawable: int rent_house_care4
+tenant.guardts.house.R$drawable: int rent_house_care5
+tenant.guardts.house.R$drawable: int rent_house_care6
 tenant.guardts.house.R$drawable: int rights
 tenant.guardts.house.R$drawable: int scan_house_qrcode_icon
 tenant.guardts.house.R$drawable: int scan_pupopwindow_bg
@@ -23366,6 +23372,7 @@ tenant.guardts.house.R$id: int id_home_house_fragment_listview
 tenant.guardts.house.R$id: int id_home_house_owner_dengji
 tenant.guardts.house.R$id: int id_home_house_owner_gaizhao
 tenant.guardts.house.R$id: int id_home_house_owner_weixiu
+tenant.guardts.house.R$id: int id_home_rent_care_button
 tenant.guardts.house.R$id: int id_home_seach_end_time
 tenant.guardts.house.R$id: int id_home_seach_input_keyword
 tenant.guardts.house.R$id: int id_home_seach_start_time
@@ -23486,8 +23493,6 @@ tenant.guardts.house.R$id: int id_rent_house_get_verifycode
 tenant.guardts.house.R$id: int id_rent_house_idcard
 tenant.guardts.house.R$id: int id_rent_house_lease_type
 tenant.guardts.house.R$id: int id_rent_house_name
-tenant.guardts.house.R$id: int id_rent_house_number
-tenant.guardts.house.R$id: int id_rent_house_order_id
 tenant.guardts.house.R$id: int id_rent_house_phone
 tenant.guardts.house.R$id: int id_rent_house_phone_verify
 tenant.guardts.house.R$id: int id_rent_house_price

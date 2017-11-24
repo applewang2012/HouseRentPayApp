@@ -20,6 +20,7 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -94,6 +95,10 @@ public class OrderFangzhuFragment extends BaseFragment{
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "owner");
 				startActivity(intent);
+//				if (position == 0){
+//					rejectRentAttributeInfo(mHouseInfoList.get(position).getHouseOrderId());
+//				}
+				
 			}
 		});
 		
@@ -312,7 +317,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 					if (ret != null){
 						if (ret.equals("0")){
 							if (mCheckoutPosition != -1){
-								mHouseInfoList.get(mCheckoutPosition).setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
+								mHouseInfoList.get(mCheckoutPosition).setHouseStatus(CommonUtil.ORDER_STATUS_CHECKOUTED);
 							}
 							mAdapter.notifyDataSetChanged();
 						}else{
@@ -751,17 +756,6 @@ public class OrderFangzhuFragment extends BaseFragment{
 		
 	}
 
-	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStatusStart(Activity activity) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 }

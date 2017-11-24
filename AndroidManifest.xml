@@ -280,7 +280,7 @@
             android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
-        <activity
+       <activity
             android:name=".GetRentAttributeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"

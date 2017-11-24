@@ -21,7 +21,7 @@ public class BaseFragment extends Fragment implements DataStatusInterface {
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
 				dismissLoadingView(mFragmentLoadingView);
-				GlobalUtil.shortToast(getActivity().getApplicationContext(), "网络异常，请检查网络！"+msg.obj, getResources().getDrawable(R.drawable.ic_dialog_no));
+				GlobalUtil.shortToast(getActivity().getApplicationContext(), ""+msg.obj, getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 1000){
 				Activity parentActivity = (Activity)msg.obj;
 				mFragmentLoadingView = parentActivity.findViewById(R.id.id_data_loading);
@@ -58,7 +58,12 @@ public class BaseFragment extends Fragment implements DataStatusInterface {
 		// TODO Auto-generated method stub
 		Message msg = mHandler.obtainMessage();
 		msg.what = 100;
-		msg.obj = action + " " + error;
+		if (action == null || action.equals("")){
+			msg.obj = " " + error;
+		}else{
+			msg.obj = "网络异常，请检查网络！"+action + " " + error;
+		}
+		
 		mHandler.sendMessage(msg);
 	}
 

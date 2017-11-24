@@ -20,7 +20,7 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 		public void handleMessage(Message msg) {
 			if (msg.what == 100){
 				dismissActivityLoadingView(mBaseLoadingView);
-				GlobalUtil.shortToast(getApplication(), "网络异常，请检查网络！"+msg.obj, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				GlobalUtil.shortToast(getApplication(), ""+msg.obj, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 			}else if (msg.what == 1000){
 				Activity parentActivity = (Activity)msg.obj;
 				mBaseLoadingView = parentActivity.findViewById(R.id.id_data_loading);
@@ -53,7 +53,11 @@ public class BaseActivity extends Activity implements DataStatusInterface{
 	public void onStatusError(String action, String error) {
 		Message msg = mHandler.obtainMessage();
 		msg.what = 100;
-		msg.obj = action + " " + error;
+		if (action == null || action.equals("")){
+			msg.obj = " " + error;
+		}else{
+			msg.obj = "网络异常，请检查网络！"+action + " " + error;
+		}
 		mHandler.sendMessage(msg);
 	}
 	

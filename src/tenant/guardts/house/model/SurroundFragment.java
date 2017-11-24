@@ -366,12 +366,6 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 
 
 	@Override
-	public void onStatusError(String action, String error) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
 		LogUtil.w("mingguo", "surround fragment  onGetPoiDetailResult  result "+result.error);
 		
@@ -458,10 +452,5 @@ public class SurroundFragment extends BaseFragment implements DataStatusInterfac
 		}
 	}
 
-	@Override
-	public void onStatusStart(Activity activity) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

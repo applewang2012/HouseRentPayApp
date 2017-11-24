@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import com.google.gson.Gson;
@@ -22,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -55,11 +58,13 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	private CheckBox mCheckBoxWechat;
 	private boolean isPayByWechat = true;// 是否使用微信支付
 	private String mPayUseWallet = "http://tempuri.org/PayUseWallet";// 钱包支付
+	private String mOrderStatusAction = "http://tempuri.org/GetOrderStatus";// 订单状态
 	private HoursePresenter mPresenter;
 	private boolean successful;
 	private String renterId;
 	private String orderID;
 	private String orderCreatedDate;
+	private View loadingView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -96,34 +101,19 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 			Toast.makeText(HousePayActivity.this, "价钱有误", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
-		final View loadingView = (View)findViewById(R.id.id_data_loading);
+		loadingView = (View)findViewById(R.id.id_data_loading);
 		Button payButton = (Button) findViewById(R.id.id_button_pay_money_button);
 		payButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (isPayByWechat) {
-					Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
-					ViewUtil.showLoadingView(HousePayActivity.this, loadingView);
-					api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
-					if (CommonUtil.version_pay_test){
-						if (realPrice != null && realPrice.length() > 0){
-							//测试支付，取钱的第一位
-							startPay(realPrice.subSequence(0, 1)+"", UtilTool.generateOrderNo(), "127.0.0.1");
-						}
-					}else{
-						startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
-					}
-					
-				} else {
-					
-					if (ownerId != null && renterId != null) {
-						showWalletPayDialog();
-					}
-				}
+				checkOrderStatus();
 			}
 		});
+		
 	}
+	
+	
 	
 	private void showWalletPayDialog() {
 		new AlertDialog.Builder(HousePayActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle("钱包支付")
@@ -148,6 +138,17 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 					}
 
 				}).show();
+	}
+	
+	private void checkOrderStatus() {
+		if (orderID == null){
+			return;
+		}
+		String url = CommonUtil.mUserHost+"Services.asmx?op=GetOrderStatus";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mOrderStatusAction));
+		rpc.addProperty("rraId", orderID);
+		mPresenter.readyPresentServiceParams(this, url, mOrderStatusAction, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
 
 	private void payByWallet(String renterID, String ownerID, String money) {
@@ -185,7 +186,6 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 			public void onClick(View v) {
 				isPayByWechat = true;
 				setCheckBoxStatus(mCheckBoxWechat, mCheckBoxWallet);
-
 			}
 		});
 
@@ -270,6 +270,7 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 	}
 
 	Handler mHandler = new Handler() {
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == 818) {
@@ -302,11 +303,47 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 						}
 					}
 				}
-				
-				
 
+			}else if (msg.what == 100){
+				//{"ret":"0","msg":"success","status":"2"}
+				JSONObject obj = null;
+				try {
+					obj = new JSONObject((String)msg.obj);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (obj != null){
+					String status = obj.optString("status");
+					if (status != null){
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_PAY)){
+							if (isPayByWechat) {
+								Toast.makeText(HousePayActivity.this, "微信支付", Toast.LENGTH_SHORT).show();
+								ViewUtil.showLoadingView(HousePayActivity.this, loadingView);
+								api = WXAPIFactory.createWXAPI(HousePayActivity.this, CommonUtil.APP_ID);
+								if (CommonUtil.version_pay_test){
+									if (realPrice != null && realPrice.length() > 0){
+										//测试支付，取钱的第一位
+										startPay(realPrice.subSequence(0, 1)+"", UtilTool.generateOrderNo(), "127.0.0.1");
+									}
+								}else{
+									startPay(realPrice, UtilTool.generateOrderNo(), "127.0.0.1");
+								}
+								
+							} else {
+								
+								if (ownerId != null && renterId != null) {
+									showWalletPayDialog();
+								}
+							}
+						}else{
+							ViewUtil.dismissLoadingView();
+							Toast.makeText(HousePayActivity.this, "支付订单状态异常，请刷新订单！", Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+				
 			}
-
 		};
 	};
 	private String ownerId;
@@ -323,7 +360,12 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				msg.what = 818;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
-			}
+			}else	if (action.equals(mOrderStatusAction)) {
+					Message msg = mHandler.obtainMessage();
+					msg.what = 100;
+					msg.obj = templateInfo;
+					msg.sendToTarget();
+				}
 		}
 	}
 

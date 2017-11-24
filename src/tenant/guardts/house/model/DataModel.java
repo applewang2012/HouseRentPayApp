@@ -44,6 +44,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.LogUtil;
@@ -135,6 +136,11 @@ public class DataModel {
 					mSoapObject.addProperty("checkUser", CommonUtil.mUserLoginName);
 					mSoapObject.addProperty("checkToken", CommonUtil.XINGE_TOKEN);
 				}
+				if (!checkOrderStatusBeforeRequest(header, mSoapAction)){
+					Log.i("mingguo", "check order status exception  ");
+					mPresenter.notifyDataRequestError(null, "获取订单状态异常，请及时刷新订单!");
+					return null;
+				}
 				SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 				envelope.headerOut = header; 
 				envelope.bodyOut = mSoapObject;
@@ -148,24 +154,100 @@ public class DataModel {
 				}
 				String resultString = valueObject.getProperty(0).toString();
 				if (resultString != null && resultString.contains("headerError")){
-					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error from header !");
+					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error header !");
 					return null;
 				}
 				Activity activity = (Activity) mContext;
 				if (activity.isFinishing()){
-					mPresenter.notifyDataRequestError(mSoapAction, "error from activity  finish ");
+					mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error finish ");
 				}else{
 					mPresenter.notifyDataRequestSuccess(mSoapAction, resultString);
 				}
 				
 			} catch (Exception e) {
-				mPresenter.notifyDataRequestError(mSoapAction, "error from exception ");
+				mPresenter.notifyDataRequestError(CommonUtil.getSoapName(mSoapAction), "error exception"+e);
 				LogUtil.e("mingguo", "exception  action   "+mSoapAction+"  e  "+e);
 			}
 			
 			return null;
 		}
+	}
+	
+	private boolean checkOrderStatusBeforeRequest(Element[] header, String action){
+		String actionName = CommonUtil.getSoapName(action);
+		String orderId = null;
+		if (actionName != null){
+			if (actionName.equalsIgnoreCase("ConfirmRentAttribute") || actionName.equalsIgnoreCase("RejectRentAttribute")
+					|| actionName.equalsIgnoreCase("CancelRentAttribute")){
+				orderId = (String) mSoapObject.getProperty("id");
+			}
+			if (actionName.equalsIgnoreCase("ExpiredOrder") || actionName.equalsIgnoreCase("ApplyCheckOut")
+					|| actionName.equalsIgnoreCase("ConfirmCheckOut")){
+				orderId = (String) mSoapObject.getProperty("rraId");
+			}
+		}
+		Log.i("mingguo", "check order status oder id   "+orderId+"  action name  "+actionName);
+		if (orderId == null || orderId.equals("")){
+			return true;  //订单id有误，无法校验状态，或者其它接口直接放过
+		}
+		try {
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			String statusUrl = "http://qxw2332340157.my3w.com/Services.asmx?op=GetOrderStatus";
+			String statusAction = "http://tempuri.org/GetOrderStatus";
+			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(statusAction));
+			
+			rpc.addProperty("rraId", orderId);
+			envelope.headerOut = header; 
+			envelope.bodyOut = rpc;
+			envelope.dotNet= true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(statusUrl,30000);
+			transport.call(statusAction, envelope);
+			SoapObject valueObject = null;
+			if(envelope.getResponse()!=null){
+				valueObject = (SoapObject)envelope.bodyIn;				
+			}
+			String resultString = valueObject.getProperty(0).toString(); //{"ret":"0","msg":"success","status":"2"}
+			Log.i("mingguo", "check order status order return    "+resultString);
+			JSONObject obj = new JSONObject(resultString);
+			if (obj != null){
+				String status = obj.optString("status");
+				if (status != null){
+					if (actionName.equalsIgnoreCase("ConfirmRentAttribute")
+							|| (actionName.equalsIgnoreCase("RejectRentAttribute"))){
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_SUBMITT)){
+							return true;
+						}else {
+							return false;
+						}
+					}else if (actionName.equalsIgnoreCase("CancelRentAttribute") || actionName.equalsIgnoreCase("ExpiredOrder")){
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_SUBMITT)  || status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_PAY)){
+							return true;
+						}else {
+							return false;
+						}
+					}else if (actionName.equalsIgnoreCase("ApplyCheckOut")){
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_HAS_PAYED)){
+							return true;
+						}else {
+							return false;
+						}
+						
+					}else if (actionName.equalsIgnoreCase("ConfirmCheckOut")){
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
+							return true;
+						}else {
+							return false;
+						}
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		return true;
 	}
 	
 	

@@ -465,13 +465,16 @@
                     android:background="#cccccc" />
 
                 <TextView
-                    android:layout_width="@dimen/base_dimen_293"
-                    android:layout_height="@dimen/base_dimen_30"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/base_dimen_28"
-                    android:text="租房时需要注意哪些问题"
-                    android:textColor="#555555"
-                    android:textSize="@dimen/base_dimen_24" />
+                    android:id="@+id/id_home_rent_care_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/base_dimen_30"
+                    android:clickable="true"
+                    android:textStyle="bold"
+                    android:text="连 心 锁 使 用 说 明"
+                    android:textColor="#337ffd"
+                    android:textSize="@dimen/base_dimen_32" />
             </LinearLayout>
 
             <View

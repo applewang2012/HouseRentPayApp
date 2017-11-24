@@ -56,8 +56,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import tenant.guardts.house.AddHouseInfoActivity;
+import tenant.guardts.house.GetRentAttributeActivity;
 import tenant.guardts.house.HomeSearchActivity;
 import tenant.guardts.house.HouseDetailInfoActivity;
+import tenant.guardts.house.LocationDemo;
 import tenant.guardts.house.LoginUserActivity;
 import tenant.guardts.house.MapRentHouseActivity;
 import tenant.guardts.house.R;
@@ -195,6 +197,17 @@ public class HouseFragment extends BaseFragment implements OnGetPoiSearchResultL
 					mHouseOwnerLayout.setVisibility(View.VISIBLE);
 					break;
 				}
+			}
+		});
+		
+		TextView careButton = (TextView)mRootView.findViewById(R.id.id_home_rent_care_button);
+		careButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent careIntent = new Intent(mContext, GetRentAttributeActivity.class);
+				startActivity(careIntent);
 			}
 		});
 

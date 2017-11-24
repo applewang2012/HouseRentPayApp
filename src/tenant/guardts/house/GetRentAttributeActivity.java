@@ -81,11 +81,11 @@ public class GetRentAttributeActivity extends BaseActivity{
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("租房订单");
-		initHandler();
-		initView();
-		mOrderId = getIntent().getStringExtra("order_id");
-		getRentAttributeByOrderId(mOrderId);
+		mTitleBar.setText("使用说明");
+//		initHandler();
+//		initView();
+//		mOrderId = getIntent().getStringExtra("order_id");
+//		getRentAttributeByOrderId(mOrderId);
 	}
 	
 	
@@ -143,61 +143,61 @@ public class GetRentAttributeActivity extends BaseActivity{
 		mEndTime.setText(mOriginEndContent + df.format(cal.getTime())); 
 	}
 	
-	private void initView(){
-		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		
-		
-		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
-		mQrcodeView.setVisibility(View.INVISIBLE);
-		mOwnerType[0] = "日租房";
-		mOwnerType[1] = "月租房";
-		
-		mStartTime = (TextView)findViewById(R.id.id_rent_house_start_date_text);
-		mOriginStartContent = (String) mStartTime.getText()+"  ";
-		
-		
-		FrameLayout endTime = (FrameLayout)findViewById(R.id.id_rent_house_end_date);
-		mEndTime = (TextView)findViewById(R.id.id_rent_house_end_date_text);
-		mOriginEndContent = (String) mEndTime.getText()+"  ";
-		
-		mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
-		mRentIDcard = (TextView)findViewById(R.id.id_rent_house_idcard);
-		mRentName = (TextView)findViewById(R.id.id_rent_house_name);
-		mRentPhone = (TextView)findViewById(R.id.id_rent_house_phone);
-		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
-		mRentOrderId = (TextView)findViewById(R.id.id_rent_house_order_id);
-		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
-		okButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+//	private void initView(){
+//		mPresenter = new HoursePresenter(getApplicationContext(), this);
+//		
+//		
+//		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
+//		mQrcodeView.setVisibility(View.INVISIBLE);
+//		mOwnerType[0] = "日租房";
+//		mOwnerType[1] = "月租房";
+//		
+//		mStartTime = (TextView)findViewById(R.id.id_rent_house_start_date_text);
+//		mOriginStartContent = (String) mStartTime.getText()+"  ";
+//		
+//		
+//		FrameLayout endTime = (FrameLayout)findViewById(R.id.id_rent_house_end_date);
+//		mEndTime = (TextView)findViewById(R.id.id_rent_house_end_date_text);
+//		mOriginEndContent = (String) mEndTime.getText()+"  ";
+//		
+//		mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
+//		mRentIDcard = (TextView)findViewById(R.id.id_rent_house_idcard);
+//		mRentName = (TextView)findViewById(R.id.id_rent_house_name);
+//		mRentPhone = (TextView)findViewById(R.id.id_rent_house_phone);
+//		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
+//		mRentOrderId = (TextView)findViewById(R.id.id_rent_house_order_id);
+//		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
+//		okButton.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+////				
+////				confirmRentAttributeInfo(mOrderId);
 //				
-//				confirmRentAttributeInfo(mOrderId);
-				
-				if (CommonUtil.mRegisterIdcard != null && !CommonUtil.mRegisterIdcard.equals("")){
-					LogUtil.w("mingguo", "register id card  "+CommonUtil.mRegisterIdcard);
-					//if (CommonUtil.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
-						Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-						mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
-						
-						File out = new File(mfilePath);
-						
-						Uri uri = Uri.fromFile(out);
-						getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-						getPhoto.putExtra("return-data", true);
-						getPhoto.putExtra("camerasensortype", 2); 
-						startActivityForResult(getPhoto, 1);
-//					}else{
-//						GlobalUtil.shortToast(getApplication(), "抱歉，登录用户身份信息和租房者身份信息不符 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-//					}
-				}else{
-					GlobalUtil.shortToast(getApplication(), "register user idcard  get failed !", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-				}
-				
-				
-			}
-		});
-	}
+//				if (CommonUtil.mRegisterIdcard != null && !CommonUtil.mRegisterIdcard.equals("")){
+//					LogUtil.w("mingguo", "register id card  "+CommonUtil.mRegisterIdcard);
+//					//if (CommonUtil.mRegisterIdcard.equalsIgnoreCase(mRentIDcard.getText().toString())){
+//						Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//						mfilePath = ScreenShotUtil.createScreenshotDirectory(GetRentAttributeActivity.this);
+//						
+//						File out = new File(mfilePath);
+//						
+//						Uri uri = Uri.fromFile(out);
+//						getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//						getPhoto.putExtra("return-data", true);
+//						getPhoto.putExtra("camerasensortype", 2); 
+//						startActivityForResult(getPhoto, 1);
+////					}else{
+////						GlobalUtil.shortToast(getApplication(), "抱歉，登录用户身份信息和租房者身份信息不符 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+////					}
+//				}else{
+//					GlobalUtil.shortToast(getApplication(), "register user idcard  get failed !", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+//				}
+//				
+//				
+//			}
+//		});
+//	}
 	
 	
 	
