@@ -43,6 +43,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.v4.view.MarginLayoutParamsCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -61,6 +62,7 @@ public class DataModel {
 	private String[] mStreetID;
 	private HashMap<String, String> mPostData;
 	private Context mContext;
+	private long mCompleteAttributeTimeTag, mLastCompleteTimeTag;
 	
 	public DataModel(HoursePresenter presenter){
 		mPresenter = presenter;
@@ -178,7 +180,7 @@ public class DataModel {
 		String orderId = null;
 		if (actionName != null){
 			if (actionName.equalsIgnoreCase("ConfirmRentAttribute") || actionName.equalsIgnoreCase("RejectRentAttribute")
-					|| actionName.equalsIgnoreCase("CancelRentAttribute")){
+					|| actionName.equalsIgnoreCase("CancelRentAttribute") || actionName.equalsIgnoreCase("CompleteRentAttribute")){
 				orderId = (String) mSoapObject.getProperty("id");
 			}
 			if (actionName.equalsIgnoreCase("ExpiredOrder") || actionName.equalsIgnoreCase("ApplyCheckOut")
@@ -187,12 +189,12 @@ public class DataModel {
 			}
 		}
 		Log.i("mingguo", "check order status oder id   "+orderId+"  action name  "+actionName);
-		if (orderId == null || orderId.equals("")){
+		if (orderId == null || orderId.equals("") || orderId.equalsIgnoreCase("null")){
 			return true;  //订单id有误，无法校验状态，或者其它接口直接放过
 		}
 		try {
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			String statusUrl = "http://qxw2332340157.my3w.com/Services.asmx?op=GetOrderStatus";
+			String statusUrl = CommonUtil.mUserHost+"Services.asmx?op=GetOrderStatus";
 			String statusAction = "http://tempuri.org/GetOrderStatus";
 			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(statusAction));
 			
@@ -232,7 +234,18 @@ public class DataModel {
 						}else {
 							return false;
 						}
-						
+					}else if(actionName.equalsIgnoreCase("CompleteRentAttribute")){
+						mCompleteAttributeTimeTag = System.currentTimeMillis();
+						if (mLastCompleteTimeTag > 0 && (mCompleteAttributeTimeTag - mLastCompleteTimeTag) < 4000){ //两次操作完成订单接口小于4秒
+							LogUtil.v("mingguo", "complete attribute too fast ");
+							return false;
+						}
+						mLastCompleteTimeTag = System.currentTimeMillis();
+						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_HAS_PAYED)){
+							return false;
+						}else if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_PAY)){
+							return true;
+						}
 					}else if (actionName.equalsIgnoreCase("ConfirmCheckOut")){
 						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){
 							return true;

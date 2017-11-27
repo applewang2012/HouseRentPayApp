@@ -61,9 +61,6 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         api.handleIntent(getIntent(), this);
         
         mPresenter = new HoursePresenter(WXPayEntryActivity.this, this);
-//        
-//		
-        
     }
     
     private void initSuccessView(View v){
@@ -186,7 +183,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					setContentView(v);
 					initSuccessView(v);
 					//请求更新数据信息
-					mHandler.sendEmptyMessageDelayed(300, 1500);
+					mHandler.sendEmptyMessageDelayed(300, 1000);
 //					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 //				}else{
 //					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);
