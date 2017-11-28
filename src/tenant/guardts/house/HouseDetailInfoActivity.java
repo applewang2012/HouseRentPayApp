@@ -332,6 +332,7 @@ public class HouseDetailInfoActivity extends BaseActivity {
 							intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
 							intent.putExtra("house_price", mHouseInfo.getHousePrice());
 							intent.putExtra("rent_type", mHouseInfo.getHouseType());
+							intent.putExtra("house_address", mHouseInfo.getHouseAddress());
 							startActivity(intent);
 							finish();
 						} else {
@@ -550,7 +551,6 @@ public class HouseDetailInfoActivity extends BaseActivity {
 	}
 
 	private void getHouseDetailInfoByHouseId(String rentNo) {
-
 		String url = CommonUtil.mUserHost + "Services.asmx?op=GetHouseDetailInfo";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
 		rpc.addProperty("rentNo", rentNo);
@@ -617,22 +617,23 @@ public class HouseDetailInfoActivity extends BaseActivity {
 				JSONObject object = array.optJSONObject(0);
 				if (object != null) {
 					mHouseInfo = new HouseInfoModel();
-					mRentName.setText(object.getString("ROwner"));
-					mRentPhone.setText(object.getString("ROwnerTel"));
-					mRentArea.setText(object.getString("RRentArea") + " 平米");
-					mRentType.setText(object.getString("RRoomTypeDesc"));
-					mRentDirection.setText(object.getString("RDirectionDesc"));
-					mRentAddress.setText(object.getString("RAddress"));
-					mZhulinType.setText(object.getString("RRentTypeDesc"));
-					// mRoomNum.setText(object.getString("RDoor"));
-					mLocationPolice.setText(object.getString("RPSName"));
-					mHousePrice.setText(object.getString("RLocationDescription") + " 元");
+					mRentName.setText(object.optString("ROwner"));
+					mRentPhone.setText(object.optString("ROwnerTel"));
+					mRentArea.setText(object.optString("RRentArea") + " 平米");
+					mRentType.setText(object.optString("RRoomTypeDesc"));
+					mRentDirection.setText(object.optString("RDirectionDesc"));
+					mRentAddress.setText(object.optString("RAddress"));
+					mZhulinType.setText(object.optString("RRentTypeDesc"));
+					// mRoomNum.setText(object.optString("RDoor"));
+					mLocationPolice.setText(object.optString("RPSName"));
+					mHousePrice.setText(object.optString("RLocationDescription") + " 元");
 					
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));
 					mHouseInfo.setHouseOwnerIdcard(object.optString("RIDCard"));
-					mHouseInfo.setHousePrice(object.getString("RLocationDescription"));
-					mHouseInfo.setHouseType(object.getString("RRentType"));
+					mHouseInfo.setHousePrice(object.optString("RLocationDescription"));
+					mHouseInfo.setHouseType(object.optString("RRentType"));
+					mHouseInfo.setHouseAddress(object.optString("RAddress"));
 				}else{
 					Toast.makeText(HouseDetailInfoActivity.this, "该房屋已下架！", Toast.LENGTH_LONG).show();
 					finish();

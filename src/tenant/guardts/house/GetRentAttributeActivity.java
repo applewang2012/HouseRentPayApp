@@ -379,14 +379,14 @@ public class GetRentAttributeActivity extends BaseActivity{
 			try {
 				object = new JSONObject(value);
 				if (object != null){
-					mHouseId.setText(object.getString("RentNo"));
-					mRentIDcard.setText(object.getString("RRAIDCard"));
-					mRentName.setText(object.getString("RRAContactName"));
-					mRentPhone.setText(object.getString("RRAContactTel"));
-					mRentPrice.setText(object.getString("RRentPrice"));
-					mRentOrderId.setText(object.getString("RRAID"));
-					mStartTime.setText(mOriginStartContent + object.getString("RRAStartDate"));
-					mEndTime.setText(mOriginEndContent + object.getString("RRAEndDate")); 
+					mHouseId.setText(object.optString("RentNo"));
+					mRentIDcard.setText(object.optString("RRAIDCard"));
+					mRentName.setText(object.optString("RRAContactName"));
+					mRentPhone.setText(object.optString("RRAContactTel"));
+					mRentPrice.setText(object.optString("RRentPrice"));
+					mRentOrderId.setText(object.optString("RRAID"));
+					mStartTime.setText(mOriginStartContent + object.optString("RRAStartDate"));
+					mEndTime.setText(mOriginEndContent + object.optString("RRAEndDate")); 
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
