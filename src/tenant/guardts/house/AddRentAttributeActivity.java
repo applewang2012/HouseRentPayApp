@@ -1198,7 +1198,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		CommonUtil.mIsCancelRentIdentifyTest = false;
 		super.onDestroy();
 		mHandler.removeCallbacksAndMessages(null);
 	}
