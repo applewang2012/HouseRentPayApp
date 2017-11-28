@@ -70,7 +70,7 @@ public class CommonUtil {
     public static boolean verify_code_test = false; //测试版本验证码改成true
     public static boolean mIsForceIdentifyUser = false;
     public static boolean mIsCancelRentIdentifyTest = false; //测试版本取消实名该成true
-    public static boolean mIsHostTest = false;  //是否使用测试host
+    public static boolean mIsHostTest = true;  //是否使用测试host
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;

@@ -107,7 +107,7 @@ public class MyFragment extends BaseFragment {
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
 		mAboutUs = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_about_us);// 修改密码
-		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_logout);// 退出登录
+		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_apply_for_friends);// 邀请好友
 		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);// 切换城市
 		if (mUserName.equals("") || mUserName == null) {
 		} else {
@@ -170,12 +170,23 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
-					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
-					startActivity(new Intent(mContext, LoginUserActivity.class));
-				} else {
-					logoutUserDialog(0);
+//				if (CommonUtil.mUserLoginName == null || CommonUtil.mUserLoginName.equals("")) {
+//					Toast.makeText(mContext, "您尚未登录，请登录后再进行操作！", Toast.LENGTH_LONG).show();
+//					startActivity(new Intent(mContext, LoginUserActivity.class));
+//				} else {
+//					logoutUserDialog(0);
+//				}
+				try {
+					Intent shareIntent = new Intent();
+			        shareIntent.setAction(Intent.ACTION_SEND);
+			        shareIntent.putExtra(Intent.EXTRA_TEXT, "连心锁是一款非常好用的租房APP，我一直在用，亲爱的朋友，你也快来点击下载吧！"+"http://39.106.19.37:81/file/shareapp/share.html");
+			        shareIntent.setType("text/plain");
+			        //设置分享列表的标题，并且每次都显示分享列表
+			        startActivity(Intent.createChooser(shareIntent, "分享到"));
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+				
 
 			}
 		});
