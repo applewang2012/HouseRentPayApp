@@ -1,0 +1,102 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1"
+    android:orientation="vertical"
+        
+        >
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_80"
+      
+        android:background="#ffffff" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:text="姓名"
+            android:textColor="#333333"
+            android:layout_weight="3"
+            android:gravity="fill_horizontal"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <EditText
+            android:id="@+id/parterner_name"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_14"
+            android:background="@null"
+            android:hint="请输入随行人员姓名"
+            android:textColor="#555555"
+            android:textColorHint="#b2b2b2"
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_1"
+        android:background="#cccccc" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_80"
+        android:background="#ffffff" >
+
+        <TextView
+             android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_30"
+            android:text="身份证"
+            android:textColor="#333333"
+            android:gravity="fill_horizontal"
+            android:textSize="@dimen/base_dimen_30" />
+
+        <EditText
+            android:id="@+id/id_card_num"
+             android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/base_dimen_14"
+            android:background="@null"
+            android:hint="请输入随行人员身份证号		"
+            android:textColor="#555555"
+            android:textColorHint="#b2b2b2"
+           	
+            android:textSize="@dimen/base_dimen_30" />
+    </LinearLayout>
+
+    
+
+    <Button
+        android:id="@+id/add_parterner"
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base_dimen_46"
+        android:background="@drawable/withdraw_btn_bg"
+        android:text="确认添加"
+        android:textSize="16sp"
+        android:textColor="#ffffff" />
+    </LinearLayout>
+<!--  <include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog" /> -->
+</FrameLayout>

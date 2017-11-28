@@ -46,8 +46,12 @@
     <string name="dialog_running_body">您想要暂停下载文件，还是取消下载？</string>
     <string name="dialog_paused_body">您想要继续下载该文件，还是将其从队列中删除？</string>
     <string name="delete_download" msgid="76629022653866471">"删除"</string>
+
    	<string name="write_idcard_to_lock_text">录入身份证步骤\n 1，点击“录入”按钮，稍后会听到智能锁“滴”声 \n 2，将身份证放入上图位置\n 3，听到智能锁“滴滴滴”声后说明身份证录入成功 \n 4，点击取消按钮完成身份证录入\n
    	    (由于身份证批次不同，可能导致某些身份证无法成功录入，敬请谅解)</string>
+
+  
+
     <string name="dialog_failed_body" msgid="587545111677064427">"您想要稍后重新尝试下载该文件，还是将其从队列中删除？"</string>
     <string name="dialog_queued_body" msgid="2506935748423351902">"该文件已加入队列，供以后下载。"</string>
     <string name="keep_queued_download" msgid="5144882786014818569">"保留"</string>
@@ -104,7 +108,7 @@
     <string name="rent_house_content">租赁该房屋需要填写个人真实信息</string>
     <string name="modify_house_title">修改房屋信息</string>
     <string name="modify_house_content">请确认修改信息是否正确？</string>
-     <string name="delete_house_content">删除后将无法继续出租该房屋</string>
+    <string name="delete_house_content">删除后将无法继续出租该房屋</string>
     <string name="identify_success_title">实名认证成功</string>
     <string name="identify_success_content">请您等待房主确认,并及时关注个人订单</string>
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
@@ -223,5 +227,7 @@
     <string name="title_activity_reset">ResetActivity</string>
     <string name="title_activity_rental_detail">RentalDetailActivity</string>
     <string name="title_activity_evaluation_detail">EvaluationDetailActivity</string>
+    <string name="title_activity_add_rent_parterner">AddRentParternerActivity</string>
+    <string name="title_activity_parterner_record">ParternerRecordActivity</string>
 
 </resources>

@@ -30,12 +30,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/base_dimen_30"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text="天津市和平区瞰和平16号楼1-202"
                 android:textColor="#000000"
-                android:focusable="true"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
                 android:textSize="@dimen/base_dimen_30" />
 
             <TextView
@@ -186,14 +186,14 @@
                     android:textColor="#444444"
                     android:textSize="@dimen/base_dimen_26" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/id_idcard_input_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_dimen_20"
                 android:layout_marginLeft="@dimen/base_dimen_30"
-                android:layout_marginTop="@dimen/base_dimen_20" 
-                >
+                android:layout_marginTop="@dimen/base_dimen_20" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -285,11 +285,85 @@
             android:background="#f1f1f1" >
         </View>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_dimen_30"
+                android:layout_marginTop="@dimen/base_dimen_30"
+                android:text="支付方式"
+                android:textColor="#444444" />
+
+            <LinearLayout
+                android:id="@+id/linearlayout_online"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_dimen_30"
+                android:layout_marginTop="@dimen/base_dimen_30"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="在线支付"
+                    android:textColor="#444444" />
+
+                <CheckBox
+                    android:id="@+id/online"
+                    android:layout_width="@dimen/base_dimen_42"
+                    android:layout_height="@dimen/base_dimen_42"
+                    android:layout_marginLeft="@dimen/base_dimen_400"
+                    android:background="@drawable/payment_checkbox_bg"
+                    android:button="@null"
+                    android:clickable="false"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                 android:id="@+id/linearlayout_offline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/base_dimen_30"
+                android:layout_marginLeft="@dimen/base_dimen_30"
+                android:layout_marginTop="@dimen/base_dimen_30"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                  
+                    android:text="线下支付"
+                    android:textColor="#444444" />
+
+                <CheckBox
+                    android:id="@+id/offline"
+                    android:layout_width="@dimen/base_dimen_42"
+                    android:layout_height="@dimen/base_dimen_42"
+                    android:layout_marginLeft="@dimen/base_dimen_400"
+                    android:background="@drawable/payment_checkbox_bg"
+                    android:button="@null"
+                    android:clickable="false"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_10"
+            android:background="#f1f1f1" >
+        </View>
+
         <FrameLayout
             android:id="@+id/order_detail_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            
             android:background="#ffffff" >
 
             <TextView
@@ -313,7 +387,7 @@
                 android:textColor="#337ffd"
                 android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
-            
+
             <Button
                 android:id="@+id/id_order_detail_modify_button"
                 android:layout_width="@dimen/base_dimen_140"
@@ -323,21 +397,20 @@
                 android:background="@drawable/item_blue_button_no_corner_selector"
                 android:text="修改价格"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/base_dimen_30"
-                 />
+                android:textSize="@dimen/base_dimen_30" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/order_service_fee"
-            android:background="#ffffff"
-            android:gravity="left"
-            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/base_dimen_30"
+            android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/base_dimen_1"
-            android:paddingTop="@dimen/base_dimen_20"
+            android:background="#ffffff"
+            android:gravity="left"
             android:paddingBottom="@dimen/base_dimen_20"
+            android:paddingLeft="@dimen/base_dimen_30"
+            android:paddingTop="@dimen/base_dimen_20"
             android:text="已包含服务费1元"
             android:textColor="#888888"
             android:textSize="@dimen/base_dimen_26" />
@@ -345,9 +418,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base_dimen_30"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/base_dimen_30"
+            android:layout_marginTop="@dimen/base_dimen_30"
             android:orientation="horizontal" >
 
             <Button
@@ -387,7 +460,7 @@
 
     <include
         android:id="@+id/id_data_loading"
-        android:visibility="invisible"
-        layout="@layout/layout_loading_dialog" />
+        layout="@layout/layout_loading_dialog"
+        android:visibility="invisible" />
 
 </FrameLayout>

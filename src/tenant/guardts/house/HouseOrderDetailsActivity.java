@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -54,12 +55,13 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	private TextView contactPhone;// 房客电话
 	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";// 扣费提醒
 	private String mExpireOrderAction = "http://tempuri.org/ExpiredOrder";
-	private String mAddIDCardToDevice="http://tempuri.org/AddIDCardToDevice";
+	private String mAddIDCardToDevice = "http://tempuri.org/AddIDCardToDevice";
 	private long mEnterTimeStamp;
 	private TextView mOrderPriceTextView;
 	private String mOrderModifyPrice;
 	private Button mModifyPriceButton;
 	private LinearLayout mIdcardContent;
+	private boolean isOnline;// 是否在线支付
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +114,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		phone = (TextView) view.findViewById(R.id.id_button_contact_owner_show_phone);
 		contact = (Button) view.findViewById(R.id.id_button_contact_owner_dial);
 		cancel = (Button) view.findViewById(R.id.id_button_contact_owner_cancel);
-		mIdcardContent = (LinearLayout)findViewById(R.id.id_idcard_input_content);
-		
+		mIdcardContent = (LinearLayout) findViewById(R.id.id_idcard_input_content);
+
 		LinearLayout passwordContent = (LinearLayout) findViewById(R.id.id_door_password_content);
 		TextView password = (TextView) findViewById(R.id.door_password);
 
@@ -137,9 +139,9 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		ownerPhone.setText(mOrderDetail.getHouseOwnerPhone());
 		mOrderPriceTextView.setText("¥ " + mOrderDetail.getHousePrice());
 		mOrderModifyPrice = mOrderDetail.getHousePrice();
-		mModifyPriceButton = (Button)findViewById(R.id.id_order_detail_modify_button);
+		mModifyPriceButton = (Button) findViewById(R.id.id_order_detail_modify_button);
 		mModifyPriceButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				showModifyPriceDialog();
@@ -182,36 +184,67 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				initScanPupopWindow();
 			}
 		});
+
+		LinearLayout payOnline = (LinearLayout) findViewById(R.id.linearlayout_online);
+		LinearLayout payOffline = (LinearLayout) findViewById(R.id.linearlayout_offline);
+		final CheckBox online = (CheckBox) findViewById(R.id.online);
+		final CheckBox offline = (CheckBox) findViewById(R.id.offline);
+		payOnline.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isOnline = true;
+				setCheckBoxStatus(online, offline);
+
+			}
+		});
+		payOffline.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isOnline = false;
+				setCheckBoxStatus(offline, online);
+
+			}
+		});
+
 	}
-	
-	private void showModifyPriceDialog(){
+
+	private void setCheckBoxStatus(CheckBox box1, CheckBox box2) {
+		box1.setChecked(true);
+		box2.setChecked(false);
+	}
+
+	private void showModifyPriceDialog() {
 		AlertDialog.Builder builder = new Builder(HouseOrderDetailsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("修改订单价格"); // 设置对话框标题
 		builder.setMessage("输入订单价格(单位:元)"); // 设置对话框标题前的图标
-//		final EditText edit = new EditText(getApplicationContext());
+		// final EditText edit = new EditText(getApplicationContext());
 		View editView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.order_input_price_editview, null);
-		final PriceEditText edit = (PriceEditText)editView.findViewById(R.id.id_input_price);
-//		edit.setHint("请输入与房客商定订单价格(单位元)");
-//		edit.setTextColor(Color.parseColor("#337ffd"));
-//		edit.setHintTextColor(Color.parseColor("#777777"));
-//		edit.setInputType(InputType.TYPE_CLASS_NUMBER);
+		final PriceEditText edit = (PriceEditText) editView.findViewById(R.id.id_input_price);
+		// edit.setHint("请输入与房客商定订单价格(单位元)");
+		// edit.setTextColor(Color.parseColor("#337ffd"));
+		// edit.setHintTextColor(Color.parseColor("#777777"));
+		// edit.setInputType(InputType.TYPE_CLASS_NUMBER);
 		builder.setView(editView);
 		builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (edit.getText() != null && edit.getText().length() > 0){
+				if (edit.getText() != null && edit.getText().length() > 0) {
 					mOrderModifyPrice = edit.getText().toString();
 					mOrderPriceTextView.setText("¥ " + edit.getText().toString());
 					getPayRateDesc(edit.getText().toString());
 				}
-				
-				//Toast.makeText(getApplicationContext(), "你输入的是: " + edit.getText().toString(), Toast.LENGTH_SHORT).show();
+
+				// Toast.makeText(getApplicationContext(), "你输入的是: " +
+				// edit.getText().toString(), Toast.LENGTH_SHORT).show();
 			}
 		});
 		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				//Toast.makeText(getApplicationContext(), "你点了取消", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(getApplicationContext(), "你点了取消",
+				// Toast.LENGTH_SHORT).show();
 			}
 		});
 		builder.setCancelable(true); // 设置按钮是否可以按返回键取消,false则不可以取消
@@ -220,18 +253,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		dialog.show();
 	}
 
-	
 	protected void initScanPupopWindow() {
 		setBackgroundAlpha(0.2f);
 
 		View scanView = getLayoutInflater().inflate(R.layout.scan_popupwindow, null);
-		popupWindow = new PopupWindow(scanView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		popupWindow = new PopupWindow(scanView, ViewGroup.LayoutParams.WRAP_CONTENT,
+				ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
-		
-		
-		Button scan=(Button)scanView. findViewById(R.id.btn_scan);
-		Button  cancel=(Button)scanView. findViewById(R.id.btn_cancel);
-		
+
+		Button scan = (Button) scanView.findViewById(R.id.btn_scan);
+		Button cancel = (Button) scanView.findViewById(R.id.btn_cancel);
+
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
 		popupWindow.setOnDismissListener(new OnDismissListener() {
 
@@ -246,10 +278,10 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(HouseOrderDetailsActivity.this, CaptureActivity.class);
-				intent.putExtra("flag", "0");//是否显示扫描页面下边图标，0，不显示
-				startActivityForResult(intent,CommonUtil.mScanCodeRequestCode);
+				intent.putExtra("flag", "0");// 是否显示扫描页面下边图标，0，不显示
+				startActivityForResult(intent, CommonUtil.mScanCodeRequestCode);
 				popupWindow.dismiss();
-				
+
 			}
 		});
 		cancel.setOnClickListener(new OnClickListener() {
@@ -261,7 +293,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 			}
 		});
-		
+
 	}
 
 	private void expireHouseRequest(String id) {
@@ -334,7 +366,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			if (mDetailType.equals("owner")) {
 				button1.setTextColor(Color.parseColor("#de6262"));
 				button1.setText("确认 " + timeContent);
-				
+
 			}
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
 			if (mDetailType.equals("renter")) {
@@ -360,23 +392,24 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("确认订单");
 			button1.setVisibility(View.GONE);
-			
-			//button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+
+			// button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			if (mDetailType != null) {
 				if (mDetailType.equals("owner")) {
 					button1.setVisibility(View.VISIBLE);
 					mModifyPriceButton.setVisibility(View.VISIBLE);
-					//button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-					//button1.setTextColor(Color.parseColor("#ffffff"));
+					// button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					// button1.setTextColor(Color.parseColor("#ffffff"));
 					button1.setOnClickListener(new OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
-							showConfirmOrderDialog(mOrderModifyPrice, mOrderDetail.getHouseContactName(), mOrderDetail.getHouseOrderId());
+							showConfirmOrderDialog(mOrderModifyPrice, mOrderDetail.getHouseContactName(),
+									mOrderDetail.getHouseOrderId());
 						}
 					});
 					button2.setText("拒绝订单");
-					//button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner);
+					// button2.setBackgroundResource(R.drawable.item_shape_no_solid_corner);
 					button2.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -386,8 +419,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					});
 				} else if (mDetailType.equals("renter")) {
 					button2.setText("取消订单");
-					//button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
-					//button2.setTextColor(Color.parseColor("#ffffff"));
+					// button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+					// button2.setTextColor(Color.parseColor("#ffffff"));
 					button2.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -402,8 +435,8 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setText("待支付");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("立即付款");
-			//button1.setTextColor(Color.parseColor("#ffffff"));
-			//button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
+			// button1.setTextColor(Color.parseColor("#ffffff"));
+			// button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			button2.setText("取消订单");
 
 			if (mDetailType != null) {
@@ -468,22 +501,21 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 				}
 			});
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				mIdcardContent.setVisibility(View.VISIBLE);
 				button1.setVisibility(View.VISIBLE);
 				button1.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
-			
-			
+
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_EVALUATION)) {
 			status.setText("待评价");
 			status.setTextColor(Color.parseColor("#8be487"));
@@ -491,17 +523,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button2.setVisibility(View.VISIBLE);
 				button2.setText("一键续租");
 				button2.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
@@ -514,17 +546,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setVisibility(View.GONE);
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button2.setVisibility(View.VISIBLE);
 				button2.setText("一键续租");
 				button2.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
@@ -536,17 +568,17 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			button2.setVisibility(View.GONE);
 			priceLinearLayout.setVisibility(View.GONE);
 			tvServiceFee.setVisibility(View.GONE);
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button2.setVisibility(View.VISIBLE);
 				button2.setText("一键续租");
 				button2.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
@@ -570,7 +602,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					});
 				}
 			}
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				mIdcardContent.setVisibility(View.VISIBLE);
 			}
 
@@ -584,34 +616,38 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 				@Override
 				public void onClick(View v) {
-//					Intent intent = new Intent(HouseOrderDetailsActivity.this, ApplyForCheckoutActivity.class);
-//					if (mDetailType.equals("owner")) {
-//						intent.putExtra("type_phone", mOrderDetail.getHouseContactPhone());
-//
-//					} else if (mDetailType.equals("renter")) {
-//						intent.putExtra("type_phone", mOrderDetail.getHouseOwnerPhone());
-//
-//					}
-//					intent.putExtra("detail_type", mDetailType);
-//					intent.putExtra("RRAID", mOrderDetail.getHouseOrderId());
-//					startActivityForResult(intent, 888);
+					// Intent intent = new
+					// Intent(HouseOrderDetailsActivity.this,
+					// ApplyForCheckoutActivity.class);
+					// if (mDetailType.equals("owner")) {
+					// intent.putExtra("type_phone",
+					// mOrderDetail.getHouseContactPhone());
+					//
+					// } else if (mDetailType.equals("renter")) {
+					// intent.putExtra("type_phone",
+					// mOrderDetail.getHouseOwnerPhone());
+					//
+					// }
+					// intent.putExtra("detail_type", mDetailType);
+					// intent.putExtra("RRAID", mOrderDetail.getHouseOrderId());
+					// startActivityForResult(intent, 888);
 					Intent intent = new Intent(HouseOrderDetailsActivity.this, EvaluationActivity.class);
 					intent.putExtra("order_detail", mOrderDetail);
 					intent.putExtra("detail_type", mDetailType);
 					startActivity(intent);
 				}
 			});
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button1.setVisibility(View.VISIBLE);
 				button1.setText("一键续租");
 				button1.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
@@ -620,21 +656,21 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button2.setVisibility(View.VISIBLE);
 				button2.setText("一键续租");
 				button2.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
-		}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)){
+		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_COMPLETE)) {
 			status.setText("已完成");
 			status.setTextColor(Color.parseColor("#de6262"));
 			button1.setVisibility(View.GONE);
@@ -644,29 +680,29 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(HouseOrderDetailsActivity.this,EvaluationDetailActivity.class);
+					Intent intent = new Intent(HouseOrderDetailsActivity.this, EvaluationDetailActivity.class);
 					if (mDetailType.equals("renter")) {
 						intent.putExtra("rraid", mOrderDetail.getHouseId());
 						intent.putExtra("detail_type", "renter");
-					}else if(mDetailType.equals("owner")){
+					} else if (mDetailType.equals("owner")) {
 						intent.putExtra("rraid", mOrderDetail.getRenterIdcard());
 						intent.putExtra("detail_type", "owner");
 					}
 					startActivity(intent);
 				}
-				
+
 			});
-			if (mDetailType.equals("renter")){
+			if (mDetailType.equals("renter")) {
 				button1.setVisibility(View.VISIBLE);
 				button1.setText("一键续租");
 				button1.setOnClickListener(new OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						Intent detailIntent = new Intent(HouseOrderDetailsActivity.this, HouseDetailInfoActivity.class);
 						detailIntent.putExtra("rentNo", mOrderDetail.getHouseId());
 						startActivity(detailIntent);
-						
+
 					}
 				});
 			}
@@ -765,30 +801,29 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		builder.setCancelable(false);
 		builder.show();
 	}
-	
-	private void showConfirmOrderDialog(final String orderPrice, final String renter,  final String houseId) {  
-		
-		  AlertDialog.Builder builder =new AlertDialog.Builder(HouseOrderDetailsActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("确认订单");
-		  builder.setMessage("订单价格:￥"+orderPrice+"\n房客:"+renter);
-		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-		         @Override  
-		  
-		         public void onClick(DialogInterface dialog, int which) {
-					//rejectRentAttributeInfo(houseId);
-					confirmRentAttributeInfo(houseId, orderPrice);
-		         }  
-			
+
+	private void showConfirmOrderDialog(final String orderPrice, final String renter, final String houseId) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(HouseOrderDetailsActivity.this,
+				AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("确认订单");
+		builder.setMessage("订单价格:￥" + orderPrice + "\n房客:" + renter);
+		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// rejectRentAttributeInfo(houseId);
+				confirmRentAttributeInfo(houseId, orderPrice);
+			}
+
 		});
-		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
-			  
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	  
-	             LogUtil.w("alertdialog"," �뱣�����ݣ�");  
-	  
-	         }
+		builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+				LogUtil.w("alertdialog", " �뱣�����ݣ�");
+
+			}
 		});
 		builder.setCancelable(false);
 		builder.show();
@@ -949,18 +984,18 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 						button2.setVisibility(View.GONE);
 					}
 				}
-			}else if(msg.what==300){
+			} else if (msg.what == 300) {
 				String value = (String) msg.obj;
 				Gson gson = new Gson();
 				AddIDCardResult result = gson.fromJson(value, AddIDCardResult.class);
-				if(result.ret!=null){
-					if(result.ret.equals("0")){
+				if (result.ret != null) {
+					if (result.ret.equals("0")) {
 						Toast.makeText(HouseOrderDetailsActivity.this, "请在滴声后按图示完成身份证绑定", Toast.LENGTH_LONG).show();
-					}else{
+					} else {
 						Toast.makeText(HouseOrderDetailsActivity.this, result.msg, Toast.LENGTH_LONG).show();
 					}
 				}
-				
+
 			}
 		}
 	};
@@ -1023,7 +1058,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 				msg.what = 200;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
-			}else if(action.equals(mAddIDCardToDevice)){
+			} else if (action.equals(mAddIDCardToDevice)) {
 				Message msg = mHandler.obtainMessage();
 				msg.what = 300;
 				msg.obj = templateInfo;
@@ -1037,7 +1072,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 	 */
 	protected void intputIDCard() {
 		setBackgroundAlpha(0.3f);
-		
+
 		View view = View.inflate(this, R.layout.popupwindow_input_identity_info, null);
 		popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
@@ -1048,7 +1083,7 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				String renterIdcard = mOrderDetail.getRenterIdcard();
-				if(!TextUtils.isEmpty(renterIdcard)&&!TextUtils.isEmpty(deviceID)){
+				if (!TextUtils.isEmpty(renterIdcard) && !TextUtils.isEmpty(deviceID)) {
 					addIDCardToDevice(renterIdcard, deviceID);
 				}
 
@@ -1071,12 +1106,16 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 			}
 		});
 	}
-	
-	/**录入身份证
-	 * @param idcard 身份证
-	 * @param deviceId 锁设备id
+
+	/**
+	 * 录入身份证
+	 * 
+	 * @param idcard
+	 *            身份证
+	 * @param deviceId
+	 *            锁设备id
 	 */
-	private void addIDCardToDevice(String idcard,String deviceId) {
+	private void addIDCardToDevice(String idcard, String deviceId) {
 		//
 		String url = CommonUtil.mUserHost + "Services.asmx?op=AddIDCardToDevice";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddIDCardToDevice));
@@ -1086,7 +1125,6 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 		mPresent.startPresentServiceTask(true);
 
 	}
-	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1101,26 +1139,26 @@ public class HouseOrderDetailsActivity extends BaseActivity {
 					button2.setVisibility(View.GONE);
 				}
 			}
-			if(requestCode==CommonUtil.mScanCodeRequestCode){
+			if (requestCode == CommonUtil.mScanCodeRequestCode) {
 				Bundle bundle = data.getExtras();
 				String scanResult = bundle.getString("result");
 				LogUtil.e("mingguo", "scan  result  " + scanResult);
-				// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
+				// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020
+				// 100 220 010 000 3
 				int pos = scanResult.lastIndexOf("=");
 				deviceID = scanResult.substring(pos + 1);
 				LogUtil.e("mingguo", "scan  result pos " + pos + " lockNo  " + deviceID);
 				if (deviceID != null && deviceID.length() > 2) {
 					intputIDCard();
 				}
-				
-//				String result = data.getStringExtra("result");
-//				String[] split = result.split("=");
-//				deviceID = split[3];
-//				if(!TextUtils.isEmpty(deviceID)){
-//					intputIDCard();
-//				}
-				
-				
+
+				// String result = data.getStringExtra("result");
+				// String[] split = result.split("=");
+				// deviceID = split[3];
+				// if(!TextUtils.isEmpty(deviceID)){
+				// intputIDCard();
+				// }
+
 			}
 		}
 	}

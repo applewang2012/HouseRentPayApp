@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f2f3"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/listview"
+        android:divider="#f1f2f3"
+        android:background="#ffffff"
+        android:dividerHeight="@dimen/base_dimen_2"
+        android:layout_width="match_parent"
+        android:listSelector="#ffffff"
+        android:layout_height="wrap_content" >
+    </ListView>
+     <Button
+        android:id="@+id/add_parterner"
+        android:layout_width="@dimen/base_dimen_680"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="@dimen/base_dimen_46"
+        android:background="@drawable/withdraw_btn_bg"
+        android:text="添加随行人员"
+        android:textSize="16sp"
+        android:layout_marginBottom="@dimen/base_dimen_20"
+        android:textColor="#ffffff" />
+  <include
+      	android:visibility="gone"
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog" />
+
+</FrameLayout>

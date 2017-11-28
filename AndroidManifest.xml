@@ -96,6 +96,8 @@
         <activity
             android:name=".WelcomeActivity"
             android:theme="@style/AppTheme" >
+
+       
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -111,7 +113,8 @@
                     android:host="tenant.guardts.house"
                     android:pathPrefix="/launcher"
                     android:scheme="guardtsapp" />
-            </intent-filter>   
+            </intent-filter>
+            
         </activity>
         <activity
             android:name=".LoginUserActivity"
@@ -140,7 +143,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-       <activity
+        <activity
             android:name=".DownloadAppActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
@@ -163,7 +166,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden" >
-          
         </activity>
         <activity
             android:name=".HouseDetailInfoActivity"
@@ -233,7 +235,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -312,11 +314,13 @@
             android:theme="@style/AppTheme" >
         </activity>
 
-<!--         <provider
+        <!--
+             <provider
             android:name=".download.DownloadProvider"
             android:authorities="tenant.guardts.house.download" />
 
-        <service android:name=".download.DownloadService" /> -->
+        <service android:name=".download.DownloadService" />
+        -->
 
         <receiver
             android:name=".download.DownloadReceiver"
@@ -349,12 +353,13 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar" >
-           <intent-filter>
-		        <action android:name="android.intent.action.VIEW"/>
-		        <category android:name="android.intent.category.DEFAULT"/>
-		        <data android:scheme="wxae25cb3fefdc75ae"/>
-   		  </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wxae25cb3fefdc75ae" />
+            </intent-filter>
         </activity>
         <activity android:name="com.gzt.faceid5sdk.ImageCaptureActivity" >
         </activity>
@@ -386,11 +391,14 @@
             android:name=".EvaluationActivity"
             android:label="@string/title_activity_evaluation"
             android:theme="@style/AppTheme" >
-           <!--      <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>   -->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".PaymentStatusActivity"
@@ -568,7 +576,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -590,7 +598,17 @@
             android:name=".EvaluationDetailActivity"
             android:label="@string/title_activity_evaluation_detail"
             android:theme="@style/AppTheme" >
-       
+        </activity>
+        <activity
+            android:name=".AddRentParternerActivity"
+            android:label="@string/title_activity_add_rent_parterner"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".ParternerRecordActivity"
+            android:label="@string/title_activity_parterner_record"
+            android:theme="@style/AppTheme" >
+           
         </activity>
     </application>
 
