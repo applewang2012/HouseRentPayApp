@@ -6,19 +6,27 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.tencent.android.tpush.XGCustomPushNotificationBuilder;
 import com.tencent.android.tpush.XGPushBaseReceiver;
 import com.tencent.android.tpush.XGPushClickedResult;
+import com.tencent.android.tpush.XGPushManager;
 import com.tencent.android.tpush.XGPushRegisterResult;
 import com.tencent.android.tpush.XGPushShowedResult;
 import com.tencent.android.tpush.XGPushTextMessage;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import tenant.guardts.house.HomeActivity;
+import tenant.guardts.house.R;
 import tenant.guardts.house.util.LogUtil;
 
 public class MessageReceiver extends XGPushBaseReceiver {
 	private Intent intent = new Intent("com.qq.xgdemo.activity.UPDATE_LISTVIEW");
+	private static Ringtone mRingtone;
 	public static final String LogTag = "TPushReceiver";
 
 	private void show(Context context, String text) {
@@ -46,8 +54,48 @@ public class MessageReceiver extends XGPushBaseReceiver {
 //		NotificationService.getInstance(context).save(notific);
 //		context.sendBroadcast(intent);
 //		show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
-		LogUtil.e(LogTag, "收到通知-- "+notifiShowedRlt.toString());
+//		LogUtil.e("mingguo", "收到通知--播放声音  "+notifiShowedRlt.toString());
+//		XGCustomPushNotificationBuilder build = new XGCustomPushNotificationBuilder();
+////      build.setSound(
+////              RingtoneManager.getActualDefaultRingtoneUri(
+////                      context, RingtoneManager.TYPE_ALARM)) // 设置声音
+//		build.setSound(
+//               Uri.parse("android.resource://" + context.getPackageName()
+//               + "/" + R.raw.order_remind)) //设定Raw下指定声音文件
+//              .setDefaults(Notification.DEFAULT_VIBRATE) // 振动
+//              .setFlags(Notification.FLAG_NO_CLEAR); // 是否可清除
+//      // 设置自定义通知layout,通知背景等可以在layout里设置
+//      //build.setLayoutId(R.layout.layout_notification);
+//      // 设置自定义通知标题id
+//      //build.setLayoutTitleId(R.id.title);
+//      // 设置自定义通知图片id
+//      //build.setLayoutIconId(R.id.icon);
+//      // 设置自定义通知图片资源
+//      //build.setLayoutIconDrawableId(R.drawable.ic_launcher);
+//      // 设置状态栏的通知小图标
+//      //build.setIcon(R.drawable.ic_launcher);
+//      // 设置时间id
+//      //build.setLayoutTimeId(R.id.time);
+//      // 若不设定以上自定义layout，又想简单指定通知栏图片资源
+//      //build.setNotificationLargeIcon(R.drawable.tenda_icon);
+//      // 客户端保存build_id
+//      XGPushManager.setDefaultNotificationBuilder(context, build);
+		playSound(context);
 	}
+	
+    private synchronized void playSound(Context context) {  
+         
+        if (mRingtone == null) {  
+            LogUtil.v("mingguo","----------初始化铃声----------");  
+            String uri = "android.resource://" + context.getPackageName() + "/" + R.raw.order_remind;  
+            Uri no = Uri.parse(uri);  
+            mRingtone = RingtoneManager.getRingtone(context.getApplicationContext(), no);  
+        }  
+        if (!mRingtone.isPlaying()) {  
+            LogUtil.v("mingguo","--------------播放铃声---------------" + mRingtone.isPlaying());  
+            mRingtone.play();  
+        }  
+    }  
 
 	@Override
 	public void onUnregisterResult(Context context, int errorCode) {
@@ -184,6 +232,9 @@ public class MessageReceiver extends XGPushBaseReceiver {
 		}
 		// APP自主处理消息的过程...
 		LogUtil.d(LogTag, text);
+		
+		
+        
 		show(context, text);
 	}
 
