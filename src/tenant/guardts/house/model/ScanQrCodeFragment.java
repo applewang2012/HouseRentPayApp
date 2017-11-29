@@ -6,9 +6,11 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,9 +19,12 @@ import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -41,7 +46,7 @@ import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 
-public class ScanQrCodeFragment extends BaseFragment implements Callback{
+public class ScanQrCodeFragment extends BaseFragment implements Callback ,OnRequestPermissionsResultCallback{
 
 	private Activity mActivity;
 	private Context mContext;
@@ -54,117 +59,118 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	private ActionOperationInterface mAction;
 	private ImageView mFlashIcon;
 	private TextView mFlashText;
-	
+	private static final int CAMERA_CODE = 123;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = getActivity().getApplicationContext();
-//		getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.window_titlebar_home);
-//		mTitlebarContent  = (FrameLayout) getActivity().getWindow().findViewById(R.id.id_title_bar_home_content);
+		// getActivity().getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+		// R.layout.window_titlebar_home);
+		// mTitlebarContent = (FrameLayout)
+		// getActivity().getWindow().findViewById(R.id.id_title_bar_home_content);
 		CameraManager.init(getActivity().getApplicationContext());
-		
-		
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mRootView = inflater.inflate(R.layout.camera, container, false);
-		
+
 		initView();
-		initEvent();
+
 		return mRootView;
 	}
-	
-	public void setFlashLightStatus(final boolean status){
+
+	public void setFlashLightStatus(final boolean status) {
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				if (status){
+				if (status) {
 					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
 					mFlashText.setText("关闭手电筒");
 					mFlashText.setTextColor(Color.parseColor("#337ffd"));
-				}else{
+				} else {
 					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
 					mFlashText.setText("打开手电筒");
 					mFlashText.setTextColor(Color.parseColor("#ffffff"));
 				}
 			}
 		}, 200);
-		
+
 	}
-	
-	public  void setFragmentActionListener(ActionOperationInterface action) {
+
+	public void setFragmentActionListener(ActionOperationInterface action) {
 		mAction = action;
 	}
-	
-	private void initView(){
-		FrameLayout fl=(FrameLayout) mRootView.findViewById(R.id.fl);
+
+	private void initView() {
+		FrameLayout fl = (FrameLayout) mRootView.findViewById(R.id.fl);
 		TextView titlebar = (TextView) mRootView.findViewById(R.id.id_titlebar);
 		titlebar.setText("扫一扫开锁");
 		String flag = mActivity.getIntent().getStringExtra("flag");
-		mNumberButton = (CheckBox)mRootView.findViewById(R.id.id_open_lock_number_button);
-		if(flag!=null){
-			if(flag.equals("0")){
-				//fl.setVisibility(View.GONE);
+		mNumberButton = (CheckBox) mRootView.findViewById(R.id.id_open_lock_number_button);
+		if (flag != null) {
+			if (flag.equals("0")) {
+				// fl.setVisibility(View.GONE);
 				titlebar.setText("录入身份证");
 				mNumberButton.setText("输入编码");
 			}
-		}else{
+		} else {
 			fl.setVisibility(View.VISIBLE);
 		}
-		
+
 		viewfinderView = (ViewfinderView) mRootView.findViewById(R.id.viewfinder_view);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(getActivity());
-		
-		LinearLayout flashButton = (LinearLayout)mRootView.findViewById(R.id.capture_flash_button);
-		mFlashIcon = (ImageView)mRootView.findViewById(R.id.capture_flash_icon);
-		mFlashText = (TextView)mRootView.findViewById(R.id.capture_flash_text);
-		flashButton.setOnClickListener(new OnClickListener() {
 
+		LinearLayout flashButton = (LinearLayout) mRootView.findViewById(R.id.capture_flash_button);
+		mFlashIcon = (ImageView) mRootView.findViewById(R.id.capture_flash_icon);
+		mFlashText = (TextView) mRootView.findViewById(R.id.capture_flash_text);
+		flashButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (((CaptureActivity) getActivity()).setFlashLightOn()){
+				if (((CaptureActivity) getActivity()).setFlashLightOn()) {
 					mFlashIcon.setBackgroundResource(R.drawable.flash_checked);
 					mFlashText.setTextColor(Color.parseColor("#337ffd"));
 					mFlashText.setText("关闭手电筒");
-				}else{
+				} else {
 					mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
 					mFlashText.setTextColor(Color.parseColor("#ffffff"));
 					mFlashText.setText("打开手电筒");
 				}
 			}
 		});
-		
-		
+
 		mNumberButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				//startActivityForResult(new Intent(mContext, DoorNumberLockActivity.class), CommonUtil.mLockNumberRequestCode);
+				// startActivityForResult(new Intent(mContext,
+				// DoorNumberLockActivity.class),
+				// CommonUtil.mLockNumberRequestCode);
 				mAction.onNextFragment();
 			}
 		});
-	}
-	
-	
-	
-
-	private void initEvent() {
-
-		
-
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+
 		SurfaceView surfaceView = (SurfaceView) mRootView.findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
-			initCamera(surfaceHolder);
+			int checkSelfPermission = ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
+			if (checkSelfPermission == PackageManager.PERMISSION_GRANTED) {
+
+				initCamera(surfaceHolder);
+			} else {
+				ActivityCompat.requestPermissions(mActivity, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
+			}
+
 		} else {
 			surfaceHolder.addCallback(this);
 			surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -179,51 +185,51 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		}
 		initBeepSound();
 		vibrate = true;
-		
+
 		mFlashIcon.setBackgroundResource(R.drawable.flash_normal);
 		mFlashText.setText("打开手电筒");
 		mFlashText.setTextColor(Color.parseColor("#ffffff"));
+
 	}
 	
-	public boolean openOrCloseFlashLight(){
-		mCamera = CameraManager.getCamera();
-        mParameters = mCamera.getParameters();
-       
-        if (mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
-            mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            mCamera.setParameters(mParameters);
-            return true;
-        } else { 
-        	mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        	mCamera.setParameters(mParameters);
-        	
-        	return false;
-        }
-	}
 	
-	public boolean getFlashLightStatus(){
+
+	public boolean openOrCloseFlashLight() {
 		mCamera = CameraManager.getCamera();
-		if (mCamera != null){
-			mParameters = mCamera.getParameters();
-		       
-	        if (mParameters != null && mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
-	        	return false;
-	        }else{
-	        	return true;
-	        }
+		mParameters = mCamera.getParameters();
+
+		if (mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
+			mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+			mCamera.setParameters(mParameters);
+			return true;
+		} else {
+			mParameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+			mCamera.setParameters(mParameters);
+
+			return false;
 		}
-        return false;
 	}
-	
-	
-	
-	
+
+	public boolean getFlashLightStatus() {
+		mCamera = CameraManager.getCamera();
+		if (mCamera != null) {
+			mParameters = mCamera.getParameters();
+
+			if (mParameters != null && mParameters.getFlashMode().equals(Camera.Parameters.FLASH_MODE_OFF)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
-		mActivity=activity;
-		
+		mActivity = activity;
+
 		LogUtil.e("mingguo", "scan qr code  onAttach ");
 	}
 
@@ -238,8 +244,6 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		}
 		CameraManager.get().closeDriver();
 	}
-	
-	
 
 	@Override
 	public void onDestroy() {
@@ -256,7 +260,7 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 			return;
 		}
 		if (handler == null) {
-			handler = new CaptureActivityHandler((CaptureActivity)getActivity(), decodeFormats, characterSet);
+			handler = new CaptureActivityHandler((CaptureActivity) getActivity(), decodeFormats, characterSet);
 		}
 	}
 
@@ -272,7 +276,7 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -280,10 +284,10 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 		// TODO Auto-generated method stub
 		hasSurface = false;
 		if (mCamera != null) {
-            CameraManager.stopPreview();
-        }
+			CameraManager.stopPreview();
+		}
 	}
-	
+
 	public ViewfinderView getViewfinderView() {
 		return viewfinderView;
 	}
@@ -318,15 +322,14 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 			}
 		}
 	}
-	
+
 	public void handleDecode(Result result, Bitmap barcode) {
 		inactivityTimer.onActivity();
 		playBeepSoundAndVibrate();
 		String resultString = result.getText();
 		// FIXME
 		if (resultString.equals("")) {
-			GlobalUtil.shortToast(mContext, "Scan failed  !",
-					getResources().getDrawable(R.drawable.ic_dialog_no));
+			GlobalUtil.shortToast(mContext, "Scan failed  !", getResources().getDrawable(R.drawable.ic_dialog_no));
 		} else {
 			// System.out.println("Result:"+resultString);
 			Intent resultIntent = new Intent();
@@ -366,4 +369,12 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback{
 	private static final float BEEP_VOLUME = 0.10f;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
+
+	@Override
+	public void onRequestPermissionsResult(int arg0, String[] arg1, int[] arg2) {
+		if(arg0==CAMERA_CODE){
+			
+		}
+		
+	}
 }

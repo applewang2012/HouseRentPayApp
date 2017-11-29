@@ -19,6 +19,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.Window;
@@ -69,6 +70,7 @@ public class CaptureActivity extends BaseActivity {
 		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
 //		TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
 //		titlebar.setText("扫一扫开锁");
+		
 		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 		if (mQrFragment == null) {
 			mQrFragment = new ScanQrCodeFragment();

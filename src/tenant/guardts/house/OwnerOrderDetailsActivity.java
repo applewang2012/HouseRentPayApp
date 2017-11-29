@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -78,6 +79,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		getPayRateDesc(mOrderDetail.getHousePrice());
 		initView();
 		initData();
+	
 	}
 
 	/**
@@ -172,6 +174,40 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				initScanPupopWindow();
+			}
+		});
+		LinearLayout payOnline = (LinearLayout) findViewById(R.id.linearlayout_online);
+		LinearLayout payOffline = (LinearLayout) findViewById(R.id.linearlayout_offline);
+		LinearLayout linearlayout = (LinearLayout) findViewById(R.id.linearlayout_payment);
+		final CheckBox online = (CheckBox) findViewById(R.id.online);
+		final CheckBox offline = (CheckBox) findViewById(R.id.offline);
+		View dividerView=findViewById(R.id.divider_view);
+		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
+			linearlayout.setVisibility(View.VISIBLE);
+			dividerView.setVisibility(View.VISIBLE);
+		}else{
+			linearlayout.setVisibility(View.GONE);
+			dividerView.setVisibility(View.GONE);
+		}
+
+		payOnline.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isOnline = true;
+				setCheckBoxStatus(online, offline);
+				mModifyPriceButton.setClickable(true);
+				mOrderModifyPrice=mOrderDetail.getHousePrice();
+			}
+		});
+		payOffline.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				isOnline = false;
+				setCheckBoxStatus(offline, online);
+				mModifyPriceButton.setClickable(false);
+				mOrderModifyPrice="0.0";
 			}
 		});
 
@@ -364,8 +400,15 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 
 				@Override
 				public void onClick(View v) {
-					showConfirmOrderDialog(mOrderModifyPrice, mOrderDetail.getHouseContactName(),
-							mOrderDetail.getHouseOrderId());
+					if(isOnline){
+						showConfirmOrderDialog("线上支付",mOrderModifyPrice, mOrderDetail.getHouseContactName(),
+								mOrderDetail.getHouseOrderId());
+					}else{
+						showConfirmOrderDialog("线下支付",mOrderModifyPrice, mOrderDetail.getHouseContactName(),
+								mOrderDetail.getHouseOrderId());
+					}
+					
+					
 				}
 			});
 			button2.setText("拒绝订单");
@@ -615,12 +658,18 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		builder.show();
 	}
 
-	private void showConfirmOrderDialog(final String orderPrice, final String renter, final String houseId) {
+	/**
+	 * @param payment支付方式
+	 * @param orderPrice
+	 * @param renter
+	 * @param houseId
+	 */
+	private void showConfirmOrderDialog(final String payment,final String orderPrice, final String renter, final String houseId) {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(OwnerOrderDetailsActivity.this,
 				AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("确认订单");
-		builder.setMessage("订单价格:￥" + orderPrice + "\n房客:" + renter);
+		builder.setMessage("订单价格:￥" + orderPrice + "\n房客:" + renter+"\n支付方式："+payment);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

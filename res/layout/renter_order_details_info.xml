@@ -279,84 +279,8 @@
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            android:visibility="gone"
-            android:id="@+id/divider_view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base_dimen_10"
-            android:background="#f1f1f1" >
-        </View>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/linearlayout_payment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/base_dimen_30"
-                android:layout_marginTop="@dimen/base_dimen_30"
-                android:text="支付方式"
-                android:textColor="#444444" />
-
-            <LinearLayout
-                android:id="@+id/linearlayout_online"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/base_dimen_30"
-                android:layout_marginTop="@dimen/base_dimen_30"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="在线支付"
-                    android:textColor="#444444" />
-
-                <CheckBox
-                    android:id="@+id/online"
-                    android:layout_width="@dimen/base_dimen_42"
-                    android:layout_height="@dimen/base_dimen_42"
-                    android:layout_marginLeft="@dimen/base_dimen_400"
-                    android:background="@drawable/payment_checkbox_bg"
-                    android:button="@null"
-                    android:clickable="false"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearlayout_offline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base_dimen_30"
-                android:layout_marginLeft="@dimen/base_dimen_30"
-                android:layout_marginTop="@dimen/base_dimen_30"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="线下支付"
-                    android:textColor="#444444" />
-
-                <CheckBox
-                    android:id="@+id/offline"
-                    android:layout_width="@dimen/base_dimen_42"
-                    android:layout_height="@dimen/base_dimen_42"
-                    android:layout_marginLeft="@dimen/base_dimen_400"
-                    android:background="@drawable/payment_checkbox_bg"
-                    android:button="@null"
-                    android:clickable="false"
-                    android:gravity="center_vertical" />
-            </LinearLayout>
-        </LinearLayout>
-
+   
+       
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_10"

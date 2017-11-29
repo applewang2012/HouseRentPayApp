@@ -180,38 +180,7 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 			}
 		});
 
-		LinearLayout payOnline = (LinearLayout) findViewById(R.id.linearlayout_online);
-		LinearLayout payOffline = (LinearLayout) findViewById(R.id.linearlayout_offline);
-		LinearLayout linearlayout = (LinearLayout) findViewById(R.id.linearlayout_payment);
-		final CheckBox online = (CheckBox) findViewById(R.id.online);
-		final CheckBox offline = (CheckBox) findViewById(R.id.offline);
-		View dividerView=findViewById(R.id.divider_view);
-		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
-			linearlayout.setVisibility(View.VISIBLE);
-			dividerView.setVisibility(View.VISIBLE);
-		}else{
-			linearlayout.setVisibility(View.GONE);
-			dividerView.setVisibility(View.GONE);
-		}
-
-		payOnline.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				isOnline = true;
-				setCheckBoxStatus(online, offline);
-
-			}
-		});
-		payOffline.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				isOnline = false;
-				setCheckBoxStatus(offline, online);
-
-			}
-		});
+		
 
 	}
 
