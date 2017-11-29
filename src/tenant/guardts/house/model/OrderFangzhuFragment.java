@@ -33,7 +33,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.EvaluationDetailActivity;
-import tenant.guardts.house.HouseOrderDetailsActivity;
+import tenant.guardts.house.OwnerOrderDetailsActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -91,7 +91,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+				Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "owner");
 				startActivity(intent);
@@ -381,7 +381,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -413,7 +413,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -431,7 +431,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -450,7 +450,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -470,7 +470,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -489,7 +489,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -508,7 +508,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "owner");
 					startActivity(intent);
@@ -550,7 +550,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							Intent intent = new Intent(getActivity(), OwnerOrderDetailsActivity.class);
 							intent.putExtra("order_detail", info);
 							intent.putExtra("detail_type", "owner");
 							startActivity(intent);

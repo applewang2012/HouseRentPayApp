@@ -30,8 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.EvaluationDetailActivity;
-import tenant.guardts.house.HouseOrderDetailsActivity;
 import tenant.guardts.house.R;
+import tenant.guardts.house.RenterOrderDetailsActivity;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
@@ -104,7 +104,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+				Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 				intent.putExtra("order_detail", mHouseInfoList.get(position));
 				intent.putExtra("detail_type", "renter");
 				LogUtil.w("mingguo", "password  "+mHouseInfoList.get(position).getDoorPassword());
@@ -229,7 +229,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					
@@ -257,7 +257,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -317,7 +317,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -336,7 +336,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -356,7 +356,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -375,7 +375,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -394,7 +394,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+					Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 					intent.putExtra("order_detail", info);
 					intent.putExtra("detail_type", "renter");
 					startActivity(intent);
@@ -436,7 +436,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 						
 						@Override
 						public void onClick(View v) {
-							Intent intent = new Intent(getActivity(), HouseOrderDetailsActivity.class);
+							Intent intent = new Intent(getActivity(), RenterOrderDetailsActivity.class);
 							intent.putExtra("order_detail", info);
 							intent.putExtra("detail_type", "renter");
 							startActivity(intent);

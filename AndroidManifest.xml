@@ -149,7 +149,12 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".HouseOrderDetailsActivity"
+            android:name=".OwnerOrderDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".RenterOrderDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme" >
         </activity>
