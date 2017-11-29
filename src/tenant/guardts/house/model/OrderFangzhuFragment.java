@@ -632,10 +632,12 @@ public class OrderFangzhuFragment extends BaseFragment{
      * 刷新倒计时控件 
      */  
     public String updateTimeTextView(long times_remain, String orderId, int position) {  
-        if (times_remain <= 0) {  
-            expireHouseRequest(orderId);
-            mExpirePosition = position;
-            return "超时未确认订单已过期";  
+        if (times_remain <= 0) {
+        	if (mHouseInfoList.get(position).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
+	            expireHouseRequest(orderId);
+        	}
+	            mExpirePosition = position;
+	            return "超时未确认订单已过期";  
         }  
         //秒钟  
         long time_second = (times_remain/1000)%60;  

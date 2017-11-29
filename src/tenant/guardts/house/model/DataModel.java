@@ -110,7 +110,7 @@ public class DataModel {
 					CommonUtil.mUserHost = sharedata.getString("user_host", "");
 					mUrl = CommonUtil.mUserHost +mUrl;
 				}
-				
+				LogUtil.i("mingguo", "data model doInBackground   url  "+mUrl);
 				 Element[] header = new Element[1]; 
 	                header[0] = new Element().createElement(CommonUtil.NAMESPACE, "Authentication"); 
 	                

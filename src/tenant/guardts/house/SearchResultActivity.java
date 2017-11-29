@@ -111,7 +111,7 @@ public class SearchResultActivity extends BaseActivity {
 		setContentView(R.layout.house_search_layout);
 		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 		// R.layout.titlebar);
-		// TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		// 
 		// mTitleBar.setText("短租共享");
 		ActivityController.addActivity(this);
 		TextView searchButton = (TextView) findViewById(R.id.button_search);

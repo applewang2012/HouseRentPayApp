@@ -70,8 +70,8 @@ public class SurroundResultActivity extends BaseActivity implements OnGetPoiSear
 		setContentView(R.layout.surround_result_layout);
 		mSearchTag = getIntent().getStringExtra("search_text");
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText(mSearchTag);
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText(mSearchTag);
 		
 		initData();
 		initView();

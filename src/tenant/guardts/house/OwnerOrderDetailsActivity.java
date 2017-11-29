@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import com.baidu.mapapi.map.Text;
 import com.google.gson.Gson;
 
 import android.app.AlertDialog;
@@ -63,6 +64,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	private Button mModifyPriceButton;
 	private LinearLayout mIdcardContent;
 	private boolean isOnline;// 是否在线支付
+	private String mServiceFeeTag = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,6 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		mTitleBar.setText("订单详情");
 		mOrderDetail = (HouseInfoModel) getIntent().getSerializableExtra("order_detail");
 		mDetailType = getIntent().getStringExtra("detail_type");
-
 		mPresent = new HoursePresenter(OwnerOrderDetailsActivity.this, this);
 		getPayRateDesc(mOrderDetail.getHousePrice());
 		initView();
@@ -179,17 +180,24 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		LinearLayout payOnline = (LinearLayout) findViewById(R.id.linearlayout_online);
 		LinearLayout payOffline = (LinearLayout) findViewById(R.id.linearlayout_offline);
 		LinearLayout linearlayout = (LinearLayout) findViewById(R.id.linearlayout_payment);
+		FrameLayout showPayStyleLayout = (FrameLayout)findViewById(R.id.show_order_pay_style_content);
+		TextView showStyle = (TextView)findViewById(R.id.show_order_pay_style);
 		final CheckBox online = (CheckBox) findViewById(R.id.online);
 		final CheckBox offline = (CheckBox) findViewById(R.id.offline);
-		View dividerView=findViewById(R.id.divider_view);
-		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
+		online.setChecked(true); //默认在线
+		
+		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			linearlayout.setVisibility(View.VISIBLE);
-			dividerView.setVisibility(View.VISIBLE);
+			showPayStyleLayout.setVisibility(View.GONE);
 		}else{
 			linearlayout.setVisibility(View.GONE);
-			dividerView.setVisibility(View.GONE);
+			showPayStyleLayout.setVisibility(View.VISIBLE);
 		}
-
+		if (mOrderModifyPrice != null && (mOrderModifyPrice.equals("0") || mOrderModifyPrice.equals("0.0") || mOrderModifyPrice.equals("0.00"))){
+			showStyle.setText("线下支付");
+		}else{
+			showStyle.setText("在线支付");
+		}
 		payOnline.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -198,6 +206,11 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				setCheckBoxStatus(online, offline);
 				mModifyPriceButton.setClickable(true);
 				mOrderModifyPrice=mOrderDetail.getHousePrice();
+				mModifyPriceButton.setVisibility(View.VISIBLE);
+				mOrderPriceTextView.setText("¥ "+mOrderModifyPrice);
+				mModifyPriceButton.setTextColor(Color.parseColor("#ffffff"));
+				mModifyPriceButton.setBackgroundResource(R.drawable.item_blue_button_no_corner_selector);
+				tvServiceFee.setText(mServiceFeeTag);
 			}
 		});
 		payOffline.setOnClickListener(new OnClickListener() {
@@ -207,7 +220,10 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				isOnline = false;
 				setCheckBoxStatus(offline, online);
 				mModifyPriceButton.setClickable(false);
-				mOrderModifyPrice="0.0";
+				mOrderModifyPrice="0.00";
+				mOrderPriceTextView.setText("¥ "+mOrderModifyPrice);
+				mModifyPriceButton.setVisibility(View.GONE);
+				tvServiceFee.setText("已包含服务费 0.00元");
 			}
 		});
 
@@ -312,7 +328,9 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	 */
 	public String updateTimeTextView(long times_remain, String orderId) {
 		if (times_remain <= 0) {
-			expireHouseRequest(orderId);
+			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
+				expireHouseRequest(orderId);
+			}
 			return "00:00";
 		}
 		// 秒钟
@@ -353,14 +371,15 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			mEnterTimeStamp = mEnterTimeStamp + 1000L;
-			updateShowTimeDown(updateTimeTextView(mOrderDetail.getOrderExpiredDate() - mEnterTimeStamp,
-					mOrderDetail.getHouseOrderId()));
-			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)
-					|| mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
-				updateTimeHandler.sendEmptyMessageDelayed(800, 1000);
+			if (msg.what == 800){
+				mEnterTimeStamp = mEnterTimeStamp + 1000L;
+				updateShowTimeDown(updateTimeTextView(mOrderDetail.getOrderExpiredDate() - mEnterTimeStamp,
+						mOrderDetail.getHouseOrderId()));
+				if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)
+						|| mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
+					updateTimeHandler.sendEmptyMessageDelayed(800, 1000);
+				}
 			}
-
 		}
 	};
 
@@ -407,8 +426,6 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 						showConfirmOrderDialog("线下支付",mOrderModifyPrice, mOrderDetail.getHouseContactName(),
 								mOrderDetail.getHouseOrderId());
 					}
-					
-					
 				}
 			});
 			button2.setText("拒绝订单");
@@ -478,8 +495,8 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			button1.setVisibility(View.GONE);
 			button2.setText("查看详情");
 			button2.setVisibility(View.GONE);
-			priceLinearLayout.setVisibility(View.GONE);
-			tvServiceFee.setVisibility(View.GONE);
+//			priceLinearLayout.setVisibility(View.GONE);
+//			tvServiceFee.setVisibility(View.GONE);
 			
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_REJECTED)) {
 			status.setText("已拒绝");// ///////////////////////////////////////////////////////////////////////////////////
@@ -487,8 +504,8 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			button1.setText("查看详情");
 			button1.setVisibility(View.GONE);
 			button2.setVisibility(View.GONE);
-			priceLinearLayout.setVisibility(View.GONE);
-			tvServiceFee.setVisibility(View.GONE);
+//			priceLinearLayout.setVisibility(View.GONE);
+//			tvServiceFee.setVisibility(View.GONE);
 			
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)) {
 			status.setText("待退房");
@@ -602,7 +619,6 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				CharSequence strPhone = phone.getText();
-
 				startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + strPhone)));
 
 			}
@@ -669,7 +685,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(OwnerOrderDetailsActivity.this,
 				AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("确认订单");
-		builder.setMessage("订单价格:￥" + orderPrice + "\n房客:" + renter+"\n支付方式："+payment);
+		builder.setMessage("房客:" + renter+"\n"+"订单价格:￥" + orderPrice + "\n"+"支付方式："+payment);
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -826,11 +842,11 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				Gson gson = new Gson();
 				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
 				if (serviceCharge.fee.startsWith("00")) {
+					mServiceFeeTag = "已包含服务费" + serviceCharge.fee.substring(1) + "元";
 					tvServiceFee.setText("已包含服务费" + serviceCharge.fee.substring(1) + "元");
-
 				} else {
+					mServiceFeeTag = "已包含服务费" + serviceCharge.fee + "元";
 					tvServiceFee.setText("已包含服务费" + serviceCharge.fee + "元");
-					;
 				}
 
 			} else if (msg.what == 200) {

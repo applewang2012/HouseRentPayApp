@@ -81,8 +81,8 @@ public class SelectShowCityActivity extends BaseActivity implements OnScrollList
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.select_city_main);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("切换城市");
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("切换城市");
 		currentCity = getIntent().getStringExtra("current_city");
 		personList = (ListView) findViewById(R.id.list_view);
 		allCity_lists = new ArrayList<City>();

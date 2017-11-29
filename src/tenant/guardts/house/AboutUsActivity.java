@@ -16,7 +16,6 @@ import org.ksoap2.serialization.SoapObject;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,8 +47,8 @@ public class AboutUsActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_about_us);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("关于我们");
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("关于我们");
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
 		TextView currentVersion = (TextView)findViewById(R.id.id_about_us_current_version);
 		currentVersion.setText(currentVersion.getText()+GlobalUtil.getVersionName(getApplicationContext()));
@@ -73,7 +72,7 @@ public class AboutUsActivity extends BaseActivity {
 				
 				Intent intent = new Intent();        
 				intent.setAction("android.intent.action.VIEW");    
-				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");   
+				Uri content_url = Uri.parse("http://39.106.19.37:81/file/houseservice.php");   
 				intent.setData(content_url);  
 				startActivity(intent);
 				

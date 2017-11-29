@@ -110,6 +110,9 @@ public class HousePayActivity extends BaseActivity implements DataStatusInterfac
 				checkOrderStatus();
 			}
 		});
+		if (realPrice != null && realPrice.equals("0")){
+			payByWallet(renterId, ownerId, price);
+		}
 		
 	}
 	

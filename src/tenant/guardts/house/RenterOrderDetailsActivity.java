@@ -41,6 +41,7 @@ import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.view.PriceEditText;
+import tenant.guardts.house.wxapi.HousePayActivity;
 
 public class RenterOrderDetailsActivity extends BaseActivity {
 	private HouseInfoModel mOrderDetail;
@@ -59,7 +60,6 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	private long mEnterTimeStamp;
 	private TextView mOrderPriceTextView;
 	private String mOrderModifyPrice;
-	private Button mModifyPriceButton;
 	private LinearLayout mIdcardContent;
 	private boolean isOnline;// 是否在线支付
 
@@ -139,14 +139,6 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 		ownerPhone.setText(mOrderDetail.getHouseOwnerPhone());
 		mOrderPriceTextView.setText("¥ " + mOrderDetail.getHousePrice());
 		mOrderModifyPrice = mOrderDetail.getHousePrice();
-		mModifyPriceButton = (Button) findViewById(R.id.id_order_detail_modify_button);
-		mModifyPriceButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				showModifyPriceDialog();
-			}
-		});
 		button1 = (Button) findViewById(R.id.id_order_detail_button1);
 		button2 = (Button) findViewById(R.id.id_order_detail_button2);
 		btnContact = (Button) findViewById(R.id.id_order_detail_contact);
@@ -180,8 +172,18 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 			}
 		});
 
-		
-
+		FrameLayout showPayStyleLayout = (FrameLayout)findViewById(R.id.show_order_pay_style_content);
+		TextView showStyle = (TextView)findViewById(R.id.show_order_pay_style);
+		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
+			showPayStyleLayout.setVisibility(View.GONE);
+		}else{
+			showPayStyleLayout.setVisibility(View.VISIBLE);
+		}
+		if (mOrderModifyPrice != null && (mOrderModifyPrice.equals("0") || mOrderModifyPrice.equals("0.0") || mOrderModifyPrice.equals("0.00"))){
+			showStyle.setText("线下支付");
+		}else{
+			showStyle.setText("在线支付");
+		}
 	}
 
 	private void setCheckBoxStatus(CheckBox box1, CheckBox box2) {
@@ -283,7 +285,9 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	 */
 	public String updateTimeTextView(long times_remain, String orderId) {
 		if (times_remain <= 0) {
-			expireHouseRequest(orderId);
+			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
+				expireHouseRequest(orderId);
+			}
 			return "00:00";
 		}
 		// 秒钟
@@ -353,7 +357,6 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	 * @param button2
 	 */
 	public void updateStatus(TextView status, Button button1, Button button2) {
-		mModifyPriceButton.setVisibility(View.GONE);
 		mIdcardContent.setVisibility(View.GONE);
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
 			status.setText("待确认");
@@ -381,22 +384,33 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 			// button1.setTextColor(Color.parseColor("#ffffff"));
 			// button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			button2.setText("取消订单");
-
 			button1.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					CommonUtil.mPayHouseOrderId = mOrderDetail.getHouseOrderId();
-					Intent payIntent = new Intent(RenterOrderDetailsActivity.this,
-							tenant.guardts.house.wxapi.HousePayActivity.class);
-					payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
-					payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
-					payIntent.putExtra("renter_idcard", mOrderDetail.getRenterIdcard());
-					LogUtil.e("", mOrderDetail.getRenterIdcard() + "kkk");
-					payIntent.putExtra("orderID", mOrderDetail.getHouseOrderId());
-					payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
-					payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
-					startActivity(payIntent);
+					if (mOrderDetail.getHousePrice() != null && (mOrderDetail.getHousePrice().equals("0.0")||
+							mOrderDetail.getHousePrice().equals("0.00")|| mOrderDetail.getHousePrice().equals("0"))){
+						Intent intent = new Intent(RenterOrderDetailsActivity.this, PaymentStatusActivity.class);
+						intent.putExtra("flag", true);
+						intent.putExtra("orderID", mOrderDetail.getHouseOrderId());
+						intent.putExtra("rentNO", mOrderDetail.getHouseId());
+						intent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
+						intent.putExtra("pay_price", mOrderDetail.getHousePrice());
+						startActivity(intent);
+						
+					}else{
+						CommonUtil.mPayHouseOrderId = mOrderDetail.getHouseOrderId();
+						Intent payIntent = new Intent(RenterOrderDetailsActivity.this,
+								tenant.guardts.house.wxapi.HousePayActivity.class);
+						payIntent.putExtra("pay_price", mOrderDetail.getHousePrice());
+						payIntent.putExtra("owner_idcard", mOrderDetail.getHouseOwnerIdcard());
+						payIntent.putExtra("renter_idcard", mOrderDetail.getRenterIdcard());
+						payIntent.putExtra("orderID", mOrderDetail.getHouseOrderId());
+						payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
+						payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
+						startActivity(payIntent);
+					}
+					
 					finish();
 				}
 			});

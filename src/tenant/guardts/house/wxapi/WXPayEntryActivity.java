@@ -183,7 +183,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 					setContentView(v);
 					initSuccessView(v);
 					//请求更新数据信息
-					mHandler.sendEmptyMessageDelayed(300, 1000);
+					mHandler.sendEmptyMessageDelayed(300, 500);
 //					completeHouseRentAttributeInfo(CommonUtil.mPayHouseOrderId);
 //				}else{
 //					View v = getLayoutInflater().inflate(R.layout.activity_successful_payment, null);

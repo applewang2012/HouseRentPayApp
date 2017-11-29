@@ -279,7 +279,41 @@
             </LinearLayout>
         </LinearLayout>
 
-   
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_dimen_10"
+            android:background="#f1f1f1" >
+        </View>
+        
+   		<FrameLayout
+            android:id="@+id/show_order_pay_style_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_dimen_30"
+            	android:layout_marginBottom="@dimen/base_dimen_30"
+                android:layout_marginLeft="@dimen/base_dimen_30"
+                android:text="支付方式"
+                android:textColor="#000000"
+                android:textSize="@dimen/base_dimen_32" />
+
+            <TextView
+                android:id="@+id/show_order_pay_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/base_dimen_50"
+                android:textColor="#444444"
+                android:textSize="@dimen/base_dimen_26"
+                />
+
+        </FrameLayout>
        
         <View
             android:layout_width="match_parent"
@@ -309,22 +343,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="@dimen/base_dimen_180"
+                android:layout_marginRight="@dimen/base_dimen_50"
                 android:text="500"
                 android:textColor="#337ffd"
                 android:textSize="@dimen/base_dimen_32"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/id_order_detail_modify_button"
-                android:layout_width="@dimen/base_dimen_140"
-                android:layout_height="@dimen/base_dimen_60"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="@dimen/base_dimen_20"
-                android:background="@drawable/item_blue_button_no_corner_selector"
-                android:text="修改价格"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/base_dimen_30" />
+            
         </FrameLayout>
 
         <TextView

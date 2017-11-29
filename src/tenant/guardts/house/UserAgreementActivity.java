@@ -23,8 +23,8 @@ public class UserAgreementActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_user_agreement);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("用户服务协议");
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("用户服务协议");
 		
 		ImageView imgView1 = new ImageView(this);     
         ImageView imgView2 = new ImageView(this);    

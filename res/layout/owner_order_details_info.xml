@@ -284,7 +284,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/base_dimen_10"
             android:background="#f1f1f1"
-            android:visibility="gone" >
+             >
         </View>
 
         <LinearLayout
@@ -300,8 +300,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/base_dimen_30"
                 android:layout_marginTop="@dimen/base_dimen_30"
-                android:text="支付方式"
-                android:textColor="#444444" />
+                android:text="选择支付方式"
+                android:textColor="#000000" />
 
             <LinearLayout
                 android:id="@+id/linearlayout_online"
@@ -316,6 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="在线支付"
+                    android:textSize="@dimen/base_dimen_26"
                     android:textColor="#444444" />
 
                 <CheckBox
@@ -343,6 +344,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="线下支付"
+                    android:textSize="@dimen/base_dimen_26"
                     android:textColor="#444444" />
 
                 <CheckBox
@@ -356,6 +358,36 @@
                     android:gravity="center_vertical" />
             </LinearLayout>
         </LinearLayout>
+        
+        <FrameLayout
+            android:id="@+id/show_order_pay_style_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="#ffffff" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_dimen_30"
+            	android:layout_marginBottom="@dimen/base_dimen_30"
+                android:layout_marginLeft="@dimen/base_dimen_30"
+                android:text="支付方式"
+                android:textColor="#000000"
+                android:textSize="@dimen/base_dimen_32" />
+
+            <TextView
+                android:id="@+id/show_order_pay_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/base_dimen_50"
+                android:textColor="#444444"
+                android:textSize="@dimen/base_dimen_26"
+                />
+
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"

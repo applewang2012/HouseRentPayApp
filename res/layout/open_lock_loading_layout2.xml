@@ -36,7 +36,7 @@
     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="开锁中，请稍后。。。"
+        android:text="开锁中,听到智能锁“滴”声后即可开门"
         android:textColor="#337ffd"
         android:layout_gravity="center"
         android:textSize="@dimen/base_dimen_37"

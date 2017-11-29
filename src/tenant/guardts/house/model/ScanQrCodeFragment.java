@@ -6,11 +6,9 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -19,12 +17,9 @@ import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -46,7 +41,7 @@ import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 
-public class ScanQrCodeFragment extends BaseFragment implements Callback ,OnRequestPermissionsResultCallback{
+public class ScanQrCodeFragment extends BaseFragment implements Callback {
 
 	private Activity mActivity;
 	private Context mContext;
@@ -163,13 +158,13 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback ,OnRequ
 		SurfaceView surfaceView = (SurfaceView) mRootView.findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
-			int checkSelfPermission = ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
-			if (checkSelfPermission == PackageManager.PERMISSION_GRANTED) {
-
-				initCamera(surfaceHolder);
-			} else {
-				ActivityCompat.requestPermissions(mActivity, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
-			}
+//			int checkSelfPermission = ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
+//			if (checkSelfPermission == PackageManager.PERMISSION_GRANTED) {
+//
+//				initCamera(surfaceHolder);
+//			} else {
+//				ActivityCompat.requestPermissions(mActivity, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
+//			}
 
 		} else {
 			surfaceHolder.addCallback(this);
@@ -370,11 +365,4 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback ,OnRequ
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
 
-	@Override
-	public void onRequestPermissionsResult(int arg0, String[] arg1, int[] arg2) {
-		if(arg0==CAMERA_CODE){
-			
-		}
-		
-	}
 }

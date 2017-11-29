@@ -52,7 +52,7 @@ public class PaymentStatusActivity extends BaseActivity implements DataStatusInt
 		mPresenter = new HoursePresenter(PaymentStatusActivity.this, this);
 		initView();
 		initEvent();
-		mHandler.sendEmptyMessageDelayed(300, 1500);
+		mHandler.sendEmptyMessageDelayed(300, 700);
 	}
 
 	private void initEvent() {

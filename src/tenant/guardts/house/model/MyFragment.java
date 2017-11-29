@@ -49,7 +49,7 @@ public class MyFragment extends BaseFragment {
 	private String mGetUserInfoAction = "http://tempuri.org/GetUserInfo";
 	private String mCommonServiceAction = "http://tempuri.org/GetAreas";
 	private FrameLayout mAboutUs;
-	private FrameLayout mLogout;
+	private FrameLayout mShareFriends;
 	// private String mUsername;
 	private FrameLayout mChangeArea;
 	private String wallet;
@@ -107,7 +107,7 @@ public class MyFragment extends BaseFragment {
 		mPublishHouse = (FrameLayout) mRootView.findViewById(R.id.id_user_publish_house);// 发布房屋
 		mWalletFrameLayout = (FrameLayout) mRootView.findViewById(R.id.id_user_house_wallet);// 我的钱包
 		mAboutUs = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_about_us);// 修改密码
-		mLogout = (FrameLayout) mRootView.findViewById(R.id.id_apply_for_friends);// 邀请好友
+		mShareFriends = (FrameLayout) mRootView.findViewById(R.id.id_apply_for_friends);// 邀请好友
 		mChangeArea = (FrameLayout) mRootView.findViewById(R.id.id_userinfo_change_area);// 切换城市
 		if (mUserName.equals("") || mUserName == null) {
 		} else {
@@ -166,7 +166,7 @@ public class MyFragment extends BaseFragment {
 			}
 		});
 
-		mLogout.setOnClickListener(new OnClickListener() {
+		mShareFriends.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

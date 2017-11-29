@@ -34,8 +34,8 @@ public class TransactionDetailActivity extends BaseActivity implements DataStatu
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE); 
 		setContentView(R.layout.activity_transaction_detail);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("交易明细");
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("交易明细");
 		
 		initView();
 		

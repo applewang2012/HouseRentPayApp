@@ -446,7 +446,6 @@ public class HomeActivity extends BaseActivity {
 					String ret = itemJsonObject.optString("ret");
 					if (ret != null) {
 						if (ret.equals("0")){
-							showOpenDoorLoadingView();
 							showOpenDoorAlertDialog(mLockNumber);
 						}else{
 							Toast.makeText(getApplicationContext(), itemJsonObject.optString("msg"), Toast.LENGTH_LONG).show();

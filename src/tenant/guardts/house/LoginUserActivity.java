@@ -131,7 +131,7 @@ public class LoginUserActivity extends BaseActivity {
 
 				Intent intent = new Intent();
 				intent.setAction("android.intent.action.VIEW");
-				Uri content_url = Uri.parse("http://mg.weiyuzhu.cn/");
+				Uri content_url = Uri.parse("http://39.106.19.37:81/file/houseservice.php");
 				intent.setData(content_url);
 				startActivity(intent);
 			}

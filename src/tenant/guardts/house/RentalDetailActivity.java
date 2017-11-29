@@ -44,8 +44,8 @@ public class RentalDetailActivity extends BaseActivity implements DataStatusInte
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_rental_detail);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText("租客历史");
+		TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText("租客历史");
 		initView();
 		
 	}

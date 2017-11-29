@@ -26,8 +26,8 @@ public class LoadUrlTestActivity extends BaseActivity {
         setContentView(R.layout.load_url);
         String tabName = getIntent().getStringExtra("tab_name"); 
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		TextView mTitleBar = (TextView)findViewById(R.id.id_titlebar);
-		mTitleBar.setText(tabName);
+        TextView titlebar  = (TextView)findViewById(R.id.id_titlebar);
+		titlebar.setText(tabName);
         webView = (WebView) findViewById(R.id.webView1);
         progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         
