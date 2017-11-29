@@ -101,7 +101,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 	private String mHousePrice, mRealPrice;
 
-	private String mRentType;
+	private String mRentType, mCreateOrder, mAddress;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mOwnerIdcard = getIntent().getStringExtra("owner_id");
 		mHousePrice = getIntent().getStringExtra("house_price");
 		mRentType = getIntent().getStringExtra("rent_type");
+		mAddress = getIntent().getStringExtra("house_address");
+		mCreateOrder = getIntent().getStringExtra("create_order");
 		if (mRentType != null){
 			if (mRentType.equals("02")){  //日租
 				mTypeIndex = "1";
@@ -369,6 +371,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private EditText mVerifyCodeText;
 
 	private String mVerifyCode;
+
+	private TextView mHouseAddressTextView;
 	
 	
 	@SuppressLint("SimpleDateFormat")
@@ -433,14 +437,6 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //		mOwnerType[2] = "时租房";
 		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_rent_house_type);
 		mTypeTextView = (TextView)findViewById(R.id.id_rent_house_type_text);
-		//mOriginTypeText = mTypeTextView.getText().toString();
-//		typeFrameLayout.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				showAlertDialog(mTypeTextView, mOwnerType);
-//			}
-//		});
 		mTypeTextView.setText(mRentType);
 		typeFrameLayout.setVisibility(View.GONE);
 		
@@ -474,13 +470,19 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}
 		});
 		
-		//mHouseId = (TextView)findViewById(R.id.id_rent_house_number);
+		mHouseAddressTextView = (TextView)findViewById(R.id.id_rent_house_address_text);
 		mRentIDcard = (EditText)findViewById(R.id.id_rent_house_idcard);
 		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
 		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
 		mRentName.setText(CommonUtil.mRegisterRealName);
 		mRentPhone.setText(CommonUtil.mUserLoginName);
 		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
+		if (mCreateOrder != null && mCreateOrder.equals("1")){
+			mRentName.setText("");
+			mRentPhone.setText("");
+			mRentIDcard.setText("");
+			CommonUtil.mIsCancelRentIdentifyTest = true; //代人下单取消实名认证
+		}
 		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
 		if (mTypeIndex.equals("0")){
 			mRentPrice.setText(mHousePrice+" 元/小时");
@@ -517,10 +519,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 //				
 //			}
 //		});
-		
+		mHouseAddressTextView.setText(mAddress);
+		mHouseAddressTextView.setSelected(true);
 		mVerifyCodeText = (EditText)findViewById(R.id.id_rent_house_phone_verify);
-		
-		
 		mGetVerifyCodeText = (TextView)findViewById(R.id.id_rent_house_get_verifycode);
 		mGetVerifyCodeText.setOnClickListener(new OnClickListener() {
 			
@@ -1197,7 +1198,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		CommonUtil.mIsCancelRentIdentifyTest = false;
 		super.onDestroy();
 		mHandler.removeCallbacksAndMessages(null);
 	}

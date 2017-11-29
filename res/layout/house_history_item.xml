@@ -120,14 +120,14 @@
     		android:layout_gravity="center_vertical"
 	        />
 	    <Button 
-	        android:id="@+id/btn_detail"
+	        android:id="@+id/btn_create_order"
 	        android:layout_width="@dimen/base_dimen_150" 
     		android:layout_height="@dimen/base_dimen_56"
     		android:layout_marginLeft="@dimen/base_dimen_10"
     		android:textColor="#444444"
     		android:background="@drawable/item_gray_button_no_corner_selector"
     		android:gravity="center"
-    		android:text="房屋详情"
+    		android:text="代人下单"
     		android:textSize="@dimen/base_dimen_28"
     		android:layout_gravity="center_vertical"
 	        /> 

@@ -200,45 +200,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 		mPresenter.startPresentServiceTask(true);
 	}
 
-	private void showPublicAttributeDialog() {
-		new AlertDialog.Builder(ApplyForCheckoutActivity.this, AlertDialog.THEME_HOLO_LIGHT)
-				.setTitle(getString(R.string.rent_house_title))
-
-				.setMessage(getString(R.string.rent_house_content))
-
-				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (mHouseInfo == null) {
-							return;
-						}
-						if (mHouseInfo != null && mHouseInfo.getHouseId() != null
-								&& !mHouseInfo.getHouseId().equals("") && mHouseInfo.getHouseOwnerName() != null
-								&& !mHouseInfo.getHouseOwnerName().equals("") && mHouseInfo.getHouseOwnerName() != null
-								&& !mHouseInfo.getHouseOwnerName().equals("")) {
-							Intent intent = new Intent(ApplyForCheckoutActivity.this, AddRentAttributeActivity.class);
-							intent.putExtra("house_id", mHouseInfo.getHouseId());
-							intent.putExtra("user_name", CommonUtil.mUserLoginName);
-							intent.putExtra("owner_name", mHouseInfo.getHouseOwnerName());
-							intent.putExtra("owner_id", mHouseInfo.getHouseOwnerIdcard());
-							startActivity(intent);
-							finish();
-						} else {
-							Toast.makeText(getApplicationContext(), "获取房屋详情异常，请重试！", Toast.LENGTH_SHORT).show();
-						}
-
-					}
-
-				}).setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {// ��ӷ��ذ�ť
-
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-
-							}
-
-						}).show();
-	}
-
+	
 	private void initView() {
 
 		mPresenter = new HoursePresenter(getApplicationContext(), this);
@@ -567,15 +529,15 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 				JSONObject object = array.optJSONObject(0);
 				if (object != null) {
 					mHouseInfo = new HouseInfoModel();
-					mRentName.setText(object.getString("ROwner"));
-					mRentArea.setText(object.getString("RRentArea") + " 平米");
-					mRentType.setText(object.getString("RRoomTypeDesc"));
-					mRentDirection.setText(object.getString("RDirectionDesc"));
-					mRentAddress.setText(object.getString("RAddress"));
-					mZhulinType.setText(object.getString("RRentTypeDesc"));
-					mRoomNum.setText(object.getString("RDoor"));
-					mLocationPolice.setText(object.getString("RPSName"));
-					mHousePrice.setText(object.getString("RLocationDescription") + " 元");
+					mRentName.setText(object.optString("ROwner"));
+					mRentArea.setText(object.optString("RRentArea") + " 平米");
+					mRentType.setText(object.optString("RRoomTypeDesc"));
+					mRentDirection.setText(object.optString("RDirectionDesc"));
+					mRentAddress.setText(object.optString("RAddress"));
+					mZhulinType.setText(object.optString("RRentTypeDesc"));
+					mRoomNum.setText(object.optString("RDoor"));
+					mLocationPolice.setText(object.optString("RPSName"));
+					mHousePrice.setText(object.optString("RLocationDescription") + " 元");
 
 					mHouseInfo.setHouseId(object.optString("RentNO"));
 					mHouseInfo.setHouseOwnerName(object.optString("ROwner"));

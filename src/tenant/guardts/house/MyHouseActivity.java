@@ -44,7 +44,7 @@ public class MyHouseActivity extends BaseActivity
 	private String mUserName = null;
 	private String mRentListAction = "http://tempuri.org/GetRentList";
 	private String mDeleteHouseInfo="http://tempuri.org/DeleteHouseInfo";
-	
+	private String mHouseDetailAction = "http://tempuri.org/GetHouseDetailInfo";
 	private String mIdCard;
 
 	@Override
@@ -122,8 +122,11 @@ public class MyHouseActivity extends BaseActivity
 					infoModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					infoModel.setHouseArea(itemJsonObject.optString("RRentArea"));
 					infoModel.setHouseId(itemJsonObject.optString("RentNO"));
-					infoModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
+					infoModel.setHouseType(itemJsonObject.optString("RRentType"));
 					infoModel.setHouseDirection(itemJsonObject.optString("RoomDirectoryDesc"));
+					infoModel.setHousePrice(itemJsonObject.optString("RLocationDescription"));
+					infoModel.setHouseOwnerName(itemJsonObject.optString("ROwner"));
+					infoModel.setHouseOwnerIdcard(itemJsonObject.optString("RIDCard"));
 					boolean isSameHouse = false;
 					for (int i = 0; i < mHouseInfoList.size(); i++) {
 						if (infoModel.getHouseId().equals(mHouseInfoList.get(i).getHouseId())) {
@@ -170,7 +173,7 @@ public class MyHouseActivity extends BaseActivity
 				mlistView.setAdapter(mAdapter);
 
 			}
-			if(msg.what==200){
+			else if(msg.what==200){
 				String value = (String) msg.obj;
 				if(value!=null){
 					
@@ -180,6 +183,8 @@ public class MyHouseActivity extends BaseActivity
 						Toast.makeText(mContext, "删除失败！", Toast.LENGTH_SHORT).show();
 					}
 				}
+			}else if (msg.what == 300){
+				jsonHouseInfoToView((String)msg.obj);
 			}
 		}
 	};
@@ -197,6 +202,11 @@ public class MyHouseActivity extends BaseActivity
 			}else if(action.equals(mDeleteHouseInfo)){
 				Message msg = mHandler.obtainMessage();
 				msg.what = 200;
+				msg.obj = templateInfo;
+				msg.sendToTarget();
+			}else if (action.equals(mHouseDetailAction)){
+				Message msg = mHandler.obtainMessage();
+				msg.what = 300;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
 			}
@@ -233,11 +243,14 @@ public class MyHouseActivity extends BaseActivity
 //			initDialog(v,(Integer)v.getTag());
 			
 			break;
-		case R.id.btn_detail:
-			Intent intent = new Intent(MyHouseActivity.this, HouseDetailInfoActivity.class);
-			intent.putExtra("rentNo", mHouseInfoList.get((Integer) (v.getTag())).getHouseId());
-			intent.putExtra("flag", "0");// 表示从当前页跳入，详情页按钮会发生改变
-			startActivity(intent);
+		case R.id.btn_create_order:
+//			Intent intent = new Intent(MyHouseActivity.this, HouseDetailInfoActivity.class);
+//			intent.putExtra("rentNo", mHouseInfoList.get((Integer) (v.getTag())).getHouseId());
+//			intent.putExtra("flag", "0");// 表示从当前页跳入，详情页按钮会发生改变
+//			startActivity(intent);
+			
+			getHouseDetailInfoByHouseId(mHouseInfoList.get((Integer) (v.getTag())).getHouseId());
+			
 			break;
 		case R.id.btn_history:
 			Intent intent2 = new Intent(MyHouseActivity.this, RentalDetailActivity.class);
@@ -248,8 +261,48 @@ public class MyHouseActivity extends BaseActivity
 		default:
 			break;
 		}
-
 	}
+	
+	private void getHouseDetailInfoByHouseId(String rentNo) {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=GetHouseDetailInfo";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mHouseDetailAction));
+		rpc.addProperty("rentNo", rentNo);
+		mPresent.readyPresentServiceParams(MyHouseActivity.this, url, mHouseDetailAction, rpc);
+		mPresent.startPresentServiceTask(true);
+	}
+	
+	private void jsonHouseInfoToView(String value) {
+		if (value != null) {
+			JSONArray array;
+			try {
+				array = new JSONArray(value);
+				JSONObject object = array.optJSONObject(0);
+				if (object != null) {
+					
+					Intent intent = new Intent(MyHouseActivity.this, AddRentAttributeActivity.class);
+					intent.putExtra("house_id", object.optString("RentNO"));
+							intent.putExtra("user_name", CommonUtil.mUserLoginName);
+							intent.putExtra("owner_name", "");
+							intent.putExtra("owner_id", "");
+							intent.putExtra("house_price", object.optString("RLocationDescription"));
+							intent.putExtra("rent_type", object.optString("RRentType"));
+							intent.putExtra("create_order", "1");
+							intent.putExtra("house_address", object.optString("RAddress"));
+							startActivity(intent);
+					
+				}else{
+					Toast.makeText(MyHouseActivity.this, "该房屋已下架，无法下单！", Toast.LENGTH_LONG).show();
+					
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
 
 	private void initDialog(final View v,final int position) {
 

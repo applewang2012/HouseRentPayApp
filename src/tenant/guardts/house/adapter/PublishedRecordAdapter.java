@@ -55,7 +55,7 @@ public class PublishedRecordAdapter extends BaseAdapter implements OnClickListen
 			holder.direction = (TextView) convertView.findViewById(R.id.id_house_direction);
 			holder.floor = (TextView) convertView.findViewById(R.id.id_house_floor);
 			holder.del = (Button) convertView.findViewById(R.id.btn_del);
-			holder.detail = (Button) convertView.findViewById(R.id.btn_detail);
+			holder.detail = (Button) convertView.findViewById(R.id.btn_create_order);
 			holder.history = (Button) convertView.findViewById(R.id.btn_history);
 			convertView.setTag(holder);
 		} else {

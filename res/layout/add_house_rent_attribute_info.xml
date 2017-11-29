@@ -65,7 +65,19 @@
                         android:background="@drawable/into_icon" /> -->
                 </FrameLayout>
             
-
+				<TextView 
+				    android:id="@+id/id_rent_house_address_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/base_dimen_90"
+                            android:layout_marginLeft="@dimen/base_dimen_35"
+                			android:layout_marginRight="@dimen/base_dimen_35"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:focusable="true"
+                            android:singleLine="true"
+                			android:ellipsize="marquee"
+                			android:marqueeRepeatLimit="marquee_forever"
+                            android:textSize="@dimen/base_dimen_30" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
