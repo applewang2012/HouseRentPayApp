@@ -63,7 +63,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	private String mOrderModifyPrice;
 	private Button mModifyPriceButton;
 	private LinearLayout mIdcardContent;
-	private boolean isOnline;// 是否在线支付
+	private boolean isOnline = true;// 是否在线支付
 	private String mServiceFeeTag = null;
 
 	@Override
@@ -177,8 +177,8 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				initScanPupopWindow();
 			}
 		});
-		LinearLayout payOnline = (LinearLayout) findViewById(R.id.linearlayout_online);
-		LinearLayout payOffline = (LinearLayout) findViewById(R.id.linearlayout_offline);
+		FrameLayout payOnline = (FrameLayout) findViewById(R.id.linearlayout_online);
+		FrameLayout payOffline = (FrameLayout) findViewById(R.id.linearlayout_offline);
 		LinearLayout linearlayout = (LinearLayout) findViewById(R.id.linearlayout_payment);
 		FrameLayout showPayStyleLayout = (FrameLayout)findViewById(R.id.show_order_pay_style_content);
 		TextView showStyle = (TextView)findViewById(R.id.show_order_pay_style);
@@ -205,7 +205,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				isOnline = true;
 				setCheckBoxStatus(online, offline);
 				mModifyPriceButton.setClickable(true);
-				mOrderModifyPrice=mOrderDetail.getHousePrice();
+				//mOrderModifyPrice=mOrderDetail.getHousePrice();
 				mModifyPriceButton.setVisibility(View.VISIBLE);
 				mOrderPriceTextView.setText("¥ "+mOrderModifyPrice);
 				mModifyPriceButton.setTextColor(Color.parseColor("#ffffff"));
@@ -220,8 +220,8 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 				isOnline = false;
 				setCheckBoxStatus(offline, online);
 				mModifyPriceButton.setClickable(false);
-				mOrderModifyPrice="0.00";
-				mOrderPriceTextView.setText("¥ "+mOrderModifyPrice);
+				//mOrderModifyPrice="0.00";
+				mOrderPriceTextView.setText("¥ 0.00");
 				mModifyPriceButton.setVisibility(View.GONE);
 				tvServiceFee.setText("已包含服务费 0.00元");
 			}
@@ -328,9 +328,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	 */
 	public String updateTimeTextView(long times_remain, String orderId) {
 		if (times_remain <= 0) {
-			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
-				expireHouseRequest(orderId);
-			}
+			mOrderDetail.setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
 			return "00:00";
 		}
 		// 秒钟
@@ -385,10 +383,11 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 
 	private void updateShowTimeDown(String timeContent) {
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)) {
-
 			button1.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("确认 " + timeContent);
-
+		}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)){
+			updateStatus(status, button1, button2);
+			Toast.makeText(OwnerOrderDetailsActivity.this, "订单已过期，请重新下单！", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -423,7 +422,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 						showConfirmOrderDialog("线上支付",mOrderModifyPrice, mOrderDetail.getHouseContactName(),
 								mOrderDetail.getHouseOrderId());
 					}else{
-						showConfirmOrderDialog("线下支付",mOrderModifyPrice, mOrderDetail.getHouseContactName(),
+						showConfirmOrderDialog("线下支付","0.00", mOrderDetail.getHouseContactName(),
 								mOrderDetail.getHouseOrderId());
 					}
 				}
@@ -904,7 +903,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
 		super.onStatusSuccess(action, templateInfo);
-		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
+		LogUtil.w("mingguo", "owner order activity on success  action " + action + "  msg  " + templateInfo);
 		if (action != null && templateInfo != null) {
 			if (action.equals(mRejectRentAction)) {
 				Message msg = mHandler.obtainMessage();

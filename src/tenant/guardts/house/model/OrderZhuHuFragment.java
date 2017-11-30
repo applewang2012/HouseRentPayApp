@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.EvaluationDetailActivity;
+import tenant.guardts.house.PaymentStatusActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.RenterOrderDetailsActivity;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -246,8 +247,6 @@ public class OrderZhuHuFragment extends BaseFragment{
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
 			status.setText("待支付");
 			status.setTextColor(Color.parseColor("#de6262"));
-			button1.setText("查看详情");
-			button2.setText("立即付款");
 			button1.setVisibility(View.INVISIBLE);
 			button2.setVisibility(View.INVISIBLE);
 			button3.setTextColor(Color.parseColor("#337ffd"));
@@ -283,16 +282,20 @@ public class OrderZhuHuFragment extends BaseFragment{
 				
 				@Override
 				public void onClick(View v) {
-					//showCancelOrderDialog(holder.getPosition(), info.getHouseOrderId());
-					CommonUtil.mPayHouseOrderId = info.getHouseOrderId();
-					Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
-					payIntent.putExtra("pay_price", info.getHousePrice());
-					payIntent.putExtra("owner_idcard", info.getHouseOwnerIdcard());
-					payIntent.putExtra("renter_idcard", info.getRenterIdcard());
-					payIntent.putExtra("orderID", info.getHouseOrderId());
-					payIntent.putExtra("rentNO", info.getHouseId());
-					payIntent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
-					startActivity(payIntent);
+					if (info.getHousePrice() != null && (info.getHousePrice().equals("0.0")||
+							info.getHousePrice().equals("0.00")|| info.getHousePrice().equals("0"))){
+						showOffLinePayOrderDialog(info);
+					}else{
+						CommonUtil.mPayHouseOrderId = info.getHouseOrderId();
+						Intent payIntent = new Intent(mContext, tenant.guardts.house.wxapi.HousePayActivity.class);
+						payIntent.putExtra("pay_price", info.getHousePrice());
+						payIntent.putExtra("owner_idcard", info.getHouseOwnerIdcard());
+						payIntent.putExtra("renter_idcard", info.getRenterIdcard());
+						payIntent.putExtra("orderID", info.getHouseOrderId());
+						payIntent.putExtra("rentNO", info.getHouseId());
+						payIntent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
+						startActivity(payIntent);
+					}
 				}
 			});
 		}else if (info.getHouseStatus().equals(CommonUtil.ORDER_STATUS_HAS_PAYED)){
@@ -500,6 +503,37 @@ public class OrderZhuHuFragment extends BaseFragment{
 			}
 		});
 
+		builder.show();
+	}
+	
+	private void showOffLinePayOrderDialog(final HouseInfoModel info) {
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
+				AlertDialog.THEME_HOLO_LIGHT);
+		builder.setTitle("完成订单");
+		builder.setMessage("与房主沟通线下付款事宜，点击确定按钮完成订单！");
+		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(getActivity(), PaymentStatusActivity.class);
+				intent.putExtra("flag", true);
+				intent.putExtra("orderID", info.getHouseOrderId());
+				intent.putExtra("rentNO", info.getHouseId());
+				intent.putExtra("orderCreatedDate", info.getOrderCreatedDate());
+				intent.putExtra("pay_price", info.getHousePrice());
+				startActivity(intent);
+			}
+
+		});
+		builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+
+			}
+		});
+		builder.setCancelable(false);
 		builder.show();
 	}
     

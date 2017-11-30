@@ -300,6 +300,8 @@ public class OrderFangzhuFragment extends BaseFragment{
 						if (ret.equals("0")){
 							if (mExpirePosition != -1){
 								mHouseInfoList.get(mExpirePosition).setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
+//								LogUtil.w("mingguo", "fangzhu fragment expire position  "+mExpirePosition+" mHouseInfoList.get(mExpirePosition).getHouseStatus "+
+//										mHouseInfoList.get(mExpirePosition).getHouseStatus());
 							}
 							mAdapter.notifyDataSetChanged();
 						}else{
@@ -343,7 +345,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 			for (int i = 0; i < mHouseInfoList.size(); i++){
 				if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
 					mHouseInfoList.get(i).setCurrentDate(mHouseInfoList.get(i).getCurrentdDate() + 1000L);
-					LogUtil.w("mingguo", "current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
+					LogUtil.w("mingguo", "position "+i+" current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
 					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDate(),
 							mHouseInfoList.get(i).getHouseOrderId(), i));
 					isUpdate = true;
@@ -725,7 +727,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		// TODO Auto-generated method stub
-		LogUtil.e("mingguo", "on status success action  "+action+"  return value "+templateInfo);
+		LogUtil.e("mingguo", "fangzhu fragment  on status success action  "+action+"  return value "+templateInfo);
 		super.onStatusSuccess(action, templateInfo);
 		if (action != null && templateInfo != null){
 			if (action.equals(mRentHistoryAction)){

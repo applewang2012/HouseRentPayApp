@@ -103,9 +103,8 @@ public class PersonalInfoActivity extends BaseActivity {
 			
 			@Override
 			public boolean onLongClick(View v) {
-				CommonUtil.verify_code_test = !CommonUtil.verify_code_test;
+				CommonUtil.verify_code_test = true;
 				Toast.makeText(getApplicationContext(), ""+CommonUtil.verify_code_test, Toast.LENGTH_SHORT).show();
-				
 				return false;
 			}
 		});

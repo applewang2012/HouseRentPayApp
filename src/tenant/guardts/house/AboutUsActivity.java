@@ -134,6 +134,7 @@ public class AboutUsActivity extends BaseActivity {
 		     							if (ret.equals("0")){
 		     								CommonUtil.verify_code_test = true;
 		     								CommonUtil.version_pay_test = true;
+		     								CommonUtil.mIsCancelRentIdentifyTest = true;
 		     							}else{
 		     								
 		     							}

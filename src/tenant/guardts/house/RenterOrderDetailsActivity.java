@@ -285,9 +285,7 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	 */
 	public String updateTimeTextView(long times_remain, String orderId) {
 		if (times_remain <= 0) {
-			if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
-				expireHouseRequest(orderId);
-			}
+			mOrderDetail.setHouseStatus(CommonUtil.ORDER_STATUS_EXPIRED);
 			return "00:00";
 		}
 		// 秒钟
@@ -342,9 +340,11 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	private void updateShowTimeDown(String timeContent) {
 
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
-
 			button1.setTextColor(Color.parseColor("#de6262"));
 			button1.setText("支付 " + timeContent);
+		}else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_EXPIRED)){
+			updateStatus(status, button1, button2);
+			Toast.makeText(RenterOrderDetailsActivity.this, "订单已过期，请重新下单！", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -390,14 +390,7 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 				public void onClick(View v) {
 					if (mOrderDetail.getHousePrice() != null && (mOrderDetail.getHousePrice().equals("0.0")||
 							mOrderDetail.getHousePrice().equals("0.00")|| mOrderDetail.getHousePrice().equals("0"))){
-						Intent intent = new Intent(RenterOrderDetailsActivity.this, PaymentStatusActivity.class);
-						intent.putExtra("flag", true);
-						intent.putExtra("orderID", mOrderDetail.getHouseOrderId());
-						intent.putExtra("rentNO", mOrderDetail.getHouseId());
-						intent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
-						intent.putExtra("pay_price", mOrderDetail.getHousePrice());
-						startActivity(intent);
-						
+						showOffLinePayOrderDialog();
 					}else{
 						CommonUtil.mPayHouseOrderId = mOrderDetail.getHouseOrderId();
 						Intent payIntent = new Intent(RenterOrderDetailsActivity.this,
@@ -409,9 +402,9 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 						payIntent.putExtra("rentNO", mOrderDetail.getHouseId());
 						payIntent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
 						startActivity(payIntent);
+						finish();
 					}
 					
-					finish();
 				}
 			});
 			button2.setOnClickListener(new OnClickListener() {
@@ -736,17 +729,23 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 		builder.show();
 	}
 
-	private void showConfirmOrderDialog(final String orderPrice, final String renter, final String houseId) {
+	private void showOffLinePayOrderDialog() {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(RenterOrderDetailsActivity.this,
 				AlertDialog.THEME_HOLO_LIGHT);
-		builder.setTitle("确认订单");
-		builder.setMessage("订单价格:￥" + orderPrice + "\n房客:" + renter);
+		builder.setTitle("完成订单");
+		builder.setMessage("与房主沟通线下付款事宜，点击确定按钮完成订单！");
 		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// rejectRentAttributeInfo(houseId);
-				confirmRentAttributeInfo(houseId, orderPrice);
+				Intent intent = new Intent(RenterOrderDetailsActivity.this, PaymentStatusActivity.class);
+				intent.putExtra("flag", true);
+				intent.putExtra("orderID", mOrderDetail.getHouseOrderId());
+				intent.putExtra("rentNO", mOrderDetail.getHouseId());
+				intent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
+				intent.putExtra("pay_price", mOrderDetail.getHousePrice());
+				startActivity(intent);
+				finish();
 			}
 
 		});
@@ -754,8 +753,7 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-
-				LogUtil.w("alertdialog", " �뱣�����ݣ�");
+				
 
 			}
 		});

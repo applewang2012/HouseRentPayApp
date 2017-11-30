@@ -210,10 +210,11 @@ public class DataModel {
 				valueObject = (SoapObject)envelope.bodyIn;				
 			}
 			String resultString = valueObject.getProperty(0).toString(); //{"ret":"0","msg":"success","status":"2"}
-			Log.i("mingguo", "check order status order return    "+resultString);
+			LogUtil.i("mingguo", "check order status order return    "+resultString);
 			JSONObject obj = new JSONObject(resultString);
 			if (obj != null){
 				String status = obj.optString("status");
+				LogUtil.i("mingguo", "query current status     "+status+"  request action  "+actionName);
 				if (status != null){
 					if (actionName.equalsIgnoreCase("ConfirmRentAttribute")
 							|| (actionName.equalsIgnoreCase("RejectRentAttribute"))){
