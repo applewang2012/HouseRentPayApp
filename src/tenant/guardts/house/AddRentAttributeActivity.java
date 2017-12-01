@@ -415,7 +415,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 					mRentPrice.setText(mHousePrice+" 元/月"+"			应付房费: "+mRealPrice+" 元");
 				}
 				if (mCreateOrder != null && mCreateOrder.equals("1")){ //代人下单
-					mRentPrice.setText(mHousePrice+" 元/月"+"	  代人下单(线下支付)");
+					mRentPrice.setText(mHousePrice+" 元/月"+"	 应付房费:"+mRealPrice+ " 元 (线下支付)");
 					mRealPrice = "0";
 				}
 			} catch (Exception e) {
