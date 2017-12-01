@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -26,13 +27,17 @@ public class PermissionActivity extends BaseActivity implements OnRequestPermiss
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.welcome_main);
-		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+		if (Build.VERSION.SDK_INT >= 23) {
+			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+				startActivityForResult(new Intent(this, CaptureActivity.class), CommonUtil.mScanCodeRequestCode);
+				//Toast.makeText(this, "check", Toast.LENGTH_LONG).show();
+			} else {
+				ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
+			}
+		}else{
 			startActivityForResult(new Intent(this, CaptureActivity.class), CommonUtil.mScanCodeRequestCode);
-			Toast.makeText(this, "check", Toast.LENGTH_LONG).show();
-			
-		} else {
-			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
 		}
+		
 		/*
 		 * if(!ActivityCompat.shouldShowRequestPermissionRationale(this,
 		 * Manifest.permission.CAMERA)){ AlertDialog.Builder build=new
@@ -55,7 +60,6 @@ public class PermissionActivity extends BaseActivity implements OnRequestPermiss
 				finish();
 				
 			} else {
-				
 
 				if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 					AlertDialog.Builder build = new AlertDialog.Builder(this);

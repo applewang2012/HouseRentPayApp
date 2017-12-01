@@ -101,7 +101,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	private void initData() {
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)
 				|| mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
-			mEnterTimeStamp = mOrderDetail.getCurrentdDate();
+			mEnterTimeStamp = mOrderDetail.getCurrentdDateStamp();
 			updateTimeHandler.sendEmptyMessage(800);
 		}
 	}
@@ -174,7 +174,11 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				initScanPupopWindow();
+				if (mOrderDetail.getHouseStartTimeStamp() < mOrderDetail.getCurrentdDateStamp()){
+					initScanPupopWindow();
+				}else{
+					Toast.makeText(OwnerOrderDetailsActivity.this, "入住时间未到，无法录入身份证。", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 		FrameLayout payOnline = (FrameLayout) findViewById(R.id.linearlayout_online);
@@ -190,6 +194,10 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			linearlayout.setVisibility(View.VISIBLE);
 			showPayStyleLayout.setVisibility(View.GONE);
 		}else{
+			linearlayout.setVisibility(View.GONE);
+			showPayStyleLayout.setVisibility(View.VISIBLE);
+		}
+		if (mOrderDetail.getOrderCreatedBy() != null && mOrderDetail.getOrderCreatedBy().equals(CommonUtil.mUserLoginName)){ //代人下单
 			linearlayout.setVisibility(View.GONE);
 			showPayStyleLayout.setVisibility(View.VISIBLE);
 		}
@@ -411,7 +419,12 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 			// button2.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 
 			button1.setVisibility(View.VISIBLE);
-			mModifyPriceButton.setVisibility(View.VISIBLE);
+			if (mOrderDetail.getOrderCreatedBy() != null && mOrderDetail.getOrderCreatedBy().equals(CommonUtil.mUserLoginName)){
+				//线下付款
+				mModifyPriceButton.setVisibility(View.GONE);
+			}else{
+				mModifyPriceButton.setVisibility(View.VISIBLE);
+			}
 			// button1.setBackgroundResource(R.drawable.order_detail_btn_pressed);
 			// button1.setTextColor(Color.parseColor("#ffffff"));
 			button1.setOnClickListener(new OnClickListener() {
@@ -477,7 +490,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 
 				}
 			});
-			
+			mIdcardContent.setVisibility(View.VISIBLE);
 
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_EVALUATION)) {
 			status.setText("待评价");
@@ -526,6 +539,7 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 					});
 				}
 			}
+			mIdcardContent.setVisibility(View.VISIBLE);
 			
 		} else if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_CHECKOUTED)) {
 			status.setText("已退房");
@@ -680,19 +694,40 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	 * @param houseId
 	 */
 	private void showConfirmOrderDialog(final String payment,final String orderPrice, final String renter, final String houseId) {
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(OwnerOrderDetailsActivity.this,
 				AlertDialog.THEME_HOLO_LIGHT);
-		builder.setTitle("确认订单");
-		builder.setMessage("房客:" + renter+"\n"+"订单价格:￥" + orderPrice + "\n"+"支付方式："+payment);
-		builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// rejectRentAttributeInfo(houseId);
-				confirmRentAttributeInfo(houseId, orderPrice);
-			}
+		if (mOrderDetail.getOrderCreatedBy() != null && mOrderDetail.getOrderCreatedBy().equals(CommonUtil.mUserLoginName)){
+			//代人下单
+			builder.setTitle("确认订单");
+			builder.setMessage("代人下单，双方协商线下付款，点击确定按钮完成订单！");
+			builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
 
-		});
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(OwnerOrderDetailsActivity.this, PaymentStatusActivity.class);
+					intent.putExtra("flag", true);
+					intent.putExtra("orderID", mOrderDetail.getHouseOrderId());
+					intent.putExtra("rentNO", mOrderDetail.getHouseId());
+					intent.putExtra("orderCreatedDate", mOrderDetail.getOrderCreatedDate());
+					intent.putExtra("pay_price", mOrderDetail.getHousePrice());
+					startActivity(intent);
+					finish();
+				}
+				
+			});
+		}else{
+		
+			builder.setTitle("确认订单");
+			builder.setMessage("房客:" + renter+"\n"+"订单价格:￥" + orderPrice + "\n"+"支付方式："+payment);
+			builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// rejectRentAttributeInfo(houseId);
+					confirmRentAttributeInfo(houseId, orderPrice);
+				}
+	
+			});
+		}
 		builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
 
 			@Override

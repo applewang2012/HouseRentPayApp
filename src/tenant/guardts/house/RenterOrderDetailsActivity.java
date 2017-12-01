@@ -98,7 +98,7 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 	private void initData() {
 		if (mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)
 				|| mOrderDetail.getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)) {
-			mEnterTimeStamp = mOrderDetail.getCurrentdDate();
+			mEnterTimeStamp = mOrderDetail.getCurrentdDateStamp();
 			updateTimeHandler.sendEmptyMessage(800);
 		}
 	}
@@ -168,7 +168,11 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				initScanPupopWindow();
+				if (mOrderDetail.getHouseStartTimeStamp() < mOrderDetail.getCurrentdDateStamp()){
+					initScanPupopWindow();
+				}else{
+					Toast.makeText(RenterOrderDetailsActivity.this, "入住时间未到，无法录入身份证。", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 

@@ -172,7 +172,7 @@ public class HomeActivity extends BaseActivity {
 					return;
 				}
 				if (!CommonUtil.mIsForceIdentifyUser){
-					Intent openCameraIntent = new Intent(HomeActivity.this, PermissionActivity.class);
+					Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
 					startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
 				}else{
 					startIndentifyProcess();

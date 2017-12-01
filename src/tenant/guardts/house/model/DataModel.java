@@ -246,6 +246,8 @@ public class DataModel {
 							return false;
 						}else if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_PAY)){
 							return true;
+						}else if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_SUBMITT)){
+							return true;
 						}
 					}else if (actionName.equalsIgnoreCase("ConfirmCheckOut")){
 						if (status.equalsIgnoreCase(CommonUtil.ORDER_STATUS_NEED_CHECKOUT)){

@@ -4899,10 +4899,10 @@ tenant.guardts.house.AddHouseInfoActivity:
     595:613:private void getHouseDistrict()
     677:692:private void getHouseStreet()
 tenant.guardts.house.AddRentAttributeActivity:
-    147:153:private void getPayRateDesc(java.lang.String)
-    820:851:private void startHttpService()
-    1032:1055:private void getIndentifyInfo(java.lang.String)
-    1058:1084:private void getQueryStatusInfo(java.lang.String)
+    149:155:private void getPayRateDesc(java.lang.String)
+    825:856:private void startHttpService()
+    1037:1060:private void getIndentifyInfo(java.lang.String)
+    1063:1089:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -4924,20 +4924,16 @@ tenant.guardts.house.ApplyForCheckoutActivity:
     private tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator
     private android.widget.Button mDel
     private java.lang.String flag
-    204:240:private void showPublicAttributeDialog()
-    431:436:private void setDeleteHouseInfo(java.lang.String)
-    440:452:private void initDialog()
-    461:471:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    493:498:private void getHouseDetailInfoByHouseId(java.lang.String)
-    502:507:private void getHouseDetailImageListByHouseId(java.lang.String)
-    85:85:static synthetic tenant.guardts.house.model.HouseInfoModel access$11(tenant.guardts.house.ApplyForCheckoutActivity)
-    75:75:static synthetic java.lang.String access$12(tenant.guardts.house.ApplyForCheckoutActivity)
-    69:69:static synthetic void access$13(tenant.guardts.house.ApplyForCheckoutActivity,java.lang.String)
-    69:69:static synthetic java.lang.String access$14(tenant.guardts.house.ApplyForCheckoutActivity)
-tenant.guardts.house.ApplyForCheckoutActivity$15
-tenant.guardts.house.ApplyForCheckoutActivity$16
-tenant.guardts.house.ApplyForCheckoutActivity$6
-tenant.guardts.house.ApplyForCheckoutActivity$7
+    393:398:private void setDeleteHouseInfo(java.lang.String)
+    402:414:private void initDialog()
+    423:433:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    455:460:private void getHouseDetailInfoByHouseId(java.lang.String)
+    464:469:private void getHouseDetailImageListByHouseId(java.lang.String)
+    75:75:static synthetic java.lang.String access$11(tenant.guardts.house.ApplyForCheckoutActivity)
+    69:69:static synthetic void access$12(tenant.guardts.house.ApplyForCheckoutActivity,java.lang.String)
+    69:69:static synthetic java.lang.String access$13(tenant.guardts.house.ApplyForCheckoutActivity)
+tenant.guardts.house.ApplyForCheckoutActivity$13
+tenant.guardts.house.ApplyForCheckoutActivity$14
 tenant.guardts.house.BankActivity:
     private java.lang.String cardNo
     private java.lang.String bankName
@@ -4959,11 +4955,11 @@ tenant.guardts.house.CaptureActivity:
     private android.widget.CheckBox lighting
     private android.hardware.Camera mCamera
     private android.hardware.Camera$Parameters mParameters
-    148:148:public boolean getFlashLightStatus()
-    152:156:private boolean checkFlashlight()
-    232:241:private void initCamera(android.view.SurfaceHolder)
-    320:339:private void initBeepSound()
-    344:351:private void playBeepSoundAndVibrate()
+    150:150:public boolean getFlashLightStatus()
+    154:158:private boolean checkFlashlight()
+    234:243:private void initCamera(android.view.SurfaceHolder)
+    322:341:private void initBeepSound()
+    346:353:private void playBeepSoundAndVibrate()
 tenant.guardts.house.City
 tenant.guardts.house.DemoApplication:
     private static android.app.Activity sActivity
@@ -5031,9 +5027,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     73:73:static synthetic void access$9(tenant.guardts.house.GetRentAttributeActivity,java.lang.String)
 tenant.guardts.house.GetRentAttributeActivity$4
 tenant.guardts.house.HomeActivity:
-    598:609:private java.lang.String getUserIdNo(java.lang.String)
-    731:732:public void setSelectedCity(java.lang.String)
-    735:735:public java.lang.String getSelectedCity()
+    597:608:private java.lang.String getUserIdNo(java.lang.String)
+    730:731:public void setSelectedCity(java.lang.String)
+    734:734:public java.lang.String getSelectedCity()
 tenant.guardts.house.HomeSearchActivity:
     private java.lang.String mModeIndex
 tenant.guardts.house.HouseDetailInfoActivity:
@@ -5048,14 +5044,16 @@ tenant.guardts.house.HouseDetailInfoActivity:
     private android.widget.TextView mRentReadMe
     private android.widget.TextView mRentOrderId
     private com.gzt.faceid5sdk.DetectionAuthentic authentic
-    440:452:private void initDialog()
-    461:471:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    441:453:private void initDialog()
+    462:472:private void showAlertDialog(android.widget.TextView,java.lang.String[])
     563:568:private void getHouseDetailImageListByHouseId(java.lang.String)
     72:72:static synthetic java.lang.String access$14(tenant.guardts.house.HouseDetailInfoActivity)
     66:66:static synthetic void access$15(tenant.guardts.house.HouseDetailInfoActivity,java.lang.String)
     66:66:static synthetic java.lang.String access$16(tenant.guardts.house.HouseDetailInfoActivity)
 tenant.guardts.house.HouseDetailInfoActivity$19
 tenant.guardts.house.HouseDetailInfoActivity$20
+tenant.guardts.house.HousePayActivity:
+    private static final int TIMELINE_SUPPORTED_VERSION
 tenant.guardts.house.LocationDemo:
     com.baidu.mapapi.map.BitmapDescriptor mCurrentMarker
     private static final int accuracyCircleFillColor
@@ -5084,8 +5082,15 @@ tenant.guardts.house.MyHouseActivity:
     private android.widget.LinearLayout mContentLayout
     private android.widget.TextView mNoContent
     100:105:private void setDeleteHouseInfo(java.lang.String)
-    256:271:private void initDialog(android.view.View,int)
+    309:324:private void initDialog(android.view.View,int)
 tenant.guardts.house.MyHouseActivity$3
+tenant.guardts.house.OwnerOrderDetailsActivity:
+    323:328:private void expireHouseRequest(java.lang.String)
+    660:684:private void showCancelOrderDialog(int,java.lang.String)
+    827:832:private void cancelRentAttributeInfo(java.lang.String)
+    826:826:static synthetic void access$25(tenant.guardts.house.OwnerOrderDetailsActivity,java.lang.String)
+tenant.guardts.house.OwnerOrderDetailsActivity$22
+tenant.guardts.house.OwnerOrderDetailsActivity$23
 tenant.guardts.house.R:
     10:10:public R()
 tenant.guardts.house.RegisterUserActivity:
@@ -5097,8 +5102,22 @@ tenant.guardts.house.RegisterUserActivity$10
 tenant.guardts.house.RegisterUserFinishActivity:
     private java.lang.String mPasswordIndentify
     private boolean mUsernameValid
-tenant.guardts.house.RentToHouseActivity:
-    226:231:private void deleteHouseInfo(java.lang.String)
+tenant.guardts.house.RenterOrderDetailsActivity:
+    private boolean isOnline
+    190:192:private void setCheckBoxStatus(android.widget.CheckBox,android.widget.CheckBox)
+    195:230:private void showModifyPriceDialog()
+    276:281:private void expireHouseRequest(java.lang.String)
+    765:771:private void confirmRentAttributeInfo(java.lang.String,java.lang.String)
+    775:799:private void showRejectOrderDialog(java.lang.String)
+    843:848:private void rejectRentAttributeInfo(java.lang.String)
+    62:62:static synthetic void access$9(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
+    61:61:static synthetic android.widget.TextView access$10(tenant.guardts.house.RenterOrderDetailsActivity)
+    88:88:static synthetic void access$11(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
+    842:842:static synthetic void access$18(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
+tenant.guardts.house.RenterOrderDetailsActivity$31
+tenant.guardts.house.RenterOrderDetailsActivity$32
+tenant.guardts.house.RenterOrderDetailsActivity$5
+tenant.guardts.house.RenterOrderDetailsActivity$6
 tenant.guardts.house.ResetActivity:
     private boolean successsful
 tenant.guardts.house.ScreenshotCameraManager:
@@ -5412,13 +5431,13 @@ tenant.guardts.house.model.DataModel:
     private java.lang.String[] mDistrictID
     private java.lang.String[] mStreetID
     private java.util.HashMap mPostData
-    77:80:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
-    93:98:public void startHttpRequestTask()
-    354:364:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
-    426:437:private void jsonStreetData(java.lang.String)
-    440:444:public java.lang.String getSoapName(java.lang.String)
-    449:463:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
-    62:62:static synthetic java.util.HashMap access$7(tenant.guardts.house.model.DataModel)
+    79:82:public void setHttpTaskReady(android.content.Context,java.lang.String,java.util.HashMap)
+    95:100:public void startHttpRequestTask()
+    370:380:public static void copyAssetFileToFiles(android.content.Context,java.lang.String)
+    442:453:private void jsonStreetData(java.lang.String)
+    456:460:public java.lang.String getSoapName(java.lang.String)
+    465:479:private java.lang.String startRequestData(java.lang.String,java.lang.String,org.ksoap2.serialization.SoapObject)
+    63:63:static synthetic java.util.HashMap access$7(tenant.guardts.house.model.DataModel)
 tenant.guardts.house.model.DataModel$HttpAsyncTask
 tenant.guardts.house.model.DataModel$RelationServiceAsyncTask
 tenant.guardts.house.model.HouseFragment:
@@ -5436,24 +5455,29 @@ tenant.guardts.house.model.HouseFragment$MyLocationListenner:
     791:791:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.model.HouseImageInfo
 tenant.guardts.house.model.HouseInfoModel:
-    56:56:public long getOrderCreatedDateStamp()
+    57:57:public long getOrderCreatedDateStamp()
+    173:173:public boolean getHouseAvailable()
 tenant.guardts.house.model.MyFragment:
-    417:437:private void changeUserAreaDialog()
+    394:415:private void logoutUserDialog(int)
+    428:448:private void changeUserAreaDialog()
+tenant.guardts.house.model.MyFragment$10
+tenant.guardts.house.model.MyFragment$11
 tenant.guardts.house.model.MyFragment$12
 tenant.guardts.house.model.MyFragment$13
 tenant.guardts.house.model.OrderFangzhuFragment:
     private long mTimeTag
-    243:248:private void rejectRentAttributeInfo(java.lang.String)
+    265:270:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
 tenant.guardts.house.model.OrderZhuHuFragment:
     private long mTimeTag
 tenant.guardts.house.model.ScanQrCodeFragment:
+    private static final int CAMERA_CODE
     private static final long VIBRATE_DURATION
     private static final float BEEP_VOLUME
-    205:215:public boolean getFlashLightStatus()
-    296:298:public void drawViewfinder()
+    209:219:public boolean getFlashLightStatus()
+    295:297:public void drawViewfinder()
 tenant.guardts.house.model.SurroundFragment:
     private tenant.guardts.house.headergridview.StickyGridHeadersGridView mHeadersGridView
     289:294:private int getContentCount()
@@ -5593,7 +5617,6 @@ tenant.guardts.house.util.LogUtil:
     public static final int NOTHING
     public static final int LEVEL
     5:5:public LogUtil()
-    42:44:public static void i(java.lang.String,java.lang.String)
 tenant.guardts.house.util.NewToast
 tenant.guardts.house.util.NewToast$1
 tenant.guardts.house.util.NewToast$OnDismissListener
@@ -5642,6 +5665,14 @@ tenant.guardts.house.wxapi.WXPayEntryActivity:
     private static final java.lang.String TAG
     private android.view.View mSuccessFrameLayout
     private android.view.View mFailedFrameLayout
+tenant.guardts.house.wxfufeiActivity:
+    private static final java.lang.String TAG
+    private android.view.View mSuccessFrameLayout
+    private android.view.View mFailedFrameLayout
+    private com.tencent.mm.sdk.openapi.IWXAPI api
+    private android.widget.Button mFailedPay
+    94:104:private void initFailedView(android.view.View)
+tenant.guardts.house.wxfufeiActivity$3
 tenant.guardts.house.wxpay.HttpClientUtil:
     public static final java.lang.String SunX509
     public static final java.lang.String JKS

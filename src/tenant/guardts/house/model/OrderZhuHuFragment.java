@@ -133,8 +133,8 @@ public class OrderZhuHuFragment extends BaseFragment{
 			boolean isUpdate = false;
 			for (int i = 0; i < mHouseInfoList.size(); i++){
 				if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
-					mHouseInfoList.get(i).setCurrentDate(mHouseInfoList.get(i).getCurrentdDate() + 1000L);
-					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDate(),
+					mHouseInfoList.get(i).setCurrentDateStamp(mHouseInfoList.get(i).getCurrentdDateStamp() + 1000L);
+					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDateStamp(),
 							mHouseInfoList.get(i).getHouseOrderId(), i));
 					isUpdate = true;
 				}else if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
@@ -709,6 +709,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
 					houseModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
+					houseModel.setHouseStartTimeStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("StartDate")));
 					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
 					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
 					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
@@ -725,7 +726,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 					houseModel.setOrderCreatedDateStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("CreatedOn")));
 					houseModel.setOrderCreatedDate(itemJsonObject.optString("RRACreatedDate"));//下单时间
 					houseModel.setOrderExpiredDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("ExpireDate"))); 
-					houseModel.setCurrentDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("SysDate")));  //当前时间
+					houseModel.setCurrentDateStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("SysDate")));  //当前时间
 					
 //					houseModel.setOrderCreatedDate(1507776010000l);//下单时间
 //					houseModel.setOrderExpiredDate(1507777150000l);//过期时间

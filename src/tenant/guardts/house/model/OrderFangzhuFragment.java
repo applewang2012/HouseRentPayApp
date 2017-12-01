@@ -34,6 +34,7 @@ import android.widget.TextView;
 import tenant.guardts.house.EvaluationActivity;
 import tenant.guardts.house.EvaluationDetailActivity;
 import tenant.guardts.house.OwnerOrderDetailsActivity;
+import tenant.guardts.house.PaymentStatusActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.presenter.HoursePresenter;
 import tenant.guardts.house.util.CommonUtil;
@@ -182,20 +183,41 @@ public class OrderFangzhuFragment extends BaseFragment{
 	}
 	
 	private void showPositiveOrderDialog(final int id, final String orderPrice, final String renter,  final String houseId) {  
-		
-		  AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
-		  builder.setTitle("确认订单");
-		  builder.setMessage("订单价格:￥"+orderPrice+"\n房客:"+renter+"\n温馨提示:您可以在详情页修改订单价格");
-		  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
-		         @Override  
+		AlertDialog.Builder builder =new AlertDialog.Builder(getActivity(), AlertDialog.THEME_HOLO_LIGHT);
+		if (mHouseInfoList.get(id).getOrderCreatedBy() != null && mHouseInfoList.get(id).getOrderCreatedBy().equals(CommonUtil.mUserLoginName)){
+			//代人下单
+			builder.setTitle("确认订单");
+			builder.setMessage("代人下单，双方协商线下付款，点击确定按钮完成订单！");
+			builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent intent = new Intent(getActivity(), PaymentStatusActivity.class);
+					intent.putExtra("flag", true);
+					intent.putExtra("orderID", mHouseInfoList.get(id).getHouseOrderId());
+					intent.putExtra("rentNO", mHouseInfoList.get(id).getHouseId());
+					intent.putExtra("orderCreatedDate", mHouseInfoList.get(id).getOrderCreatedDate());
+					intent.putExtra("pay_price", mHouseInfoList.get(id).getHousePrice());
+					startActivity(intent);
+				}
+				
+			});
+		}else{
+			builder.setTitle("确认订单");
+			  builder.setMessage("房客:"+renter+"订单价格:￥"+orderPrice+"\n房客:"+renter+"\n温馨提示:您可以在详情页修改订单价格和支付方式");
+			  builder.setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() {
+			         @Override  
+			  
+			         public void onClick(DialogInterface dialog, int which) {
+			        	 mCurrentPosition = id;
+						//rejectRentAttributeInfo(houseId);
+						confirmRentAttributeInfo(houseId, orderPrice);
+			         }  
+				
+			});
+		}
 		  
-		         public void onClick(DialogInterface dialog, int which) {
-		        	 mCurrentPosition = id;
-					//rejectRentAttributeInfo(houseId);
-					confirmRentAttributeInfo(houseId, orderPrice);
-		         }  
-			
-		});
+		  
 		builder.setNegativeButton(getString(R.string.button_cancel),new DialogInterface.OnClickListener() {
 			  
 	         @Override  
@@ -344,9 +366,9 @@ public class OrderFangzhuFragment extends BaseFragment{
 			boolean isUpdate = false;
 			for (int i = 0; i < mHouseInfoList.size(); i++){
 				if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_SUBMITT)){
-					mHouseInfoList.get(i).setCurrentDate(mHouseInfoList.get(i).getCurrentdDate() + 1000L);
-					LogUtil.w("mingguo", "position "+i+" current date  "+mHouseInfoList.get(i).getCurrentdDate()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
-					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDate(),
+					mHouseInfoList.get(i).setCurrentDateStamp(mHouseInfoList.get(i).getCurrentdDateStamp() + 1000L);
+					LogUtil.w("mingguo", "position "+i+" current date  "+mHouseInfoList.get(i).getCurrentdDateStamp()+"  expire time  "+mHouseInfoList.get(i).getOrderExpiredDate());
+					mHouseInfoList.get(i).setShowTimeDownTime(updateTimeTextView(mHouseInfoList.get(i).getOrderExpiredDate() - mHouseInfoList.get(i).getCurrentdDateStamp(),
 							mHouseInfoList.get(i).getHouseOrderId(), i));
 					isUpdate = true;
 				}else if (mHouseInfoList.get(i).getHouseStatus().equals(CommonUtil.ORDER_STATUS_NEED_PAY)){
@@ -690,6 +712,7 @@ public class OrderFangzhuFragment extends BaseFragment{
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
 					houseModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
+					houseModel.setHouseStartTimeStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("StartDate")));
 					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
 					houseModel.setHouseAvailable(itemJsonObject.optBoolean("Available"));
 					houseModel.setHouseId(itemJsonObject.optString("RentNO"));
@@ -699,11 +722,12 @@ public class OrderFangzhuFragment extends BaseFragment{
 					houseModel.setHouseOwnerPhone(itemJsonObject.optString("ROwnerTel"));
 					houseModel.setHouseContactName(itemJsonObject.optString("RRAContactName"));
 					houseModel.setHouseContactPhone(itemJsonObject.optString("RRAContactTel"));
+					houseModel.setOrderCreatedBy(itemJsonObject.optString("RRACreatedBy"));
 					houseModel.setRenterIdcard(itemJsonObject.optString("RRAIDCard"));//租客身份证
 					houseModel.setOrderCreatedDateStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("CreatedOn")));
 					houseModel.setOrderCreatedDate(itemJsonObject.optString("RRACreatedDate"));//下单时间
 					houseModel.setOrderExpiredDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("CreatedOn"))+CommonUtil.TIME_STAMP_10_MINUTES); //过期时间
-					houseModel.setCurrentDate(UtilTool.DateTimeToStamp(itemJsonObject.optString("SysDate")));  //当前时间
+					houseModel.setCurrentDateStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("SysDate")));  //当前时间
 //					houseModel.setOrderCreatedDate(1507777210000l);//下单时间
 //					houseModel.setOrderExpiredDate(1507777210000l+CommonUtil.TIME_STAMP_10_MINUTES);//过期时间
 //					houseModel.setCurrentDate(1507777450000l);  //当前时间

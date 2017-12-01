@@ -9,6 +9,7 @@ public class HouseInfoModel implements Serializable{
 	private String ownerPhone;
 	private String area;
 	private String startTime;
+	private long startTimeStamp;
 	private String direction;
 	private String endTime;
 	private boolean houseAvailable;
@@ -30,6 +31,7 @@ public class HouseInfoModel implements Serializable{
 	private long currentDate;  //当前时间
 	private String mShowTimeDown;
 	private String checkOutPerson;//退房申请人
+	private String orderCreatedBy;
 	
 
 	public String getCheckOutPerson() {
@@ -68,11 +70,11 @@ public class HouseInfoModel implements Serializable{
 		this.orderExpiredDate = expiredDate;
 	}
 	
-	public long getCurrentdDate() {
+	public long getCurrentdDateStamp() {
 		return currentDate;
 	}
 
-	public void setCurrentDate(long currentDate) {
+	public void setCurrentDateStamp(long currentDate) {
 		this.currentDate = currentDate;
 	}
 	
@@ -196,6 +198,14 @@ public class HouseInfoModel implements Serializable{
 		return startTime;
 	}
 
+	public void setHouseStartTimeStamp(long time) {
+		this.startTimeStamp = time;
+	}
+	
+	public long getHouseStartTimeStamp() {
+		return startTimeStamp;
+	}
+
 	public void setHouseStartTime(String time) {
 		this.startTime = time;
 	}
@@ -239,6 +249,14 @@ public class HouseInfoModel implements Serializable{
 
 	public void setDoorPassword(String password) {
 		this.doorPassword = password;
+	}
+	
+	public String getOrderCreatedBy() {
+		return this.orderCreatedBy;
+	}
+
+	public void setOrderCreatedBy(String create) {
+		this.orderCreatedBy = create;
 	}
 
 }
