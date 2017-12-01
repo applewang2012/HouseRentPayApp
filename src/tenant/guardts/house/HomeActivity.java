@@ -172,7 +172,7 @@ public class HomeActivity extends BaseActivity {
 					return;
 				}
 				if (!CommonUtil.mIsForceIdentifyUser){
-					Intent openCameraIntent = new Intent(HomeActivity.this, CaptureActivity.class);
+					Intent openCameraIntent = new Intent(HomeActivity.this, PermissionActivity.class);
 					startActivityForResult(openCameraIntent, CommonUtil.mScanCodeRequestCode);
 				}else{
 					startIndentifyProcess();
@@ -536,7 +536,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 
 			public void onClick(DialogInterface dialog, int which) {
-				LogUtil.w("alertdialog", " �뱣�����ݣ�");
+				dimissOpenDoorLoading();
 			}
 		});
 		builder.setCancelable(false);

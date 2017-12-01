@@ -6,7 +6,10 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
@@ -19,7 +22,11 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.Window;
@@ -35,7 +42,6 @@ import tenant.guardts.house.util.CommonUtil;
 import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 
-
 /**
  * Initial the camera
  * 
@@ -44,7 +50,7 @@ import tenant.guardts.house.zxingview.ViewfinderView;
 public class CaptureActivity extends BaseActivity {
 
 	private CaptureActivityHandler handler;
-	//private ViewfinderView viewfinderView;
+	// private ViewfinderView viewfinderView;
 	private boolean hasSurface;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
@@ -59,7 +65,8 @@ public class CaptureActivity extends BaseActivity {
 	private DoorNumberLockFragment mOpenLockNumber;
 	private boolean mFlashLightOn = false;
 	
-//	private ActionOperationInterface mAction;
+
+	// private ActionOperationInterface mAction;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -67,69 +74,70 @@ public class CaptureActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_scan_open_door);
-		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-//		TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
-//		titlebar.setText("扫一扫开锁");
-		
-		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-		if (mQrFragment == null) {
-			mQrFragment = new ScanQrCodeFragment();
-			fragmentTransaction.add(R.id.id_scan_qrcode_content, mQrFragment);
-			fragmentTransaction.commitAllowingStateLoss();
-			mQrFragment.setFlashLightStatus(mFlashLightOn);
-			mQrFragment.setFragmentActionListener(new ActionOperationInterface() {
+		// getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+		// R.layout.titlebar);
+		// TextView titlebar = (TextView) findViewById(R.id.id_titlebar);
+		// titlebar.setText("扫一扫开锁");
+			
 
-				@Override
-				public void onPreFragment() {
-					
-					
-				}
-				
-				@Override
-				public void onNextFragment() {
-					FragmentTransaction newTransaction = getFragmentManager().beginTransaction();
-					hideAllFragments(newTransaction);
-					if (mOpenLockNumber == null) {
-						mOpenLockNumber = new DoorNumberLockFragment();
-						newTransaction.add(R.id.id_scan_qrcode_content, mOpenLockNumber);
-						newTransaction.commitAllowingStateLoss();
-						mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
-						mOpenLockNumber.setFragmentActionListener(new ActionOperationInterface() {
-							
-							@Override
-							public void onPreFragment() {
-								// TODO Auto-generated method stub
-								FragmentTransaction backPreTransction = getFragmentManager().beginTransaction();
-								hideAllFragments(backPreTransction);
-								if (mQrFragment != null){
-									backPreTransction.show(mQrFragment);
-									backPreTransction.commitAllowingStateLoss();
-									mQrFragment.setFlashLightStatus(mFlashLightOn);
-								}
-							}
-							
-							@Override
-							public void onNextFragment() {
-								// TODO Auto-generated method stub
-								
-							}
-						});
-					}else{
-						newTransaction.show(mOpenLockNumber);
-						newTransaction.commitAllowingStateLoss();
-						mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
+			FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+			if (mQrFragment == null) {
+				mQrFragment = new ScanQrCodeFragment();
+				fragmentTransaction.add(R.id.id_scan_qrcode_content, mQrFragment);
+				fragmentTransaction.commitAllowingStateLoss();
+				mQrFragment.setFlashLightStatus(mFlashLightOn);
+				mQrFragment.setFragmentActionListener(new ActionOperationInterface() {
+
+					@Override
+					public void onPreFragment() {
+
 					}
-				}
-			});
-		} else {
-			fragmentTransaction.show(mQrFragment);
-			fragmentTransaction.commitAllowingStateLoss();
-			mQrFragment.setFlashLightStatus(mFlashLightOn);
-		}
+
+					@Override
+					public void onNextFragment() {
+						FragmentTransaction newTransaction = getFragmentManager().beginTransaction();
+						hideAllFragments(newTransaction);
+						if (mOpenLockNumber == null) {
+							mOpenLockNumber = new DoorNumberLockFragment();
+							newTransaction.add(R.id.id_scan_qrcode_content, mOpenLockNumber);
+							newTransaction.commitAllowingStateLoss();
+							mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
+							mOpenLockNumber.setFragmentActionListener(new ActionOperationInterface() {
+
+								@Override
+								public void onPreFragment() {
+									// TODO Auto-generated method stub
+									FragmentTransaction backPreTransction = getFragmentManager().beginTransaction();
+									hideAllFragments(backPreTransction);
+									if (mQrFragment != null) {
+										backPreTransction.show(mQrFragment);
+										backPreTransction.commitAllowingStateLoss();
+										mQrFragment.setFlashLightStatus(mFlashLightOn);
+									}
+								}
+
+								@Override
+								public void onNextFragment() {
+									// TODO Auto-generated method stub
+
+								}
+							});
+						} else {
+							newTransaction.show(mOpenLockNumber);
+							newTransaction.commitAllowingStateLoss();
+							mOpenLockNumber.setFlashLightStatus(mFlashLightOn);
+						}
+					}
+				});
+			} else {
+				fragmentTransaction.show(mQrFragment);
+				fragmentTransaction.commitAllowingStateLoss();
+				mQrFragment.setFlashLightStatus(mFlashLightOn);
+			}
 		
-		
+
 	}
-	
+
 	private void hideAllFragments(FragmentTransaction transaction) {
 		if (mQrFragment != null && !mQrFragment.isHidden()) {
 			transaction.hide(mQrFragment);
@@ -137,16 +145,16 @@ public class CaptureActivity extends BaseActivity {
 		if (mOpenLockNumber != null && !mOpenLockNumber.isHidden()) {
 			transaction.hide(mOpenLockNumber);
 		}
-		
+
 	}
-	
-	public boolean setFlashLightOn(){
+
+	public boolean setFlashLightOn() {
 		mQrFragment.openOrCloseFlashLight();
 		mFlashLightOn = !mFlashLightOn;
 		return mFlashLightOn;
 	}
-	
-	public boolean getFlashLightStatus(){
+
+	public boolean getFlashLightStatus() {
 		return mFlashLightOn;
 	}
 
@@ -158,47 +166,48 @@ public class CaptureActivity extends BaseActivity {
 		return true;
 	}
 
-	
-
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-//		SurfaceHolder surfaceHolder = surfaceView.getHolder();
-//		if (hasSurface) {
-//			initCamera(surfaceHolder);
-//		} else {
-//			surfaceHolder.addCallback(this);
-//			surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-//		}
-//		decodeFormats = null;
-//		characterSet = null;
-//
-//		playBeep = true;
-//		AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
-//		if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
-//			playBeep = false;
-//		}
-//		initBeepSound();
-//		vibrate = true;
+		
+		// SurfaceView surfaceView = (SurfaceView)
+		// findViewById(R.id.preview_view);
+		// SurfaceHolder surfaceHolder = surfaceView.getHolder();
+		// if (hasSurface) {
+		// initCamera(surfaceHolder);
+		// } else {
+		// surfaceHolder.addCallback(this);
+		// surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		// }
+		// decodeFormats = null;
+		// characterSet = null;
+		//
+		// playBeep = true;
+		// AudioManager audioService = (AudioManager)
+		// getSystemService(AUDIO_SERVICE);
+		// if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL)
+		// {
+		// playBeep = false;
+		// }
+		// initBeepSound();
+		// vibrate = true;
 
-	
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		if (handler != null) {
-//			handler.quitSynchronously();
-//			handler = null;
-//		}
-//		CameraManager.get().closeDriver();
+		// if (handler != null) {
+		// handler.quitSynchronously();
+		// handler = null;
+		// }
+		// CameraManager.get().closeDriver();
 		mFlashLightOn = false;
 	}
 
 	@Override
 	protected void onDestroy() {
-//		inactivityTimer.shutdown();
+		// inactivityTimer.shutdown();
 
 		super.onDestroy();
 	}
@@ -211,22 +220,22 @@ public class CaptureActivity extends BaseActivity {
 	 */
 	public void handleDecode(Result result, Bitmap barcode) {
 		mQrFragment.handleDecode(result, barcode);
-//		inactivityTimer.onActivity();
-//		playBeepSoundAndVibrate();
-//		String resultString = result.getText();
-//		// FIXME
-//		if (resultString.equals("")) {
-//			GlobalUtil.shortToast(getApplication(), "Scan failed  !",
-//					getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-//		} else {
-//			// System.out.println("Result:"+resultString);
-//			Intent resultIntent = new Intent();
-//			Bundle bundle = new Bundle();
-//			bundle.putString("result", resultString);
-//			resultIntent.putExtras(bundle);
-//			this.setResult(RESULT_OK, resultIntent);
-//		}
-//		CaptureActivity.this.finish();
+		// inactivityTimer.onActivity();
+		// playBeepSoundAndVibrate();
+		// String resultString = result.getText();
+		// // FIXME
+		// if (resultString.equals("")) {
+		// GlobalUtil.shortToast(getApplication(), "Scan failed  !",
+		// getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+		// } else {
+		// // System.out.println("Result:"+resultString);
+		// Intent resultIntent = new Intent();
+		// Bundle bundle = new Bundle();
+		// bundle.putString("result", resultString);
+		// resultIntent.putExtras(bundle);
+		// this.setResult(RESULT_OK, resultIntent);
+		// }
+		// CaptureActivity.this.finish();
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
@@ -241,36 +250,34 @@ public class CaptureActivity extends BaseActivity {
 			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
 		}
 	}
-	
-	
 
-	
 	@Override
-
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK && requestCode == CommonUtil.mLockNumberRequestCode) {
 			if (data != null)
-//			Bundle bundle = data.getExtras();
-//			String scanResult = bundle.getString("result");
-			LogUtil.e("mingguo", "capture activity  scan  result  " + data);
-			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020 100 220 010 000 3
-			
-//			Intent resultIntent = new Intent();
-//			Bundle activityBundel = new Bundle();
-//			activityBundel.putString("result", scanResult);
-//			resultIntent.putExtras(resultIntent);
+				// Bundle bundle = data.getExtras();
+				// String scanResult = bundle.getString("result");
+				LogUtil.e("mingguo", "capture activity  scan  result  " + data);
+			// http://www.trackbike.cn/SafeCard/servlet/OAuthServlet?r=r&z=0&d=020
+			// 100 220 010 000 3
+
+			// Intent resultIntent = new Intent();
+			// Bundle activityBundel = new Bundle();
+			// activityBundel.putString("result", scanResult);
+			// resultIntent.putExtras(resultIntent);
 			this.setResult(RESULT_OK, data);
 			CaptureActivity.this.finish();
-			}}
+		}
+	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (mOpenLockNumber != null && mOpenLockNumber.isVisible()){
+			if (mOpenLockNumber != null && mOpenLockNumber.isVisible()) {
 				FragmentTransaction backTransaction = getFragmentManager().beginTransaction();
 				hideAllFragments(backTransaction);
-				if (mQrFragment != null){
+				if (mQrFragment != null) {
 					backTransaction.show(mQrFragment);
 					backTransaction.commitAllowingStateLoss();
 					mQrFragment.setFlashLightStatus(mFlashLightOn);
@@ -282,28 +289,28 @@ public class CaptureActivity extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
-
-//	@Override
-//	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//
-//	}
-//
-//	@Override
-//	public void surfaceCreated(SurfaceHolder holder) {
-//		if (!hasSurface) {
-//			hasSurface = true;
-//			initCamera(holder);
-//		}
-//
-//	}
-//
-//	@Override
-//	public void surfaceDestroyed(SurfaceHolder holder) {
-//		hasSurface = false;
-//		if (mCamera != null) {
-//            CameraManager.stopPreview();
-//        }
-//	}
+	// @Override
+	// public void surfaceChanged(SurfaceHolder holder, int format, int width,
+	// int height) {
+	//
+	// }
+	//
+	// @Override
+	// public void surfaceCreated(SurfaceHolder holder) {
+	// if (!hasSurface) {
+	// hasSurface = true;
+	// initCamera(holder);
+	// }
+	//
+	// }
+	//
+	// @Override
+	// public void surfaceDestroyed(SurfaceHolder holder) {
+	// hasSurface = false;
+	// if (mCamera != null) {
+	// CameraManager.stopPreview();
+	// }
+	// }
 
 	public ViewfinderView getViewfinderView() {
 		return mQrFragment.getViewfinderView();
@@ -363,5 +370,7 @@ public class CaptureActivity extends BaseActivity {
 	private CheckBox mNumberButton, lighting;
 	private Camera mCamera;
 	private Parameters mParameters;
+
+	
 
 }

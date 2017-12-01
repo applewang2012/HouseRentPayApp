@@ -6,8 +6,12 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
+import android.Manifest;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -17,9 +21,21 @@ import android.hardware.Camera.Parameters;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Vibrator;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import android.support.v4.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -32,6 +48,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import tenant.guardts.house.CaptureActivity;
 import tenant.guardts.house.R;
 import tenant.guardts.house.camera.CameraManager;
@@ -41,7 +58,9 @@ import tenant.guardts.house.util.GlobalUtil;
 import tenant.guardts.house.util.LogUtil;
 import tenant.guardts.house.zxingview.ViewfinderView;
 
+
 public class ScanQrCodeFragment extends BaseFragment implements Callback {
+
 
 	private Activity mActivity;
 	private Context mContext;
@@ -54,7 +73,7 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback {
 	private ActionOperationInterface mAction;
 	private ImageView mFlashIcon;
 	private TextView mFlashText;
-	private static final int CAMERA_CODE = 123;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,17 +84,18 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback {
 		// mTitlebarContent = (FrameLayout)
 		// getActivity().getWindow().findViewById(R.id.id_title_bar_home_content);
 		CameraManager.init(getActivity().getApplicationContext());
-
+		
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mRootView = inflater.inflate(R.layout.camera, container, false);
-
 		initView();
-
+		
 		return mRootView;
 	}
+	
+	
 
 	public void setFlashLightStatus(final boolean status) {
 		new Handler().postDelayed(new Runnable() {
@@ -158,13 +178,9 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback {
 		SurfaceView surfaceView = (SurfaceView) mRootView.findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
-//			int checkSelfPermission = ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA);
-//			if (checkSelfPermission == PackageManager.PERMISSION_GRANTED) {
-//
-//				initCamera(surfaceHolder);
-//			} else {
-//				ActivityCompat.requestPermissions(mActivity, new String[] { Manifest.permission.CAMERA }, CAMERA_CODE);
-//			}
+
+			initCamera(surfaceHolder);
+
 
 		} else {
 			surfaceHolder.addCallback(this);
@@ -186,8 +202,6 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback {
 		mFlashText.setTextColor(Color.parseColor("#ffffff"));
 
 	}
-	
-	
 
 	public boolean openOrCloseFlashLight() {
 		mCamera = CameraManager.getCamera();
@@ -364,5 +378,6 @@ public class ScanQrCodeFragment extends BaseFragment implements Callback {
 	private static final float BEEP_VOLUME = 0.10f;
 	private Vector<BarcodeFormat> decodeFormats;
 	private String characterSet;
+
 
 }

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
@@ -13,7 +14,7 @@ import tenant.guardts.house.R;
 import tenant.guardts.house.impl.DataStatusInterface;
 import tenant.guardts.house.util.GlobalUtil;
 
-public class BaseFragment extends Fragment implements DataStatusInterface {
+public class BaseFragment extends Fragment implements DataStatusInterface{
 	View mFragmentLoadingView ;
 	private Handler mHandler = new Handler(){
 
@@ -82,6 +83,8 @@ public class BaseFragment extends Fragment implements DataStatusInterface {
 			loadingView.setVisibility(View.INVISIBLE);
 		}
 	}
+
+	
 
 
 }
