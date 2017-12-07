@@ -237,7 +237,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -316,7 +316,7 @@
             android:name=".download.DownloadProvider"
             android:authorities="tenant.guardts.house.download" />
 
-        <service android:name=".download.DownloadService" />
+        <service android:name=".download.DownloadService" />
         -->
 
         <receiver
@@ -394,7 +394,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -573,7 +573,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -599,18 +599,24 @@
         <activity
             android:name=".AddRentParternerActivity"
             android:label="@string/title_activity_add_rent_parterner"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".ParternerRecordActivity"
             android:label="@string/title_activity_parterner_record"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".PermissionActivity"
-            android:label="@string/title_activity_permission" 
-             android:theme="@style/AppTheme" 
-            >
+            android:label="@string/title_activity_permission"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".RetinueDetailActivity"
+            android:label="@string/title_activity_retinue_detail" >
         </activity>
     </application>
 

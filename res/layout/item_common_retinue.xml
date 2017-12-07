@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="@dimen/base_dimen_100"
+    android:gravity="center_vertical"
+   
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/base_dimen_40"
+        android:layout_height="@dimen/base_dimen_40"
+        android:layout_marginLeft="@dimen/base_dimen_50"
+        android:button="@null"
+         android:focusable="false"
+         android:focusableInTouchMode="false"
+        android:drawableLeft="@drawable/radiobutton_bg"
+      />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/idcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_dimen_30"
+        android:text="TextView" />
+
+</LinearLayout>

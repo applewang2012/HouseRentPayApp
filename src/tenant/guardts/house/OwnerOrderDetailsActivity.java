@@ -107,6 +107,18 @@ public class OwnerOrderDetailsActivity extends BaseActivity {
 	}
 
 	private void initView() {
+		TextView retinueDetail=(TextView) findViewById(R.id.retinue_detail);
+		retinueDetail.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(OwnerOrderDetailsActivity.this, RetinueDetailActivity.class);
+				intent.putExtra("rraid", mOrderDetail.getHouseOrderId());
+				startActivity(intent);
+				
+			}
+		});
+		
 		// 取消和拒绝，隐藏
 		priceLinearLayout = (FrameLayout) findViewById(R.id.order_detail_ll);
 		// 取消和拒绝，隐藏

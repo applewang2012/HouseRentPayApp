@@ -319,6 +319,77 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#0c000000" />
+               <FrameLayout
+					android:id="@+id/retinue_framelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base_dimen_90"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/base_dimen_90"
+                        android:layout_marginLeft="@dimen/base_dimen_35"
+                		android:layout_marginRight="@dimen/base_dimen_35"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center_vertical"
+                            android:text="随行人员"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/base_dimen_30" />
+
+                       	<RadioGroup 
+                       	    android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                       	    android:layout_marginLeft="@dimen/base_dimen_30"
+                       	    android:layout_gravity="center_vertical"
+                       	    android:orientation="horizontal"
+                       	    >
+                       	    <RadioButton 
+                       	        android:id="@+id/retinues_yes"
+                       	        android:layout_width="wrap_content"
+                       	        android:layout_height="wrap_content"
+                       	        android:button="@null"
+                       	       android:drawableLeft="@drawable/radiobutton_bg"
+                       	        android:text="@string/radiobutton_on"
+                       	        android:textColor="#444444"
+                       	        />
+                       	       <RadioButton 
+                       	           android:id="@+id/retinues_no"
+                       	        android:button="@null"
+                       	        android:drawableLeft="@drawable/radiobutton_bg"
+                       	        android:layout_width="wrap_content"
+                       	        android:layout_height="wrap_content"
+                       	        android:text="@string/radiobutton_off"
+                       	        android:textColor="#444444"
+                       	        android:layout_marginLeft="@dimen/base_dimen_50"
+                       	        />
+                       	    
+                       	</RadioGroup>
+                       	<TextView 
+                       	    android:id="@+id/add"
+                       	  android:layout_width="wrap_content"
+                            android:layout_height="match_parent"  
+                       	    android:text="添加"
+                       	    android:textColor="#337ffd"
+                       	    android:visibility="gone"
+                       	    android:gravity="center_vertical"
+                       	     android:layout_marginLeft="@dimen/base_dimen_100"
+                       	    />
+                    </LinearLayout>
+
+                    
+                </FrameLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#0c000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

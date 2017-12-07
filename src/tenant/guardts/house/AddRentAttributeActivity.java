@@ -2,6 +2,7 @@ package tenant.guardts.house;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -10,11 +11,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
-import com.google.gson.Gson;
-import com.gzt.faceid5sdk.DetectionAuthentic;
-import com.gzt.faceid5sdk.listener.ResultListener;
-import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
-
+import tenant.guardts.house.impl.DataStatusInterface;
+import tenant.guardts.house.model.Retinue;
+import tenant.guardts.house.model.RetinuesResult;
+import tenant.guardts.house.model.ServiceCharge;
+import tenant.guardts.house.presenter.HoursePresenter;
+import tenant.guardts.house.util.BMapUtil;
+import tenant.guardts.house.util.CommonUtil;
+import tenant.guardts.house.util.GlobalUtil;
+import tenant.guardts.house.util.LogUtil;
+import tenant.guardts.house.util.ScreenShotUtil;
+import tenant.guardts.house.util.UtilTool;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,30 +45,30 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import tenant.guardts.house.impl.DataStatusInterface;
-import tenant.guardts.house.model.ActivityController;
-import tenant.guardts.house.model.ServiceCharge;
-import tenant.guardts.house.presenter.HoursePresenter;
-import tenant.guardts.house.util.BMapUtil;
-import tenant.guardts.house.util.CommonUtil;
-import tenant.guardts.house.util.GlobalUtil;
-import tenant.guardts.house.util.LogUtil;
-import tenant.guardts.house.util.ScreenShotUtil;
-import tenant.guardts.house.util.UtilTool;
 
-public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface{
+import com.google.gson.Gson;
+import com.gzt.faceid5sdk.DetectionAuthentic;
+import com.gzt.faceid5sdk.listener.ResultListener;
+import com.oliveapp.face.livenessdetectorsdk.utilities.algorithms.DetectedRect;
+
+public class AddRentAttributeActivity extends BaseActivity implements DataStatusInterface {
 
 	private TextView mTitleBar;
-	
+
 	private HoursePresenter mPresenter;
-	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";//扣费提醒
+	private String mAddRetinues = "http://tempuri.org/AddRetinues";// 添加随行人员
+
+	private String mGetPayRateDesc = "http://tempuri.org/GetPayRateDesc";// 扣费提醒
 	private String mAddRentAction = "http://tempuri.org/AddRentRecord";
 	private String mQueryStatusAction = "http://tempuri.org/IsOrderConfirmed";
 	private String mSendMessageAction = "http://tempuri.org/SendMessageToPlice";
@@ -69,9 +76,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mIdentifyUrl = "https://nid.sdtt.com.cn/AppRegSvr/thirdsysauthsvr/houseorder";
 	private String mGetSystemClockAction = "http://tempuri.org/GetSystemClock";
 	private String mRandNum = null;
-	//	private Map<String, String> mSelectedMap = new HashMap<>();
-//	private Map<String, String> mOriginText = new HashMap<>();
-//	private Map<String, String[]> mAllList = new HashMap<>();
+	// private Map<String, String> mSelectedMap = new HashMap<>();
+	// private Map<String, String> mOriginText = new HashMap<>();
+	// private Map<String, String[]> mAllList = new HashMap<>();
 	private Calendar cal = Calendar.getInstance();
 	private SimpleDateFormat df;
 	private TextView mStartTime, mEndTime;
@@ -82,8 +89,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mCheckVerifyCodeAction = "http://tempuri.org/ValidateIdentifyCode";
 	private String mHouseNo;
 	private String mUsername;
-	//private String [] mOwnerType = new String[3];
-	private String  mTypeIndex = null;
+	// private String [] mOwnerType = new String[3];
+	private String mTypeIndex = null;
 	private String mOwnerName;
 	private String mOwnerIdcard;
 	private String mOrderId;
@@ -91,26 +98,30 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private DetectionAuthentic authentic;
 	private String mFaceCaptureString, mCaptureString;
 	private String mRealName, mIdCard;
-	private HandlerThread myHandlerThread ;
+	private HandlerThread myHandlerThread;
 	private Handler mSubHandler;
-	//private TextView commission;
-	//private TextView explanation;
+	// private TextView commission;
+	// private TextView explanation;
 	private EditText password;
-	//private LinearLayout mCommissionContent, mExplannationContent;
+	// private LinearLayout mCommissionContent, mExplannationContent;
 	private boolean mShowRentHouseDialog = false;
 
 	private String mHousePrice, mRealPrice;
 
 	private String mRentType, mCreateOrder, mAddress;
-	
+	private static final int REQUEST_CODE = 123;
+	private static final int ADD_REQUEST_CODE = 124;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.add_house_rent_attribute_info); 
+		setContentView(R.layout.add_house_rent_attribute_info);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.titlebar);
-		mTitleBar = (TextView)findViewById(R.id.id_titlebar);
+		mTitleBar = (TextView) findViewById(R.id.id_titlebar);
 		mTitleBar.setText("房客信息");
+		mPresenter = new HoursePresenter(getApplicationContext(), this);
+
 		mHouseNo = getIntent().getStringExtra("house_id");
 		mUsername = getIntent().getStringExtra("user_name");
 		mOwnerName = getIntent().getStringExtra("owner_name");
@@ -119,101 +130,124 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mRentType = getIntent().getStringExtra("rent_type");
 		mAddress = getIntent().getStringExtra("house_address");
 		mCreateOrder = getIntent().getStringExtra("create_order");
-		if (mRentType != null){
-			if (mRentType.equals("02")){  //日租
+		if (mRentType != null) {
+			if (mRentType.equals("02")) { // 日租
 				mTypeIndex = "1";
-			}else if (mRentType.equals("01")){ //月租
-				mTypeIndex = "2";  //月租2，时租 0   日租 1
-			}else{
-				mTypeIndex = "0";  //时租
+			} else if (mRentType.equals("01")) { // 月租
+				mTypeIndex = "2"; // 月租2，时租 0 日租 1
+			} else {
+				mTypeIndex = "0"; // 时租
 			}
 		}
-		
+
 		initView();
 		initHandler();
-		
+
 	}
-	
-	
+
+	/**
+	 * 添加随行人员
+	 * 
+	 * @param rraId
+	 *            订单号
+	 * @param createdBy
+	 *            身份证
+	 * @param jsonstr
+	 */
+	private void addRetinues(String rraId, String createdBy, String jsonstr) {
+
+		String url = CommonUtil.mUserHost + "Services.asmx?op=AddRetinues";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRetinues));
+		rpc.addProperty("rraId", rraId);
+		rpc.addProperty("createdBy", createdBy);
+		rpc.addProperty("jsonstr", jsonstr);
+		mPresenter.readyPresentServiceParams(this, url, mAddRetinues, rpc);
+		mPresenter.startPresentServiceTask(true);
+
+	}
+
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 	}
-	
-	/**获取服务费信息
+
+	/**
+	 * 获取服务费信息
+	 * 
 	 * @param price
 	 */
-	private void getPayRateDesc(String price){
-//		
-		String url = CommonUtil.mUserHost+"Services.asmx?op=GetPayRateDesc";
+	private void getPayRateDesc(String price) {
+		//
+		String url = CommonUtil.mUserHost + "Services.asmx?op=GetPayRateDesc";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetPayRateDesc));
 		rpc.addProperty("fee", price);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetPayRateDesc, rpc);
 		mPresenter.startPresentServiceTask(false);
-		
+
 	}
-	
-	private void checkCanRentHouseTime(String houseno){
-		LogUtil.w("mingguo0", "add rent attribute check can rent house time house no  "+houseno+"  startTime "+mSetStartData+"  endTime  "+mSetEndData);
-		String url = CommonUtil.mUserHost+"Services.asmx?op=CanRentTheHouse";
+
+	private void checkCanRentHouseTime(String houseno) {
+		LogUtil.w("mingguo0", "add rent attribute check can rent house time house no  " + houseno + "  startTime "
+				+ mSetStartData + "  endTime  " + mSetEndData);
+		String url = CommonUtil.mUserHost + "Services.asmx?op=CanRentTheHouse";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCanRentHouseListAction));
-		rpc.addProperty("rentNo", houseno); 
-		rpc.addProperty("startdate", mSetStartData); 
-		rpc.addProperty("enddate", mSetEndData); 
+		rpc.addProperty("rentNo", houseno);
+		rpc.addProperty("startdate", mSetStartData);
+		rpc.addProperty("enddate", mSetEndData);
 		mPresenter.readyPresentServiceParams(this, url, mCanRentHouseListAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
-	
-	private void sendPhoneVerifyCode(String phone){
+
+	private void sendPhoneVerifyCode(String phone) {
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
-		rpc.addProperty("phone", phone); 
+		rpc.addProperty("phone", phone);
 		mPresenter.readyPresentServiceParams(this, url, mSendVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
-	
-	private void checkPhoneVerifyCode(String phone, String code){
+
+	private void checkPhoneVerifyCode(String phone, String code) {
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=ValidateIdentifyCode";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
-		rpc.addProperty("phone", phone); 
-		rpc.addProperty("number", code); 
+		rpc.addProperty("phone", phone);
+		rpc.addProperty("number", code);
 		mPresenter.readyPresentServiceParams(this, url, mCheckVerifyCodeAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
 
-	
-//	private void showAlertDialog(final TextView text,final String[] items) {  
-//		  AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
-//		  builder.setItems(items, new DialogInterface.OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				mTypeIndex = which+"";
-//				text.setText(items[which]);
-//				mSetStartData = "";
-//				mSetEndData = "";
-//				mStartTime.setText(mSetStartData);
-//				mEndTime.setText(mSetEndData);
-//			}
-//		});
-//		builder.show();
-//	}
-	
-	private String[] parseAlreadyRentHouseTime(String value){
-		String [] list = null;
+	// private void showAlertDialog(final TextView text,final String[] items) {
+	// AlertDialog.Builder builder =new
+	// AlertDialog.Builder(AddRentAttributeActivity.this,
+	// AlertDialog.THEME_HOLO_LIGHT);
+	// builder.setItems(items, new DialogInterface.OnClickListener() {
+	// @Override
+	// public void onClick(DialogInterface dialog, int which) {
+	// mTypeIndex = which+"";
+	// text.setText(items[which]);
+	// mSetStartData = "";
+	// mSetEndData = "";
+	// mStartTime.setText(mSetStartData);
+	// mEndTime.setText(mSetEndData);
+	// }
+	// });
+	// builder.show();
+	// }
+
+	private String[] parseAlreadyRentHouseTime(String value) {
+		String[] list = null;
 		try {
 			JSONArray array = new JSONArray(value);
-			LogUtil.w("mingguo", " list item json  array  "+array);
+			LogUtil.w("mingguo", " list item json  array  " + array);
 			if (array != null) {
 				list = new String[array.length()];
-				for (int item = 0; item < array.length(); item++){
+				for (int item = 0; item < array.length(); item++) {
 					JSONObject itemJsonObject = array.optJSONObject(item);
 					String startTime = itemJsonObject.optString("RRAStartDate");
 					String endTime = itemJsonObject.optString("RRAEndDate");
-					String newStartTime = UtilTool.stampToDateTime(startTime.substring(6,startTime.length()-2));
-					String newEndTime = UtilTool.stampToDateTime(endTime.substring(6,endTime.length()-2));
-					list[item] = newStartTime +"至"+newEndTime;
-					LogUtil.w("mingguo", " list item  "+list[item]);
+					String newStartTime = UtilTool.stampToDateTime(startTime.substring(6, startTime.length() - 2));
+					String newEndTime = UtilTool.stampToDateTime(endTime.substring(6, endTime.length() - 2));
+					list[item] = newStartTime + "至" + newEndTime;
+					LogUtil.w("mingguo", " list item  " + list[item]);
 				}
 			}
 		} catch (Exception e) {
@@ -221,96 +255,118 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		}
 		return list;
 	}
-	
-	private void showAlreadyRentHouseTime(String[] items) {  
-		AlertDialog.Builder builder =new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+
+	private void showAlreadyRentHouseTime(String[] items) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(AddRentAttributeActivity.this,
+				AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("以下时间段，该房屋已出租");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		builder.show();
-		
-//		 AlertDialog.Builder builder2 = new AlertDialog.Builder(AddRentAttributeActivity.this, R.style.AlertDialog);
-//		  View view = LayoutInflater.from(AddRentAttributeActivity.this).inflate(R.layout.dialog_style_layout, null);
-//		  builder2.setView(view);
-//
-//		builder2.show();
+
+		// AlertDialog.Builder builder2 = new
+		// AlertDialog.Builder(AddRentAttributeActivity.this,
+		// R.style.AlertDialog);
+		// View view =
+		// LayoutInflater.from(AddRentAttributeActivity.this).inflate(R.layout.dialog_style_layout,
+		// null);
+		// builder2.setView(view);
+		//
+		// builder2.show();
 	}
 
-	private void getStartDateAndTime(){
-		new DatePickerDialog(AddRentAttributeActivity.this , 
-				startlistener , 
-				cal.get(Calendar.YEAR ), 
-				cal .get(Calendar.MONTH ), 
-				cal .get(Calendar.DAY_OF_MONTH ) 
-				).show(); 
+	private void getStartDateAndTime() {
+		new DatePickerDialog(AddRentAttributeActivity.this, startlistener, cal.get(Calendar.YEAR),
+				cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
 	}
-	
-	private void getStartTime(){
-		new TimePickerDialog(AddRentAttributeActivity.this, starttimeListener, 
-				cal.get(Calendar.HOUR_OF_DAY), 0, true)
-			.show();
+
+	private void getStartTime() {
+		new TimePickerDialog(AddRentAttributeActivity.this, starttimeListener, cal.get(Calendar.HOUR_OF_DAY), 0, true)
+				.show();
 	}
-	
-	private void getEndTime(){
-		new TimePickerDialog(AddRentAttributeActivity.this, endtimeListener, 
-				cal.get(Calendar.HOUR_OF_DAY), 0, true)
-			.show();
+
+	private void getEndTime() {
+		new TimePickerDialog(AddRentAttributeActivity.this, endtimeListener, cal.get(Calendar.HOUR_OF_DAY), 0, true)
+				.show();
 	}
-	
-	private void getEndDateAndTime(){
-		new DatePickerDialog(AddRentAttributeActivity.this , 
-				endlistener , 
-				cal.get(Calendar.YEAR ), 
-				cal .get(Calendar.MONTH ), 
-				cal .get(Calendar.DAY_OF_MONTH ) 
-				).show(); 
+
+	private void getEndDateAndTime() {
+		new DatePickerDialog(AddRentAttributeActivity.this, endlistener, cal.get(Calendar.YEAR),
+				cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
 	}
-	
-	private void showIndentifySuccessDialog(){
-		new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT).setTitle(getString(R.string.identify_success_title)) 
-		  
-	     .setMessage(getString(R.string.identify_success_content))  
-	  
-	     .setPositiveButton(getString(R.string.button_ok),new DialogInterface.OnClickListener() { 
-	         @Override  
-	  
-	         public void onClick(DialogInterface dialog, int which) {
-	        	 finish();
-	         }  
-	  
-	     }).setCancelable(false)
-	     .show(); 
+
+	private void showIndentifySuccessDialog() {
+		new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT)
+				.setTitle(getString(R.string.identify_success_title))
+
+				.setMessage(getString(R.string.identify_success_content))
+
+				.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+
+				}).setCancelable(false).show();
 	}
-	
-	private DatePickerDialog.OnDateSetListener startlistener = new DatePickerDialog.OnDateSetListener(){  //
-		@Override 
-		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) { 
-		cal .set(Calendar. YEAR , arg1); 
-		cal .set(Calendar. MONTH , arg2); 
-		cal .set(Calendar. DAY_OF_MONTH , arg3);
-		
-//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
-//			cal.set(Calendar.HOUR_OF_DAY, 00);
-//			cal.set(Calendar.MINUTE, 00);
-//			updateStartDate();
-//			
-//		}else{
+
+	/**
+	 * 是否添加随行人员
+	 * 
+	 */
+	private void AddRetinues() {
+		AlertDialog dialog = new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT)
+				.setTitle("随行人员管理")
+
+				.setMessage("检测到您尚未添加常用随行人员，是否添加随行人员？")
+
+				.setPositiveButton("是", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						Intent intent = new Intent(AddRentAttributeActivity.this, AddRentParternerActivity.class);
+						startActivity(intent);
+					}
+
+				}).setNegativeButton("否", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+						dialog.cancel();
+					}
+				}).setCancelable(false).show();
+	}
+
+	private DatePickerDialog.OnDateSetListener startlistener = new DatePickerDialog.OnDateSetListener() { //
+		@Override
+		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+			cal.set(Calendar.YEAR, arg1);
+			cal.set(Calendar.MONTH, arg2);
+			cal.set(Calendar.DAY_OF_MONTH, arg3);
+
+			// if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+			// cal.set(Calendar.HOUR_OF_DAY, 00);
+			// cal.set(Calendar.MINUTE, 00);
+			// updateStartDate();
+			//
+			// }else{
 			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
 			cal.set(Calendar.MINUTE, 00);
 			getStartTime();
-//			}
-		} 
+			// }
+		}
 	};
-	
+
 	private OnTimeSetListener starttimeListener = new OnTimeSetListener() {
-		
+
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// TODO Auto-generated method stub
@@ -319,32 +375,29 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			updateStartDate();
 		}
 	};
-	
-	
-	
-	
-	private DatePickerDialog.OnDateSetListener endlistener = new DatePickerDialog.OnDateSetListener(){  //
-		@Override 
-		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) { 
-		cal .set(Calendar. YEAR , arg1); 
-		cal .set(Calendar. MONTH , arg2); 
-		cal .set(Calendar. DAY_OF_MONTH , arg3);
-		
-//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //月租{
-//			cal.set(Calendar.HOUR_OF_DAY, 00);
-//			cal.set(Calendar.MINUTE, 00);
-//			updateEndDate();
-//		}else{
+
+	private DatePickerDialog.OnDateSetListener endlistener = new DatePickerDialog.OnDateSetListener() { //
+		@Override
+		public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+			cal.set(Calendar.YEAR, arg1);
+			cal.set(Calendar.MONTH, arg2);
+			cal.set(Calendar.DAY_OF_MONTH, arg3);
+
+			// if (mTypeIndex != null && mTypeIndex.equals("2")){ //月租{
+			// cal.set(Calendar.HOUR_OF_DAY, 00);
+			// cal.set(Calendar.MINUTE, 00);
+			// updateEndDate();
+			// }else{
 			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
 			cal.set(Calendar.MINUTE, 00);
 			getEndTime();
-//			}
-		 
-		} 
+			// }
+
+		}
 	};
-	
+
 	private OnTimeSetListener endtimeListener = new OnTimeSetListener() {
-		
+
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// TODO Auto-generated method stub
@@ -353,13 +406,12 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			updateEndDate();
 		}
 	};
-	
-	
-	//private TextView mHouseId;
+
+	// private TextView mHouseId;
 	private EditText mRentIDcard;
 	private EditText mRentName;
 	private TextView mRentPrice;
-	
+
 	private TextView mRentPhone;
 	private View mQrcodeView;
 	private TextView mTypeTextView;
@@ -373,261 +425,310 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mVerifyCode;
 
 	private TextView mHouseAddressTextView;
-	
-	
+
+	private RadioButton mRetinuesYes;
+
+	private RadioButton mRetinuesNo;
+
 	@SuppressLint("SimpleDateFormat")
-	private void updateStartDate(){ 
-		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm"); 
+	private void updateStartDate() {
+		df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		mSetStartData = df.format(cal.getTime());
-		mStartTime.setText(df.format(cal.getTime())); 
+		mStartTime.setText(df.format(cal.getTime()));
 		mStartTimeClipse = cal.getTimeInMillis();
 		setHousePriceByRentTime();
 	}
-	
-	private void updateEndDate(){ 
-		df = new SimpleDateFormat( "yyyy-MM-dd HH:mm" ); 
+
+	private void updateEndDate() {
+		df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		mSetEndData = df.format(cal.getTime());
-		mEndTime.setText(df.format(cal.getTime())); 
+		mEndTime.setText(df.format(cal.getTime()));
 		mEndTimeClipse = cal.getTimeInMillis();
 		setHousePriceByRentTime();
 	}
-	
-	private void setHousePriceByRentTime(){
-		if (mEndTimeClipse > mStartTimeClipse){
+
+	private void setHousePriceByRentTime() {
+		if (mEndTimeClipse > mStartTimeClipse) {
 			try {
-				long hoursCount = UtilTool.formatDuringToHour(mEndTimeClipse-mStartTimeClipse);
+				long hoursCount = UtilTool.formatDuringToHour(mEndTimeClipse - mStartTimeClipse);
 				float price = Float.parseFloat(mHousePrice);
-				Log.w("mingguo", "time  clipse  "+hoursCount+"  end  - start  "+(mEndTimeClipse-mStartTimeClipse));
-				if (mTypeIndex.equals("0")){
-					mRealPrice = price * hoursCount+"";
-					mRentPrice.setText(mHousePrice+" 元/小时"+"		应付房费: "+mRealPrice+" 元");
-				}else if (mTypeIndex.equals("1")){
+				Log.w("mingguo", "time  clipse  " + hoursCount + "  end  - start  "
+						+ (mEndTimeClipse - mStartTimeClipse));
+				if (mTypeIndex.equals("0")) {
+					mRealPrice = price * hoursCount + "";
+					mRentPrice.setText(mHousePrice + " 元/小时" + "		应付房费: " + mRealPrice + " 元");
+				} else if (mTypeIndex.equals("1")) {
 					float hourPrice = 0;
 					hourPrice = price / 24;
-					mRealPrice = (int)(hourPrice * hoursCount + 0.99f)+"";
-					
-					mRentPrice.setText(mHousePrice+" 元/天"+"			应付房费: "+mRealPrice+" 元");
-				}else{
+					mRealPrice = (int) (hourPrice * hoursCount + 0.99f) + "";
+
+					mRentPrice.setText(mHousePrice + " 元/天" + "			应付房费: " + mRealPrice + " 元");
+				} else {
 					float hourPrice = 0;
 					hourPrice = price / (30 * 24);
-					
-					mRealPrice = (int)(hourPrice * hoursCount  + 0.99f)+"";
-					mRentPrice.setText(mHousePrice+" 元/月"+"			应付房费: "+mRealPrice+" 元");
+
+					mRealPrice = (int) (hourPrice * hoursCount + 0.99f) + "";
+					mRentPrice.setText(mHousePrice + " 元/月" + "			应付房费: " + mRealPrice + " 元");
 				}
-				if (mCreateOrder != null && mCreateOrder.equals("1")){ //代人下单
-					mRentPrice.setText(mHousePrice+" 元/月"+"	 应付房费:"+mRealPrice+ " 元 (线下支付)");
+				if (mCreateOrder != null && mCreateOrder.equals("1")) { // 代人下单
+					mRentPrice.setText(mHousePrice + " 元/月" + "	 应付房费:" + mRealPrice + " 元 (线下支付)");
 					mRealPrice = "0";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
-	private void initView(){
-		password = (EditText) findViewById(R.id.door_password);//门锁密码
-//		commission = (TextView) findViewById(R.id.id_commission);//手续费
-//		explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
-//		mCommissionContent = (LinearLayout)findViewById(R.id.id_commission_content);
-//		mExplannationContent = (LinearLayout)findViewById(R.id.id_explanation_content);
-//		mCommissionContent.setVisibility(View.GONE);
-//		mExplannationContent.setVisibility(View.GONE);
-		mPresenter = new HoursePresenter(getApplicationContext(), this);
-		mQrcodeView = (View)findViewById(R.id.id_qrcode_layout);
-		mQrcodeView.setVisibility(View.INVISIBLE);
-//		mOwnerType[0] = "日租房";
-//		mOwnerType[1] = "月租房";
-//		mOwnerType[2] = "时租房";
-		FrameLayout typeFrameLayout = (FrameLayout)findViewById(R.id.id_rent_house_type);
-		mTypeTextView = (TextView)findViewById(R.id.id_rent_house_type_text);
-		mTypeTextView.setText(mRentType);
-		typeFrameLayout.setVisibility(View.GONE);
-		
-		FrameLayout startTime = (FrameLayout)findViewById(R.id.id_rent_house_start_date);
-		mStartTime = (TextView)findViewById(R.id.id_rent_house_start_date_text);
-		startTime.setOnClickListener(new OnClickListener() {
-			
+
+	private void initView() {
+		mRetinuesYes = (RadioButton) findViewById(R.id.retinues_yes);
+
+		mRetinuesNo = (RadioButton) findViewById(R.id.retinues_no);
+		tvAdd = (TextView) findViewById(R.id.add);// 添加随行人员按钮
+		mRetinuesYes.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
 			@Override
-			public void onClick(View v) {
-//				if (mTypeIndex == null || mTypeIndex.equals("")){
-//					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-//					return;
-//				}
-				getStartDateAndTime();
-				 
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					tvAdd.setVisibility(View.VISIBLE);
+				} else {
+					tvAdd.setVisibility(View.GONE);
+				}
+
 			}
 		});
-		
-		FrameLayout endTime = (FrameLayout)findViewById(R.id.id_rent_house_end_date);
-		mEndTime = (TextView)findViewById(R.id.id_rent_house_end_date_text);
-		endTime.setOnClickListener(new OnClickListener() {
-			
+		tvAdd.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-//				if (mTypeIndex == null || mTypeIndex.equals("")){
-//					Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-//					return;
-//				}
+				Intent intent = new Intent(AddRentAttributeActivity.this, ParternerRecordActivity.class);
+				if (list != null) {
+					intent.putExtra("have_added", list);
+				}
+				startActivityForResult(intent, ADD_REQUEST_CODE);
+
+			}
+		});
+
+		password = (EditText) findViewById(R.id.door_password);// 门锁密码
+		// commission = (TextView) findViewById(R.id.id_commission);//手续费
+		// explanation = (TextView) findViewById(R.id.id_explanation);//手续费描述
+		// mCommissionContent =
+		// (LinearLayout)findViewById(R.id.id_commission_content);
+		// mExplannationContent =
+		// (LinearLayout)findViewById(R.id.id_explanation_content);
+		// mCommissionContent.setVisibility(View.GONE);
+		// mExplannationContent.setVisibility(View.GONE);
+
+		mQrcodeView = (View) findViewById(R.id.id_qrcode_layout);
+		mQrcodeView.setVisibility(View.INVISIBLE);
+		// mOwnerType[0] = "日租房";
+		// mOwnerType[1] = "月租房";
+		// mOwnerType[2] = "时租房";
+		FrameLayout typeFrameLayout = (FrameLayout) findViewById(R.id.id_rent_house_type);
+		mTypeTextView = (TextView) findViewById(R.id.id_rent_house_type_text);
+		mTypeTextView.setText(mRentType);
+		typeFrameLayout.setVisibility(View.GONE);
+
+		FrameLayout startTime = (FrameLayout) findViewById(R.id.id_rent_house_start_date);
+		mStartTime = (TextView) findViewById(R.id.id_rent_house_start_date_text);
+		startTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// if (mTypeIndex == null || mTypeIndex.equals("")){
+				// Toast.makeText(getApplicationContext(), "请选择租赁类型",
+				// Toast.LENGTH_SHORT).show();
+				// return;
+				// }
+				getStartDateAndTime();
+
+			}
+		});
+
+		FrameLayout endTime = (FrameLayout) findViewById(R.id.id_rent_house_end_date);
+		mEndTime = (TextView) findViewById(R.id.id_rent_house_end_date_text);
+		endTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// if (mTypeIndex == null || mTypeIndex.equals("")){
+				// Toast.makeText(getApplicationContext(), "请选择租赁类型",
+				// Toast.LENGTH_SHORT).show();
+				// return;
+				// }
 				getEndDateAndTime();
 				getSystemClock();
 			}
 		});
-		
-		mHouseAddressTextView = (TextView)findViewById(R.id.id_rent_house_address_text);
-		mRentIDcard = (EditText)findViewById(R.id.id_rent_house_idcard);
-		mRentName = (EditText)findViewById(R.id.id_rent_house_name);
-		mRentPhone = (EditText)findViewById(R.id.id_rent_house_phone);
+
+		mHouseAddressTextView = (TextView) findViewById(R.id.id_rent_house_address_text);
+		mRentIDcard = (EditText) findViewById(R.id.id_rent_house_idcard);
+		mRentName = (EditText) findViewById(R.id.id_rent_house_name);
+		mRentPhone = (EditText) findViewById(R.id.id_rent_house_phone);
 		mRentName.setText(CommonUtil.mRegisterRealName);
 		mRentPhone.setText(CommonUtil.mUserLoginName);
 		mRentIDcard.setText(CommonUtil.mRegisterIdcard);
-		if (mCreateOrder != null && mCreateOrder.equals("1")){
+		if (mCreateOrder != null && mCreateOrder.equals("1")) {
 			mRentName.setText("");
 			mRentPhone.setText("");
 			mRentIDcard.setText("");
-			CommonUtil.mIsCancelRentIdentifyTest = true; //代人下单取消实名认证
+			CommonUtil.mIsCancelRentIdentifyTest = true; // 代人下单取消实名认证
 		}
-		mRentPrice = (TextView)findViewById(R.id.id_rent_house_price);
-		if (mTypeIndex.equals("0")){
-			mRentPrice.setText(mHousePrice+" 元/小时");
-		}else if (mTypeIndex.equals("1")){
-			mRentPrice.setText(mHousePrice+" 元/天");
-		}else{
-			mRentPrice.setText(mHousePrice+" 元/月");
+		mRentPrice = (TextView) findViewById(R.id.id_rent_house_price);
+		if (mTypeIndex.equals("0")) {
+			mRentPrice.setText(mHousePrice + " 元/小时");
+		} else if (mTypeIndex.equals("1")) {
+			mRentPrice.setText(mHousePrice + " 元/天");
+		} else {
+			mRentPrice.setText(mHousePrice + " 元/月");
 		}
-//		mRentPrice.addTextChangedListener(new TextWatcher() {
-//			
-//			@Override
-//			public void onTextChanged(CharSequence s, int start, int before, int count) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void afterTextChanged(Editable s) {
-//				if(s.length()>0){
-//					getPayRateDesc(s+"");
-//					
-//				}else{
-//					mCommissionContent.setVisibility(View.GONE);
-//					mExplannationContent.setVisibility(View.GONE);
-//					commission.setText("");
-//					explanation.setText("");
-//				}
-//				
-//			}
-//		});
+		// mRentPrice.addTextChangedListener(new TextWatcher() {
+		//
+		// @Override
+		// public void onTextChanged(CharSequence s, int start, int before, int
+		// count) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public void beforeTextChanged(CharSequence s, int start, int count,
+		// int after) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public void afterTextChanged(Editable s) {
+		// if(s.length()>0){
+		// getPayRateDesc(s+"");
+		//
+		// }else{
+		// mCommissionContent.setVisibility(View.GONE);
+		// mExplannationContent.setVisibility(View.GONE);
+		// commission.setText("");
+		// explanation.setText("");
+		// }
+		//
+		// }
+		// });
 		mHouseAddressTextView.setText(mAddress);
 		mHouseAddressTextView.setSelected(true);
-		mVerifyCodeText = (EditText)findViewById(R.id.id_rent_house_phone_verify);
-		mGetVerifyCodeText = (TextView)findViewById(R.id.id_rent_house_get_verifycode);
+		mVerifyCodeText = (EditText) findViewById(R.id.id_rent_house_phone_verify);
+		mGetVerifyCodeText = (TextView) findViewById(R.id.id_rent_house_get_verifycode);
 		mGetVerifyCodeText.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				String phone = mRentPhone.getEditableText().toString();
-				if (phone == null || phone.equals("")){
-					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				if (phone == null || phone.equals("")) {
+					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_not_null), getApplicationContext()
+							.getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
-				}else if (phone.length() < 11){
-					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+				} else if (phone.length() < 11) {
+					GlobalUtil.shortToast(getApplication(), getString(R.string.phone_input_error),
+							getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 					return;
 				}
-				if (mTimeCount < 0){
+				if (mTimeCount < 0) {
 					mTimeCount = 60;
 					sendPhoneVerifyCode(phone);
 					mHandler.sendEmptyMessage(2000);
-				}else{
+				} else {
 					return;
 				}
-				
+
 			}
 		});
-		
-		Button checkHouseTime = (Button)findViewById(R.id.id_check_can_rent_house);
+
+		Button checkHouseTime = (Button) findViewById(R.id.id_check_can_rent_house);
 		checkHouseTime.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(checkInputTimeContent()){
+				if (checkInputTimeContent()) {
 					mShowRentHouseDialog = true;
 					checkCanRentHouseTime(mHouseNo);
 				}
 			}
 		});
-		
-		
-		Button okButton = (Button)findViewById(R.id.id_add_rent_confirm);
+
+		Button okButton = (Button) findViewById(R.id.id_add_rent_confirm);
 		okButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				if (checkInputContent()){
+
+				if (checkInputContent()) {
+
 					mShowRentHouseDialog = false;
 					checkCanRentHouseTime(mHouseNo);
+
 				}
+
 			}
 		});
+
 	}
-	
-	private void startIndentifyProcess(){
+
+	private void startIndentifyProcess() {
 		mRealName = mRentName.getEditableText().toString();
 		mIdCard = mRentIDcard.getEditableText().toString();
-		
-		GlobalUtil.longToast(getApplication(),"拍照认证！");
+
+		GlobalUtil.longToast(getApplication(), "拍照认证！");
 		Intent getPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		file = ScreenShotUtil.createScreenshotDirectory(AddRentAttributeActivity.this);
 		File out = new File(file);
 		Uri uri = Uri.fromFile(out);
 		getPhoto.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		getPhoto.putExtra("return-data", true);
-		getPhoto.putExtra("camerasensortype", 2); 
+		getPhoto.putExtra("camerasensortype", 2);
 		startActivityForResult(getPhoto, 1);
 	}
-	
-	private void initHandler(){
-    	//创建一个线程,线程名字：handler-thread
-        myHandlerThread = new HandlerThread( "handler-thread") ;
-        myHandlerThread.start();
-        
-        mSubHandler = new Handler(myHandlerThread.getLooper()){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                int degree = BMapUtil.readPictureDegree(file);
-                Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
-   			 	LogUtil.w("mingguo", "onActivityResult  before compress image  "+rotationBitmap.getWidth()+" height  "+rotationBitmap.getHeight()+"  byte  "+rotationBitmap.getByteCount());
-   			 	Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
-   			 	LogUtil.w("mingguo", "onActivityResult  compress image  "+newBitmap.getWidth()+" height  "+newBitmap.getHeight()+"  byte  "+newBitmap.getByteCount());
-   			 	mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap), android.util.Base64.NO_WRAP);
-                
-            }
-        };
-        
-    }
-	
-	private void getSystemClock(){
-		String url = CommonUtil.mUserHost+"Services.asmx?op=GetSystemClock";
+
+	private void initHandler() {
+		// 创建一个线程,线程名字：handler-thread
+		myHandlerThread = new HandlerThread("handler-thread");
+		myHandlerThread.start();
+
+		mSubHandler = new Handler(myHandlerThread.getLooper()) {
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				int degree = BMapUtil.readPictureDegree(file);
+				Bitmap rotationBitmap = BMapUtil.rotaingImageView(degree, BitmapFactory.decodeFile(file, null));
+				LogUtil.w("mingguo", "onActivityResult  before compress image  " + rotationBitmap.getWidth()
+						+ " height  " + rotationBitmap.getHeight() + "  byte  " + rotationBitmap.getByteCount());
+				Bitmap newBitmap = BMapUtil.compressScale(rotationBitmap);
+				LogUtil.w("mingguo", "onActivityResult  compress image  " + newBitmap.getWidth() + " height  "
+						+ newBitmap.getHeight() + "  byte  " + newBitmap.getByteCount());
+				mCaptureString = android.util.Base64.encodeToString(BMapUtil.Bitmap2Bytes(newBitmap),
+						android.util.Base64.NO_WRAP);
+
+			}
+		};
+
+	}
+
+	private void getSystemClock() {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=GetSystemClock";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetSystemClockAction));
-		//rpc.addProperty("id", orderId);
+		// rpc.addProperty("id", orderId);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mGetSystemClockAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
-	
-	private boolean checkInputTimeContent(){
-		
-//		if (mTypeIndex == null || mTypeIndex.equals("")){
-//			Toast.makeText(getApplicationContext(), "请选择租赁类型", Toast.LENGTH_SHORT).show();
-//			return false;
-//		}
-		
+
+	private boolean checkInputTimeContent() {
+
+		// if (mTypeIndex == null || mTypeIndex.equals("")){
+		// Toast.makeText(getApplicationContext(), "请选择租赁类型",
+		// Toast.LENGTH_SHORT).show();
+		// return false;
+		// }
+
 		if (mSetStartData == null || mSetStartData.equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入租房开始时间", Toast.LENGTH_SHORT).show();
 			return false;
@@ -636,73 +737,75 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "请输入租房结束时间", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
-		if (mEndTimeClipse <= mStartTimeClipse){
+
+		if (mEndTimeClipse <= mStartTimeClipse) {
 			Toast.makeText(getApplicationContext(), "租房起止时间选择有误！", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	private boolean checkInputContent(){
-		
-		if (!checkInputTimeContent()){
+
+	private boolean checkInputContent() {
+
+		if (!checkInputTimeContent()) {
 			return false;
 		}
-		//LogUtil.w("mingguo", "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
-		if (mEndTimeClipse + 60000L < mSystemClockTime){
+		// LogUtil.w("mingguo",
+		// "check int content endtime   "+(mEndTimeClipse+200000)+"  system time  "+mSystemClockTime);
+		if (mEndTimeClipse + 60000L < mSystemClockTime) {
 			Toast.makeText(getApplicationContext(), "租房结束时间需要在当前时间之后！", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
-		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")){
+
+		if (mRentIDcard.getText().toString() == null || mRentIDcard.getText().toString().equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入身份证信息", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentIDcard.getText().toString().length()<18){
+		if (mRentIDcard.getText().toString().length() < 18) {
 			Toast.makeText(getApplicationContext(), "身份证信息输入有误", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
-		if (mOwnerIdcard.equals(CommonUtil.mRegisterIdcard)){
+
+		if (mOwnerIdcard.equals(CommonUtil.mRegisterIdcard)) {
 			Toast.makeText(getApplicationContext(), "您无法租赁自己发布的房屋", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentName.getText().toString() == null || mRentName.getText().toString().equals("")){
+		if (mRentName.getText().toString() == null || mRentName.getText().toString().equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入姓名", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentPhone.getText().toString() == null || mRentPhone.getText().toString().equals("")){
+		if (mRentPhone.getText().toString() == null || mRentPhone.getText().toString().equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入手机号码,保证手机号真实有效", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if (mRentPhone.getText().toString().length()<11){
+		if (mRentPhone.getText().toString().length() < 11) {
 			Toast.makeText(getApplicationContext(), "手机号码输入有误", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
+
 		mVerifyCode = mVerifyCodeText.getText().toString();
-		
-		if (mVerifyCode == null || mVerifyCode.equals("") ){
-			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_not_null), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+
+		if (mVerifyCode == null || mVerifyCode.equals("")) {
+			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_not_null), getApplicationContext()
+					.getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
-		}else if (mVerifyCode.length() != 6){
-			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+		} else if (mVerifyCode.length() != 6) {
+			GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext()
+					.getResources().getDrawable(R.drawable.ic_dialog_no));
 			return false;
 		}
-		
-		if (mRentPrice.getText().toString() == null || mRentPrice.getText().toString().equals("")){
+
+		if (mRentPrice.getText().toString() == null || mRentPrice.getText().toString().equals("")) {
 			Toast.makeText(getApplicationContext(), "请输入租金", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		 String string = mRentPrice.getText().toString();
-		 
-		if (mRentPrice.getText().toString().equals("0")){
+		String string = mRentPrice.getText().toString();
+
+		if (mRentPrice.getText().toString().equals("0")) {
 			Toast.makeText(getApplicationContext(), "租金不能为0", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
 
 		// 判断密码
 		if (password.getText().toString() == null || password.getText().toString().equals("")) {
@@ -717,98 +820,120 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "密码不能设置为6个0", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		
-		
+
+		if ((!mRetinuesYes.isChecked()) && (!mRetinuesNo.isChecked())) {
+			Toast.makeText(getApplicationContext(), "请选择本次租房是否有随行人员", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+
 		return true;
 	}
-	
-	private void startAddRentInfo(){
-			LogUtil.w("mingguo", "house no  "+mHouseNo+"  mRentName "+mRentName.getText()+" mRentPhone "+mRentPhone.getText()+" mRentIDcard.getText() "+mRentIDcard.getText()+" mRentPrice "+mRealPrice+
-					"mSetStartData "+mSetStartData+" mSetEndData "+mSetEndData+" mRentReadMe "+" password  "+password.getEditableText().toString()+" username  "+mUsername);
-			String url = CommonUtil.mUserHost+"services.asmx?op=AddRentRecord";
-			SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
-			rpc.addProperty("RentNo", mHouseNo);   
-			rpc.addProperty("RRAContactName", mRentName.getText().toString());      
-			rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());  
-			rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());  
-			rpc.addProperty("RRentPrice", mRealPrice);     
-			rpc.addProperty("RRAStartDate", mSetStartData);  
-			rpc.addProperty("RRAEndDate", mSetEndData); 
-			rpc.addProperty("RRADescription", "meiyou"); 
-			rpc.addProperty("password", password.getEditableText().toString()); 
-			rpc.addProperty("createdBy", mUsername);
-			mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mAddRentAction, rpc);
-			mPresenter.startPresentServiceTask(true);
+
+	private void startAddRentInfo() {
+		LogUtil.w("mingguo", "house no  " + mHouseNo + "  mRentName " + mRentName.getText() + " mRentPhone "
+				+ mRentPhone.getText() + " mRentIDcard.getText() " + mRentIDcard.getText() + " mRentPrice "
+				+ mRealPrice + "mSetStartData " + mSetStartData + " mSetEndData " + mSetEndData + " mRentReadMe "
+				+ " password  " + password.getEditableText().toString() + " username  " + mUsername);
+		String url = CommonUtil.mUserHost + "services.asmx?op=AddRentRecord";
+		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mAddRentAction));
+		rpc.addProperty("RentNo", mHouseNo);
+		rpc.addProperty("RRAContactName", mRentName.getText().toString());
+		rpc.addProperty("RRAContactTel", mRentPhone.getText().toString());
+		rpc.addProperty("RRAIDCard", mRentIDcard.getText().toString());
+		rpc.addProperty("RRentPrice", mRealPrice);
+		rpc.addProperty("RRAStartDate", mSetStartData);
+		rpc.addProperty("RRAEndDate", mSetEndData);
+		rpc.addProperty("RRADescription", "meiyou");
+		rpc.addProperty("password", password.getEditableText().toString());
+		rpc.addProperty("createdBy", mUsername);
+		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mAddRentAction, rpc);
+		mPresenter.startPresentServiceTask(true);
 	}
-	
-	private void queryIdentifyStatus(String orderId){
-		String url = CommonUtil.mUserHost+"Services.asmx?op=IsOrderConfirmed";
+
+	private void queryIdentifyStatus(String orderId) {
+		String url = CommonUtil.mUserHost + "Services.asmx?op=IsOrderConfirmed";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mQueryStatusAction));
 		rpc.addProperty("id", orderId);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mQueryStatusAction, rpc);
 		mPresenter.startPresentServiceTask(true);
 	}
-	
-	private void sendMessageToFinish(){
-//		String url = "http://qxw2332340157.my3w.com/Services.asmx?op=SendMessageToPlice";
-//		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendMessageAction));
-//		rpc.addProperty("rentNo", mHouseId.getText().toString());
-//		rpc.addProperty("sign", "0");
-//		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, url, mSendMessageAction, rpc);
-//		mPresenter.startPresentServiceTask(true);
+
+	private void sendMessageToFinish() {
+		// String url =
+		// "http://qxw2332340157.my3w.com/Services.asmx?op=SendMessageToPlice";
+		// SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE,
+		// CommonUtil.getSoapName(mSendMessageAction));
+		// rpc.addProperty("rentNo", mHouseId.getText().toString());
+		// rpc.addProperty("sign", "0");
+		// mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this,
+		// url, mSendMessageAction, rpc);
+		// mPresenter.startPresentServiceTask(true);
 	}
-	
-	private void startLiveIdentifyActivity(){
+
+	private void startLiveIdentifyActivity() {
 		authentic = DetectionAuthentic.getInstance(AddRentAttributeActivity.this, new ResultListener() {
 
-		@Override
-		public void onSDKUsingFail(String errorMessage, String errorCode) {
-			// TODO Auto-generated method stub
-			GlobalUtil.shortToast(getApplication(), errorMessage, getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-			
-		}
-		
-		@Override
-		public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
-			if(faceImages == null){
-				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			@Override
+			public void onSDKUsingFail(String errorMessage, String errorCode) {
+				// TODO Auto-generated method stub
+				GlobalUtil.shortToast(getApplication(), errorMessage, getApplicationContext().getResources()
+						.getDrawable(R.drawable.ic_dialog_no));
+
 			}
-		}
-		
-		@Override
-		public void onFaceImageCaptured(byte[] faceImages) {
-			if(faceImages == null){
-				GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+
+			@Override
+			public void onIDCardImageCaptured(byte[] faceImages, DetectedRect arg1) {
+				if (faceImages == null) {
+					GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext()
+							.getResources().getDrawable(R.drawable.ic_dialog_no));
+				}
 			}
-			
-			mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
-			identifyUserInfo(mFaceCaptureString, mCaptureString);
-		}
+
+			@Override
+			public void onFaceImageCaptured(byte[] faceImages) {
+				if (faceImages == null) {
+					GlobalUtil.shortToast(getApplication(), "image capture  无人脸", getApplicationContext()
+							.getResources().getDrawable(R.drawable.ic_dialog_no));
+				}
+
+				mFaceCaptureString = android.util.Base64.encodeToString(faceImages, android.util.Base64.NO_WRAP);
+				identifyUserInfo(mFaceCaptureString, mCaptureString);
+			}
 		});
-	
+
 		authentic.autenticateToCaptureAction(AddRentAttributeActivity.this, mRealName, mIdCard);
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		LogUtil.w("mingguo", "onActivityResult resultCode  "+resultCode+" requestCode  "+requestCode+"  file  "+file);
-		if (resultCode == RESULT_OK && requestCode == 1) {
-			 LogUtil.w("mingguo", "activity result  width data   "+data);
-			 mSubHandler.sendEmptyMessage(1000);
-			 startLiveIdentifyActivity();
-		}else{
-			GlobalUtil.shortToast(getApplication(), "头像采集失败", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+		LogUtil.w("mingguo", "onActivityResult resultCode  " + resultCode + " requestCode  " + requestCode + "  file  "
+				+ file);
+
+		if (resultCode == RESULT_OK) {
+			if (requestCode == 1) {
+				mSubHandler.sendEmptyMessage(1000);
+				startLiveIdentifyActivity();
+			} else if (requestCode == ADD_REQUEST_CODE) {
+				// 随行人员
+				list = (ArrayList<RetinuesResult>) data.getSerializableExtra("retinues_list");
+
+			} else {
+				GlobalUtil.shortToast(getApplication(), "头像采集失败",
+						getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+			}
 		}
+
 	}
 
+	ArrayList<RetinuesResult> list;
 
-	private void identifyUserInfo(String faceStr, String screenshotStr){
-		if (faceStr == null || screenshotStr == null){
+	private void identifyUserInfo(String faceStr, String screenshotStr) {
+		if (faceStr == null || screenshotStr == null) {
 			return;
 		}
-		LogUtil.w("mingguo", "register interface  mIdCard  "+mIdCard+"  mRealName  "+mRealName);
+		LogUtil.w("mingguo", "register interface  mIdCard  " + mIdCard + "  mRealName  " + mRealName);
 		String identifyUrl = "http://www.guardts.com/ValidateService/IdentifyValidateService.asmx?op=IdentifyValidateLive";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mIdentifyAction));
 		rpc.addProperty("idcard", mIdCard);
@@ -817,36 +942,39 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		rpc.addProperty("picBase64Str", screenshotStr);
 		mPresenter.readyPresentServiceParams(AddRentAttributeActivity.this, identifyUrl, mIdentifyAction, rpc);
 		mPresenter.startPresentServiceTask(true);
-		
+
 	}
-	
-	private void startHttpService(){
+
+	private void startHttpService() {
 		try {
-			JSONObject obj = new JSONObject(); 
+			JSONObject obj = new JSONObject();
 			HashMap<String, String> hashMap = new HashMap<>();
 			obj.put("AppID", "0000004");
 			obj.put("FunID", "000");
-			obj.put("OrderID", System.currentTimeMillis()+"");
+			obj.put("OrderID", System.currentTimeMillis() + "");
 			obj.put("HouseID", mHouseNo);
 			obj.put("LessorID", mOwnerIdcard);
 			obj.put("LessorName", mOwnerName);
 			obj.put("LesseeID", mRentIDcard.getText().toString());
 			obj.put("LesseeName", mRentName.getText().toString());
 			obj.put("Rent", mRentPrice.getText().toString());
-//			obj.put("RentType", mTypeIndex);  //0，日租，1，月租，2，时租
-			obj.put("StartTime",mSetStartData);
+			// obj.put("RentType", mTypeIndex); //0，日租，1，月租，2，时租
+			obj.put("StartTime", mSetStartData);
 			obj.put("EndTime", mSetEndData);
-			
+
 			obj.put("AgentFlag", "0");
 			obj.put("AgentID", "");
 			obj.put("AgentName", "");
-			
-//			String data = "{'StartTime':'2017-02-01','HouseID':'test002',"
-//					+ "'Rent':'1000','AgentID':'110101109892837271','EndTime':'2017-03-01',"
-//					+ "'LesseeID':'110101198729838272','RentType':'1','LesseeName':'fangduoduo',"
-//					+ "'LessorName':'guolili','AgentName':'fangdongdong','AgentFlag':'1','LessorID':'110101109892837271',"
-//					+ "'AppID':'0000004','FunID':'000','OrderID':'02212121212'}";	
-			
+
+			// String data = "{'StartTime':'2017-02-01','HouseID':'test002',"
+			// +
+			// "'Rent':'1000','AgentID':'110101109892837271','EndTime':'2017-03-01',"
+			// +
+			// "'LesseeID':'110101198729838272','RentType':'1','LesseeName':'fangduoduo',"
+			// +
+			// "'LessorName':'guolili','AgentName':'fangdongdong','AgentFlag':'1','LessorID':'110101109892837271',"
+			// + "'AppID':'0000004','FunID':'000','OrderID':'02212121212'}";
+
 			hashMap.put("strData", obj.toString());
 			mPresenter.readyPresentHttpServiceParams(AddRentAttributeActivity.this, mIdentifyUrl, hashMap);
 			mPresenter.startPresentHttpServiceTask();
@@ -854,140 +982,162 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-		
-	
-	private Handler mHandler = new Handler(){
+
+	String rraid;
+
+	private Handler mHandler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			if (msg.what == 100){
-				
-				String value = (String)msg.obj;
-				if (value != null && value.equals("true")){
+			if (msg.what == 100) {
+
+				String value = (String) msg.obj;
+				if (value != null && value.equals("true")) {
 					mQrcodeView.setVisibility(View.INVISIBLE);
 					Toast.makeText(getApplicationContext(), "成功", Toast.LENGTH_SHORT).show();
-					Intent intent= new Intent();
-			        setResult(Activity.RESULT_OK, intent);
-			        finish();
-//					
-//					startHttpService();
-				}else{
+					Intent intent = new Intent();
+					setResult(Activity.RESULT_OK, intent);
+					finish();
+					//
+					// startHttpService();
+				} else {
 					Toast.makeText(getApplicationContext(), "添加租赁信息失败", Toast.LENGTH_SHORT).show();
 				}
-			}else if (msg.what == 101){
-				
+			} else if (msg.what == 101) {
+
 				try {
-					JSONObject object = new JSONObject((String)msg.obj);
-					if (object != null){
+					JSONObject object = new JSONObject((String) msg.obj);
+
+					if (object != null) {
 						String ret = object.optString("ret");
-						if (ret != null){
-							if (ret.equals("0")){
-								ActivityController.finishAll();
-								showIndentifySuccessDialog();
-							}else{
-								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						rraid = object.optString("Id");
+						if (ret != null) {
+							if (ret.equals("0")) {
+								if (mRetinuesYes.isChecked()) {
+									Gson gson = new Gson();
+									String json = gson.toJson(list).replace("IDCard", "PartnerIdCard")
+											.replace("Name", "PartnerName");
+									addRetinues(rraid, CommonUtil.mUserLoginName, json);
+								} else {
+									showIndentifySuccessDialog();
+								}
+
+								
+
+							} else {
+								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext()
+										.getResources().getDrawable(R.drawable.ic_dialog_no));
 							}
+
 						}
 					}
-				}catch (JSONException e) {
+
+				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				
-				//getIndentifyInfo((String)msg.obj);
-			}else if (msg.what == 102){
-				parseQueryStatus((String)msg.obj);
-			}else if (msg.what == 103){
+
+				// getIndentifyInfo((String)msg.obj);
+			} else if (msg.what == 102) {
+				parseQueryStatus((String) msg.obj);
+			} else if (msg.what == 103) {
 				finish();
-			}else if (msg.what == 105){
+			} else if (msg.what == 105) {
 				try {
-					LogUtil.e("mingguo", "msg .obj   "+(String)msg.obj);
-					JSONObject object = new JSONObject((String)msg.obj);
-					if (object != null){
+					LogUtil.e("mingguo", "msg .obj   " + (String) msg.obj);
+					JSONObject object = new JSONObject((String) msg.obj);
+					if (object != null) {
 						String ret = object.optString("ret");
-						if (ret != null){
-							LogUtil.e("mingguo", "ret  "+ret);
-							if (ret.equals("0")){
-								if (mShowRentHouseDialog){
-									Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT).show();
-								}else{
+						if (ret != null) {
+							LogUtil.e("mingguo", "ret  " + ret);
+							if (ret.equals("0")) {
+
+								if (mShowRentHouseDialog) {
+
+									Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT)
+											.show();
+								} else {
 									checkPhoneVerifyCode(mRentPhone.getText().toString(), mVerifyCode);
 								}
-							}else if (ret.equals("1")){
+							} else if (ret.equals("1")) {
 								Toast.makeText(getApplicationContext(), "该时间段房屋已出租，请选择其他时间", Toast.LENGTH_SHORT).show();
-								if (mShowRentHouseDialog){
+								if (mShowRentHouseDialog) {
 									showAlreadyRentHouseTime(parseAlreadyRentHouseTime(object.optString("RentRecord")));
 								}
 							}
 						}
 					}
-				}catch (JSONException e) {
+				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-			}else if (msg.what ==106){
-				mSystemClockTime = UtilTool.DateTimeToStamp((String)msg.obj);
-				LogUtil.w("mingguo", "date to string  system clock  "+mSystemClockTime);
-			}else if (msg.what == 110){
-				
+			} else if (msg.what == 106) {
+				mSystemClockTime = UtilTool.DateTimeToStamp((String) msg.obj);
+				LogUtil.w("mingguo", "date to string  system clock  " + mSystemClockTime);
+			} else if (msg.what == 110) {
+
 				try {
-					JSONObject object = new JSONObject((String)msg.obj);
-					if (object != null){
+					JSONObject object = new JSONObject((String) msg.obj);
+					if (object != null) {
 						String compareResult = object.optString("verify_result");
 						String result = object.optString("result");
-						if (result != null && result.equals("0")){
-							if (compareResult != null && compareResult.equals("0")){
-								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ,请等待房主确认！", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+						if (result != null && result.equals("0")) {
+							if (compareResult != null && compareResult.equals("0")) {
+								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证成功 ,请等待房主确认！",
+										getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+
 								startAddRentInfo();
-								//GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
-							}else{
-								
-								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  "+compareResult , getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+								// GlobalUtil.shortToast(getApplication(),
+								// mRealName + " 身份认证失败 ",
+								// getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+							} else {
+
+								GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败  " + compareResult,
+										getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
 							}
-						}else{
-							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败，请重试 ", getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_no));
+						} else {
+							GlobalUtil.shortToast(getApplication(), mRealName + " 身份认证失败，请重试 ", getApplicationContext()
+									.getResources().getDrawable(R.drawable.ic_dialog_no));
 						}
-						
+
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}else if(msg.what==818){
-				String value = (String)msg.obj;
-				LogUtil.e("", value+"----------");
-				//显示服务费信息
-				///////////////////////////////////////////////////////////////////////////////
-				Gson gson=new Gson();
+			} else if (msg.what == 818) {
+				String value = (String) msg.obj;
+				LogUtil.e("", value + "----------");
+				// 显示服务费信息
+				// /////////////////////////////////////////////////////////////////////////////
+				Gson gson = new Gson();
 				ServiceCharge serviceCharge = gson.fromJson(value, ServiceCharge.class);
-//				mCommissionContent.setVisibility(View.VISIBLE);
-//				mExplannationContent.setVisibility(View.VISIBLE);
-//				if(serviceCharge.fee.startsWith("00")){
-//					commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
-//					
-//				}else{
-//					commission.setText(serviceCharge.fee+"元（手续费）");
-//				}
-//				explanation.setText(serviceCharge.msg);
-			}else if (msg.what == 1002){
-				if (msg.obj != null){
+				// mCommissionContent.setVisibility(View.VISIBLE);
+				// mExplannationContent.setVisibility(View.VISIBLE);
+				// if(serviceCharge.fee.startsWith("00")){
+				// commission.setText(serviceCharge.fee.substring(1)+"元（手续费）");
+				//
+				// }else{
+				// commission.setText(serviceCharge.fee+"元（手续费）");
+				// }
+				// explanation.setText(serviceCharge.msg);
+			} else if (msg.what == 1002) {
+				if (msg.obj != null) {
 					JSONObject json;
 					try {
-						json = new JSONObject((String)msg.obj);
+						json = new JSONObject((String) msg.obj);
 						String ret = json.optString("ret");
-						if (ret != null){
-							if (CommonUtil.verify_code_test || ret.equals("0")){
-								if (CommonUtil.mIsCancelRentIdentifyTest){
+						if (ret != null) {
+							if (CommonUtil.verify_code_test || ret.equals("0")) {
+								if (CommonUtil.mIsCancelRentIdentifyTest) {
 									startAddRentInfo();
-								}else{
+								} else {
 									startIndentifyProcess();
 								}
-								
-							}else{
-								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error), getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
+
+							} else {
+								GlobalUtil.shortToast(getApplication(), getString(R.string.verify_error),
+										getApplicationContext().getResources().getDrawable(R.drawable.ic_dialog_yes));
 							}
 						}
 					} catch (JSONException e) {
@@ -995,34 +1145,52 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						e.printStackTrace();
 					}
 				}
-			}else if (msg.what == 2000){
-				if (mTimeCount >= 0){
+			} else if (msg.what == 2000) {
+				if (mTimeCount >= 0) {
 					mGetVerifyCodeText.setTextColor(Color.parseColor("#cccccc"));
-					mGetVerifyCodeText.setText(mTimeCount +" 秒重新发送");
+					mGetVerifyCodeText.setText(mTimeCount + " 秒重新发送");
 					mTimeCount--;
 					mHandler.sendEmptyMessageDelayed(2000, 1000);
-				}else{
+				} else {
 					mGetVerifyCodeText.setTextColor(Color.parseColor("#337ffd"));
 					mGetVerifyCodeText.setText("获取验证码");
 				}
-				
-				
+
+			} else if (msg.what == 800) {
+
+				JSONObject object;
+				try {
+					object = new JSONObject((String) msg.obj);
+					if (object != null) {
+						String ret = object.optString("ret");
+						if (ret != null && ret.equals("0")) {
+							showIndentifySuccessDialog();
+						} else {
+							Toast.makeText(AddRentAttributeActivity.this, "添加随行人员错误", Toast.LENGTH_SHORT).show();
+						}
+
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
 			}
 		}
-		
+
 	};
 
-	
-	private void parseQueryStatus(String value){
-		if (value != null){
+	private TextView tvAdd;
+
+	private void parseQueryStatus(String value) {
+		if (value != null) {
 			try {
 				JSONObject object = new JSONObject(value);
-				if (object != null){
+				if (object != null) {
 					String ret = object.optString("ret");
-					if (ret != null && ret.equals("0")){
+					if (ret != null && ret.equals("0")) {
 						Toast.makeText(getApplicationContext(), "租户已确认完成 ", Toast.LENGTH_SHORT).show();
 						sendMessageToFinish();
-					}else{
+					} else {
 						queryIdentifyStatus(mOrderId);
 					}
 				}
@@ -1032,23 +1200,25 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			}
 		}
 	}
-	
-	private void getIndentifyInfo(String value){
-		if (value != null){
+
+	private void getIndentifyInfo(String value) {
+		if (value != null) {
 			try {
 				JSONObject object = new JSONObject(value);
-				if (object != null){
+				if (object != null) {
 					object.optString("ret");
 					mOrderId = object.optString("Id");
-					if (mOrderId != null && !mOrderId.equals("")){
+					if (mOrderId != null && !mOrderId.equals("")) {
 						mQrcodeView.setVisibility(View.VISIBLE);
 						ImageView qrImageView = (ImageView) mQrcodeView.findViewById(R.id.id_qrcode_view);
-						LogUtil.e("mingguo", "  ret == 0  "+qrImageView.getWidth()+"  height  "+qrImageView.getWidth());
-						Bitmap qrBitmap = BMapUtil.createQRImage(mOrderId, qrImageView, qrImageView.getWidth(), qrImageView.getHeight());
+						LogUtil.e("mingguo",
+								"  ret == 0  " + qrImageView.getWidth() + "  height  " + qrImageView.getWidth());
+						Bitmap qrBitmap = BMapUtil.createQRImage(mOrderId, qrImageView, qrImageView.getWidth(),
+								qrImageView.getHeight());
 						qrImageView.setImageBitmap(qrBitmap);
 						queryIdentifyStatus(mOrderId);
-					}else{
-						Toast.makeText(getApplicationContext(), "failed  return "+value, Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getApplicationContext(), "failed  return " + value, Toast.LENGTH_SHORT).show();
 					}
 				}
 			} catch (JSONException e) {
@@ -1056,27 +1226,27 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	private void getQueryStatusInfo(String value){
-		if (value == null){
+
+	private void getQueryStatusInfo(String value) {
+		if (value == null) {
 			return;
 		}
 		JSONObject object;
 		try {
 			object = new JSONObject(value);
-			if (object != null){
+			if (object != null) {
 				String ret = object.optString("ret");
 				String desc = object.optString("desc");
-				if (ret != null){
-					if (ret.equals("1")){
+				if (ret != null) {
+					if (ret.equals("1")) {
 						startAddRentInfo();
-						
-					}else if (ret.equals("0")){
+
+					} else if (ret.equals("0")) {
 						queryIdentifyStatus(mRandNum);
-					}else {
-						Toast.makeText(getApplicationContext(), ""+desc, Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getApplicationContext(), "" + desc, Toast.LENGTH_SHORT).show();
 					}
 				}
 			}
@@ -1084,18 +1254,18 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	public class IdentifyModel {
-		
+
 		private String status;
 		private String idtfInfo;
-		
-		public IdentifyModel(){
-			
+
+		public IdentifyModel() {
+
 		}
+
 		public String getIdentifyStatus() {
 			return status;
 		}
@@ -1112,88 +1282,91 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			this.idtfInfo = info;
 		}
 
-
 	}
 
-	 @Override
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-			// TODO Auto-generated method stub
-			return super.onKeyDown(keyCode, event);
-		}
-	 
-//	 public static IdentifyModel parseIdentifyInfo(String value) {
-//			IdentifyModel model = new IdentifyModel();
-//			try{
-//				JSONObject object = new JSONObject(value);
-//				LogUtil.e("house", "  object  ");
-//				if (object != null){
-//						String ret = object.optString("ret");
-//						String desc = object.optString("desc");
-//						model.setIdentifyStatus(ret);
-//						model.setIdentifyInfo(desc);
-//						LogUtil.e("house", "  ret  "+ret+" desc "+desc);
-//				}
-//				return model;
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				return model;
-//			}
-//		}
+		// TODO Auto-generated method stub
+		return super.onKeyDown(keyCode, event);
+	}
 
+	// public static IdentifyModel parseIdentifyInfo(String value) {
+	// IdentifyModel model = new IdentifyModel();
+	// try{
+	// JSONObject object = new JSONObject(value);
+	// LogUtil.e("house", "  object  ");
+	// if (object != null){
+	// String ret = object.optString("ret");
+	// String desc = object.optString("desc");
+	// model.setIdentifyStatus(ret);
+	// model.setIdentifyInfo(desc);
+	// LogUtil.e("house", "  ret  "+ret+" desc "+desc);
+	// }
+	// return model;
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// return model;
+	// }
+	// }
 
 	@Override
 	public void onStatusSuccess(String action, String templateInfo) {
 		super.onStatusSuccess(action, templateInfo);
-		
+
 		LogUtil.w("mingguo", "on success  action " + action + "  msg  " + templateInfo);
-		if (action != null && templateInfo != null){
-			if (action.equals(mAddRentAction)){
+		if (action != null && templateInfo != null) {
+			if (action.equals(mAddRentAction)) {
 				Message msg = mHandler.obtainMessage();
 				msg.what = 101;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
-			}else if (action.equals(mIdentifyUrl)){
-				LogUtil.e("mingguo", "identify url "+mIdentifyUrl);
-//				Message msg = mHandler.obtainMessage();
-//				msg.what = 101;
-//				msg.obj = templateInfo;
-//				msg.sendToTarget();
-			}else if (action.equals(mQueryStatusAction)){
+			} else if (action.equals(mIdentifyUrl)) {
+				LogUtil.e("mingguo", "identify url " + mIdentifyUrl);
+				// Message msg = mHandler.obtainMessage();
+				// msg.what = 101;
+				// msg.obj = templateInfo;
+				// msg.sendToTarget();
+			} else if (action.equals(mQueryStatusAction)) {
 				Message msg = new Message();
 				msg.what = 102;
 				msg.obj = templateInfo;
 				mHandler.sendMessageDelayed(msg, 3000);
-			}else if (action.equals(mSendMessageAction)){
+			} else if (action.equals(mSendMessageAction)) {
 				Message msg = new Message();
 				msg.what = 103;
 				msg.obj = templateInfo;
 				mHandler.sendMessage(msg);
-			}else if (action.equals(mIdentifyAction)){
+			} else if (action.equals(mIdentifyAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 110;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
-			}else if(action.equals(mGetPayRateDesc)){
+			} else if (action.equals(mGetPayRateDesc)) {
 				Message msg = mHandler.obtainMessage();
 				msg.what = 818;
 				msg.obj = templateInfo;
 				msg.sendToTarget();
-			}else if (action.equals(mCheckVerifyCodeAction)){
+			} else if (action.equals(mCheckVerifyCodeAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 1002;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
-			}else if (action.equals(mSendVerifyCodeAction)){
-				
-			}else if (action.equals(mCanRentHouseListAction)){
+			} else if (action.equals(mSendVerifyCodeAction)) {
+
+			} else if (action.equals(mCanRentHouseListAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 105;
-				//message.obj = templateInfo.replace("\\", "");
+				// message.obj = templateInfo.replace("\\", "");
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
-			}else if (action.equals(mGetSystemClockAction)){
+			} else if (action.equals(mGetSystemClockAction)) {
 				Message message = mHandler.obtainMessage();
 				message.what = 106;
+				message.obj = templateInfo;
+				mHandler.sendMessage(message);
+			} else if (action.equals(mAddRetinues)) {
+				Message message = mHandler.obtainMessage();
+				message.what = 800;
 				message.obj = templateInfo;
 				mHandler.sendMessage(message);
 			}
@@ -1206,7 +1379,5 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		super.onDestroy();
 		mHandler.removeCallbacksAndMessages(null);
 	}
-	
-	
 
 }

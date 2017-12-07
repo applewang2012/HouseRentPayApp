@@ -14,8 +14,6 @@
         
         >
 
-    
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/base_dimen_80"
@@ -69,7 +67,7 @@
             android:textSize="@dimen/base_dimen_30" />
 
         <EditText
-            android:id="@+id/id_card_num"
+            android:id="@+id/parterner_id_card_num"
              android:layout_width="0dp"
             android:layout_weight="7"
             android:layout_height="wrap_content"
@@ -79,22 +77,34 @@
             android:hint="请输入随行人员身份证号		"
             android:textColor="#555555"
             android:textColorHint="#b2b2b2"
-           	
+           android:digits="@string/edit_input"
+            android:maxLength="18"
             android:textSize="@dimen/base_dimen_30" />
     </LinearLayout>
 
-    
-
+   
     <Button
-        android:id="@+id/add_parterner"
+        android:id="@+id/add_retinue"
         android:layout_width="@dimen/base_dimen_680"
         android:layout_height="@dimen/base_dimen_80"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/base_dimen_46"
         android:background="@drawable/withdraw_btn_bg"
-        android:text="确认添加"
+        android:text="添加"
         android:textSize="16sp"
         android:textColor="#ffffff" />
+    
+    <TextView 
+        android:id="@+id/common_retinue"
+         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/base_dimen_30"
+         android:layout_marginLeft="@dimen/base_dimen_300"
+        android:text="常用随行人员"
+        android:gravity="center_horizontal"
+        android:textColor="#337ffd"
+        
+        />
     </LinearLayout>
 <!--  <include
         android:id="@+id/id_data_loading"

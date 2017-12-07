@@ -5,29 +5,44 @@
     android:background="#f1f2f3"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/listview"
-        android:divider="#f1f2f3"
-        android:background="#ffffff"
-        android:dividerHeight="@dimen/base_dimen_2"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:listSelector="#ffffff"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
+
+         <ListView
+             android:id="@+id/listview"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_above="@+id/btn_add_retinue"
+             android:layout_alignParentTop="true"
+             android:background="#ffffff"
+             android:divider="#f1f2f3"
+             android:dividerHeight="@dimen/base_dimen_2"
+             android:listSelector="#ffffff" >
+        
     </ListView>
-     <Button
-        android:id="@+id/add_parterner"
-        android:layout_width="@dimen/base_dimen_680"
-        android:layout_height="@dimen/base_dimen_80"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginTop="@dimen/base_dimen_46"
-        android:background="@drawable/withdraw_btn_bg"
-        android:text="添加随行人员"
-        android:textSize="16sp"
-        android:layout_marginBottom="@dimen/base_dimen_20"
-        android:textColor="#ffffff" />
-  <include
-      	android:visibility="gone"
+       
+
+    
+
+        <Button
+            android:id="@+id/btn_add_retinue"
+            android:layout_width="@dimen/base_dimen_680"
+            android:layout_height="@dimen/base_dimen_80"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+           android:gravity="center"
+            android:background="@drawable/withdraw_btn_bg"
+            android:text="添加随行人员"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="@dimen/base_dimen_20"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <include
         android:id="@+id/id_data_loading"
-        layout="@layout/layout_loading_dialog" />
+        layout="@layout/layout_loading_dialog"
+        android:visibility="gone" />
 
 </FrameLayout>

@@ -2,25 +2,23 @@ package tenant.guardts.house.adapter;
 
 import java.util.ArrayList;
 
+import tenant.guardts.house.R;
+import tenant.guardts.house.model.Retinue;
+import tenant.guardts.house.model.RetinuesResult;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import tenant.guardts.house.R;
-import tenant.guardts.house.model.HouseInfoModel;
-import tenant.guardts.house.model.ParternerRecord;
 
 public class ParternerRecordAdapter extends BaseAdapter implements OnClickListener {
 	Context context;
-	ArrayList<ParternerRecord> list;
+	ArrayList<RetinuesResult> list;
 	CallBack mCallBack;
 	
 	
-	public ParternerRecordAdapter(Context context, ArrayList<ParternerRecord> list, CallBack mCallBack) {
+	public ParternerRecordAdapter(Context context, ArrayList<RetinuesResult> list, CallBack mCallBack) {
 		super();
 		this.context = context;
 		this.list = list;
@@ -66,7 +64,7 @@ public class ParternerRecordAdapter extends BaseAdapter implements OnClickListen
 		holder.del.setTag(position);
 		holder.edit.setTag(position);
 		holder.name.setText(list.get(position).name);
-		holder.idcard.setText(list.get(position).idCard);
+		holder.idcard.setText(list.get(position).idcard);
 		
 		return convertView;
 	}

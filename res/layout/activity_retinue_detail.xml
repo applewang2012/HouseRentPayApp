@@ -1,0 +1,39 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff" >
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#f1f2f3"
+            android:dividerHeight="@dimen/base_dimen_10"
+            android:listSelector="#ffffff" >
+        </ListView>
+        <TextView 
+            android:id="@+id/detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="此订单没有随行人员"
+            android:textSize="18sp"
+            android:textColor="#444444"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            />
+        
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog"
+        android:visibility="invisible" />
+
+</FrameLayout>

@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">连心锁</string>
+    <string name="radiobutton_on">有</string>
+    <string name="radiobutton_off">无</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="demo_name_overlay">覆盖物功能</string>
@@ -226,5 +228,6 @@
     <string name="title_activity_add_rent_parterner">AddRentParternerActivity</string>
     <string name="title_activity_parterner_record">ParternerRecordActivity</string>
     <string name="title_activity_permission">PermissionActivity</string>
+    <string name="title_activity_retinue_detail">RetinueDetailActivity</string>
 
 </resources>

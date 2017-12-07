@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_80"
+        android:gravity="center"
+        android:text="常用随行人员人列表"
+        android:textColor="#444444"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:background="#f1f2f3" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_500"
+        android:listSelector="#ffffff" >
+    </ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_10"
+        android:background="#f1f2f3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_dimen_80"
+        android:layout_marginBottom="@dimen/base_dimen_10"
+        android:layout_marginLeft="@dimen/base_dimen_10"
+        android:layout_marginRight="@dimen/base_dimen_10"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/item_blue_button_no_corner_selector"
+            android:text="添加"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/base_dimen_10"
+            android:layout_weight="1"
+            android:background="@drawable/item_blue_button_no_corner_selector"
+            android:text="取消"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>
+<include
+        android:id="@+id/id_data_loading"
+        layout="@layout/layout_loading_dialog"
+        android:visibility="invisible" />
+
+</FrameLayout>

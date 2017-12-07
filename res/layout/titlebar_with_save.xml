@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       android:id="@+id/id_titlebar_bg"
+       android:layout_width="fill_parent"
+       android:layout_height="@dimen/base_dimen_90"
+       android:background="#337ffd"  
+       >
+      <FrameLayout
+          android:id="@+id/id_titlebar_back"
+	       android:layout_width="@dimen/base_dimen_100"
+	       android:layout_height="@dimen/base_dimen_90"
+	       android:clickable="true"
+	       android:focusable="true"
+	       android:onClick="backFinish" >
+	      <ImageView 
+	           android:layout_width="@dimen/base_dimen_44"
+	           android:layout_height="@dimen/base_dimen_44"
+	           android:background="@drawable/short_lease_back"
+	           android:layout_gravity="center_vertical"
+	           android:layout_marginLeft="@dimen/base_dimen_20"
+	          />
+      </FrameLayout>
+      <TextView
+           android:id="@+id/id_titlebar"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:text="@string/app_name"
+           android:textColor="#ffffff"
+           android:gravity="center_vertical"
+           android:layout_gravity="center"
+           android:textSize="@dimen/base_dimen_38"
+           android:textStyle="bold"
+       /> 
+       <TextView
+           android:id="@+id/save"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="right|center_vertical"
+           android:layout_marginRight="@dimen/base_dimen_20"
+		   android:text="保存"
+		   android:textStyle="bold"
+		   android:textSize="18sp"
+		   android:textColor="#ffffff"
+		   
+       />
+       
+       <!-- <ImageView 
+           android:id="@+id/id_titlebar_right_search"
+           android:layout_width="@dimen/base_dimen_44"
+           android:layout_height="@dimen/base_dimen_44" 
+           android:src="@drawable/short_lease_search"
+           android:layout_gravity="center_vertical"
+           android:layout_marginLeft="@dimen/base_dimen_650"
+           /> -->
+</FrameLayout>
