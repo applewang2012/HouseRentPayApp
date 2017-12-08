@@ -466,7 +466,6 @@ public class HomeActivity extends BaseActivity {
 			
 			return;
 		}
-		
 		LogUtil.w("mingguo", "home activity  delete installed file  " + CommonUtil.deleteInstalledApkFile(this));
 		//+" delete database "+ getContentResolver().delete(Downloads.ALL_DOWNLOADS_CONTENT_URI, null, null));
 			

@@ -111,6 +111,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 	private String mRentType, mCreateOrder, mAddress;
 	private static final int REQUEST_CODE = 123;
 	private static final int ADD_REQUEST_CODE = 124;
+	private ArrayList<RetinuesResult> mAddParterList;
+	//private String rraid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -503,8 +505,8 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(AddRentAttributeActivity.this, ParternerRecordActivity.class);
-				if (list != null) {
-					intent.putExtra("have_added", list);
+				if (mAddParterList != null) {
+					intent.putExtra("have_added", mAddParterList);
 				}
 				startActivityForResult(intent, ADD_REQUEST_CODE);
 
@@ -825,6 +827,11 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 			Toast.makeText(getApplicationContext(), "请选择本次租房是否有随行人员", Toast.LENGTH_SHORT).show();
 			return false;
 		}
+		
+		if (mRetinuesYes.isChecked() && (mAddParterList == null || mAddParterList.size() == 0)){
+			Toast.makeText(getApplicationContext(), "您尚未添加随行人员", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 
 		return true;
 	}
@@ -917,7 +924,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				startLiveIdentifyActivity();
 			} else if (requestCode == ADD_REQUEST_CODE) {
 				// 随行人员
-				list = (ArrayList<RetinuesResult>) data.getSerializableExtra("retinues_list");
+				mAddParterList = (ArrayList<RetinuesResult>) data.getSerializableExtra("retinues_list");
 
 			} else {
 				GlobalUtil.shortToast(getApplication(), "头像采集失败",
@@ -927,7 +934,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 	}
 
-	ArrayList<RetinuesResult> list;
+	
 
 	private void identifyUserInfo(String faceStr, String screenshotStr) {
 		if (faceStr == null || screenshotStr == null) {
@@ -983,7 +990,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		}
 	}
 
-	String rraid;
+	
 
 	private Handler mHandler = new Handler() {
 
@@ -1012,20 +1019,17 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 					if (object != null) {
 						String ret = object.optString("ret");
-						rraid = object.optString("Id");
+						String rraid = object.optString("Id");
 						if (ret != null) {
 							if (ret.equals("0")) {
 								if (mRetinuesYes.isChecked()) {
 									Gson gson = new Gson();
-									String json = gson.toJson(list).replace("IDCard", "PartnerIdCard")
+									String json = gson.toJson(mAddParterList).replace("IDCard", "PartnerIdCard")
 											.replace("Name", "PartnerName");
 									addRetinues(rraid, CommonUtil.mUserLoginName, json);
 								} else {
 									showIndentifySuccessDialog();
 								}
-
-								
-
 							} else {
 								GlobalUtil.shortToast(getApplication(), "抱歉，提交订单失败！", getApplicationContext()
 										.getResources().getDrawable(R.drawable.ic_dialog_no));
@@ -1052,9 +1056,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 						if (ret != null) {
 							LogUtil.e("mingguo", "ret  " + ret);
 							if (ret.equals("0")) {
-
 								if (mShowRentHouseDialog) {
-
 									Toast.makeText(getApplicationContext(), "该时间段房屋空闲，请放心租住！", Toast.LENGTH_SHORT)
 											.show();
 								} else {
