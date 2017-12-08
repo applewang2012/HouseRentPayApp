@@ -249,7 +249,7 @@ public class AddRentParternerActivity extends BaseActivity implements CallBack {
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mGetRetinuesByIDCard));
 		rpc.addProperty("idCard", idCard);
 		mPresenter.readyPresentServiceParams(AddRentParternerActivity.this, url, mGetRetinuesByIDCard, rpc);
-		mPresenter.startPresentServiceTask(false);
+		mPresenter.startPresentServiceTask(true);
 
 	}
 
