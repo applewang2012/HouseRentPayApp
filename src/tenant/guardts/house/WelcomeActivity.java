@@ -59,6 +59,9 @@ public class WelcomeActivity extends BaseActivity {
 		//testHelloword();
 	}
 	
+	/**城市选择   
+	 * 
+	 */
 	private void commonServiceInterface(){
 		
 	    	String url = "http://www.guardts.com/commonservice/commonservices.asmx?op=GetAreas";

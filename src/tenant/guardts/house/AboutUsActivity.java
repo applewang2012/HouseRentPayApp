@@ -196,6 +196,9 @@ public class AboutUsActivity extends BaseActivity {
     }  
   
 	
+	/**
+	 * 版本更新
+	 */
 	private void checkVersionUpdate(){
 		mVersionCode = GlobalUtil.getVersionCode(getApplicationContext());
 		String url = "http://www.guardts.com/UpgradeService/SystemUpgradeService.asmx?op=CheckUpgrade";
@@ -228,6 +231,9 @@ public class AboutUsActivity extends BaseActivity {
 		}
 	}
 	
+	/**
+	 * 版本更新弹窗
+	 */
 	private void showUpdateVersionAlertDialog() {
 		if (CommonUtil.DOWLOAD_URL == null || CommonUtil.DOWLOAD_URL.equals("")){
 			LogUtil.w("mingguo", "home activity  delete installed file  "+CommonUtil.deleteInstalledApkFile(this));

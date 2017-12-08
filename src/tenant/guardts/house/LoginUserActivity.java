@@ -22,9 +22,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import tenant.guardts.house.model.ActivityController;
 import tenant.guardts.house.presenter.HoursePresenter;
@@ -96,6 +98,18 @@ public class LoginUserActivity extends BaseActivity {
 		// if (mPassword != null && !mPassword.equals("")){
 		// passwordEditText.setText(mPassword);
 		// }
+		passwordEditText.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if(actionId==EditorInfo.IME_ACTION_GO){
+					
+					login();
+					return true;
+				}
+				return false;
+			}
+		});
 		
 
 		// 忘记密码
@@ -141,27 +155,10 @@ public class LoginUserActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				mUserName = userNameEditText.getEditableText().toString();
-				mPassword = passwordEditText.getEditableText().toString();
-				if (mUserName == null || mUserName.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "请输入手机号码", getApplicationContext().getResources()
-							.getDrawable(R.drawable.ic_dialog_no));
-
-					return;
-				}
-				if (mPassword == null || mPassword.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "请输入密码", getApplicationContext().getResources()
-							.getDrawable(R.drawable.ic_dialog_no));
-					return;
-				}
-				if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")) {
-					GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources()
-							.getDrawable(R.drawable.ic_dialog_no));
-					return;
-				}
-				ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
-				loginUser();
+				login();
 			}
+
+			
 		});
 
 		Button registerButton = (Button) findViewById(R.id.id_login_user_register);
@@ -191,6 +188,28 @@ public class LoginUserActivity extends BaseActivity {
 				startActivityForResult(new Intent(LoginUserActivity.this, ModifyPasswordActivity.class), 1);
 			}
 		});
+	}
+	public void login() {
+		mUserName = userNameEditText.getEditableText().toString();
+		mPassword = passwordEditText.getEditableText().toString();
+		if (mUserName == null || mUserName.equals("")) {
+			GlobalUtil.shortToast(getApplication(), "请输入手机号码", getApplicationContext().getResources()
+					.getDrawable(R.drawable.ic_dialog_no));
+
+			return;
+		}
+		if (mPassword == null || mPassword.equals("")) {
+			GlobalUtil.shortToast(getApplication(), "请输入密码", getApplicationContext().getResources()
+					.getDrawable(R.drawable.ic_dialog_no));
+			return;
+		}
+		if (CommonUtil.mUserHost == null || CommonUtil.mUserHost.equals("")) {
+			GlobalUtil.shortToast(getApplication(), "您尚未选择所在区域", getApplicationContext().getResources()
+					.getDrawable(R.drawable.ic_dialog_no));
+			return;
+		}
+		ViewUtil.forceCloseSoftKeyborad(LoginUserActivity.this);
+		loginUser();
 	}
 
 	private void loginUser() {

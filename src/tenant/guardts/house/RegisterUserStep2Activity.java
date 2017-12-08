@@ -161,6 +161,9 @@ public class RegisterUserStep2Activity extends BaseActivity{
 
 	
 	
+	/**获取验证码
+	 * @param phone 手机号
+	 */
 	private void sendPhoneVerifyCode(String phone){
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
@@ -169,6 +172,10 @@ public class RegisterUserStep2Activity extends BaseActivity{
 		mPresenter.startPresentServiceTask(true);
 	}
 	
+	/**校验验证码
+	 * @param phone 手机号
+	 * @param code 验证码
+	 */
 	private void checkPhoneVerifyCode(String phone, String code){
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=ValidateIdentifyCode";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));

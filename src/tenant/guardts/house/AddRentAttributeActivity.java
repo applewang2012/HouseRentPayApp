@@ -188,6 +188,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 
 	}
 
+	/**房屋在该时间段是否可租
+	 * @param houseno 
+	 */
 	private void checkCanRentHouseTime(String houseno) {
 		LogUtil.w("mingguo0", "add rent attribute check can rent house time house no  " + houseno + "  startTime "
 				+ mSetStartData + "  endTime  " + mSetEndData);
@@ -200,6 +203,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mPresenter.startPresentServiceTask(true);
 	}
 
+	/**获取验证码
+	 * @param phone
+	 */
 	private void sendPhoneVerifyCode(String phone) {
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=SendIdentifyCodeMsg";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mSendVerifyCodeAction));
@@ -208,6 +214,10 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		mPresenter.startPresentServiceTask(true);
 	}
 
+	/**校验验证码
+	 * @param phone
+	 * @param code
+	 */
 	private void checkPhoneVerifyCode(String phone, String code) {
 		String url = "http://www.guardts.com/COMMONSERVICE/COMMONSERVICES.ASMX?op=ValidateIdentifyCode";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mCheckVerifyCodeAction));
@@ -304,6 +314,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
 	}
 
+	/**
+	 * 下单成功提示框
+	 */
 	private void showIndentifySuccessDialog() {
 		new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT)
 				.setTitle(getString(R.string.identify_success_title))
@@ -319,33 +332,7 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				}).setCancelable(false).show();
 	}
 
-	/**
-	 * 是否添加随行人员
-	 * 
-	 */
-	private void AddRetinues() {
-		AlertDialog dialog = new AlertDialog.Builder(AddRentAttributeActivity.this, AlertDialog.THEME_HOLO_LIGHT)
-				.setTitle("随行人员管理")
-
-				.setMessage("检测到您尚未添加常用随行人员，是否添加随行人员？")
-
-				.setPositiveButton("是", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						Intent intent = new Intent(AddRentAttributeActivity.this, AddRentParternerActivity.class);
-						startActivity(intent);
-					}
-
-				}).setNegativeButton("否", new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-
-						dialog.cancel();
-					}
-				}).setCancelable(false).show();
-	}
+	
 
 	private DatePickerDialog.OnDateSetListener startlistener = new DatePickerDialog.OnDateSetListener() { //
 		@Override
@@ -449,6 +436,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		setHousePriceByRentTime();
 	}
 
+	/**
+	 * 房费计算
+	 */
 	private void setHousePriceByRentTime() {
 		if (mEndTimeClipse > mStartTimeClipse) {
 			try {
@@ -456,17 +446,17 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 				float price = Float.parseFloat(mHousePrice);
 				Log.w("mingguo", "time  clipse  " + hoursCount + "  end  - start  "
 						+ (mEndTimeClipse - mStartTimeClipse));
-				if (mTypeIndex.equals("0")) {
+				if (mTypeIndex.equals("0")) {//时租
 					mRealPrice = price * hoursCount + "";
 					mRentPrice.setText(mHousePrice + " 元/小时" + "		应付房费: " + mRealPrice + " 元");
-				} else if (mTypeIndex.equals("1")) {
+				} else if (mTypeIndex.equals("1")) {//日租
 					float hourPrice = 0;
 					hourPrice = price / 24;
 					mRealPrice = (int) (hourPrice * hoursCount + 0.99f) + "";
 
 					mRentPrice.setText(mHousePrice + " 元/天" + "			应付房费: " + mRealPrice + " 元");
 				} else {
-					float hourPrice = 0;
+					float hourPrice = 0;//月租
 					hourPrice = price / (30 * 24);
 
 					mRealPrice = (int) (hourPrice * hoursCount + 0.99f) + "";
@@ -836,6 +826,9 @@ public class AddRentAttributeActivity extends BaseActivity implements DataStatus
 		return true;
 	}
 
+	/**
+	 * 提交租房信息
+	 */
 	private void startAddRentInfo() {
 		LogUtil.w("mingguo", "house no  " + mHouseNo + "  mRentName " + mRentName.getText() + " mRentPhone "
 				+ mRentPhone.getText() + " mRentIDcard.getText() " + mRentIDcard.getText() + " mRentPrice "

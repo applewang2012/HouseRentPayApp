@@ -128,6 +128,9 @@ public class RegisterUserStep1Activity extends BaseActivity{
 	}
 
     	
+	/**检测用户名是否可用
+	 * @param username 手机号
+	 */
 	private void checkUserNameValid(String username){
 		String url = CommonUtil.mUserHost+"services.asmx?op=ValidateLoginName";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mValidAction));

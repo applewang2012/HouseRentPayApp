@@ -227,6 +227,11 @@ public class ParternerRecordActivity extends BaseActivity implements CallBack {
 		View layout = View.inflate(this, R.layout.edit_dialog, null);
 		final EditText etName = (EditText) layout.findViewById(R.id.et_name);
 		final EditText etIdCard = (EditText) layout.findViewById(R.id.et_idcard);
+		if(list!=null){
+			etName.setText(list.get(position).name);
+			etIdCard.setText(list.get(position).idcard);
+		}
+		
 		new AlertDialog.Builder(this).setTitle("请填写要修改的内容").setView(layout)
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					@Override

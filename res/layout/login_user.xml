@@ -92,7 +92,10 @@
                     android:textColor="#444444"
                     android:textColorHint="#b2b2b2"
                     android:maxLength="18"
-                    android:textSize="@dimen/base_dimen_28" />
+                    android:textSize="@dimen/base_dimen_28" 
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
+                    />
 
                 <ImageView
                     android:layout_width="match_parent"

@@ -147,6 +147,9 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 	}
 
+	/**是否退房提示框
+	 * @param reason
+	 */
 	protected void initAlertDialog(final String reason) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		builder.setTitle("是否申请退房？");
@@ -306,7 +309,7 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 	}
 
 	/**
-	 * 初始化PopupWindow
+	 * 联系电话PopupWindow
 	 */
 	protected void initPopupWindow() {
 
@@ -413,6 +416,9 @@ public class ApplyForCheckoutActivity extends BaseActivity {
 
 	}
 
+	/**背景透明度
+	 * @param bgAlpha
+	 */
 	private void backgroundAlpha(float bgAlpha) {
 		WindowManager.LayoutParams lp = getWindow().getAttributes();
 		lp.alpha = bgAlpha; // 0.0-1.0

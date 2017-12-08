@@ -236,6 +236,9 @@ public class OrderFangzhuFragment extends BaseFragment{
 		getRentOwnerData();
 	}
 	
+	/**
+	 * 房主订单信息
+	 */
 	private void getRentOwnerData(){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=GetRentOwnerHistory";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mRentHistoryAction));
@@ -244,6 +247,10 @@ public class OrderFangzhuFragment extends BaseFragment{
 		mPresent.startPresentServiceTask(false);
 	}
 	
+	/**确认订单
+	 * @param id 房号
+	 * @param fee费用
+	 */
 	private void confirmRentAttributeInfo(String id, String fee){
 		String url = CommonUtil.mUserHost+"Services.asmx?op=ConfirmRentAttribute";
 		SoapObject rpc = new SoapObject(CommonUtil.NAMESPACE, CommonUtil.getSoapName(mConfirmRentAttribute));
