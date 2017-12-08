@@ -45,6 +45,9 @@
 -keep class tenant.guardts.house.model.AddIDCardResult
 -keep class tenant.guardts.house.bean.Detail
 -keep class tenant.guardts.house.model.ParternerRecord
+-keep class tenant.guardts.house.model.RetinuesResult
+-keep class tenant.guardts.house.model.Retinue
+
 
 -keep class com.google.** { *; }
  -keep class com.tencent.** { *;}  
