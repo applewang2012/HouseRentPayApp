@@ -354,6 +354,7 @@
                                 android:drawableRight="@drawable/radiobutton_bg"
                                 android:text="@string/radiobutton_on"
                                 android:drawablePadding="@dimen/base_dimen_20"
+                                android:textSize="@dimen/base_dimen_30" 
                                 android:textColor="#444444" />
 
                             <RadioButton
@@ -365,6 +366,7 @@
                                 android:drawableRight="@drawable/radiobutton_bg"
                                 android:text="@string/radiobutton_off"
                                 android:drawablePadding="@dimen/base_dimen_20"
+                                android:textSize="@dimen/base_dimen_30" 
                                 android:textColor="#444444" />
                         </RadioGroup>
 
@@ -375,6 +377,7 @@
                             android:layout_marginLeft="@dimen/base_dimen_165"
                             android:gravity="center"
                             android:text="添加"
+                            android:textSize="@dimen/base_dimen_30" 
                             android:textColor="#337ffd"
                             android:visibility="gone" />
                     </LinearLayout>
