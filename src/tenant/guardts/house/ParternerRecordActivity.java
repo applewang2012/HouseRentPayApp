@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -293,5 +294,12 @@ public class ParternerRecordActivity extends BaseActivity implements CallBack {
 		}
 
 	}
-
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (mListView.getCount() > 0) {
+			Toast.makeText(this, "请点击右上角进行保存", Toast.LENGTH_LONG).show();
+			return true;
+		} 
+		return super.onKeyDown(keyCode, event);
+	}
 }

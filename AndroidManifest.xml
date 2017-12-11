@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tenant.guardts.house"
-    android:versionCode="5"
-    android:versionName="1.0.5" >
+    android:versionCode="6"
+    android:versionName="1.0.6" >
 
     <uses-sdk
         android:minSdkVersion="13"
@@ -599,13 +599,11 @@
         <activity
             android:name=".AddRentParternerActivity"
             android:label="@string/title_activity_add_rent_parterner"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
             android:name=".ParternerRecordActivity"
             android:label="@string/title_activity_parterner_record"
-            android:launchMode="singleInstance"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
