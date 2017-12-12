@@ -233,7 +233,7 @@ public class ParternerRecordActivity extends BaseActivity implements CallBack {
 			etIdCard.setText(list.get(position).idcard);
 		}
 		
-		new AlertDialog.Builder(this).setTitle("请填写要修改的内容").setView(layout)
+		new AlertDialog.Builder(this,AlertDialog.THEME_HOLO_LIGHT).setTitle("请填写要修改的内容").setView(layout)
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -268,7 +268,7 @@ public class ParternerRecordActivity extends BaseActivity implements CallBack {
 	 */
 	private void initDialog(final ArrayList<RetinuesResult> list, final View v, final int position) {
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this,AlertDialog.THEME_HOLO_LIGHT);
 		builder.setTitle("是否删除该条记录？").setNegativeButton("是", new DialogInterface.OnClickListener() {
 
 			@Override
