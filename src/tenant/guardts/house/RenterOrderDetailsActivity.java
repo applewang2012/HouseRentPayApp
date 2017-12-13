@@ -180,10 +180,17 @@ public class RenterOrderDetailsActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				if (mOrderDetail.getHouseStartTimeStamp() >= mOrderDetail.getCurrentdDateStamp()){
+					Toast.makeText(RenterOrderDetailsActivity.this, "入住时间未到，无法录入身份证。", Toast.LENGTH_LONG).show();
+					return;
+				}
+				if (mOrderDetail.getHouseEndTimeStamp() < mOrderDetail.getCurrentdDateStamp()){
+					Toast.makeText(RenterOrderDetailsActivity.this, "退房时间已到，无法继续录入身份证。", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
 				if (mOrderDetail.getHouseStartTimeStamp() < mOrderDetail.getCurrentdDateStamp()){
 					initScanPupopWindow();
-				}else{
-					Toast.makeText(RenterOrderDetailsActivity.this, "入住时间未到，无法录入身份证。", Toast.LENGTH_LONG).show();
 				}
 			}
 		});

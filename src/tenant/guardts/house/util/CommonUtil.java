@@ -70,7 +70,7 @@ public class CommonUtil {
     public static boolean verify_code_test = false; //测试版本验证码改成true
     public static boolean mIsForceIdentifyUser = false;
     public static boolean mIsCancelRentIdentifyTest = false; //测试版本取消实名该成true
-    public static boolean mIsHostTest = true;  //是否使用测试host
+    public static boolean mIsHostTest = false;  //是否使用测试host
     
     public static  String ORDER_TIME = null;
     public static  String ORDER_NO = null;
@@ -145,12 +145,15 @@ public class CommonUtil {
 			}
 
 			File[] files = base.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				String filename = files[i].getName();
-				if (filename.endsWith(".apk") || filename.endsWith(".APK")) {
-					return new File(base.getPath() + File.separator + filename).delete();
+			if (files != null){
+				for (int i = 0; i < files.length; i++) {
+					String filename = files[i].getName();
+					if (filename.endsWith(".apk") || filename.endsWith(".APK")) {
+						return new File(base.getPath() + File.separator + filename).delete();
+					}
 				}
 			}
+			
 		}else{
 			Toast.makeText(context, "外部存储卡未挂载", Toast.LENGTH_SHORT).show();
 		}

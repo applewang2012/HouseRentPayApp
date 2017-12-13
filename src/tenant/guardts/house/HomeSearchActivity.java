@@ -189,16 +189,17 @@ public class HomeSearchActivity extends BaseActivity {
 		cal .set(Calendar. MONTH , arg2); 
 		cal .set(Calendar. DAY_OF_MONTH , arg3);
 		
-		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
-			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
-			cal.set(Calendar.MINUTE, 00);
+//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+//			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
+//			cal.set(Calendar.MINUTE, 00);
 			getStartTime();
-		}else{
-			cal.set(Calendar.HOUR_OF_DAY, 00);
-			cal.set(Calendar.MINUTE, 00);
-			updateStartDate();
-			}
+//		}else{
+//			cal.set(Calendar.HOUR_OF_DAY, 00);
+//			cal.set(Calendar.MINUTE, 00);
+//			updateStartDate();
+//			}
 		} 
+			//日租和月租都可选择小时为单位
 	};
 	
 	private OnTimeSetListener starttimeListener = new OnTimeSetListener() {
@@ -233,13 +234,13 @@ public class HomeSearchActivity extends BaseActivity {
 		cal .set(Calendar. MONTH , arg2); 
 		cal .set(Calendar. DAY_OF_MONTH , arg3);
 		
-		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
+//		if (mTypeIndex != null && mTypeIndex.equals("2")){ //时租{
 			getEndTime();
-		}else{
-			cal.set(Calendar.HOUR_OF_DAY, 00);
-			cal.set(Calendar.MINUTE, 00);
-			updateEndDate();
-			}
+//		}else{
+//			cal.set(Calendar.HOUR_OF_DAY, 00);
+//			cal.set(Calendar.MINUTE, 00);
+//			updateEndDate();
+//			}
 		 
 		} 
 	};

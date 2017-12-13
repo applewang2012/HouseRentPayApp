@@ -5525,10 +5525,12 @@ tenant.guardts.house.AddHouseInfoActivity:
     595:613:private void getHouseDistrict()
     677:692:private void getHouseStreet()
 tenant.guardts.house.AddRentAttributeActivity:
-    149:155:private void getPayRateDesc(java.lang.String)
-    825:856:private void startHttpService()
-    1037:1060:private void getIndentifyInfo(java.lang.String)
-    1063:1089:private void getQueryStatusInfo(java.lang.String)
+    private static final int REQUEST_CODE
+    private static final int ADD_REQUEST_CODE
+    183:189:private void getPayRateDesc(java.lang.String)
+    950:984:private void startHttpService()
+    1200:1225:private void getIndentifyInfo(java.lang.String)
+    1228:1253:private void getQueryStatusInfo(java.lang.String)
 tenant.guardts.house.AddRentAttributeActivity$IdentifyModel
 tenant.guardts.house.AlbumActivity$BackListener
 tenant.guardts.house.AlbumActivity$CancelListener
@@ -5550,11 +5552,11 @@ tenant.guardts.house.ApplyForCheckoutActivity:
     private tenant.guardts.house.bannerview.CircleFlowIndicator mFlowIndicator
     private android.widget.Button mDel
     private java.lang.String flag
-    393:398:private void setDeleteHouseInfo(java.lang.String)
-    402:414:private void initDialog()
-    423:433:private void showAlertDialog(android.widget.TextView,java.lang.String[])
-    455:460:private void getHouseDetailInfoByHouseId(java.lang.String)
-    464:469:private void getHouseDetailImageListByHouseId(java.lang.String)
+    396:401:private void setDeleteHouseInfo(java.lang.String)
+    405:417:private void initDialog()
+    429:439:private void showAlertDialog(android.widget.TextView,java.lang.String[])
+    461:466:private void getHouseDetailInfoByHouseId(java.lang.String)
+    470:475:private void getHouseDetailImageListByHouseId(java.lang.String)
     75:75:static synthetic java.lang.String access$11(tenant.guardts.house.ApplyForCheckoutActivity)
     69:69:static synthetic void access$12(tenant.guardts.house.ApplyForCheckoutActivity,java.lang.String)
     69:69:static synthetic java.lang.String access$13(tenant.guardts.house.ApplyForCheckoutActivity)
@@ -5653,9 +5655,9 @@ tenant.guardts.house.GetRentAttributeActivity:
     73:73:static synthetic void access$9(tenant.guardts.house.GetRentAttributeActivity,java.lang.String)
 tenant.guardts.house.GetRentAttributeActivity$4
 tenant.guardts.house.HomeActivity:
-    597:608:private java.lang.String getUserIdNo(java.lang.String)
-    730:731:public void setSelectedCity(java.lang.String)
-    734:734:public java.lang.String getSelectedCity()
+    596:607:private java.lang.String getUserIdNo(java.lang.String)
+    729:730:public void setSelectedCity(java.lang.String)
+    733:733:public java.lang.String getSelectedCity()
 tenant.guardts.house.HomeSearchActivity:
     private java.lang.String mModeIndex
 tenant.guardts.house.HouseDetailInfoActivity:
@@ -5687,9 +5689,9 @@ tenant.guardts.house.LocationDemo:
 tenant.guardts.house.LocationDemo$MyLocationListenner:
     303:303:public void onReceivePoi(com.baidu.location.BDLocation)
 tenant.guardts.house.LoginUserActivity:
-    207:219:private void commonServiceInterface()
-    232:232:private void showLoadingView()
-    238:238:private void dismissLoadingView()
+    226:238:private void commonServiceInterface()
+    251:251:private void showLoadingView()
+    257:257:private void dismissLoadingView()
 tenant.guardts.house.MapRentHouseActivity:
     private com.baidu.mapapi.map.MyLocationConfiguration$LocationMode mCurrentMode
     private boolean mShowInfoWindow
@@ -5711,12 +5713,16 @@ tenant.guardts.house.MyHouseActivity:
     309:324:private void initDialog(android.view.View,int)
 tenant.guardts.house.MyHouseActivity$3
 tenant.guardts.house.OwnerOrderDetailsActivity:
-    327:332:private void expireHouseRequest(java.lang.String)
-    664:688:private void showCancelOrderDialog(int,java.lang.String)
-    831:836:private void cancelRentAttributeInfo(java.lang.String)
-    830:830:static synthetic void access$25(tenant.guardts.house.OwnerOrderDetailsActivity,java.lang.String)
-tenant.guardts.house.OwnerOrderDetailsActivity$22
+    339:344:private void expireHouseRequest(java.lang.String)
+    676:700:private void showCancelOrderDialog(int,java.lang.String)
+    843:848:private void cancelRentAttributeInfo(java.lang.String)
+    842:842:static synthetic void access$25(tenant.guardts.house.OwnerOrderDetailsActivity,java.lang.String)
 tenant.guardts.house.OwnerOrderDetailsActivity$23
+tenant.guardts.house.OwnerOrderDetailsActivity$24
+tenant.guardts.house.ParternerRecordActivity:
+    private static final int ADD_RETINUE_REQUEST_CODE
+    private java.lang.String flag
+    165:176:private void initData()
 tenant.guardts.house.PermissionActivity:
     private static final int CAMERA_CODE
 tenant.guardts.house.R:
@@ -5732,20 +5738,20 @@ tenant.guardts.house.RegisterUserFinishActivity:
     private boolean mUsernameValid
 tenant.guardts.house.RenterOrderDetailsActivity:
     private boolean isOnline
-    194:196:private void setCheckBoxStatus(android.widget.CheckBox,android.widget.CheckBox)
-    199:234:private void showModifyPriceDialog()
-    280:285:private void expireHouseRequest(java.lang.String)
-    769:775:private void confirmRentAttributeInfo(java.lang.String,java.lang.String)
-    779:803:private void showRejectOrderDialog(java.lang.String)
-    847:852:private void rejectRentAttributeInfo(java.lang.String)
+    206:208:private void setCheckBoxStatus(android.widget.CheckBox,android.widget.CheckBox)
+    211:246:private void showModifyPriceDialog()
+    292:297:private void expireHouseRequest(java.lang.String)
+    781:787:private void confirmRentAttributeInfo(java.lang.String,java.lang.String)
+    791:815:private void showRejectOrderDialog(java.lang.String)
+    859:864:private void rejectRentAttributeInfo(java.lang.String)
     62:62:static synthetic void access$9(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
     61:61:static synthetic android.widget.TextView access$10(tenant.guardts.house.RenterOrderDetailsActivity)
     88:88:static synthetic void access$11(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
-    846:846:static synthetic void access$18(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
-tenant.guardts.house.RenterOrderDetailsActivity$31
+    858:858:static synthetic void access$18(tenant.guardts.house.RenterOrderDetailsActivity,java.lang.String)
 tenant.guardts.house.RenterOrderDetailsActivity$32
-tenant.guardts.house.RenterOrderDetailsActivity$5
+tenant.guardts.house.RenterOrderDetailsActivity$33
 tenant.guardts.house.RenterOrderDetailsActivity$6
+tenant.guardts.house.RenterOrderDetailsActivity$7
 tenant.guardts.house.ResetActivity:
     private boolean successsful
 tenant.guardts.house.ScreenshotCameraManager:
@@ -5783,7 +5789,7 @@ tenant.guardts.house.WelcomeActivity:
     private android.widget.LinearLayout mLoading_data
     private android.os.Bundle mDataBundle
     private android.widget.ImageView mSplashBG
-    89:98:private void testHelloword()
+    92:101:private void testHelloword()
 tenant.guardts.house.WithdrawActivity:
     private java.lang.String idCard
     private java.lang.String cardNo
@@ -6094,12 +6100,14 @@ tenant.guardts.house.model.MyFragment$12
 tenant.guardts.house.model.MyFragment$13
 tenant.guardts.house.model.OrderFangzhuFragment:
     private long mTimeTag
-    265:270:private void rejectRentAttributeInfo(java.lang.String)
+    272:277:private void rejectRentAttributeInfo(java.lang.String)
 tenant.guardts.house.model.OrderFragment:
     private android.widget.ListView mlistView
     private android.widget.TextView mNoContent
 tenant.guardts.house.model.OrderZhuHuFragment:
     private long mTimeTag
+tenant.guardts.house.model.Retinue:
+    14:17:public Retinue(java.lang.String,java.lang.String)
 tenant.guardts.house.model.ScanQrCodeFragment:
     private static final long VIBRATE_DURATION
     private static final float BEEP_VOLUME
@@ -6189,11 +6197,11 @@ tenant.guardts.house.util.CommonUtil:
     public static final java.lang.String HEXI_POWER_PACKAGE_NAME
     public static final long TIME_STAMP_10_MINUTES
     23:23:public CommonUtil()
-    171:174:public static void uninstallApk(android.content.Context,java.lang.String)
-    187:187:private static double Rad(double)
-    199:209:public static double GetDistance(double,double,double,double)
-    213:234:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
-    239:262:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
+    174:177:public static void uninstallApk(android.content.Context,java.lang.String)
+    190:190:private static double Rad(double)
+    202:212:public static double GetDistance(double,double,double,double)
+    216:237:public static com.baidu.mapapi.model.inner.GeoPoint getGeoPointBystr(android.content.Context,java.lang.String)
+    242:265:public static com.baidu.mapapi.model.LatLng getLatLngBystr(android.content.Context,java.lang.String)
 tenant.guardts.house.util.FileUpLoadUtils:
     11:11:public FileUpLoadUtils()
     54:59:public static void delFile(java.lang.String)
@@ -6272,11 +6280,15 @@ tenant.guardts.house.util.ScreenShotUtil:
     309:326:public static android.graphics.Bitmap myShot(android.app.Activity)
     332:411:public static void ScreenCapture(android.content.Context,java.lang.String)
 tenant.guardts.house.util.UtilTool:
-    21:21:private UtilTool()
-    24:39:public static final java.lang.String getMessageDigest(byte[])
-    44:48:public static java.lang.String formatDuring(long)
-    192:214:public static java.lang.String getPrintSize(long)
-    221:234:public static java.lang.String getStringToUtf8(java.lang.String)
+    29:29:private UtilTool()
+    32:47:public static final java.lang.String getMessageDigest(byte[])
+    52:56:public static java.lang.String formatDuring(long)
+    200:222:public static java.lang.String getPrintSize(long)
+    228:248:public static java.lang.String getFileMD5String(java.io.File)
+    252:252:private static java.lang.String bufferToHex(byte[])
+    256:261:private static java.lang.String bufferToHex(byte[],int,int)
+    265:269:private static void appendHexPair(byte,java.lang.StringBuffer)
+    273:286:public static java.lang.String getStringToUtf8(java.lang.String)
 tenant.guardts.house.util.ViewUtil:
     12:12:public ViewUtil()
 tenant.guardts.house.view.AddressSelector$Line:

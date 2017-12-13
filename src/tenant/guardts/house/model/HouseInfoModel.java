@@ -9,7 +9,7 @@ public class HouseInfoModel implements Serializable{
 	private String ownerPhone;
 	private String area;
 	private String startTime;
-	private long startTimeStamp;
+	private long startTimeStamp, endTimeStamp;
 	private String direction;
 	private String endTime;
 	private boolean houseAvailable;
@@ -199,13 +199,21 @@ public class HouseInfoModel implements Serializable{
 	}
 
 	public void setHouseStartTimeStamp(long time) {
-		this.startTimeStamp = time;
+		this.endTimeStamp = time;
 	}
 	
 	public long getHouseStartTimeStamp() {
-		return startTimeStamp;
+		return endTimeStamp;
 	}
 
+	public void setHouseEndTimeStamp(long time) {
+		this.startTimeStamp = time;
+	}
+	
+	public long getHouseEndTimeStamp() {
+		return startTimeStamp;
+	}
+	
 	public void setHouseStartTime(String time) {
 		this.startTime = time;
 	}

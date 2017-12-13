@@ -708,6 +708,7 @@ public class OrderZhuHuFragment extends BaseFragment{
 					houseModel.setHousePrice(itemJsonObject.optString("RRentPrice"));
 					houseModel.setHouseTotalFloor(itemJsonObject.optString("RTotalFloor"));
 					houseModel.setHouseEndTime(itemJsonObject.optString("EndDate"));
+					houseModel.setHouseEndTimeStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("EndDate")));
 					houseModel.setHouseStartTime(itemJsonObject.optString("StartDate"));
 					houseModel.setHouseStartTimeStamp(UtilTool.DateTimeToStamp(itemJsonObject.optString("StartDate")));
 					houseModel.setHouseType(itemJsonObject.optString("RRoomTypeDesc"));
